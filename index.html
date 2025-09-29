@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaymentHood - Enterprise Payment Orchestration Platform</title>
+    <meta name="description" content="PaymentHood is a comprehensive, cloud-native payment orchestration platform built for businesses that need more than just basic payment processing. Unified API, advanced fraud protection, real-time analytics.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --primary-dark: #0052a3;
+            --primary-light: #e6f2ff;
+            --secondary-color: #00c851;
+            --accent-color: #ff6b35;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-light: #ffffff;
+            --background-primary: #ffffff;
+            --background-secondary: #f8fafc;
+            --background-dark: #1a1a1a;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--background-primary);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--text-light);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--text-light);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border: 2px solid var(--text-light);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--primary-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--background-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--background-primary);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            padding: 80px 0;
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .arch-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .arch-content p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--background-secondary);
+            border-radius: 8px;
+        }
+
+        .tech-item i {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+
+        .tech-item span {
+            font-weight: 600;
+        }
+
+        /* Providers Section */
+        .providers {
+            padding: 80px 0;
+            background: var(--background-secondary);
+        }
+
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .provider-category {
+            background: var(--background-primary);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .provider-category h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .provider-list {
+            list-style: none;
+        }
+
+        .provider-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 0;
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: var(--background-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--background-dark);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 0.25rem 0;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .arch-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">PaymentHood</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#providers">Providers</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#docs">Documentation</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in-up">Enterprise Payment Orchestration Platform</h1>
+            <p class="fade-in-up">PaymentHood is a comprehensive, cloud-native payment orchestration platform built for businesses that need more than just basic payment processing. Our unified API connects you to dozens of payment providers while offering enterprise-grade features.</p>
+            <div class="hero-buttons fade-in-up">
+                <a href="#demo" class="btn-primary">
+                    <i class="fas fa-play"></i>
+                    Start Free Trial
+                </a>
+                <a href="#docs" class="btn-secondary">View Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful Features for Modern Businesses</h2>
+                <p>From fraud protection to real-time analytics, PaymentHood provides everything you need to optimize your payment operations and accelerate growth.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Unified Multi-Gateway Orchestration</h3>
+                    <p>Connect to 15+ payment providers through a single, consistent API. Switch between providers, add new ones, or route transactions intelligently—all without touching your code.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Advanced Fraud & Risk Management</h3>
+                    <p>Go beyond basic fraud detection with our customizable rules engine. Set granular controls for transaction velocity, geographic restrictions, and suspicious activity detection.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-Time Analytics & BI</h3>
+                    <p>Access comprehensive dashboards with live transaction monitoring, success rate analytics, provider performance metrics, and detailed financial reporting.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Secure Payment Links</h3>
+                    <p>Generate secure, one-time payment links for invoicing, or use our fully-customizable hosted checkout pages. Reduce PCI compliance burden while maintaining control.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Customer Lifecycle Management</h3>
+                    <p>Manage customer profiles, securely vault payment methods, handle complex subscription billing, and automate recurring payments with intelligent retry logic.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-webhook"></i>
+                    </div>
+                    <h3>Enterprise Webhook System</h3>
+                    <p>Never miss critical payment events with our guaranteed webhook delivery system. Built-in retry logic, event sourcing, and detailed logging ensure perfect synchronization.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Multi-Tenancy & Team Management</h3>
+                    <p>Built for agencies and platforms managing multiple clients. Isolated app environments, granular role-based permissions, and comprehensive audit trails.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Account Verification & Risk Assessment</h3>
+                    <p>Integrate with Plaid for real-time bank account verification and balance checking before processing ACH payments, reducing NSF fees and improving success rates.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Intelligent Payment Routing</h3>
+                    <p>Automatically route transactions to the best-performing gateway based on success rates, cost optimization, currency support, and real-time provider health monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture" id="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2>Modern .NET 9 Microservices Architecture</h2>
+                <p>Built for scalability, reliability, and maintainability with cloud-native principles.</p>
+            </div>
+            
+            <div class="arch-grid">
+                <div class="arch-content">
+                    <h3>Core Projects</h3>
+                    <p>Our platform is built using modern microservices architecture on .NET 9, designed to handle enterprise-scale payment processing with maximum reliability and performance.</p>
+                    
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <i class="fab fa-microsoft"></i>
+                            <div>
+                                <span>Payment.Services</span>
+                                <small style="display: block; color: var(--text-secondary);">Core business logic</small>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <span>Payment.Data</span>
+                                <small style="display: block; color: var(--text-secondary);">EF Core data access</small>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-plug"></i>
+                            <div>
+                                <span>Payment.Provider</span>
+                                <small style="display: block; color: var(--text-secondary);">Provider integrations</small>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-server"></i>
+                            <div>
+                                <span>Payment.Server</span>
+                                <small style="display: block; color: var(--text-secondary);">Public REST API</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="arch-content">
+                    <h3>Supporting Infrastructure</h3>
+                    <p>Complete ecosystem of supporting services for licensing, external integrations, and comprehensive testing.</p>
+                    
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <i class="fas fa-key"></i>
+                            <div>
+                                <span>License Server</span>
+                                <small style="display: block; color: var(--text-secondary);">License management</small>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-credit-card"></i>
+                            <div>
+                                <span>Method Providers</span>
+                                <small style="display: block; color: var(--text-secondary);">Plaid & external services</small>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-vial"></i>
+                            <div>
+                                <span>Test Suite</span>
+                                <small style="display: block; color: var(--text-secondary);">Comprehensive testing</small>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-desktop"></i>
+                            <div>
+                                <span>Admin Dashboard</span>
+                                <small style="display: block; color: var(--text-secondary);">Management interface</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Payment Providers</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99.9%</h3>
+                    <p>Uptime SLA</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50ms</h3>
+                    <p>Average Response Time</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Enterprise Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Providers Section -->
+    <section class="providers" id="providers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Supported Payment Providers</h2>
+                <p>Connect to leading payment processors worldwide through our unified API.</p>
+            </div>
+            <div class="providers-grid">
+                <div class="provider-category">
+                    <h4>Global Leaders</h4>
+                    <ul class="provider-list">
+                        <li>Stripe (Cards, ACH, Payment Intents)</li>
+                        <li>PayPal (Express Checkout, Hosted Pages)</li>
+                        <li>Adyen (Global Cards, Local Methods)</li>
+                        <li>Braintree (PayPal, Venmo, Cards)</li>
+                    </ul>
+                </div>
+                
+                <div class="provider-category">
+                    <h4>Enterprise & Banking</h4>
+                    <ul class="provider-list">
+                        <li>J.P. Morgan (Cards & ACH Processing)</li>
+                        <li>Chase Payment Solutions</li>
+                    </ul>
+                </div>
+                
+                <div class="provider-category">
+                    <h4>Regional Specialists</h4>
+                    <ul class="provider-list">
+                        <li>PayTabs (Middle East & Africa)</li>
+                        <li>Tap Payments (Gulf Region)</li>
+                        <li>Amazon Payfort (MENA Region)</li>
+                    </ul>
+                </div>
+                
+                <div class="provider-category">
+                    <h4>Alternative & Crypto</h4>
+                    <ul class="provider-list">
+                        <li>BitPay (Bitcoin, Cryptocurrency)</li>
+                        <li>Binance Pay (Crypto Payments)</li>
+                        <li>Tron Network Integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Ready to Transform Your Payment Operations?</h2>
+            <p>Join leading businesses using PaymentHood to optimize their payment processing and accelerate growth.</p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Start Free Trial
+                </a>
+                <a href="#contact" class="btn-secondary">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PaymentHood</h4>
+                    <p style="opacity: 0.8; margin-top: 1rem;">Enterprise payment orchestration platform built for modern businesses.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#integrations">Integrations</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Developers</h4>
+                    <ul>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                        <li><a href="#sdks">SDKs</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 PaymentHood. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for smooth scrolling and interactions -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--background-primary)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and sections
+        document.querySelectorAll('.feature-card, .provider-category, .stat-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
