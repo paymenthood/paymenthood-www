@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the entire site
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+
+# Important pages for crawlers
+Sitemap: https://www.paymenthood.com/sitemap.xml
+
+# Crawl-delay (optional, adjust based on server capacity)
+Crawl-delay: 1
+
+# Specific directives for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
