@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Chase"><rect width="64" height="64" rx="14" fill="#117ACA"/>
+	<g fill="#fff" transform="translate(12 12)">
+		<polygon points="20,0 32,0 40,8 28,8"/>
+		<polygon points="40,8 40,20 32,28 32,16"/>
+		<polygon points="32,28 20,28 12,20 24,20"/>
+		<polygon points="12,20 12,8 20,0 20,12"/>
+	</g>
+</svg>
