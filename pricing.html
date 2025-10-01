@@ -12,16 +12,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALCSURBVFhH7ZfNaxNBFMafJBsttRUEwYNIQaGCByue9OBBELyIePGgB0/ixYsHL148ePDgxYMXDx48ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHgAAAABJRU5ErkJggg==">
     <link rel="manifest" href="site.webmanifest">
     <meta name="theme-color" content="#0066cc">
+    <script src="js/includes.js"></script>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="index.html" class="logo"><img src="images/Logo-name-2.png" alt="PaymentHood" style="height: 80px; width: auto;"></a>
+    <header class="header" itemscope itemtype="https://schema.org/WPHeader">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <div class="logo-brand">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="brand-name">Payment<span class="brand-highlight">Hood</span></span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-links" role="menubar">
                 <li role="none"><a href="index.html#features" role="menuitem" aria-label="View features">Features</a></li>
                 <li role="none"><a href="index.html#gateways" role="menuitem" aria-label="View supported gateways">Gateways</a></li>
@@ -29,7 +47,7 @@
                 <li role="none"><a href="pricing.html" role="menuitem" aria-label="View pricing plans" class="active">Pricing</a></li>
                 <li role="none"><a href="https://docs.paymenthood.com/" role="menuitem" aria-label="Open documentation on docs.paymenthood.com" target="_blank" rel="noopener">Documentation</a></li>
             </ul>
-            <a href="#contact" class="cta-button" aria-label="Start your free trial">Start 1-Month Free</a>
+            <a href="index.html#contact" class="cta-button" aria-label="Start your free trial">Start 1-Month Free</a>
         </nav>
     </header>
 
@@ -169,40 +187,61 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>PaymentHood</h4>
-                    <p>The unified payment orchestration platform for modern businesses.</p>
+                    <h4 itemprop="name">PaymentHood</h4>
+                    <p style="opacity: 0.8; margin-top: 1rem;" itemprop="description">Enterprise payment orchestration platform built for modern businesses.</p>
                 </div>
+                
                 <div class="footer-section">
                     <h4>Product</h4>
                     <ul>
                         <li><a href="index.html#features">Features</a></li>
-                        <li><a href="index.html#providers">Providers</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#integrations">Integrations</a></li>
+                        <li><a href="index.html#security">Security</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Developers</h4>
+                    <ul>
                         <li><a href="https://docs.paymenthood.com/" target="_blank" rel="noopener">Documentation</a></li>
+                        <li><a href="index.html#api">API Reference</a></li>
+                        <li><a href="index.html#sdks">SDKs</a></li>
+                        <li><a href="index.html#support">Support</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Support</h4>
+                    <h4>Company</h4>
                     <ul>
-                        <li><a href="mailto:support@paymenthood.com">Contact Support</a></li>
-                        <li><a href="#startup-guide">Startup Guide</a></li>
-                        <li><a href="https://docs.paymenthood.com/" target="_blank" rel="noopener">API Docs</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="term-of-use.html">Terms of Use</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="index.html#about" aria-label="Learn about PaymentHood">About Us</a></li>
+                        <li><a href="index.html#careers" aria-label="View career opportunities">Careers</a></li>
+                        <li><a href="index.html#blog" aria-label="Read our blog">Blog</a></li>
+                        <li><a href="index.html#contact" aria-label="Contact PaymentHood">Contact</a></li>
+                        <li><a href="index.html#case-studies" aria-label="View customer case studies">Case Studies</a></li>
+                        <li><a href="term-of-use.html" aria-label="Read the PaymentHood terms of use">Terms of Use</a></li>
+                        <li><a href="privacy-policy.html" aria-label="Read the PaymentHood privacy policy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 PaymentHood. All rights reserved. <a href="term-of-use.html">Terms of Use</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
+                <p>&copy; 2025 PaymentHood. All rights reserved. | <a href="privacy-policy.html" aria-label="Privacy Policy">Privacy Policy</a> | <a href="term-of-use.html" aria-label="Terms of Use">Terms of Use</a></p>
+                <div class="footer-social">
+                    <a href="https://twitter.com/paymenthood" aria-label="Follow us on Twitter" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/paymenthood" aria-label="Follow us on LinkedIn" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://github.com/paymenthood" aria-label="View our GitHub repository" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
