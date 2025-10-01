@@ -1,5 +1,5 @@
 ```markdown
-# **PaymentHood Gateway**
+# **PaymentHood**
 
 ## **Terms of Use**
 
@@ -15,7 +15,7 @@ We have limited liability, and you are not allowed to use our Service for any il
 
 **MERCHANT:** You, as a business that uses PaymentHood to process payments on your behalf
 
-**PAYMENTHOOD GATEWAY:** The SaaS payment gateway service that facilitates transactions between merchants and their customers
+**PAYMENTHOOD:** The SaaS payment gateway service that facilitates transactions between merchants and their customers
 
 **HOSTING:** Any infrastructure or third-party service that hosts or supports PaymentHood operations
 
