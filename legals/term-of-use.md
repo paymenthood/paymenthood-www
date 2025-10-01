@@ -1,4 +1,3 @@
-```markdown
 # **PaymentHood**
 
 ## **Terms of Use**
@@ -106,4 +105,3 @@ We process certain information about merchants and customers. Please make sure y
 **OUR ROLE**
 
 PaymentHood is a SaaS payment gateway. We do not hold or store customer funds. We act solely as a mediator, facilitating transactions between merchants and their customers. PaymentHood does not manage merchant servers or accounts, and merchants remain responsible for their own business operations and compliance.
-```

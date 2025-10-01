@@ -1,4 +1,3 @@
-```markdown
 # **PaymentHood**
 
 ## **Terms of Use**

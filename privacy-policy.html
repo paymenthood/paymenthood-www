@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+---
+layout: none
+title: Privacy Policy
+---
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,11 +44,27 @@
             <div class="legal-card" role="article" aria-labelledby="terms-title">
                 <header>
                     <h1 id="terms-title">Terms of Use</h1>
-                    <p class="legal-meta">Effective Date: {{ site.time | date: '%B %d, %Y' }}</p>
                 </header>
                 <article>
                     {% capture terms_markdown %}
                     {% include_relative legals/term-of-use.md %}
+                    {% endcapture %}
+                    {{ terms_markdown | markdownify }}
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <main id="main-content" class="legal-main">
+        <div class="legal-container">
+            <div class="legal-card" role="article" aria-labelledby="terms-title">
+                <header>
+                    <h1 id="terms-title">Terms of Use</h1>
+                    <p class="legal-meta">Effective Date: {{ site.time | date: '%B %d, %Y' }}</p>
+                </header>
+                <article>
+                    {% capture terms_markdown %}
+                    {% include_relative legals/privacy-policy.md %}
                     {% endcapture %}
                     {{ terms_markdown | markdownify }}
                 </article>
@@ -79,8 +99,8 @@
                 <div class="footer-section">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="term-of-use/">Terms of Use</a></li>
-                        <li><a href="privacy-policy/" aria-current="page">Privacy Policy</a></li>
+                        <li><a href="term-of-use.html">Terms of Use</a></li>
+                        <li><a href="privacy-policy.html" aria-current="page">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
