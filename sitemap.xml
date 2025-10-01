@@ -54,7 +54,7 @@
 
     <!-- Terms of Use -->
     <url>
-        <loc>https://www.paymenthood.com/term-of-use/</loc>
+        <loc>https://www.paymenthood.com/term-of-use.html</loc>
         <lastmod>2025-09-30</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
@@ -62,7 +62,7 @@
 
     <!-- Privacy Policy -->
     <url>
-        <loc>https://www.paymenthood.com/privacy-policy/</loc>
+        <loc>https://www.paymenthood.com/privacy-policy.html</loc>
         <lastmod>2025-09-30</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>

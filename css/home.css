@@ -8,16 +8,17 @@
 }
 
 .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    display: flex;
+    justify-content: center;
     align-items: center;
     min-height: 500px;
 }
 
 /* Left Column Styles */
 .hero-left {
-    padding-right: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero-content h1 {
@@ -39,6 +40,7 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .hero-buttons .btn-primary,
@@ -6626,5 +6628,1049 @@ a:focus {
         padding: 1rem 1.5rem;
         border-radius: 8px;
         touch-action: manipulation;
+    }
+}
+
+/* New Startup Section Styles */
+.startup-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.hero-content h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0066cc;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Journey Steps */
+.startup-journey-section {
+    margin-bottom: 3rem;
+}
+
+.journey-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 2rem;
+}
+
+.journey-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.step-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    border-color: #0066cc;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15);
+}
+
+.step-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #0066cc, #059669);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.step-content h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.step-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.step-features li {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 0.25rem;
+}
+
+.step-arrow {
+    font-size: 1.5rem;
+    color: #0066cc;
+    font-weight: bold;
+    margin: 0 1rem;
+}
+
+/* Benefits Grid */
+.startup-benefits-section {
+    margin-bottom: 3rem;
+}
+
+.benefits-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 2rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.benefit-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    border-color: #0066cc;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+}
+
+.benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.benefit-card h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-card p {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Social Proof */
+.startup-social-proof {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.proof-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.proof-header h4 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.proof-header p {
+    color: #6b7280;
+    margin: 0;
+}
+
+.testimonials-slider {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial {
+    display: none;
+    text-align: center;
+    padding: 1rem;
+}
+
+.testimonial.active {
+    display: block;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.quote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #374151;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.author-info strong {
+    color: #1a365d;
+    font-weight: 600;
+}
+
+.author-info span {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.metric {
+    background: #f0f9ff;
+    color: #0066cc;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #d1d5db;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: #0066cc;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero-stats {
+        gap: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .journey-steps {
+        flex-direction: column;
+    }
+    
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 1rem 0;
+    }
+    
+    .step-card {
+        max-width: 100%;
+    }
+    
+    .author {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-content h3 {
+        font-size: 2rem;
+    }
+}
+
+/* Plugins Section Styles */
+.plugins {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.plugins-grid {
+    display: grid;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.plugin-category {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.plugin-category h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.plugin-category h4 i {
+    color: #0066cc;
+    font-size: 1.2rem;
+}
+
+.plugin-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.plugin-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.plugin-item:hover {
+    border-color: #0066cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+}
+
+.plugin-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* Platform-specific colors */
+.plugin-icon.shopify {
+    background: linear-gradient(135deg, #96bf48, #7ab317);
+}
+
+.plugin-icon.woocommerce {
+    background: linear-gradient(135deg, #96588a, #7c4e82);
+}
+
+.plugin-icon.magento {
+    background: linear-gradient(135deg, #f26322, #ee5620);
+}
+
+.plugin-icon.whmcs {
+    background: linear-gradient(135deg, #007acc, #0056b3);
+}
+
+.plugin-icon.nopcommerce {
+    background: linear-gradient(135deg, #3c76c4, #2e5d9f);
+}
+
+.plugin-icon.opencart {
+    background: linear-gradient(135deg, #1e91cf, #1773a8);
+}
+
+.plugin-icon.prestashop {
+    background: linear-gradient(135deg, #df0067, #b8005a);
+}
+
+.plugin-icon.bigcommerce {
+    background: linear-gradient(135deg, #121118, #2d2a39);
+}
+
+.plugin-icon.custom {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
+.plugin-info {
+    flex: 1;
+}
+
+.plugin-info h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.25rem;
+}
+
+.plugin-info p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.plugin-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.plugin-status.available {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.plugin-status.coming-soon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.plugin-status.beta {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.plugin-status.custom {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+/* Clickable plugin item styles */
+.plugin-item.clickable {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.plugin-item.clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+    border-color: #0066cc;
+    background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+}
+
+.plugin-item.clickable .plugin-icon {
+    transition: all 0.3s ease;
+}
+
+.plugin-item.clickable:hover .plugin-icon {
+    transform: scale(1.1);
+}
+
+.plugin-item.clickable .plugin-status.available {
+    background: linear-gradient(135deg, #0066cc, #059669);
+    color: white;
+    font-weight: 600;
+}
+
+.plugins-cta {
+    background: linear-gradient(135deg, #0066cc, #059669);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    color: white;
+}
+
+.plugins-cta h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.plugins-cta p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn-outline {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.cta-buttons .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.cta-buttons .btn-primary {
+    background: white;
+    color: #0066cc;
+    border-color: white;
+}
+
+.cta-buttons .btn-primary:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+}
+
+/* Mobile responsive for plugins */
+@media (max-width: 768px) {
+    .plugin-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .plugin-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .plugins-cta {
+        padding: 2rem 1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn-outline,
+    .cta-buttons .btn-primary {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* WHMCS Plugin Page Styles */
+.plugin-hero {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 80px 0;
+}
+
+.plugin-badge {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.plugin-icon.large {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+}
+
+.badge-info h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.badge-info p {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.version {
+    background: #0066cc;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.hero-description h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 1rem;
+}
+
+.hero-description p {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.plugin-features {
+    padding: 80px 0;
+    background: white;
+}
+
+.plugin-features h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 3rem;
+}
+
+.installation-guide {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.installation-guide h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 1rem;
+}
+
+.guide-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.installation-steps {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.step-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.step-number {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #0066cc, #059669);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.step-content > p {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.code-block {
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.step-details ul, .step-details ol {
+    color: #4a5568;
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.step-details li {
+    margin-bottom: 0.5rem;
+}
+
+.config-table {
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.config-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.config-table th,
+.config-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.config-table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #1a365d;
+}
+
+.advanced-config {
+    padding: 80px 0;
+    background: white;
+}
+
+.advanced-config h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 3rem;
+}
+
+.config-sections {
+    display: grid;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.config-section {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.config-section h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.config-section h3 i {
+    color: #0066cc;
+}
+
+.config-options {
+    margin-top: 1.5rem;
+}
+
+.option-item {
+    margin-bottom: 1rem;
+}
+
+.option-item strong {
+    color: #1a365d;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.webhook-setup {
+    margin-top: 1rem;
+}
+
+.troubleshooting {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.troubleshooting h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 3rem;
+}
+
+.faq-sections {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 2rem;
+}
+
+.faq-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.faq-item h3 i {
+    color: #f59e0b;
+}
+
+.issue-item {
+    margin-bottom: 2rem;
+}
+
+.issue-item h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.75rem;
+}
+
+.support-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.support-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.support-link:hover {
+    background: #0052a3;
+    transform: translateY(-2px);
+}
+
+.download-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #0066cc, #059669);
+    color: white;
+    text-align: center;
+}
+
+.download-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.download-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.download-info {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.version-info {
+    text-align: left;
+}
+
+.version-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.release-date {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.requirements h4 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.requirements ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+}
+
+.requirements li {
+    margin-bottom: 0.25rem;
+    opacity: 0.9;
+}
+
+.download-actions {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.changelog {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.changelog h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.changelog ul {
+    list-style: none;
+    padding: 0;
+}
+
+.changelog li {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+/* Mobile responsive for plugin page */
+@media (max-width: 768px) {
+    .plugin-badge {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .step-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .step-number {
+        align-self: center;
+    }
+    
+    .download-info {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .version-info,
+    .requirements {
+        text-align: center;
+    }
+    
+    .support-links {
+        flex-direction: column;
+    }
+    
+    .hero-actions {
+        justify-content: center;
     }
 }
