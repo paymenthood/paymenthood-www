@@ -58,18 +58,21 @@
         }
     }
     </script>
+    <script src="js/includes.js"></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header" itemscope itemtype="https://schema.org/WPHeader">
         <nav class="nav container" role="navigation" aria-label="Main navigation">
             <div class="logo-brand">
-                <div class="logo-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="logo-text">
-                    <span class="brand-name">Payment<span class="brand-highlight">Hood</span></span>
-                </div>
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="brand-name">Payment<span class="brand-highlight">Hood</span></span>
+                    </div>
+                </a>
             </div>
             
             <!-- Mobile Navigation Toggle -->
@@ -1259,7 +1262,7 @@
                     <a href="https://linkedin.com/company/paymenthood" aria-label="Follow us on LinkedIn" rel="noopener noreferrer" target="_blank">
                         <i class="fab fa-linkedin" aria-hidden="true"></i>
                     </a>
-                    <a href="https://github.com/paymenthood" aria-label="View our GitHub" rel="noopener noreferrer" target="_blank">
+                    <a href="https://github.com/paymenthood" aria-label="View our GitHub repository" rel="noopener noreferrer" target="_blank">
                         <i class="fab fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -1269,39 +1272,7 @@
 
     <!-- JavaScript for smooth scrolling and interactions -->
     <script>
-        // Mobile Navigation Toggle
         document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.querySelector('.nav-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            
-            if (navToggle && navLinks) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                    
-                    // Update aria-expanded for accessibility
-                    const isExpanded = navLinks.classList.contains('active');
-                    navToggle.setAttribute('aria-expanded', isExpanded);
-                });
-                
-                // Close mobile menu when clicking on links
-                navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navToggle.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        navToggle.setAttribute('aria-expanded', 'false');
-                    });
-                });
-                
-                // Close mobile menu when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                        navToggle.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        navToggle.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            }
         });
     </script>
     
