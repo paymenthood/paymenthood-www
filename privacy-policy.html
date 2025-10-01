@@ -30,107 +30,13 @@ hide_architecture: true
     <main id="main-content" class="legal-main">
         <div class="legal-container">
             <div class="legal-card" role="article" aria-labelledby="privacy-title">
-                <header>
-                    <h1 id="privacy-title">Privacy Policy</h1>
-                    <p class="legal-meta">Effective Date: October 1, 2024</p>
-                </header>
                 <article>
-                    <h2><strong>Introduction</strong></h2>
-                    
-                    <p>OmegaHood LLC ("we," "us," or "our"), the owner and operator of PaymentHood, respects your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard information in connection with our PaymentHood services.</p>
-                    
-                    <p>By using our Service, you agree to the terms of this Privacy Policy.</p>
-                    
-                    <h2><strong>Information We Collect</strong></h2>
-                    
-                    <h3>Merchant Information</h3>
-                    <ul>
-                        <li>Business name and contact details</li>
-                        <li>Account login credentials</li>
-                        <li>Payment and billing information</li>
-                        <li>Transaction records</li>
-                    </ul>
-                    
-                    <h3>Client Information (End-Customers of Merchants)</h3>
-                    <ul>
-                        <li>Information submitted by clients during payment checkout (e.g., name, email, billing/shipping address, phone number)</li>
-                        <li>Tokenized payment method identifiers (we never store raw credit card credentials)</li>
-                        <li>Transaction details, including amounts and timestamps</li>
-                    </ul>
-                    
-                    <h3>Automatically Collected Information</h3>
-                    <ul>
-                        <li>Log data such as IP addresses, device identifiers, browser type, and operating system</li>
-                        <li>Usage data about interactions with our API or user interface</li>
-                        <li>Cookies and similar technologies for authentication, security, and analytics</li>
-                    </ul>
-                    
-                    <h2><strong>How We Use Information</strong></h2>
-                    
-                    <ul>
-                        <li>To provide, operate, and maintain the PaymentHood</li>
-                        <li>To process transactions on behalf of merchants</li>
-                        <li>To comply with legal, regulatory, and anti-fraud obligations</li>
-                        <li>To improve our services and enhance security</li>
-                        <li>To communicate with merchants regarding account activity, updates, or support inquiries</li>
-                    </ul>
-                    
-                    <h2><strong>Data Retention</strong></h2>
-                    
-                    <p>We retain merchant and client data as long as necessary to provide our services, comply with legal obligations, and resolve disputes. Some transaction data may be stored for extended periods due to compliance with financial regulations.</p>
-                    
-                    <h2><strong>Data Sharing and Disclosure</strong></h2>
-                    
-                    <p>We may share collected information with:</p>
-                    <ul>
-                        <li><strong>Payment processors</strong> and acquiring banks (for processing transactions)</li>
-                        <li><strong>Regulatory authorities</strong> when required by law</li>
-                        <li><strong>Service providers</strong> assisting in hosting, analytics, or fraud prevention</li>
-                        <li><strong>Legal entities</strong> in case of business transfer, merger, or acquisition</li>
-                    </ul>
-                    
-                    <p>We do not sell or rent client or merchant data to third parties.</p>
-                    
-                    <h2><strong>Security</strong></h2>
-                    
-                    <p>We implement industry-standard security measures to protect information. This includes encryption, access controls, monitoring, and tokenization of payment details. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
-                    
-                    <h2><strong>Client Rights</strong></h2>
-                    
-                    <ul>
-                        <li>Clients cannot request deletion of their data directly from PaymentHood, as we act on behalf of merchants. Clients should contact the merchant they transacted with regarding data deletion or modification.</li>
-                        <li>Merchants are responsible for managing client data in compliance with applicable laws.</li>
-                    </ul>
-                    
-                    <h2><strong>Merchant Rights</strong></h2>
-                    
-                    <p>Merchants may:</p>
-                    <ul>
-                        <li>Access and update their account and business information</li>
-                        <li>Request a copy of stored data related to their accounts</li>
-                        <li>Close their PaymentHood account subject to applicable retention requirements</li>
-                    </ul>
-                    
-                    <h2><strong>International Data Transfers</strong></h2>
-                    
-                    <p>We may transfer, process, and store information outside the country of origin, subject to applicable data protection laws.</p>
-                    
-                    <h2><strong>Children's Privacy</strong></h2>
-                    
-                    <p>PaymentHood is not directed to individuals under the age of 18. We do not knowingly collect personal information from children. If you believe we have inadvertently collected such data, please contact us for deletion.</p>
-                    
-                    <h2><strong>Changes to This Privacy Policy</strong></h2>
-                    
-                    <p>We reserve the right to update this Privacy Policy at any time. The revised version will be posted on our website with an updated effective date.</p>
-                    
-                    <h2><strong>Contact Us</strong></h2>
-                    
-                    <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:privacy@paymenthood.com">privacy@paymenthood.com</a>.</p>
+                    {% capture privacy_content %}{% include_relative legals/privacy-policy.md %}{% endcapture %}
+                    {{ privacy_content | markdownify }}
                 </article>
             </div>
         </div>
     </main>
-
     {% include footer.html %}
 
     <script>

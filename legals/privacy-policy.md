@@ -1,26 +1,3 @@
-# **PaymentHood**
-
-## **Terms of Use**
-
-# **SUMMARY (SIMPLIFIED)**
-
-We have limited liability, and you are not allowed to use our Service for any illegal activity according to the laws that govern payment services. You are responsible for any unlawful activity by your clients or merchants. We may suspend our service at any time. Please read these Terms of Use carefully.
-
-# **OVERVIEW**
-
-**OMEGAHOOD LLC, WE, US, OUR:** OmegaHood LLC, the owner and operator of PaymentHood  
-**CLIENT:** Your customers who make payments through PaymentHood  
-**MERCHANT:** You, as a business that uses PaymentHood to process payments on your behalf  
-**PAYMENTHOOD:** The SaaS payment gateway service that facilitates transactions between merchants and their customers  
-**HOSTING:** Any infrastructure or third-party service that hosts or supports PaymentHood operations  
-**YOU:** Refers to you, the merchant using the Service
-
-By visiting our site and/or using the Service, you agree to be bound by the following terms and conditions (“Terms of Use” or “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Use apply to all users of the Service, including merchants and their customers.
-
-[...full Terms of Use content here, as in previous version...]
-
----
-
 # **Privacy Policy**
 
 ## **Introduction**

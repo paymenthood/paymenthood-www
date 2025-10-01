@@ -31,17 +31,54 @@ hide_architecture: true
     <main id="main-content" class="legal-main">
         <div class="legal-container">
             <div class="legal-card" role="article" aria-labelledby="terms-title">
-                <header>
-                    <h1 id="terms-title">Terms of Use</h1>
-                </header>
                 <article>
-                    <p><strong>SUMMARY (SIMPLIFIED)</strong></p>
-                    
-                    <p>We have limited liability, and you are not allowed to use our Service for any illegal activity according to the laws that govern payment services. You are responsible for any unlawful activity by your clients or merchants. We may suspend our service at any time. Please read these Terms of Use carefully.</p>
-                    
-                    <p><strong>OVERVIEW</strong></p>
-                    
-                    <p><strong>OMEGAHOOD LLC, WE, US, OUR:</strong> OmegaHood LLC, the owner and operator of PaymentHood</p>
+                    {% capture terms_content %}{% include_relative legals/term-of-use.md %}{% endcapture %}
+                    {{ terms_content | markdownify }}
+                </article>
+            </div>
+        </div>
+    </main>
+
+    {% include footer.html %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Ensure Terms link marked active (defensive in case server-side liquid missed it)
+            const termsLink = document.querySelector('.nav-links a[href="term-of-use.html"]');
+            if (termsLink) termsLink.classList.add('active');
+
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', function () {
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', String(!isExpanded));
+                    navToggle.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
+                        navLinks.classList.remove('active');
+                        navToggle.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Close menu when a nav link is clicked (mobile UX improvement)
+                navLinks.querySelectorAll('a').forEach(a => {
+                    a.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        navToggle.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
                     
                     <p><strong>CLIENT:</strong> Your customers who make payments through PaymentHood</p>
                     
