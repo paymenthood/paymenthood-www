@@ -1,0 +1,52 @@
+# Jekyll Configuration for GitHub Pages
+title: PaymentHood
+description: Enterprise Payment Orchestration Platform | Unified API for 15+ Payment Providers
+url: "https://paymenthood.com"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# GitHub Pages configuration
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - responsive-analysis.md
+  - REUSABLE_COMPONENTS.md
+  - .gitignore
+  - .git/
+  - .vs/
+
+# Include settings
+include:
+  - _includes
+
+# Default settings
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Site settings
+author: PaymentHood
+lang: en
+
+# SEO settings
+logo: /images/Logo-name-2.png
+social:
+  name: PaymentHood
+  links:
+    - https://docs.paymenthood.com
+
+# GitHub Pages specific
+safe: true
+incremental: false
