@@ -35,7 +35,22 @@
         </nav>
     </header>
 
-
+    <main id="main-content" class="legal-main">
+        <div class="legal-container">
+            <div class="legal-card" role="article" aria-labelledby="terms-title">
+                <header>
+                    <h1 id="terms-title">Terms of Use</h1>
+                    <p class="legal-meta">Effective Date: {{ site.time | date: '%B %d, %Y' }}</p>
+                </header>
+                <article>
+                    {% capture terms_markdown %}
+                    {% include_relative legals/term-of-use.md %}
+                    {% endcapture %}
+                    {{ terms_markdown | markdownify }}
+                </article>
+            </div>
+        </div>
+    </main>
 
     <footer class="footer">
         <div class="container">
