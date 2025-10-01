@@ -7137,6 +7137,10 @@ a:focus {
     transform: scale(1.1);
 }
 
+.plugin-item.clickable:hover .plugin-icon.whmcs {
+    transform: none;
+}
+
 .plugin-item.clickable .plugin-status.available {
     background: linear-gradient(135deg, #0066cc, #059669);
     color: white;
@@ -7639,38 +7643,321 @@ a:focus {
     opacity: 0.9;
 }
 
-/* Mobile responsive for plugin page */
+.authorization-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    min-width: 120px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.15);
+}
+
+.flow-step i {
+    font-size: 1.5rem;
+    color: #0066cc;
+    margin-bottom: 0.25rem;
+}
+
+.flow-step span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1a365d;
+    line-height: 1.3;
+}
+
+.flow-arrow {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0066cc;
+    margin: 0 0.5rem;
+}
+
+/* Enhanced Logo Design */
+.logo-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-brand:hover {
+    transform: translateY(-1px);
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-1px);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #0066cc, #059669);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+    transition: all 0.3s ease;
+}
+
+.logo-brand:hover .logo-icon,
+.logo-link:hover .logo-icon {
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a365d;
+    line-height: 1;
+}
+
+.brand-highlight {
+    background: linear-gradient(135deg, #0066cc, #059669);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.brand-tagline {
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.2;
+    max-width: 300px;
+    text-align: left;
+}
+
+/* Mobile responsive for logo */
 @media (max-width: 768px) {
-    .plugin-badge {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
+    .logo-brand, .logo-link {
+        gap: 0.5rem;
     }
     
-    .step-item {
-        flex-direction: column;
-        gap: 1rem;
+    .logo-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
     }
     
-    .step-number {
-        align-self: center;
+    .brand-name {
+        font-size: 1.2rem;
     }
     
-    .download-info {
-        flex-direction: column;
+    .brand-tagline {
+        font-size: 0.55rem;
+        max-width: 250px;
+        line-height: 1.1;
+    }
+}
+
+.visual-step .step-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.visual-step .step-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.visual-step .step-image:hover img {
+    transform: scale(1.02);
+}
+
+.image-caption {
+    background: #f8fafc;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 500;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.step-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-left: 4px solid #0ea5e9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.step-note i {
+    color: #0ea5e9;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.step-note span {
+    color: #0c4a6e;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.success-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #22c55e;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.success-note i {
+    color: #22c55e;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.success-note span {
+    color: #14532d;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.installation-tips {
+    margin-top: 4rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.installation-tips h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 2rem;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tip-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.tip-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+}
+
+.tip-item i {
+    font-size: 2rem;
+    color: #0066cc;
+    margin-bottom: 1rem;
+}
+
+.tip-item h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.tip-item p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Enhanced step items for visual guide */
+.visual-step {
+    background: white;
+    border: 2px solid #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.visual-step:hover {
+    border-color: #0066cc;
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.1);
+}
+
+/* Mobile responsive for visual guide */
+@media (max-width: 768px) {
+    .visual-step .step-image {
+        margin: 1rem 0;
+    }
+    
+    .installation-tips {
+        padding: 2rem 1rem;
+        margin-top: 2rem;
+    }
+    
+    .tips-grid {
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
-    .version-info,
-    .requirements {
-        text-align: center;
-    }
-    
-    .support-links {
-        flex-direction: column;
-    }
-    
-    .hero-actions {
-        justify-content: center;
+    .tip-item {
+        padding: 1.5rem;
     }
 }

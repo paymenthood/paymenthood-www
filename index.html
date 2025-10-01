@@ -63,7 +63,14 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header" itemscope itemtype="https://schema.org/WPHeader">
         <nav class="nav container" role="navigation" aria-label="Main navigation">
-            <a href="index.html" class="logo" itemprop="url">PaymentHood</a>
+            <div class="logo-brand">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Payment<span class="brand-highlight">Hood</span></span>
+                </div>
+            </div>
             
             <!-- Mobile Navigation Toggle -->
             <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -77,9 +84,6 @@
                 <li role="none"><a href="#gateways" role="menuitem" aria-label="View supported gateways">Gateways</a></li>
                 <li role="none"><a href="#plugins" role="menuitem" aria-label="View available plugins">Plugins</a></li>
                 <li role="none"><a href="pricing.html" role="menuitem" aria-label="View pricing plans">Pricing</a></li>
-                <li role="none"><a href="#architecture" role="menuitem" aria-label="View architecture">Architecture</a></li>
-                <li role="none"><a href="term-of-use.html" role="menuitem" aria-label="Read the PaymentHood terms of use">Terms</a></li>
-                <li role="none"><a href="privacy-policy.html" role="menuitem" aria-label="Read the PaymentHood privacy policy">Privacy</a></li>
                 <li role="none"><a href="https://docs.paymenthood.com/" role="menuitem" aria-label="Open documentation on docs.paymenthood.com" target="_blank" rel="noopener">Documentation</a></li>
             </ul>
             <a href="#contact" class="cta-button" aria-label="Start your free trial">Start 1-Month Free</a>
@@ -95,7 +99,7 @@
                     <div class="hero-left">
                         <div class="hero-content">
                             <h1 itemprop="headline">Seamless Payments. Unlock Global Performance</h1>
-                            <p itemprop="description">The open payment orchestration platform that drives performance across multiple providers. Connect 15+ providers through one API, prevent fraud with AI, and optimize every transaction for maximum success.</p>
+                            <p itemprop="description">From e-commerce stores to enterprise systems, PaymentHood brings together 15+ gateways, AI-driven fraud protection, and smart routing — all through one simple integration.</p>
                             <div class="hero-buttons">
                                 <a href="#demo" class="btn-primary" aria-label="Start your free trial with PaymentHood">
                                     <i class="fas fa-rocket" aria-hidden="true"></i>
@@ -343,8 +347,8 @@
                                 
                                 <div class="benefit-card">
                                     <div class="benefit-icon">💰</div>
-                                    <h5>Capital Efficient</h5>
-                                    <p>Pay only for successful transactions. No monthly fees or setup costs.</p>
+                                    <h5>Cost Effective</h5>
+                                    <p>Transparent pricing with competitive rates. Save on development time and maintenance costs.</p>
                                 </div>
                                 
                                 <div class="benefit-card">
@@ -365,7 +369,6 @@
                                 <ul class="benefits-list">
                                     <li><i class="fas fa-check-circle"></i>Multi-gateway redundancy for 99.9% uptime</li>
                                     <li><i class="fas fa-check-circle"></i>AI-powered fraud prevention</li>
-                                    <li><i class="fas fa-check-circle"></i>Global payment methods (40+ countries)</li>
                                     <li><i class="fas fa-check-circle"></i>Real-time analytics and reporting</li>
                                     <li><i class="fas fa-check-circle"></i>Intelligent routing for higher approval rates</li>
                                 </ul>
@@ -955,116 +958,6 @@
         </div>
     </section>
 
-    <!-- Integrations Section -->
-    <section class="integrations" id="integrations">
-        <div class="container">
-            <div class="section-header">
-                <h2>Platform Integrations</h2>
-                <p>Seamlessly integrate PaymentHood with your existing systems and popular e-commerce platforms.</p>
-            </div>
-            
-            <div class="integration-grid">
-                <div class="integration-category available">
-                    <div class="category-header">
-                        <h3><i class="fas fa-check-circle"></i> Integrations</h3>
-                        <p>Ready-to-use integrations for immediate deployment</p>
-                    </div>
-                    
-                    <div class="integration-items">
-                        <div class="integration-item featured">
-                            <div class="integration-icon">
-                                <i class="fas fa-cog"></i>
-                            </div>
-                            <div class="integration-content">
-                                <h4>WHMCS Plugin</h4>
-                                <p>Complete payment gateway plugin for WHMCS billing systems. Handle subscriptions, invoicing, and automated billing seamlessly.</p>
-                                <div class="integration-features">
-                                    <span class="feature-tag">✓ Auto-billing</span>
-                                    <span class="feature-tag">✓ Multi-currency</span>
-                                    <span class="feature-tag">✓ Recurring payments</span>
-                                    <span class="feature-tag">✓ Invoice integration</span>
-                                </div>
-                                <a href="https://docs.paymenthood.com/#whmcs-plugin" class="integration-btn" target="_blank" rel="noopener">Get WHMCS Plugin</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Coming Soon -->
-                <div class="integration-category coming-soon">
-                    <div class="category-header">
-                        <h3><i class="fas fa-rocket"></i> Coming Soon</h3>
-                        <p>Upcoming integrations to expand your e-commerce reach</p>
-                    </div>
-                    
-                    <div class="integration-items">
-                        <div class="integration-item">
-                            <div class="integration-icon">
-                                <i class="fab fa-shopify"></i>
-                            </div>
-                            <div class="integration-content">
-                                <h4>Shopify App</h4>
-                                <p>Native Shopify app for seamless checkout experiences with smart routing and fraud protection.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="integration-item">
-                            <div class="integration-icon">
-                                <i class="fab fa-wordpress"></i>
-                            </div>
-                            <div class="integration-content">
-                                <h4>WooCommerce Plugin</h4>
-                                <p>WordPress WooCommerce plugin with advanced payment routing and comprehensive analytics.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="integration-item">
-                            <div class="integration-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <div class="integration-content">
-                                <h4>E-commerce Platforms</h4>
-                                <p>Magento, PrestaShop, BigCommerce, and other major e-commerce platform integrations.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="integration-item">
-                            <div class="integration-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <div class="integration-content">
-                                <h4>Mobile SDKs</h4>
-                                <p>Native iOS and Android SDKs for seamless mobile app payment integration.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="integration-cta">
-                <div class="cta-content">
-                    <h3>Need a Custom Integration?</h3>
-                    <p>If you have a payment gateway that's not in our list, we can integrate it into our system <strong>free of charge</strong>. Our team also builds custom plugins and integrations for your specific platform or business needs.</p>
-                    <div class="integration-benefits">
-                        <div class="benefit-item">
-                            <i class="fas fa-gift"></i>
-                            <span><strong>Free Gateway Integration</strong> - Any payment gateway you need</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-code"></i>
-                            <span><strong>Custom Platform Plugins</strong> - Tailored to your system</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-headset"></i>
-                            <span><strong>Dedicated Support</strong> - Throughout the integration process</span>
-                        </div>
-                    </div>
-                    <a href="mailto:support@paymenthood.com?subject=Free Gateway Integration Request&body=Hello,%0A%0AI would like to request a free gateway integration for the following payment gateway:%0A%0AGateway Name: [Please specify]%0AWebsite: [Gateway website]%0AIntegration Requirements: [Please describe]%0A%0AThank you!" class="btn-primary">Request Free Gateway Integration</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Stats Section -->
     <section class="stats">
         <div class="container">
@@ -1143,44 +1036,6 @@
 
             <div class="plugins-grid">
                 <div class="plugin-category">
-                    <h4><i class="fas fa-shopping-cart"></i> Popular E-commerce Platforms</h4>
-                    <div class="plugin-items">
-                        <div class="plugin-item">
-                            <div class="plugin-icon shopify">
-                                <i class="fab fa-shopify"></i>
-                            </div>
-                            <div class="plugin-info">
-                                <h5>Shopify</h5>
-                                <p>Complete Shopify app with advanced payment routing and fraud protection</p>
-                                <span class="plugin-status coming-soon">Coming Soon</span>
-                            </div>
-                        </div>
-                        
-                        <div class="plugin-item">
-                            <div class="plugin-icon woocommerce">
-                                <i class="fab fa-wordpress"></i>
-                            </div>
-                            <div class="plugin-info">
-                                <h5>WooCommerce</h5>
-                                <p>WordPress plugin with intelligent gateway selection and checkout optimization</p>
-                                <span class="plugin-status coming-soon">Coming Soon</span>
-                            </div>
-                        </div>
-                        
-                        <div class="plugin-item">
-                            <div class="plugin-icon magento">
-                                <i class="fas fa-store"></i>
-                            </div>
-                            <div class="plugin-info">
-                                <h5>Magento</h5>
-                                <p>Enterprise-grade extension for Magento 2 with multi-store support</p>
-                                <span class="plugin-status coming-soon">Coming Soon</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="plugin-category">
                     <h4><i class="fas fa-server"></i> Business & Hosting Platforms</h4>
                     <div class="plugin-items">
                         <div class="plugin-item clickable" onclick="window.location.href='whmcs-plugin.html'" style="cursor: pointer;">
@@ -1219,6 +1074,44 @@
                 </div>
 
                 <div class="plugin-category">
+                    <h4><i class="fas fa-shopping-cart"></i> Popular E-commerce Platforms</h4>
+                    <div class="plugin-items">
+                        <div class="plugin-item">
+                            <div class="plugin-icon shopify">
+                                <i class="fab fa-shopify"></i>
+                            </div>
+                            <div class="plugin-info">
+                                <h5>Shopify</h5>
+                                <p>Complete Shopify app with advanced payment routing and fraud protection</p>
+                                <span class="plugin-status coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                        
+                        <div class="plugin-item">
+                            <div class="plugin-icon woocommerce">
+                                <i class="fab fa-wordpress"></i>
+                            </div>
+                            <div class="plugin-info">
+                                <h5>WooCommerce</h5>
+                                <p>WordPress plugin with intelligent gateway selection and checkout optimization</p>
+                                <span class="plugin-status coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                        
+                        <div class="plugin-item">
+                            <div class="plugin-icon magento">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="plugin-info">
+                                <h5>Magento</h5>
+                                <p>Enterprise-grade extension for Magento 2 with multi-store support</p>
+                                <span class="plugin-status coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plugin-category">
                     <h4><i class="fas fa-globe"></i> Multi-Platform & Enterprise</h4>
                     <div class="plugin-items">
                         <div class="plugin-item">
@@ -1240,17 +1133,6 @@
                                 <h5>BigCommerce</h5>
                                 <p>Enterprise SaaS e-commerce with headless payment integration</p>
                                 <span class="plugin-status coming-soon">Coming Soon</span>
-                            </div>
-                        </div>
-                        
-                        <div class="plugin-item">
-                            <div class="plugin-icon custom">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <div class="plugin-info">
-                                <h5>Custom Platform</h5>
-                                <p>We build custom plugins for your proprietary e-commerce system</p>
-                                <span class="plugin-status custom">On Request</span>
                             </div>
                         </div>
                     </div>
