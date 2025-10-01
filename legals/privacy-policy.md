@@ -97,16 +97,3 @@ PaymentHood is not directed to individuals under the age of 18. We do not knowin
 ## **Changes to This Privacy Policy**
 
 We reserve the right to update this Privacy Policy at any time. The revised version will be posted on our website with an updated effective date.
-
-## **Contact Us**
-
-If you have any questions about this Privacy Policy or our practices, please contact us:
-
-**OmegaHood LLC**  
-Email: privacy@paymenthood.com  
-Website: [www.paymenthood.com](https://www.paymenthood.com)
-
----
-
-**Effective Date:** [Insert Date]
-```
