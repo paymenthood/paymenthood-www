@@ -60,4 +60,12 @@
         <priority>0.5</priority>
     </url>
 
+    <!-- Privacy Policy -->
+    <url>
+        <loc>https://www.paymenthood.com/privacy-policy/</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
 </urlset>
