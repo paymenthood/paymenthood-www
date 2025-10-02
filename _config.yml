@@ -26,7 +26,7 @@ exclude:
 
 # Include settings
 include:
-  - includes
+  - _includes
 
 # Default settings
 defaults:
