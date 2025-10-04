@@ -7157,17 +7157,17 @@ a:focus {
     margin-right: auto;
 }
 
-.plugin-item.gateway-integration-special {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-    border: none;
-    color: white;
+.gateway-integration-showcase .plugin-item.gateway-integration-special {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899) !important;
+    border: none !important;
+    color: white !important;
     position: relative;
     overflow: hidden;
     transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3) !important;
 }
 
-.plugin-item.gateway-integration-special::before {
+.gateway-integration-showcase .plugin-item.gateway-integration-special::before {
     content: '';
     position: absolute;
     top: 0;
@@ -7183,48 +7183,26 @@ a:focus {
     100% { transform: translateX(100%); }
 }
 
-.plugin-item.gateway-integration-special:hover {
-    transform: scale(1.08);
-    box-shadow: 0 25px 50px rgba(99, 102, 241, 0.4);
+.gateway-integration-showcase .plugin-item.gateway-integration-special:hover {
+    transform: scale(1.08) !important;
+    box-shadow: 0 25px 50px rgba(99, 102, 241, 0.4) !important;
 }
 
-.plugin-item.gateway-integration-special .plugin-icon {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    position: relative;
-}
-
-.plugin-item.gateway-integration-special .plugin-icon .icon-glow {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-    animation: glow-pulse 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow-pulse {
-    0% { opacity: 0.5; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1.2); }
-}
-
-.plugin-item.gateway-integration-special .plugin-info h5 {
-    color: white;
+.gateway-integration-showcase .plugin-item.gateway-integration-special .plugin-info h5 {
+    color: white !important;
     font-size: 1.25rem;
     font-weight: 700;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.plugin-item.gateway-integration-special .plugin-info p {
-    color: rgba(255, 255, 255, 0.95);
+.gateway-integration-showcase .plugin-item.gateway-integration-special .plugin-info p {
+    color: rgba(255, 255, 255, 0.95) !important;
     font-weight: 500;
 }
 
-.plugin-item.gateway-integration-special .plugin-status.premium-free {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #1f2937;
+.gateway-integration-showcase .plugin-item.gateway-integration-special .plugin-status.premium-free {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+    color: #1f2937 !important;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
