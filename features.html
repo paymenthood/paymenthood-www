@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PaymentHood Features - Complete Payment Orchestration Platform</title>
-    <meta name="description" content="Explore PaymentHood's comprehensive features: fraud protection, intelligent gateway switching, monitoring & logs, automatic payments, approval workflows, and unified multi-gateway orchestration.">
+    <title>PaymentHood Features - Advanced Payment Orchestration Platform</title>
+    <meta name="description" content="Discover PaymentHood's powerful features: AI fraud protection, smart gateway routing, real-time monitoring, automated workflows, and unified payment orchestration across 15+ providers.">
     <link rel="canonical" href="https://paymenthood.com/features">
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/fraud-detection.css">
+    <link rel="stylesheet" href="css/verification-security.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,442 +22,952 @@
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <header class="header" itemscope itemtype="https://schema.org/WPHeader">
-        <nav class="nav container" role="navigation" aria-label="Main navigation">
-            <div class="logo-brand">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="logo-text">
-                        <span class="brand-name">Payment<span class="brand-highlight">Hood</span></span>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Mobile Navigation Toggle -->
-            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <ul class="nav-links" role="menubar">
-                <li role="none"><a href="index.html#features" role="menuitem" aria-label="View features" class="active">Features</a></li>
-                <li role="none"><a href="index.html#gateways" role="menuitem" aria-label="View supported gateways">Gateways</a></li>
-                <li role="none"><a href="index.html#plugins" role="menuitem" aria-label="View available plugins">Plugins</a></li>
-                <li role="none"><a href="pricing.html" role="menuitem" aria-label="View pricing plans">Pricing</a></li>
-                <li role="none"><a href="https://docs.paymenthood.com/" role="menuitem" aria-label="Open documentation on docs.paymenthood.com" target="_blank" rel="noopener">Documentation</a></li>
-            </ul>
-            <a href="index.html#contact" class="cta-button" aria-label="Start your free trial">Start 1-Month Free</a>
-        </nav>
-    </header>
+    {% include header.html %}
 
     <main id="main-content">
         <!-- Hero Section -->
-        <section class="hero features-hero">
+        <section class="features-hero-modern">
             <div class="container">
-                <div class="hero-content text-center">
-                    <h1>PaymentHood Features</h1>
-                    <p class="hero-description">Complete payment orchestration platform with advanced fraud protection, intelligent routing, and comprehensive monitoring.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Overview -->
-        <section class="features-overview">
-            <div class="container">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Fraud Protection</h3>
-                        <p>AI-powered fraud detection with customizable rules</p>
-                        <a href="#fraud-protection" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span>Complete Payment Platform</span>
                     </div>
+                    <h1>Advanced Payment Features</h1>
+                    <p>Unlock the full potential of payment processing with our comprehensive suite of tools designed for modern businesses.</p>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-route"></i>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Payment Gateways</div>
                         </div>
-                        <h3>Intelligent Payment Gateway Switching</h3>
-                        <p>Smart routing based on performance and rules</p>
-                        <a href="#gateway-switching" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
+                        <div class="stat-item">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Uptime</div>
                         </div>
-                        <h3>Monitoring & Logs</h3>
-                        <p>Real-time analytics and comprehensive logging</p>
-                        <a href="#monitoring" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-sync-alt"></i>
+                        <div class="stat-item">
+                            <div class="stat-number">< 300ms</div>
+                            <div class="stat-label">Response Time</div>
                         </div>
-                        <h3>Automatic Payment</h3>
-                        <p>Recurring and scheduled payment automation</p>
-                        <a href="#automatic-payment" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <h3>Onetime Payment</h3>
-                        <p>Secure links and hosted checkout pages</p>
-                        <a href="#onetime-payment" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-clipboard-check"></i>
-                        </div>
-                        <h3>Approval Workflow</h3>
-                        <p>Manual approval for high-risk transactions</p>
-                        <a href="#approval-workflow" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h3>Unified Multi-Gateway Orchestration</h3>
-                        <p>Manage 15+ payment gateways from one platform</p>
-                        <a href="#orchestration" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <h3>15+ Payment Gateways</h3>
-                        <p>Connect to global and regional payment providers</p>
-                        <a href="#gateways" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Smart Gateway Selection -->
-        <section class="feature-detail" id="gateway-switching">
+        <!-- Core Features Grid -->
+        <section class="core-features-section">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Smart Gateway Selection</h2>
-                    <p>Automatically route transactions to the best-performing gateway based on configurable rules.</p>
+                <div class="section-header">
+                    <h2>Core Capabilities</h2>
+                    <p>Everything you need to manage payments at scale</p>
                 </div>
                 
-                <div class="feature-content">
-                    <div class="feature-examples">
-                        <div class="example-card">
-                            <h4>Route by Commission</h4>
-                            <p>Automatically select gateways with the lowest processing fees for cost optimization.</p>
+                <div class="features-grid-modern">
+                    <div class="feature-card-modern fraud-card">
+                        <div class="card-header">
+                            <div class="feature-icon-modern">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-badge ai">AI-Powered</div>
                         </div>
-                        
-                        <div class="example-card">
-                            <h4>Route by Transaction Amount</h4>
-                            <p>For example, transactions over $5,000 can automatically be redirected to Amazon Pay for better approval rates.</p>
+                        <h3>Advanced Fraud Detection</h3>
+                        <p>Machine learning algorithms detect suspicious patterns and automatically block fraudulent transactions in real-time.</p>
+                        <div class="feature-highlights">
+                            <div class="highlight">Smart Rules Engine</div>
+                            <div class="highlight">Real-time Monitoring</div>
+                            <div class="highlight">Custom Thresholds</div>
                         </div>
-                        
-                        <div class="example-card">
-                            <h4>Route by Fraud Policy</h4>
-                            <p>Direct high-risk transactions to gateways with advanced fraud detection capabilities.</p>
+                    </div>
+                    
+                    <div class="feature-card-modern routing-card">
+                        <div class="card-header">
+                            <div class="feature-icon-modern">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <div class="feature-badge smart">Smart</div>
+                        </div>
+                        <h3>Intelligent Gateway Routing</h3>
+                        <p>Automatically route transactions to the best-performing gateway based on success rates, costs, and custom business rules.</p>
+                        <div class="feature-highlights">
+                            <div class="highlight">Cost Optimization</div>
+                            <div class="highlight">Success Rate Tracking</div>
+                            <div class="highlight">Failover Protection</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern monitoring-card">
+                        <div class="card-header">
+                            <div class="feature-icon-modern">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-badge realtime">Real-time</div>
+                        </div>
+                        <h3>Advanced Analytics</h3>
+                        <p>Comprehensive dashboards and real-time monitoring provide deep insights into payment performance and customer behavior.</p>
+                        <div class="feature-highlights">
+                            <div class="highlight">Live Dashboards</div>
+                            <div class="highlight">Custom Reports</div>
+                            <div class="highlight">Performance Metrics</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern automation-card">
+                        <div class="card-header">
+                            <div class="feature-icon-modern">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="feature-badge automated">Automated</div>
+                        </div>
+                        <h3>Payment Automation</h3>
+                        <p>Streamline recurring billing, subscription management, and automated payment workflows with zero manual intervention.</p>
+                        <div class="feature-highlights">
+                            <div class="highlight">Recurring Billing</div>
+                            <div class="highlight">Subscription Management</div>
+                            <div class="highlight">Auto-retry Logic</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern verification-card">
+                        <div class="card-header">
+                            <div class="feature-icon-modern">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="feature-badge secure">Secure</div>
+                        </div>
+                        <h3>Payment Verification</h3>
+                        <p>Verify payment methods instantly using micro-deposits, Plaid integration, and advanced validation techniques.</p>
+                        <div class="feature-highlights">
+                            <div class="highlight">Instant Verification</div>
+                            <div class="highlight">Bank Integration</div>
+                            <div class="highlight">Micro-deposits</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern orchestration-card">
+                        <div class="card-header">
+                            <div class="feature-icon-modern">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="feature-badge unified">Unified</div>
+                        </div>
+                        <h3>Multi-Gateway Orchestration</h3>
+                        <p>Manage 15+ payment gateways through a single API, with seamless switching and centralized control.</p>
+                        <div class="feature-highlights">
+                            <div class="highlight">Single API</div>
+                            <div class="highlight">15+ Gateways</div>
+                            <div class="highlight">Zero Code Changes</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Multi-Gateway Management -->
-        <section class="feature-detail" id="orchestration">
+        <!-- Integration Showcase -->
+        <section class="integration-showcase">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Multi-Gateway Management</h2>
-                    <p>Add, switch, or remove gateways without changing your code.</p>
-                </div>
-                
-                <div class="feature-benefits">
-                    <div class="benefit-item">
-                        <i class="fas fa-plug"></i>
-                        <h4>Zero Code Changes</h4>
-                        <p>Integrate new payment gateways without modifying your application code.</p>
+                <div class="showcase-content">
+                    <div class="showcase-text">
+                        <h2>Seamless Integration</h2>
+                        <p>Get started in minutes with our developer-friendly APIs and comprehensive documentation.</p>
+                        
+                        <div class="integration-benefits">
+                            <div class="benefit">
+                                <i class="fas fa-code"></i>
+                                <div>
+                                    <h4>Simple API</h4>
+                                    <p>RESTful API with clear documentation</p>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-headset"></i>
+                                <div>
+                                    <h4>Expert Support</h4>
+                                    <p>24/7 technical support during integration</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="https://docs.paymenthood.com" class="btn-primary" target="_blank">
+                            <i class="fas fa-book"></i>
+                            View Documentation
+                        </a>
                     </div>
                     
-                    <div class="benefit-item">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <h4>Instant Switching</h4>
-                        <p>Switch between gateways in real-time based on performance metrics.</p>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <i class="fas fa-globe"></i>
-                        <h4>Global Reach</h4>
-                        <p>Access 15+ payment gateways covering global and regional markets.</p>
+                    <div class="showcase-visual">
+                        <div class="code-preview">
+                            <div class="code-header">
+                                <div class="code-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <span>payment.js</span>
+                            </div>
+                            <div class="code-content">
+                                <code>
+const payment = await paymenthood.process({<br>
+&nbsp;&nbsp;amount: 9999,<br>
+&nbsp;&nbsp;currency: 'USD',<br>
+&nbsp;&nbsp;customer: customer_id,<br>
+&nbsp;&nbsp;routing: 'smart'<br>
+});<br><br>
+// Automatic gateway selection<br>
+// Fraud detection included<br>
+// Real-time monitoring
+                                </code>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- CTA Section -->
+        <section class="features-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Payment Processing?</h2>
+                    <p>Join hundreds of businesses already using PaymentHood to optimize their payment operations.</p>
+                    <div class="cta-buttons">
+                        <a href="index.html#contact" class="btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            Start Free Trial
+                        </a>
+                        <a href="pricing.html" class="btn-outline">
+                            <i class="fas fa-dollar-sign"></i>
+                            View Pricing
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include footer.html %}
+</body>
+</html>
 
         <!-- Advanced Fraud & Risk Management -->
-        <section class="feature-detail" id="fraud-protection">
+        <section class="advanced-fraud-section" id="fraud-protection">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Advanced Fraud & Risk Management</h2>
+                <div class="fraud-hero">
+                    <div class="fraud-hero-content">
+                        <div class="section-badge">
+                            <i class="fas fa-shield-virus"></i>
+                            <span>AI-Powered Protection</span>
+                        </div>
+                        <h2>Advanced Fraud & Risk Management</h2>
+                        <p>Next-generation fraud protection powered by machine learning and behavioral analytics to safeguard your business from sophisticated threats.</p>
+                        
+                        <div class="fraud-stats">
+                            <div class="fraud-stat">
+                                <div class="stat-number">99.7%</div>
+                                <div class="stat-label">Fraud Detection Rate</div>
+                            </div>
+                            <div class="fraud-stat">
+                                <div class="stat-number">&lt;50ms</div>
+                                <div class="stat-label">Analysis Time</div>
+                            </div>
+                            <div class="fraud-stat">
+                                <div class="stat-number">0.02%</div>
+                                <div class="stat-label">False Positives</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="fraud-features">
-                    <div class="fraud-feature">
-                        <div class="fraud-icon">
-                            <i class="fas fa-brain"></i>
+                <div class="fraud-grid-modern">
+                    <div class="fraud-card-modern ai-detection">
+                        <div class="card-background-effect"></div>
+                        <div class="card-content">
+                            <div class="fraud-icon-modern">
+                                <i class="fas fa-brain"></i>
+                                <div class="icon-pulse"></div>
+                            </div>
+                            <div class="fraud-badge ai-badge">Neural Network</div>
+                            <h3>AI-Powered Detection Engine</h3>
+                            <p>Advanced machine learning algorithms analyze transaction patterns, user behavior, and device fingerprints in real-time to identify sophisticated fraud attempts.</p>
+                            <div class="fraud-features-list">
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Behavioral Pattern Analysis</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Device Fingerprinting</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Velocity Monitoring</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>AI-Powered Fraud Detection</h3>
-                        <p>Machine learning automatically identifies risky transactions using behavioral patterns and historical data.</p>
                     </div>
                     
-                    <div class="fraud-feature">
-                        <div class="fraud-icon">
-                            <i class="fas fa-cog"></i>
+                    <div class="fraud-card-modern rules-engine">
+                        <div class="card-background-effect"></div>
+                        <div class="card-content">
+                            <div class="fraud-icon-modern">
+                                <i class="fas fa-cogs"></i>
+                                <div class="icon-spin"></div>
+                            </div>
+                            <div class="fraud-badge rules-badge">Smart Rules</div>
+                            <h3>Intelligent Rules Engine</h3>
+                            <p>Create sophisticated fraud rules with conditional logic, geographic restrictions, and dynamic thresholds that adapt to your business patterns.</p>
+                            <div class="fraud-features-list">
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Custom Rule Builder</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Geographic Filtering</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Dynamic Thresholds</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Customizable Fraud Rules</h3>
-                        <p>Set rules for transaction velocity, geography, and amount thresholds tailored to your business.</p>
                     </div>
                     
-                    <div class="fraud-feature">
-                        <div class="fraud-icon">
-                            <i class="fas fa-users"></i>
+                    <div class="fraud-card-modern risk-scoring">
+                        <div class="card-background-effect"></div>
+                        <div class="card-content">
+                            <div class="fraud-icon-modern">
+                                <i class="fas fa-chart-line"></i>
+                                <div class="icon-wave"></div>
+                            </div>
+                            <div class="fraud-badge risk-badge">Risk Scoring</div>
+                            <h3>Dynamic Risk Assessment</h3>
+                            <p>Real-time risk scoring system that evaluates multiple data points to assign risk levels and automatically route transactions for review or approval.</p>
+                            <div class="fraud-features-list">
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Multi-Factor Scoring</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Threshold Management</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Auto-Routing</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Per-Customer or Combined Rules</h3>
-                        <p>Admins can apply fraud rules individually or across multiple users for comprehensive protection.</p>
                     </div>
                     
-                    <div class="fraud-feature">
-                        <div class="fraud-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
+                    <div class="fraud-card-modern customer-protection">
+                        <div class="card-background-effect"></div>
+                        <div class="card-content">
+                            <div class="fraud-icon-modern">
+                                <i class="fas fa-user-shield"></i>
+                                <div class="icon-glow"></div>
+                            </div>
+                            <div class="fraud-badge protection-badge">Individual & Global</div>
+                            <h3>Customer-Level Protection</h3>
+                            <p>Apply fraud rules per customer or globally across your entire customer base. Advanced segmentation allows for personalized fraud protection strategies.</p>
+                            <div class="fraud-features-list">
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Per-Customer Rules</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Global Policies</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Customer Segmentation</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Dispute & Chargeback Handling</h3>
-                        <p>Automatic notifications and approval workflows for high-risk transactions.</p>
+                    </div>
+                    
+                    <div class="fraud-card-modern chargeback-defense">
+                        <div class="card-background-effect"></div>
+                        <div class="card-content">
+                            <div class="fraud-icon-modern">
+                                <i class="fas fa-shield-alt"></i>
+                                <div class="icon-shield"></div>
+                            </div>
+                            <div class="fraud-badge defense-badge">Defense System</div>
+                            <h3>Chargeback Defense</h3>
+                            <p>Proactive chargeback prevention and automated dispute management with evidence collection and response automation.</p>
+                            <div class="fraud-features-list">
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Automated Responses</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evidence Collection</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Prevention Alerts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fraud-card-modern monitoring-alerts">
+                        <div class="card-background-effect"></div>
+                        <div class="card-content">
+                            <div class="fraud-icon-modern">
+                                <i class="fas fa-bell"></i>
+                                <div class="icon-ring"></div>
+                            </div>
+                            <div class="fraud-badge alert-badge">Real-time</div>
+                            <h3>Intelligent Monitoring</h3>
+                            <p>24/7 monitoring with instant alerts for suspicious activities. Smart notifications reduce noise while ensuring critical threats are immediately escalated.</p>
+                            <div class="fraud-features-list">
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Smart Notifications</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Priority Escalation</span>
+                                </div>
+                                <div class="fraud-feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>24/7 Monitoring</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Customer Management -->
-        <section class="feature-detail" id="customer-management">
+        <section class="customer-management-section" id="customer-management">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Customer Management</h2>
+                <div class="customer-hero">
+                    <div class="customer-badge">
+                        <i class="fas fa-users-cog"></i>
+                        <span>Customer-Centric</span>
+                    </div>
+                    <h2>Advanced Customer Management</h2>
+                    <p>Comprehensive customer lifecycle management with intelligent automation, secure data handling, and personalized payment experiences.</p>
                 </div>
                 
-                <div class="customer-features">
-                    <div class="customer-feature">
-                        <h3>Customer Profiles</h3>
-                        <p>Securely store and manage payment methods with PCI-compliant tokenization.</p>
+                <div class="customer-grid">
+                    <div class="customer-card profiles-card">
+                        <div class="customer-card-header">
+                            <div class="customer-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3>Customer Profiles</h3>
+                        </div>
+                        <div class="customer-card-content">
+                            <p>Securely store and manage payment methods.</p>
+                        </div>
                     </div>
                     
-                    <div class="customer-feature">
-                        <h3>Automated Payments</h3>
-                        <p>Handle recurring or scheduled payments with intelligent automation and retry logic.</p>
+                    <div class="customer-card automation-card">
+                        <div class="customer-card-header">
+                            <div class="customer-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h3>Automated Payments</h3>
+                        </div>
+                        <div class="customer-card-content">
+                            <p>Handle recurring or scheduled payments with intelligent automation.</p>
+                        </div>
                     </div>
                     
-                    <div class="customer-feature">
-                        <h3>Custom Approval Workflows</h3>
-                        <p>Approve high-risk payments before processing with configurable workflow rules.</p>
+                    <div class="customer-card workflow-card">
+                        <div class="customer-card-header">
+                            <div class="customer-icon">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h3>Custom Approval Workflows</h3>
+                        </div>
+                        <div class="customer-card-content">
+                            <p>Approve high-risk payments before processing.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Real-Time Analytics -->
-        <section class="feature-detail" id="monitoring">
+        <section class="analytics-section" id="monitoring">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Real-Time Analytics & Business Intelligence</h2>
+                <div class="analytics-hero">
+                    <div class="analytics-badge">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Real-Time Intelligence</span>
+                    </div>
+                    <h2>Advanced Analytics & Business Intelligence</h2>
+                    <p>Transform payment data into actionable insights with AI-powered analytics, real-time dashboards, and comprehensive business intelligence tools.</p>
+                    
+                    <div class="analytics-stats">
+                        <div class="analytics-stat">
+                            <div class="stat-number">< 100ms</div>
+                            <div class="stat-label">Data Refresh Rate</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">KPI Metrics</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Monitoring</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="analytics-features">
-                    <div class="analytics-feature">
-                        <div class="analytics-icon">
+                <div class="analytics-features-grid">
+                    <div class="analytics-feature-card">
+                        <div class="analytics-feature-icon">
                             <i class="fas fa-chart-bar"></i>
                         </div>
                         <h3>Live Dashboards</h3>
                         <p>Track transactions, success rates, and gateway performance in real-time with interactive dashboards.</p>
                     </div>
                     
-                    <div class="analytics-feature">
-                        <div class="analytics-icon">
+                    <div class="analytics-feature-card">
+                        <div class="analytics-feature-icon">
                             <i class="fas fa-file-alt"></i>
                         </div>
-                        <h3>Detailed Reporting</h3>
+                        <h3>Custom Reports</h3>
                         <p>Access full financial reports for accounting and business decisions with customizable date ranges.</p>
+                    </div>
+                    
+                    <div class="analytics-feature-card">
+                        <div class="analytics-feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>Performance Metrics</h3>
+                        <p>Monitor key performance indicators and business metrics with automated tracking and alerting.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Secure Payment Links -->
-        <section class="feature-detail" id="onetime-payment">
+        <section class="payment-links-section" id="onetime-payment">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Secure Payment Links & Hosted Checkout</h2>
+                <div class="payment-hero">
+                    <div class="payment-badge">
+                        <i class="fas fa-link"></i>
+                        <span>Secure & Branded</span>
+                    </div>
+                    <h2>Payment Links & Hosted Checkout</h2>
+                    <p>Create beautiful, secure payment experiences with customizable checkout pages, branded payment links, and global payment acceptance.</p>
                 </div>
                 
-                <div class="payment-features">
-                    <div class="payment-feature">
-                        <h3>One-Time Payment Links</h3>
-                        <p>Generate secure links for invoices or individual payments that expire automatically.</p>
+                <div class="payment-showcase">
+                    <div class="payment-demo">
+                        <div class="checkout-preview">
+                            <div class="checkout-header">
+                                <div class="brand-logo"></div>
+                                <div class="checkout-title">Secure Checkout</div>
+                            </div>
+                            <div class="checkout-form">
+                                <div class="form-field"></div>
+                                <div class="form-field"></div>
+                                <div class="payment-methods">
+                                    <div class="method-icon card"></div>
+                                    <div class="method-icon paypal"></div>
+                                    <div class="method-icon apple"></div>
+                                </div>
+                                <div class="checkout-button"></div>
+                            </div>
+                            <div class="security-badges">
+                                <div class="security-badge">SSL</div>
+                                <div class="security-badge">PCI</div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="payment-feature">
-                        <h3>Hosted Checkout Pages</h3>
-                        <p>Fully customizable pages hosted securely with your branding.</p>
-                    </div>
-                    
-                    <div class="payment-feature">
-                        <h3>Recurring Payments & Auto-Capture</h3>
-                        <p>Simplify billing with automated recurring payment processing.</p>
-                    </div>
-                    
-                    <div class="payment-feature">
-                        <h3>Multi-Currency & Global Support</h3>
-                        <p>Accept payments from customers worldwide in their local currencies.</p>
+                    <div class="payment-grid">
+                        <div class="payment-card links-card">
+                            <div class="payment-icon">
+                                <i class="fas fa-external-link-alt"></i>
+                                <div class="icon-bounce"></div>
+                            </div>
+                            <div class="payment-badge-small instant">Instant</div>
+                            <h3>One-Time Payment Links</h3>
+                            <p>Generate secure, time-limited payment links for invoices and individual transactions with automatic expiration and fraud protection.</p>
+                            <div class="payment-features">
+                                <div class="feature-highlight">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Auto-Expiration</span>
+                                </div>
+                                <div class="feature-highlight">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Fraud Protection</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-card hosted-card">
+                            <div class="payment-icon">
+                                <i class="fas fa-palette"></i>
+                                <div class="icon-paint"></div>
+                            </div>
+                            <div class="payment-badge-small branded">Customizable</div>
+                            <h3>Branded Checkout Pages</h3>
+                            <p>Fully customizable, mobile-responsive checkout pages hosted on secure infrastructure with your branding and styling.</p>
+                            <div class="payment-features">
+                                <div class="feature-highlight">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Mobile Optimized</span>
+                                </div>
+                                <div class="feature-highlight">
+                                    <i class="fas fa-brush"></i>
+                                    <span>Custom Branding</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-card recurring-card">
+                            <div class="payment-icon">
+                                <i class="fas fa-redo-alt"></i>
+                                <div class="icon-cycle"></div>
+                            </div>
+                            <div class="payment-badge-small automated">Automated</div>
+                            <h3>Recurring Payments</h3>
+                            <p>Streamline subscription billing with automated recurring payments, intelligent retry logic, and dunning management.</p>
+                            <div class="payment-features">
+                                <div class="feature-highlight">
+                                    <i class="fas fa-repeat"></i>
+                                    <span>Auto-Retry Logic</span>
+                                </div>
+                                <div class="feature-highlight">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Dunning Management</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-card global-card">
+                            <div class="payment-icon">
+                                <i class="fas fa-globe"></i>
+                                <div class="icon-globe"></div>
+                            </div>
+                            <div class="payment-badge-small global">Global</div>
+                            <h3>Multi-Currency Support</h3>
+                            <p>Accept payments from customers worldwide.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Webhook System -->
-        <section class="feature-detail" id="webhook-system">
+        <section class="webhook-section" id="webhook-system">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Webhook System</h2>
+                <div class="webhook-hero">
+                    <div class="webhook-badge">
+                        <i class="fas fa-plug"></i>
+                        <span>Event-Driven</span>
+                    </div>
+                    <h2>Advanced Webhook System</h2>
+                    <p>Enterprise-grade event delivery system with guaranteed delivery, comprehensive logging, and real-time event streaming for seamless integrations.</p>
                 </div>
                 
-                <div class="webhook-features">
-                    <div class="webhook-feature">
-                        <div class="webhook-icon">
-                            <i class="fas fa-check-circle"></i>
+                <div class="webhook-showcase">
+                    <div class="webhook-flow">
+                        <div class="flow-step">
+                            <div class="step-icon payment">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="step-label">Payment Event</div>
                         </div>
-                        <h3>Guaranteed Webhook Delivery</h3>
-                        <p>Never miss critical payment events with retry logic and event sourcing.</p>
-                    </div>
-                    
-                    <div class="webhook-feature">
-                        <div class="webhook-icon">
-                            <i class="fas fa-list-alt"></i>
+                        <div class="flow-arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
                         </div>
-                        <h3>Detailed Logging</h3>
-                        <p>Full audit trails for integration reliability and troubleshooting.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Management -->
-        <section class="feature-detail" id="team-management">
-            <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Team Management</h2>
-                </div>
-                
-                <div class="team-features">
-                    <div class="team-feature">
-                        <h3>Isolated App Environments</h3>
-                        <p>Perfect for agencies or platforms managing multiple clients with separate environments.</p>
+                        <div class="flow-step">
+                            <div class="step-icon webhook">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="step-label">Webhook Trigger</div>
+                        </div>
+                        <div class="flow-arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-icon delivery">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="step-label">Guaranteed Delivery</div>
+                        </div>
                     </div>
                     
-                    <div class="team-feature">
-                        <h3>Role-Based Permissions</h3>
-                        <p>Granular access control for team members with customizable permission levels.</p>
-                    </div>
-                    
-                    <div class="team-feature">
-                        <h3>Comprehensive Audit Trails</h3>
-                        <p>Track all activity across applications and users for compliance and security.</p>
+                    <div class="webhook-grid">
+                        <div class="webhook-card delivery-card">
+                            <div class="webhook-icon">
+                                <i class="fas fa-shield-check"></i>
+                                <div class="icon-pulse-webhook"></div>
+                            </div>
+                            <div class="webhook-badge-small reliable">99.99% Reliable</div>
+                            <h3>Guaranteed Delivery</h3>
+                            <p>Advanced retry mechanisms with exponential backoff ensure critical payment events are never lost, even during system outages.</p>
+                            <div class="webhook-features">
+                                <div class="webhook-feature-item">
+                                    <i class="fas fa-redo"></i>
+                                    <span>Smart Retry Logic</span>
+                                </div>
+                                <div class="webhook-feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Exponential Backoff</span>
+                                </div>
+                                <div class="webhook-feature-item">
+                                    <i class="fas fa-database"></i>
+                                    <span>Event Sourcing</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="webhook-card logging-card">
+                            <div class="webhook-icon">
+                                <i class="fas fa-list-ul"></i>
+                                <div class="icon-scroll"></div>
+                            </div>
+                            <div class="webhook-badge-small detailed">Full Audit</div>
+                            <h3>Comprehensive Logging</h3>
+                            <p>Complete audit trails with detailed request/response logging, error tracking, and performance metrics for troubleshooting and compliance.</p>
+                            <div class="webhook-features">
+                                <div class="webhook-feature-item">
+                                    <i class="fas fa-search"></i>
+                                    <span>Searchable Logs</span>
+                                </div>
+                                <div class="webhook-feature-item">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Performance Metrics</span>
+                                </div>
+                                <div class="webhook-feature-item">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>Error Tracking</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Bank Integration -->
-        <section class="feature-detail" id="bank-integration">
+        <section class="bank-integration-section" id="bank-integration">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Bank Integration & Verification</h2>
+                <div class="bank-hero">
+                    <div class="bank-badge">
+                        <i class="fas fa-university"></i>
+                        <span>Bank-Grade Security</span>
+                    </div>
+                    <h2>Advanced Bank Integration & Verification</h2>
+                    <p>Direct bank connectivity with real-time verification, balance checking, and risk reduction through industry-leading financial data providers.</p>
                 </div>
                 
-                <div class="bank-features">
-                    <div class="bank-feature">
-                        <div class="bank-icon">
-                            <i class="fab fa-paypal"></i>
+                <div class="bank-showcase">
+                    <div class="bank-flow">
+                        <div class="bank-step">
+                            <div class="bank-step-icon connect">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="bank-step-label">Connect Bank</div>
                         </div>
-                        <h3>Plaid Integration</h3>
-                        <p>Real-time bank account verification and balance checking for ACH payments.</p>
+                        <div class="bank-flow-line"></div>
+                        <div class="bank-step">
+                            <div class="bank-step-icon verify">
+                                <i class="fas fa-shield-check"></i>
+                            </div>
+                            <div class="bank-step-label">Instant Verification</div>
+                        </div>
+                        <div class="bank-flow-line"></div>
+                        <div class="bank-step">
+                            <div class="bank-step-icon process">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="bank-step-label">Secure Payment</div>
+                        </div>
                     </div>
                     
-                    <div class="bank-feature">
-                        <div class="bank-icon">
-                            <i class="fas fa-dollar-sign"></i>
+                    <div class="bank-grid">
+                        <div class="bank-card plaid-card">
+                            <div class="bank-icon">
+                                <i class="fab fa-stripe"></i>
+                                <div class="icon-connect"></div>
+                            </div>
+                            <div class="bank-badge-small instant">Real-Time</div>
+                            <h3>Plaid Integration</h3>
+                            <p>Real-time bank account verification and balance checking for ACH payments.</p>
+                            <div class="bank-features">
+                                <div class="bank-feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Instant Verification</span>
+                                </div>
+                                <div class="bank-feature-item">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>Real-Time Balances</span>
+                                </div>
+                                <div class="bank-feature-item">
+                                    <i class="fas fa-university"></i>
+                                    <span>11,000+ Banks</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Reduced NSF Fees</h3>
-                        <p>Minimize failed payments with automatic pre-checks and balance verification.</p>
+                        
+                        <div class="bank-card nsf-card">
+                            <div class="bank-icon">
+                                <i class="fas fa-exclamation-shield"></i>
+                                <div class="icon-protect"></div>
+                            </div>
+                            <div class="bank-badge-small protected">Risk Reduction</div>
+                            <h3>NSF Fee Prevention</h3>
+                            <p>Minimize failed payments with automatic pre-checks for the account balance.</p>
+                            <div class="bank-features">
+                                <div class="bank-feature-item">
+                                    <i class="fas fa-chart-line-down"></i>
+                                    <span>85% Fewer NSF Fees</span>
+                                </div>
+                                <div class="bank-feature-item">
+                                    <i class="fas fa-check-double"></i>
+                                    <span>Pre-Transaction Checks</span>
+                                </div>
+                                <div class="bank-feature-item">
+                                    <i class="fas fa-robot"></i>
+                                    <span>Smart Timing</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Approval Workflow -->
-        <section class="feature-detail" id="approval-workflow">
+        <section class="approval-workflow-section" id="approval-workflow">
             <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Approval Workflow</h2>
-                    <p>Manual approval system for high-risk transactions with customizable rules and notifications.</p>
+                <div class="approval-hero">
+                    <div class="approval-badge">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Provider-Native</span>
+                    </div>
+                    <h2>Authorization & Capture Workflows</h2>
+                    <p>Advanced payment authorization management with support for authorize-only, capture, and void operations across multiple payment providers for maximum control and flexibility.</p>
                 </div>
                 
-                <div class="approval-features">
-                    <div class="approval-feature">
-                        <h3>Risk-Based Triggers</h3>
-                        <p>Automatically flag transactions based on amount, customer history, or geography.</p>
+                <div class="approval-showcase">
+                    <div class="workflow-diagram">
+                        <div class="workflow-step trigger">
+                            <div class="step-circle">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="step-label">Authorize</div>
+                        </div>
+                        <div class="workflow-arrow">
+                            <div class="arrow-body"></div>
+                            <div class="arrow-tip"></div>
+                        </div>
+                        <div class="workflow-step review">
+                            <div class="step-circle">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="step-label">Hold Funds</div>
+                        </div>
+                        <div class="workflow-arrow">
+                            <div class="arrow-body"></div>
+                            <div class="arrow-tip"></div>
+                        </div>
+                        <div class="workflow-step approve">
+                            <div class="step-circle">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="step-label">Capture</div>
+                        </div>
+                        <div class="workflow-arrow decline">
+                            <div class="arrow-body decline"></div>
+                            <div class="arrow-tip decline"></div>
+                        </div>
+                        <div class="workflow-step void">
+                            <div class="step-circle void">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="step-label">Void</div>
+                        </div>
                     </div>
                     
-                    <div class="approval-feature">
-                        <h3>Multi-Level Approval</h3>
-                        <p>Configure multiple approval levels for different transaction types and amounts.</p>
-                    </div>
-                    
-                    <div class="approval-feature">
-                        <h3>Real-Time Notifications</h3>
-                        <p>Instant alerts to administrators when manual approval is required.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Automatic Payment -->
-        <section class="feature-detail" id="automatic-payment">
-            <div class="container">
-                <div class="feature-detail-header">
-                    <h2>Automatic Payment</h2>
-                    <p>Comprehensive automation for recurring payments, subscriptions, and scheduled transactions.</p>
-                </div>
-                
-                <div class="auto-payment-features">
-                    <div class="auto-feature">
-                        <h3>Subscription Management</h3>
-                        <p>Handle complex subscription models with proration, upgrades, and downgrades.</p>
-                    </div>
-                    
-                    <div class="auto-feature">
-                        <h3>Retry Logic</h3>
-                        <p>Intelligent retry mechanisms for failed payments with customizable intervals.</p>
-                    </div>
-                    
-                    <div class="auto-feature">
-                        <h3>Dunning Management</h3>
-                        <p>Automated customer communication for failed payment recovery.</p>
+                    <div class="approval-grid">
+                        <div class="approval-card triggers-card">
+                            <div class="approval-icon">
+                                <i class="fas fa-shield-check"></i>
+                                <div class="icon-target"></div>
+                            </div>
+                            <div class="approval-badge-small smart">Secure</div>
+                            <h3>Authorize-Only Payments</h3>
+                            <p>Reserve funds on customer payment methods without immediate capture, allowing for inventory verification, fraud checks, or manual review before completing the transaction.</p>
+                            <div class="approval-features">
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-hand-paper"></i>
+                                    <span>Fund Reservation</span>
+                                </div>
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Configurable Hold Period</span>
+                                </div>
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-search"></i>
+                                    <span>Pre-Capture Validation</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="approval-card levels-card">
+                            <div class="approval-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <div class="icon-layers"></div>
+                            </div>
+                            <div class="approval-badge-small hierarchical">Flexible</div>
+                            <h3>Capture Management</h3>
+                            <p>Complete authorized transactions with full or partial capture capabilities, supporting split payments, partial fulfillment, and delayed capture scenarios.</p>
+                            <div class="approval-features">
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-coins"></i>
+                                    <span>Partial Capture</span>
+                                </div>
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-cut"></i>
+                                    <span>Split Payments</span>
+                                </div>
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Delayed Capture</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="approval-card notifications-card">
+                            <div class="approval-icon">
+                                <i class="fas fa-ban"></i>
+                                <div class="icon-notification"></div>
+                            </div>
+                            <div class="approval-badge-small instant">Instant</div>
+                            <h3>Void Authorization</h3>
+                            <p>Cancel previously authorized transactions before capture, automatically releasing held funds and preventing unnecessary payment processing fees.</p>
+                            <div class="approval-features">
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-undo"></i>
+                                    <span>Instant Fund Release</span>
+                                </div>
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span>Fee Prevention</span>
+                                </div>
+                                <div class="approval-feature-item">
+                                    <i class="fas fa-robot"></i>
+                                    <span>Automatic Processing</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
