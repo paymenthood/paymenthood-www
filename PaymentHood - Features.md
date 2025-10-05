@@ -139,17 +139,13 @@ Advanced payment authorization management with support for authorize-only, captu
 ### **Capture Management**
 
 * Complete authorized transactions with full or partial capture capabilities, supporting split payments, partial fulfillment, and delayed capture scenarios.  
-    
-  * Partial Capture  
-  * Split Payments  
+  *   
   * Delayed Capture  
   * FLEXIBLE(badge in the right corner of the card)
 
 ### **Void Authorization**
 
 * Cancel previously authorized transactions before capture, automatically releasing held funds and preventing unnecessary payment processing fees.  
-  * Instant Fund Release  
-  * Fee Prevention  
   * Automatic Processing  
   * INSTANT(badge in the right corner of the card)
 
