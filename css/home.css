@@ -7162,6 +7162,28 @@ a:focus {
     font-weight: 600;
 }
 
+/* More info button styling for plugin items */
+.plugin-info .more-info-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.plugin-info .more-info-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.2);
+}
+
 /* Stunning Gateway Integration Card */
 .gateway-integration-showcase {
     margin-top: 5rem;
@@ -8293,4 +8315,328 @@ a:focus {
 
 .plugin-card.on-demand .plugin-icon {
     background: linear-gradient(135deg, #d97706, #b45309);
+}
+
+/* Auto Payment & Subscription Section */
+.auto-payment-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.auto-payment-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(248, 113, 113, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.payment-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-top: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.payment-type-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-type-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.payment-type-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.payment-type-card.one-time::before {
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.payment-type-card.subscriptions::before {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.payment-type-card.auto-payments::before {
+    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+}
+
+.payment-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 24px;
+}
+
+.one-time .payment-icon {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.subscriptions .payment-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.auto-payments .payment-icon {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.payment-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.payment-content p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.payment-visual {
+    margin-top: auto;
+}
+
+.payment-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.step-icon {
+    font-size: 1.5rem;
+}
+
+.step-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.flow-arrow {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    font-weight: bold;
+}
+
+.subscription-cycle {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.cycle-item {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.cycle-item.active {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-color: #10b981;
+}
+
+.cycle-period {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.auto-flow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auto-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.auto-icon {
+    font-size: 1.25rem;
+}
+
+.auto-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* Gateway On Demand Section */
+.gateway-on-demand-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.gateway-on-demand-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.gateway-demand-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 60px 40px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.demand-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    text-align: left;
+}
+
+.demand-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.demand-text {
+    flex: 1;
+}
+
+.demand-text h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.demand-text p {
+    font-size: 1.125rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.demand-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.demand-btn {
+    padding: 16px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.demand-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.3);
+}
+
+.demand-badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .payment-types-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 60px;
+    }
+    
+    .payment-type-card {
+        padding: 30px 24px;
+    }
+    
+    .demand-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .demand-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .gateway-demand-card {
+        padding: 40px 24px;
+    }
 }
