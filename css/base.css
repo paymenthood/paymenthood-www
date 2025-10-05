@@ -213,8 +213,42 @@ body {
 .footer-bottom {
     border-top: 1px solid #333;
     padding-top: 2rem;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     opacity: 0.7;
+}
+
+.footer-bottom-left {
+    flex: 1;
+}
+
+.footer-bottom-right {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.footer-bottom-right a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-right a:hover {
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-bottom-right {
+        justify-content: center;
+    }
 }
 
 /* Legal Pages */
