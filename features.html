@@ -22,8 +22,11 @@ nav_active: features
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=2">
+    <link rel="shortcut icon" href="/favicon.png?v=2">
+    <link rel="apple-touch-icon" href="/favicon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0066cc">
 </head>
 <body>
@@ -86,9 +89,9 @@ nav_active: features
                             <div class="feature-icon-modern">
                                 <i class="fas fa-route"></i>
                             </div>
-                            <div class="feature-badge smart">Smart</div>
+                            <div class="feature-badge smart">SMART</div>
                         </div>
-                        <h3>Intelligent Gateway Routing</h3>
+                        <h3>Intelligent Payment Gateway Switching</h3>
                         <p>Automatically route transactions to the best-performing gateway based on success rates, costs, and custom business rules.</p>
                         <div class="feature-highlights">
                             <div class="highlight">Cost Optimization</div>
@@ -118,7 +121,7 @@ nav_active: features
                             <div class="feature-icon-modern">
                                 <i class="fas fa-sync-alt"></i>
                             </div>
-                            <div class="feature-badge automated">Automated</div>
+                            <div class="feature-badge automated">AUTOMATED</div>
                         </div>
                         <h3>Payment Automation</h3>
                         <p>Streamline recurring billing, subscription management, and automated payment workflows with zero manual intervention.</p>
@@ -134,7 +137,7 @@ nav_active: features
                             <div class="feature-icon-modern">
                                 <i class="fas fa-check-double"></i>
                             </div>
-                            <div class="feature-badge secure">Secure</div>
+                            <div class="feature-badge secure">SECURE</div>
                         </div>
                         <h3>Payment Verification</h3>
                         <p>Verify payment methods instantly using micro-deposits, Plaid integration, and advanced validation techniques.</p>
@@ -150,9 +153,9 @@ nav_active: features
                             <div class="feature-icon-modern">
                                 <i class="fas fa-network-wired"></i>
                             </div>
-                            <div class="feature-badge unified">Unified</div>
+                            <div class="feature-badge unified">UNIFIED</div>
                         </div>
-                        <h3>Multi-Gateway Orchestration</h3>
+                        <h3>Unified Multi-Gateway Orchestration</h3>
                         <p>Manage 15+ payment gateways through a single API, with seamless switching and centralized control.</p>
                         <div class="feature-highlights">
                             <div class="highlight">Single API</div>
@@ -164,98 +167,65 @@ nav_active: features
             </div>
         </section>
 
-        <!-- Integration Showcase -->
-        <section class="integration-showcase">
+        <!-- Team Management Section -->
+        <section class="team-management-section" id="team-management">
             <div class="container">
-                <div class="showcase-content">
-                    <div class="showcase-text">
-                        <h2>Seamless Integration</h2>
-                        <p>Get started in minutes with our developer-friendly APIs and comprehensive documentation.</p>
-                        
-                        <div class="integration-benefits">
-                            <div class="benefit">
-                                <i class="fas fa-code"></i>
-                                <div>
-                                    <h4>Simple API</h4>
-                                    <p>RESTful API with clear documentation</p>
+                <div class="section-header">
+                    <h2>Team Management</h2>
+                    <p>Powerful collaboration tools for growing teams and agencies</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-card modern-card-1">
+                        <div class="team-card-background"></div>
+                        <div class="team-card-content">
+                            <div class="team-icon-wrapper">
+                                <div class="team-icon">
+                                    <i class="fas fa-layer-group"></i>
                                 </div>
                             </div>
-                            <div class="benefit">
-                                <i class="fas fa-headset"></i>
-                                <div>
-                                    <h4>Expert Support</h4>
-                                    <p>24/7 technical support during integration</p>
-                                </div>
-                            </div>
+                            <div class="team-badge">Multi-Tenant</div>
+                            <h3>Isolated App Environments</h3>
+                            <p>Perfect for agencies or platforms managing multiple clients.</p>
                         </div>
-                        
-                        <a href="https://docs.paymenthood.com" class="btn-primary" target="_blank">
-                            <i class="fas fa-book"></i>
-                            View Documentation
-                        </a>
                     </div>
                     
-                    <div class="showcase-visual">
-                        <div class="code-preview">
-                            <div class="code-header">
-                                <div class="code-dots">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                    <div class="team-card modern-card-2">
+                        <div class="team-card-background"></div>
+                        <div class="team-card-content">
+                            <div class="team-icon-wrapper">
+                                <div class="team-icon">
+                                    <i class="fas fa-user-lock"></i>
                                 </div>
-                                <span>payment.js</span>
                             </div>
-                            <div class="code-content">
-                                <code>
-const payment = await paymenthood.process({<br>
-&nbsp;&nbsp;amount: 9999,<br>
-&nbsp;&nbsp;currency: 'USD',<br>
-&nbsp;&nbsp;customer: customer_id<br>
-});<br><br>
-// Fraud detection included<br>
-// Real-time monitoring
-                                </code>
+                            <div class="team-badge">Access Control</div>
+                            <h3>Role-Based Permissions</h3>
+                            <p>Granular access control for team members.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card modern-card-3">
+                        <div class="team-card-background"></div>
+                        <div class="team-card-content">
+                            <div class="team-icon-wrapper">
+                                <div class="team-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
                             </div>
+                            <div class="team-badge">Compliance</div>
+                            <h3>Comprehensive Audit Trails</h3>
+                            <p>Track all activity across applications and users.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- CTA Section -->
-        <section class="features-cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Ready to Transform Your Payment Processing?</h2>
-                    <p>Join hundreds of businesses already using PaymentHood to optimize their payment operations.</p>
-                    <div class="cta-buttons">
-                        <a href="index.html#contact" class="btn-primary">
-                            <i class="fas fa-rocket"></i>
-                            Start Free Trial
-                        </a>
-                        <a href="pricing.html" class="btn-outline">
-                            <i class="fas fa-dollar-sign"></i>
-                            View Pricing
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    {% include footer.html %}
-</body>
-</html>
 
         <!-- Advanced Fraud & Risk Management -->
         <section class="advanced-fraud-section" id="fraud-protection">
             <div class="container">
                 <div class="fraud-hero">
                     <div class="fraud-hero-content">
-                        <div class="section-badge">
-                            <i class="fas fa-shield-virus"></i>
-                            <span>AI-Powered Protection</span>
-                        </div>
                         <h2>Advanced Fraud & Risk Management</h2>
                         <p>Next-generation fraud protection powered by machine learning and behavioral analytics to safeguard your business from sophisticated threats.</p>
                         
@@ -445,50 +415,48 @@ const payment = await paymenthood.process({<br>
         <!-- Customer Management -->
         <section class="customer-management-section" id="customer-management">
             <div class="container">
-                <div class="customer-hero">
-                    <div class="customer-badge">
-                        <i class="fas fa-users-cog"></i>
-                        <span>Customer-Centric</span>
-                    </div>
-                    <h2>Advanced Customer Management</h2>
-                    <p>Comprehensive customer lifecycle management with intelligent automation, secure data handling, and personalized payment experiences.</p>
+                <div class="section-header">
+                    <h2>Customer Management</h2>
                 </div>
                 
-                <div class="customer-grid">
-                    <div class="customer-card profiles-card">
-                        <div class="customer-card-header">
-                            <div class="customer-icon">
+                <div class="customer-grid-modern">
+                    <div class="customer-card-modern profiles-card">
+                        <div class="customer-card-icon">
+                            <div class="icon-circle">
                                 <i class="fas fa-user-circle"></i>
                             </div>
-                            <h3>Customer Profiles</h3>
                         </div>
-                        <div class="customer-card-content">
+                        <div class="customer-card-body">
+                            <h3>Customer Profiles</h3>
                             <p>Securely store and manage payment methods.</p>
                         </div>
+                        <div class="customer-card-accent"></div>
                     </div>
                     
-                    <div class="customer-card automation-card">
-                        <div class="customer-card-header">
-                            <div class="customer-icon">
+                    <div class="customer-card-modern automation-card">
+                        <div class="customer-card-icon">
+                            <div class="icon-circle">
                                 <i class="fas fa-sync-alt"></i>
                             </div>
-                            <h3>Automated Payments</h3>
                         </div>
-                        <div class="customer-card-content">
+                        <div class="customer-card-body">
+                            <h3>Automated Payments</h3>
                             <p>Handle recurring or scheduled payments with intelligent automation.</p>
                         </div>
+                        <div class="customer-card-accent"></div>
                     </div>
                     
-                    <div class="customer-card workflow-card">
-                        <div class="customer-card-header">
-                            <div class="customer-icon">
+                    <div class="customer-card-modern workflow-card">
+                        <div class="customer-card-icon">
+                            <div class="icon-circle">
                                 <i class="fas fa-sitemap"></i>
                             </div>
-                            <h3>Custom Approval Workflows</h3>
                         </div>
-                        <div class="customer-card-content">
+                        <div class="customer-card-body">
+                            <h3>Custom Approval Workflows</h3>
                             <p>Approve high-risk payments before processing.</p>
                         </div>
+                        <div class="customer-card-accent"></div>
                     </div>
                 </div>
             </div>
@@ -498,12 +466,7 @@ const payment = await paymenthood.process({<br>
         <section class="analytics-section" id="monitoring">
             <div class="container">
                 <div class="analytics-hero">
-                    <div class="analytics-badge">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Real-Time Intelligence</span>
-                    </div>
-                    <h2>Advanced Analytics & Business Intelligence</h2>
-                    <p>Transform payment data into actionable insights with AI-powered analytics, real-time dashboards, and comprehensive business intelligence tools.</p>
+                    <h2>Real-Time Analytics & Business Intelligence</h2>
                     
                     <div class="analytics-stats">
                         <div class="analytics-stat">
@@ -527,23 +490,15 @@ const payment = await paymenthood.process({<br>
                             <i class="fas fa-chart-bar"></i>
                         </div>
                         <h3>Live Dashboards</h3>
-                        <p>Track transactions, success rates, and gateway performance in real-time with interactive dashboards.</p>
+                        <p>Track transactions, success rates, and gateway performance in real-time.</p>
                     </div>
                     
                     <div class="analytics-feature-card">
                         <div class="analytics-feature-icon">
                             <i class="fas fa-file-alt"></i>
                         </div>
-                        <h3>Custom Reports</h3>
-                        <p>Access full financial reports for accounting and business decisions with customizable date ranges.</p>
-                    </div>
-                    
-                    <div class="analytics-feature-card">
-                        <div class="analytics-feature-icon">
-                            <i class="fas fa-tachometer-alt"></i>
-                        </div>
-                        <h3>Performance Metrics</h3>
-                        <p>Monitor key performance indicators and business metrics with automated tracking and alerting.</p>
+                        <h3>Detailed Reporting</h3>
+                        <p>Access full financial reports for accounting and business decisions.</p>
                     </div>
                 </div>
             </div>
@@ -553,38 +508,11 @@ const payment = await paymenthood.process({<br>
         <section class="payment-links-section" id="onetime-payment">
             <div class="container">
                 <div class="payment-hero">
-                    <div class="payment-badge">
-                        <i class="fas fa-link"></i>
-                        <span>Secure & Branded</span>
-                    </div>
-                    <h2>Payment Links & Hosted Checkout</h2>
+                    <h2>Secure Payment Links & Hosted Checkout</h2>
                     <p>Create beautiful, secure payment experiences with customizable checkout pages, branded payment links, and global payment acceptance.</p>
                 </div>
                 
                 <div class="payment-showcase">
-                    <div class="payment-demo">
-                        <div class="checkout-preview">
-                            <div class="checkout-header">
-                                <div class="brand-logo"></div>
-                                <div class="checkout-title">Secure Checkout</div>
-                            </div>
-                            <div class="checkout-form">
-                                <div class="form-field"></div>
-                                <div class="form-field"></div>
-                                <div class="payment-methods">
-                                    <div class="method-icon card"></div>
-                                    <div class="method-icon paypal"></div>
-                                    <div class="method-icon apple"></div>
-                                </div>
-                                <div class="checkout-button"></div>
-                            </div>
-                            <div class="security-badges">
-                                <div class="security-badge">SSL</div>
-                                <div class="security-badge">PCI</div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="payment-grid">
                         <div class="payment-card links-card">
                             <div class="payment-icon">
@@ -664,12 +592,7 @@ const payment = await paymenthood.process({<br>
         <section class="webhook-section" id="webhook-system">
             <div class="container">
                 <div class="webhook-hero">
-                    <div class="webhook-badge">
-                        <i class="fas fa-plug"></i>
-                        <span>Event-Driven</span>
-                    </div>
-                    <h2>Advanced Webhook System</h2>
-                    <p>Enterprise-grade event delivery system with guaranteed delivery, comprehensive logging, and real-time event streaming for seamless integrations.</p>
+                    <h2>Webhook System</h2>
                 </div>
                 
                 <div class="webhook-showcase">
@@ -708,9 +631,8 @@ const payment = await paymenthood.process({<br>
                                 <i class="fas fa-shield-check"></i>
                                 <div class="icon-pulse-webhook"></div>
                             </div>
-                            <div class="webhook-badge-small reliable">99.99% Reliable</div>
                             <h3>Guaranteed Delivery</h3>
-                            <p>Advanced retry mechanisms with exponential backoff ensure critical payment events are never lost, even during system outages.</p>
+                            <p>Never miss critical payment events with retry logic and event sourcing.</p>
                             <div class="webhook-features">
                                 <div class="webhook-feature-item">
                                     <i class="fas fa-redo"></i>
@@ -732,9 +654,8 @@ const payment = await paymenthood.process({<br>
                                 <i class="fas fa-list-ul"></i>
                                 <div class="icon-scroll"></div>
                             </div>
-                            <div class="webhook-badge-small detailed">Full Audit</div>
                             <h3>Comprehensive Logging</h3>
-                            <p>Complete audit trails with detailed request/response logging, error tracking, and performance metrics for troubleshooting and compliance.</p>
+                            <p>Full audit trails for integration reliability and troubleshooting.</p>
                             <div class="webhook-features">
                                 <div class="webhook-feature-item">
                                     <i class="fas fa-search"></i>
@@ -759,11 +680,7 @@ const payment = await paymenthood.process({<br>
         <section class="bank-integration-section" id="bank-integration">
             <div class="container">
                 <div class="bank-hero">
-                    <div class="bank-badge">
-                        <i class="fas fa-university"></i>
-                        <span>Bank-Grade Security</span>
-                    </div>
-                    <h2>Advanced Bank Integration & Verification</h2>
+                    <h2>Bank Integration & Verification</h2>
                     <p>Direct bank connectivity with real-time verification, balance checking, and risk reduction through industry-leading financial data providers.</p>
                 </div>
                 
@@ -809,10 +726,6 @@ const payment = await paymenthood.process({<br>
                                     <i class="fas fa-balance-scale"></i>
                                     <span>Real-Time Balances</span>
                                 </div>
-                                <div class="bank-feature-item">
-                                    <i class="fas fa-university"></i>
-                                    <span>11,000+ Banks</span>
-                                </div>
                             </div>
                         </div>
                         
@@ -848,10 +761,6 @@ const payment = await paymenthood.process({<br>
         <section class="approval-workflow-section" id="approval-workflow">
             <div class="container">
                 <div class="approval-hero">
-                    <div class="approval-badge">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Provider-Native</span>
-                    </div>
                     <h2>Authorization & Capture Workflows</h2>
                     <p>Advanced payment authorization management with support for authorize-only, capture, and void operations across multiple payment providers for maximum control and flexibility.</p>
                 </div>
@@ -972,87 +881,9 @@ const payment = await paymenthood.process({<br>
                 </div>
             </div>
         </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Ready to Get Started?</h2>
-                    <p>Experience all these features with our 1-month free trial. No setup fees, no long-term commitments.</p>
-                    <div class="hero-buttons">
-                        <a href="index.html#contact" class="btn-primary">
-                            <i class="fas fa-rocket"></i>
-                            Start 1-Month Free Trial
-                        </a>
-                        <a href="https://docs.paymenthood.com/" class="btn-secondary" target="_blank" rel="noopener">
-                            <i class="fas fa-book"></i>
-                            View Documentation
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4 itemprop="name">PaymentHood</h4>
-                    <p style="opacity: 0.8; margin-top: 1rem;" itemprop="description">Enterprise payment orchestration platform built for modern businesses.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="index.html#features">Features</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#integrations">Integrations</a></li>
-                        <li><a href="index.html#security">Security</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Developers</h4>
-                    <ul>
-                        <li><a href="https://docs.paymenthood.com/" target="_blank" rel="noopener">Documentation</a></li>
-                        <li><a href="index.html#api">API Reference</a></li>
-                        <li><a href="index.html#sdks">SDKs</a></li>
-                        <li><a href="index.html#support">Support</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="index.html#about" aria-label="Learn about PaymentHood">About Us</a></li>
-                        <li><a href="index.html#careers" aria-label="View career opportunities">Careers</a></li>
-                        <li><a href="index.html#blog" aria-label="Read our blog">Blog</a></li>
-                        <li><a href="index.html#contact" aria-label="Contact PaymentHood">Contact</a></li>
-                        <li><a href="index.html#case-studies" aria-label="View customer case studies">Case Studies</a></li>
-                        <li><a href="term-of-use.html" aria-label="Read the PaymentHood terms of use">Terms of Use</a></li>
-                        <li><a href="privacy-policy.html" aria-label="Read the PaymentHood privacy policy">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 PaymentHood. All rights reserved. | <a href="privacy-policy.html" aria-label="Privacy Policy">Privacy Policy</a> | <a href="term-of-use.html" aria-label="Terms of Use">Terms of Use</a></p>
-                <div class="footer-social">
-                    <a href="https://twitter.com/paymenthood" aria-label="Follow us on Twitter" rel="noopener noreferrer" target="_blank">
-                        <i class="fab fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://linkedin.com/company/paymenthood" aria-label="Follow us on LinkedIn" rel="noopener noreferrer" target="_blank">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://github.com/paymenthood" aria-label="View our GitHub repository" rel="noopener noreferrer" target="_blank">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    {% include footer.html %}
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
