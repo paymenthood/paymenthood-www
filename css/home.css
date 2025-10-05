@@ -4492,6 +4492,14 @@
     background: var(--background-secondary);
 }
 
+.providers .section-header h2 {
+    color: #1e293b;
+}
+
+.providers .section-header p {
+    color: #64748b;
+}
+
 /* Startup Submenu (Fintech focus) */
 .startup-submenu { margin-top:1.75rem; background: var(--background-secondary); padding:1.25rem 1.25rem 1.5rem; border:1px solid var(--border-color); border-radius:12px; }
 .startup-submenu .submenu-title { font-size:1rem; font-weight:600; display:flex; align-items:center; gap:.5rem; margin:0 0 .75rem; color:var(--primary-color); }
@@ -8783,6 +8791,14 @@ a:focus {
 .auto-payment-section {
     padding: 80px 0;
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.auto-payment-section .section-header h2 {
+    color: #0c4a6e;
+}
+
+.auto-payment-section .section-header p {
+    color: #0e7490;
 }
 
 .auto-payment-features {

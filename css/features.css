@@ -7,6 +7,14 @@
     overflow: hidden;
 }
 
+.key-features .section-header h2 {
+    color: #1e293b;
+}
+
+.key-features .section-header p {
+    color: #64748b;
+}
+
 .key-features::before {
     content: '';
     position: absolute;
