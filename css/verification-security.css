@@ -308,12 +308,12 @@
 }
 
 .methods-grid {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(350px, 1fr));
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
-    flex-wrap: wrap;
+    justify-items: center;
 }
 
 .method-card {
@@ -325,9 +325,6 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    flex: 1;
-    max-width: 480px;
-    min-width: 400px;
 }
 
 .method-card:hover {
@@ -1229,14 +1226,11 @@
     }
     
     .methods-grid {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
         gap: 30px;
     }
     
     .method-card {
-        min-width: auto;
-        max-width: 100%;
         width: 100%;
     }
     

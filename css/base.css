@@ -71,6 +71,14 @@ body {
     position: relative;
 }
 
+.logo img {
+    height: 80px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -345,6 +353,12 @@ body {
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
+    .logo img {
+        height: 50px;
+        width: auto;
+        max-width: 180px;
+    }
+    
     .nav-toggle {
         display: flex;
     }
@@ -444,6 +458,11 @@ body {
 
 /* Enhanced Mobile Touch Targets */
 @media (max-width: 767px) {
+    .logo img {
+        height: 45px;
+        max-width: 150px;
+    }
+    
     .nav-toggle {
         min-height: 48px;
         min-width: 48px;
