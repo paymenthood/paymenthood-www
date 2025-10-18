@@ -4579,15 +4579,15 @@ ul.progress-info { display: flex; justify-content: space-between; }
 
 .feature-icon-bg-grd { background-position: center center; background-size: contain; min-height: 135px; min-width: 230px; text-align: center; display: flex; align-items: center; justify-content: center; }
 
-.feature-icon-bg-grd-s1 { background-image: url(../../images/icons/icon-bg-a.png); }
+.feature-icon-bg-grd-s1 { background-image: url(../images/icons/icon-bg-a.png); }
 
 .feature-icon-bg-grd-s1 .icon-grd { background-image: linear-gradient(to top, #82ffdd 0%, white 70%); }
 
-.feature-icon-bg-grd-s2 { background-image: url(../../images/icons/icon-bg-a2.png); }
+.feature-icon-bg-grd-s2 { background-image: url(../images/icons/icon-bg-a2.png); }
 
 .feature-icon-bg-grd-s2 .icon-grd { background-image: linear-gradient(to top, #82ffdd 0%, white 70%); }
 
-.feature-icon-bg-grd-s3 { background-image: url(../../images/icons/icon-bg-a3.png); }
+.feature-icon-bg-grd-s3 { background-image: url(../images/icons/icon-bg-a3.png); }
 
 .feature-icon-bg-grd-s3 .icon-grd { background-image: linear-gradient(to top, #82ffdd 0%, white 70%); }
 
@@ -7331,7 +7331,7 @@ ul.progress-info { display: flex; justify-content: space-between; }
 
 
 #homeBannerMask{
-    background: url("../../images/home/banner-bg.png") no-repeat right top;
+    background: url("../images/home/banner-bg.png") no-repeat right top;
 }
 .about-feature-icon {
     width: 55px;
@@ -7360,7 +7360,7 @@ ul.progress-info { display: flex; justify-content: space-between; }
     gap: 15px;
 }
 #providerContentWrapper{
-    background: url("../../images/home/globe.png") no-repeat 90% 90%;
+    background: url("../images/home/globe.png") no-repeat 90% 90%;
 }
 #providerListImg{
     position: absolute;
@@ -7383,12 +7383,12 @@ ul.progress-info { display: flex; justify-content: space-between; }
 #hexagonSection:before{
     left: 0;
     top: 100px;
-    background: url("../../images/home/polygon-line-left.png") no-repeat left top;
+    background: url("../images/home/polygon-line-left.png") no-repeat left top;
 }
 #hexagonSection:after{
     right: 0;
     bottom: 200px;
-    background: url("../../images/home/polygon-line-right.png") no-repeat right bottom;
+    background: url("../images/home/polygon-line-right.png") no-repeat right bottom;
 }
 .payment-type-card{
     display: flex;
@@ -7415,13 +7415,13 @@ ul.progress-info { display: flex; justify-content: space-between; }
     margin-bottom: 20px;
 }
 .icon-wrapper.type-1{
-    background-image: url("../../images/home/icon-bg-a.png");
+    background-image: url("../images/home/icon-bg-a.png");
 }
 .icon-wrapper.type-2{
-    background-image: url("../../images/home/icon-bg-a2.png");
+    background-image: url("../images/home/icon-bg-a2.png");
 }
 .icon-wrapper.type-3{
-    background-image: url("../../images/home/icon-bg-a3.png");
+    background-image: url("../images/home/icon-bg-a3.png");
 }
 #fraudFeatures li{
     display: flex;
