@@ -2,144 +2,392 @@
 layout: none
 nav_active: pricing
 title: Pricing
-description: Any question? Reach out to us and we'll get back to you shortly.
+description: Simple, transparent pricing. Start with a 30-day free trial, no credit card required.
 ---
 
-    {% include header-secondary.html %}
-    <main id="main-content">
-        <!-- Pricing Section -->
-        <section class="pricing" id="pricing" style="padding: 80px 0; background: #f8fafc;">
-            <div class="container">
-                <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                    <h2 style="font-size: 2.5rem; color: #1a1a1a; margin-bottom: 1rem;">PaymentHood Product Packages</h2>
-                    <p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">Choose the plan that best fits your business needs, from startups to large enterprises. Both packages offer robust features to streamline your global payment operations.</p>
-                </div>
+{% include header-secondary.html %}
 
-                <div class="pricing-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                    <!-- Core Package -->
-                    <div class="pricing-card" style="background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                        <div class="pricing-header" style="text-align: center; margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.8rem; color: #1a1a1a; margin-bottom: 1rem;">Core</h3>
-                            <div class="price" style="margin-bottom: 1rem;">
-                                <span class="currency" style="font-size: 2.5rem; font-weight: 700; color: #0066cc;">Free</span>
-                                <span class="period" style="font-size: 1rem; color: #666; margin-left: 0.5rem;">1-Month Trial</span>
-                            </div>
-                            <p style="color: #666; font-size: 1rem;">Perfect for startups - Try all features free for 1 month</p>
-                        </div>
+<style>
+  .pricing-hero {
+    background: linear-gradient(135deg, #1940b0 0%, #16a3fe 100%);
+    padding: 60px 0;
+    margin-top: -80px;
+    padding-top: 140px;
+  }
 
-                        <div class="pricing-features" style="margin-bottom: 2rem;">
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;"><strong>1.2%</strong> per transaction</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">All major gateways included</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Basic hosted payment templates</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">AI-powered fraud detection</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Basic analytics & reports</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;"><strong>2</strong> gateway onboardings/month</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;"><strong>5</strong> user seats included</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Email support</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Full API access & documentation</span>
-                            </div>
-                        </div>
+  .pricing-card-main {
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-                        <a href="#signup-core" class="pricing-cta" style="display: block; background: #0066cc; color: white; text-align: center; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.3s ease;">Start 1-Month Free Trial</a>
-                    </div>
+  .pricing-card-main:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(25, 64, 176, 0.15);
+  }
 
-                    <!-- Plus Package -->
-                    <div class="pricing-card featured" style="background: white; border: 2px solid #0066cc; border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 0 0 1px #0066cc, 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
-                        <div class="popular-badge" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #0066cc; color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600;">Most Popular</div>
-                        <div class="pricing-header" style="text-align: center; margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.8rem; color: #1a1a1a; margin-bottom: 1rem;">Plus</h3>
-                            <div class="price" style="margin-bottom: 1rem;">
-                                <span class="currency" style="font-size: 2.5rem; font-weight: 700; color: #0066cc;">$299</span>
-                                <span class="period" style="font-size: 1rem; color: #666; margin-left: 0.5rem;">/ month</span>
-                            </div>
-                            <p style="color: #666; font-size: 1rem;">Ideal for growing businesses - 1-month free trial included</p>
-                        </div>
+  .price-large {
+    font-size: 72px;
+    line-height: 1;
+    font-weight: 700;
+  }
 
-                        <div class="pricing-features" style="margin-bottom: 2rem;">
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;"><strong>0.6%</strong> per transaction</span>
-                            </div>
-                            <div class="feature-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-check" style="color: #10b981; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">All major gateways included</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Smart routing & optimization</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Multi-currency support</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Fully branded & customizable pages</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">AI + Custom rule engine fraud detection</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Full dashboard + export tools</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;"><strong>Unlimited</strong> gateway onboardings</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;"><strong>50</strong> user seats (expandable)</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">24/7 priority support</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Webhook delivery guarantee</span>
-                            </div>
-                            <div class="feature-item premium" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0;">
-                                <i class="fas fa-star" style="color: #fbbf24; font-size: 1rem;"></i>
-                                <span style="color: #1a1a1a; font-weight: 500;">Dedicated account manager</span>
-                            </div>
-                        </div>
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
 
-                        <a href="#signup-plus" class="pricing-cta" style="display: block; background: #0066cc; color: white; text-align: center; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.3s ease;">Start 1-Month Free Trial</a>
-                    </div>
-                </div>
+  .pricing-calculator {
+    background: linear-gradient(135deg, #f6fafd 0%, #ffffff 100%);
+    border-radius: 20px;
+    padding: 40px;
+  }
 
-                <div class="pricing-footer" style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; margin-top: 2rem; border: 1px solid #e2e8f0;">
-                    <p style="color: #334155; margin: 0; font-weight: 500;"><strong>🎉 All plans include a complete 1-month free trial!</strong> Full API access, comprehensive documentation, and enterprise-grade security included. Need a custom solution? <a href="mailto:support@paymenthood.com?subject=Enterprise Pricing Inquiry&body=Hello,%0A%0AI'm interested in enterprise pricing for PaymentHood:%0A%0ACompany Name: [Your company]%0AMonthly Transaction Volume: [Estimated volume]%0ASpecific Requirements: [Please describe]%0A%0APlease provide enterprise pricing information.%0A%0AThank you!" style="color: #0066cc; text-decoration: none; font-weight: 600; background: rgba(0, 102, 204, 0.1); padding: 2px 6px; border-radius: 4px;">Contact our sales team</a> for enterprise pricing.</p>
-                </div>
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e0e7ff;
+    outline: none;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1940b0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(25, 64, 176, 0.3);
+  }
+
+  .volume-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1940b0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(25, 64, 176, 0.3);
+  }
+
+  .trust-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .price-large {
+      font-size: 48px;
+    }
+    .pricing-hero {
+      padding: 40px 0;
+      padding-top: 100px;
+    }
+  }
+</style>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8">
+          <h1 class="text-white mb-3 animated" data-animate="fadeInUp" data-delay=".1">
+            Pricing that grows with you
+          </h1>
+          <p class="text-white fs-5 mb-4 animated" data-animate="fadeInUp" data-delay=".2" style="opacity: 0.9;">
+            One simple plan. No hidden fees. No surprises.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap animated" data-animate="fadeInUp" data-delay=".3">
+            <div class="trust-badge">
+              <em class="fas fa-shield-alt text-white"></em>
+              <span class="text-white small">Enterprise Security</span>
             </div>
-        </section>
-    </main>
-    {% include footer.html %}
+            <div class="trust-badge">
+              <em class="fas fa-clock text-white"></em>
+              <span class="text-white small">30-Day Free Trial</span>
+            </div>
+            <div class="trust-badge">
+              <em class="fas fa-credit-card text-white"></em>
+              <span class="text-white small">No Card Required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Pricing -->
+  <section class="py-5" style="margin-top: -40px;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+          <div class="pricing-card-main bg-white shadow-lg animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="row g-0">
+              <!-- Left Side - Price -->
+              <div class="col-lg-5 bg-blue-200 text-white p-5">
+                <div class="mb-4">
+                  <span class="badge bg-white text-primary px-3 py-2 rounded-pill">Professional</span>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex align-items-start">
+                    <span class="fs-3 mt-2">$</span>
+                    <span class="price-large">29</span>
+                  </div>
+                  <p class="fs-5 mb-0" style="opacity: 0.9;">per month</p>
+                </div>
+                <div class="mb-4 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                  <p class="mb-2" style="opacity: 0.9;">Plus transaction fees:</p>
+                  <p class="fs-4 fw-bold mb-0">0.4% over $5,000</p>
+                  <p class="small mb-0" style="opacity: 0.8;">monthly volume</p>
+                </div>
+                <a href="#" class="btn btn-white w-100 py-3 fw-bold" style="color: var(--blue-200);">
+                  Start Free Trial
+                  <em class="fas fa-arrow-right ms-2"></em>
+                </a>
+                <p class="text-center small mt-3 mb-0" style="opacity: 0.8;">
+                  No credit card required
+                </p>
+              </div>
+
+              <!-- Right Side - What's Included -->
+              <div class="col-lg-7 p-5">
+                <h4 class="txt-blue-600 mb-4">Everything included</h4>
+                
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="d-flex gap-3">
+                      <div class="feature-icon bg-blue-30">
+                        <em class="fas fa-infinity txt-blue-200 fs-5"></em>
+                      </div>
+                      <div>
+                        <h6 class="txt-blue-600 mb-1">Unlimited transactions</h6>
+                        <p class="txt-blue-400 small mb-0">Process as many payments as you need</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="d-flex gap-3">
+                      <div class="feature-icon bg-blue-30">
+                        <em class="fas fa-plug txt-blue-200 fs-5"></em>
+                      </div>
+                      <div>
+                        <h6 class="txt-blue-600 mb-1">All payment gateways</h6>
+                        <p class="txt-blue-400 small mb-0">Connect any provider, anytime</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="d-flex gap-3">
+                      <div class="feature-icon bg-blue-30">
+                        <em class="fas fa-chart-line txt-blue-200 fs-5"></em>
+                      </div>
+                      <div>
+                        <h6 class="txt-blue-600 mb-1">Real-time analytics</h6>
+                        <p class="txt-blue-400 small mb-0">Track performance and insights</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="d-flex gap-3">
+                      <div class="feature-icon bg-blue-30">
+                        <em class="fas fa-shield-alt txt-blue-200 fs-5"></em>
+                      </div>
+                      <div>
+                        <h6 class="txt-blue-600 mb-1">Advanced fraud protection</h6>
+                        <p class="txt-blue-400 small mb-0">AI-powered security included</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="d-flex gap-3">
+                      <div class="feature-icon bg-blue-30">
+                        <em class="fas fa-headset txt-blue-200 fs-5"></em>
+                      </div>
+                      <div>
+                        <h6 class="txt-blue-600 mb-1">24/7 Support</h6>
+                        <p class="txt-blue-400 small mb-0">Expert help whenever you need it</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="d-flex gap-3">
+                      <div class="feature-icon bg-blue-30">
+                        <em class="fas fa-code txt-blue-200 fs-5"></em>
+                      </div>
+                      <div>
+                        <h6 class="txt-blue-600 mb-1">Complete API access</h6>
+                        <p class="txt-blue-400 small mb-0">Full developer documentation</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Calculator -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="text-center mb-5 animated" data-animate="fadeInUp" data-delay=".5">
+            <h2 class="txt-blue-600 mb-3">Calculate your cost</h2>
+            <p class="txt-blue-400">See exactly what you'll pay based on your transaction volume</p>
+          </div>
+
+          <div class="pricing-calculator animated" data-animate="fadeInUp" data-delay=".6">
+            <div class="row align-items-center">
+              <div class="col-lg-7 mb-4 mb-lg-0">
+                <label class="txt-blue-600 fw-semibold mb-3 d-block">Monthly transaction volume</label>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100000" step="5000" value="10000">
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="txt-blue-400 small">$0</span>
+                  <span class="txt-blue-600 fw-bold fs-4" id="volumeDisplay">$10,000</span>
+                  <span class="txt-blue-400 small">$100k+</span>
+                </div>
+              </div>
+
+              <div class="col-lg-5">
+                <div class="text-center p-4 bg-white rounded-3 shadow-sm">
+                  <p class="txt-blue-400 small mb-2">You'll pay</p>
+                  <div class="txt-blue-200 fw-bold mb-2" style="font-size: 48px; line-height: 1;" id="totalCost">$49</div>
+                  <p class="txt-blue-400 small mb-0" id="breakdown">$29 base + $20 transaction fees</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="text-center mb-5 animated" data-animate="fadeInUp" data-delay=".7">
+            <h2 class="txt-blue-600 mb-3">Frequently asked questions</h2>
+          </div>
+
+          <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".8">
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h5 class="txt-blue-600 mb-3">What's included in the free trial?</h5>
+                <p class="txt-blue-400 mb-0">Everything. You get full access to all features for 30 days with no credit card required.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h5 class="txt-blue-600 mb-3">How do transaction fees work?</h5>
+                <p class="txt-blue-400 mb-0">You only pay 0.4% on transactions that exceed $5,000 in monthly volume. First $5,000 has no transaction fees.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h5 class="txt-blue-600 mb-3">Can I cancel anytime?</h5>
+                <p class="txt-blue-400 mb-0">Yes, absolutely. No contracts, no commitments. Cancel anytime with one click.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h5 class="txt-blue-600 mb-3">Are there any hidden fees?</h5>
+                <p class="txt-blue-400 mb-0">None. What you see is what you pay. No setup fees, no cancellation fees, no surprises.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-blue-200">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8">
+          <h2 class="text-white mb-3 animated" data-animate="fadeInUp" data-delay=".9">
+            Ready to get started?
+          </h2>
+          <p class="text-white fs-5 mb-4 animated" data-animate="fadeInUp" data-delay="1" style="opacity: 0.9;">
+            Start accepting payments in minutes. No credit card required.
+          </p>
+          <div class="d-flex gap-3 justify-content-center flex-wrap animated" data-animate="fadeInUp" data-delay="1.1">
+            <a href="#" class="btn btn-white btn-lg px-5 py-3 fw-bold" style="color: var(--blue-200);">
+              Start Free Trial
+            </a>
+            <a href="/contact-us.html" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">
+              Contact Sales
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Pricing Calculator
+  const slider = document.getElementById('volumeSlider');
+  const volumeDisplay = document.getElementById('volumeDisplay');
+  const totalCost = document.getElementById('totalCost');
+  const breakdown = document.getElementById('breakdown');
+
+  function calculatePrice(volume) {
+    const baseFee = 29;
+    const threshold = 5000;
+    const transactionRate = 0.004; // 0.4%
+
+    let transactionFee = 0;
+    if (volume > threshold) {
+      transactionFee = (volume - threshold) * transactionRate;
+    }
+
+    const total = baseFee + transactionFee;
+    return { total: Math.round(total), transactionFee: Math.round(transactionFee), baseFee };
+  }
+
+  function updatePricing() {
+    const volume = parseInt(slider.value);
+    volumeDisplay.textContent = '$' + volume.toLocaleString();
+
+    const pricing = calculatePrice(volume);
+    totalCost.textContent = '$' + pricing.total;
+
+    if (pricing.transactionFee > 0) {
+      breakdown.textContent = `$${pricing.baseFee} base + $${pricing.transactionFee} transaction fees`;
+    } else {
+      breakdown.textContent = `$${pricing.baseFee} base fee only`;
+    }
+  }
+
+  slider.addEventListener('input', updatePricing);
+  updatePricing(); // Initial calculation
+</script>
+
+{% include footer.html %}

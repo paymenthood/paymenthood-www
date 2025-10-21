@@ -1,0 +1,291 @@
+---
+layout: none
+title: Transparent Pricing
+description: One simple plan to unlock powerful payment orchestration. No hidden fees.
+---
+
+{% include header-secondary.html %}
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+
+  .pricing-v3-hero {
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  .pricing-v3-hero h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    color: #12183a;
+    letter-spacing: -1.5px;
+  }
+
+  .pricing-v3-hero p {
+    font-size: 1.25rem;
+    color: #415076;
+    max-width: 650px;
+    margin: 1rem auto 0;
+  }
+
+  .pricing-v3-card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 16px 40px rgba(25, 64, 176, 0.08);
+    transition: all 0.3s ease;
+  }
+  .pricing-v3-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 24px 50px rgba(25, 64, 176, 0.12);
+  }
+
+  .price-display {
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #1940b0;
+    line-height: 1;
+  }
+
+  .feature-list-v3 .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .feature-list-v3 .feature-item:last-child {
+    border-bottom: none;
+  }
+  .feature-list-v3 .feature-icon {
+    color: #23c99d;
+    font-size: 1.2rem;
+  }
+  .feature-list-v3 .feature-text {
+    color: #415076;
+  }
+
+  .calculator-v3 {
+    background: linear-gradient(135deg, #f6fafd, #ffffff);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid #e9ecef;
+  }
+
+  .volume-slider-v3 {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #dee2e6;
+    outline: none;
+    transition: background 0.3s;
+  }
+  .volume-slider-v3::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1940b0;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(25, 64, 176, 0.25);
+  }
+
+  .faq-v3 .accordion-item {
+    border: none;
+    border-bottom: 1px solid #e9ecef;
+    background: transparent;
+  }
+  .faq-v3 .accordion-button {
+    font-weight: 600;
+    color: #12183a;
+    background: transparent;
+    box-shadow: none;
+  }
+  .faq-v3 .accordion-body {
+    color: #415076;
+  }
+
+  .cta-v3 {
+    background: linear-gradient(135deg, #1940b0, #12183a);
+    border-radius: 24px;
+    padding: 60px;
+  }
+</style>
+
+<main id="main-content">
+  <!-- Hero -->
+  <section class="pricing-v3-hero">
+    <div class="container">
+      <div class="animated" data-animate="fadeInUp" data-delay=".1">
+        <h1 class="mb-3">Pricing that scales with you</h1>
+        <p>One simple plan with everything you need to manage payments globally. Start your 30-day free trial today.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Card -->
+  <section class="pb-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="pricing-v3-card animated" data-animate="fadeInUp" data-delay=".2">
+            <div class="row align-items-center">
+              <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
+                <h2 class="txt-blue-600 mb-3">Professional Plan</h2>
+                <div class="d-flex align-items-end justify-content-center justify-content-md-start gap-2 mb-3">
+                  <span class="price-display">$29</span>
+                  <span class="txt-blue-400 fs-4 mb-2">/ month</span>
+                </div>
+                <p class="txt-blue-400">Plus <strong>0.4%</strong> per transaction over $5,000 in monthly volume.</p>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-list-v3">
+                  <div class="feature-item"><em class="fas fa-check-circle feature-icon"></em><span class="feature-text">30-Day Free Trial</span></div>
+                  <div class="feature-item"><em class="fas fa-check-circle feature-icon"></em><span class="feature-text">No Credit Card Required</span></div>
+                  <div class="feature-item"><em class="fas fa-check-circle feature-icon"></em><span class="feature-text">Unlimited Transactions</span></div>
+                  <div class="feature-item"><em class="fas fa-check-circle feature-icon"></em><span class="feature-text">All Payment Gateways</span></div>
+                  <div class="feature-item"><em class="fas fa-check-circle feature-icon"></em><span class="feature-text">24/7 Priority Support</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <a href="#" class="btn btn-blue-300 btn-lg px-5 py-3 w-100">
+                Start Your 30-Day Free Trial
+              </a>
+              <p class="txt-blue-400 small mt-3 mb-0">Cancel anytime. No questions asked.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="text-center mb-5 animated" data-animate="fadeInUp" data-delay=".3">
+            <h2 class="txt-blue-600">Estimate Your Cost</h2>
+            <p class="txt-blue-400">Use the slider to see how our pricing adapts to your volume.</p>
+          </div>
+          <div class="calculator-v3 animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="row align-items-center">
+              <div class="col-lg-7 mb-4 mb-lg-0">
+                <label class="txt-blue-600 fw-semibold mb-3 d-block">Monthly Transaction Volume</label>
+                <input type="range" class="volume-slider-v3" id="volumeSliderV3" min="0" max="100000" step="1000" value="10000">
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="txt-blue-400 small">$0</span>
+                  <span class="txt-blue-600 fw-bold fs-4" id="volumeDisplayV3">$10,000</span>
+                  <span class="txt-blue-400 small">$100k+</span>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="text-center p-4 bg-white rounded-3 shadow-sm">
+                  <p class="txt-blue-400 small mb-2">Estimated Monthly Cost</p>
+                  <div class="txt-blue-200 fw-bold mb-2" style="font-size: 48px; line-height: 1;" id="totalCostV3">$49</div>
+                  <p class="txt-blue-400 small mb-0" id="breakdownV3">$29 base + $20 transaction fees</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-5 faq-v3">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5 animated" data-animate="fadeInUp" data-delay=".5">
+            <h2 class="txt-blue-600">Common Questions</h2>
+          </div>
+          <div class="accordion accordion-flush animated" data-animate="fadeInUp" data-delay=".6" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq-h1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c1">What's included in the free trial?</button></h2>
+              <div id="faq-c1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">You get full access to every feature for 30 days to test our platform with no limitations. No credit card is required to start.</div></div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq-h2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c2">How are transaction fees calculated?</button></h2>
+              <div id="faq-c2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">The 0.4% fee only applies to the portion of your monthly volume that exceeds $5,000. For example, if your volume is $6,000, you only pay the fee on $1,000.</div></div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq-h3"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c3">Can I change my plan or cancel later?</button></h2>
+              <div id="faq-c3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Our single plan includes everything. You can cancel your subscription at any time with no penalty.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="cta-v3 text-center text-white animated" data-animate="fadeInUp" data-delay=".7">
+            <h2 class="text-white mb-3">Ready to simplify your payments?</h2>
+            <p class="fs-5 mb-4" style="opacity: 0.9;">Join hundreds of businesses growing with PaymentHood.</p>
+            <a href="#" class="btn btn-green-300 btn-lg px-5 py-3">
+              Get Started for Free
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slider = document.getElementById('volumeSliderV3');
+    const volumeDisplay = document.getElementById('volumeDisplayV3');
+    const totalCost = document.getElementById('totalCostV3');
+    const breakdown = document.getElementById('breakdownV3');
+
+    function calculatePrice(volume) {
+      const baseFee = 29;
+      const threshold = 5000;
+      const transactionRate = 0.004; // 0.4%
+
+      let transactionFee = 0;
+      if (volume > threshold) {
+        transactionFee = (volume - threshold) * transactionRate;
+      }
+
+      const total = baseFee + transactionFee;
+      return { total: Math.round(total), transactionFee: Math.round(transactionFee), baseFee };
+    }
+
+    function updatePricing() {
+      if (!slider) return;
+      const volume = parseInt(slider.value);
+      volumeDisplay.textContent = '$' + volume.toLocaleString();
+
+      const pricing = calculatePrice(volume);
+      totalCost.textContent = '$' + pricing.total;
+
+      if (pricing.transactionFee > 0) {
+        breakdown.textContent = `$${pricing.baseFee} base + $${pricing.transactionFee} transaction fees`;
+      } else {
+        breakdown.textContent = `$${pricing.baseFee} base fee only`;
+      }
+    }
+
+    if (slider) {
+      slider.addEventListener('input', updatePricing);
+      updatePricing(); // Initial calculation
+    }
+  });
+</script>
+
+{% include footer.html %}
