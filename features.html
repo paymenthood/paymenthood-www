@@ -1,58 +1,33 @@
 ---
 layout: none
 nav_active: features
+title: Advanced Payment Features
+description: Unlock the full potential of payment processing with our comprehensive suite of tools designed for modern businesses.
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PaymentHood Features - Advanced Payment Orchestration Platform</title>
-    <meta name="description" content="Discover PaymentHood's powerful features: AI fraud protection, smart gateway routing, real-time monitoring, automated workflows, and unified payment orchestration across 15+ providers.">
-    <link rel="canonical" href="https://paymenthood.com/features">
 
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/features.css">
-    <link rel="stylesheet" href="css/fraud-detection.css">
-    <link rel="stylesheet" href="css/verification-security.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=2">
-    <link rel="shortcut icon" href="/favicon.png?v=2">
-    <link rel="apple-touch-icon" href="/favicon.png?v=2">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0066cc">
-</head>
-<body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    {% include header.html %}
+    {% include header-secondary.html %}
 
     <main id="main-content">
-        <!-- Hero Section -->
-        <section class="features-hero-modern">
+
+        <section id="featuresHero">
             <div class="container">
-                <div class="hero-content">
-                    <h1>Advanced Payment Features</h1>
-                    <p>Unlock the full potential of payment processing with our comprehensive suite of tools designed for modern businesses.</p>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">15+</div>
-                            <div class="stat-label">Payment Gateways</div>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-4">
+                        <div class="bg-blue-30 p-4 bg-blue-30 p-4 d-flex align-items-center justify-content-center gap-3">
+                            <em class="icon ikon ikon-shiled-alt txt-blue-100 display-3"></em>
+                            <h5 class="title title-sm">15+ Payment Gateways</h5>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">99.9%</div>
-                            <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="bg-blue-30 p-4 bg-blue-30 p-4 d-flex align-items-center justify-content-center gap-3">
+                            <em class="icon ikon ikon-user txt-blue-100 display-3"></em>
+                            <h5 class="title title-sm">99.9% Uptime</h5>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">< 300ms</div>
-                            <div class="stat-label">Response Time</div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="bg-blue-30 p-4 bg-blue-30 p-4 d-flex align-items-center justify-content-center gap-3">
+                            <em class="icon ikon ikon-data-server txt-blue-100 display-3"></em>
+                            <h5 class="title title-sm">>300ms Response Time</h5>
                         </div>
                     </div>
                 </div>
@@ -60,108 +35,106 @@ nav_active: features
         </section>
 
         <!-- Core Features Grid -->
-        <section class="core-features-section">
+        <section id="coreFeatures" class="section">
             <div class="container">
-                <div class="section-header">
-                    <h2>Core Capabilities</h2>
-                    <p>Everything you need to manage payments at scale</p>
+                <div class="section-head wide-sm text-center">
+                    <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Core <span class="txt-blue-200">Capabilities</span></h2>
+                    <p class="animated" data-animate="fadeInUp" data-delay=".3">Everything you need to manage payments at scale.</p>
                 </div>
-                
-                <div class="features-grid-modern">
-                    <div class="feature-card-modern fraud-card">
-                        <div class="card-header">
-                            <div class="feature-icon-modern">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="feature-badge ai">AI-Powered</div>
+
+                <div class="feature-card fraud-card">
+                    <div class="card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Advanced Fraud Detection</h3>
-                        <p>Machine learning algorithms detect suspicious patterns and automatically block fraudulent transactions in real-time.</p>
-                        <div class="feature-highlights">
-                            <div class="highlight">Smart Rules Engine</div>
-                            <div class="highlight">Real-time Monitoring</div>
-                            <div class="highlight">Custom Thresholds</div>
-                        </div>
+                        <div class="feature-badge">AI-Powered</div>
                     </div>
-                    
-                    <div class="feature-card-modern routing-card">
-                        <div class="card-header">
-                            <div class="feature-icon-modern">
-                                <i class="fas fa-route"></i>
-                            </div>
-                            <div class="feature-badge smart">SMART</div>
-                        </div>
-                        <h3>Intelligent Payment Gateway Switching</h3>
-                        <p>Automatically route transactions to the best-performing gateway based on success rates, costs, and custom business rules.</p>
-                        <div class="feature-highlights">
-                            <div class="highlight">Cost Optimization</div>
-                            <div class="highlight">Success Rate Tracking</div>
-                            <div class="highlight">Failover Protection</div>
-                        </div>
+                    <h3 class="feature-title">Advanced Fraud Detection</h3>
+                    <p class="feature-desc">Machine learning algorithms detect suspicious patterns and automatically block fraudulent transactions in real-time.</p>
+                    <div class="feature-highlights">
+                        <div class="highlight">Smart Rules Engine</div>
+                        <div class="highlight">Real-time Monitoring</div>
+                        <div class="highlight">Custom Thresholds</div>
                     </div>
-                    
-                    <div class="feature-card-modern monitoring-card">
-                        <div class="card-header">
-                            <div class="feature-icon-modern">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="feature-badge realtime">Real-time</div>
+                </div>
+
+                <div class="feature-card routing-card">
+                    <div class="card-header">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-route"></i>
                         </div>
-                        <h3>Advanced Analytics</h3>
-                        <p>Comprehensive dashboards and real-time monitoring provide deep insights into payment performance and customer behavior.</p>
-                        <div class="feature-highlights">
-                            <div class="highlight">Live Dashboards</div>
-                            <div class="highlight">Custom Reports</div>
-                            <div class="highlight">Performance Metrics</div>
-                        </div>
+                        <div class="feature-badge smart">SMART</div>
                     </div>
-                    
-                    <div class="feature-card-modern automation-card">
-                        <div class="card-header">
-                            <div class="feature-icon-modern">
-                                <i class="fas fa-sync-alt"></i>
-                            </div>
-                            <div class="feature-badge automated">AUTOMATED</div>
-                        </div>
-                        <h3>Payment Automation</h3>
-                        <p>Streamline recurring billing, subscription management, and automated payment workflows with zero manual intervention.</p>
-                        <div class="feature-highlights">
-                            <div class="highlight">Recurring Billing</div>
-                            <div class="highlight">Subscription Management</div>
-                            <div class="highlight">Auto-retry Logic</div>
-                        </div>
+                    <h3>Intelligent Payment Gateway Switching</h3>
+                    <p>Automatically route transactions to the best-performing gateway based on success rates, costs, and custom business rules.</p>
+                    <div class="feature-highlights">
+                        <div class="highlight">Cost Optimization</div>
+                        <div class="highlight">Success Rate Tracking</div>
+                        <div class="highlight">Failover Protection</div>
                     </div>
-                    
-                    <div class="feature-card-modern verification-card">
-                        <div class="card-header">
-                            <div class="feature-icon-modern">
-                                <i class="fas fa-check-double"></i>
-                            </div>
-                            <div class="feature-badge secure">SECURE</div>
+                </div>
+
+                <div class="feature-card monitoring-card">
+                    <div class="card-header">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3>Payment Verification</h3>
-                        <p>Verify payment methods instantly using micro-deposits, Plaid integration, and advanced validation techniques.</p>
-                        <div class="feature-highlights">
-                            <div class="highlight">Instant Verification</div>
-                            <div class="highlight">Bank Integration</div>
-                            <div class="highlight">Micro-deposits</div>
-                        </div>
+                        <div class="feature-badge realtime">Real-time</div>
                     </div>
-                    
-                    <div class="feature-card-modern orchestration-card">
-                        <div class="card-header">
-                            <div class="feature-icon-modern">
-                                <i class="fas fa-network-wired"></i>
-                            </div>
-                            <div class="feature-badge unified">UNIFIED</div>
+                    <h3>Advanced Analytics</h3>
+                    <p>Comprehensive dashboards and real-time monitoring provide deep insights into payment performance and customer behavior.</p>
+                    <div class="feature-highlights">
+                        <div class="highlight">Live Dashboards</div>
+                        <div class="highlight">Custom Reports</div>
+                        <div class="highlight">Performance Metrics</div>
+                    </div>
+                </div>
+
+                <div class="feature-card automation-card">
+                    <div class="card-header">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-sync-alt"></i>
                         </div>
-                        <h3>Unified Multi-Gateway Orchestration</h3>
-                        <p>Manage 15+ payment gateways through a single API, with seamless switching and centralized control.</p>
-                        <div class="feature-highlights">
-                            <div class="highlight">Single API</div>
-                            <div class="highlight">15+ Gateways</div>
-                            <div class="highlight">Zero Code Changes</div>
+                        <div class="feature-badge automated">AUTOMATED</div>
+                    </div>
+                    <h3>Payment Automation</h3>
+                    <p>Streamline recurring billing, subscription management, and automated payment workflows with zero manual intervention.</p>
+                    <div class="feature-highlights">
+                        <div class="highlight">Recurring Billing</div>
+                        <div class="highlight">Subscription Management</div>
+                        <div class="highlight">Auto-retry Logic</div>
+                    </div>
+                </div>
+
+                <div class="feature-card verification-card">
+                    <div class="card-header">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-check-double"></i>
                         </div>
+                        <div class="feature-badge secure">SECURE</div>
+                    </div>
+                    <h3>Payment Verification</h3>
+                    <p>Verify payment methods instantly using micro-deposits, Plaid integration, and advanced validation techniques.</p>
+                    <div class="feature-highlights">
+                        <div class="highlight">Instant Verification</div>
+                        <div class="highlight">Bank Integration</div>
+                        <div class="highlight">Micro-deposits</div>
+                    </div>
+                </div>
+
+                <div class="feature-card orchestration-card">
+                    <div class="card-header">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="feature-badge unified">UNIFIED</div>
+                    </div>
+                    <h3>Unified Multi-Gateway Orchestration</h3>
+                    <p>Manage 15+ payment gateways through a single API, with seamless switching and centralized control.</p>
+                    <div class="feature-highlights">
+                        <div class="highlight">Single API</div>
+                        <div class="highlight">15+ Gateways</div>
+                        <div class="highlight">Zero Code Changes</div>
                     </div>
                 </div>
             </div>
@@ -727,37 +700,3 @@ nav_active: features
     </main>
 
     {% include footer.html %}
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const navToggle = document.querySelector('.nav-toggle');
-            const navLinks = document.querySelector('.nav-links');
-
-            if (navToggle && navLinks) {
-                navToggle.addEventListener('click', function () {
-                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-                    navToggle.setAttribute('aria-expanded', String(!isExpanded));
-                    navToggle.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                });
-
-                document.addEventListener('click', function (event) {
-                    if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
-                        navLinks.classList.remove('active');
-                        navToggle.classList.remove('active');
-                        navToggle.setAttribute('aria-expanded', 'false');
-                    }
-                });
-
-                navLinks.querySelectorAll('a').forEach(a => {
-                    a.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                        navToggle.classList.remove('active');
-                        navToggle.setAttribute('aria-expanded', 'false');
-                    });
-                });
-            }
-        });
-    </script>
-</body>
-</html>
