@@ -1,3 +1,7 @@
-Do not create contact us from in bottom of home page
-There is no need to social media links in footer
-There is not Schedule App demo link in footer
+- Do not create contact us from in bottom of home page
+- There is no need to social media links in footer
+- There is not "Schedule App demo" link in footer
+- Try using site custom styles and use your styles unless there is no other option
+- Follow page layout and structure
+- Use header-secondary.html for all pages except home page
+- Use header.html only for home page
