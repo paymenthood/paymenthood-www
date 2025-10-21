@@ -7,77 +7,8 @@ description: Any question? Reach out to us and we'll get back to you shortly.
 {% include header-secondary.html %}
 
 <style>
-  /* Contact Form Styles */
-  .contact-form .form-control {
-    padding: 0.875rem 1.25rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    background-color: white;
-  }
-
-  .contact-form .form-control:focus {
-    box-shadow: 0 0 0 0.25rem rgba(25, 64, 176, 0.15);
-    border-color: var(--blue-200);
-    transform: translateY(-2px);
-  }
-
-  .contact-form .form-control::placeholder {
-    color: #b0b9c9;
-  }
-
-  .contact-form .form-label {
-    font-size: 0.95rem;
-  }
-
-  .contact-form textarea.form-control {
-    resize: vertical;
-    min-height: 150px;
-  }
-
-  .btn-blue-200 {
-    background-color: var(--blue-200);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-  }
-
-  .btn-blue-200:hover {
-    background-color: var(--green-300);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(35, 201, 157, 0.3);
-  }
-
-  .btn-blue-200:active {
-    transform: translateY(-1px);
-  }
-
   .bg-green-300 {
     background-color: var(--green-300);
-  }
-
-  /* Contact Info Hover Effects */
-  .contact-info-wrapper > div {
-    transition: all 0.3s ease;
-  }
-
-  .contact-info-wrapper > div:hover {
-    transform: translateX(8px);
-    box-shadow: 0 4px 15px rgba(25, 64, 176, 0.15);
-  }
-
-  .contact-info-wrapper a:hover {
-    color: var(--blue-200) !important;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 991.98px) {
-    .contact-form {
-      margin-top: 2rem;
-    }
   }
 </style>
 
@@ -98,8 +29,8 @@ description: Any question? Reach out to us and we'll get back to you shortly.
         </div>
         
         <!-- Contact Info Cards -->
-        <div class="contact-info-wrapper">
-          <div class="bg-white p-4 rounded shadow-sm mb-3 animated" data-animate="fadeInLeft" data-delay=".2">
+        <div>
+          <div class="card p-4 mb-3 animated" data-animate="fadeInLeft" data-delay=".2">
             <div class="d-flex align-items-center gap-3">
               <div class="d-flex align-items-center justify-content-center bg-blue-200 rounded-circle" 
                    style="width: 50px; height: 50px; min-width: 50px;">
@@ -114,7 +45,7 @@ description: Any question? Reach out to us and we'll get back to you shortly.
             </div>
           </div>
 
-          <div class="bg-white p-4 rounded shadow-sm mb-4 animated" data-animate="fadeInLeft" data-delay=".3">
+          <div class="card p-4 mb-4 animated" data-animate="fadeInLeft" data-delay=".3">
             <div class="d-flex align-items-center gap-3">
               <div class="d-flex align-items-center justify-content-center bg-green-300 rounded-circle" 
                    style="width: 50px; height: 50px; min-width: 50px;">
@@ -146,9 +77,9 @@ description: Any question? Reach out to us and we'll get back to you shortly.
       </div>
       <div class="col-lg-7">
         <div class="bg-blue-30 p-4 p-md-5 rounded animated" data-animate="fadeInRight" data-delay=".2">
-          <form action="https://formsubmit.co/support@paymenthood.com" method="POST" class="contact-form">
+          <form action="https://formsubmit.co/support@paymenthood.com" method="POST">
             <!-- Name Field -->
-            <div class="mb-4 form-group animated" data-animate="fadeInUp" data-delay=".3">
+            <div class="mb-4 animated" data-animate="fadeInUp" data-delay=".3">
               <label for="name" class="form-label txt-blue-600 fw-semibold mb-2">
                 <em class="fas fa-user me-2 txt-blue-200"></em>Full Name
               </label>
@@ -156,14 +87,14 @@ description: Any question? Reach out to us and we'll get back to you shortly.
                 type="text" 
                 id="name"
                 name="name" 
-                class="form-control form-control-lg border-0 shadow-sm" 
+                class="form-control form-control-lg" 
                 placeholder="Enter your full name" 
                 required 
               />
             </div>
 
             <!-- Email Field -->
-            <div class="mb-4 form-group animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="mb-4 animated" data-animate="fadeInUp" data-delay=".4">
               <label for="email" class="form-label txt-blue-600 fw-semibold mb-2">
                 <em class="fas fa-envelope me-2 txt-blue-200"></em>Email Address
               </label>
@@ -171,21 +102,21 @@ description: Any question? Reach out to us and we'll get back to you shortly.
                 type="email" 
                 id="email"
                 name="email" 
-                class="form-control form-control-lg border-0 shadow-sm" 
+                class="form-control form-control-lg" 
                 placeholder="your.email@example.com" 
                 required 
               />
             </div>
 
             <!-- Message Field -->
-            <div class="mb-4 form-group animated" data-animate="fadeInUp" data-delay=".6">
+            <div class="mb-4 animated" data-animate="fadeInUp" data-delay=".6">
               <label for="message" class="form-label txt-blue-600 fw-semibold mb-2">
                 <em class="fas fa-comment-dots me-2 txt-blue-200"></em>Message
               </label>
               <textarea 
                 id="message"
                 name="message" 
-                class="form-control form-control-lg border-0 shadow-sm" 
+                class="form-control form-control-lg" 
                 rows="6" 
                 placeholder="Tell us more about your inquiry..." 
                 required
@@ -199,11 +130,7 @@ description: Any question? Reach out to us and we'll get back to you shortly.
 
             <!-- Submit Button -->
             <div class="text-end animated" data-animate="fadeInUp" data-delay=".7">
-              <button 
-                type="submit" 
-                class="btn btn-blue-200 btn-lg px-5 py-3 shadow-sm"
-                style="transition: all 0.3s ease;"
-              >
+              <button type="submit" class="btn btn-blue-300 btn-lg px-5 py-3">
                 <em class="fas fa-paper-plane me-2"></em>Send Message
               </button>
             </div>
