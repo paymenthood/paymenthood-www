@@ -1,0 +1,602 @@
+---
+layout: none
+nav_active: features
+title: PaymentHood Feature Suite
+description: Explore PaymentHood's orchestrated payment platform with automation, risk intelligence, and developer tooling built for scale.
+---
+
+{% include header-secondary.html %}
+
+    <style>
+        .feature5-hero {
+            position: relative;
+            overflow: hidden;
+        }
+        .feature5-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.22) 0%, transparent 55%), radial-gradient(circle at 85% 15%, rgba(22, 163, 254, 0.25) 0%, transparent 45%);
+            pointer-events: none;
+        }
+        .feature5-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .feature5-cta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .feature5-checklist {
+            list-style: none;
+            padding: 0;
+            margin: 1.75rem 0 0;
+            display: grid;
+            gap: 0.85rem;
+        }
+        .feature5-checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-weight: 400;
+        }
+        .feature5-checklist .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+        .feature5-snapshot {
+            position: relative;
+            background: rgba(255, 255, 255, 0.16);
+            border: none;
+            border-radius: 22px;
+            padding: 2.4rem 2.25rem;
+            color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(7px);
+            box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22);
+        }
+        .feature5-snapshot h3 {
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+        .feature5-snapshot p {
+            margin-bottom: 1.65rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .feature5-sparkline {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.6rem;
+            height: 92px;
+            align-items: end;
+            margin-bottom: 1.75rem;
+        }
+        .feature5-sparkline .sparkline-bar {
+            --sparkline-height: 48;
+            height: calc(var(--sparkline-height) * 1px);
+            border-radius: 14px 14px 6px 6px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.35) 100%);
+            animation: sparklinePulse 5s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+        .feature5-sparkline .sparkline-bar:nth-child(1) { --sparkline-height: 36; animation-delay: 0.2s; }
+        .feature5-sparkline .sparkline-bar:nth-child(2) { --sparkline-height: 68; animation-delay: 0.6s; }
+        .feature5-sparkline .sparkline-bar:nth-child(3) { --sparkline-height: 56; animation-delay: 1s; }
+        .feature5-sparkline .sparkline-bar:nth-child(4) { --sparkline-height: 80; animation-delay: 1.4s; }
+        .feature5-sparkline .sparkline-bar:nth-child(5) { --sparkline-height: 48; animation-delay: 1.8s; }
+        .feature5-sparkline .sparkline-bar:nth-child(6) { --sparkline-height: 70; animation-delay: 2.2s; }
+        .feature5-sparkline .sparkline-bar:nth-child(7) { --sparkline-height: 60; animation-delay: 2.6s; }
+        @keyframes sparklinePulse {
+            0%, 100% { transform: scaleY(0.45); }
+            50% { transform: scaleY(1); }
+        }
+        .feature5-stat-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.9rem;
+        }
+        .feature5-stat-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .feature5-stat-list span {
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+        .feature5-stat-list strong {
+            color: #fff;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+        }
+        .btn-outline-light {
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            color: #fff;
+            background: transparent;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .btn-outline-light:hover {
+            background: #fff;
+            color: var(--blue-200);
+        }
+        .feature5-metric {
+            border: none;
+            border-radius: 20px;
+            padding: 2.2rem 1.85rem;
+            background: #fff;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .feature5-metric:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 44px rgba(65, 80, 118, 0.16);
+        }
+        .feature5-metric .metric-label {
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--blue-400);
+            margin-bottom: 0.4rem;
+        }
+        .feature5-metric .metric-value {
+            display: block;
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: var(--blue-600);
+        }
+        .feature5-metric .metric-help {
+            display: block;
+            margin-top: 0.6rem;
+            color: var(--blue-400);
+            font-size: 0.9rem;
+        }
+        .feature5-card {
+            border: 1px solid rgba(var(--blue-100-rgb), 0.18);
+            border-radius: 24px;
+            padding: 2.6rem 2.4rem;
+            background: #fff;
+            height: 100%;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .feature5-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 26px 52px rgba(18, 24, 58, 0.18);
+            border-color: rgba(var(--blue-100-rgb), 0.42);
+        }
+        .feature5-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(var(--blue-100-rgb), 0.16);
+            color: var(--blue-100);
+            font-size: 1.55rem;
+            margin-bottom: 1.4rem;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
+        .feature5-card:hover .feature5-icon {
+            background: var(--blue-100);
+            color: #fff;
+        }
+        .feature5-flow {
+            display: grid;
+            gap: 1.4rem;
+        }
+        .feature5-flow-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.35rem;
+            align-items: flex-start;
+            padding: 1.75rem 1.9rem;
+            border-radius: 20px;
+            background: #fff;
+            border: 1px solid rgba(var(--blue-100-rgb), 0.12);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature5-flow-step:hover {
+            transform: translateX(10px);
+            border-color: rgba(var(--blue-100-rgb), 0.32);
+            box-shadow: 0 20px 48px rgba(18, 24, 58, 0.14);
+        }
+        .feature5-flow-index {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(var(--blue-100-rgb), 0.18);
+            color: var(--blue-100);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .feature5-dev-card {
+            background: linear-gradient(138deg, rgba(var(--blue-100-rgb), 0.08) 0%, rgba(255, 255, 255, 1) 78%);
+        }
+        .feature5-code {
+            font-family: "Roboto Mono", Menlo, Monaco, Consolas, monospace;
+            background: rgba(18, 24, 58, 0.95);
+            color: #fff;
+            padding: 1.6rem;
+            border-radius: 18px;
+            box-shadow: 0 26px 52px rgba(18, 24, 58, 0.35);
+            transition: transform 0.35s ease;
+        }
+        .feature5-code:hover {
+            transform: translateY(-8px);
+        }
+        .feature5-code pre {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        .feature5-cta-bar .btn {
+            min-width: 210px;
+        }
+        .feature5-integration-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .feature5-integration-pills span {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(var(--blue-100-rgb), 0.12);
+            color: var(--blue-600);
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 991px) {
+            .feature5-snapshot {
+                margin-top: 2.6rem;
+            }
+        }
+        @media (max-width: 767px) {
+            .feature5-flow-step {
+                grid-template-columns: 1fr;
+            }
+            .feature5-flow-index {
+                margin-bottom: 0.6rem;
+            }
+            .feature5-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="section section-feature tc-light bg-blue-200 feature5-hero">
+            <div class="container">
+                <div class="row gutter-vr-30px align-items-center justify-content-between">
+                    <div class="col-xl-6 col-lg-7">
+                        <span class="feature5-badge animated" data-animate="fadeInUp" data-delay=".05">Unified payments platform</span>
+                        <h1 class="title title-xl animated" data-animate="fadeInUp" data-delay=".1">Orchestrate every payment journey with confidence</h1>
+                        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">PaymentHood brings smart routing, risk intelligence, and automated workflows together so teams can launch, optimise, and scale payments globally with ease.</p>
+                        <ul class="feature5-checklist animated" data-animate="fadeInUp" data-delay=".3">
+                            <li><em class="icon ti ti-check"></em><span>Dynamic routing across 15+ global gateways</span></li>
+                            <li><em class="icon ti ti-check"></em><span>Adaptive fraud controls with AI risk scoring</span></li>
+                            <li><em class="icon ti ti-check"></em><span>API-first tooling and real-time observability</span></li>
+                        </ul>
+                        <div class="feature5-cta animated" data-animate="fadeInUp" data-delay=".4">
+                            <a class="btn btn-green-300" href="pricing.html">Explore pricing</a>
+                            <a class="btn btn-outline-light" href="contact-us.html">Talk to sales</a>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-5">
+                        <div class="card feature5-snapshot animated" data-animate="fadeInUp" data-delay=".25">
+                            <h3 class="title title-md txt-blue-600">Live orchestration snapshot</h3>
+                            <p>Monitor performance and automatically switch pathways as acquiring conditions change.</p>
+                            <div class="feature5-sparkline" role="presentation" aria-hidden="true">
+                                <div class="sparkline-bar"></div>
+                                <div class="sparkline-bar"></div>
+                                <div class="sparkline-bar"></div>
+                                <div class="sparkline-bar"></div>
+                                <div class="sparkline-bar"></div>
+                                <div class="sparkline-bar"></div>
+                                <div class="sparkline-bar"></div>
+                            </div>
+                            <ul class="feature5-stat-list">
+                                <li><span>Best route latency</span><strong>212ms</strong></li>
+                                <li><span>Approval lift after AI reroute</span><strong>+4.7%</strong></li>
+                                <li><span>Proactive alerts resolved</span><strong>96%</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Section -->
+        <section class="section section-feature bg-blue-30">
+            <div class="container">
+                <div class="section-head wide-sm text-center">
+                    <h2 class="title txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Scale-ready by design</h2>
+                    <p class="animated" data-animate="fadeInUp" data-delay=".2">Operational metrics that teams rely on when migrating to PaymentHood.</p>
+                </div>
+                <div class="row gutter-vr-30px justify-content-center text-center">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="feature5-metric animated" data-animate="fadeInUp" data-delay=".15">
+                            <span class="metric-label">Global gateways</span>
+                            <span class="metric-value">15+</span>
+                            <span class="metric-help">Activate the acquiring mix that fits each market.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="feature5-metric animated" data-animate="fadeInUp" data-delay=".25">
+                            <span class="metric-label">Optimised auth rate</span>
+                            <span class="metric-value">+7%</span>
+                            <span class="metric-help">Intelligent routing and retries on every transaction.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="feature5-metric animated" data-animate="fadeInUp" data-delay=".35">
+                            <span class="metric-label">Time to integrate</span>
+                            <span class="metric-value">14 days</span>
+                            <span class="metric-help">SDKs and guided playbooks cut go-live timelines.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="feature5-metric animated" data-animate="fadeInUp" data-delay=".45">
+                            <span class="metric-label">SLA adherence</span>
+                            <span class="metric-value">99.9%</span>
+                            <span class="metric-help">Enterprise reliability backed by proactive monitoring.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Pillars -->
+        <section class="section section-feature">
+            <div class="container">
+                <div class="section-head wide-md text-center">
+                    <h2 class="title title-lg txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Platform pillars built for scale</h2>
+                    <p class="animated" data-animate="fadeInUp" data-delay=".2">Modular capabilities combine to deliver the orchestration layer your payments team needs today and tomorrow.</p>
+                </div>
+                <div class="row gutter-vr-30px justify-content-center">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature5-card animated" data-animate="fadeInUp" data-delay=".2">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-shield"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Risk intelligence</h3>
+                            <p>Detect anomalies before they impact revenue with adaptive rules, real-time scoring, and device intelligence.</p>
+                            <ul class="list list-dot pdt-s">
+                                <li>Adaptive 3DS orchestration</li>
+                                <li>Velocity &amp; behaviour scoring</li>
+                                <li>Trusted payment network tokens</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature5-card animated" data-animate="fadeInUp" data-delay=".3">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-direction"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Smart routing</h3>
+                            <p>Route and retry transactions with machine-learned preferences, A/B experimentation, and performance automation.</p>
+                            <ul class="list list-dot pdt-s">
+                                <li>Gateway failover decisioning</li>
+                                <li>Payment method fallbacks</li>
+                                <li>Mid-flow business rules</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature5-card animated" data-animate="fadeInUp" data-delay=".4">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-loop"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Lifecycle automation</h3>
+                            <p>Automate settlement, reconciliation, and customer communications so finance teams can operate with precision.</p>
+                            <ul class="list list-dot pdt-s">
+                                <li>Automated settlement tracking</li>
+                                <li>Refund &amp; dispute workflows</li>
+                                <li>Ledger &amp; ERP synchronisation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automation Flow -->
+        <section class="section bg-gray-100">
+            <div class="container">
+                <div class="row gutter-vr-30px align-items-center">
+                    <div class="col-lg-5">
+                        <div class="section-head text-start">
+                            <h2 class="title title-lg txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Automation across the payment lifecycle</h2>
+                            <p class="animated" data-animate="fadeInUp" data-delay=".2">Configure workflows once and let PaymentHood orchestrate the rest. Every step is observable, versioned, and auditable.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="feature5-flow">
+                            <div class="feature5-flow-step animated" data-animate="fadeInUp" data-delay=".2">
+                                <div class="feature5-flow-index">1</div>
+                                <div>
+                                    <h4 class="title title-sm txt-blue-600">Authorize with context</h4>
+                                    <p>Enrich every request with device, velocity, and historical data to maximise upfront approvals while respecting risk tolerances.</p>
+                                </div>
+                            </div>
+                            <div class="feature5-flow-step animated" data-animate="fadeInUp" data-delay=".3">
+                                <div class="feature5-flow-index">2</div>
+                                <div>
+                                    <h4 class="title title-sm txt-blue-600">Optimise in real time</h4>
+                                    <p>Machine learning monitors gateway health, dynamically rerouting traffic and sequencing retries to capture incremental revenue.</p>
+                                </div>
+                            </div>
+                            <div class="feature5-flow-step animated" data-animate="fadeInUp" data-delay=".4">
+                                <div class="feature5-flow-index">3</div>
+                                <div>
+                                    <h4 class="title title-sm txt-blue-600">Capture &amp; reconcile</h4>
+                                    <p>Automated capture windows, partial fulfilment logic, and ledger-ready reconciliation rules keep finance teams in control.</p>
+                                </div>
+                            </div>
+                            <div class="feature5-flow-step animated" data-animate="fadeInUp" data-delay=".5">
+                                <div class="feature5-flow-index">4</div>
+                                <div>
+                                    <h4 class="title title-sm txt-blue-600">Report &amp; iterate</h4>
+                                    <p>Dashboards, webhooks, and exports deliver the insights product and finance leaders need to continuously improve performance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developer Experience -->
+        <section class="section section-feature">
+            <div class="container">
+                <div class="row gutter-vr-30px align-items-center">
+                    <div class="col-lg-6">
+                        <div class="feature5-card feature5-dev-card animated" data-animate="fadeInUp" data-delay=".2">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-braces"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Built for engineering teams</h3>
+                            <p>SDKs, modular APIs, and extensive sandbox tooling accelerate your roadmap without sacrificing control.</p>
+                            <ul class="list list-dot pdt-s">
+                                <li>Environment parity with live data simulators</li>
+                                <li>Config-as-code for routing, rules, and webhooks</li>
+                                <li>Granular role-based access controls</li>
+                            </ul>
+                            <div class="feature5-integration-pills">
+                                <span>REST</span>
+                                <span>GraphQL</span>
+                                <span>Webhooks</span>
+                                <span>SDKs</span>
+                                <span>Event Bridge</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="feature5-code animated" data-animate="fadeInUp" data-delay=".3">
+<pre><code>// Quickstart: Authorise with PaymentHood
+const client = new PaymentHoodSDK({
+    apiKey: process.env.PAYMENTHOOD_KEY,
+    environment: 'sandbox'
+});
+
+const intent = await client.payments.create({
+    amount: 12900,
+    currency: 'USD',
+    captureStrategy: 'delayed',
+    customer: { id: 'cust_4391' },
+    routingProfile: 'north-america',
+    risk: { frictionless3DS: true }
+});
+
+console.log('Authorised in', intent.latency, 'ms');</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enterprise Confidence -->
+        <section class="section bg-gray-100">
+            <div class="container">
+                <div class="section-head wide-sm text-center">
+                    <h2 class="title title-lg txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Enterprise confidence, global reach</h2>
+                    <p class="animated" data-animate="fadeInUp" data-delay=".2">Operate across regions with compliance controls, certification coverage, and round-the-clock support.</p>
+                </div>
+                <div class="row gutter-vr-30px justify-content-center">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature5-card animated" data-animate="fadeInUp" data-delay=".2">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-world"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Global coverage</h3>
+                            <p>Support for 190+ countries, 135 currencies, and popular local payment methods out of the box.</p>
+                            <div class="feature5-integration-pills">
+                                <span>APAC</span>
+                                <span>LATAM</span>
+                                <span>EMEA</span>
+                                <span>North America</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature5-card animated" data-animate="fadeInUp" data-delay=".3">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-lock"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Compliance ready</h3>
+                            <p>PCI DSS Level 1, GDPR, PSD2, and SOC 2 controls built-in, with audit trails and data residency options.</p>
+                            <div class="feature5-integration-pills">
+                                <span>PCI DSS</span>
+                                <span>GDPR</span>
+                                <span>SOC 2</span>
+                                <span>PSD2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature5-card animated" data-animate="fadeInUp" data-delay=".4">
+                            <div class="feature5-icon">
+                                <em class="icon ti ti-headset"></em>
+                            </div>
+                            <h3 class="title title-md txt-blue-600">Expert partnership</h3>
+                            <p>Strategic support, migration playbooks, and 24/7 monitoring ensure smooth operations everywhere you launch.</p>
+                            <div class="feature5-integration-pills">
+                                <span>24/7 NOC</span>
+                                <span>Playbooks</span>
+                                <span>Success Managers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section section-feature tc-light bg-blue-200 feature5-cta-bar">
+            <div class="container">
+                <div class="row align-items-center justify-content-between gutter-vr-30px">
+                    <div class="col-lg-8">
+                        <h2 class="title title-lg animated" data-animate="fadeInUp" data-delay=".1">Ready to orchestrate payments your way?</h2>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".2">Partner with PaymentHood to align product, risk, and finance teams behind a single, intelligent payments backbone.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="btn btn-green-300 animated" data-animate="fadeInUp" data-delay=".3" href="contact-us.html">Book a strategy call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include footer.html %}
