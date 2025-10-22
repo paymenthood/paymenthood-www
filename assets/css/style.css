@@ -195,7 +195,7 @@ h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:la
 p {
     font-size: 14px;
     margin-bottom: 1rem;
-    color: #415076;
+
 }
 
 
@@ -4604,9 +4604,6 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
 
 @media (min-width: 1900px) {
-    .gfx-re-lgl {
-        margin-left: -315px;
-    }
 
     .gfx-re-lgr {
         margin-right: -315px;
@@ -4621,6 +4618,17 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     }
 }
 
+.gfx-round-bg {
+    min-width: 300px;
+    min-height: 300px;
+    background: #f7f8ff;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
 
 .gfx-round-bg.after:after {
     position: absolute;
@@ -4650,20 +4658,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 
-@media (min-width: 1600px) {
-    .gfx-round-bg {
-        min-width: 600px;
-        min-height: 600px;
-    }
-}
-
-
 @media (min-width: 1900px) {
-    .gfx-round-bg {
-        min-width: 660px;
-        min-height: 660px;
-    }
-
     .gfx-round-bg-md {
         min-width: 557px;
         min-height: 557px;
@@ -11370,4 +11365,9 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     border-radius: 50%;
     margin-right: 15px;
     flex-shrink: 0;
+}
+/**-------- Installation Guide ---------**/
+.installation-section-space{
+    padding-top: 150px;
+    padding-bottom: 150px;
 }
