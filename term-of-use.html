@@ -1,33 +1,14 @@
 ---
 layout: none
 nav_active: home
+title: Terms of Use
+description: Unlock the full potential of payment processing with our comprehensive suite of tools designed for modern businesses.
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PaymentHood Term Of Use</title>
-    <meta name="description" content="Understand how PaymentHood by OmegaHood LLC collects, uses, and protects personal data for merchants and their customers.">
-    <link rel="canonical" href="https://paymenthood.com/term-of-use">
 
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALCSURBVFhH7ZfNaxNBFMafJBsttRUEwYNIQaGCByue9OBBELyIePGgB0/ixYsHL148ePDgxYMXDx48ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHixYsXL168ePHgAAAABJRU5ErkJggg==">
-    <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#0066cc">
-    <script src="assets/js/includes.js"></script>
-</head>
-<body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    {% include header.html %}
+    {% include header-secondary.html %}
 
     <main id="main-content" class="legal-main">
-        <div class="legal-container">
+        <div class="container">
             <div class="legal-card" role="article" aria-labelledby="term_of_use-title">
                 <article>
                     {% capture term_of_use_content %}{% include_relative legals/term-of-use.md %}{% endcapture %}
@@ -36,16 +17,5 @@ nav_active: home
             </div>
         </div>
     </main>
-    {% include footer.html %}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var termLink = document.querySelector('.nav-links a[href="term-of-use.html"]');
-            if (termLink) {
-                termLink.classList.add('active');
-                termLink.setAttribute('aria-current', 'page');
-            }
-        });
-    </script>
-</body>
-</html>
+    {% include footer.html %}

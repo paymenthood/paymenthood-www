@@ -1,7 +1,7 @@
 ---
 layout: none
 nav_active: home
-title: Advanced Payment Features
+title: Privacy Policy
 description: Unlock the full potential of payment processing with our comprehensive suite of tools designed for modern businesses.
 ---
 
@@ -9,13 +9,11 @@ description: Unlock the full potential of payment processing with our comprehens
 
     <main id="main-content" class="legal-main">
         <div class="container">
-            <div class="legal-container">
-                <div class="legal-card" role="article" aria-labelledby="privacy-title">
-                    <article>
-                        {% capture privacy_content %}{% include_relative legals/privacy-policy.md %}{% endcapture %}
-                        {{ privacy_content | markdownify }}
-                    </article>
-                </div>
+            <div class="legal-card" role="article" aria-labelledby="privacy-title">
+                <article>
+                    {% capture privacy_content %}{% include_relative legals/privacy-policy.md %}{% endcapture %}
+                    {{ privacy_content | markdownify }}
+                </article>
             </div>
         </div>
     </main>
