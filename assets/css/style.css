@@ -6139,7 +6139,11 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 .section-head {
     position: relative;
 }
-
+.section-head>span{
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 1.25rem;
+}
 
 .section-head:not([class*=pdb]) {
     padding-bottom: 40px;
