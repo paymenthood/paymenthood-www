@@ -11278,6 +11278,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     background-image: url("../images/home/icon-bg-a3.png");
 }
 
+
 #fraudFeatures li {
     display: flex;
     align-items: center;
@@ -11295,6 +11296,40 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     font-weight: 500;
     width: 39px;
     height: 39px;
+}
+
+.fraud-item{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.fraud-item>.itemIcon{
+    position: relative;
+    width: 63px;
+    height: 63px;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 17px;
+    font-size: 45px;
+    color: var(--blue-200);
+}
+.fraud-item>.itemIcon:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    border-radius: 10px;
+    border: 2px solid rgba(var(--blue-200-rgb), .3);
+    transform: rotate(45deg);
+}
+.fraud-item>.fraud-title,
+.fraud-item>p{
+    margin-bottom: 0;
 }
 
 #securityFeaturesList .icon {
