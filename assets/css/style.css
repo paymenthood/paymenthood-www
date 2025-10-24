@@ -1998,6 +1998,18 @@ hr {
     }
 }
 
+/* ==============================
+     Android Edge-to-Edge support
+     - Uses safe area inset for bottom navigation bars
+     - No effect on desktop or browsers that don't support env()
+     ============================== */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .nk-footer {
+        /* Add extra space equal to the bottom system inset */
+        padding-bottom: calc(env(safe-area-inset-bottom, 0px));
+    }
+}
+
 
 @media (min-width: 992px) {
     .text-lg-left .btn-grp {
