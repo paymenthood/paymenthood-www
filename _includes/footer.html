@@ -65,5 +65,18 @@
 <script src="../assets/js/scripts.js?ver=210"></script>
 <script src="../assets/js/charts.js?ver=210"></script>
 <script src="../assets/js/charts.js?ver=210"></script>
+<!-- Android Edge-to-Edge Support -->
+<script>
+    if ('virtualKeyboard' in navigator) {
+        navigator.virtualKeyboard.overlaysContent = true;
+    }
+</script>
+<style>
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+        body {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    }
+</style>
 </body>
 </html>
