@@ -2,6 +2,9 @@
     --green-300: #23c99d;
     --green-300-rgb: 35, 201, 157;
 
+    --green-300: #23a377;
+    --green-300-rgb: 35, 201, 157;
+
     --blue-30: #f6fafd;
     --blue-30-rgb: 246, 250, 253;
 
@@ -241,7 +244,7 @@ a:link, a:visited {
 
 a:hover, a:focus, a:active {
     outline: 0;
-    color: #23c99d;
+    color: var(--green-300);
 }
 
 
@@ -603,7 +606,7 @@ h6, .h6 {
 }
 
 .text-secondary {
-    color: #23c99d !important;
+    color: var(--green-300) !important;
 }
 
 /** 02.04 Misc */
@@ -1585,8 +1588,8 @@ hr {
 
 
 .btn-blue-100:hover, .btn-blue-100:focus {
-    background-color: #23c99d;
-    border-color: #23c99d;
+    background-color: var(--green-300);
+    border-color: var(--green-300);
 }
 
 
@@ -1596,8 +1599,8 @@ hr {
 
 
 .tc-light .btn-blue-100:hover, .tc-light .btn-blue-100:focus {
-    background-color: #23c99d;
-    border-color: #23c99d;
+    background-color: var(--green-300);
+    border-color: var(--green-300);
     color: #fff !important;
 }
 
@@ -1610,8 +1613,8 @@ hr {
 
 
 .btn-green-300 {
-    background-color: #23c99d;
-    border-color: #23c99d;
+    background-color: var(--green-300);
+    border-color: var(--green-300);
 }
 
 
@@ -1632,8 +1635,8 @@ hr {
 }
 
 .btn-green-300.vh-btn-outline:hover, .btn-green-300.vh-btn-outline:focus {
-    background-color: #23c99d !important;
-    border-color: #23c99d;
+    background-color: var(--green-300) !important;
+    border-color: var(--green-300);
 }
 
 
@@ -3795,7 +3798,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     left: 5px;
     right: 5px;
     bottom: 5px;
-    border-top-color: #23c99d;
+    border-top-color: var(--green-300);
     animation: spin 3s linear infinite;
 }
 
@@ -8426,7 +8429,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
 
 .tc-light .wgs-title {
-    color: #23c99d;
+    color: var(--green-300);
 }
 
 
@@ -9217,12 +9220,12 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
 
 .tc-light .product-name {
-    color: #23c99d;
+    color: var(--green-300);
 }
 
 
 .tc-light .product-image {
-    border-color: #23c99d;
+    border-color: var(--green-300);
 }
 
 
@@ -9783,7 +9786,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
 
 .has-fixed:not(.is-dark) .header-main {
-    background: #fff;
+    background: var(--gray-200);
 }
 
 
@@ -11336,6 +11339,10 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     margin-bottom: 0;
 }
 
+#securityFeatures{
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
 #securityFeaturesList .icon {
     position: relative;
 }
