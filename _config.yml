@@ -26,8 +26,6 @@ plugins:
 # Exclude files from processing
 exclude:
   - README.md
-  - responsive-analysis.md
-  - REUSABLE_COMPONENTS.md
   - .gitignore
   - .git/
   - .vs/
