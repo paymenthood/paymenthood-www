@@ -4,8 +4,12 @@
     "description": "Enterprise Payment Orchestration Platform",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#0066cc",
+    "display_override": [
+        "standalone",
+        "browser"
+    ],
+    "background_color": "#1940b0",
+    "theme_color": "transparent",
     "icons": [
         {
             "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
