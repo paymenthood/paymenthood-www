@@ -9,6 +9,14 @@ markdown: kramdown
 highlighter: rouge
 theme: minima
 
+# Sass configuration (suppress deprecation warnings)
+sass:
+  quiet_deps: true
+  silence_deprecations:
+    - import
+    - global-builtin
+    - color-functions
+
 # GitHub Pages configuration
 plugins:
   - jekyll-feed
@@ -18,8 +26,6 @@ plugins:
 # Exclude files from processing
 exclude:
   - README.md
-  - responsive-analysis.md
-  - REUSABLE_COMPONENTS.md
   - .gitignore
   - .git/
   - .vs/
