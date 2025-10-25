@@ -4190,42 +4190,22 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     right: 0;
     bottom: -4rem;
 }
-
-
-.carousel-shadow-fix .owl-stage-outer {
-    margin: 0 -30px;
-    margin-top: -20px;
-    padding-left: 40px;
-}
-
-
 .carousel-shadow-fix.feature-carousel-center .owl-stage-outer {
     padding-left: 30px;
 }
-
-
 .carousel-shadow-fix.owl-rtl .owl-stage-outer {
     padding-left: 0;
     padding-right: 30px;
 }
-
-
 .carousel-shadow-fix .owl-item {
     padding: 20px 0 40px;
 }
-
-
 .carousel-shadow-fix .owl-item > div {
     transition: all .4s;
-    opacity: 0;
 }
-
-
 .carousel-shadow-fix .owl-item.active > div {
     opacity: 1;
 }
-
-
 .carousel-shadow-fix .owl-item:not(.active) [class*='shadow'] {
     box-shadow: none !important;
 }
@@ -11416,4 +11396,37 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 .installation-section-space{
     padding-top: 150px;
     padding-bottom: 150px;
+}
+
+#transactionControl{
+    background: url("../images/home/globe-particle.webp") no-repeat center 107%;
+    background-size: 90%;
+}
+.transaction-card{
+    position: relative;
+    overflow: hidden;
+    display: block;
+    padding: 35px 25px 110px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 5px 30px rgba(25, 64, 176, 0.14);
+    height: 100%;
+}
+
+.transaction-icon {
+    position: absolute;
+    width: 121px;
+    height: 121px;
+    margin: 0;
+    right: -15px;
+    bottom: -15px;
+    background: rgba(22, 163, 254, 0.15);
+    border-radius: 50%;
+    box-shadow: 0px 0px 0px 10px rgba(22, 163, 254, 0.06);
+    text-align: center;
+    line-height: 112px;
+}
+.transaction-icon img {
+    max-width: 60px;
+    display: inline-block !important;
 }

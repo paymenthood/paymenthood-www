@@ -283,15 +283,15 @@ NioApp = function (NioApp, $, window, document) {
         }
 	};
 	NioApp.components.docReady.push(NioApp.Util.progressBar);
-    
+
     // inputAnimation @v1.0
     NioApp.Util.inputAnimate = function(){
 		var $inputline = $('.input-line');
-		
+
         if ($inputline.exists()) {
             $inputline.each(function(){
                 var $self = $(this), selfval = $self.val(), inputCls = 'input-focused';
-				
+
                 if(selfval) {
                     $self.parent().addClass(inputCls);
                 }
@@ -300,7 +300,7 @@ NioApp = function (NioApp, $, window, document) {
                 });
                 $self.on('blur', function(){
                     $(this).parent().removeClass(inputCls);
-                    var afterblur = $(this).val();		
+                    var afterblur = $(this).val();
                     if(afterblur) {
                         $(this).parent().addClass(inputCls);
                     }
@@ -310,32 +310,7 @@ NioApp = function (NioApp, $, window, document) {
         }
     };
 	NioApp.components.docReady.push(NioApp.Util.inputAnimate);
-	
-    // Dropdown @v1.0
-    NioApp.Util.toggler = function(){
-		var _trigger = '.toggle-tigger', _toggle = '.toggle-class';
-		
-        if ($(_trigger).exists()) {
-            $doc.on('click', _trigger, function(e){
-                var $self = $(this);
-                $(_trigger).not($self).removeClass('active');
-                $(_toggle).not($self.parent().children()).removeClass('active');
-                $self.toggleClass('active').parent().find(_toggle).toggleClass('active');
-                e.preventDefault();
-            });
-        }
-        
-        $doc.on('click', 'body', function(e){
-        var $elm_tig = $(_trigger), $elm_tog = $(_toggle);
-            if (!$elm_tog.is(e.target) && $elm_tog.has(e.target).length===0 && 
-                !$elm_tig.is(e.target) && $elm_tig.has(e.target).length===0) {
-                    $elm_tog.removeClass('active');
-                    $elm_tig.removeClass('active');
-            }
-        });
-    };
-	NioApp.components.docReady.push(NioApp.Util.toggler);
-	
+
 	// accordionActive @v1.0
     NioApp.Util.accordionActive = function() {
         var $accordion_item = $('.accordion-item'),
@@ -529,41 +504,12 @@ NioApp = function (NioApp, $, window, document) {
         });
     };
 	NioApp.components.docReady.push(NioApp.scrollAct);
-	
-	//ModalFix @v1.0
-	NioApp.modalFix = function() {
-	   var $modal = $('.modal');
-	   $modal.on('shown.bs.modal', function () {
-		   if(!$body.hasClass('modal-open'))  {
-			   $body.addClass('modal-open');
-		   }
-	   });
-	};
-	NioApp.components.docReady.push(NioApp.modalFix);
-	
+
+
 	//// Plugins ////
 	/////////////////
 	NioApp.Plugins = {};
-	
-	// Count Down !Plugin @v1.0
-	NioApp.Plugins.countdown = function () {
-		var $count = $('.countdown');
-        if ($count.exists()) {
-            $count.each(function() {
-                var $self = $(this), datetime = $self.attr("data-date");
-                var _day_text = ($self.data('day-text')) ? $self.data('day-text') : 'Days';
-                var _hour_text = ($self.data('hour-text')) ? $self.data('hour-text') : 'Hours';
-                var _min_text = ($self.data('min-text')) ? $self.data('min-text') : 'Min';
-                var _sec_text = ($self.data('sec-text')) ? $self.data('sec-text') : 'Sec';
-                $self.countdown(datetime).on('update.countdown', function(event) {
-                    $(this).html(event.strftime('<div class="countdown-item"><span class="countdown-time countdown-time-first">%D</span><span class="countdown-text">' + _day_text + '</span></div>' + '<div class="countdown-item"><span class="countdown-time">%H</span><span class="countdown-text">' + _hour_text + '</span></div>' + '<div class="countdown-item"><span class="countdown-time">%M</span><span class="countdown-text">' + _min_text + '</span></div>' + '<div class="countdown-item"><span class="countdown-time countdown-time-last">%S</span><span class="countdown-text">' + _sec_text + '</span></div>'));
-                });
-            });
-        }
-    };
-	NioApp.components.docReady.push(NioApp.Plugins.countdown);
-	
-    
+
     // Carousel !Plugin @v1.1
     NioApp.Plugins.carousel = function () {
 		var $carousel = $('.has-carousel');
@@ -578,7 +524,8 @@ NioApp = function (NioApp, $, window, document) {
                 var cim_xm = ($self.data('items-mobile-s')) ? $self.data('items-mobile-s') : cim_m;
                 var c_timeout =($self.data('timeout')) ? $self.data('timeout') : 6000;
                 var c_auto =($self.data('auto')) ? $self.data('auto') : false,
-                    c_auto_speed =($self.data('auto-speed')) ? $self.data('auto-speed') : 600,
+                    c_auto_stop_hover =($self.data('auto-stop-hover')) ? $self.data('auto-stop-hover') : true,
+                    c_auto_speed =($self.data('auto-speed')) ? $self.data('auto-speed') : 400,
                     c_loop =($self.data('loop')) ? $self.data('loop') : false,
                     c_dots = ($self.data('dots')) ? $self.data('dots') : false,
                     c_custdots = ($self.data('custom-dots')) ? '.'+$self.data('custom-dots') : false,
@@ -596,14 +543,16 @@ NioApp = function (NioApp, $, window, document) {
 
                 $self.addClass('owl-carousel').owlCarousel({
                     navText: ['',''],
-                    items: cim, 
-                    loop: c_loop, 
+                    items: cim,
+                    stagePadding: 30,
+                    loop: c_loop,
                     nav: c_navs, 
                     dots: c_dots,
                     dotsContainer: c_custdots, 
-                    margin: c_mgn, 
+                    margin: c_mgn,
                     center: c_ctr,
-                    autoplay: c_auto, 
+                    autoplay: c_auto,
+                    autoplayHoverPause:c_auto_stop_hover,
                     autoplayTimeout: c_timeout, 
                     autoplaySpeed: c_auto_speed,
                     animateOut : c_animate_out,
@@ -687,56 +636,6 @@ NioApp = function (NioApp, $, window, document) {
 	};
 	NioApp.components.docReady.push(NioApp.Plugins.select2);
     
-    // Validator !Plugin @v1.0
-	NioApp.Plugins.validform = function () {
-		var $form = $(".form-validate");
-        if( !$().validate ) {
-            console.log('jQuery Form Validate not Defined.');
-            return true;
-        }
-		if ($form.exists()) {
-			$form.each(function(){
-                var $self = $(this);
-				$self.validate();
-                $self.find('.select').on('change', function() { $(this).valid(); });
-			});
-        }
-	};
-	NioApp.components.docReady.push(NioApp.Plugins.validform);
-
-	// Form Validation !Plugin @v1.0
-	NioApp.Plugins.submitform = function () {
-		var $form = $('.nk-form-submit');
-        
-        if( !$().validate && !$().ajaxSubmit ) {
-            console.log('jQuery Form and Form Validate not Defined.');
-            return true;
-        }
-        
-        if ($form.exists()) {
-            $form.each(function(){
-                var $self = $(this), _result = $self.find('.form-results');
-                $self.validate({
-                    ignore: [],
-                    invalidHandler: function () { _result.slideUp(400); },
-                    submitHandler: function(form) {
-                    _result.slideUp(400);
-                    $(form).ajaxSubmit({
-                        target: _result, dataType: 'json',
-                        success: function(data) {
-                            var type = (data.result==='error') ? 'alert-danger' : 'alert-success';
-                            _result.removeClass( 'alert-danger alert-success' ).addClass( 'alert ' + type ).html(data.message).slideDown(400);
-                            if (data.result !== 'error') { $(form).clearForm().find('input').removeClass('input-focused'); }
-                        }
-                    });
-                    }
-                });
-                $self.find('.select').on('change', function() { $(this).valid(); });
-            });
-        }
-	};
-	NioApp.components.docReady.push(NioApp.Plugins.submitform);
-    
 	// Parallax !Plugin @v1.0
 	NioApp.Plugins.parallax = function () {
 		var $parallax = $("[data-parallax]");
@@ -752,195 +651,6 @@ NioApp = function (NioApp, $, window, document) {
         }
 	};
 	NioApp.components.docReady.push(NioApp.Plugins.parallax);
-	
-    // Popup !Plugin @v1.0
-	NioApp.Plugins.popup = function () {
-		var $content_popup = $('.content-popup'),
-			$video_popup     = $('.video-popup'),
-			$image_popup     = $('.image-popup');
-		
-		var popupInit = {};
-		popupInit.content_popup = function () {
-			if ($content_popup.exists()) {
-				$content_popup.each(function(){
-                    var overlay = $(this).data('overlay');
-                    var setOverlay = (typeof overlay!=='undefined' && overlay) ? overlay : '';
-					$(this).magnificPopup({
-						type: 'inline',
-						preloader: true,
-						removalDelay: 400,
-						mainClass: 'mfp-fade content-popup ' + setOverlay,
-                        callbacks: {
-                            open: function() {
-                                $body.addClass('mfp-opened')
-                            },
-                            close: function() {
-                                $body.removeClass('mfp-opened')
-                            }
-                        }
-					});
-				});
-			}
-		};
-		popupInit.video_popup = function () {
-			if ($video_popup.exists()) {
-				$video_popup.each(function(){
-					$(this).magnificPopup({
-						type: 'iframe',
-						removalDelay: 160,
-						preloader: true,
-						fixedContentPos: false,
-						callbacks: {
-							beforeOpen: function() {
-								this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-								this.st.mainClass = this.st.el.attr('data-effect');
-							}
-						},
-					});
-				});
-			}
-		};
-        popupInit.image_popup = function () {
-			if ($image_popup.exists()) {
-				$image_popup.each(function(){
-					$(this).magnificPopup({
-						type: 'image',
-						mainClass: 'mfp-fade image-popup'
-					});
-				});
-			}
-		};
-		popupInit.content_popup(); 
-		popupInit.video_popup();
-		popupInit.image_popup();
-	};
-	NioApp.components.docReady.push(NioApp.Plugins.popup);
-    
-    // particlesJS !Plugin @v1.0
-	NioApp.Plugins.particles = function () {
-        var $particles_bg = $('.particles-bg');
-        if ($particles_bg.exists()) {
-            $particles_bg.each(function(){
-                var $self = $(this), $self_id = $self.attr('id'),
-                    _pt_base        = ($self.data('pt-base')) ? $self.data('pt-base') : '#fff', 
-                    _pt_base_op     = ($self.data('pt-base-op')) ? parseFloat($self.data('pt-base-op')) : 0.10, 
-                    _pt_shape       = ($self.data('pt-shape')) ? $self.data('pt-shape') : '#fff', 
-                    _pt_shape_op    = ($self.data('pt-shape-op')) ? parseFloat($self.data('pt-shape-op')) : 0.10, 
-                    _pt_line        = ($self.data('pt-line')) ? $self.data('pt-line') : '#fff',
-                    _pt_line_op     = ($self.data('pt-line-op')) ? parseFloat($self.data('pt-line-op')) : 0.20;
-                
-                particlesJS($self_id, {
-                "particles": {
-                    "number": {
-                        "value": 30,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": _pt_base,
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "opacity": _pt_shape_op,
-                        "stroke": {
-                            "width": 0,
-                            "color": _pt_shape,
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        }
-                    },
-                    "opacity": {
-                        "value": _pt_base_op,
-                        "random": false,
-                        "anim": {
-                            "enable": false,
-                            "speed": 1,
-                            "opacity_min": 0.12,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 6,
-                        "random": true,
-                        "anim": {
-                            "enable": false,
-                            "speed": 40,
-                            "size_min": 0.08,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": _pt_line,
-                        "opacity": _pt_line_op,
-                        "width": 1.3
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 6,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true, 
-                            "mode": "repulse"
-                        },
-                        "onclick": {
-                            "enable": true, 
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                        "distance": 400,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                    "retina_detect": true
-                }
-                // Stop here.
-              );
-            });
-        }
-	};
-	NioApp.components.docReady.push(NioApp.Plugins.particles);
     
     NioApp.Plugins.videoBG = function () {
 		var $videobg = $(".bg-video");
@@ -989,30 +699,6 @@ NioApp = function (NioApp, $, window, document) {
     $win.on('resize', function(){
         NioApp.components.docReady.push(NioApp.Plugins.videoBG);
     });
-    
-    // Data Tables @v100
-    NioApp.Plugins.dataTable = function () {
-		var $dt_filter = $('.dt-filter-init');
-		
-		if($dt_filter.exists()) {
-			var dt_filter = $dt_filter.DataTable({
-                "ordering": true,
-                "autoWidth": false,
-                "dom":"<'row'<'col-sm-6 col-mb-6'f><'col-sm-6'<'dt-short'>>><'table-wrap't>",
-                "language": {
-                    "search": '<em class="ti ti-search"></em>',
-                    "searchPlaceholder": "Search"
-                },
-            });
-            var $dt_shorter = $('.dt-shorter');
-            $dt_shorter.on('change', function(){
-                var _thisval = $(this).val();
-                dt_filter.columns('.'+_thisval).order('asc').draw();
-            });
-		}
-	};
-	NioApp.components.docReady.push(NioApp.Plugins.dataTable);
-
     
 	return NioApp;
 }(NioApp, jQuery, window, document);
