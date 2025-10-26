@@ -638,36 +638,27 @@ h6, .h6 {
 .shadow {
     box-shadow: 0 3px 12px 0 rgba(18, 24, 58, 0.08) !important;
 }
-
-
-.nk-df-mask-d, .mask-d:before, .mask-d-bg {
-    background-image: url(../images/home/banner-mask-small.svg);
-}
-
-
 .mask-contain-bottom:before {
     background-size: contain;
     background-position: 50% 100%;
 }
-
-
 .nk-df-shape-x, .shape-x:after, .shape-x-bg {
-    background-image: url(../images/shape-x.png);
+    background-image: url('../images/shape-x.png');
 }
 
 
 .nk-df-shape-x-2, .shape-x-2:after, .shape-x-2-bg {
-    background-image: url(../images/shape-x-2.png);
+    background-image: url('../images/shape-x-2.png');
 }
 
 
 .nk-df-shape-x-3, .shape-x-3:after, .shape-x-3-bg {
-    background-image: url(../images/shape-x-3.png);
+    background-image: url('../images/shape-x-3.png');
 }
 
 
 .nk-df-shape-y, .shape-y:after, .shape-y-bg {
-    background-image: url(../images/home/shape-y.png);
+    background-image: url('../images/home/shape-y.png');
 }
 
 
@@ -11133,19 +11124,36 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     width: 40%;
 }
 #homeBannerMask {
-    background: url("../images/home/banner-bg.png") no-repeat right top;
+    background: url("../images/home/banner-bg-large.webp") no-repeat right top;
+}
+#homeBannerMask:before{
+    background-image: url('../images/home/banner-mask-small.svg');
+    background-position: 101% 101%;
+    right: -1px !important;
+    left: -1px !important;
+}
+#homeBannerMask:after{
+    background-image: url('../images/shape-x.png'), linear-gradient(to left, rgba(var(--blue-200-rgb), 0) 10%, rgba(var(--blue-200-rgb), .6), rgba(var(--blue-200-rgb), 1) 70%);
 }
 @media (max-width: 991px) {
-    #homeBannerMask{
-        background-position-x: 76%;
+    #homeBannerMask {
+        background: url("../images/home/banner-bg.webp") no-repeat right top;
     }
-    #homeBannerMask:before{
-    background-image: url('../images/home/banner-mask-small.svg'), linear-gradient(to left, rgba(var(--blue-200-rgb), .6) , rgba(var(--blue-200-rgb), 0.9) )
+    #homeBannerMask:after{
+        background-image: url('../images/shape-x.png'), linear-gradient(to left, rgba(var(--blue-200-rgb), .5) , rgba(var(--blue-200-rgb), .7) , rgba(var(--blue-200-rgb), .95) 70%);
     }
 }
 @media (max-width: 575px) {
     #homeBannerMask{
-        background-position-x: 76%;
+        background-position-x: 81%;
+        background-size: 283%;
+    }
+    .banner{
+        min-height: 582px !important;
+        padding-bottom: 0;
+    }
+    .banner .lead{
+        color: white !important;
     }
 }
 .about-feature-icon {
