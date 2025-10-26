@@ -11140,9 +11140,13 @@ input:-moz-placeholder, textarea:-moz-placeholder {
         background: url("../images/home/banner-bg.webp") no-repeat right top;
     }
     #homeBannerMask:after{
-        background-image: url('../images/shape-x.png'), linear-gradient(to left, rgba(var(--blue-200-rgb), .5) , rgba(var(--blue-200-rgb), .7) , rgba(var(--blue-200-rgb), .95) 70%);
+        background-image: url('../images/shape-x.png'), linear-gradient(219deg, rgb(var(--blue-200-rgb), 31%), rgb(var(--blue-200-rgb), 42%), rgba(var(--blue-200-rgb), .95) 70%)
     }
+    /*#homeBannerMask:after{
+        background-image: url('../images/shape-x.png'), linear-gradient(to left, rgba(var(--blue-200-rgb), .5) , rgba(var(--blue-200-rgb), .7) , rgba(var(--blue-200-rgb), .95) 70%);
+    }*/
 }
+
 @media (max-width: 575px) {
     #homeBannerMask{
         background-position-x: 81%;
