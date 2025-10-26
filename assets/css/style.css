@@ -11135,7 +11135,19 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 #homeBannerMask {
     background: url("../images/home/banner-bg.png") no-repeat right top;
 }
-
+@media (max-width: 991px) {
+    #homeBannerMask{
+        background-position-x: 76%;
+    }
+    #homeBannerMask:before{
+    background-image: url('../images/home/banner-mask-small.svg'), linear-gradient(to left, rgba(var(--blue-200-rgb), .6) , rgba(var(--blue-200-rgb), 0.9) )
+    }
+}
+@media (max-width: 575px) {
+    #homeBannerMask{
+        background-position-x: 76%;
+    }
+}
 .about-feature-icon {
     width: 55px;
     height: 55px;
