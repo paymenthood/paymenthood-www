@@ -1,0 +1,258 @@
+---
+layout: none
+nav_active: plugins
+title: WHMCS Module
+description: Install PaymentHood in your WHMCS in under 5 minutes. Download, upload, activate - that's it!
+---
+
+{% include header-secondary.html %}
+
+<main id="main-content">
+    <section id="download">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 order-lg-last">
+                    <div class="nk-block-img edge-r1 pb-4 pb-lg-0">
+                        <img src="assets/images/whmcs/laptop-a.webp" width="1192" height="699" alt="WHMCS in a laptop">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="nk-block-text">
+                        <p class="txt-blue-100 fs-5">PaymentHood Integration</p>
+                        <h2 class="title">WHMCS Gateway Module</h2>
+                        <p>We designed the ICO Admin panel to mange back-end of ICO Token Sales. It’s allows to mange every thing such as KYC, Users, Transaction etc.</p>
+                        <ul class="list list-check">
+                            <li><em class="fas fa-check-circle txt-green-300 fs-5 me-3"></em> Fully manage KYC application process.</li>
+                            <li><em class="fas fa-check-circle txt-green-300 fs-5 me-3"></em> Online Payment Gateway with Offline Payment option.</li>
+                            <li><em class="fas fa-check-circle txt-green-300  fs-5 me-3"></em> Manage Stage &amp; each stage pricing and bonus option.</li>
+                        </ul>
+                        <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+                            <a href="#" class="vh-btn btn-green-300 no-change px-5">
+                                <i class="fas fa-download me-3 fs-5"></i>
+                                <span class="fs-5">Download Now</span>
+                            </a>
+                            <p class="mb-0" style="font-size: 15px">
+                                <strong>Version:</strong>
+                                <span class="bg-blue-100 bg-opacity-25 txt-blue-100 px-2 py-1 rounded-2" style="font-size: 14px">1.2.0</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <h2 class="animated" data-animate="fadeInUp" data-delay=".2">Visual Installation Guide</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">Follow these simple steps with visual guidance to install PaymentHood in your WHMCS.</p>
+            </div>
+
+            <div class="installation-section-space">
+                <div class="row align-items-center justify-content-lg-between justify-content-center">
+                    <div class="col-lg-5 col-mb-10">
+                        <div class="gfx-re-lgl py-5 py-lg-0 animated" data-animate="fadeInUp" data-delay="0.1">
+                            <div class="gfx-round-bg after"></div>
+                            <img src="assets/images/whmcs/inetgartionList.png" width="1862" height="667" alt="app">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-mb-10">
+                        <div class="nk-block-text animated" data-animate="fadeInUp" data-delay="0.2">
+                            <span class="display-1 fw-bold txt-blue-100 opacity-50">1</span>
+                            <h3 class="mb-4">Access Apps & Integration</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <i class="fas fa-check txt-blue-100 me-3"></i>
+                                    <span>Download the PaymentHood plugin and upload it.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check txt-blue-100 me-3"></i>
+                                    <span>Navigate to the Apps & Integration section in WHMCS.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="installation-section-space">
+                <div class="row align-items-center justify-content-lg-between justify-content-center">
+                    <div class="col-lg-6 col-mb-10">
+                        <div class="nk-block-text animated" data-animate="fadeInUp" data-delay="0.2">
+                            <span class="display-1 fw-bold txt-blue-100 opacity-50">2</span>
+                            <h3 class="mb-4">Select PaymentHood Gateway</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <i class="fas fa-check txt-blue-100 me-3"></i>
+                                    <span>Download the PaymentHood plugin and upload it.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check txt-blue-100 me-3"></i>
+                                    <span>Navigate to the Apps & Integration section in WHMCS.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-mb-10">
+                        <div class="gfx-re-lgl py-5 py-lg-0 animated" data-animate="fadeInUp" data-delay="0.1">
+                            <div class="gfx-round-bg after"></div>
+                            <img src="assets/images/whmcs/select-paymenthood-gateway.png" width="1122" height="566" alt="app">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Installation Guide -->
+    <section class="d-none installation-guide" id="installation">
+        <div class="container">
+            <div class="installation-steps">
+                <div class="step-item visual-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Download & Upload Plugin Files</h3>
+                        <p>Download the PaymentHood plugin and upload the files to your WHMCS installation directory.</p>
+                        <div class="step-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Extract the downloaded ZIP file and upload all contents to your WHMCS root directory</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+
+                        <div class="step-note">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Navigate to: <strong>Apps & Integration</strong> to view available integrations</span>
+                        </div>
+                        <div class="step-image">
+                            <img src="images/whmcs/inetgartionList.png" alt="Integration List in WHMCS Apps & Integration" loading="lazy">
+                            <div class="image-caption">Apps & Integration list showing available services</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Select PaymentHood Gateway</h3>
+                        <p>Select PaymentHood from the available payment gateways.</p>
+                        <div class="step-image">
+                            <img src="images/whmcs/select-paymenthood-gateway.png" alt="Select PaymentHood Gateway in WHMCS" loading="lazy">
+                            <div class="image-caption">Select PaymentHood from the available gateways</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Gateway Activated Successfully</h3>
+                        <p>After pressing activate, the PaymentHood gateway is automatically activated. No action needed - continue to add the addon.</p>
+                        <div class="step-image">
+                            <img src="images/whmcs/activated-paymenthood-gateway.png" alt="Activated PaymentHood Gateway in WHMCS" loading="lazy">
+                            <div class="image-caption">PaymentHood gateway successfully activated</div>
+                        </div>
+                        <div class="step-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span>This happens automatically - no action required. Continue to the next step.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Select PaymentHood Add-on</h3>
+                        <p>Access the PaymentHood add-on from the Apps & Integration section.</p>
+                        <div class="step-note">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Navigate to: <strong>Apps & Integration</strong> to access PaymentHood add-on</span>
+                        </div>
+                        <div class="step-image">
+                            <img src="images/whmcs/select-paymenthood-addon.png" alt="Select PaymentHood Add-on in WHMCS" loading="lazy">
+                            <div class="image-caption">Find PaymentHood in the Apps & Integration section</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Configure PaymentHood Settings</h3>
+                        <p>Configure your PaymentHood integration settings including API credentials and preferences.</p>
+                        <div class="step-image">
+                            <img src="images/whmcs/configure-paymenthood-addon.png" alt="Configure PaymentHood Settings in WHMCS" loading="lazy">
+                            <div class="image-caption">Click "Save Changes" to save the configuration</div>
+                        </div>
+                        <div class="step-note">
+                            <i class="fas fa-save"></i>
+                            <span>Don't forget to click the "Save" button after entering your configuration settings.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3>Activate & Authorize PaymentHood</h3>
+                        <p>Complete the activation and authorization process to connect your WHMCS with PaymentHood.</p>
+                        <div class="step-note">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Navigate to: <strong>System Settings → Add-on Modules</strong> to access the activation section</span>
+                        </div>
+                        <div class="step-image">
+                            <img src="images/whmcs/active-paymenthood-addon.png" alt="Activate PaymentHood Add-on in WHMCS" loading="lazy">
+                        </div>
+                        <div class="authorization-flow">
+                            <div class="flow-step">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span>Click "Activate"</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Redirect to PaymentHood</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <i class="fas fa-user-check"></i>
+                                <span>Grant Authorization</span>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Return to WHMCS</span>
+                            </div>
+                        </div>
+                        <div class="step-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span>After pressing activate, you'll be redirected to PaymentHood to grant authorization. Once authorized, you'll return automatically to WHMCS.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item visual-step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h3>Installation Complete!</h3>
+                        <p>PaymentHood is now successfully activated and ready to process payments in your WHMCS.</p>
+                        <div class="step-image">
+                            <img src="images/whmcs/activated-paymenthood-addon.png" alt="PaymentHood Successfully Activated in WHMCS" loading="lazy">
+                            <div class="image-caption">PaymentHood is now active and ready to use</div>
+                        </div>
+                        <div class="success-note">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Your WHMCS is now connected to PaymentHood! Define your bank account in the PaymentHood system and start processing payments.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% include footer.html %}

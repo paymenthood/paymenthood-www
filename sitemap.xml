@@ -4,76 +4,58 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+    <!-- Note: Sitemaps should not include URL fragments (e.g. /#section). -->
+
     <!-- Homepage -->
     <url>
-        <loc>https://www.paymenthood.com/</loc>
-    <lastmod>2025-09-30</lastmod>
+        <loc>{{ '/' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
-    <!-- Features Section -->
+    <!-- Main pages -->
     <url>
-        <loc>https://www.paymenthood.com/#features</loc>
-    <lastmod>2025-09-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Architecture Section -->
-    <url>
-        <loc>https://www.paymenthood.com/#architecture</loc>
-    <lastmod>2025-09-30</lastmod>
+        <loc>{{ '/features.html' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
-    <!-- Providers Section -->
     <url>
-        <loc>https://www.paymenthood.com/#providers</loc>
-    <lastmod>2025-09-30</lastmod>
+        <loc>{{ '/pricing.html' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>{{ '/whmcs-plugin.html' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Pricing Section -->
     <url>
-        <loc>https://www.paymenthood.com/#pricing</loc>
-        <lastmod>2025-09-30</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-
-    <!-- Pricing Page -->
-    <url>
-        <loc>https://www.paymenthood.com/pricing.html</loc>
-        <lastmod>2025-09-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <!-- Terms of Use -->
-    <url>
-        <loc>https://www.paymenthood.com/term-of-use.html</loc>
-        <lastmod>2025-09-30</lastmod>
+        <loc>{{ '/contact-us.html' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
 
-    <!-- Privacy Policy -->
+    <!-- Legal -->
     <url>
-        <loc>https://www.paymenthood.com/privacy-policy.html</loc>
-        <lastmod>2025-09-30</lastmod>
+        <loc>{{ '/term-of-use.html' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.3</priority>
     </url>
 
-    <!-- Privacy Policy -->
     <url>
-        <loc>https://www.paymenthood.com/contact.html</loc>
-        <lastmod>2025-09-30</lastmod>
+        <loc>{{ '/privacy-policy.html' | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.3</priority>
     </url>
 
 </urlset>
