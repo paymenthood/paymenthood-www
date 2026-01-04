@@ -1,8 +1,26 @@
 # Jekyll Configuration for GitHub Pages
 title: PaymentHood
 description: Enterprise Payment Orchestration Platform | Unified API for 15+ Payment Providers
-url: "https://paymenthood.com"
+url: "https://www.paymenthood.com"
 baseurl: ""
+
+# Social Media & SEO
+logo: /assets/images/logo.png
+twitter:
+  username: paymenthood
+  card: summary_large_image
+social:
+  name: PaymentHood
+  links:
+    - https://github.com/paymenthood
+
+# Default page settings
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-image.png
+      author: PaymentHood
 
 # Build settings
 markdown: kramdown

@@ -4,19 +4,42 @@
 <head>
     <meta charset="utf-8">
     <meta name="author" content="PaymentHood!">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no viewport-fit=cover">
-    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    {% if page.noindex %}
+    <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+
+    {% seo %}
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "PaymentHood",
+      "url": "{{ site.url }}",
+      "logo": "{{ site.url }}/assets/images/logo.png",
+      "description": "{{ site.description }}",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@paymenthood.com",
+        "url": "{{ site.url }}/contact-us.html"
+      },
+      "sameAs": [
+        "https://github.com/paymenthood"
+      ]
+    }
+    </script>
+
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="../favicon.png">
-    <!-- Site Title  -->
-    <title>All-in-One Payment Integration - PaymentHood!</title>
+    <link rel="icon" href="{{ '/favicon.png' | relative_url }}" type="image/png">
+    <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
     <!-- Bundle and Base CSS -->
-    <link rel="stylesheet" href="../assets/css/vendor.bundle.css">
-
-    <link rel="stylesheet" href="../assets/css/style.css">
-
+    <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <!-- Extra CSS -->
-    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
 </head>
 
 <body class="nk-body body-wider mode-onepage">
@@ -28,9 +51,9 @@
                     <div class="header-wrap">
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
-                            <a href="../index.html" class="logo-link">
-                                <img class="logo-dark" src="../assets/images/logo.png" srcset="../assets/images/logo2x.png 2x" alt="logo">
-                                <img class="logo-light" src="../assets/images/logo-full-white.png" srcset="../assets/images/logo-full-white2x.png 2x" alt="logo">
+                            <a href="{{ '/' | relative_url }}" class="logo-link">
+                                <img class="logo-dark" src="{{ '/assets/images/logo.png' | relative_url }}" srcset="{{ '/assets/images/logo2x.png' | relative_url }} 2x" alt="logo">
+                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.png' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.png' | relative_url }} 2x" alt="logo">
                             </a>
                         </div>
                         <!-- Menu Toogle @s -->
@@ -45,7 +68,7 @@
                         <div class="header-navbar animated" data-animate="fadeInDown" data-delay=".75">
                             <nav class="header-menu" id="header-menu">
                                 <ul class="menu">
-                                    <li class="menu-item"><a class="menu-link nav-link" href="../index.html">Home</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="{{ '/' | relative_url }}">Home</a></li>
                                     <li class="d-none menu-item"><a class="menu-link nav-link" href="/features.html">Features</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/pricing.html">Pricing</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/contact-us.html">Contact Us</a></li>

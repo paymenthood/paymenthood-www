@@ -1,0 +1,99 @@
+---
+layout: none
+title: 404 - Page Not Found
+description: The page you're looking for doesn't exist.
+permalink: /404.html
+sitemap: false
+noindex: true
+---
+
+{% include header-secondary.html %}
+
+<main id="main-content">
+    <section class="section section-l bg-blue-30">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="mb-5">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                        </div>
+                        <h1 class="display-1 fw-bold txt-blue-600 mb-4">404</h1>
+                        <h2 class="h3 txt-blue-600 mb-3">Page Not Found</h2>
+                        <p class="lead txt-blue-400 mb-5">
+                            Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
+                        </p>
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="{{ '/' | relative_url }}" class="vh-btn btn-lg btn-green-300 no-change">
+                                <i class="fas fa-home me-2"></i>
+                                Back to Home
+                            </a>
+                            <a href="{{ '/contact-us.html' | relative_url }}" class="vh-btn btn-lg btn-outline-primary no-change">
+                                <i class="fas fa-envelope me-2"></i>
+                                Contact Support
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-5">
+                        <h5 class="txt-blue-600 mb-4">You might be looking for:</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <a href="{{ '/features.html' | relative_url }}" class="card text-decoration-none border-0 shadow-sm h-100 hover-lift">
+                                    <div class="card-body text-center p-4">
+                                        <i class="fas fa-star txt-blue-100 fa-2x mb-3"></i>
+                                        <h6 class="txt-blue-600 mb-2">Features</h6>
+                                        <p class="txt-blue-400 small mb-0">Explore our payment features</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ '/pricing.html' | relative_url }}" class="card text-decoration-none border-0 shadow-sm h-100 hover-lift">
+                                    <div class="card-body text-center p-4">
+                                        <i class="fas fa-tags txt-blue-100 fa-2x mb-3"></i>
+                                        <h6 class="txt-blue-600 mb-2">Pricing</h6>
+                                        <p class="txt-blue-400 small mb-0">View our pricing plans</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ '/whmcs-plugin.html' | relative_url }}" class="card text-decoration-none border-0 shadow-sm h-100 hover-lift">
+                                    <div class="card-body text-center p-4">
+                                        <i class="fas fa-plug txt-blue-100 fa-2x mb-3"></i>
+                                        <h6 class="txt-blue-600 mb-2">WHMCS Plugin</h6>
+                                        <p class="txt-blue-400 small mb-0">Download WHMCS integration</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ '/contact-us.html' | relative_url }}" class="card text-decoration-none border-0 shadow-sm h-100 hover-lift">
+                                    <div class="card-body text-center p-4">
+                                        <i class="fas fa-headset txt-blue-100 fa-2x mb-3"></i>
+                                        <h6 class="txt-blue-600 mb-2">Contact Us</h6>
+                                        <p class="txt-blue-400 small mb-0">Get in touch with our team</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
+
+{% include footer.html %}
