@@ -1,0 +1,284 @@
+---
+layout: none
+nav_active: providers
+title: Payment Providers
+description: Connect to 15+ payment providers through a single integration. Support for global, regional, and crypto gateways.
+---
+
+{% include header-secondary.html %}
+
+<style>
+  .providers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .provider-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e8ecf4;
+    box-shadow: 0 2px 8px rgba(25, 64, 176, 0.04);
+  }
+
+  .provider-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(25, 64, 176, 0.12);
+    border-color: #1940b0;
+  }
+
+  .provider-logo {
+    height: 60px;
+    width: auto;
+    max-width: 180px;
+    margin-bottom: 20px;
+    object-fit: contain;
+  }
+
+  .provider-category {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+  }
+
+  .category-global {
+    background: #e3f2fd;
+    color: #1976d2;
+  }
+
+  .category-regional {
+    background: #f3e5f5;
+    color: #7b1fa2;
+  }
+
+  .category-crypto {
+    background: #fff3e0;
+    color: #f57c00;
+  }
+
+  .provider-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    text-align: left;
+  }
+
+  .provider-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #5a6c7d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .provider-features li:before {
+    content: "✓";
+    color: #1940b0;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .section-intro {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+
+  .category-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 12px 28px;
+    border: 2px solid #e8ecf4;
+    background: #ffffff;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: #5a6c7d;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: #1940b0;
+    color: #ffffff;
+    border-color: #1940b0;
+  }
+
+  .coming-soon {
+    position: relative;
+    opacity: 0.6;
+  }
+
+  .coming-soon:after {
+    content: "Coming Soon";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff9800;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+</style>
+
+<main class="overflow-hidden">
+  <section class="section">
+    <div class="container">
+      
+      <div class="section-intro animated" data-animate="fadeInUp" data-delay=".1">
+        <h2 class="txt-blue-600 mb-4">All Payment Providers</h2>
+        <p class="lead">PaymentHood integrates with leading payment providers worldwide. Connect to global processors, regional gateways, and crypto networks through a single, unified API.</p>
+      </div>
+
+      <div class="category-filter animated" data-animate="fadeInUp" data-delay=".2">
+        <button class="filter-btn active" data-category="all">All Providers</button>
+        <button class="filter-btn" data-category="global">Global</button>
+        <button class="filter-btn" data-category="regional">Regional / Local</button>
+        <button class="filter-btn" data-category="crypto">Crypto</button>
+      </div>
+
+      <div class="providers-grid">
+        
+        <!-- PayPal -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".3" data-category="global">
+          <img src="assets/images/home/providers-icon/paypal.png" alt="PayPal" class="provider-logo">
+          <span class="provider-category category-global">Global</span>
+          <h4 class="txt-blue-600 mb-2">PayPal</h4>
+          <ul class="provider-features">
+            <li>Credit & Debit Cards</li>
+            <li>PayPal Wallet</li>
+            <li>200+ Countries</li>
+            <li>25+ Currencies</li>
+          </ul>
+        </div>
+
+        <!-- Stripe -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".35" data-category="global">
+          <img src="assets/images/home/providers-icon/stripe.png" alt="Stripe" class="provider-logo">
+          <span class="provider-category category-global">Global</span>
+          <h4 class="txt-blue-600 mb-2">Stripe</h4>
+          <ul class="provider-features">
+            <li>Cards & Digital Wallets</li>
+            <li>Bank Transfers</li>
+            <li>45+ Countries</li>
+            <li>135+ Currencies</li>
+          </ul>
+        </div>
+
+        <!-- Adyen -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".4" data-category="global">
+          <img src="assets/images/home/providers-icon/adyen.png" alt="Adyen" class="provider-logo">
+          <span class="provider-category category-global">Global</span>
+          <h4 class="txt-blue-600 mb-2">Adyen</h4>
+          <ul class="provider-features">
+            <li>Unified Commerce</li>
+            <li>250+ Payment Methods</li>
+            <li>Enterprise-Grade</li>
+            <li>Real-time Data</li>
+          </ul>
+        </div>
+
+        <!-- Braintree -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".45" data-category="global">
+          <img src="assets/images/home/providers-icon/braintree.png" alt="Braintree" class="provider-logo">
+          <span class="provider-category category-global">Global</span>
+          <h4 class="txt-blue-600 mb-2">Braintree</h4>
+          <ul class="provider-features">
+            <li>PayPal Integration</li>
+            <li>Venmo Support</li>
+            <li>Vault & Recurring</li>
+            <li>Advanced Fraud Tools</li>
+          </ul>
+        </div>
+
+        <!-- Binance -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".5" data-category="crypto">
+          <img src="assets/images/home/providers-icon/binance.png" alt="Binance" class="provider-logo">
+          <span class="provider-category category-crypto">Crypto</span>
+          <h4 class="txt-blue-600 mb-2">Binance Pay</h4>
+          <ul class="provider-features">
+            <li>100+ Cryptocurrencies</li>
+            <li>Zero Fees</li>
+            <li>Instant Settlement</li>
+            <li>Global Reach</li>
+          </ul>
+        </div>
+
+        <!-- Amazon Pay -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".55" data-category="global">
+          <img src="assets/images/home/providers-icon/amazon.png" alt="Amazon Pay" class="provider-logo">
+          <span class="provider-category category-global">Global</span>
+          <h4 class="txt-blue-600 mb-2">Amazon Pay</h4>
+          <ul class="provider-features">
+            <li>Amazon Customer Base</li>
+            <li>One-Click Checkout</li>
+            <li>Fraud Protection</li>
+            <li>Mobile Optimized</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- CTA Section -->
+      <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".9">
+        <h3 class="txt-blue-600 mb-3">Ready to Connect?</h3>
+        <p class="lead mb-4">Start accepting payments through multiple providers with a single integration.</p>
+        <a href="/whmcs-plugin.html" class="vh-btn btn-lg btn-blue-100">
+          <span>Get Started with WHMCS</span>
+          <em class="ti ti-arrow-right ps-2"></em>
+        </a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+  // Category filter functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const providerCards = document.querySelectorAll('.provider-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter cards
+        providerCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          
+          if (category === 'all' || cardCategory === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% include footer.html %}
