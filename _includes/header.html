@@ -51,6 +51,11 @@
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Light.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+
+    <!-- LCP image (home hero background) -->
+    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
+    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
+    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     
     <!-- Bundle and Base CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
