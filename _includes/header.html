@@ -44,6 +44,14 @@
     <!-- Fav Icon  -->
     <link rel="icon" href="{{ '/favicon.png' | relative_url }}" type="image/png">
     <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+    
+    <!-- Preload critical assets to reduce render-blocking -->
+    <link rel="preload" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}" as="style">
+    <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style">
+    <link rel="preload" href="{{ '/assets/fonts/Roboto-Light.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    
     <!-- Bundle and Base CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
