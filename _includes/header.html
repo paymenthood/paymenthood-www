@@ -106,8 +106,11 @@
         <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     </noscript>
 
-    <!-- Extra CSS -->
-    <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+    <!-- Preconnect to third-party origins used on this page -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://console.paymenthood.com">
+
+    <!-- theme.css is empty; removed to eliminate render-blocking request -->
 </head>
 
 <body class="nk-body body-wider mode-onepage">
