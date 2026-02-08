@@ -8,7 +8,10 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-82EW36ZEBJ');
+        gtag('config', 'G-82EW36ZEBJ', {
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false,
+        });
 
         // Load gtag.js after initial render to reduce forced reflow impact on page load.
         (function () {
