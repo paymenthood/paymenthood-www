@@ -2,8 +2,6 @@
 <html lang="en" class="js">
 
 <head>
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-82EW36ZEBJ"></script>
     <script>
@@ -48,8 +46,8 @@
     <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
     
     <!-- Preload critical assets to reduce render-blocking -->
-    <link rel="preload" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}" as="style">
-    <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style">
+    <link rel="preload" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Light.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -59,9 +57,28 @@
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     
-    <!-- Bundle and Base CSS -->
-    <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <!-- Critical CSS for LCP (hero mask) to avoid waiting on large stylesheets -->
+    <style>
+        :root{--blue-200:#1940b0;--blue-200-rgb:25,64,176;}
+        body{margin:0;}
+        .header-banner{position:relative;}
+        .banner{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:800px;padding-bottom:100px;}
+        .nk-ovm,.nk-ovm:before,.nk-ovm:after{position:absolute;top:0;right:0;bottom:0;left:0;background-repeat:no-repeat;background-size:cover;background-position:50% 50%;}
+        .nk-ovm:before,.nk-ovm:after{content:"";bottom:-1px;left:-1px;}
+        #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}") no-repeat right top;}
+        #homeBannerMask:before{background-image:url("{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}");background-size:contain;background-position:101% 101%;right:-1px!important;left:-1px!important;}
+        #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
+        @media (max-width: 991px){#homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}#homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}}
+        @media (max-width: 575px){#homeBannerMask{background-position-x:81%;background-size:283%;}}
+    </style>
+
+    <noscript>
+        <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
+        <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    </noscript>
+
+    <!-- Extra CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
 </head>
 
 <body class="nk-body body-wider mode-onepage">

@@ -170,12 +170,15 @@ NioApp = function (NioApp, $, window, document) {
 		var $is_sticky = $('.is-sticky');
         
         var stickyInit = {};
+        var _stickyScrollTop = 0;
+        var _stickyScrollTicking = false;
         
         stickyInit.hasFixed = function () {
             if ($is_sticky.exists() ) {
                 var navm = $is_sticky.offset();
-                $win.on('scroll', function(){
-                    var _top = $win.scrollTop();
+
+                var applyStickyState = function(){
+                    var _top = _stickyScrollTop;
                     if(_top > navm.top){
                         if(!$is_sticky.hasClass(_has_fixed)) {
                             $is_sticky.addClass(_has_fixed);
@@ -188,6 +191,20 @@ NioApp = function (NioApp, $, window, document) {
                             $is_sticky.removeClass(_has_fixed);
                         }
                     }
+                };
+
+                $win.on('scroll', function(){
+                    _stickyScrollTop = $win.scrollTop();
+                    if(_stickyScrollTicking) return;
+                    _stickyScrollTicking = true;
+                    window.requestAnimationFrame(function(){
+                        applyStickyState();
+                        _stickyScrollTicking = false;
+                    });
+                });
+
+                $win.on('resize', function(){
+                    navm = $is_sticky.offset();
                 });
             }
         };
@@ -356,7 +373,7 @@ NioApp = function (NioApp, $, window, document) {
 			});
         }
     };
-	NioApp.components.winLoad.push(NioApp.Util.scrollAnimation);
+    NioApp.components.docReady.push(NioApp.Util.scrollAnimation);
     
 	// Mainmenu/Nav @v1.0
 	NioApp.MainMenu = function() {
