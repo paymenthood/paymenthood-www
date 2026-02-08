@@ -2,6 +2,12 @@
 <html lang="en" class="js">
 
 <head>
+    <!-- Preconnect hints (must be early in head for maximum benefit) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://console.paymenthood.com">
+    <link rel="dns-prefetch" href="https://console.paymenthood.com">
+    
     <!-- Google tag (gtag.js) -->
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -112,12 +118,6 @@
         <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
         <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     </noscript>
-
-    <!-- Preconnect to third-party origins used on this page -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="preconnect" href="https://console.paymenthood.com">
-
-    <!-- theme.css is empty; removed to eliminate render-blocking request -->
 </head>
 
 <body class="nk-body body-wider mode-onepage">
