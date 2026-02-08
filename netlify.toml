@@ -5,16 +5,43 @@
   publish = "_site"
   command = "bundle exec jekyll build"
 
+# Enable Netlify's asset optimization
+[build.processing]
+  skip_processing = false
+[build.processing.html]
+  pretty_urls = false
+[build.processing.css]
+  bundle = false
+  minify = true
+[build.processing.js]
+  bundle = false
+  minify = true
+[build.processing.images]
+  compress = true
+
 # Cache control headers for better performance
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"
+    # Preload critical resources via Link header (Early Hints)
+    Link = '''
+      </assets/css/vendor.bundle.css>; rel=preload; as=style,
+      </assets/css/style.css>; rel=preload; as=style,
+      </assets/images/home/banner-bg-large.webp>; rel=preload; as=image; type=image/webp,
+      </assets/fonts/Roboto-Medium.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+    '''
 
 [[headers]]
   for = "/"
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"
+    Link = '''
+      </assets/css/vendor.bundle.css>; rel=preload; as=style,
+      </assets/css/style.css>; rel=preload; as=style,
+      </assets/images/home/banner-bg-large.webp>; rel=preload; as=image; type=image/webp,
+      </assets/fonts/Roboto-Medium.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+    '''
 
 [[headers]]
   for = "/assets/css/*"

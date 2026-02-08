@@ -1,13 +1,15 @@
 # PaymentHood Cache Headers Configuration
 # For Netlify, Cloudflare Pages, and similar platforms
 
-# HTML pages - 1 hour cache
+# HTML pages - 1 hour cache + Early Hints preload
 /*.html
   Cache-Control: public, max-age=3600, must-revalidate
+  Link: </assets/css/vendor.bundle.css>; rel=preload; as=style, </assets/css/style.css>; rel=preload; as=style, </assets/fonts/Roboto-Medium.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
 
 # HTML root
 /
   Cache-Control: public, max-age=3600, must-revalidate
+  Link: </assets/css/vendor.bundle.css>; rel=preload; as=style, </assets/css/style.css>; rel=preload; as=style, </assets/images/home/banner-bg-large.webp>; rel=preload; as=image; type=image/webp, </assets/fonts/Roboto-Medium.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
 
 # CSS files - 1 year cache
 /assets/css/*
