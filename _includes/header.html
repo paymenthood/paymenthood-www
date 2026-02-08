@@ -13,7 +13,7 @@
             allow_ad_personalization_signals: false,
         });
 
-        // Load gtag.js after initial render to reduce forced reflow impact on page load.
+        // Load gtag.js well after page load to avoid forced-reflow impact on LCP/interactivity.
         (function () {
             var GA_ID = 'G-82EW36ZEBJ';
             var loaded = false;
@@ -25,11 +25,18 @@
                 s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
                 document.head.appendChild(s);
             }
-
-            if ('requestIdleCallback' in window) {
-                window.requestIdleCallback(loadGtag, { timeout: 3000 });
+            function scheduleLoad() {
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(loadGtag, { timeout: 4000 });
+                } else {
+                    window.setTimeout(loadGtag, 2500);
+                }
+            }
+            // Wait until after window load, then schedule idly
+            if (document.readyState === 'complete') {
+                scheduleLoad();
             } else {
-                window.setTimeout(loadGtag, 1500);
+                window.addEventListener('load', scheduleLoad);
             }
         })();
     </script>
