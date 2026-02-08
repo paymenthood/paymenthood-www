@@ -51,6 +51,8 @@ exclude:
 # Include settings
 include:
   - _includes
+  - .htaccess
+  - _headers
 
 # Default settings
 defaults:
