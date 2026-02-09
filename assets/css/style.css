@@ -587,7 +587,7 @@ h6, .h6 {
 
 @media (min-width: 1600px) {
     .over-lg-up {
-        margin-top: -160px !important;
+        margin-top: -100px !important;
     }
 }
 
