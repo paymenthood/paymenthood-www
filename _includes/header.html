@@ -128,9 +128,14 @@
         .header-main{padding:20px 0;}
         .header-container{display:flex;align-items:center;justify-content:space-between;}
         .header-logo{display:flex;align-items:center;}
-        .header-logo img{display:block;height:57px;width:auto;transition:all .4s;aspect-ratio:228/65;}
-        .logo-dark,.is-transparent:not(.has-fixed) .logo-light{display:block;}
-        .logo-light,.is-transparent:not(.has-fixed) .logo-dark{display:none;}
+        /* Logo swap: overlap + fade to avoid scroll glitches */
+        .header-logo{--logo-h:57px;}
+        .header-logo .logo-link{position:relative;display:block;height:var(--logo-h);aspect-ratio:228/65;}
+        .header-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block!important;transition:opacity .15s linear!important;}
+        .header-logo .logo-dark{opacity:1;}
+        .header-logo .logo-light{opacity:0;}
+        .is-transparent:not(.has-fixed) .header-logo .logo-dark{opacity:0;}
+        .is-transparent:not(.has-fixed) .header-logo .logo-light{opacity:1;}
         /* Hero banner styles */
         .header-banner{position:relative;min-height:72px;}
         .banner{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:800px;padding-bottom:100px;padding-top:120px;}
@@ -146,19 +151,24 @@
         .btn-md{padding:14px 32px;}
         .fs-5{font-size:1.125rem;}
         .ps-2{padding-left:.5rem;}
-        /* Partner logos */
-        .partner-logo{display:inline-block;padding:15px 10px;}
-        .partner-logo img{max-height:50px;max-width:120px;height:auto;width:auto;display:block;}
-        .partner-list{display:flex;flex-wrap:wrap;justify-content:center;min-height:60px;margin-bottom:-15px;}
-        .partner-box{padding:15px 0;margin-bottom:30px;}
+        /* Partner logos (match site CSS to avoid layout changes) */
+        .partner-list{display:flex;flex-wrap:wrap;justify-content:center;margin-bottom:-15px;}
+        .partner-logo{padding:15px 10px;}
+        .partner-logo img{max-height:30px;max-width:100%;width:auto!important;margin-left:auto;margin-right:0;}
+        .partner-box{padding:15px 0px;margin-bottom:30px;}
         @media (min-width:576px){.partner-box{padding:15px 66px;box-shadow:0px 5px 25px rgba(25,64,176,0.1);}}
+        @media (min-width:992px){.partner-box .partner-list{justify-content:space-between;}}
         /* Background mask */
         .nk-ovm,.nk-ovm:before,.nk-ovm:after{position:absolute;top:0;right:0;bottom:0;left:0;background-repeat:no-repeat;background-size:cover;background-position:50% 50%;}
         .nk-ovm:before,.nk-ovm:after{content:"";bottom:-1px;left:-1px;}
         .mask-contain-bottom:before{background-size:contain;background-position:50% 100%;}
         .shape-x:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}");}
         .shape-x.nk-ovm:after,.shape-x.nk-ovm:before{right:0!important;}
-        #homeBannerMask{position:relative;z-index:1;}
+        /* Hero background must cover banner; avoid collapsing to 0 height */
+        #homeBannerMask{position:absolute;top:0;right:0;bottom:0;left:0;z-index:1;pointer-events:none;background:none!important;}
+        #homeBannerMask picture,#homeBannerMask img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;}
+        #homeBannerMask img{object-fit:cover;object-position:right top;z-index:0;}
+        #homeBannerMask:before,#homeBannerMask:after{z-index:1;}
         #homeBannerMask:before{background-image:url("{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}");background-size:contain;background-position:101% 101%;right:-1px!important;left:-1px!important;}
         #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
         @media (max-width:991px){
@@ -174,10 +184,10 @@
             .header-banner{min-height:98px;}
             .nk-header{min-height:98px;}
             .d-md-block{display:block!important;}
-            .header-logo img{height:65px;aspect-ratio:228/65;}
+            .header-logo{--logo-h:65px;}
         }
         @media (min-width:992px) and (max-width:1199px){
-            .header-logo img{height:58px;aspect-ratio:228/65;}
+            .header-logo{--logo-h:58px;}
         }
     </style>
 
@@ -204,8 +214,8 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
                             <a href="{{ '/' | relative_url }}" class="logo-link">
-                                <img class="logo-dark" src="{{ '/assets/images/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logo2x.webp' | relative_url }} 2x" alt="logo" width="228" height="65">
-                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.webp' | relative_url }} 2x" alt="logo" width="228" height="65">
+                                <img class="logo-dark" src="{{ '/assets/images/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logo2x.webp' | relative_url }} 2x" alt="PaymentHood" width="228" height="65" onerror="this.onerror=null;this.src='{{ '/assets/images/logo.png' | relative_url }}';this.srcset='{{ '/assets/images/logo2x.png' | relative_url }} 2x';">
+                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.webp' | relative_url }} 2x" alt="PaymentHood" width="228" height="65" onerror="this.onerror=null;this.src='{{ '/assets/images/logo-full-white.png' | relative_url }}';this.srcset='{{ '/assets/images/logo-full-white2x.png' | relative_url }} 2x';">
                             </a>
                         </div>
                         <!-- Menu Toogle @s -->
