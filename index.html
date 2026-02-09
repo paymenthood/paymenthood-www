@@ -35,7 +35,19 @@ description: Enterprise payment orchestration platform with a unified API for 15
                     </div>
                 </div>
             </div>
-            <div id="homeBannerMask" class="nk-ovm mask-d mask-contain-bottom shape-x"></div>
+            <div id="homeBannerMask" class="nk-ovm mask-d mask-contain-bottom shape-x">
+                <!-- LCP Hero Background Image - Discoverable from HTML -->
+                <picture>
+                    <source media="(min-width: 992px)" srcset="assets/images/home/banner-bg-large.webp" type="image/webp">
+                    <source media="(max-width: 991px)" srcset="assets/images/home/banner-bg.webp" type="image/webp">
+                    <img src="assets/images/home/banner-bg-large.webp" 
+                         alt="" 
+                         width="1920" 
+                         height="1080" 
+                         fetchpriority="high"
+                         style="position:absolute;top:0;right:0;width:100%;height:100%;object-fit:cover;object-position:right top;z-index:-1;">
+                </picture>
+            </div>
             <!-- Place Particle Js -->
             <!-- <div id="particles-bg" class="particles-container particles-bg"></div> -->
         </div>

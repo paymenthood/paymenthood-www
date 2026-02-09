@@ -90,8 +90,6 @@
     <link rel="preload" as="image" href="{{ '/assets/images/logo-full-white.png' | relative_url }}" type="image/png">
 
     <!-- Preload LCP images -->
-    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
-    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/paymenthood-chart.webp' | relative_url }}" type="image/webp" fetchpriority="high">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     <link rel="preload" as="image" href="{{ '/assets/images/shape-x.png' | relative_url }}" type="image/png">
@@ -157,11 +155,10 @@
         .mask-contain-bottom:before{background-size:contain;background-position:50% 100%;}
         .shape-x:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}");}
         .shape-x.nk-ovm:after,.shape-x.nk-ovm:before{right:0!important;}
-        #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}") no-repeat right top;z-index:1;}
+        #homeBannerMask{position:relative;z-index:1;}
         #homeBannerMask:before{background-image:url("{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}");background-size:contain;background-position:101% 101%;right:-1px!important;left:-1px!important;}
         #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
         @media (max-width:991px){
-            #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}
             #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}
             .nk-header{min-height:64px;}
             .title-lg{font-size:2rem;}
