@@ -128,9 +128,9 @@
         .header-main{padding:20px 0;}
         .header-container{display:flex;align-items:center;justify-content:space-between;}
         .header-logo{display:flex;align-items:center;}
-        .header-logo img{display:block;}
-        .logo-dark{width:40px;height:40px;}
-        .logo-light{width:182px;height:40px;}
+        .header-logo img{display:block;height:57px;width:auto;transition:all .4s;}
+        .logo-dark,.is-transparent:not(.has-fixed) .logo-light{display:block;}
+        .logo-light,.is-transparent:not(.has-fixed) .logo-dark{display:none;}
         /* Hero banner styles */
         .header-banner{position:relative;min-height:72px;}
         .banner{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:800px;padding-bottom:100px;padding-top:120px;}
@@ -171,6 +171,10 @@
             .header-banner{min-height:98px;}
             .nk-header{min-height:98px;}
             .d-md-block{display:block!important;}
+            .header-logo img{height:65px;}
+        }
+        @media (min-width:992px) and (max-width:1199px){
+            .header-logo img{height:58px;}
         }
     </style>
 
@@ -197,8 +201,8 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
                             <a href="{{ '/' | relative_url }}" class="logo-link">
-                                <img class="logo-dark" src="{{ '/assets/images/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logo2x.webp' | relative_url }} 2x" alt="logo" width="40" height="40">
-                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.webp' | relative_url }} 2x" alt="logo" width="182" height="40">
+                                <img class="logo-dark" src="{{ '/assets/images/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logo2x.webp' | relative_url }} 2x" alt="logo" width="228" height="65">
+                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.webp' | relative_url }} 2x" alt="logo" width="228" height="65">
                             </a>
                         </div>
                         <!-- Menu Toogle @s -->

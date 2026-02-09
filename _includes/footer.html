@@ -52,7 +52,51 @@
     </section>
 </footer>
 <!-- JavaScript -->
-<script defer src="{{ '/assets/js/jquery.bundle.js' | relative_url }}?ver=210"></script>
-<script defer src="{{ '/assets/js/scripts.min.js' | relative_url }}?ver=210"></script>
+<!-- Lazy load jQuery bundle only when needed (on scroll or interaction) -->
+<script>
+(function() {
+    var jqLoaded = false;
+    var scriptsLoaded = false;
+    
+    function loadJQuery() {
+        if (jqLoaded) return;
+        jqLoaded = true;
+        
+        var script = document.createElement('script');
+        script.src = '{{ "/assets/js/jquery.bundle.js?ver=210" | relative_url }}';
+        script.defer = true;
+        script.onload = function() {
+            loadScripts();
+        };
+        document.head.appendChild(script);
+    }
+    
+    function loadScripts() {
+        if (scriptsLoaded) return;
+        scriptsLoaded = true;
+        
+        var script = document.createElement('script');
+        script.src = '{{ "/assets/js/scripts.min.js?ver=210" | relative_url }}';
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+    
+    // Load on user interaction
+    var events = ['scroll', 'mousemove', 'touchstart', 'click'];
+    var loadOnce = function() {
+        loadJQuery();
+        events.forEach(function(event) {
+            window.removeEventListener(event, loadOnce);
+        });
+    };
+    
+    events.forEach(function(event) {
+        window.addEventListener(event, loadOnce, { passive: true, once: true });
+    });
+    
+    // Fallback: load after 3 seconds
+    setTimeout(loadJQuery, 3000);
+})();
+</script>
 </body>
 </html>
