@@ -85,6 +85,10 @@
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
+    <!-- Preload logo images to prevent CLS -->
+    <link rel="preload" as="image" href="{{ '/assets/images/logo.png' | relative_url }}" type="image/png">
+    <link rel="preload" as="image" href="{{ '/assets/images/logo-full-white.png' | relative_url }}" type="image/png">
+
     <!-- Preload LCP images -->
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
@@ -97,6 +101,13 @@
         :root{--blue-200:#1940b0;--blue-200-rgb:25,64,176;--bs-bg-opacity:1;}
         body{margin:0;}
         .bg-blue-200{background-color:rgba(var(--blue-200-rgb),var(--bs-bg-opacity));}
+        /* Reserve space for header to prevent CLS */
+        .nk-header{min-height:72px;}
+        .header-logo img{display:block;}
+        .logo-dark{width:40px;height:40px;}
+        .logo-light{width:182px;height:40px;}
+        /* Partner logos container to prevent shift */
+        .partner-logo img{max-height:50px;width:auto;height:auto;}
         .header-banner{position:relative;min-height:72px;}
         .banner{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:800px;padding-bottom:100px;}
         .nk-ovm,.nk-ovm:before,.nk-ovm:after{position:absolute;top:0;right:0;bottom:0;left:0;background-repeat:no-repeat;background-size:cover;background-position:50% 50%;}
@@ -107,9 +118,10 @@
         #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}") no-repeat right top;}
         #homeBannerMask:before{background-image:url("{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}");background-size:contain;background-position:101% 101%;right:-1px!important;left:-1px!important;}
         #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
-        @media (max-width: 991px){#homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}#homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}}
+        @media (max-width: 991px){#homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}#homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}
+        .nk-header{min-height:64px;}}
         @media (max-width: 575px){#homeBannerMask{background-position-x:81%;background-size:283%;}}
-        @media (min-width: 992px){.header-banner{min-height:98px;}}
+        @media (min-width: 992px){.header-banner{min-height:98px;}.nk-header{min-height:98px;}}
     </style>
 
     <!-- Non-render-blocking CSS using media="print" pattern -->
@@ -131,8 +143,8 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
                             <a href="{{ '/' | relative_url }}" class="logo-link">
-                                <img class="logo-dark" src="{{ '/assets/images/logo.png' | relative_url }}" srcset="{{ '/assets/images/logo2x.png' | relative_url }} 2x" alt="logo">
-                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.png' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.png' | relative_url }} 2x" alt="logo">
+                                <img class="logo-dark" src="{{ '/assets/images/logo.png' | relative_url }}" srcset="{{ '/assets/images/logo2x.png' | relative_url }} 2x" alt="logo" width="40" height="40">
+                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.png' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.png' | relative_url }} 2x" alt="logo" width="182" height="40">
                             </a>
                         </div>
                         <!-- Menu Toogle @s -->
