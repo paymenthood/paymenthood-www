@@ -62,7 +62,7 @@
       "@type": "Organization",
       "name": "PaymentHood",
       "url": "{{ site.url }}",
-      "logo": "{{ site.url }}/assets/images/logo.png",
+      "logo": "{{ site.url }}/assets/images/logo.webp",
       "description": "{{ site.description }}",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -86,7 +86,7 @@
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
     <!-- Preload logo images to prevent CLS -->
-    <link rel="preload" as="image" href="{{ '/assets/images/logo.png' | relative_url }}" type="image/png">
+    <link rel="preload" as="image" href="{{ '/assets/images/logo.webp' | relative_url }}" type="image/webp">
     <link rel="preload" as="image" href="{{ '/assets/images/logo-full-white.png' | relative_url }}" type="image/png">
 
     <!-- Preload LCP images -->
@@ -143,7 +143,7 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
                             <a href="{{ '/' | relative_url }}" class="logo-link">
-                                <img class="logo-dark" src="{{ '/assets/images/logo.png' | relative_url }}" srcset="{{ '/assets/images/logo2x.png' | relative_url }} 2x" alt="logo" width="40" height="40">
+                                <img class="logo-dark" src="{{ '/assets/images/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logo2x.webp' | relative_url }} 2x" alt="logo" width="40" height="40">
                                 <img class="logo-light" src="{{ '/assets/images/logo-full-white.png' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.png' | relative_url }} 2x" alt="logo" width="182" height="40">
                             </a>
                         </div>

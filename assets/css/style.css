@@ -11195,7 +11195,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 #providerContentWrapper {
-    background: url("../images/home/globe.png") no-repeat 90% 90%;
+    background: url("../images/home/globe.webp") no-repeat 90% 90%;
 }
 #providerListImg {
     position: absolute;
