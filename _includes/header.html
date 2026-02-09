@@ -128,7 +128,7 @@
         .header-main{padding:20px 0;}
         .header-container{display:flex;align-items:center;justify-content:space-between;}
         .header-logo{display:flex;align-items:center;}
-        .header-logo img{display:block;height:57px;width:auto;transition:all .4s;}
+        .header-logo img{display:block;height:57px;width:auto;transition:all .4s;aspect-ratio:228/65;}
         .logo-dark,.is-transparent:not(.has-fixed) .logo-light{display:block;}
         .logo-light,.is-transparent:not(.has-fixed) .logo-dark{display:none;}
         /* Hero banner styles */
@@ -147,8 +147,11 @@
         .fs-5{font-size:1.125rem;}
         .ps-2{padding-left:.5rem;}
         /* Partner logos */
-        .partner-logo{display:inline-block;margin:0 15px;}
-        .partner-logo img{max-height:50px;width:auto;height:auto;}
+        .partner-logo{display:inline-block;padding:15px 10px;}
+        .partner-logo img{max-height:50px;max-width:120px;height:auto;width:auto;display:block;}
+        .partner-list{display:flex;flex-wrap:wrap;justify-content:center;min-height:60px;margin-bottom:-15px;}
+        .partner-box{padding:15px 0;margin-bottom:30px;}
+        @media (min-width:576px){.partner-box{padding:15px 66px;box-shadow:0px 5px 25px rgba(25,64,176,0.1);}}
         /* Background mask */
         .nk-ovm,.nk-ovm:before,.nk-ovm:after{position:absolute;top:0;right:0;bottom:0;left:0;background-repeat:no-repeat;background-size:cover;background-position:50% 50%;}
         .nk-ovm:before,.nk-ovm:after{content:"";bottom:-1px;left:-1px;}
@@ -171,10 +174,10 @@
             .header-banner{min-height:98px;}
             .nk-header{min-height:98px;}
             .d-md-block{display:block!important;}
-            .header-logo img{height:65px;}
+            .header-logo img{height:65px;aspect-ratio:228/65;}
         }
         @media (min-width:992px) and (max-width:1199px){
-            .header-logo img{height:58px;}
+            .header-logo img{height:58px;aspect-ratio:228/65;}
         }
     </style>
 
