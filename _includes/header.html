@@ -96,37 +96,94 @@
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     <link rel="preload" as="image" href="{{ '/assets/images/shape-x.png' | relative_url }}" type="image/png">
     
-    <!-- Critical CSS for LCP (hero mask) - inlined to ensure immediate render -->
+    <!-- Critical CSS for LCP and above-the-fold content - inlined to ensure immediate render -->
     <style>
-        :root{--blue-200:#1940b0;--blue-200-rgb:25,64,176;--bs-bg-opacity:1;}
-        body{margin:0;}
+        :root{--blue-200:#1940b0;--blue-200-rgb:25,64,176;--blue-100:#5777f1;--bs-bg-opacity:1;--bs-white:#fff;--bs-body-font-family:Roboto,sans-serif;--bs-body-font-size:1rem;--bs-body-line-height:1.5;}
+        *,::before,::after{box-sizing:border-box;}
+        body{margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);line-height:var(--bs-body-line-height);color:#495463;background-color:#fff;-webkit-text-size-adjust:100%;}
+        h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2;}
+        h1{font-size:2.5rem;}
+        p{margin-top:0;margin-bottom:1rem;}
+        a{color:#1940b0;text-decoration:none;}
+        a:hover{color:#123088;}
+        img{max-width:100%;height:auto;vertical-align:middle;}
+        .container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
+        @media (min-width:576px){.container{max-width:540px;}}
+        @media (min-width:768px){.container{max-width:720px;}}
+        @media (min-width:992px){.container{max-width:960px;}}
+        @media (min-width:1200px){.container{max-width:1140px;}}
+        .row{display:flex;flex-wrap:wrap;margin-right:-15px;margin-left:-15px;}
+        [class*="col-"]{position:relative;width:100%;padding-right:15px;padding-left:15px;}
+        .col-lg-6{flex:0 0 50%;max-width:50%;}
+        @media (max-width:991px){.col-lg-6{flex:0 0 100%;max-width:100%;}}
+        .d-flex{display:flex!important;}
+        .d-none{display:none!important;}
+        .align-items-center{align-items:center!important;}
+        .justify-content-center{justify-content:center!important;}
+        .text-center{text-align:center!important;}
+        .text-lg-start{text-align:left!important;}
+        @media (max-width:991px){.text-lg-start{text-align:center!important;}}
+        .overflow-hidden{overflow:hidden!important;}
         .bg-blue-200{background-color:rgba(var(--blue-200-rgb),var(--bs-bg-opacity));}
-        /* Reserve space for header to prevent CLS */
-        .nk-header{min-height:72px;}
+        /* Header styles */
+        .nk-header{min-height:72px;position:relative;z-index:999;}
+        .header-main{padding:20px 0;}
+        .header-container{display:flex;align-items:center;justify-content:space-between;}
+        .header-logo{display:flex;align-items:center;}
         .header-logo img{display:block;}
         .logo-dark{width:40px;height:40px;}
         .logo-light{width:182px;height:40px;}
-        /* Partner logos container to prevent shift */
-        .partner-logo img{max-height:50px;width:auto;height:auto;}
+        /* Hero banner styles */
         .header-banner{position:relative;min-height:72px;}
-        .banner{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:800px;padding-bottom:100px;}
+        .banner{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:800px;padding-bottom:100px;padding-top:120px;}
+        .banner-caption{position:relative;z-index:2;}
+        .tc-light{color:var(--bs-white);}
+        .title{font-size:2.5rem;font-weight:700;line-height:1.2;margin-bottom:20px;}
+        .title-lg{font-size:3rem;}
+        .lead{font-size:1.125rem;opacity:.9;margin-bottom:30px;}
+        .cpn-head,.cpn-text,.cpn-action{margin-bottom:1.5rem;}
+        /* Button styles */
+        .vh-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 30px;font-size:1rem;font-weight:500;border-radius:6px;background-color:var(--blue-100);color:var(--bs-white);border:none;cursor:pointer;transition:all .3s ease;}
+        .vh-btn:hover{background-color:#4666d8;color:var(--bs-white);}
+        .btn-md{padding:14px 32px;}
+        .fs-5{font-size:1.125rem;}
+        .ps-2{padding-left:.5rem;}
+        /* Partner logos */
+        .partner-logo{display:inline-block;margin:0 15px;}
+        .partner-logo img{max-height:50px;width:auto;height:auto;}
+        /* Background mask */
         .nk-ovm,.nk-ovm:before,.nk-ovm:after{position:absolute;top:0;right:0;bottom:0;left:0;background-repeat:no-repeat;background-size:cover;background-position:50% 50%;}
         .nk-ovm:before,.nk-ovm:after{content:"";bottom:-1px;left:-1px;}
         .mask-contain-bottom:before{background-size:contain;background-position:50% 100%;}
         .shape-x:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}");}
         .shape-x.nk-ovm:after,.shape-x.nk-ovm:before{right:0!important;}
-        #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}") no-repeat right top;}
+        #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}") no-repeat right top;z-index:1;}
         #homeBannerMask:before{background-image:url("{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}");background-size:contain;background-position:101% 101%;right:-1px!important;left:-1px!important;}
         #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
-        @media (max-width: 991px){#homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}#homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}
-        .nk-header{min-height:64px;}}
-        @media (max-width: 575px){#homeBannerMask{background-position-x:81%;background-size:283%;}}
-        @media (min-width: 992px){.header-banner{min-height:98px;}.nk-header{min-height:98px;}}
+        @media (max-width:991px){
+            #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}
+            #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}
+            .nk-header{min-height:64px;}
+            .title-lg{font-size:2rem;}
+        }
+        @media (max-width:575px){
+            #homeBannerMask{background-position-x:81%;background-size:283%;}
+            .title-lg{font-size:1.75rem;}
+        }
+        @media (min-width:992px){
+            .header-banner{min-height:98px;}
+            .nk-header{min-height:98px;}
+            .d-md-block{display:block!important;}
+        }
     </style>
 
+    <!-- Preload CSS for faster loading -->
+    <link rel="preload" as="style" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
+    <link rel="preload" as="style" href="{{ '/assets/css/style.css' | relative_url }}">
+
     <!-- Non-render-blocking CSS using media="print" pattern -->
-    <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}" media="print" onload="this.media='all';this.onload=null;">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" media="print" onload="this.media='all';this.onload=null;">
     <noscript>
         <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
         <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
