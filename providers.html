@@ -10,19 +10,23 @@ description: Connect to 15+ payment providers through a single integration. Supp
 <style>
   .providers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(262px, 1fr));
+    gap: 20px;
     margin-top: 60px;
   }
 
   .provider-card {
     background: #ffffff;
     border-radius: 16px;
-    padding: 40px 30px;
+    padding: 30px 30px;
     text-align: center;
     transition: all 0.3s ease;
     border: 1px solid #e8ecf4;
     box-shadow: 0 2px 8px rgba(25, 64, 176, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
   }
 
   .provider-card:hover {
@@ -31,23 +35,18 @@ description: Connect to 15+ payment providers through a single integration. Supp
     border-color: #1940b0;
   }
 
-  .provider-logo {
-    height: 60px;
-    width: auto;
-    max-width: 180px;
-    margin-bottom: 20px;
-    object-fit: contain;
-  }
-
   .provider-category {
-    display: inline-block;
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 15px;
+    opacity: .5;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .provider-card:hover .provider-category {
+    opacity: 1;
   }
 
   .category-global {
@@ -162,96 +161,72 @@ description: Connect to 15+ payment providers through a single integration. Supp
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".3" data-category="global">
           <img src="assets/images/home/providers-icon/paypal.png" alt="PayPal" class="provider-logo">
           <span class="provider-category category-global">Global</span>
-          <ul class="provider-features">
-            <li>Credit & Debit Cards</li>
-            <li>PayPal Wallet</li>
-            <li>200+ Countries</li>
-            <li>25+ Currencies</li>
-          </ul>
         </div>
 
         <!-- Stripe -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".35" data-category="global">
           <img src="assets/images/home/providers-icon/stripe.png" alt="Stripe" class="provider-logo">
           <span class="provider-category category-global">Global</span>
-          <ul class="provider-features">
-            <li>Cards & Digital Wallets</li>
-            <li>Bank Transfers</li>
-            <li>45+ Countries</li>
-            <li>135+ Currencies</li>
-          </ul>
         </div>
 
         <!-- Adyen -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".4" data-category="global">
           <img src="assets/images/home/providers-icon/adyen.png" alt="Adyen" class="provider-logo">
           <span class="provider-category category-global">Global</span>
-          <ul class="provider-features">
-            <li>Unified Commerce</li>
-            <li>250+ Payment Methods</li>
-            <li>Enterprise-Grade</li>
-            <li>Real-time Data</li>
-          </ul>
         </div>
 
         <!-- Braintree -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".45" data-category="global">
           <img src="assets/images/home/providers-icon/braintree.png" alt="Braintree" class="provider-logo">
           <span class="provider-category category-global">Global</span>
-          <ul class="provider-features">
-            <li>PayPal Integration</li>
-            <li>Venmo Support</li>
-            <li>Vault & Recurring</li>
-            <li>Advanced Fraud Tools</li>
-          </ul>
         </div>
 
         <!-- Binance -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".5" data-category="crypto">
           <img src="assets/images/home/providers-icon/binance.png" alt="Binance" class="provider-logo">
           <span class="provider-category category-crypto">Crypto</span>
-          <ul class="provider-features">
-            <li>100+ Cryptocurrencies</li>
-            <li>Zero Fees</li>
-            <li>Instant Settlement</li>
-            <li>Global Reach</li>
-          </ul>
         </div>
 
         <!-- Amazon Pay -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".55" data-category="global">
           <img src="assets/images/home/providers-icon/amazon.png" alt="Amazon Pay" class="provider-logo">
           <span class="provider-category category-global">Global</span>
-          <ul class="provider-features">
-            <li>Amazon Customer Base</li>
-            <li>One-Click Checkout</li>
-            <li>Fraud Protection</li>
-            <li>Mobile Optimized</li>
-          </ul>
         </div>
 
         <!-- Tap -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".6" data-category="regional">
           <img src="assets/images/home/providers-icon/tap.png" alt="Tap Payments" class="provider-logo">
           <span class="provider-category category-regional">Regional / Local</span>
-          <ul class="provider-features">
-            <li>Middle East Focus</li>
-            <li>Multiple Payment Methods</li>
-            <li>Local Currency Support</li>
-            <li>Quick Integration</li>
-          </ul>
         </div>
 
         <!-- BitPay -->
         <div class="provider-card animated" data-animate="fadeInUp" data-delay=".65" data-category="crypto">
           <img src="assets/images/home/providers-icon/bitpay.png" alt="BitPay" class="provider-logo">
           <span class="provider-category category-crypto">Crypto</span>
-          <ul class="provider-features">
-            <li>Bitcoin & Crypto Payments</li>
-            <li>Fiat Settlement</li>
-            <li>Secure & Compliant</li>
-            <li>Global Acceptance</li>
-          </ul>
+        </div>
+
+        <!-- PayTabs -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".7" data-category="regional">
+          <img src="assets/images/home/providers-icon/paytabs.png" alt="PayTabs" class="provider-logo">
+          <span class="provider-category category-regional">Regional / Local</span>
+        </div>
+
+        <!-- Authorize -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".75" data-category="regional">
+          <img src="assets/images/home/providers-icon/authorize.png" alt="authorize.net" class="provider-logo">
+          <span class="provider-category category-regional">Regional / Local</span>
+        </div>
+
+        <!-- OxaPay -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".8" data-category="crypto">
+          <img src="assets/images/home/providers-icon/oxapay.png" alt="OxaPay" class="provider-logo">
+          <span class="provider-category category-crypto">Crypto</span>
+        </div>
+
+        <!-- Revolut -->
+        <div class="provider-card animated" data-animate="fadeInUp" data-delay=".85" data-category="regional">
+          <img src="assets/images/home/providers-icon/revolut.png" alt="Revolut" class="provider-logo">
+          <span class="provider-category category-regional">Regional / Local</span>
         </div>
 
       </div>
@@ -289,7 +264,7 @@ description: Connect to 15+ payment providers through a single integration. Supp
           const cardCategory = card.getAttribute('data-category');
           
           if (category === 'all' || cardCategory === category) {
-            card.style.display = 'block';
+            card.style.display = 'flex';
           } else {
             card.style.display = 'none';
           }

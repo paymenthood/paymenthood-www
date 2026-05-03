@@ -8155,44 +8155,30 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     margin-bottom: -15px;
 }
 
-
 .partner-logo {
     padding: 15px 10px;
 }
-
 
 [class*="col-"] > .partner-logo {
     padding: 0;
 }
 
-
-.partner-logo img {
-    max-height: 30px;
-    max-width: 100%;
-    width: auto !important;
-    margin-left: auto;
-    margin-right: 0;
-}
-
-
 .has-carousel .partner-logo img {
     margin-right: auto;
 }
-
 
 .partner-list-lg .partner-logo {
     padding: 20px 25px;
 }
 
-
 .partner-list-lg .partner-logo img {
     max-height: 50px;
 }
 
-
 .partner-box {
     padding: 15px 0px;
     margin-bottom: 30px;
+    box-shadow: 0px 5px 25px rgba(25, 64, 176, 0.1);
 }
 
 
@@ -8209,7 +8195,6 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
     .partner-box {
         padding: 15px 66px;
-        box-shadow: 0px 5px 25px rgba(25, 64, 176, 0.1);
     }
 }
 
@@ -11457,4 +11442,17 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 .transaction-icon img {
     max-width: 60px;
     display: inline-block !important;
+}
+.linear-slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    mask-image: linear-gradient(90deg, transparent 0, #ffffff 20%, #ffffff 80%, transparent);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#screenshotSlider>.linear-slider-items{
+    gap: 5rem;
 }
