@@ -153,8 +153,7 @@
         <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     </noscript>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16951550465">
-    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16951550465"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -162,6 +161,22 @@
 
         gtag('config', 'AW-16951550465');
     </script>
+
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-16951550465/T6rvCPrZ2a0cEIHEkJM_',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+
 </head>
 
 <body class="nk-body body-wider mode-onepage">
