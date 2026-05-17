@@ -5466,7 +5466,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 800px;
+    min-height: 850px;
     padding-bottom: 100px;
 }
 .is-transparent .banner {
@@ -5989,7 +5989,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 @media (max-width: 991px) {
     .banner {
-        min-height: 700px !important;
+        min-height: 750px !important;
         padding-bottom: 40px;
     }
 }
@@ -6004,13 +6004,17 @@ input:-moz-placeholder, textarea:-moz-placeholder {
         min-height: 650px !important;
     }
 }
-
+@media (max-width: 1200px) {
+    .banner {
+        min-height: 800px;
+        padding-bottom: 65px;
+    }
+}
 
 @media (min-width: 992px) and (max-width: 1200px) and (orientation: portrait) {
     .banner-fs {
         min-height: calc(65vh - 90px);
     }
-
     .is-transparent .banner-fs {
         min-height: 60vh;
     }
@@ -11142,7 +11146,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
         background-size: 283%;
     }
     .banner{
-        min-height: 582px !important;
+        min-height: 599px !important;
         padding-bottom: 0;
     }
     .banner .lead{
