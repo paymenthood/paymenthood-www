@@ -2,7 +2,16 @@
    whmcs-product.css  —  styles for whmcs-product.html only
    ============================================================= */
 
-/* ── Hero ─────────────────────────────────────────────────────── */
+/* ── Checkout Screenshot ──────────────────────────────────────── */
+.checkout-screenshot-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(18,24,58,.18), 0 4px 16px rgba(18,24,58,.1);
+    border: 1px solid var(--gray-200);
+    max-width: 908px;
+    margin: 0 auto;
+}
+
 .whmcs-product-hero {
     background: linear-gradient(135deg, #12183a 0%, #1940b0 60%, #16a3fe 100%);
     padding: 90px 0 70px;
@@ -69,12 +78,15 @@
     color: #fff;
 }
 .hero-visual-card .whmcs-logo-box {
-    width: 64px; height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: #fff;
     border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
+    padding: 16px 24px;
     margin-bottom: 20px;
     box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    width: 100%;
 }
 .payment-type-row {
     display: grid;
