@@ -10209,10 +10209,17 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     border-bottom: 0;
 }
 
-
-.menu-item > ul, .menu-item .menu-sub {
-    display: none;
+@media (min-width: 992px) {
+    .menu-item > ul, .menu-item .menu-sub {
+        display: none;
+    }
 }
+@media (max-width: 991px) {
+    .menu-item > ul, .menu-item .menu-sub {
+        padding-left: 15px;
+    }
+}
+
 
 
 .menu-item a {
@@ -10220,7 +10227,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     font-size: 15px;
     line-height: 18px;
     color: #415076;
-    padding: 12px 0;
+    padding: 10px 0;
     display: block;
     position: relative;
 }
@@ -10528,7 +10535,6 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
     .menu-item > a {
         font-weight: 400;
-        padding: 20px 10px;
     }
 
     .menu-drop .menu-item > a {
@@ -10544,7 +10550,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
         min-width: 215px;
         max-width: 215px;
         background: #fff;
-        padding: 15px 10px;
+        padding: 15px;
         top: 100%;
         left: 0;
         display: block !important;
@@ -10560,7 +10566,6 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     .menu-sub a {
         width: 100%;
         display: block;
-        padding: 10px 10px;
     }
 
     .menu-sub .menu-item:first-child {
@@ -10764,10 +10769,6 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
     .menu-item.has-sub > a:after {
         right: 8px;
-    }
-
-    .menu-sub a {
-        padding: 10px 15px;
     }
 
     .secondary-menu-link {
