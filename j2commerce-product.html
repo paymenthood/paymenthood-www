@@ -1,0 +1,48 @@
+---
+layout: none
+nav_active: plugins
+permalink: /j2commerce/
+title: J2Commerce Payment Gateway - Accept Payments with 15+ Providers | PaymentHood
+description: PaymentHood for J2Commerce lets your Joomla store accept one-time payments through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
+---
+
+{% include header-secondary.html %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PaymentHood J2Commerce Plugin",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Joomla 4.0+",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "{{ page.description }}",
+  "author": {
+    "@type": "Organization",
+    "name": "PaymentHood"
+  },
+  "installUrl": "{{ site.url }}/j2commerce/"
+}
+</script>
+
+<link rel="stylesheet" href="{{ '/assets/css/j2commerce-product.css' | relative_url }}">
+
+<main id="main-content">
+    {% include j2commerce-product/hero.html %}
+    {% include j2commerce-product/checkout.html %}
+    {% include j2commerce-product/stats.html %}
+    {% include j2commerce-product/payment-types.html %}
+    {% include j2commerce-product/features.html %}
+    {% include j2commerce-product/how-it-works.html %}
+    {% include j2commerce-product/providers.html %}
+    {% include j2commerce-product/why.html %}
+    {% include j2commerce-product/faq.html %}
+    {% include j2commerce-product/cta.html %}
+</main>
+
+<script src="{{ '/assets/js/j2commerce-product.js' | relative_url }}"></script>
+{% include footer.html %}

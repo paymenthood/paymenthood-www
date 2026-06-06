@@ -11543,3 +11543,120 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 #screenshotSlider>.linear-slider-items{
     gap: 5rem;
 }
+
+/* ============================================================
+   Integrations dropdown — dark themed, logo-forward, horizontal
+   Self-contained dark card so it stands out on white sections,
+   the dark hero, and the (white) mobile nav panel alike.
+   ============================================================ */
+.integrations-menu {
+    list-style: none;
+    background: #0f1f71;
+    border-radius: 14px;
+}
+.integrations-menu .menu-item {
+    border: none;
+}
+.integrations-menu-head {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .55);
+    padding: 14px 16px 8px;
+}
+.integration-link {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 12px !important;
+    border-radius: 10px;
+    transition: background .2s ease;
+}
+.integration-link:hover {
+    background: rgba(255, 255, 255, .08);
+}
+/* White tile keeps every brand logo readable on the dark card */
+.integration-logo {
+    flex: 0 0 auto;
+    width: 148px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 14px;
+    overflow: hidden;
+}
+.integration-logo img {
+    max-height: 50px;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+/* Phoca Cart's source PNG has heavy vertical whitespace — size it by
+   width and let the tile clip the empty padding so the mark reads large. */
+.integration-logo img[alt="Phoca Cart"] {
+    max-height: 100px;
+    max-width: 124px;
+}
+/* J2Commerce is a horizontal wordmark — size it by width like the others. */
+.integration-logo img[alt="J2Commerce"] {
+    max-height: 44px;
+    max-width: 130px;
+}
+.integration-desc {
+    flex: 1 1 auto;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, .72);
+}
+.integration-arrow {
+    flex: 0 0 auto;
+    margin-left: auto;
+    font-size: 15px;
+    color: #16a3fe;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+.integration-link:hover .integration-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+.integrations-menu-foot {
+    margin-top: 6px;
+    padding: 14px 16px 4px;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+.integrations-menu-foot a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #16a3fe;
+    transition: gap .2s ease;
+}
+.integrations-menu-foot a:hover {
+    gap: 10px;
+    color: #16a3fe;
+}
+
+@media (min-width: 992px) {
+    .menu-sub.integrations-menu {
+        min-width: 420px;
+        max-width: 420px;
+        padding: 10px;
+        background: #0f1f71;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, .12);
+        box-shadow: 0 26px 60px -16px rgba(8, 12, 45, .55), 0 10px 24px rgba(8, 12, 45, .28);
+    }
+    .integrations-menu .menu-sub-arrow,
+    .menu-sub.integrations-menu:before { display: none; }
+}
