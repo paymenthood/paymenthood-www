@@ -11189,7 +11189,8 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 /* END @iO */
 
 #pageHeader{
-    height: 311px;
+    min-height: 311px;
+    height: auto;
     padding: 180px 0px 90px;
     color: white;
     margin-bottom: 50px;
@@ -11198,6 +11199,23 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 #pageHeader>p{
     width: 40%;
+    max-width: 100%;
+}
+/* Tablet & mobile: the banner grows with its content and the text widens so
+   it no longer overflows the blue area into the white section below. */
+@media (max-width: 991px){
+    #pageHeader{
+        padding: 150px 24px 60px;
+    }
+    #pageHeader>p{
+        width: 100%;
+        max-width: 560px;
+    }
+}
+@media (max-width: 575px){
+    #pageHeader{
+        padding: 120px 20px 48px;
+    }
 }
 #homeBannerMask {
     background: url("../images/home/banner-bg-large.webp") no-repeat right top;
@@ -11648,13 +11666,54 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 /* In the narrow mobile nav the descriptions can't fit on one row beside the
-   logo, so hide them — show only the logos and the "View all plugins" link. */
+   logo, so hide them — show only the logos and the "View all plugins" link.
+   The logo tiles are also scaled down responsively (tablet, then phone) so
+   they don't overpower the narrow off-canvas panel. */
 @media (max-width: 991px) {
     .integrations-menu .integration-desc {
         display: none;
     }
     .integrations-menu .integration-link {
         justify-content: center;
+    }
+    /* Tablet / small-desktop off-canvas nav */
+    .integrations-menu .integration-logo {
+        width: 128px;
+        height: 56px;
+        padding: 8px 12px;
+    }
+    .integrations-menu .integration-logo img {
+        max-height: 34px;
+        max-width: 96px;
+    }
+    .integrations-menu .integration-logo img[alt="Phoca Cart"] {
+        max-height: 76px;
+        max-width: 100px;
+    }
+    .integrations-menu .integration-logo img[alt="J2Commerce"] {
+        max-height: 50px;
+        max-width: 108px;
+    }
+}
+
+/* Phones — smallest panel, scale the tiles down further */
+@media (max-width: 575px) {
+    .integrations-menu .integration-logo {
+        width: 104px;
+        height: 48px;
+        padding: 6px 10px;
+    }
+    .integrations-menu .integration-logo img {
+        max-height: 28px;
+        max-width: 80px;
+    }
+    .integrations-menu .integration-logo img[alt="Phoca Cart"] {
+        max-height: 62px;
+        max-width: 84px;
+    }
+    .integrations-menu .integration-logo img[alt="J2Commerce"] {
+        max-height: 42px;
+        max-width: 90px;
     }
 }
 
