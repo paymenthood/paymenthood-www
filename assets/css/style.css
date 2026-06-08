@@ -11647,6 +11647,17 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     color: #16a3fe;
 }
 
+/* In the narrow mobile nav the descriptions can't fit on one row beside the
+   logo, so hide them — show only the logos and the "View all plugins" link. */
+@media (max-width: 991px) {
+    .integrations-menu .integration-desc {
+        display: none;
+    }
+    .integrations-menu .integration-link {
+        justify-content: center;
+    }
+}
+
 @media (min-width: 992px) {
     .menu-sub.integrations-menu {
         min-width: 420px;
