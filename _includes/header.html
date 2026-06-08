@@ -80,13 +80,9 @@
         @media (min-width: 992px){.header-banner{min-height:98px;}}
     </style>
 
-    <!-- Non-render-blocking CSS using media="print" pattern -->
-    <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
-        <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    </noscript>
+    <!-- Render-blocking CSS so the page paints fully styled on first frame (prevents FOUC) -->
+    <link rel="stylesheet" href="{{ '/assets/css/vendor.bundle.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
 </head>
 
