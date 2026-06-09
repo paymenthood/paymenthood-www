@@ -1,0 +1,250 @@
+---
+layout: none
+nav_active: plugins
+permalink: /virtuemart/installation/
+title: VirtueMart Payment Gateway Plugin - Installation Guide | PaymentHood
+description: Install the PaymentHood payment gateway in your VirtueMart Joomla store in minutes. Download, install, connect - start accepting payments through 15+ providers instantly.
+---
+
+{% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/virtuemart-product.css' | relative_url }}">
+<style>
+    .vm-install-hero {
+        background: #fff;
+        padding: 80px 0 60px;
+    }
+    .vm-install-hero h1,
+    .vm-install-hero p,
+    .vm-install-hero .lead {
+        color: #1a1a1a !important;
+    }
+    .vm-install-hero .logo-wrap {
+        background: #fff;
+        border: 1px solid #e8ecf4;
+        border-radius: 18px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(25, 64, 176, .08);
+        display: inline-block;
+    }
+</style>
+
+<main id="main-content">
+
+    <!-- Hero Section -->
+    <section class="vm-install-hero tc-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="mb-3">
+                        <span class="plugin-hero-badge animated" data-animate="fadeInUp" data-delay=".1">
+                            <i class="fab fa-joomla me-1"></i> VirtueMart Integration
+                        </span>
+                    </div>
+                    <h1 class="display-4 fw-bold mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+                        PaymentHood for VirtueMart
+                    </h1>
+                    <p class="lead mb-4 animated" data-animate="fadeInUp" data-delay=".3">
+                        Accept payments through 15+ providers with a single plugin. Install it on your Joomla / VirtueMart store, connect your account, and start processing payments in minutes.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 align-items-center animated" data-animate="fadeInUp" data-delay=".4">
+                        <a href="https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip"
+                           class="vh-btn btn-xl btn-green-300 no-change">
+                            <i class="fas fa-download me-2"></i>
+                            Download Plugin
+                        </a>
+                        <a href="https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart"
+                           target="_blank" rel="noopener"
+                           class="vh-btn btn-xl btn-outline-light no-change">
+                            <i class="fab fa-github me-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                    <div class="mt-4 d-flex align-items-center gap-3 flex-wrap animated" data-animate="fadeInUp" data-delay=".5">
+                        <span class="badge bg-white text-dark px-3 py-2">
+                            <i class="fas fa-star text-warning"></i> Free Plugin
+                        </span>
+                        <span class="badge bg-white text-dark px-3 py-2">
+                            <strong>Joomla 4.0+ / VirtueMart 4</strong>
+                        </span>
+                        <span class="badge bg-white text-dark px-3 py-2">
+                            <i class="fas fa-bolt text-primary"></i> 5-Minute Setup
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5 mt-5 mt-lg-0 text-center animated" data-animate="fadeInRight" data-delay=".3">
+                    <span class="logo-wrap">
+                        <img src="{{ '/assets/images/virtuemart/virtuemart-logo.png' | relative_url }}" class="img-fluid" alt="VirtueMart" style="max-width:280px;">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide -->
+    <section class="section bg-blue-30">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-head text-center mb-5">
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Installation Guide</h2>
+                        <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">Follow these steps to install PaymentHood in your VirtueMart store</p>
+                    </div>
+
+                    <!-- Step 1: Download -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".2">
+                        <span class="step-number">1</span>
+                        <h4 class="txt-blue-600 mb-3">Download the Plugin</h4>
+                        <p class="txt-blue-400 mb-3">Download the latest PaymentHood plugin for VirtueMart from our GitHub repository. It is a standard Joomla extension package (<code>.zip</code>) — no build steps or extra dependencies required.</p>
+                        <a href="https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip"
+                           class="vh-btn btn-green-300 no-change">
+                            <i class="fas fa-download me-2"></i>
+                            Download Plugin
+                        </a>
+                        <div class="info-box mt-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Tip:</strong> This link always serves the newest release, so you get the latest features and security updates every time.
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Upload & Install -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".3">
+                        <span class="step-number">2</span>
+                        <h4 class="txt-blue-600 mb-3">Upload &amp; Install in Joomla</h4>
+                        <p class="txt-blue-400 mb-3">Log in to your Joomla administrator and go to <strong>Extensions → Install</strong>. On the <strong>Upload Package File</strong> tab, drag &amp; drop the ZIP you downloaded (or click <em>Or browse for file</em>). Joomla installs it in seconds and shows <em>“Installation of the plugin was successful.”</em></p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/1.png' | relative_url }}" alt="Joomla Extensions Install — Upload Package File, installation successful" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirm installed & enabled -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".4">
+                        <span class="step-number">3</span>
+                        <h4 class="txt-blue-600 mb-3">Confirm the Plugin is Installed</h4>
+                        <p class="txt-blue-400 mb-3">Go to <strong>Extensions → Manage</strong> and search for <strong>“VirtueMart - PaymentHood”</strong>. You should see it listed as a <strong>Site Plugin</strong> in the <code>vmpayment</code> folder, by Paymenthood, and <strong>enabled</strong>.</p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/2.png' | relative_url }}" alt="Joomla Extensions Manage — VirtueMart PaymentHood plugin enabled" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Open the plugin -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".5">
+                        <span class="step-number">4</span>
+                        <h4 class="txt-blue-600 mb-3">Open the PaymentHood Plugin</h4>
+                        <p class="txt-blue-400 mb-3">Go to <strong>System → Plugins</strong>, search for <strong>“VM Payment - Paymenthood”</strong> (type <code>vmpayment</code>, element <code>paymenthood</code>), and click the plugin name to open its settings.</p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/3.png' | relative_url }}" alt="Joomla Plugins list — open VM Payment - Paymenthood" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Configure & connect (with localhost webhook warning) -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".6">
+                        <span class="step-number">5</span>
+                        <h4 class="txt-blue-600 mb-3">Configure &amp; Connect Your Account</h4>
+                        <p class="txt-blue-400 mb-3">Set the <strong>Display name</strong> shown to customers at checkout (e.g. <em>PaymentHood</em>) and turn on <strong>Sandbox mode</strong> while you are testing. Then click <strong>Connect to Paymenthood</strong> to link your account.</p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/4.png' | relative_url }}" alt="VirtueMart PaymentHood settings — connect account and localhost webhook warning" loading="lazy">
+                        </div>
+                        <div class="warning-box mt-3">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Running on localhost? Webhooks can’t reach your machine.</strong>
+                            If your Joomla site runs on a <strong>localhost / private network URL</strong>, PaymentHood’s webhook notifications cannot be delivered to your computer, so <strong>payment status updates will not be received</strong>. To receive webhooks, deploy your store to a <strong>public domain</strong>, or expose your local site with a tunnel such as <strong>Cloudflare Tunnel</strong> or <strong>ngrok</strong> — the plugin links to our Cloudflare Tunnel guide right in this warning.
+                        </div>
+                        <div class="info-box mt-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>On a public domain</strong> you won’t see the warning above — the account panel goes straight to the <strong>Connect to Paymenthood</strong> action.
+                        </div>
+                        <div class="screenshot-container mt-3">
+                            <img src="{{ '/assets/images/virtuemart/5.png' | relative_url }}" alt="VirtueMart PaymentHood settings on a public domain — no webhook warning" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Complete Sandbox / Live setup -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".7">
+                        <span class="step-number">6</span>
+                        <h4 class="txt-blue-600 mb-3">Complete Your Sandbox &amp; Live Setup</h4>
+                        <p class="txt-blue-400 mb-3">Once connected, the panel shows <strong>“PaymentHood is connected”</strong> with two environments — <strong>Sandbox</strong> (for trial transactions) and <strong>Live</strong> (for real payments). Click <strong>Complete Setup</strong> on an environment to be taken to the PaymentHood Console to configure it.</p>
+                        <div class="warning-box">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            <strong>Our strong recommendation:</strong> set up your <strong>Sandbox</strong> environment and test the full checkout before switching to <strong>Live</strong>.
+                        </div>
+                        <div class="screenshot-container mt-3">
+                            <img src="{{ '/assets/images/virtuemart/6.png' | relative_url }}" alt="PaymentHood connected — complete Sandbox and Live setup" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Sandbox ready / manage gateways -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".8">
+                        <span class="step-number">7</span>
+                        <h4 class="txt-blue-600 mb-3">Add Your Payment Gateways</h4>
+                        <p class="txt-blue-400 mb-3">When an environment is configured it shows <strong>“Sandbox account is ready”</strong> (or Live). Use <strong>Manage Gateways</strong> to add and enable the providers you want — PayPal, Stripe, Authorize.net, Adyen, and more — all from your PaymentHood account.</p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/7.png' | relative_url }}" alt="PaymentHood — Sandbox ready, Manage Gateways" loading="lazy">
+                        </div>
+                        <div class="success-box mt-3">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>All set!</strong> Test thoroughly in Sandbox, then run the same <em>Complete Setup</em> for your Live environment to start accepting real payments.
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Define a VirtueMart payment method -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay=".9">
+                        <span class="step-number">8</span>
+                        <h4 class="txt-blue-600 mb-3">Define a Payment Method in VirtueMart</h4>
+                        <p class="txt-blue-400 mb-3">For PaymentHood to appear at checkout, define a payment method in the VirtueMart component. Go to <strong>VirtueMart → Shop → Payment Methods</strong> and click <strong>New</strong>. Give it a <strong>Payment Name</strong> (e.g. <em>PaymentHood</em>), set <strong>Published</strong> to <em>Yes</em>, then choose <strong>Payment Method → <code>plg_vmpayment_paymenthood</code></strong> and <strong>Save</strong>.</p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/8.png' | relative_url }}" alt="VirtueMart — define a PaymentHood payment method" loading="lazy">
+                        </div>
+                        <div class="info-box mt-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Tip:</strong> Pick your store's <strong>Currency</strong> and assign a <strong>Shopper Group</strong> if needed — once saved, PaymentHood shows up as an option on the VirtueMart checkout.
+                        </div>
+                    </div>
+
+                    <!-- Step 9: Checkout preview (both images) -->
+                    <div class="step-card animated" data-animate="fadeInUp" data-delay="1">
+                        <span class="step-number">9</span>
+                        <h4 class="txt-blue-600 mb-3">What Your Customers See at Checkout</h4>
+                        <p class="txt-blue-400 mb-3">At checkout, shoppers select <strong>PaymentHood</strong> and confirm their purchase. They're securely redirected to PaymentHood to pay, then returned to a clear confirmation — the <em>Sandbox</em> badge shows you're still in test mode.</p>
+                        <div class="screenshot-container">
+                            <img src="{{ '/assets/images/virtuemart/checkout.png' | relative_url }}" alt="VirtueMart checkout — select PaymentHood and confirm purchase" loading="lazy">
+                        </div>
+                        <div class="screenshot-container mt-3">
+                            <img src="{{ '/assets/images/virtuemart/checkout-result.png' | relative_url }}" alt="VirtueMart — payment successful confirmation" loading="lazy">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section bg-blue-200 tc-light">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-4 animated" data-animate="fadeInUp" data-delay=".1">Ready to Get Started?</h2>
+                    <p class="lead mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+                        Download the PaymentHood VirtueMart plugin and start accepting payments in minutes.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center animated" data-animate="fadeInUp" data-delay=".3">
+                        <a href="https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip"
+                           class="vh-btn btn-xl btn-green-300 no-change">
+                            <i class="fas fa-download me-2"></i>
+                            Download Plugin
+                        </a>
+                        <a href="https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart"
+                           target="_blank" rel="noopener"
+                           class="vh-btn btn-xl btn-outline-light no-change">
+                            <i class="fab fa-github me-2"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% include footer.html %}

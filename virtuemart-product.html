@@ -1,0 +1,48 @@
+---
+layout: none
+nav_active: plugins
+permalink: /virtuemart/
+title: VirtueMart Payment Gateway - Accept Payments with 15+ Providers | PaymentHood
+description: PaymentHood for VirtueMart lets your Joomla store accept one-time payments through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
+---
+
+{% include header-secondary.html %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PaymentHood VirtueMart Plugin",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Joomla 4.0+",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "{{ page.description }}",
+  "author": {
+    "@type": "Organization",
+    "name": "PaymentHood"
+  },
+  "installUrl": "{{ site.url }}/virtuemart/"
+}
+</script>
+
+<link rel="stylesheet" href="{{ '/assets/css/virtuemart-product.css' | relative_url }}">
+
+<main id="main-content">
+    {% include virtuemart-product/hero.html %}
+    {% include virtuemart-product/checkout.html %}
+    {% include virtuemart-product/stats.html %}
+    {% include virtuemart-product/payment-types.html %}
+    {% include virtuemart-product/features.html %}
+    {% include virtuemart-product/how-it-works.html %}
+    {% include virtuemart-product/providers.html %}
+    {% include virtuemart-product/why.html %}
+    {% include virtuemart-product/faq.html %}
+    {% include virtuemart-product/cta.html %}
+</main>
+
+<script src="{{ '/assets/js/virtuemart-product.js' | relative_url }}"></script>
+{% include footer.html %}
