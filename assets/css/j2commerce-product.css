@@ -2,12 +2,14 @@
    j2commerce-product.css  —  styles for integrations/j2commerce/ only
    =============================================================
    Shared product-page components live in components.css; this
-   file sets the light-blue accent and the logo-box sizing. */
+   file sets the J2Commerce maroon-brown theme and logo-box sizing. */
 
 /* ── Theme ────────────────────────────────────────────────────── */
 #main-content {
-    --pp-accent: var(--blue-100);
-    --pp-accent-rgb: 22, 163, 254;
+    --pp-accent: #6a091b;          /* J2Commerce brand maroon (sampled from logo) */
+    --pp-accent-rgb: 106, 9, 27;
+    --pp-hero-end: #6a091b;
+    --pp-blob-rgb: 106, 9, 27;
 }
 
 /* ── Hero logo box ────────────────────────────────────────────── */

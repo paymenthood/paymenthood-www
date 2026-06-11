@@ -18,9 +18,14 @@
       logo: {src,width,height}
       hero_title_html  the styled <h1>
       checkout_image   screenshot path
-      steps            install steps [{title,text}, …] (genuinely per-platform)
+      ecosystem        ecosystem named in the default install steps ("Joomla", "WordPress")
+      install_path     admin path in the default install step ("Extensions → Manage → Install")
+      steps            custom install steps [{title,text}, …] — only when the
+                       default Download → Install → Connect flow doesn't fit (e.g. WHMCS)
 
-    OPTIONAL overrides (only when a page really differs — e.g. WHMCS):
+    OPTIONAL overrides (rarely needed — every section has a tokenised default,
+    including the subscription card + comparison table when
+    supports_subscriptions is true):
       compat_name (pill name when it isn't the platform, e.g. "Joomla"),
       hero_lead, hero_pills, card_subtitle, mini_providers, mini_more,
       checkout_heading, checkout_text, payment_heading, payment_intro,
@@ -42,7 +47,17 @@
 {%- capture d_why_heading %}Why {{ p.platform }} Stores Choose PaymentHood{% endcapture -%}
 {%- capture d_cta_heading %}Start Accepting Payments on Your {{ p.platform }} Store{% endcapture -%}
 {%- capture d_cta_text %}Free {{ p.noun }}. 15+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
-{%- capture d_steps_intro %}Three simple steps from download to accepting live payments on your {{ p.platform }} store.{% endcapture -%}
+{%- if p.steps %}{% assign steps_n = p.steps | size %}{% else %}{% assign steps_n = 3 %}{% endif -%}
+{%- case steps_n %}{% when 3 %}{% assign steps_word = 'Three' %}{% when 4 %}{% assign steps_word = 'Four' %}{% when 5 %}{% assign steps_word = 'Five' %}{% else %}{% assign steps_word = steps_n %}{% endcase -%}
+{%- capture d_steps_intro %}{{ steps_word }} simple steps from download to accepting live payments on your {{ p.store }}.{% endcapture -%}
+{%- assign ecosystem = p.ecosystem | default: p.platform -%}
+{%- if p.supports_subscriptions -%}
+{%- comment %} subscription-capable platforms get billing-centric default copy {% endcomment -%}
+{%- capture d_lead %}Accept <strong class="text-white">one-time</strong> and <strong class="text-white">recurring subscription</strong> payments through 15+ global payment providers — all from a single, free {{ p.platform }} {{ p.noun }} with zero code changes.{% endcapture -%}
+{%- capture d_subtitle %}v{{ p.version }} · One-Time & Subscriptions · 15+ Providers{% endcapture -%}
+{%- capture d_payment_intro %}{{ p.platform }} generates both one-off invoices and recurring renewal invoices. PaymentHood handles both billing models through the same {{ p.noun }} — no extra configuration, no second gateway.{% endcapture -%}
+{%- capture d_cta_text %}Free {{ p.noun }}. 15+ global providers. One-time and subscription payments. No recurring fees, no complexity.{% endcapture -%}
+{%- endif -%}
 {%- assign noun_cap = p.noun | capitalize -%}
 {%- assign compat_name = p.compat_name | default: p.platform -%}
 
@@ -187,14 +202,22 @@
         {% assign ot = p.payment_onetime %}
         {% if p.supports_subscriptions %}
         {% assign sub = p.payment_subscription %}
+        {% if ot.points %}{% assign ot_points = ot.points %}{% else %}
+            {% capture ot_points_raw %}Pay any open {{ p.platform }} invoice in one step|Works with all 15+ payment providers|Instant confirmation via secure provider callback|Invoice marked paid in {{ p.platform }} automatically|Charges in the invoice currency — multi-currency ready{% endcapture %}
+            {% assign ot_points = ot_points_raw | split: "|" %}
+        {% endif %}
+        {% if sub.points %}{% assign sub_points = sub.points %}{% else %}
+            {% capture sub_points_raw %}Renewal invoices charged automatically|Subscription agreement created securely at the provider|Supports every {{ p.platform }} billing cycle — monthly, annual, custom|Failed payments follow your {{ p.platform }} retry rules|Cancellations synced back to the provider{% endcapture %}
+            {% assign sub_points = sub_points_raw | split: "|" %}
+        {% endif %}
         <div class="row g-4 align-items-stretch">
             <div class="col-md-6">
                 <div class="ptype-card onetime">
                     <div class="ptype-header-icon onetime">🛒</div>
-                    <h3>{{ ot.title }}</h3>
-                    <p class="ptype-desc">{{ ot.desc }}</p>
+                    <h3>{{ ot.title | default: "One-Time Payments" }}</h3>
+                    <p class="ptype-desc">{% if ot.desc %}{{ ot.desc }}{% else %}Process a single charge when {{ p.audience }} pay a {{ p.platform }} invoice. They select PaymentHood at checkout and pay through your active provider — the transaction completes immediately and the invoice is marked paid automatically.{% endif %}</p>
                     <ul class="use-case-list">
-                        {% for pt in ot.points %}
+                        {% for pt in ot_points %}
                         <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>{{ pt }}</li>
                         {% endfor %}
                     </ul>
@@ -203,10 +226,10 @@
             <div class="col-md-6">
                 <div class="ptype-card subscription">
                     <div class="ptype-header-icon subscription">🔄</div>
-                    <h3>{{ sub.title }}</h3>
-                    <p class="ptype-desc">{{ sub.desc }}</p>
+                    <h3>{{ sub.title | default: "Subscription &amp; Recurring" }}</h3>
+                    <p class="ptype-desc">{% if sub.desc %}{{ sub.desc }}{% else %}Enable automatic recurring billing for any {{ p.platform }} product or service with a recurring cycle. PaymentHood creates a subscription agreement with the provider so your {{ p.audience }} are charged automatically on their billing cycle — no manual follow-up needed.{% endif %}</p>
                     <ul class="use-case-list">
-                        {% for pt in sub.points %}
+                        {% for pt in sub_points %}
                         <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>{{ pt }}</li>
                         {% endfor %}
                     </ul>
@@ -221,7 +244,7 @@
                     <h3>{{ ot.title | default: "One-Time Payment" }}</h3>
                     <p class="ptype-desc">{% if ot.desc %}{{ ot.desc }}{% else %}Let {{ p.audience }} pay once at checkout using any of the 15+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured — with full order management handled automatically by {{ p.platform }}.{% endif %}</p>
                     <ul class="use-case-list use-case-list--grid">
-                        {% assign points = ot.points | default: site.data.integrations.defaults.onetime_points %}
+                        {% if ot.points %}{% assign points = ot.points %}{% else %}{% assign points = "Physical product orders,Digital downloads,Service & booking payments,Multi-item cart checkout,Variable product purchases,Guest and account checkout" | split: "," %}{% endif %}
                         {% for pt in points %}
                         <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>{{ pt }}</li>
                         {% endfor %}
@@ -275,6 +298,7 @@
             </div>
         </div>
         <div class="row gy-4 justify-content-center">
+            {% if p.steps %}
             {% for step in p.steps %}
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
@@ -284,6 +308,29 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="col-lg-4 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">1</div>
+                    <h5>Download the {{ noun_cap }}</h5>
+                    <p>Grab the latest release from GitHub. It's a standard {{ ecosystem }} {{ p.noun }} package — no build steps, no dependencies.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">2</div>
+                    <h5>Install &amp; Enable in {{ ecosystem }}</h5>
+                    <p>Go to <em>{{ p.install_path }}</em>, upload the package, then enable the PaymentHood {{ p.noun }} — and it appears in your {{ p.platform }} payment methods.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">3</div>
+                    <h5>Connect Your PaymentHood Account</h5>
+                    <p>Paste your PaymentHood API key in the {{ p.noun }} settings, choose sandbox or live mode, and save. Your store is now ready to accept payments.</p>
+                </div>
+            </div>
+            {% endif %}
         </div>
         <div class="row justify-content-center mt-5">
             <div class="col-auto">
@@ -327,14 +374,14 @@
     </div>
 </section>
 
-{% if p.comparison %}
+{% if p.supports_subscriptions %}
 <!-- Comparison (subscription plugins only) -->
 <section class="section bg-light">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Side by Side</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ p.comparison.heading }}</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ p.comparison.heading | default: "One-Time vs. Subscription — at a Glance" }}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -342,9 +389,19 @@
                 <table class="compare-table">
                     <thead><tr><th>Feature</th><th>One-Time Payment</th><th>Subscription</th></tr></thead>
                     <tbody>
+                        {% if p.comparison.rows %}
                         {% for row in p.comparison.rows %}
                         <tr><td>{{ row.feature }}</td><td>{{ row.onetime }}</td><td>{{ row.subscription }}</td></tr>
                         {% endfor %}
+                        {% else %}
+                        <tr><td>Charge frequency</td><td>Single charge</td><td>Monthly / Annual / Custom</td></tr>
+                        <tr><td>Auto-renew</td><td><span class="check-no">✗</span> Manual</td><td><span class="check-yes">✓</span> Automatic</td></tr>
+                        <tr><td>{{ p.platform }} invoice trigger</td><td>{{ p.audience | capitalize }} pay open invoice</td><td>System-generated renewal invoice</td></tr>
+                        <tr><td>Provider agreement</td><td>Not required</td><td>Subscription created at provider</td></tr>
+                        <tr><td>Cancellation</td><td>N/A</td><td><span class="check-yes">✓</span> Synced to provider</td></tr>
+                        <tr><td>Best for</td><td>Single invoices &amp; one-off orders</td><td>Products with recurring billing cycles</td></tr>
+                        <tr><td>Supported providers</td><td><span class="check-yes">✓</span> All 15+ providers</td><td><span class="check-yes">✓</span> All 15+ providers</td></tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>
