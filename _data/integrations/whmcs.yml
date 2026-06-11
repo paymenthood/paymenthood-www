@@ -1,6 +1,14 @@
-# FAQ content for /integrations/whmcs/ — rendered by _includes/faq.html
-# (drives both the visible accordion and the FAQPage JSON-LD). Answers may
+# Structured data for the /integrations/whmcs/ pages.
+# `software` drives the SoftwareApplication JSON-LD (via _includes/software-application.html);
+# `faqs` drives the accordion + FAQPage JSON-LD (via _includes/faq.html). Answers may
 # contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
+software:
+  name: PaymentHood WHMCS Module
+  operating_system: WHMCS 7.0+
+  version: "1.2.0"
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/download/v1.2.0/paymenthood-whmcs.zip
+  release_notes: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/tag/v1.2.0
+
 faqs:
   - q: Does PaymentHood support WHMCS subscriptions / automatic payments?
     a: >-

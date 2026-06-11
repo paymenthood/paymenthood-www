@@ -1,0 +1,26 @@
+{% comment %}
+  SoftwareApplication JSON-LD for an integration product page.
+  Pass the plugin's data object as the `app` parameter, sourced from
+  _data/integrations/<slug>.yml (the `software` key on that file).
+  Required fields on `app`: name, operating_system, download_url.
+  Optional: version, release_notes.
+  Constant fields (category, free-price offer, author) are baked in here;
+  `description` comes from the page front matter and `installUrl` is derived
+  from page.url (assumes the product page lives at /integrations/<slug>/).
+{% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ include.app.name | jsonify }},
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": {{ include.app.operating_system | jsonify }},
+  {% if include.app.version %}"softwareVersion": {{ include.app.version | jsonify }},
+  {% endif %}"downloadUrl": {{ include.app.download_url | jsonify }},
+  {% if include.app.release_notes %}"releaseNotes": {{ include.app.release_notes | jsonify }},
+  {% endif %}"offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": {{ page.description | jsonify }},
+  "author": { "@type": "Organization", "name": "PaymentHood" },
+  "installUrl": "{{ site.url }}{{ page.url }}installation/"
+}
+</script>

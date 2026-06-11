@@ -6,27 +6,7 @@ title: Phoca Cart Payment Plugin - Accept Payments with 15+ Providers
 description: PaymentHood for Phoca Cart lets you accept one-time payments on your Joomla store through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
 ---
 {% include header-secondary.html %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PaymentHood Phoca Cart Plugin",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Joomla 4.0+",
-  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.PhocaCart/releases/latest/download/paymenthood-phocacart.zip",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "{{ page.description }}",
-  "author": {
-    "@type": "Organization",
-    "name": "PaymentHood"
-  },
-  "installUrl": "{{ site.url }}/integrations/phoca-cart/installation/"
-}
-</script>
+{% assign phoca_app = site.data.integrations["phoca-cart"].software %}{% include software-application.html app=phoca_app %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/phocacart-product.css' | relative_url }}">

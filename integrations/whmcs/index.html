@@ -7,28 +7,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
 ---
 
 {% include header-secondary.html %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PaymentHood WHMCS Module",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "WHMCS 7.0+",
-  "softwareVersion": "1.2.0",
-  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/download/v1.2.0/paymenthood-whmcs.zip",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "{{ page.description }}",
-  "author": {
-    "@type": "Organization",
-    "name": "PaymentHood"
-  },
-  "installUrl": "{{ site.url }}/integrations/whmcs/installation/"
-}
-</script>
+{% include software-application.html app=site.data.integrations.whmcs.software %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/whmcs-product.css' | relative_url }}">

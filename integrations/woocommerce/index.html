@@ -6,28 +6,7 @@ title: WooCommerce Payment Gateway Plugin - Accept Payments with 15+ Providers
 description: PaymentHood for WooCommerce lets you accept one-time payments through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
 ---
 {% include header-secondary.html %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PaymentHood WooCommerce Plugin",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "WordPress 5.8+ with WooCommerce 6.0+",
-  "softwareVersion": "1.0.0",
-  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/download/v1.0.0/paymenthood-woocommerce.zip",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "{{ page.description }}",
-  "author": {
-    "@type": "Organization",
-    "name": "PaymentHood"
-  },
-  "installUrl": "{{ site.url }}/integrations/woocommerce/installation/"
-}
-</script>
+{% include software-application.html app=site.data.integrations.woocommerce.software %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/woocommerce-product.css' | relative_url }}">

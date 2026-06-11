@@ -1,6 +1,12 @@
-# FAQ content for /integrations/virtuemart/ — rendered by _includes/faq.html
-# (drives both the visible accordion and the FAQPage JSON-LD). Answers may
+# Structured data for the /integrations/virtuemart/ pages.
+# `software` drives the SoftwareApplication JSON-LD (via _includes/software-application.html);
+# `faqs` drives the accordion + FAQPage JSON-LD (via _includes/faq.html). Answers may
 # contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
+software:
+  name: PaymentHood VirtueMart Plugin
+  operating_system: Joomla 4.0+
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip
+
 faqs:
   - q: Which Joomla and VirtueMart versions does the plugin support?
     a: >-

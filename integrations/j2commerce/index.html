@@ -8,27 +8,7 @@ description: PaymentHood for J2Commerce lets your Joomla store accept one-time p
 
 {% include header-secondary.html %}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PaymentHood J2Commerce Plugin",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Joomla 4.0+",
-  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.J2Commerce/releases/latest/download/paymenthood-j2commerece.zip",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "{{ page.description }}",
-  "author": {
-    "@type": "Organization",
-    "name": "PaymentHood"
-  },
-  "installUrl": "{{ site.url }}/integrations/j2commerce/installation/"
-}
-</script>
+{% include software-application.html app=site.data.integrations.j2commerce.software %}
 {% include breadcrumb.html %}
 
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">

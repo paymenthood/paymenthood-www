@@ -1,6 +1,13 @@
-# FAQ content for /integrations/woocommerce/ — rendered by _includes/faq.html
-# (drives both the visible accordion and the FAQPage JSON-LD). Answers may
+# Structured data for the /integrations/woocommerce/ pages.
+# `software` drives the SoftwareApplication JSON-LD (via _includes/software-application.html);
+# `faqs` drives the accordion + FAQPage JSON-LD (via _includes/faq.html). Answers may
 # contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
+software:
+  name: PaymentHood WooCommerce Plugin
+  operating_system: WordPress 5.8+ with WooCommerce 6.0+
+  version: "1.0.0"
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/download/v1.0.0/paymenthood-woocommerce.zip
+
 faqs:
   - q: Which WooCommerce versions does the plugin support?
     a: >-

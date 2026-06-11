@@ -8,27 +8,7 @@ description: PaymentHood for VirtueMart lets your Joomla store accept one-time p
 
 {% include header-secondary.html %}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PaymentHood VirtueMart Plugin",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Joomla 4.0+",
-  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "{{ page.description }}",
-  "author": {
-    "@type": "Organization",
-    "name": "PaymentHood"
-  },
-  "installUrl": "{{ site.url }}/integrations/virtuemart/installation/"
-}
-</script>
+{% include software-application.html app=site.data.integrations.virtuemart.software %}
 {% include breadcrumb.html %}
 
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
