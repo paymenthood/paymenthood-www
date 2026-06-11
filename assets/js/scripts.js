@@ -717,6 +717,16 @@ NioApp = function (NioApp, $, window, document) {
         NioApp.components.docReady.push(NioApp.Plugins.videoBG);
     });
     
+	// Integrations menu: on desktop, clicking the parent item opens the hub page @v1.0
+	NioApp.IntegrationsMenuLink = function() {
+		$('.integrations-menu').parent().children('.menu-toggle').on('click', function(){
+			if ($win.width() >= _navBreak) {
+				window.location.href = '/integrations/';
+			}
+		});
+	};
+	NioApp.components.docReady.push(NioApp.IntegrationsMenuLink);
+
 	return NioApp;
 }(NioApp, jQuery, window, document);
 /* END @iO */
