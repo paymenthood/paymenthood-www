@@ -42,3 +42,26 @@ faqs:
       Yes. Provider switching happens entirely in your PaymentHood dashboard. Just activate a
       different provider there — the Joomla plugin and Phoca Cart configuration remain
       unchanged.
+
+# `product` drives the whole product page via _includes/integration-product.html.
+product:
+  platform: Phoca Cart
+  store: Joomla store
+  audience: customers
+  noun: plugin
+  compat_name: Joomla                      # chip shows "Joomla 4.0+", not "Phoca Cart 4.0+"
+  compat: "4.0+"
+  version: "1.0.0"
+  badge: Phoca Cart Integration
+  supports_subscriptions: false
+  install_url: /integrations/phoca-cart/installation/
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.PhocaCart/releases/download/v1.0.0/paymenthood-phocacart.zip
+  repo: PaymentHood.Plugins.PhocaCart
+  logo: { src: /assets/images/phocacart/phocacart-logo.png }
+  hero_title_html: 'The Payment Gateway<br>Built for <span class="txt-blue-50">Joomla Stores</span>'
+  checkout_image: /assets/images/phocacart/phocacart-checkout.png
+  steps:
+    - { title: Download the Plugin, text: "Grab the latest release from GitHub. It's a standard Joomla extension package (.zip) — no build tools or extra steps required." }
+    - { title: Install via Extension Manager, text: "In your Joomla admin go to <em>Extensions → Install</em>, upload the zip and install. Then enable the PaymentHood plugin in Phoca Cart's payment settings." }
+    - { title: Connect Your PaymentHood Account, text: 'Enter your PaymentHood API key in the plugin configuration, select sandbox or live mode, save — and your Joomla store is ready to accept payments.' }
+  steps_intro: 'Three simple steps from download to accepting live payments — the standard Joomla way.'

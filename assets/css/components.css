@@ -221,25 +221,23 @@
 /* Bootstrap's .border-2 only sets --bs-border-width, which .btn ignores —
    map it to the button border variable so outline buttons get a 2px edge. */
 .btn.border-2 { --bs-btn-border-width: 2px; }
-/* Hero CTA: the wrapper shrinks to the chip row's width; the button row spans
-   that width (contributing 0 to the wrapper's own sizing) with the buttons at
-   their natural size, centered over the chips. */
+/* CTA button rows (hero + bottom banner). In the hero, .hero-cta shrinks to
+   the chip row's width and the button row spans it (contributing 0 to the
+   wrapper's own sizing) with the buttons centered over the chips. */
 .hero-cta { width: -moz-fit-content; width: fit-content; max-width: 100%; }
-.hero-cta-buttons {
+.cta-buttons {
     width: 0;
     min-width: 100%;
     justify-content: center;
 }
-.hero-cta-buttons .btn {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-}
-/* On phones, side-by-side halves get cramped (text clips), so stack the two
-   buttons full-width and ease btn-lg's 1.25rem text/weight back down. */
+/* On phones, side-by-side buttons get cramped (text clips), so stack them at
+   their natural width, centered, and ease btn-lg's 1.25rem text/weight down. */
 @media (max-width: 575.98px) {
-    .hero-cta { width: 100%; }
-    .hero-cta-buttons { flex-direction: column; }
-    .hero-cta-buttons .btn {
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cta-buttons .btn {
         --bs-btn-font-size: 1rem;
         font-weight: 500 !important;
     }

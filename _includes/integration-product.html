@@ -21,11 +21,13 @@
       steps            install steps [{title,text}, …] (genuinely per-platform)
 
     OPTIONAL overrides (only when a page really differs — e.g. WHMCS):
+      compat_name (pill name when it isn't the platform, e.g. "Joomla"),
       hero_lead, hero_pills, card_subtitle, mini_providers, mini_more,
       checkout_heading, checkout_text, payment_heading, payment_intro,
       payment_onetime{title,desc,points}, payment_subscription{title,desc,points},
-      features[…], steps_heading, steps_intro, providers_eyebrow, providers_desc,
-      why_heading, why[…], comparison{heading,rows[…]}, cta_heading, cta_text
+      features_heading, features_intro, features[…], steps_heading, steps_intro,
+      providers_eyebrow, providers_desc, why_heading, why[…],
+      comparison{heading,rows[…]}, cta_heading, cta_text
 {% endcomment %}
 {% assign p = site.data.integrations[include.slug].product %}
 {% assign faqs = site.data.integrations[include.slug].faqs %}
@@ -40,7 +42,9 @@
 {%- capture d_why_heading %}Why {{ p.platform }} Stores Choose PaymentHood{% endcapture -%}
 {%- capture d_cta_heading %}Start Accepting Payments on Your {{ p.platform }} Store{% endcapture -%}
 {%- capture d_cta_text %}Free {{ p.noun }}. 15+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
+{%- capture d_steps_intro %}Three simple steps from download to accepting live payments on your {{ p.platform }} store.{% endcapture -%}
 {%- assign noun_cap = p.noun | capitalize -%}
+{%- assign compat_name = p.compat_name | default: p.platform -%}
 
 <main id="main-content">
 
@@ -56,12 +60,12 @@
                 <h1 class="h1 fw-bold text-white mb-4">{{ p.hero_title_html }}</h1>
                 <p class="lead mb-5 hero-lead">{{ p.hero_lead | default: d_lead }}</p>
                 <div class="hero-cta mb-4">
-                <div class="hero-cta-buttons d-flex gap-3 mb-3">
-                    <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-5 rounded-pill d-inline-flex align-items-center justify-content-center">
+                <div class="cta-buttons d-flex gap-3 mb-3">
+                    <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
                         <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                         Installation Guide
                     </a>
-                    <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
+                    <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
                         <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         Download {{ noun_cap }}
                     </a>
@@ -83,7 +87,7 @@
                     {% else %}
                         <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>15+</strong>&nbsp;Providers</div>
                         <div class="hero-stat-pill"><svg class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg><strong>5 min</strong>&nbsp;Setup</div>
-                        <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg><strong>{{ p.platform }}</strong>&nbsp;{{ p.compat }}</div>
+                        <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg><strong>{{ compat_name }}</strong>&nbsp;{{ p.compat }}</div>
                     {% endif %}
                 </div>
                 </div>
@@ -97,7 +101,7 @@
             <div class="col-lg-5 mt-5 mt-lg-0">
                 <div class="hero-visual-card">
                     <div class="logo-box">
-                        <img src="{{ p.logo.src | relative_url }}" alt="{{ p.platform }}" width="{{ p.logo.width }}" height="{{ p.logo.height }}">
+                        <img src="{{ p.logo.src | relative_url }}" alt="{{ p.platform }}"{% if p.logo.width %} width="{{ p.logo.width }}" height="{{ p.logo.height }}"{% endif %}>
                     </div>
                     <div class="h5 fw-bold text-white mb-2">PaymentHood for {{ p.platform }}</div>
                     <div class="txt-white-soft small mb-3">{{ p.card_subtitle | default: d_subtitle }}</div>
@@ -235,8 +239,8 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Features</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">Everything Your {{ p.platform }} Store Needs</h2>
-                <p class="txt-blue-400 mw-narrow">One {{ p.noun }} connects your store to a world of payment options — with full native {{ p.platform }} compatibility.</p>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{% if p.features_heading %}{{ p.features_heading }}{% else %}Everything Your {{ p.platform }} Store Needs{% endif %}</h2>
+                <p class="txt-blue-400 mw-narrow">{% if p.features_intro %}{{ p.features_intro }}{% else %}One {{ p.noun }} connects your store to a world of payment options — with full native {{ p.platform }} compatibility.{% endif %}</p>
             </div>
         </div>
         <div class="feature-grid">
@@ -267,7 +271,7 @@
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">How It Works</div>
                 <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ p.steps_heading | default: "Up and Running in 5 Minutes" }}</h2>
-                {% if p.steps_intro %}<p class="txt-blue-400 mw-narrow">{{ p.steps_intro }}</p>{% endif %}
+                <p class="txt-blue-400 mw-narrow">{{ p.steps_intro | default: d_steps_intro }}</p>
             </div>
         </div>
         <div class="row gy-4 justify-content-center">
@@ -283,7 +287,7 @@
         </div>
         <div class="row justify-content-center mt-5">
             <div class="col-auto">
-                <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-5 rounded-pill d-inline-flex align-items-center justify-content-center">
+                <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
                     <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                     View Full Installation Guide
                 </a>
@@ -359,12 +363,12 @@
                 <div class="col-lg-8">
                     <h2 class="h2 fw-bold mb-4">{{ p.cta_heading | default: d_cta_heading }}</h2>
                     <p class="mb-5 mw-narrow">{{ p.cta_text | default: d_cta_text }}</p>
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-5 rounded-pill d-inline-flex align-items-center justify-content-center">
+                    <div class="cta-buttons d-flex gap-3">
+                        <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
                             <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                             Installation Guide
                         </a>
-                        <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
+                        <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
                             <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             Download {{ noun_cap }}
                         </a>
