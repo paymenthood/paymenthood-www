@@ -53,6 +53,8 @@ plugins:
 # Exclude files from processing
 exclude:
   - README.md
+  - CLAUDE.md
+  - legals/        # raw .md sources; rendered into privacy-policy/term-of-use via include_relative
   - .gitignore
   - .git/
   - .vs/
