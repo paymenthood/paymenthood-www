@@ -1,4 +1,4 @@
-/* whmcs-product.js — FAQ accordion for whmcs-product page */
+/* product-page.js — FAQ accordion shared by all integration product pages */
 (function () {
     'use strict';
 

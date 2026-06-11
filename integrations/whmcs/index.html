@@ -7,13 +7,14 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
 ---
 
 {% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/whmcs-product.css' | relative_url }}">
 
 <main id="main-content">
 <!-- Hero -->
 <!-- ─────────────────────── HERO ─────────────────────────────── -->
-<section class="whmcs-product-hero tc-light">
-    <div class="container position-relative" style="z-index:1">
+<section class="product-hero tc-light">
+    <div class="container">
         <div class="row align-items-center gy-5">
             <div class="col-lg-6">
                 <div class="hero-badge animated" data-animate="fadeInDown" data-delay=".1">
@@ -23,8 +24,8 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
                 <h1 class="display-4 fw-bold mb-4 animated" data-animate="fadeInUp" data-delay=".15">
                     The Payment Gateway<br>Your WHMCS Deserves
                 </h1>
-                <p class="lead mb-5 animated" style="color:rgba(255,255,255,.85); max-width:520px;" data-animate="fadeInUp" data-delay=".25">
-                    Accept <strong style="color:#fff">one-time invoices</strong> and <strong style="color:#fff">recurring subscriptions</strong> through 15+ global payment providers — all from a single, free WHMCS module with zero code changes.
+                <p class="lead mb-5 hero-lead animated" data-animate="fadeInUp" data-delay=".25">
+                    Accept <strong class="text-white">one-time invoices</strong> and <strong class="text-white">recurring subscriptions</strong> through 15+ global payment providers — all from a single, free WHMCS module with zero code changes.
                 </p>
                 <div class="d-flex flex-wrap gap-3 mb-5 animated" data-animate="fadeInUp" data-delay=".35">
                     <a href="/integrations/whmcs/installation/" class="vh-btn btn-xl btn-green-300 no-change">
@@ -39,16 +40,16 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
                 </div>
                 <div class="d-flex flex-wrap gap-3 animated" data-animate="fadeInUp" data-delay=".45">
                     <span class="hero-stat-pill"><i class="fas fa-check-circle text-success me-1"></i> <strong>Free &amp; Open Source</strong></span>
-                    <span class="hero-stat-pill"><i class="fas fa-bolt me-1" style="color:#ffd700"></i> <strong>5-min Setup</strong></span>
-                    <span class="hero-stat-pill"><i class="fas fa-shield-alt me-1" style="color:#7ee8a2"></i> <strong>WHMCS 7.0+</strong></span>
+                    <span class="hero-stat-pill"><i class="fas fa-bolt me-1 text-warning"></i> <strong>5-min Setup</strong></span>
+                    <span class="hero-stat-pill"><i class="fas fa-shield-alt me-1 text-success"></i> <strong>WHMCS 7.0+</strong></span>
                 </div>
             </div>
             <div class="col-lg-5 offset-lg-1 animated" data-animate="fadeInRight" data-delay=".2">
                 <div class="hero-visual-card">
-                    <div class="whmcs-logo-box">
-                        <img src="{{ '/assets/images/whmcs/whmcs-logo.png' | relative_url }}" alt="WHMCS" width="284" height="177" style="display:block;">
+                    <div class="logo-box">
+                        <img src="{{ '/assets/images/whmcs/whmcs-logo.png' | relative_url }}" alt="WHMCS" width="284" height="177">
                     </div>
-                    <p class="fw-bold mb-4" style="color:#fff;font-size:1.05rem">PaymentHood × WHMCS</p>
+                    <p class="fw-bold mb-4">PaymentHood × WHMCS</p>
                     <div class="payment-type-row">
                         <div class="payment-type-item">
                             <div class="ptype-icon">💳</div>
@@ -85,7 +86,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
                 <h2 class="txt-blue-600 fw-bold animated" data-animate="fadeInUp" data-delay=".15">
                     What Your Clients See at Checkout
                 </h2>
-                <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2" style="max-width:560px; margin:0 auto">
+                <p class="txt-blue-400 mw-narrow animated" data-animate="fadeInUp" data-delay=".2">
                     PaymentHood integrates directly into the WHMCS checkout flow — clients stay on your site and pay through their preferred provider without any redirects or friction.
                 </p>
             </div>
@@ -95,8 +96,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
                 <div class="checkout-screenshot-wrap">
                     <img src="{{ '/assets/images/whmcs/whmcs-checkout.png' | relative_url }}"
                          alt="WHMCS PaymentHood Checkout"
-                         width="908" height="335"
-                         style="width:100%; max-width:908px; height:auto; display:block;">
+                         width="908" height="335">
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
             </div>
             <div class="col-6 col-md-3">
                 <div class="stat-item animated" data-animate="fadeInUp" data-delay=".15">
-                    <div class="stat-number">5<span style="font-size:1.2rem">min</span></div>
+                    <div class="stat-number">5<span class="fs-5">min</span></div>
                     <div class="stat-label">Average Setup Time</div>
                 </div>
             </div>
@@ -136,12 +136,12 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
 </div>
 <!-- Payment Types -->
 <!-- ──────────────────── PAYMENT TYPES ───────────────────────── -->
-<section class="section payment-types-section">
+<section class="section bg-blue-30">
     <div class="container">
         <div class="section-head text-center mb-5">
             <p class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1">Flexible Billing</p>
             <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".15">One-Time &amp; Subscription Payments</h2>
-            <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2" style="max-width:580px;margin:0 auto">
+            <p class="txt-blue-400 mw-narrow animated" data-animate="fadeInUp" data-delay=".2">
                 WHMCS hosts sell both domain/hosting bundles and recurring managed services. PaymentHood handles both billing models seamlessly.
             </p>
         </div>
@@ -224,7 +224,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
         <div class="section-head text-center mb-5">
             <p class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1">Everything You Need</p>
             <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".15">Built for Serious WHMCS Operators</h2>
-            <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2" style="max-width:560px;margin:0 auto">
+            <p class="txt-blue-400 mw-narrow animated" data-animate="fadeInUp" data-delay=".2">
                 Every feature was designed with WHMCS hosting companies and service providers in mind.
             </p>
         </div>
@@ -339,9 +339,9 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
 <section class="providers-strip">
     <div class="container">
         <div class="section-head text-center mb-5">
-            <p class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1" style="color:var(--blue-50)">Global Coverage</p>
-            <h2 class="animated" data-animate="fadeInUp" data-delay=".15" style="color:#fff">15+ Providers. One Module.</h2>
-            <p class="animated" data-animate="fadeInUp" data-delay=".2" style="color:rgba(255,255,255,.65);max-width:520px;margin:0 auto">
+            <p class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1">Global Coverage</p>
+            <h2 class="animated" data-animate="fadeInUp" data-delay=".15">15+ Providers. One Module.</h2>
+            <p class="txt-white-soft mw-narrow animated" data-animate="fadeInUp" data-delay=".2">
                 Connect to the world's leading payment gateways without writing a single line of code. Switch providers in seconds from your PaymentHood dashboard.
             </p>
         </div>
@@ -581,7 +581,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
             <div class="row align-items-center gy-4">
                 <div class="col-lg-8">
                     <h2 class="mb-3">Ready to Power Up Your WHMCS Billing?</h2>
-                    <p class="mb-0 lead" style="color:rgba(255,255,255,.8)">
+                    <p class="mb-0 lead">
                         Download the free module, follow the 5-step guide, and start accepting one-time and subscription payments in minutes.
                     </p>
                 </div>
@@ -604,5 +604,5 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
 </section>
 </main>
 
-<script src="{{ '/assets/js/whmcs-product.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/product-page.js' | relative_url }}"></script>
 {% include footer.html %}

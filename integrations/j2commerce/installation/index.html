@@ -7,31 +7,12 @@ description: Install the PaymentHood payment gateway in your J2Commerce Joomla s
 ---
 
 {% include header-secondary.html %}
-<link rel="stylesheet" href="{{ '/assets/css/j2commerce-product.css' | relative_url }}">
-<style>
-    .j2c-install-hero {
-        background: #fff;
-        padding: 80px 0 60px;
-    }
-    .j2c-install-hero h1,
-    .j2c-install-hero p,
-    .j2c-install-hero .lead {
-        color: #1a1a1a !important;
-    }
-    .j2c-install-hero .logo-wrap {
-        background: #fff;
-        border: 1px solid #e8ecf4;
-        border-radius: 18px;
-        padding: 32px;
-        box-shadow: 0 10px 30px rgba(25, 64, 176, .08);
-        display: inline-block;
-    }
-</style>
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 
 <main id="main-content">
 
     <!-- Hero Section -->
-    <section class="j2c-install-hero tc-light">
+    <section class="install-hero tc-light">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
@@ -73,7 +54,7 @@ description: Install the PaymentHood payment gateway in your J2Commerce Joomla s
                 </div>
                 <div class="col-lg-5 mt-5 mt-lg-0 text-center animated" data-animate="fadeInRight" data-delay=".3">
                     <span class="logo-wrap">
-                        <img src="{{ '/assets/images/j2commerce/j2commerce-logo.png' | relative_url }}" class="img-fluid" alt="J2Commerce" style="max-width:280px;">
+                        <img src="{{ '/assets/images/j2commerce/j2commerce-logo.png' | relative_url }}" class="img-fluid install-hero-logo" alt="J2Commerce">
                     </span>
                 </div>
             </div>
@@ -191,8 +172,8 @@ description: Install the PaymentHood payment gateway in your J2Commerce Joomla s
                         <span class="step-number">8</span>
                         <h4 class="txt-blue-600 mb-3">What Your Customers See at Checkout</h4>
                         <p class="txt-blue-400 mb-3">At checkout, shoppers select <strong>PaymentHood</strong>, choose their preferred provider, and are securely redirected to PaymentHood to complete payment. The <em>Sandbox</em> badge confirms you are still in test mode.</p>
-                        <div class="screenshot-container" style="background:transparent; box-shadow:none; border:none; padding:0;">
-                            <img src="{{ '/assets/images/j2commerce/checkout.png' | relative_url }}" alt="J2Commerce checkout — PaymentHood payment method" loading="lazy" style="max-width:380px; width:100%; height:auto; display:block; margin:0 auto;">
+                        <div class="screenshot-container screenshot-container--bare">
+                            <img src="{{ '/assets/images/j2commerce/checkout.png' | relative_url }}" alt="J2Commerce checkout — PaymentHood payment method" loading="lazy">
                         </div>
                     </div>
 
