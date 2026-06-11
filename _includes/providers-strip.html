@@ -1,0 +1,33 @@
+{% comment %}
+  Supported payment gateways / providers strip — shared dark band, white logos.
+  The "+ More Providers" pill links to the full providers page.
+  Background defaults to blue-600; a page can override it by setting
+  --pp-strip-bg on #main-content in its <slug>-product.css.
+  Params (all optional):
+    eyebrow     — small uppercase label (default: "Supported Providers")
+    title       — section heading (default: "Supported Payment & Gateways Provider")
+    description — intro paragraph under the heading
+{% endcomment %}
+<section class="providers-strip">
+    <div class="container">
+        <div class="section-head text-center mb-5">
+            <p class="section-eyebrow">{{ include.eyebrow | default: "Supported Providers" }}</p>
+            <h2>{{ include.title | default: "Supported Payment & Gateways Provider" }}</h2>
+            {% if include.description %}<p class="txt-white-soft mw-narrow">{{ include.description }}</p>{% endif %}
+        </div>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 justify-content-center">
+            {% assign providers = "paypal|PayPal,stripe|Stripe,authorize|Authorize.net,adyen|Adyen,braintree|Braintree,paytabs|PayTabs,tap|Tap,oxapay|Oxapay,amazon|Amazon Pay,binance|Binance Pay,revolut|Revolut,bitpay|BitPay" | split: "," %}
+            {% for p in providers %}
+                {% assign parts = p | split: "|" %}
+                <div class="col">
+                    <div class="provider-logo-pill">
+                        <img src="{{ '/assets/images/home/providers-icon/' | append: parts[0] | append: '.png' | relative_url }}" alt="{{ parts[1] }}" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col">
+                <a href="{{ '/providers.html' | relative_url }}" class="provider-logo-pill provider-logo-pill--more">+ More Providers</a>
+            </div>
+        </div>
+    </div>
+</section>

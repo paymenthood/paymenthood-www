@@ -458,12 +458,15 @@
 }
 
 /* ── Providers strip ──────────────────────────────────────────── */
+/* Dark band — background is themeable per page via the `bg` include param
+   (defaults to the page accent, falling back to blue-600); white logos. */
 .providers-strip {
-    background: var(--blue-600);
+    background: var(--pp-strip-bg, var(--blue-600));
     padding: 56px 0;
 }
 .providers-strip .section-eyebrow { color: var(--blue-50); }
 .providers-strip h2 { color: #fff; }
+.providers-strip .txt-white-soft { color: rgba(var(--blue-50-rgb), .8); }
 .provider-logo-pill {
     background: rgba(255,255,255,.07);
     border: 1px solid rgba(255,255,255,.12);
@@ -493,7 +496,9 @@
     font-weight: 600;
     color: rgba(255,255,255,.7);
     letter-spacing: .03em;
+    text-decoration: none;
 }
+.provider-logo-pill--more:hover { color: #fff; }
 
 /* ── Why cards ────────────────────────────────────────────────── */
 .why-card {
