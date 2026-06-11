@@ -195,15 +195,54 @@
     justify-content: center;
     background: #fff;
     border-radius: 16px;
-    padding: 16px 24px;
+    padding: 28px 32px;
     margin-bottom: 20px;
     box-shadow: 0 8px 24px rgba(0,0,0,.2);
     width: 100%;
 }
 .logo-box img {
     display: block;
-    max-width: 100%;
+    width: 100%;
+    max-width: 240px;
     height: auto;
+    margin-inline: auto;
+}
+.hero-stat-pill svg { flex-shrink: 0; opacity: .85; }
+.hero-source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,.8);
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.hero-source-link:hover { color: #fff; text-decoration: underline; }
+/* Bootstrap's .border-2 only sets --bs-border-width, which .btn ignores —
+   map it to the button border variable so outline buttons get a 2px edge. */
+.btn.border-2 { --bs-btn-border-width: 2px; }
+/* Hero CTA: the wrapper shrinks to the chip row's width; the button row spans
+   that width (contributing 0 to the wrapper's own sizing) with the buttons at
+   their natural size, centered over the chips. */
+.hero-cta { width: -moz-fit-content; width: fit-content; max-width: 100%; }
+.hero-cta-buttons {
+    width: 0;
+    min-width: 100%;
+    justify-content: center;
+}
+.hero-cta-buttons .btn {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
+/* On phones, side-by-side halves get cramped (text clips), so stack the two
+   buttons full-width and ease btn-lg's 1.25rem text/weight back down. */
+@media (max-width: 575.98px) {
+    .hero-cta { width: 100%; }
+    .hero-cta-buttons { flex-direction: column; }
+    .hero-cta-buttons .btn {
+        --bs-btn-font-size: 1rem;
+        font-weight: 500 !important;
+    }
 }
 
 .payment-type-row {
@@ -258,6 +297,15 @@
     font-size: .75rem;
     color: rgba(255,255,255,.85);
     font-weight: 500;
+}
+a.provider-mini-pill--more {
+    text-decoration: none;
+    transition: background .2s, border-color .2s;
+}
+a.provider-mini-pill--more:hover {
+    background: rgba(255,255,255,.22);
+    border-color: rgba(255,255,255,.45);
+    color: #fff;
 }
 
 /* ── Stats bar ────────────────────────────────────────────────── */

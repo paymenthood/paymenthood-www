@@ -1,0 +1,9 @@
+# Shared defaults for the integration product template (_includes/integration-product.html).
+# Lists that can't be expressed as inline tokenised markup live here so every page reuses them.
+onetime_points:
+  - Physical product orders
+  - Digital downloads
+  - Service & booking payments
+  - Multi-item cart checkout
+  - Variable product purchases
+  - Guest and account checkout

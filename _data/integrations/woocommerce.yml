@@ -2,6 +2,29 @@
 # `software` drives the SoftwareApplication JSON-LD (via _includes/software-application.html);
 # `faqs` drives the accordion + FAQPage JSON-LD (via _includes/faq.html). Answers may
 # contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
+# `product` drives the whole product page via _includes/integration-product.html —
+# one shared template renders every integration from this data. See any other
+# integrations/<slug>.yml for the same shape.
+
+product:
+  platform: WooCommerce                    # display name woven through all shared copy
+  store: WordPress store                   # "on your ___"
+  audience: customers                      # customers | clients
+  noun: plugin                             # plugin | module | extension
+  compat: "6.0+"                           # hero version pill ("WooCommerce 6.0+")
+  version: "1.0.0"
+  badge: WooCommerce Integration
+  supports_subscriptions: false            # true → subscription card + comparison + recurring copy
+  install_url: /integrations/woocommerce/installation/
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/download/v1.0.0/paymenthood-woocommerce.zip
+  repo: PaymentHood.Plugins.WooCommerce     # open-source repo under github.com/paymenthood
+  logo: { src: /assets/images/woocommerce/woo-logo.png, width: 225, height: 225 }
+  hero_title_html: 'The Payment Gateway<br>Your <span class="txt-blue-50">WooCommerce Store</span><br>Deserves'
+  checkout_image: /assets/images/woocommerce/woo-checkout.png
+  steps:                                   # install flow — genuinely per platform
+    - { title: Download the Plugin, text: "Grab the latest release from GitHub. It's a standard WordPress plugin zip — no build steps, no dependencies." }
+    - { title: Upload & Activate in WordPress, text: 'Go to <em>Plugins → Add New → Upload Plugin</em>, select the zip, activate — and PaymentHood appears in your WooCommerce payment gateways list.' }
+    - { title: Connect Your PaymentHood Account, text: 'Paste your PaymentHood API key in the plugin settings, choose sandbox or live mode, and save. Your store is now ready to accept payments.' }
 software:
   name: PaymentHood WooCommerce Plugin
   operating_system: WordPress 5.8+ with WooCommerce 6.0+

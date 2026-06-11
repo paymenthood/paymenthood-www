@@ -1,0 +1,379 @@
+{% comment %}
+  Single shared template for every integration product page.
+    {% include integration-product.html slug="woocommerce" %}
+
+  Almost everything is shared and written here once, with the platform woven in
+  through a few tokens from _data/integrations/<slug>.yml → `product`:
+
+    REQUIRED per page:
+      platform        display name ...... "WooCommerce"
+      store           "your ___ store" ... "WordPress store"
+      audience        customers|clients
+      noun            plugin|module|extension
+      compat          short version pill .. "6.0+"
+      version         "1.0.0"
+      badge           hero pill text
+      supports_subscriptions   true → subscription card + comparison + recurring copy
+      install_url, download_url
+      logo: {src,width,height}
+      hero_title_html  the styled <h1>
+      checkout_image   screenshot path
+      steps            install steps [{title,text}, …] (genuinely per-platform)
+
+    OPTIONAL overrides (only when a page really differs — e.g. WHMCS):
+      hero_lead, hero_pills, card_subtitle, mini_providers, mini_more,
+      checkout_heading, checkout_text, payment_heading, payment_intro,
+      payment_onetime{title,desc,points}, payment_subscription{title,desc,points},
+      features[…], steps_heading, steps_intro, providers_eyebrow, providers_desc,
+      why_heading, why[…], comparison{heading,rows[…]}, cta_heading, cta_text
+{% endcomment %}
+{% assign p = site.data.integrations[include.slug].product %}
+{% assign faqs = site.data.integrations[include.slug].faqs %}
+
+{%- comment %} ---- tokenised shared defaults ---- {% endcomment -%}
+{%- capture d_lead %}Accept payments from 15+ global providers on your {{ p.store }} — PayPal, Stripe, Authorize.net, and more. One {{ p.noun }}. Zero complexity.{% endcapture -%}
+{%- capture d_subtitle %}v{{ p.version }} · One-Time Payments · 15+ Providers{% endcapture -%}
+{%- capture d_checkout_heading %}What Your {{ p.audience | capitalize }} See at Checkout{% endcapture -%}
+{%- capture d_checkout_text %}PaymentHood integrates directly into the {{ p.platform }} checkout flow — {{ p.audience }} stay on your site and pay through their preferred provider without any redirects or friction.{% endcapture -%}
+{%- capture d_payment_intro %}PaymentHood for {{ p.platform }} powers every standard checkout on your store — from single products to full cart orders.{% endcapture -%}
+{%- capture d_providers_desc %}Connect any of these globally trusted providers to your {{ p.platform }} store through a single PaymentHood integration.{% endcapture -%}
+{%- capture d_why_heading %}Why {{ p.platform }} Stores Choose PaymentHood{% endcapture -%}
+{%- capture d_cta_heading %}Start Accepting Payments on Your {{ p.platform }} Store{% endcapture -%}
+{%- capture d_cta_text %}Free {{ p.noun }}. 15+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
+{%- assign noun_cap = p.noun | capitalize -%}
+
+<main id="main-content">
+
+<!-- Hero -->
+<section class="product-hero tc-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="hero-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {{ p.badge }}
+                </div>
+                <h1 class="h1 fw-bold text-white mb-4">{{ p.hero_title_html }}</h1>
+                <p class="lead mb-5 hero-lead">{{ p.hero_lead | default: d_lead }}</p>
+                <div class="hero-cta mb-4">
+                <div class="hero-cta-buttons d-flex gap-3 mb-3">
+                    <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-5 rounded-pill d-inline-flex align-items-center justify-content-center">
+                        <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
+                        Installation Guide
+                    </a>
+                    <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
+                        <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download {{ noun_cap }}
+                    </a>
+                </div>
+                <div class="d-flex flex-wrap gap-3">
+                    {% if p.hero_pills %}
+                        {% for pill in p.hero_pills %}
+                        <div class="hero-stat-pill">
+                            {% case pill.icon %}
+                            {% when 'check' %}<svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            {% when 'bolt' %}<svg class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg>
+                            {% when 'shield' %}<svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg>
+                            {% when 'globe' %}<svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+                            {% when 'tag' %}<svg class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            {% endcase %}
+                            <strong>{{ pill.value }}</strong>&nbsp;{{ pill.label }}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>15+</strong>&nbsp;Providers</div>
+                        <div class="hero-stat-pill"><svg class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg><strong>5 min</strong>&nbsp;Setup</div>
+                        <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg><strong>{{ p.platform }}</strong>&nbsp;{{ p.compat }}</div>
+                    {% endif %}
+                </div>
+                </div>
+                {% if p.repo %}
+                <a href="https://github.com/paymenthood/{{ p.repo }}" class="hero-source-link" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2.1v3.1c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                    Free &amp; open source — view the {{ p.noun }} on GitHub
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="hero-visual-card">
+                    <div class="logo-box">
+                        <img src="{{ p.logo.src | relative_url }}" alt="{{ p.platform }}" width="{{ p.logo.width }}" height="{{ p.logo.height }}">
+                    </div>
+                    <div class="h5 fw-bold text-white mb-2">PaymentHood for {{ p.platform }}</div>
+                    <div class="txt-white-soft small mb-3">{{ p.card_subtitle | default: d_subtitle }}</div>
+                    {% if p.supports_subscriptions %}
+                    <div class="payment-type-row">
+                        <div class="payment-type-item">
+                            <div class="ptype-icon">💳</div>
+                            <div class="ptype-label">Support</div>
+                            <div class="ptype-title">One-Time</div>
+                        </div>
+                        <div class="payment-type-item">
+                            <div class="ptype-icon">🔄</div>
+                            <div class="ptype-label">Support</div>
+                            <div class="ptype-title">Subscription</div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="payment-type-box">
+                        <div class="ptype-icon">🛒</div>
+                        <div class="ptype-label">Supported Payment Type</div>
+                        <div class="ptype-title">One-Time Checkout</div>
+                    </div>
+                    {% endif %}
+                    <div class="provider-mini-row mt-3">
+                        {% assign minis = p.mini_providers | default: "PayPal,Stripe,Authorize.net,Adyen,Braintree,PayTabs" | split: "," %}
+                        {% for mp in minis %}
+                        <span class="provider-mini-pill">{{ mp }}</span>
+                        {% endfor %}
+                        <a href="{{ '/providers.html' | relative_url }}" class="provider-mini-pill provider-mini-pill--more">{{ p.mini_more | default: "+9 More" }}<svg class="ms-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Checkout preview -->
+<section class="section checkout-preview-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <p class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1">Real Checkout Experience</p>
+                <h2 class="txt-blue-600 fw-bold animated" data-animate="fadeInUp" data-delay=".15">{{ p.checkout_heading | default: d_checkout_heading }}</h2>
+                <p class="txt-blue-400 mw-narrow animated" data-animate="fadeInUp" data-delay=".2">{{ p.checkout_text | default: d_checkout_text }}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-11 animated" data-animate="fadeInUp" data-delay=".25">
+                <div class="checkout-screenshot-wrap">
+                    <img src="{{ p.checkout_image | relative_url }}" alt="{{ p.platform }} PaymentHood Checkout" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-bar">
+    <div class="container">
+        <div class="row text-center gy-4">
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Payment Providers</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">5min</div><div class="stat-label">Average Setup Time</div></div></div>
+            {% if p.supports_subscriptions %}
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">2</div><div class="stat-label">Payment Models Supported</div></div></div>
+            {% else %}
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">1</div><div class="stat-label">{{ noun_cap }} for All Providers</div></div></div>
+            {% endif %}
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">$0</div><div class="stat-label">{{ noun_cap }} Cost</div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Types -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">{% if p.supports_subscriptions %}Flexible Billing{% else %}Payment Types{% endif %}</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{% if p.payment_heading %}{{ p.payment_heading }}{% elsif p.supports_subscriptions %}One-Time &amp; Subscription Payments{% else %}Built for One-Time Checkout{% endif %}</h2>
+                <p class="txt-blue-400 mw-narrow">{{ p.payment_intro | default: d_payment_intro }}</p>
+            </div>
+        </div>
+        {% assign ot = p.payment_onetime %}
+        {% if p.supports_subscriptions %}
+        {% assign sub = p.payment_subscription %}
+        <div class="row g-4 align-items-stretch">
+            <div class="col-md-6">
+                <div class="ptype-card onetime">
+                    <div class="ptype-header-icon onetime">🛒</div>
+                    <h3>{{ ot.title }}</h3>
+                    <p class="ptype-desc">{{ ot.desc }}</p>
+                    <ul class="use-case-list">
+                        {% for pt in ot.points %}
+                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>{{ pt }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ptype-card subscription">
+                    <div class="ptype-header-icon subscription">🔄</div>
+                    <h3>{{ sub.title }}</h3>
+                    <p class="ptype-desc">{{ sub.desc }}</p>
+                    <ul class="use-case-list">
+                        {% for pt in sub.points %}
+                        <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>{{ pt }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="ptype-card onetime shadow-sm">
+                    <div class="ptype-header-icon onetime">🛒</div>
+                    <h3>{{ ot.title | default: "One-Time Payment" }}</h3>
+                    <p class="ptype-desc">{% if ot.desc %}{{ ot.desc }}{% else %}Let {{ p.audience }} pay once at checkout using any of the 15+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured — with full order management handled automatically by {{ p.platform }}.{% endif %}</p>
+                    <ul class="use-case-list use-case-list--grid">
+                        {% assign points = ot.points | default: site.data.integrations.defaults.onetime_points %}
+                        {% for pt in points %}
+                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>{{ pt }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Features -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Features</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">Everything Your {{ p.platform }} Store Needs</h2>
+                <p class="txt-blue-400 mw-narrow">One {{ p.noun }} connects your store to a world of payment options — with full native {{ p.platform }} compatibility.</p>
+            </div>
+        </div>
+        <div class="feature-grid">
+            {% if p.features %}
+                {% for f in p.features %}
+                <div class="feat-card">
+                    <div class="feat-card-icon {{ f.color }}">{{ f.icon }}</div>
+                    <h4>{{ f.title }}</h4>
+                    <p>{{ f.text }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="feat-card"><div class="feat-card-icon navy">🔌</div><h4>Native {{ p.platform }} Integration</h4><p>Registered as a standard {{ p.platform }} payment gateway — works seamlessly with your existing checkout flow.</p></div>
+                <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h4>15+ Global Providers</h4><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more — all through a single PaymentHood account.</p></div>
+                <div class="feat-card"><div class="feat-card-icon green">⚡</div><h4>Automatic Order Management</h4><p>{{ p.platform }} order statuses update automatically on payment success or failure. No manual order handling required.</p></div>
+                <div class="feat-card"><div class="feat-card-icon orange">🔒</div><h4>Sandbox &amp; Live Modes</h4><p>Test your full checkout flow in sandbox mode before going live. Switch environments with a single toggle in the admin.</p></div>
+                <div class="feat-card"><div class="feat-card-icon teal">📦</div><h4>Upload &amp; Activate — That's It</h4><p>Install the {{ p.noun }}, paste your PaymentHood API key, and you're ready to accept payments — no code, no webhooks.</p></div>
+                <div class="feat-card"><div class="feat-card-icon indigo">🎛️</div><h4>Centralized Provider Dashboard</h4><p>Manage provider credentials, view transactions, and configure settings from your PaymentHood account.</p></div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">How It Works</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ p.steps_heading | default: "Up and Running in 5 Minutes" }}</h2>
+                {% if p.steps_intro %}<p class="txt-blue-400 mw-narrow">{{ p.steps_intro }}</p>{% endif %}
+            </div>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            {% for step in p.steps %}
+            <div class="col-lg-4 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">{{ forloop.index }}</div>
+                    <h5>{{ step.title }}</h5>
+                    <p>{{ step.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-auto">
+                <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-5 rounded-pill d-inline-flex align-items-center justify-content-center">
+                    <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
+                    View Full Installation Guide
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Providers -->
+{% assign prov_desc = p.providers_desc | default: d_providers_desc %}
+{% if p.providers_eyebrow %}{% include providers-strip.html eyebrow=p.providers_eyebrow description=prov_desc %}{% else %}{% include providers-strip.html description=prov_desc %}{% endif %}
+
+<!-- Why -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Why PaymentHood</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ p.why_heading | default: d_why_heading }}</h2>
+                <p class="txt-blue-400 mw-narrow">One {{ p.noun }} with real flexibility — no per-provider installs, no recurring fees, no lock-in.</p>
+            </div>
+        </div>
+        <div class="row gy-4">
+            {% if p.why %}
+                {% for w in p.why %}
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">{{ w.icon }}</div><div><h5>{{ w.title }}</h5><p>{{ w.text }}</p></div></div></div>
+                {% endfor %}
+            {% else %}
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h5>One {{ noun_cap }}, Any Provider</h5><p>Other solutions require a separate {{ p.noun }} for each payment gateway. PaymentHood gives you all 15+ providers through one unified {{ p.platform }} {{ p.noun }}.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h5>No {{ noun_cap }} Cost</h5><p>The {{ p.noun }} is completely free. PaymentHood earns only through your payment provider — you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h5>Sell to Any Market</h5><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs — without changing your {{ p.platform }} setup.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">⚙️</div><div><h5>No Code Required</h5><p>Works out of the box with any standard {{ p.platform }} installation. No custom development, no webhook setup, no API coding on your end.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🧾</div><div><h5>{{ p.platform }}-Native Behaviour</h5><p>Orders, statuses, emails, and refunds all flow through {{ p.platform }} as expected — customers and admins see no difference in the checkout experience.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔄</div><div><h5>Switch Providers Anytime</h5><p>Change your active payment provider from your PaymentHood dashboard without touching {{ p.platform }}. No {{ p.noun }} changes, no reinstallation.</p></div></div></div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% if p.comparison %}
+<!-- Comparison (subscription plugins only) -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Side by Side</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ p.comparison.heading }}</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <table class="compare-table">
+                    <thead><tr><th>Feature</th><th>One-Time Payment</th><th>Subscription</th></tr></thead>
+                    <tbody>
+                        {% for row in p.comparison.rows %}
+                        <tr><td>{{ row.feature }}</td><td>{{ row.onetime }}</td><td>{{ row.subscription }}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% include faq.html items=faqs %}
+
+<!-- CTA -->
+<section class="section">
+    <div class="container">
+        <div class="cta-banner text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="h2 fw-bold mb-4">{{ p.cta_heading | default: d_cta_heading }}</h2>
+                    <p class="mb-5 mw-narrow">{{ p.cta_text | default: d_cta_text }}</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{{ p.install_url }}" class="btn btn-green-300 btn-lg px-5 rounded-pill d-inline-flex align-items-center justify-content-center">
+                            <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
+                            Installation Guide
+                        </a>
+                        <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
+                            <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download {{ noun_cap }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+<script src="{{ '/assets/js/product-page.js' | relative_url }}"></script>
