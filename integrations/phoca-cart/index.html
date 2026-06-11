@@ -27,17 +27,7 @@ description: PaymentHood for Phoca Cart lets you accept one-time payments on you
   "installUrl": "{{ site.url }}/integrations/phoca-cart/installation/"
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
-    { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "{{ site.url }}/integrations/" },
-    { "@type": "ListItem", "position": 3, "name": "Phoca Cart", "item": "{{ site.url }}/integrations/phoca-cart/" }
-  ]
-}
-</script>
+{% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/phocacart-product.css' | relative_url }}">
 <main id="main-content">

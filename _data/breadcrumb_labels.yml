@@ -1,0 +1,10 @@
+# Display names for URL path segments used by _includes/breadcrumb.html.
+# Any segment not listed here falls back to a capitalized form of the slug
+# (hyphens become spaces), so only special casings need an entry.
+integrations: Integrations
+installation: Installation
+whmcs: WHMCS
+woocommerce: WooCommerce
+j2commerce: J2Commerce
+phoca-cart: Phoca Cart
+virtuemart: VirtueMart

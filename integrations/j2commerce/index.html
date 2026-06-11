@@ -29,17 +29,7 @@ description: PaymentHood for J2Commerce lets your Joomla store accept one-time p
   "installUrl": "{{ site.url }}/integrations/j2commerce/installation/"
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
-    { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "{{ site.url }}/integrations/" },
-    { "@type": "ListItem", "position": 3, "name": "J2Commerce", "item": "{{ site.url }}/integrations/j2commerce/" }
-  ]
-}
-</script>
+{% include breadcrumb.html %}
 
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/j2commerce-product.css' | relative_url }}">

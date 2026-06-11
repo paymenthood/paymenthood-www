@@ -1,0 +1,20 @@
+{% comment %}
+  BreadcrumbList JSON-LD, generated from page.url at build time.
+  Each path segment's display name comes from _data/breadcrumb_labels.yml;
+  unmapped segments fall back to a capitalized form of the slug (hyphens ->
+  spaces). Assumes directory-style URLs (trailing slash). Emits nothing on the
+  home page, where there is no meaningful trail.
+{% endcomment %}
+{% assign _segs = page.url | split: "/" | where_exp: "s", "s != ''" %}
+{% if _segs.size > 0 %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" }{% assign _path = "" %}{% for _seg in _segs %}{% assign _path = _path | append: "/" | append: _seg %}{% assign _label = site.data.breadcrumb_labels[_seg] %}{% unless _label %}{% assign _label = _seg | replace: "-", " " | capitalize %}{% endunless %},
+    { "@type": "ListItem", "position": {{ forloop.index | plus: 1 }}, "name": {{ _label | jsonify }}, "item": "{{ site.url }}{{ _path }}/" }{% endfor %}
+  ]
+}
+</script>
+{% endif %}

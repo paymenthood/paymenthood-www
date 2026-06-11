@@ -29,17 +29,7 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
   "installUrl": "{{ site.url }}/integrations/whmcs/installation/"
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
-    { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "{{ site.url }}/integrations/" },
-    { "@type": "ListItem", "position": 3, "name": "WHMCS", "item": "{{ site.url }}/integrations/whmcs/" }
-  ]
-}
-</script>
+{% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/whmcs-product.css' | relative_url }}">
 

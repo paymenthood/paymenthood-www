@@ -6,28 +6,18 @@ description: One integration. 15+ payment providers. Install the PaymentHood pay
 ---
 
 {% include header-secondary.html %}
+{% include breadcrumb.html %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
-        { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "{{ site.url }}/integrations/" }
-      ]
-    },
-    {
-      "@type": "ItemList",
-      "name": "PaymentHood Payment Integrations",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "WHMCS Payment Gateway Module", "url": "{{ site.url }}/integrations/whmcs/" },
-        { "@type": "ListItem", "position": 2, "name": "WooCommerce Payment Gateway Plugin", "url": "{{ site.url }}/integrations/woocommerce/" },
-        { "@type": "ListItem", "position": 3, "name": "Phoca Cart Payment Plugin", "url": "{{ site.url }}/integrations/phoca-cart/" },
-        { "@type": "ListItem", "position": 4, "name": "J2Commerce Payment Plugin", "url": "{{ site.url }}/integrations/j2commerce/" },
-        { "@type": "ListItem", "position": 5, "name": "VirtueMart Payment Plugin", "url": "{{ site.url }}/integrations/virtuemart/" }
-      ]
-    }
+  "@type": "ItemList",
+  "name": "PaymentHood Payment Integrations",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "WHMCS Payment Gateway Module", "url": "{{ site.url }}/integrations/whmcs/" },
+    { "@type": "ListItem", "position": 2, "name": "WooCommerce Payment Gateway Plugin", "url": "{{ site.url }}/integrations/woocommerce/" },
+    { "@type": "ListItem", "position": 3, "name": "Phoca Cart Payment Plugin", "url": "{{ site.url }}/integrations/phoca-cart/" },
+    { "@type": "ListItem", "position": 4, "name": "J2Commerce Payment Plugin", "url": "{{ site.url }}/integrations/j2commerce/" },
+    { "@type": "ListItem", "position": 5, "name": "VirtueMart Payment Plugin", "url": "{{ site.url }}/integrations/virtuemart/" }
   ]
 }
 </script>
