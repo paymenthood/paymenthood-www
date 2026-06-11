@@ -10,19 +10,11 @@ software:
 # `product` drives the whole product page via _includes/integration-product.html.
 product:
   platform: J2Commerce
-  store: Joomla store
-  audience: customers
-  noun: plugin
   compat_name: Joomla                      # chip shows "Joomla 4.0+"
   compat: "4.0+"
-  version: "1.0.0"
-  badge: J2Commerce Integration
-  supports_subscriptions: false
-  install_url: /integrations/j2commerce/installation/
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.J2Commerce/releases/latest/download/paymenthood-j2commerece.zip
   repo: PaymentHood.Plugins.J2Commerce
   logo: { src: /assets/images/j2commerce/j2commerce-logo.png, width: 669, height: 180 }
-  hero_title_html: 'The Payment Gateway<br>Your <span class="txt-blue-50">J2Commerce Store</span><br>Deserves'
   checkout_image: /assets/images/j2commerce/j2commerce-checkout.png
   ecosystem: Joomla                        # named in the default install steps
   install_path: 'Extensions → Manage → Install'

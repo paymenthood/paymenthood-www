@@ -10,18 +10,10 @@ software:
 # `product` drives the whole product page via _includes/integration-product.html.
 product:
   platform: VirtueMart
-  store: Joomla store
-  audience: customers
-  noun: plugin
   compat: "4.0+"
-  version: "1.0.0"
-  badge: VirtueMart Integration
-  supports_subscriptions: false
-  install_url: /integrations/virtuemart/installation/
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip
   repo: PaymentHood.Plugins.VirtueMart
   logo: { src: /assets/images/virtuemart/virtuemart-logo.png, width: 300, height: 120 }
-  hero_title_html: 'The Payment Gateway<br>Your <span class="txt-blue-50">VirtueMart Store</span><br>Deserves'
   checkout_image: /assets/images/virtuemart/checkout.png
   ecosystem: Joomla                        # named in the default install steps
   install_path: 'Extensions → Manage → Install'

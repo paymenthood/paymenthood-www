@@ -18,21 +18,13 @@ product:
   audience: clients
   noun: module
   compat: "7.0+"
-  version: "1.2.0"
-  badge: WHMCS Payment Gateway Module
   supports_subscriptions: true
-  install_url: /integrations/whmcs/installation/
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/download/v1.2.0/paymenthood-whmcs.zip
   repo: PaymentHood.Plugins.WHMCS
   logo: { src: /assets/images/whmcs/whmcs-logo.png, width: 284, height: 177 }
   hero_title_html: 'The Payment Gateway<br>Your <span class="txt-blue-50">WHMCS</span> Deserves'
   checkout_image: /assets/images/whmcs/whmcs-checkout.png
-  steps:
-    - { title: Download the Module, text: 'Grab the free ZIP from GitHub releases — always the latest stable version.' }
-    - { title: Upload to WHMCS, text: 'Extract the ZIP and copy its <code>modules/</code> and <code>includes/</code> folders into your WHMCS root directory via FTP or cPanel.' }
-    - { title: Activate Gateway, text: 'Go to <strong>Apps & Integrations</strong> in your WHMCS admin and search for PaymentHood.' }
-    - { title: Sign In with Google, text: 'One-click sign-up with your Google account. PaymentHood creates your apps automatically.' }
-    - { title: Start Accepting Payments, text: 'Your gateway is live. Clients can pay invoices and subscribe to plans right away.' }
+  install_path: 'Apps & Integrations'
 
 faqs:
   - q: Does PaymentHood support WHMCS subscriptions / automatic payments?

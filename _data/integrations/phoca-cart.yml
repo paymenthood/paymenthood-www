@@ -10,15 +10,8 @@ software:
 # `product` drives the whole product page via _includes/integration-product.html.
 product:
   platform: Phoca Cart
-  store: Joomla store
-  audience: customers
-  noun: plugin
   compat_name: Joomla                      # chip shows "Joomla 4.0+", not "Phoca Cart 4.0+"
   compat: "4.0+"
-  version: "1.0.0"
-  badge: Phoca Cart Integration
-  supports_subscriptions: false
-  install_url: /integrations/phoca-cart/installation/
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.PhocaCart/releases/download/v1.0.0/paymenthood-phocacart.zip
   repo: PaymentHood.Plugins.PhocaCart
   logo: { src: /assets/images/phocacart/phocacart-logo.png }
