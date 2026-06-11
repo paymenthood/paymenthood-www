@@ -1500,6 +1500,11 @@ hr {
 }
 
 
+.btn-brand-equal {
+    min-width: 185px;
+}
+
+
 .text-center .btn-grp {
     justify-content: center;
 }
