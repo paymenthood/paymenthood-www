@@ -3,7 +3,7 @@ layout: none
 redirect_from: /whmcs/installation/
 nav_active: integrations
 title: WHMCS Payment Gateway Module - PaymentHood
-description: Install PaymentHood payment gateway in your WHMCS in under 5 minutes. Download, upload, activate - start accepting payments through 15+ providers instantly.
+description: Install the PaymentHood payment gateway module in your WHMCS in under 5 minutes. Download, upload, activate - start accepting payments through 15+ providers instantly.
 ---
 
 {% include header-secondary.html %}
@@ -34,7 +34,7 @@ description: Install PaymentHood payment gateway in your WHMCS in under 5 minute
     "@type": "Organization",
     "name": "PaymentHood"
   },
-  "installUrl": "{{ site.url }}/whmcs-plugin.html"
+  "installUrl": "{{ site.url }}/integrations/whmcs/installation/"
 }
 </script>
 
@@ -110,20 +110,27 @@ description: Install PaymentHood payment gateway in your WHMCS in under 5 minute
                     <div class="step-card animated" data-animate="fadeInUp" data-delay=".3">
                         <span class="step-number">2</span>
                         <h4 class="txt-blue-600 mb-3">Extract & Upload Files</h4>
-                        <p class="txt-blue-400 mb-3">Extract the downloaded ZIP file and upload the contents to your WHMCS installation directory.</p>
+                        <p class="txt-blue-400 mb-3">Extract the downloaded ZIP file and upload its <code>modules/</code> and <code>includes/</code> folders to your WHMCS root directory. The module consists of a payment gateway module, an addon module, automation hooks, and a transactions report.</p>
                         <div class="code-block">
 # Upload structure:<br>
 /your-whmcs-root/<br>
+├── includes/<br>
+│   └── hooks/<br>
+│       └── paymenthood-*.php<br>
 ├── modules/<br>
+│   ├── addons/<br>
+│   │   └── paymenthood/<br>
 │   ├── gateways/<br>
+│   │   ├── callback/paymenthood.php<br>
+│   │   ├── paymenthood/<br>
 │   │   └── paymenthood.php<br>
-│   └── addons/<br>
-│       └── paymenthood/<br>
+│   └── reports/<br>
+│       └── paymenthood_transactions.php<br>
 └── ...
                         </div>
                         <div class="warning-box">
                             <i class="fas fa-exclamation-triangle me-2"></i>
-                            <strong>Important:</strong> Make sure you upload to the correct WHMCS root directory, not a subdirectory.
+                            <strong>Important:</strong> Upload <em>all</em> folders to the WHMCS root directory, not a subdirectory. The gateway module reports an installation error if the addon or hook files are missing.
                         </div>
                     </div>
 
