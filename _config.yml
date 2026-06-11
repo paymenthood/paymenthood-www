@@ -49,11 +49,6 @@ exclude:
   - .git/
   - .vs/
 
-# Include settings
-include:
-  - .htaccess
-  - _headers
-
 # Default settings
 defaults:
   - scope:

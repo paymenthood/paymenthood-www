@@ -39,7 +39,7 @@ When adding or optimizing a secondary page (non-home), follow this pattern:
    - Use master palette vars (`var(--blue-200)`, `var(--blue-600)`, `var(--gray-200)`, `var(--blue-50)`, etc.) — never hardcode hex values that match an existing var.
    - No `@media` queries in page CSS files; use Bootstrap cols + auto-fit grids for responsiveness.
    - No CSS custom properties defined in page files — only consume what `:root` provides in `style.css`.
-5. **Class naming:** kebab-case, prefixed per page (`plugins-*`, `woo-*`, `vm-*`, etc.) to avoid collisions with master CSS.
+5. **Class naming:** kebab-case, prefixed per page (`integration-*`/`integrations-*`, `woo-*`, `vm-*`, etc.) to avoid collisions with master CSS.
 6. **Watch for master-CSS name collisions** before naming a class — e.g. `.step-card` is owned by `style.css:8374` for install pages.
 7. **Specificity:** when a rule must beat a global selector (e.g. `a:hover`), scope it under a parent class rather than using `!important`.
 
