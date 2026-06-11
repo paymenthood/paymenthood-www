@@ -10,7 +10,7 @@
 ## Styling Rules
 - **Resolve every style in this order — never skip a tier:**
   1. **Bootstrap 5.2 utilities/components** (`vendor.bundle.css`) and **site master classes** (`style.css`). Grids → `row g-*` + `col-*` (never redeclare CSS grid/flex layouts); cards → `.card` (site-styled: white, 12px radius, responsive padding, soft shadow); pills → `.badge` (site-styled uppercase pill); spacing/flex → `m*/p*`, `d-flex`, `gap-*`, `align-self-*`; typography → `fs-*`, `fw-*`, `small`, `lh-1`; colors → site utilities `txt-*`/`bg-*` (e.g. `txt-blue-50`, `bg-blue-200`, `tc-light`).
-  2. **Shared components** in `assets/css/components.css` — pieces reused by 2+ pages: `.card-lift` (hover-lift on `.card`), `.badge-*` platform colorways, `.check-list` (✓ list), `.icon-circle`/`.icon-circle-lg`/`.step-num`, `.link-arrow`. Promote a rule from page CSS to here the moment a second page needs it; never copy it.
+  2. **Shared components** in `assets/css/components.css` — pieces reused by 2+ secondary pages: `.card-lift` (hover-lift on `.card`), `.badge-*` platform colorways, `.check-list` (✓ list), `.icon-circle`/`.icon-circle-lg`/`.step-num`, `.link-arrow`. Promote a rule from page CSS to here the moment a second page needs it; never copy it. The home page (`index.html`) does **not** load `components.css` — leave its markup and styles as they are.
   3. **Page CSS** (`assets/css/<page-name>.css`) — last resort, only for what the above cannot express: pseudo-elements unique to one page, image-sizing quirks, exact pixel dimensions, one-off overrides of global element styles.
 - **Never modify** `assets/css/style.css`, `assets/css/vendor.bundle.css`, `assets/css/theme.css`, `_includes/header.html`, `_includes/header-secondary.html`, or `_includes/footer.html`.
 - Follow the page layout and structure already established in `index.html`.
@@ -28,7 +28,7 @@
 When adding or optimizing a secondary page (non-home), follow this pattern:
 
 1. **No inline `<style>` blocks or `style=""` attributes in page files.** Styles go to `assets/css/components.css` (shared) or a dedicated `assets/css/<page-name>.css` (page-only), per the Styling Rules order.
-2. **Link placement:** immediately after `{% include header-secondary.html %}` (or `header.html` on home), before `<main>` — `components.css` first, then the page CSS so it can override:
+2. **Link placement:** immediately after `{% include header-secondary.html %}`, before `<main>` — `components.css` first, then the page CSS so it can override:
    ```html
    {% include header-secondary.html %}
    <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
