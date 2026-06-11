@@ -20,9 +20,16 @@
 - The installation/download page is `integrations/<slug>/installation/index.html` → `/integrations/<slug>/installation/`.
 - The hub is `integrations/index.html` → `/integrations/`.
 - **No `permalink:` front matter** on these — the folder structure drives the URL. Keep `layout: none`, `title`, `description`, `nav_active: integrations`.
-- Product-page content is assembled from `_includes/<slug>-product/*.html`; installation pages are standalone.
+- Product and installation pages are standalone files built entirely from the shared product-page components in `components.css` (see Styling Rules tier 2).
 - Redirects from old URLs use the **`jekyll-redirect-from`** plugin (works locally and on every host). Add `redirect_from: /old-path/` to the destination page's front matter; the plugin generates a redirect stub at the old URL. This is the single source of truth for redirects — do not also add `.htaccess`/`_redirects` rules for the same path (file-vs-redirect precedence on Netlify gets ambiguous).
 - `jekyll-sitemap` auto-generates `/sitemap.xml` — do **not** hand-write one (a manual sitemap silently disables the plugin).
+
+### New Integration Page Recipe (mandatory — never clone)
+When adding a new `integrations/<slug>/` product or installation page:
+1. Copy the **markup structure** of an existing page (`integrations/woocommerce/index.html` is the canonical product page; any `*/installation/index.html` for installs) and keep the shared class names exactly as they are — `product-hero`, `stats-bar`, `feat-card`, `ptype-card`, `faq-item`, `install-hero`, etc. **Never create page-prefixed copies of these components** (the old `woo-*`/`vm-*`/`phoca-*`/`j2c-*` clones cost ~480 duplicated CSS lines per page and were removed on purpose).
+2. Create `assets/css/<slug>-product.css` containing **only**: the `--pp-*` theme overrides on `#main-content` (omit entirely for the default blue theme) and logo/screenshot sizing quirks. A near-empty (or absent) page CSS file is correct.
+3. FAQ accordions use the shared `assets/js/product-page.js` (`toggleFaq`) — do not add a per-page script.
+4. If the new page needs a component variant that doesn't exist yet, add it to `components.css` as a modifier (like `.use-case-list--grid`, `.screenshot-container--bare`) — don't fork the component into page CSS.
 
 ## CSS for New Pages (Plugin Pattern)
 When adding or optimizing a secondary page (non-home), follow this pattern:
@@ -42,7 +49,7 @@ When adding or optimizing a secondary page (non-home), follow this pattern:
    - Use master palette vars (`var(--blue-200)`, `var(--blue-600)`, `var(--gray-200)`, `var(--blue-50)`, etc.) — never hardcode hex values that match an existing var.
    - No `@media` queries in page CSS files; use Bootstrap cols + auto-fit grids for responsiveness.
    - No new CSS custom properties defined in page files — consume what `:root` provides in `style.css`. Sole exception: overriding the documented `--pp-*` theme vars on `#main-content` to retheme the shared product components.
-5. **Class naming:** kebab-case. Page CSS classes are prefixed per page (`integration-*`, `woo-*`, `vm-*`, etc.) to avoid collisions with master CSS; `components.css` classes use generic component names (`card-lift`, `check-list`, `icon-circle`, `link-arrow`).
+5. **Class naming:** kebab-case. The few genuinely page-specific classes in page CSS are prefixed per page (e.g. `integration-card-logo`) to avoid collisions; `components.css` classes use generic component names (`card-lift`, `check-list`, `product-hero`, `feat-card`). Do not page-prefix a class that exists (or should exist) in `components.css`.
 6. **Watch for master-CSS name collisions** before naming a class — e.g. `.step-card` is owned by `style.css:8374` for install pages.
 7. **Specificity:** when a rule must beat a global selector (e.g. `a:hover`), scope it under a parent class rather than using `!important`.
 
