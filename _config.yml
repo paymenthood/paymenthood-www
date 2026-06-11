@@ -1,11 +1,13 @@
 # Jekyll Configuration for GitHub Pages
 title: PaymentHood
-description: Enterprise Payment Orchestration Platform | Unified API for 15+ Payment Providers
+description: Enterprise payment orchestration platform with a unified API for 15+ payment providers. Accept payments in minutes without touching your code.
 url: "https://www.paymenthood.com"
 baseurl: ""
+lang: en
+author: PaymentHood
 
-# Social Media & SEO
-logo: /assets/images/logo.png
+# Social Media & SEO (consumed by jekyll-seo-tag)
+logo: /assets/images/logo2x.png
 twitter:
   username: paymenthood
   card: summary_large_image
@@ -13,6 +15,7 @@ social:
   name: PaymentHood
   links:
     - https://github.com/paymenthood
+    - https://docs.paymenthood.com
 
 # Default page settings
 defaults:
@@ -21,6 +24,11 @@ defaults:
     values:
       image: /assets/images/og-image.png
       author: PaymentHood
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
 
 # Build settings
 markdown: kramdown
@@ -48,25 +56,6 @@ exclude:
   - .gitignore
   - .git/
   - .vs/
-
-# Default settings
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "default"
-
-# Site settings
-author: PaymentHood
-lang: en
-
-# SEO settings
-logo: /images/Logo-name-2.png
-social:
-  name: PaymentHood
-  links:
-    - https://docs.paymenthood.com
 
 # GitHub Pages specific
 safe: true

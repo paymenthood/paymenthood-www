@@ -28,7 +28,7 @@
 When adding a new `integrations/<slug>/` product or installation page:
 1. Copy the **markup structure** of an existing page (`integrations/woocommerce/index.html` is the canonical product page; any `*/installation/index.html` for installs) and keep the shared class names exactly as they are — `product-hero`, `stats-bar`, `feat-card`, `ptype-card`, `faq-item`, `install-hero`, etc. **Never create page-prefixed copies of these components** (the old `woo-*`/`vm-*`/`phoca-*`/`j2c-*` clones cost ~480 duplicated CSS lines per page and were removed on purpose).
 2. Create `assets/css/<slug>-product.css` containing **only**: the `--pp-*` theme overrides on `#main-content` (omit entirely for the default blue theme) and logo/screenshot sizing quirks. A near-empty (or absent) page CSS file is correct.
-3. FAQ accordions use the shared `assets/js/product-page.js` (`toggleFaq`) — do not add a per-page script.
+3. FAQ sections are single-sourced: define the Q&A as `faqs:` front matter (list of `q:`/`a:` pairs; answers may contain inline HTML) and render with `{% include faq.html %}` where the FAQ section belongs. The include emits both the visible accordion (wired to the shared `assets/js/product-page.js` `toggleFaq`) and the FAQPage JSON-LD — never hand-write FAQ markup or FAQ schema. Optional include params: `eyebrow`, `bg`, `first_open`.
 4. If the new page needs a component variant that doesn't exist yet, add it to `components.css` as a modifier (like `.use-case-list--grid`, `.screenshot-container--bare`) — don't fork the component into page CSS.
 
 ## CSS for New Pages (Plugin Pattern)

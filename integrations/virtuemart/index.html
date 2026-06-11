@@ -2,8 +2,42 @@
 layout: none
 redirect_from: /virtuemart/
 nav_active: integrations
-title: VirtueMart Payment Plugin - Accept Payments with 15+ Providers | PaymentHood
+title: VirtueMart Payment Plugin - Accept Payments with 15+ Providers
 description: PaymentHood for VirtueMart lets your Joomla store accept one-time payments through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
+faqs:
+  - q: Which Joomla and VirtueMart versions does the plugin support?
+    a: >-
+      PaymentHood for VirtueMart runs on Joomla 4.0 or higher with a supported VirtueMart 4
+      release. It is tested against the latest stable Joomla and VirtueMart versions.
+  - q: Does PaymentHood support subscriptions or recurring billing?
+    a: >-
+      Not at this time. The current version supports one-time checkout payments only.
+      Subscription / recurring billing support is planned for a future release.
+  - q: How do I get a PaymentHood API key?
+    a: >-
+      Create a free PaymentHood account, add your chosen payment provider in the dashboard,
+      and generate an API key. Then paste that key into the VirtueMart payment method
+      settings page.
+  - q: Can I test payments before going live?
+    a: >-
+      Yes. The plugin includes a sandbox mode toggle. When enabled, all transactions are routed
+      through your payment provider's sandbox environment so you can verify the full checkout
+      flow without processing real payments.
+  - q: How is the plugin installed on Joomla?
+    a: >-
+      It installs like any Joomla extension. Download the package, go to
+      <em>Extensions → Manage → Install</em>, upload the file, then enable the PaymentHood
+      payment plugin. It then appears as a payment method inside VirtueMart.
+  - q: Is there a cost to use the plugin?
+    a: >-
+      No. The PaymentHood VirtueMart plugin is free to download and use. You pay only the
+      transaction fees charged by your chosen payment provider — there are no additional fees
+      from PaymentHood.
+  - q: Can I switch payment providers without reinstalling the plugin?
+    a: >-
+      Yes. Provider switching happens in your PaymentHood dashboard — just activate a different
+      provider there. Your VirtueMart plugin continues working without any changes on the
+      Joomla side.
 ---
 
 {% include header-secondary.html %}
@@ -15,6 +49,7 @@ description: PaymentHood for VirtueMart lets your Joomla store accept one-time p
   "name": "PaymentHood VirtueMart Plugin",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Joomla 4.0+",
+  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.VirtueMart/releases/latest/download/paymenthood-virtuemart.zip",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -25,7 +60,18 @@ description: PaymentHood for VirtueMart lets your Joomla store accept one-time p
     "@type": "Organization",
     "name": "PaymentHood"
   },
-  "installUrl": "{{ site.url }}/virtuemart/"
+  "installUrl": "{{ site.url }}/integrations/virtuemart/installation/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "{{ site.url }}/integrations/" },
+    { "@type": "ListItem", "position": 3, "name": "VirtueMart", "item": "{{ site.url }}/integrations/virtuemart/" }
+  ]
 }
 </script>
 
@@ -449,92 +495,7 @@ description: PaymentHood for VirtueMart lets your Joomla store accept one-time p
         </div>
     </div>
 </section>
-<!-- Faq -->
-<section class="section bg-light">
-    <div class="container">
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-7 text-center">
-                <div class="section-eyebrow">FAQ</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">Frequently Asked Questions</h2>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Which Joomla and VirtueMart versions does the plugin support?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        PaymentHood for VirtueMart runs on Joomla 4.0 or higher with a supported VirtueMart 4 release. It is tested against the latest stable Joomla and VirtueMart versions.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Does PaymentHood support subscriptions or recurring billing?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Not at this time. The current version supports one-time checkout payments only. Subscription / recurring billing support is planned for a future release.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        How do I get a PaymentHood API key?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Create a free PaymentHood account, add your chosen payment provider in the dashboard, and generate an API key. Then paste that key into the VirtueMart payment method settings page.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Can I test payments before going live?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. The plugin includes a sandbox mode toggle. When enabled, all transactions are routed through your payment provider's sandbox environment so you can verify the full checkout flow without processing real payments.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        How is the plugin installed on Joomla?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        It installs like any Joomla extension. Download the package, go to <em>Extensions → Manage → Install</em>, upload the file, then enable the PaymentHood payment plugin. It then appears as a payment method inside VirtueMart.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Is there a cost to use the plugin?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        No. The PaymentHood VirtueMart plugin is free to download and use. You pay only the transaction fees charged by your chosen payment provider — there are no additional fees from PaymentHood.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Can I switch payment providers without reinstalling the plugin?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Provider switching happens in your PaymentHood dashboard — just activate a different provider there. Your VirtueMart plugin continues working without any changes on the Joomla side.
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
+{% include faq.html %}
 <!-- Cta -->
 <section class="section">
     <div class="container">

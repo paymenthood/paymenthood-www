@@ -2,10 +2,75 @@
 layout: none
 redirect_from: /woocommerce/
 nav_active: integrations
-title: WooCommerce Payment Gateway Plugin - Accept Payments with 15+ Providers | PaymentHood
+title: WooCommerce Payment Gateway Plugin - Accept Payments with 15+ Providers
 description: PaymentHood for WooCommerce lets you accept one-time payments through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
+faqs:
+  - q: Which WooCommerce versions does the plugin support?
+    a: >-
+      PaymentHood for WooCommerce requires WooCommerce 6.0 or higher on WordPress 5.8+.
+      It is tested with the latest stable WooCommerce releases.
+  - q: Does PaymentHood support WooCommerce Subscriptions?
+    a: >-
+      Not at this time. The current version supports one-time checkout payments only.
+      Subscription / recurring billing support is planned for a future release.
+  - q: How do I get a PaymentHood API key?
+    a: >-
+      Create a free PaymentHood account, add your chosen payment provider in the dashboard,
+      and generate an API key. Then paste that key into the WooCommerce plugin settings page.
+  - q: Can I test payments before going live?
+    a: >-
+      Yes. The plugin includes a sandbox mode toggle. When enabled, all transactions are routed
+      through your payment provider's sandbox environment so you can verify the full checkout
+      flow without processing real payments.
+  - q: Does the plugin work with the WooCommerce Block Checkout?
+    a: >-
+      Yes. PaymentHood registers as a standard WooCommerce payment gateway and is compatible
+      with both the Classic Checkout and the newer Block-based Checkout experience.
+  - q: Is there a cost to use the plugin?
+    a: >-
+      No. The PaymentHood WooCommerce plugin is free to download and use. You pay only the
+      transaction fees charged by your chosen payment provider — there are no additional fees
+      from PaymentHood.
+  - q: Can I switch payment providers without reinstalling the plugin?
+    a: >-
+      Yes. Provider switching happens in your PaymentHood dashboard — just activate a different
+      provider there. Your WooCommerce plugin continues working without any changes on the
+      WordPress side.
 ---
 {% include header-secondary.html %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PaymentHood WooCommerce Plugin",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "WordPress 5.8+ with WooCommerce 6.0+",
+  "softwareVersion": "1.0.0",
+  "downloadUrl": "https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/download/v1.0.0/paymenthood-woocommerce.zip",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "{{ page.description }}",
+  "author": {
+    "@type": "Organization",
+    "name": "PaymentHood"
+  },
+  "installUrl": "{{ site.url }}/integrations/woocommerce/installation/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "{{ site.url }}/integrations/" },
+    { "@type": "ListItem", "position": 3, "name": "WooCommerce", "item": "{{ site.url }}/integrations/woocommerce/" }
+  ]
+}
+</script>
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/woocommerce-product.css' | relative_url }}">
 <main id="main-content">
@@ -419,92 +484,7 @@ description: PaymentHood for WooCommerce lets you accept one-time payments throu
         </div>
     </div>
 </section>
-<!-- Faq -->
-<section class="section bg-light">
-    <div class="container">
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-7 text-center">
-                <div class="section-eyebrow">FAQ</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">Frequently Asked Questions</h2>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Which WooCommerce versions does the plugin support?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        PaymentHood for WooCommerce requires WooCommerce 6.0 or higher on WordPress 5.8+. It is tested with the latest stable WooCommerce releases.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Does PaymentHood support WooCommerce Subscriptions?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Not at this time. The current version supports one-time checkout payments only. Subscription / recurring billing support is planned for a future release.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        How do I get a PaymentHood API key?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Create a free PaymentHood account, add your chosen payment provider in the dashboard, and generate an API key. Then paste that key into the WooCommerce plugin settings page.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Can I test payments before going live?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. The plugin includes a sandbox mode toggle. When enabled, all transactions are routed through your payment provider's sandbox environment so you can verify the full checkout flow without processing real payments.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Does the plugin work with the WooCommerce Block Checkout?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. PaymentHood registers as a standard WooCommerce payment gateway and is compatible with both the Classic Checkout and the newer Block-based Checkout experience.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Is there a cost to use the plugin?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        No. The PaymentHood WooCommerce plugin is free to download and use. You pay only the transaction fees charged by your chosen payment provider — there are no additional fees from PaymentHood.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Can I switch payment providers without reinstalling the plugin?
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Provider switching happens in your PaymentHood dashboard — just activate a different provider there. Your WooCommerce plugin continues working without any changes on the WordPress side.
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
+{% include faq.html %}
 <!-- Cta -->
 <section class="section">
     <div class="container">

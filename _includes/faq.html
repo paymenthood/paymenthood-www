@@ -1,0 +1,51 @@
+{% comment %}
+  Shared FAQ section for integration product pages.
+  Renders the visible accordion AND the FAQPage JSON-LD from one source: the
+  page's `faqs:` front matter (list of `q:` / `a:` pairs; answers may contain
+  inline HTML — Google permits a/em/strong/br/ul/ol/li in FAQ answers).
+
+  Parameters (all optional):
+    eyebrow    — eyebrow label above the heading (default: FAQ)
+    bg         — section background class (default: bg-light)
+    first_open — true to render the first item expanded (default: false)
+{% endcomment %}
+<!-- Faq -->
+<section class="section {{ include.bg | default: 'bg-light' }}">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-7 text-center">
+                <div class="section-eyebrow">{{ include.eyebrow | default: 'FAQ' }}</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">Frequently Asked Questions</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+{% for faq in page.faqs %}
+                <div class="faq-item{% if include.first_open and forloop.first %} open{% endif %}">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        {{ faq.q }}
+                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </div>
+                    <div class="faq-answer">
+                        {{ faq.a }}
+                    </div>
+                </div>
+{% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in page.faqs %}{
+      "@type": "Question",
+      "name": {{ faq.q | strip | jsonify }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a | strip | jsonify }} }
+    }{% unless forloop.last %},
+    {% endunless %}{% endfor %}
+  ]
+}
+</script>
