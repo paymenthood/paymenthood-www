@@ -6,6 +6,7 @@ description: One plugin. 15+ payment providers. Install PaymentHood on WHMCS, Wo
 ---
 
 {% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/integrations.css' | relative_url }}">
 
 <main class="overflow-hidden">
@@ -19,132 +20,142 @@ description: One plugin. 15+ payment providers. Install PaymentHood on WHMCS, Wo
       </div>
 
       <!-- Integration cards -->
-      <div class="integrations-grid">
+      <div class="row g-4">
 
         <!-- WHMCS -->
-        <div class="integration-card animated" data-animate="fadeInUp" data-delay=".2">
-          <span class="integration-badge badge-billing">Hosting &amp; Billing</span>
-          <div class="integration-card-logo">
-            <img src="{{ '/assets/images/whmcs/whmcs-logo.png' | relative_url }}" alt="WHMCS">
-          </div>
-          <h3 class="txt-blue-600">WHMCS Payment Gateway</h3>
-          <p class="integration-pitch">Bill smarter inside the world's leading hosting automation platform. Collect one-time and recurring payments and let invoices reconcile themselves.</p>
-          <ul class="integration-features list-unstyled p-0">
-            <li>One-time &amp; subscription billing</li>
-            <li>Automatic invoice reconciliation</li>
-            <li>15+ providers from one module</li>
-            <li>WHMCS 7.0+ — installs in minutes</li>
-          </ul>
-          <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
-            <a href="/integrations/whmcs/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
-            <a href="/integrations/whmcs/installation/" class="link-guide">Install guide <em class="ti ti-arrow-right"></em></a>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".2">
+            <span class="badge badge-billing align-self-start mb-3">Hosting &amp; Billing</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/whmcs/whmcs-logo.png' | relative_url }}" alt="WHMCS">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">WHMCS Payment Gateway</h3>
+            <p class="mb-4">Bill smarter inside the world's leading hosting automation platform. Collect one-time and recurring payments and let invoices reconcile themselves.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>One-time &amp; subscription billing</li>
+              <li>Automatic invoice reconciliation</li>
+              <li>15+ providers from one module</li>
+              <li>WHMCS 7.0+ — installs in minutes</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/whmcs/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/whmcs/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
           </div>
         </div>
 
         <!-- WooCommerce -->
-        <div class="integration-card animated" data-animate="fadeInUp" data-delay=".3">
-          <span class="integration-badge badge-wordpress">WordPress</span>
-          <div class="integration-card-logo">
-            <img src="{{ '/assets/images/woocommerce/woo-logo.png' | relative_url }}" alt="WooCommerce">
-          </div>
-          <h3 class="txt-blue-600">WooCommerce Payment Gateway</h3>
-          <p class="integration-pitch">Give your WordPress store a checkout customers trust. Activate the providers your shoppers prefer without touching a line of code.</p>
-          <ul class="integration-features list-unstyled p-0">
-            <li>Seamless WooCommerce checkout</li>
-            <li>Refunds &amp; order sync handled for you</li>
-            <li>15+ global &amp; regional providers</li>
-            <li>Upload, activate, sell — in 5 minutes</li>
-          </ul>
-          <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
-            <a href="/integrations/woocommerce/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
-            <a href="/integrations/woocommerce/installation/" class="link-guide">Install guide <em class="ti ti-arrow-right"></em></a>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".3">
+            <span class="badge badge-wordpress align-self-start mb-3">WordPress</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/woocommerce/woo-logo.png' | relative_url }}" alt="WooCommerce">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">WooCommerce Payment Gateway</h3>
+            <p class="mb-4">Give your WordPress store a checkout customers trust. Activate the providers your shoppers prefer without touching a line of code.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Seamless WooCommerce checkout</li>
+              <li>Refunds &amp; order sync handled for you</li>
+              <li>15+ global &amp; regional providers</li>
+              <li>Upload, activate, sell — in 5 minutes</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/woocommerce/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/woocommerce/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
           </div>
         </div>
 
         <!-- Phoca Cart -->
-        <div class="integration-card animated" data-animate="fadeInUp" data-delay=".4">
-          <span class="integration-badge badge-joomla">Joomla</span>
-          <div class="integration-card-logo">
-            <img src="{{ '/assets/images/phocacart/phocacart-logo.png' | relative_url }}" alt="Phoca Cart">
-          </div>
-          <h3 class="txt-blue-600">Phoca Cart Payment Gateway</h3>
-          <p class="integration-pitch">Turn your Joomla shopping cart into a global checkout. PaymentHood plugs straight into Phoca Cart so you can accept payments worldwide.</p>
-          <ul class="integration-features list-unstyled p-0">
-            <li>Native Phoca Cart integration</li>
-            <li>Accept cards, wallets &amp; crypto</li>
-            <li>15+ providers, one configuration</li>
-            <li>No developer required</li>
-          </ul>
-          <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
-            <a href="/integrations/phoca-cart/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
-            <a href="/integrations/phoca-cart/installation/" class="link-guide">Install guide <em class="ti ti-arrow-right"></em></a>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".4">
+            <span class="badge badge-joomla align-self-start mb-3">Joomla</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/phocacart/phocacart-logo.png' | relative_url }}" alt="Phoca Cart">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">Phoca Cart Payment Gateway</h3>
+            <p class="mb-4">Turn your Joomla shopping cart into a global checkout. PaymentHood plugs straight into Phoca Cart so you can accept payments worldwide.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Native Phoca Cart integration</li>
+              <li>Accept cards, wallets &amp; crypto</li>
+              <li>15+ providers, one configuration</li>
+              <li>No developer required</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/phoca-cart/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/phoca-cart/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
           </div>
         </div>
 
         <!-- J2Commerce -->
-        <div class="integration-card animated" data-animate="fadeInUp" data-delay=".5">
-          <span class="integration-badge badge-joomla">Joomla</span>
-          <div class="integration-card-logo">
-            <img src="{{ '/assets/images/j2commerce/j2commerce-logo.png' | relative_url }}" alt="J2Commerce">
-          </div>
-          <h3 class="txt-blue-600">J2Commerce Payment Gateway</h3>
-          <p class="integration-pitch">Power your J2Commerce store with the providers your customers already know. One PaymentHood plugin replaces a drawer full of gateway extensions.</p>
-          <ul class="integration-features list-unstyled p-0">
-            <li>Built for J2Commerce on Joomla</li>
-            <li>One-time payments out of the box</li>
-            <li>15+ providers without extra plugins</li>
-            <li>Fast, guided setup</li>
-          </ul>
-          <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
-            <a href="/integrations/j2commerce/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
-            <a href="/integrations/j2commerce/installation/" class="link-guide">Install guide <em class="ti ti-arrow-right"></em></a>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".5">
+            <span class="badge badge-joomla align-self-start mb-3">Joomla</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/j2commerce/j2commerce-logo.png' | relative_url }}" alt="J2Commerce">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">J2Commerce Payment Gateway</h3>
+            <p class="mb-4">Power your J2Commerce store with the providers your customers already know. One PaymentHood plugin replaces a drawer full of gateway extensions.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Built for J2Commerce on Joomla</li>
+              <li>One-time payments out of the box</li>
+              <li>15+ providers without extra plugins</li>
+              <li>Fast, guided setup</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/j2commerce/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/j2commerce/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
           </div>
         </div>
 
         <!-- VirtueMart -->
-        <div class="integration-card animated" data-animate="fadeInUp" data-delay=".6">
-          <span class="integration-badge badge-joomla">Joomla</span>
-          <div class="integration-card-logo">
-            <img src="{{ '/assets/images/virtuemart/virtuemart-logo.png' | relative_url }}" alt="VirtueMart">
-          </div>
-          <h3 class="txt-blue-600">VirtueMart Payment Gateway</h3>
-          <p class="integration-pitch">Bring 15+ providers to your VirtueMart store on Joomla. One PaymentHood plugin replaces a separate extension for every gateway.</p>
-          <ul class="integration-features list-unstyled p-0">
-            <li>Native VirtueMart payment method</li>
-            <li>One-time payments out of the box</li>
-            <li>15+ providers without extra plugins</li>
-            <li>Fast, guided setup</li>
-          </ul>
-          <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
-            <a href="/integrations/virtuemart/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
-            <a href="/integrations/virtuemart/installation/" class="link-guide">Install guide <em class="ti ti-arrow-right"></em></a>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".6">
+            <span class="badge badge-joomla align-self-start mb-3">Joomla</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/virtuemart/virtuemart-logo.png' | relative_url }}" alt="VirtueMart">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">VirtueMart Payment Gateway</h3>
+            <p class="mb-4">Bring 15+ providers to your VirtueMart store on Joomla. One PaymentHood plugin replaces a separate extension for every gateway.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Native VirtueMart payment method</li>
+              <li>One-time payments out of the box</li>
+              <li>15+ providers without extra plugins</li>
+              <li>Fast, guided setup</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/virtuemart/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/virtuemart/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
           </div>
         </div>
 
       </div>
 
       <!-- Value strip -->
-      <div class="integrations-value tc-light animated" data-animate="fadeInUp" data-delay=".2">
+      <div class="bg-blue-200 tc-light rounded-4 p-4 p-md-5 mt-5 animated" data-animate="fadeInUp" data-delay=".2">
         <div class="wide text-center">
           <h2 class="mb-3">Why merchants pick PaymentHood plugins</h2>
-          <p class="lead mb-0">Stop juggling a separate extension, contract, and dashboard for every gateway. PaymentHood gives you one plugin to install, one place to manage, and every provider you'll ever need.</p>
+          <p class="lead mb-0 txt-blue-50">Stop juggling a separate extension, contract, and dashboard for every gateway. PaymentHood gives you one plugin to install, one place to manage, and every provider you'll ever need.</p>
         </div>
-        <div class="value-stats">
-          <div class="value-stat text-center">
-            <div class="num">15+</div>
-            <div class="lbl">Payment providers, one plugin</div>
+        <div class="row g-4 mt-3 text-center">
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">15+</div>
+            <div class="small mt-2 txt-blue-50">Payment providers, one plugin</div>
           </div>
-          <div class="value-stat text-center">
-            <div class="num">5 min</div>
-            <div class="lbl">Average install time</div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">5 min</div>
+            <div class="small mt-2 txt-blue-50">Average install time</div>
           </div>
-          <div class="value-stat text-center">
-            <div class="num">$0</div>
-            <div class="lbl">To download &amp; get started</div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">$0</div>
+            <div class="small mt-2 txt-blue-50">To download &amp; get started</div>
           </div>
-          <div class="value-stat text-center">
-            <div class="num">1</div>
-            <div class="lbl">Dashboard for every gateway</div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">1</div>
+            <div class="small mt-2 txt-blue-50">Dashboard for every gateway</div>
           </div>
         </div>
       </div>
@@ -154,21 +165,21 @@ description: One plugin. 15+ payment providers. Install PaymentHood on WHMCS, Wo
         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Live in three steps</h2>
         <p class="lead animated" data-animate="fadeInUp" data-delay=".2">The same fast experience on every platform.</p>
       </div>
-      <div class="steps-grid">
-        <div class="integrations-step animated" data-animate="fadeInUp" data-delay=".2">
-          <div class="step-num">1</div>
-          <h4 class="txt-blue-600">Download</h4>
-          <p>Grab the free PaymentHood plugin for your platform — no purchase, no waiting on approvals.</p>
+      <div class="row g-4 mt-4 text-center">
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="icon-circle step-num mx-auto mb-3">1</div>
+          <h4 class="txt-blue-600 fs-5 mb-2">Download</h4>
+          <p class="small mb-0">Grab the free PaymentHood plugin for your platform — no purchase, no waiting on approvals.</p>
         </div>
-        <div class="integrations-step animated" data-animate="fadeInUp" data-delay=".3">
-          <div class="step-num">2</div>
-          <h4 class="txt-blue-600">Upload &amp; activate</h4>
-          <p>Install it like any other plugin and connect it to your PaymentHood account in a couple of clicks.</p>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="icon-circle step-num mx-auto mb-3">2</div>
+          <h4 class="txt-blue-600 fs-5 mb-2">Upload &amp; activate</h4>
+          <p class="small mb-0">Install it like any other plugin and connect it to your PaymentHood account in a couple of clicks.</p>
         </div>
-        <div class="integrations-step animated" data-animate="fadeInUp" data-delay=".4">
-          <div class="step-num">3</div>
-          <h4 class="txt-blue-600">Start accepting payments</h4>
-          <p>Toggle on the providers you want and start collecting from customers worldwide — instantly.</p>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="icon-circle step-num mx-auto mb-3">3</div>
+          <h4 class="txt-blue-600 fs-5 mb-2">Start accepting payments</h4>
+          <p class="small mb-0">Toggle on the providers you want and start collecting from customers worldwide — instantly.</p>
         </div>
       </div>
 
