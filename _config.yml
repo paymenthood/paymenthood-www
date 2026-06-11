@@ -40,6 +40,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 # Exclude files from processing
 exclude:
@@ -50,7 +51,6 @@ exclude:
 
 # Include settings
 include:
-  - _includes
   - .htaccess
   - _headers
 

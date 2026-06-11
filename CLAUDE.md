@@ -13,6 +13,15 @@
 - **Never modify** `assets/css/style.css`, `assets/css/vendor.bundle.css`, `assets/css/theme.css`, `_includes/header.html`, `_includes/header-secondary.html`, or `_includes/footer.html`.
 - Follow the page layout and structure already established in `index.html`.
 
+## Plugin Page Structure
+- Plugin pages live under `plugins/<slug>/` as `index.html`; the folder name **is** the URL slug (e.g. `plugins/phoca-cart/index.html` → `/plugins/phoca-cart/`). Use the URL slug for the folder, not the source stem (`phoca-cart`, not `phocacart`).
+- The installation/download page is `plugins/<slug>/installation/index.html` → `/plugins/<slug>/installation/`.
+- The hub is `plugins/index.html` → `/plugins/`.
+- **No `permalink:` front matter** on these — the folder structure drives the URL. Keep `layout: none`, `title`, `description`, `nav_active: plugins`.
+- Product-page content is assembled from `_includes/<slug>-product/*.html`; installation pages are standalone.
+- Redirects from old URLs use the **`jekyll-redirect-from`** plugin (works locally and on every host). Add `redirect_from: /old-path/` to the destination page's front matter; the plugin generates a redirect stub at the old URL. This is the single source of truth for redirects — do not also add `.htaccess`/`_redirects` rules for the same path (file-vs-redirect precedence on Netlify gets ambiguous).
+- `jekyll-sitemap` auto-generates `/sitemap.xml` — do **not** hand-write one (a manual sitemap silently disables the plugin).
+
 ## CSS for New Pages (Plugin Pattern)
 When adding or optimizing a secondary page (non-home), follow this pattern:
 
