@@ -99,6 +99,14 @@
      --pp-blob-rgb    hero decorative blob tint as r,g,b          */
 
 /* ── Product hero ─────────────────────────────────────────────── */
+/* The blue page banner (#pageHeader, style.css) ends in a 50px bottom
+   margin; on product/install pages the dark hero is the first block in
+   #main-content, so that margin shows as a stray white gap. The negative
+   margin collapses with it so the hero sits flush under the banner. */
+#main-content {
+    margin-top: -50px;
+}
+
 .product-hero {
     background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-200) 50%, var(--pp-hero-end, var(--blue-100)) 100%);
     padding: 90px 0 70px;
