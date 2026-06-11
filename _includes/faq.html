@@ -1,10 +1,12 @@
 {% comment %}
   Shared FAQ section for integration product pages.
-  Renders the visible accordion AND the FAQPage JSON-LD from one source: the
-  page's `faqs:` front matter (list of `q:` / `a:` pairs; answers may contain
-  inline HTML — Google permits a/em/strong/br/ul/ol/li in FAQ answers).
+  Renders the visible accordion AND the FAQPage JSON-LD from one source: a list
+  of `q:` / `a:` pairs passed in as `items` (typically from a per-page data file
+  such as _data/integrations/<slug>.yml). Answers may contain inline HTML —
+  Google permits a/em/strong/br/ul/ol/li in FAQ answers.
 
-  Parameters (all optional):
+  Parameters:
+    items      — (required) the list of {q, a} entries to render
     eyebrow    — eyebrow label above the heading (default: FAQ)
     bg         — section background class (default: bg-light)
     first_open — true to render the first item expanded (default: false)
@@ -20,7 +22,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-9">
-{% for faq in page.faqs %}
+{% for faq in include.items %}
                 <div class="faq-item{% if include.first_open and forloop.first %} open{% endif %}">
                     <div class="faq-question" onclick="toggleFaq(this)">
                         {{ faq.q }}
@@ -40,7 +42,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {% for faq in page.faqs %}{
+    {% for faq in include.items %}{
       "@type": "Question",
       "name": {{ faq.q | strip | jsonify }},
       "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a | strip | jsonify }} }

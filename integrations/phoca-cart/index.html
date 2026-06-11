@@ -4,41 +4,6 @@ redirect_from: /phoca-cart/
 nav_active: integrations
 title: Phoca Cart Payment Plugin - Accept Payments with 15+ Providers
 description: PaymentHood for Phoca Cart lets you accept one-time payments on your Joomla store through 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free plugin. 5-minute setup.
-faqs:
-  - q: Which Joomla and Phoca Cart versions does the plugin support?
-    a: >-
-      PaymentHood for Phoca Cart requires Joomla 4.0 or higher and a recent stable release of
-      Phoca Cart. It is tested against Joomla 4 and Joomla 5 with the corresponding PHP 8.x
-      requirements.
-  - q: Does PaymentHood support recurring or subscription payments?
-    a: >-
-      Not at this time. The current version supports one-time checkout payments only.
-      Recurring billing and subscription support is planned for a future release.
-  - q: How do I get a PaymentHood API key?
-    a: >-
-      Create a free PaymentHood account, connect your chosen payment provider in the dashboard,
-      and generate an API key. Paste that key into the PaymentHood plugin settings inside your
-      Joomla admin.
-  - q: Can I test payments before going live?
-    a: >-
-      Yes. The plugin includes a sandbox mode toggle. When enabled, all transactions route
-      through your payment provider's test environment so you can verify the full checkout
-      flow without processing real payments.
-  - q: Will the plugin affect Phoca Cart's order and invoice system?
-    a: >-
-      No. The plugin acts purely as a payment bridge. All standard Phoca Cart functionality —
-      order status updates, PDF invoices, email notifications, and stock management —
-      continues to work exactly as configured.
-  - q: Is there a cost to use the plugin?
-    a: >-
-      No. The PaymentHood Phoca Cart plugin is free to download and use. You pay only the
-      transaction fees charged by your chosen payment provider — there are no additional fees
-      from PaymentHood.
-  - q: Can I switch payment providers without reinstalling the plugin?
-    a: >-
-      Yes. Provider switching happens entirely in your PaymentHood dashboard. Just activate a
-      different provider there — the Joomla plugin and Phoca Cart configuration remain
-      unchanged.
 ---
 {% include header-secondary.html %}
 <script type="application/ld+json">
@@ -486,7 +451,7 @@ faqs:
         </div>
     </div>
 </section>
-{% include faq.html %}
+{% assign phoca_faqs = site.data.integrations["phoca-cart"].faqs %}{% include faq.html items=phoca_faqs %}
 <!-- Cta -->
 <section class="section">
     <div class="container">

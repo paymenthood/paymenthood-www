@@ -1,0 +1,37 @@
+# FAQ content for /integrations/virtuemart/ — rendered by _includes/faq.html
+# (drives both the visible accordion and the FAQPage JSON-LD). Answers may
+# contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
+faqs:
+  - q: Which Joomla and VirtueMart versions does the plugin support?
+    a: >-
+      PaymentHood for VirtueMart runs on Joomla 4.0 or higher with a supported VirtueMart 4
+      release. It is tested against the latest stable Joomla and VirtueMart versions.
+  - q: Does PaymentHood support subscriptions or recurring billing?
+    a: >-
+      Not at this time. The current version supports one-time checkout payments only.
+      Subscription / recurring billing support is planned for a future release.
+  - q: How do I get a PaymentHood API key?
+    a: >-
+      Create a free PaymentHood account, add your chosen payment provider in the dashboard,
+      and generate an API key. Then paste that key into the VirtueMart payment method
+      settings page.
+  - q: Can I test payments before going live?
+    a: >-
+      Yes. The plugin includes a sandbox mode toggle. When enabled, all transactions are routed
+      through your payment provider's sandbox environment so you can verify the full checkout
+      flow without processing real payments.
+  - q: How is the plugin installed on Joomla?
+    a: >-
+      It installs like any Joomla extension. Download the package, go to
+      <em>Extensions → Manage → Install</em>, upload the file, then enable the PaymentHood
+      payment plugin. It then appears as a payment method inside VirtueMart.
+  - q: Is there a cost to use the plugin?
+    a: >-
+      No. The PaymentHood VirtueMart plugin is free to download and use. You pay only the
+      transaction fees charged by your chosen payment provider — there are no additional fees
+      from PaymentHood.
+  - q: Can I switch payment providers without reinstalling the plugin?
+    a: >-
+      Yes. Provider switching happens in your PaymentHood dashboard — just activate a different
+      provider there. Your VirtueMart plugin continues working without any changes on the
+      Joomla side.
