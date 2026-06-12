@@ -140,7 +140,7 @@
     pointer-events: none;
 }
 .product-hero .container { position: relative; z-index: 1; }
-.product-hero h1 { line-height: 1.15; }
+.product-hero h2 { line-height: 1.15; }
 
 /* Soft white for secondary text on dark strips/heroes */
 .txt-white-soft { color: rgba(255,255,255,.65); }
@@ -665,7 +665,7 @@ a.provider-mini-pill--more:hover {
     background: #fff;
     padding: 80px 0 60px;
 }
-.install-hero h1,
+.install-hero h2,
 .install-hero p,
 .install-hero .lead { color: #1a1a1a !important; }
 .install-hero .logo-wrap {
