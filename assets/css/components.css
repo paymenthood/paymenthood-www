@@ -659,15 +659,15 @@ a.provider-mini-pill--more:hover {
 }
 
 /* ── Installation-page hero ───────────────────────────────────── */
-/* White hero used by all /integrations/<slug>/installation/ pages;
-   !important needed to beat the tc-light section text colors. */
+/* White hero used by all /integrations/<slug>/installation/ pages.
+   Deliberately NOT tc-light (that vocabulary is for dark sections). */
 .install-hero {
     background: #fff;
     padding: 80px 0 60px;
 }
 .install-hero h2,
 .install-hero p,
-.install-hero .lead { color: #1a1a1a !important; }
+.install-hero .lead { color: #1a1a1a; }
 /* White pills need an edge to read as pills on this white hero. */
 .install-hero .badge.bg-white { border: 1px solid var(--gray-200); }
 .install-hero .logo-wrap {
