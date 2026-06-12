@@ -18,13 +18,18 @@ Marketing site for PaymentHood (payment orchestration platform). Static Jekyll s
 
 ## Integration Pages (`integrations/…`)
 - Layout: `integrations/<slug>/index.html` (product), `integrations/<slug>/installation/index.html` (install guide), `integrations/index.html` (hub). The folder name **is** the URL slug (`phoca-cart`, not `phocacart`).
-- **All per-integration data lives in one file: `_data/integrations/<slug>.yml`** with two keys — `software:` (name, operating_system, download_url, optional version/release_notes) and `faqs:` (list of `q:`/`a:` pairs; inline HTML allowed in answers). Shared includes generate everything from it — **never hand-write `SoftwareApplication`/`FAQPage`/`BreadcrumbList` JSON-LD or FAQ accordion markup**:
-  - `{% include software-application.html app=site.data.integrations.<slug>.software %}` — product page only, never on install pages (one canonical software listing per plugin).
-  - `{% include faq.html items=site.data.integrations.<slug>.faqs %}` — renders the accordion **and** the FAQPage schema. Optional params: `eyebrow`, `bg`, `first_open`.
+- **All per-integration data lives in one file: `_data/integrations/<slug>.yml`** with three keys:
+  - `product:` — drives the shared product template (see below): `platform`, `compat`, `download_url`, `repo`, `logo`, `checkout_image`, `ecosystem`, `install_path`, plus optionals (`noun`, `audience`, `compat_name`, `hero_title_html`, `store`, `supports_subscriptions`). The template's top comment documents each field.
+  - `software:` — name, operating_system, download_url, optional version/release_notes.
+  - `faqs:` — list of `q:`/`a:` pairs; inline HTML allowed in answers.
+- **The entire product-page body is one shared template, `_includes/integration-product.html`.** A product page is just a thin stub: front matter (`layout: none`, `slug`, `redirect_from`, `nav_active: integrations`, `title`, `description`) → `{% include header-secondary.html %}` → `software-application.html` → `breadcrumb.html` → the `components.css` link → an inline `<style>` setting the `--pp-*` theme vars on `#main-content` → `{% include integration-product.html slug=page.slug %}` → `footer.html` (see `integrations/woocommerce/index.html`). **To change product-page copy or structure, edit the template, not the stubs** — the template renders the hero, all sections, the providers strip, and the FAQ for every plugin. Never hand-write product markup per page.
+- Shared includes generate all structured data — **never hand-write `SoftwareApplication`/`FAQPage`/`BreadcrumbList` JSON-LD or FAQ accordion markup**:
+  - `{% include software-application.html app=site.data.integrations.<slug>.software %}` — product stub only, never on install pages (one canonical software listing per plugin).
+  - `{% include faq.html items=… %}` — rendered **inside** `integration-product.html`; emits the accordion **and** the FAQPage schema. Optional params: `eyebrow`, `bg`, `first_open`.
   - `{% include breadcrumb.html %}` — on every integration page; derives the trail from `page.url`. Segment labels come from `_data/breadcrumb_labels.yml` — add an entry only for special casing (e.g. `whmcs: WHMCS`); unmapped segments fall back to a capitalized slug.
-  - Hyphenated slugs break dot-access inside include tags — assign first: `{% assign d = site.data.integrations["phoca-cart"] %}` then `app=d.software` / `items=d.faqs` (see `integrations/phoca-cart/index.html`).
-- New page = copy the **markup structure** of the canonical page (`integrations/woocommerce/index.html`; any `*/installation/index.html` for installs) and keep the shared class names exactly (`product-hero`, `stats-bar`, `feat-card`, `ptype-card`, `install-hero`, …). Never create page-prefixed clones of shared components (the old `woo-*`/`vm-*` clones cost ~480 duplicated lines per page and were removed deliberately).
-- Page CSS `assets/css/<slug>-product.css` contains **only** the `--pp-*` theme overrides and logo/screenshot sizing quirks; near-empty (or absent, for the default blue theme) is correct.
+  - Hyphenated slugs break dot-access inside include tags — assign first: `{% assign d = site.data.integrations["phoca-cart"] %}` then `app=d.software` (see `integrations/phoca-cart/index.html`).
+- **Installation pages are still standalone hand-written files** (the shared template is product-only). New install page = copy an existing `*/installation/index.html`, keep the shared class names exactly (`install-hero`, `step-card`, …), link `components.css`, and add `{% include breadcrumb.html %}`. Never create page-prefixed clones of shared components.
+- Exactly **one `<h1>` per page** — it's the visible page title from `header-secondary.html`. Hero/in-content headings are `<h2>` (keep a size class like `h1`/`display-4` so the visual size is unchanged).
 
 ## CSS Rules
 **Core principle: one unified class vocabulary across the whole site.** Always reach for Bootstrap utilities and existing site/master classes before writing any CSS; the same visual pattern must use the same class on every page (never a per-page re-implementation or near-duplicate). New CSS is a last resort, only for what no existing class can express.
@@ -35,7 +40,7 @@ Resolve every style in this order — never skip a tier:
 3. **Page CSS** (`assets/css/<page>.css`) — last resort: `--pp-*` overrides, unique pseudo-elements, sizing quirks.
 
 Conventions:
-- **No inline `<style>` blocks or `style=""` attributes** in new or refactored pages.
+- **No inline `<style>` blocks or `style=""` attributes** in new or refactored pages. Sole sanctioned exception: the one-line `<style>` on a product-page stub that sets the `--pp-*` theme vars on `#main-content` (this replaced the old per-slug `assets/css/<slug>-product.css` files).
 - kebab-case class names; page-specific classes are page-prefixed, component classes are generic. Check `style.css` for collisions before naming (e.g. `.step-card` is taken).
 - Use palette vars (`var(--blue-200)`, `var(--gray-200)`, …) — never hardcode a hex that matches a var. No `@media` in page CSS (use Bootstrap cols + auto-fit grids). No new custom properties except the documented `--pp-*` overrides. Beat a global selector by scoping under a parent class, not `!important`.
 - `vendor.bundle*.css` is vendored Bootstrap — don't hand-edit it. `style.css`/`theme.css` are the master theme and the header/footer includes are shared by every page — editable, but changes there affect the whole site, so make them deliberate and global in intent.

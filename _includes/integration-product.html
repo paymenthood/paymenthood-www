@@ -19,7 +19,7 @@
       noun ........... plugin (default) | module | extension — woven through all copy
       audience ....... customers (default) | clients
       compat_name .... version-pill name when not the platform (e.g. "Joomla")
-      hero_title_html  styled <h1> (default "The Payment Gateway / Your <platform> Store / Deserves")
+      hero_title_html  styled hero heading, rendered as <h2> (default "The Payment Gateway / Your <platform> Store / Deserves")
       store .......... "on your ___" (default "<ecosystem> store")
       supports_subscriptions  true → subscription card, billing copy & comparison table
 {% endcomment %}
@@ -60,7 +60,7 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {{ p.platform }} Integration
                 </div>
-                <h1 class="h1 fw-bold text-white mb-4">{{ hero_title }}</h1>
+                <h2 class="h1 fw-bold text-white mb-4">{{ hero_title }}</h2>
                 <p class="lead mb-5 hero-lead">{{ lead }}</p>
                 <div class="hero-cta mb-4">
                 <div class="cta-buttons d-flex gap-3 mb-3">
