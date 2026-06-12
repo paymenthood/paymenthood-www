@@ -10,6 +10,17 @@ description: PaymentHood for WHMCS lets you accept one-time and subscription pay
 {% include software-application.html app=site.data.integrations.whmcs.software %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/whmcs-product.css' | relative_url }}">
+<style>
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;border:1px solid var(--gray-200)}
+.compare-table thead th{background:var(--blue-200);color:#fff;padding:18px 24px;font-size:.9rem;font-weight:600;text-align:left}
+.compare-table thead th:first-child{width:40%}
+.compare-table tbody tr:nth-child(even){background:var(--blue-30)}
+.compare-table tbody tr:nth-child(odd){background:#fff}
+.compare-table tbody td{padding:14px 24px;font-size:.88rem;color:var(--blue-400);border-bottom:1px solid var(--gray-200)}
+.compare-table tbody tr:last-child td{border-bottom:none}
+.compare-table tbody td:first-child{font-weight:600;color:var(--blue-600)}
+.check-yes{color:var(--green-300);font-weight:700}
+.check-no{color:#e53e3e;font-weight:700}
+</style>
 {% include integration-product.html slug=page.slug %}
 {% include footer.html %}

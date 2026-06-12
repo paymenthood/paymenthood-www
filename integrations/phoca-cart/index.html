@@ -10,6 +10,9 @@ description: PaymentHood for Phoca Cart lets you accept one-time payments on you
 {% assign d = site.data.integrations["phoca-cart"] %}{% include software-application.html app=d.software %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/phocacart-product.css' | relative_url }}">
+<style>
+/* The Phoca Cart logo PNG carries built-in whitespace. */
+.logo-box{padding:28px 32px;min-height:110px}
+</style>
 {% include integration-product.html slug=page.slug %}
 {% include footer.html %}

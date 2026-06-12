@@ -10,6 +10,10 @@ description: PaymentHood for VirtueMart lets you accept one-time payments on you
 {% include software-application.html app=site.data.integrations.virtuemart.software %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/virtuemart-product.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:var(--blue-100);--pp-accent-rgb:22,163,254}
+/* The VirtueMart logo PNG is wide and short; give it more air. */
+.logo-box{padding:30px 28px;min-height:128px}
+</style>
 {% include integration-product.html slug=page.slug %}
 {% include footer.html %}
