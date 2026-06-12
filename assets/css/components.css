@@ -668,6 +668,8 @@ a.provider-mini-pill--more:hover {
 .install-hero h2,
 .install-hero p,
 .install-hero .lead { color: #1a1a1a !important; }
+/* White pills need an edge to read as pills on this white hero. */
+.install-hero .badge.bg-white { border: 1px solid var(--gray-200); }
 .install-hero .logo-wrap {
     display: inline-block;
     background: #fff;
