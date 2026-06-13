@@ -1,0 +1,247 @@
+// Utility/helper classes of the master theme: gutters, text-color contexts,
+// overflow/shape/overlay/mask helpers, the bg-image system and width caps.
+// Loaded on every page via assets/css/style.scss.
+// Extracted (pruned of unused rules) from style.css sections
+// "02.02 Spacing", "02.03 Colors" and "02.04 Misc".
+
+// ---- 02.02 Spacing ----
+
+// vertical gutters
+.gutter-vr-30px {
+  margin-top: -15px !important;
+  margin-bottom: -15px !important;
+
+  > li, > div {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+}
+
+// ---- 02.03 Colors ----
+
+// light text context (dark backgrounds)
+.tc-light {
+  &, a:not(.btn):not([class*="link-"]) {
+    color: #f6fafd;
+  }
+
+  a:not(.btn):not([class*="link-"]):hover {
+    color: #16a3fe;
+  }
+
+  p, .list {
+    color: #b9d2f4;
+  }
+
+  .lead {
+    color: #fff;
+  }
+}
+
+// background helpers
+.bg-light.current {
+  background-color: rgba(246, 250, 253, 0.7) !important;
+}
+
+.bg-light-alt.current {
+  background-color: rgba(234, 239, 246, 0.7) !important;
+}
+
+.bg-theme-alt {
+  background-color: var(--blue-200) !important;
+
+  &.current {
+    background-color: rgba(25, 64, 176, 0.7) !important;
+  }
+}
+
+// text colors
+.text-primary {
+  color: #122272 !important;
+}
+
+.text-secondary {
+  color: var(--green-300) !important;
+}
+
+// ---- 02.04 Misc ----
+
+// overflow / shadow
+.ov-h, .banner-wrap {
+  overflow: hidden;
+}
+
+.shadow {
+  box-shadow: 0 3px 12px 0 rgba(18, 24, 58, 0.08) !important;
+}
+
+// section shape overlays
+.mask-contain-bottom:before {
+  background-size: contain;
+  background-position: 50% 100%;
+}
+
+.shape-x:after {
+  background-image: url('../images/shape-x.png');
+}
+
+.shape-x-2:after {
+  background-image: url('../images/shape-x-2.png');
+}
+
+.shape-y:after {
+  background-image: url('../images/home/shape-y.png');
+}
+
+.shape-x.nk-ovm:after, .shape-x.nk-ovm:before {
+  right: 0 !important;
+}
+
+.nk-ovm {
+  z-index: 1;
+
+  &:before, &:after {
+    bottom: -1px;
+    left: -1px;
+  }
+
+  &:before {
+    z-index: 1;
+  }
+}
+
+// bg-image / bg-video system
+.has-bg-image > div, .has-bg-video > div {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-image {
+  position: absolute !important;
+  z-index: 0 !important;
+  opacity: 0;
+  transition: opacity .4s;
+
+  &.bg-image-loaded {
+    opacity: 1;
+  }
+
+  img {
+    display: none !important;
+  }
+}
+
+.bg-video {
+  position: absolute !important;
+  z-index: 0 !important;
+  overflow: hidden;
+}
+
+.overlay:after {
+  content: '';
+}
+
+// width caps
+.wide {
+  max-width: 750px;
+}
+
+.wide-sm, .wide-auto-sm {
+  max-width: 555px;
+}
+
+.text-center [class*="wide"], .text-center[class*="wide"] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// section overlap pull-up
+.over-lg-up {
+  margin-top: 0;
+}
+
+@media (min-width: 576px) {
+  .over-lg-up {
+    margin-top: -80px;
+  }
+}
+
+@media (min-width: 768px) {
+  .over-lg-up {
+    margin-top: -80px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .over-lg-up {
+    margin-top: -100px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .over-lg-up {
+    margin-top: -160px !important;
+  }
+}
+
+hr {
+  position: relative;
+  z-index: 5;
+}
+
+// ui-mask glow helper
+[class*=ui-mask] {
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  width: 400px;
+  height: 600px;
+  z-index: 1;
+  overflow: hidden;
+
+  &:after {
+    position: absolute;
+    right: 30%;
+    top: 25%;
+    content: "";
+    display: block;
+    background-image: linear-gradient(135deg, rgba(25, 64, 176, 0) 15%, #1c62d8 50%, rgba(25, 64, 176, 0) 80%);
+    border-radius: 50%;
+    height: 400px;
+    width: 400px;
+    -webkit-filter: blur(80px);
+    filter: blur(80px);
+    z-index: 1;
+  }
+
+  &:before {
+    display: none;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 50%;
+    z-index: 3;
+  }
+}
+
+.bg-white [class*=ui-mask]:after {
+  display: none;
+}
+
+@media only screen and (min-width: 767px) and (max-width: 1024px) {
+  [class*=ui-mask]:before {
+    background-size: 50%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  [class*=ui-mask] {
+    transform: scale(0.5);
+    transform-origin: right;
+  }
+}

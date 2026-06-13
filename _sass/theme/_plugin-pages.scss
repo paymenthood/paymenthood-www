@@ -1,0 +1,164 @@
+// Plugin Pages — shared styles for the integration plugin pages
+// (screenshots, steps, hero bits — used by /integrations/<slug>/ pages).
+// Loaded on every page via assets/css/style.scss.
+// Extracted (pruned of unused rules) from style.css section
+// "05. Plugin Pages (shared across WHMCS, WooCommerce, etc.)".
+
+// ---- installation steps ----
+.step-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 32px;
+  border-left: 4px solid var(--blue-100);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--blue-100);
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+// ---- code & callout boxes ----
+.code-block {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.warning-box {
+  background: #fff3e0;
+  border-left: 4px solid #ff9800;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.success-box {
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+// ---- screenshots ----
+.screenshot-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  margin: 24px 0;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// ---- hero badge ----
+.plugin-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(var(--blue-200-rgb), 0.08);
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: var(--blue-200);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+// ---- wgs (footer widget) titles & body ----
+.wgs-title {
+  text-transform: uppercase;
+  color: var(--blue-200);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.075em;
+}
+
+// Two consecutive .wgs-title-s3 rules are an intentional cascade override:
+// the first body originally belonged to ".wgs-title-s2, .wgs-title-s3"
+// (.wgs-title-s2 was pruned as unused) — keep both, in order.
+.wgs-title-s3 {
+  font-size: 1.125rem;
+  letter-spacing: normal;
+}
+
+.wgs-title-s3 {
+  font-weight: 700;
+  margin-bottom: 22px;
+  padding-top: 10px;
+}
+
+.tc-light .wgs-title {
+  color: var(--green-300);
+}
+
+.wgs-logo {
+  padding-bottom: 22px;
+  display: inline-block;
+}
+
+.wgs-body p {
+  font-size: 0.93em;
+  line-height: 1.71;
+  margin-bottom: 0.75rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ---- wgs link lists ----
+.wgs-links li {
+  position: relative;
+  padding: 5px 0;
+  line-height: 1;
+
+  &:last-child {
+    padding-bottom: 0px;
+  }
+
+  a {
+    font-size: 0.9em;
+    line-height: 20px;
+    display: block;
+    color: #12183a;
+
+    &:hover {
+      color: #16a3fe;
+    }
+  }
+}
+
+.tc-light .wgs-links li a {
+  color: #fff !important;
+
+  &:hover {
+    color: #16a3fe !important;
+  }
+}

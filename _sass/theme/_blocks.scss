@@ -1,0 +1,332 @@
+// Content layout blocks (nk-block grid system, card/box components,
+// section-head eyebrow+title pattern, partner logo box, wgs widget base).
+// Loaded on every page via assets/css/style.scss.
+// Extracted (pruned of unused rules) from style.css sections
+// "04.03 Blocks", "04.04 Box", "04.06 Head", "04.11 Partners", "04.13 WGS".
+
+// ---- 04.03 Blocks ----
+
+.nk-block {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+
+  & ~ & {
+    padding-top: 40px;
+  }
+}
+
+.overlay-x .nk-block {
+  z-index: 2;
+}
+
+.section-head + .nk-block, hr + .nk-block {
+  padding-top: 0;
+}
+
+.nk-block-features {
+  margin-bottom: -30px;
+}
+
+@media (min-width: 576px) {
+  .nk-block ~ .nk-block {
+    padding-top: 60px;
+  }
+  .section-head + .nk-block, hr + .nk-block {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .nk-block ~ .nk-block {
+    padding-top: 150px;
+  }
+  .section-head + .nk-block, hr + .nk-block {
+    padding-top: 0;
+  }
+}
+
+// ---- 04.04 Box ----
+
+.card {
+  padding: 20px;
+  background: #fff;
+  border: none;
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.02);
+
+  &.card-s3 {
+    padding: 30px 20px;
+  }
+}
+
+.card-s3 {
+  box-shadow: 0px 5px 18px rgba(65, 80, 118, 0.2);
+}
+
+@media (min-width: 576px) {
+  .card {
+    padding: 30px;
+
+    &.card-s3 {
+      padding: 25px;
+    }
+  }
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 850px;
+  padding-bottom: 100px;
+}
+
+.is-transparent .banner {
+  padding-top: 60px;
+}
+
+.banner-wrap {
+  width: 100%;
+}
+
+.banner > .nk-block {
+  position: relative;
+  z-index: 2;
+}
+
+.cpn {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.cpn-head, .cpn-action, .cpn-text {
+  margin-top: 20px;
+}
+
+.cpn > *:first-child {
+  margin-top: 0;
+}
+
+.cpn-head {
+  .title {
+    font-size: 3rem;
+    line-height: 1.5;
+  }
+
+  .title-lg {
+    line-height: 1.3;
+    font-weight: 700;
+  }
+}
+
+.cpn-text {
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #415076;
+}
+
+.tc-light .cpn-text {
+  color: #b9d2f4;
+}
+
+.cpn-text {
+  p {
+    color: inherit !important;
+    font-size: inherit !important;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .lead-s3 {
+    font-size: 1.3rem !important;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+}
+
+@media (min-width: 768px) {
+  .cpn-head .title-lg {
+    font-size: 4rem;
+  }
+  .cpn-text, .cpn-action {
+    margin-top: 20px;
+  }
+  .cpn-text {
+    margin-bottom: 15px;
+  }
+  .cpn-btns {
+    padding-top: 10px;
+  }
+}
+
+@media (min-width: 992px) {
+  .is-transparent .banner {
+    padding-top: 75px;
+  }
+  .cpn {
+    max-width: 90%;
+  }
+  .cpn-head, .cpn-action, .cpn-text {
+    margin-top: 30px;
+  }
+  .cpn-text {
+    margin-bottom: 25px;
+    max-width: 90%;
+  }
+  .cpn-text-s3 {
+    margin-top: 10px;
+  }
+  .cpn-btns {
+    padding-top: 20px;
+  }
+  .cpn-action .cpn-btns {
+    padding-top: 0;
+  }
+  .cpn-head {
+    .title-sm {
+      font-size: 1.85rem;
+    }
+
+    .title-md {
+      font-size: 2.6rem;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .banner {
+    min-height: 750px !important;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .banner {
+    min-height: 650px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner {
+    min-height: 800px;
+    padding-bottom: 65px;
+  }
+}
+
+@media (max-width: 420px) {
+  .cpn-btns .btn:not(.btn-with-icon) {
+    font-size: 11px;
+    padding: 8px 16px;
+  }
+}
+
+// ---- 04.06 Head ----
+
+.section-head {
+  position: relative;
+
+  > span {
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 1.25rem;
+  }
+
+  &:not([class*=pdb]) {
+    padding-bottom: 40px;
+  }
+
+  p {
+    color: #415076;
+  }
+}
+
+.tc-light .section-head p {
+  color: #8ca2e5;
+}
+
+.section-head {
+  &.tc-light p {
+    color: #8ca2e5;
+  }
+
+  .title-thin {
+    font-weight: 300;
+  }
+
+  .title:not(:last-child) {
+    margin-bottom: .75rem;
+  }
+
+  .title:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    content: attr(title);
+    font-family: "Roboto", sans-serif;
+    line-height: .9;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--blue-200);
+    transform: translate(-50%, -50%);
+    opacity: 0.06;
+  }
+}
+
+.tc-light .section-head .title:before {
+  opacity: 0.06;
+}
+
+@media (min-width: 576px) {
+  .section-head:not([class*=pdb]) {
+    padding-bottom: 50px;
+  }
+  .section-head-sm:not([class*=pdb]) {
+    padding-bottom: 30px;
+  }
+  .section-head .title:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .section-head:not([class*=pdb]) {
+    padding-bottom: 60px;
+  }
+  .section-head-sm:not([class*=pdb]) {
+    padding-bottom: 40px;
+  }
+}
+
+.t-cap {
+  text-transform: capitalize !important;
+}
+
+// ---- 04.11 Partners ----
+
+.partner-box {
+  padding: 15px 0px;
+  margin-bottom: 30px;
+  box-shadow: 0px 5px 25px rgba(25, 64, 176, 0.1);
+}
+
+@media (min-width: 576px) {
+  .partner-box {
+    padding: 15px 66px;
+  }
+}
+
+// ---- 04.13 WGS ----
+
+.wgs {
+  margin-bottom: 30px;
+}

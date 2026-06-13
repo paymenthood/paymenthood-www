@@ -1,0 +1,52 @@
+// _faq.scss — FAQ accordion (item frame, question row, arrow chip, collapsible
+// answer). Markup is emitted by _includes/faq.html, which renders inside the
+// integration product template (_includes/integration-product.html) and
+// anywhere else the faq include is dropped in.
+
+// ── FAQ accordion ────────────────────────────────────────────── //
+.faq-item {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--blue-600);
+    font-size: .95rem;
+    gap: 16px;
+
+    &:hover { background: var(--blue-30); }
+    .faq-arrow {
+        flex-shrink: 0;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        background: var(--blue-30);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--blue-200);
+        transition: transform .25s;
+        font-size: .85rem;
+    }
+}
+.faq-answer {
+    display: none;
+    padding: 0 24px 20px;
+    font-size: .9rem;
+    color: var(--blue-400);
+    line-height: 1.65;
+    background: #fff;
+}
+.faq-item.open {
+    .faq-answer { display: block; }
+    .faq-arrow  {
+        transform: rotate(180deg);
+        background: var(--pp-accent, var(--blue-200));
+        color: #fff;
+    }
+}

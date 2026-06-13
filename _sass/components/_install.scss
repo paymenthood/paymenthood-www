@@ -1,0 +1,43 @@
+// _install.scss — installation-page hero (white variant) and the bare
+// screenshot modifier for the master .screenshot-container. Used by the
+// hand-written /integrations/<slug>/installation/ pages.
+
+// ── Installation-page hero ───────────────────────────────────── //
+// White hero used by all /integrations/<slug>/installation/ pages.
+// Deliberately NOT tc-light (that vocabulary is for dark sections).
+.install-hero {
+    background: #fff;
+    padding: 80px 0 60px;
+
+    h2,
+    p,
+    .lead { color: #1a1a1a; }
+    // White pills need an edge to read as pills on this white hero.
+    .badge.bg-white { border: 1px solid var(--gray-200); }
+    .logo-wrap {
+        display: inline-block;
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: 18px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(25, 64, 176, .08);
+    }
+}
+.install-hero-logo { max-width: 280px; }
+
+// Bare screenshot variant — no card chrome, narrow and centered.
+// Modifies the master .screenshot-container from style.css.
+.screenshot-container--bare {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+
+    img {
+        max-width: 380px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+}

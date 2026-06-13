@@ -1,0 +1,286 @@
+// Fixed site header (.header-main/.header-box, sticky .has-fixed state toggled by scripts.js,
+// logo sizing, banner/hero base); used by _includes/header.html and header-secondary.html on
+// every page; extracted (pruned of unused rules) from style.css section "05.01 Header".
+
+// ---- header bar & fixed/transparent states ----
+.header-main {
+  padding: 12px 0;
+  transition: all .4s;
+}
+
+.is-transparent .header-main, .has-fixed .header-main {
+  width: 100%;
+  z-index: 49;
+}
+
+.is-transparent .header-main {
+  position: absolute !important;
+}
+
+.has-fixed .header-main {
+  position: fixed !important;
+  box-shadow: 0 0 20px 0 rgba(18, 24, 58, 0.08);
+}
+
+// no element carries .is-dark, so this always applies once the header is stuck
+.has-fixed:not(.is-dark) .header-main {
+  background: var(--gray-200);
+}
+
+.has-fixed.is-shrink .header-main {
+  padding: 8px 0;
+}
+
+// ---- container & wrap ----
+.header-container:not(.container) {
+  width: 100%;
+  padding: 0 15px;
+}
+
+.page-header:not(.has-fixed) .header-wrap {
+  background-color: #0f3297;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.header-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  margin: 6px 0;
+  flex-shrink: 0;
+}
+
+// ---- mobile navbar drawer ----
+.header-navbar {
+  position: fixed;
+  left: -280px;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+
+  &.menu-mobile {
+    transition: all 0.4s;
+  }
+}
+
+.header-navbar::before, .header-navbar-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  content: '';
+  top: 0;
+}
+
+.header-navbar::before {
+  background: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all .4s;
+}
+
+.header-navbar-overlay {
+  background: rgba(12, 25, 90, 0.7);
+  left: 100%;
+  width: 0;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s;
+  transition-delay: .2s;
+}
+
+.header-navbar.menu-shown {
+  left: 0 !important;
+  z-index: 10;
+
+  .header-navbar-overlay {
+    width: 100vw;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ---- classic (desktop) navbar ----
+.header-navbar-classic {
+  position: absolute;
+  top: 99%;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  margin-top: 12px;
+  z-index: auto;
+  flex-grow: 1;
+  transition: all 0.4s;
+  padding: 0 20px;
+}
+
+.has-fixed .header-navbar-classic {
+  margin-top: -6px;
+  padding: 0;
+}
+
+.header-navbar-classic:before {
+  border-radius: 4px;
+}
+
+.has-fixed .header-navbar-classic:before {
+  width: 100vw;
+  border-radius: 0;
+}
+
+// ---- menu & banner base ----
+.header-menu {
+  justify-content: flex-end;
+  padding: 30px 25px;
+}
+
+.header-navbar-classic .header-menu {
+  padding: 0;
+}
+
+.header-banner {
+  min-height: 72px;
+}
+
+.overlay-menu-shown .has-fixed > .header-main {
+  z-index: 16;
+}
+
+// ---- drawer width breakpoints ----
+@media (min-width: 375px) {
+  .header-navbar:not(.header-navbar-classic) {
+    left: -310px;
+    width: 290px;
+  }
+}
+
+@media (min-width: 576px) {
+  .header-navbar:not(.header-navbar-classic) {
+    left: -360px;
+    width: 340px;
+  }
+}
+
+// ---- logo light/dark variants & sizing ----
+.logo-dark, .is-transparent:not(.has-fixed) .logo-light {
+  display: block;
+}
+
+.logo-light, .is-transparent:not(.has-fixed) .logo-dark {
+  display: none;
+}
+
+.logo img {
+  height: 57px;
+  transition: all .4s;
+}
+
+// ---- desktop layout ----
+@media (min-width: 992px) {
+  .header-navbar:not(.header-navbar-classic) {
+    height: auto;
+    width: auto;
+    left: 0;
+  }
+  .header-main {
+    padding: 20px 0;
+  }
+  .header-nav-toggle {
+    display: none;
+  }
+  .header-container:not(.container) {
+    padding: 0 25px;
+  }
+  .header-banner {
+    min-height: 98px;
+  }
+  .logo img {
+    height: 65px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header-container:not(.container) {
+    padding: 0 25px;
+  }
+}
+
+// ---- menu scroll behavior & toggle ----
+.header-menu {
+  max-height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.header-navbar-classic .header-menu {
+  display: none;
+  max-height: 65vh;
+
+  &.menu-shown {
+    display: block;
+  }
+}
+
+.header-nav-toggle {
+  height: 44px;
+}
+
+// ---- menu buttons ----
+// .is-transparent = header over the home hero (no scroll yet);
+// .has-fixed = stuck header after scroll. Most :not() args below
+// (.is-dark, .is-light, .no-change, btn-grad) exist nowhere on the
+// site, so those :not()s always match — kept for cascade weight.
+.header-menu .vh-btn-outline:not(:hover) {
+  color: #415076;
+}
+
+// theme oddity preserved as-is: .is-transparent here is a descendant,
+// so this rule never matches — but it rode along in the original cascade
+.header-menu .vh-btn-outline:not(:hover) .is-transparent:not(.is-dark) {
+  color: #415076;
+}
+
+.tc-light .vh-btn-outline:not(:hover) {
+  color: #fff;
+}
+
+@media (min-width: 992px) {
+  .tc-light .header-menu .vh-btn-outline:not(:hover), .is-transparent .header-menu .vh-btn-outline:not(:hover), .is-transparent:not(.has-fixed):not(.is-light) .header-menu .vh-btn-outline:not(:hover) {
+    color: #fff;
+  }
+  .has-fixed:not(.is-dark) .header-menu .vh-btn-outline:not(:hover) {
+    color: #415076;
+  }
+  .is-transparent:not(.has-fixed):not(.is-light) .header-menu .vh-btn-outline:not(:hover):not(:focus):not(.no-change) {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .is-transparent:not(.has-fixed):not(.is-light) .header-menu .btn:not(:hover):not(:focus):not(.no-change):not(.vh-btn-outline) {
+    border-color: #fff;
+    background: #fff;
+    color: #415076 !important;
+  }
+  .is-transparent:not(.has-fixed):not(.is-light) .header-menu .vh-btn-outline:not([class*="btn-grad"]):not(.no-change):hover, .is-transparent:not(.has-fixed):not(.is-light) .header-menu .vh-btn-outline:not([class*="btn-grad"]):not(.no-change):focus {
+    color: #16a3fe !important;
+    border-color: #fff !important;
+    background-color: #fff !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .header-menu .vh-btn {
+    line-height: 24px;
+    padding: 6px 14px;
+    min-width: 100px;
+  }
+}

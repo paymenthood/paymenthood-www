@@ -1,0 +1,268 @@
+// Integrations mega-menu in the navbar (dark logo-forward card on desktop,
+// stacked list inside mobile off-canvas nav); used by _includes/header.html.
+//
+// Desktop (>=992px): a wide card anchored to the navbar with the plugins in a
+// two-column grid ("View all" fills the sixth cell).
+// Mobile (<992px): the same markup slide-toggles inside the off-canvas nav as
+// a stacked list, like a regular submenu.
+// Self-contained dark card so it stands out on white sections, the dark hero,
+// and the (white) mobile nav panel alike.
+
+// ---- dark card shell ----
+.integrations-menu {
+  list-style: none;
+  background: #0f1f71;
+  border-radius: 14px;
+
+  .menu-item {
+    border: none;
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+}
+
+.integrations-menu-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.integrations-menu-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .55);
+  padding: 14px 16px 8px;
+}
+
+// ---- plugin rows ----
+.integration-link {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 12px !important;
+  border-radius: 10px;
+  transition: background .2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, .08);
+  }
+}
+
+// White tile keeps every brand logo readable on the dark card
+.integration-logo {
+  flex: 0 0 auto;
+  width: 148px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  overflow: hidden;
+
+  img {
+    max-height: 50px;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+
+    // Phoca Cart's source PNG has heavy vertical whitespace — size it by
+    // width and let the tile clip the empty padding so the mark reads large.
+    &[alt="Phoca Cart"] {
+      max-height: 100px;
+      max-width: 124px;
+    }
+
+    // J2Commerce is a horizontal wordmark — size it by width like the others.
+    &[alt="J2Commerce"] {
+      max-height: 44px;
+      max-width: 130px;
+    }
+  }
+}
+
+.integration-desc {
+  flex: 1 1 auto;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, .72);
+}
+
+.integration-arrow {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: 15px;
+  color: #16a3fe;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.integration-link:hover .integration-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+// ---- "View all plugins" footer link ----
+.integrations-menu-foot {
+  margin-top: 6px;
+  padding: 14px 16px 4px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #16a3fe;
+    transition: gap .2s ease;
+
+    &:hover {
+      gap: 10px;
+      color: #16a3fe;
+    }
+  }
+}
+
+// ---- mobile off-canvas nav ----
+// In the narrow mobile nav the descriptions can't fit on one row beside the
+// logo, so hide them — show only the logos and the "View all plugins" link.
+// The logo tiles are also scaled down responsively (tablet, then phone) so
+// they don't overpower the narrow off-canvas panel.
+@media (max-width: 991px) {
+  .integrations-menu {
+    .integration-desc {
+      display: none;
+    }
+
+    .integration-link {
+      justify-content: center;
+    }
+
+    // Tablet / small-desktop off-canvas nav
+    .integration-logo {
+      width: 128px;
+      height: 56px;
+      padding: 8px 12px;
+
+      img {
+        max-height: 34px;
+        max-width: 96px;
+
+        &[alt="Phoca Cart"] {
+          max-height: 76px;
+          max-width: 100px;
+        }
+
+        &[alt="J2Commerce"] {
+          max-height: 50px;
+          max-width: 108px;
+        }
+      }
+    }
+  }
+}
+
+// Phones — smallest panel, scale the tiles down further
+@media (max-width: 575px) {
+  .integrations-menu {
+    .integration-logo {
+      width: 104px;
+      height: 48px;
+      padding: 6px 10px;
+
+      img {
+        max-height: 28px;
+        max-width: 80px;
+
+        &[alt="Phoca Cart"] {
+          max-height: 62px;
+          max-width: 84px;
+        }
+
+        &[alt="J2Commerce"] {
+          max-height: 42px;
+          max-width: 90px;
+        }
+      }
+    }
+  }
+}
+
+// ---- desktop mega-menu card ----
+@media (min-width: 992px) {
+  // Anchor the panel to the navbar (position: relative at this width)
+  // instead of the menu item, so the wide card right-aligns with the
+  // header and can never overflow the viewport.
+  .menu-item.has-mega {
+    position: static;
+  }
+
+  .menu-sub.integrations-menu {
+    min-width: 680px;
+    max-width: 680px;
+    left: auto;
+    right: 0;
+    transform: translateY(-8px);
+    padding: 10px;
+    background: #0f1f71;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    box-shadow: 0 26px 60px -16px rgba(8, 12, 45, .55), 0 10px 24px rgba(8, 12, 45, .28);
+  }
+
+  .menu-item.has-mega:hover > .integrations-menu {
+    transform: translateY(0);
+  }
+
+  .integrations-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 12px;
+  }
+
+  // "View all plugins" becomes the sixth grid cell — a ghost card
+  // sized by the row, so the 5 plugins + link fill the grid exactly.
+  .integrations-menu-foot {
+    margin-top: 0;
+    padding: 0;
+    border-top: 0;
+
+    a {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      padding: 12px;
+      border: 1px dashed rgba(255, 255, 255, .25);
+      border-radius: 10px;
+
+      &:hover {
+        border-color: rgba(22, 163, 254, .6);
+        background: rgba(255, 255, 255, .04);
+      }
+    }
+  }
+
+  .menu-sub.integrations-menu:before {
+    display: none;
+  }
+}
+
+// From 1200px the header fits on one row and the navbar spans wider,
+// so the panel can open out to its full size.
+@media (min-width: 1200px) {
+  .menu-sub.integrations-menu {
+    min-width: 820px;
+    max-width: 820px;
+  }
+}

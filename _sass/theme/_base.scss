@@ -1,0 +1,221 @@
+// Element reset / base typography layer of the master theme.
+// Loaded on every page via assets/css/style.scss.
+// Extracted (pruned of unused rules) from style.css section "02.01 Reset".
+
+// ---- root typography ----
+
+html, body {
+  font-family: "Roboto", sans-serif;
+  color: #415076;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+@media (min-width: 576px) {
+  html, body {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+}
+
+// ---- element resets ----
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+
+*[hidden] {
+  display: none;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote::after, blockquote::before, q::after, q::before {
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// ---- headings ----
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h5 {
+  color: var(--blue-200);
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.45;
+  margin-bottom: 0.5rem;
+}
+
+h1, h2, .h1, .h2 {
+  font-weight: bold;
+}
+
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child, .h1:last-child, .h2:last-child, .h3:last-child, .h5:last-child {
+  margin-bottom: 0;
+}
+
+.tc-light h1, .tc-light h2, .tc-light h3, .tc-light h4, .tc-light h5, .tc-light h6, .tc-light .h1, .tc-light .h2, .tc-light .h3, .tc-light .h5 {
+  color: #fff;
+}
+
+// ---- paragraphs ----
+
+p {
+  font-size: 14px;
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  & + [class*=btn] {
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 576px) {
+  p {
+    font-size: 16px;
+  }
+}
+
+// ---- lists, tables, inline elements ----
+
+ul, ol, table {
+  margin: 0;
+  padding: 0;
+}
+
+strong, b {
+  font-weight: 500;
+}
+
+// ---- links ----
+
+a {
+  outline: 0 none;
+  transition: all 0.5s;
+  color: #16a3fe;
+
+  &:link, &:visited {
+    text-decoration: none;
+  }
+
+  &:hover, &:focus, &:active {
+    outline: 0;
+    color: var(--green-300);
+  }
+}
+
+// ---- images ----
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// ---- heading / lead sizes (mobile first) ----
+
+h1, .h1 {
+  font-size: 1.75rem;
+}
+
+h2, .h2 {
+  font-size: 1.35rem;
+}
+
+h3, .h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+h5, .h5 {
+  font-size: 1.2rem;
+}
+
+h6 {
+  font-size: 0.94rem;
+}
+
+.lead {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #415076;
+}
+
+// ---- heading / lead sizes (>= 576px) ----
+
+@media (min-width: 576px) {
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h5 {
+    line-height: 1.3;
+  }
+  h1, .h1 {
+    font-size: 2.75rem;
+  }
+  h2, .h2 {
+    font-size: 2.25rem;
+  }
+  h3, .h3 {
+    font-size: 1.87rem;
+  }
+  h4 {
+    font-size: 1.6rem;
+  }
+  .lead {
+    font-size: 1.1rem;
+  }
+}
+
+// ---- overlay / background helpers ----
+
+.nk-ovm:before, .nk-ovm:after {
+  content: "";
+}
+
+.has-ovm, [class*='bg-'], .has-bg-image, .has-bg-video {
+  position: relative;
+}
+
+.has-ovm > [class*=container], .has-ovm > *:not(.nk-ovm):not(.header-main):not(.nk-header):not([class*=ui-mask]), .has-bg-image > [class*=container], .has-bg-video > [class*=container] {
+  position: relative;
+  z-index: 5;
+}
+
+.nk-ovm, .nk-ovm:before, .nk-ovm:after, .bg-image, .bg-video, .overlay:after {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.nk-ovm, .nk-ovm:before, .nk-ovm:after, [class*='bg-'], .bg-image, .bg-video {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+// ---- utilities ----
+
+[class*='line-truncate'] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

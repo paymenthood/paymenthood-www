@@ -1,0 +1,83 @@
+// Form controls (inputs, textareas, selects, field wraps, validation/focus
+// states — used by the contact page form); loaded on every page via
+// assets/css/style.scss; extracted (pruned of unused rules) from style.css
+// section "03.05 Form".
+
+// ---- placeholder colors (per-vendor; each kept separate so one unsupported
+// selector doesn't invalidate the others) ----
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light .bg-light input::-webkit-input-placeholder, .tc-light .bg-light-alt input::-webkit-input-placeholder, .tc-light .bg-white input::-webkit-input-placeholder, .tc-light .bg-light textarea::-webkit-input-placeholder, .tc-light .bg-light-alt textarea::-webkit-input-placeholder, .tc-light .bg-white textarea::-webkit-input-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light input::-webkit-input-placeholder, .tc-light textarea::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light .bg-light input::-moz-placeholder, .tc-light .bg-light-alt input::-moz-placeholder, .tc-light .bg-white input::-moz-placeholder, .tc-light .bg-light textarea::-moz-placeholder, .tc-light .bg-light-alt textarea::-moz-placeholder, .tc-light .bg-white textarea::-moz-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light input::-moz-placeholder, .tc-light textarea::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light .bg-light input:-ms-input-placeholder, .tc-light .bg-light-alt input:-ms-input-placeholder, .tc-light .bg-white input:-ms-input-placeholder, .tc-light .bg-light textarea:-ms-input-placeholder, .tc-light .bg-light-alt textarea:-ms-input-placeholder, .tc-light .bg-white textarea:-ms-input-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light input:-ms-input-placeholder, .tc-light textarea:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light .bg-light input:-moz-placeholder, .tc-light .bg-light-alt input:-moz-placeholder, .tc-light .bg-white input:-moz-placeholder, .tc-light .bg-light textarea:-moz-placeholder, .tc-light .bg-light-alt textarea:-moz-placeholder, .tc-light .bg-white textarea:-moz-placeholder {
+  color: rgba(65, 80, 118, 0.6);
+}
+
+.tc-light input:-moz-placeholder, .tc-light textarea:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+// ---- underline-style text inputs (.input-line) ----
+// kept flat: the .tc-light override sits between .input-line and its :focus
+// state, so nesting would reorder the cascade.
+
+.input-line {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  width: 100%;
+  font-size: 15px;
+  line-height: 19px;
+  padding: 16px 0 8px;
+  color: #415076;
+  border-bottom: 1px solid #dbe4f7;
+  outline: none;
+  transition: all .4s;
+}
+
+.tc-light .input-line {
+  color: #fff;
+  border-bottom-color: rgba(219, 228, 247, 0.3);
+}
+
+.input-line:focus {
+  border-bottom-color: #16a3fe;
+}

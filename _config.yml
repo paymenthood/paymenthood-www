@@ -35,8 +35,9 @@ markdown: kramdown
 highlighter: rouge
 theme: minima
 
-# Sass configuration (suppress deprecation warnings)
+# Sass configuration (sources in _sass/, entry files in assets/css/*.scss)
 sass:
+  style: expanded
   quiet_deps: true
   silence_deprecations:
     - import

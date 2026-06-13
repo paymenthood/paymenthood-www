@@ -1,0 +1,53 @@
+// Late-cascade page extras (home transaction-control cards, home screenshot
+// slider); extracted (pruned) from the tail of style.css.
+
+// ---- transaction-control cards ----
+#transactionControl {
+  background: url("../images/home/globe-particle.webp") no-repeat center 107%;
+  background-size: 90%;
+}
+
+.transaction-card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  padding: 35px 25px 110px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 5px 30px rgba(25, 64, 176, 0.14);
+  height: 100%;
+}
+
+.transaction-icon {
+  position: absolute;
+  width: 121px;
+  height: 121px;
+  margin: 0;
+  right: -15px;
+  bottom: -15px;
+  background: rgba(22, 163, 254, 0.15);
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 10px rgba(22, 163, 254, 0.06);
+  text-align: center;
+  line-height: 112px;
+
+  img {
+    max-width: 60px;
+    display: inline-block !important;
+  }
+}
+
+// ---- screenshot slider ----
+.linear-slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  mask-image: linear-gradient(90deg, transparent 0, #ffffff 20%, #ffffff 80%, transparent);
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#screenshotSlider > .linear-slider-items {
+  gap: 5rem;
+}

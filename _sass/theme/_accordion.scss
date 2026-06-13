@@ -1,0 +1,67 @@
+// theme accordion component (Bootstrap-accordion based);
+// loaded on every page via assets/css/style.scss;
+// extracted (pruned of unused rules) from style.css section "04.02 Accordion".
+
+// ---- item ----
+.accordion-item {
+  transition: all .4s;
+  padding-bottom: 8px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #dbe4f7;
+  }
+}
+
+.tc-light .accordion-item:not(:last-child) {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+// ---- title ----
+.accordion-title {
+  position: relative;
+  color: var(--blue-200);
+  font-weight: 400;
+  cursor: pointer;
+  padding: 22px 54px 14px 0;
+  margin-bottom: 0;
+}
+
+.tc-light .accordion-title {
+  color: #16a3fe;
+}
+
+.accordion-title.collapsed {
+  color: #415076;
+  transition: all .4s;
+}
+
+.tc-light .accordion-title.collapsed {
+  color: #fff;
+
+  &:hover {
+    color: #16a3fe;
+  }
+}
+
+.accordion-title.collapsed:hover {
+  color: var(--blue-200);
+}
+
+// ---- header & body (sm and up) ----
+@media (min-width: 576px) {
+  .accordion-header {
+    padding: 20px 40px;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    p:nth-child(2), p:nth-child(3) {
+      display: block;
+    }
+  }
+
+  .accordion-body {
+    padding: 0 40px 40px;
+  }
+}

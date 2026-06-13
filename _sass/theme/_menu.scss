@@ -1,0 +1,390 @@
+// navbar & menus (.header-menu, .menu/.menu-item links, dropdown submenus,
+// mobile off-canvas behavior driven by scripts.js classes
+// .menu-shown/.navbar-active/.menu-mobile, navbar toggle button);
+// used by _includes/header.html on every page; extracted (pruned of unused
+// rules) from style.css section "05.02 Menu".
+
+// ---- base menu & items (mobile-first) ----
+.menu {
+  padding: 12px 0;
+}
+
+.menu-btns {
+  margin-bottom: 26px;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-top: -10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  > li {
+    padding: 10px;
+    padding: 10px;
+  }
+}
+
+.menu-item {
+  position: relative;
+  border-bottom: 1px solid rgba(219, 228, 247, 0.75);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  > ul,
+  .menu-sub {
+    display: none;
+  }
+
+  a {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    color: #415076;
+    padding: 12px 0;
+    display: block;
+    position: relative;
+
+    .badge {
+      margin-left: 5px;
+      position: relative;
+      top: -1px;
+    }
+
+    .active,
+    &:hover {
+      color: #16a3fe;
+    }
+  }
+}
+
+// ---- submenus (mobile accordion) ----
+.menu-sub .menu-item:first-child {
+  border-top: 1px solid rgba(219, 228, 247, 0.75);
+}
+
+.menu-sub .menu-sub .menu-item {
+  border-bottom: none;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  a {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}
+
+.menu-item > a.active {
+  color: #16a3fe;
+}
+
+.has-sub.open-nav > a:after {
+  transform: translateY(-50%) rotate(-180deg);
+}
+
+// ---- navbar toggle button ----
+.navbar-toggle {
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  border-radius: 50%;
+  padding: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  margin-right: -10px;
+
+  &.navbar-active {
+    color: #16a3fe;
+    position: relative;
+    z-index: 49;
+  }
+
+  &:hover,
+  &.navbar-active {
+    background: rgba(246, 250, 253, 0.2);
+  }
+}
+
+.is-transparent:not(.has-fixed) .navbar-toggle {
+  color: #fff;
+
+  &:hover,
+  &.navbar-active {
+    background: rgba(246, 250, 253, 0.2);
+  }
+}
+
+@media (min-width: 360px) {
+  .navbar-toggle {
+    margin-right: 0;
+  }
+}
+
+// ---- toggle hamburger lines ----
+.toggle-line {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: block;
+  color: #415076;
+
+  &:hover {
+    color: #415076;
+  }
+}
+
+// home transparent header (before scroll): hamburger reads white on the hero.
+// .is-light/.is-dark exist nowhere on the site, so the :not()s always match.
+.is-transparent:not(.has-fixed):not(.is-light) .toggle-line {
+  color: #fff;
+}
+
+.toggle-line {
+  &::after,
+  &::before,
+  > span {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: all 0.2s;
+    width: 24px;
+    height: 2px;
+    left: 4px;
+    border-radius: 3px;
+  }
+
+  &::before {
+    top: 8px;
+  }
+
+  &::after {
+    bottom: 8px;
+  }
+
+  > span {
+    top: 50%;
+    margin-top: -1px;
+    width: 20px;
+  }
+}
+
+// ---- toggle in active (off-canvas open) state ----
+.navbar-active .toggle-line {
+  color: #fff;
+
+  &::before,
+  &::after {
+    width: 28px;
+    left: 2px;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+    top: 15px;
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+    bottom: 15px;
+  }
+
+  > span {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+// ---- desktop navbar & hover dropdowns ----
+@media (min-width: 992px) {
+  .header-menu {
+    display: flex !important;
+    width: auto;
+    align-items: center;
+    position: static;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+  .header-navbar {
+    padding: 0 0 0 15px;
+    margin-top: 0;
+    position: relative;
+
+    &:before {
+      display: none;
+    }
+  }
+  .has-fixed .header-navbar {
+    margin-top: 0;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+  .menu-item {
+    border-bottom: none;
+
+    > a {
+      font-weight: 400;
+      padding: 20px 10px;
+    }
+  }
+  .menu-drop .menu-item > a {
+    font-weight: 300;
+  }
+  .menu-item:hover {
+    z-index: 9999;
+  }
+  .menu-sub {
+    position: absolute;
+    min-width: 215px;
+    max-width: 215px;
+    background: #fff;
+    padding: 15px 10px;
+    top: 100%;
+    left: 0;
+    display: block !important;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .4s;
+    border-radius: 4px;
+    transform: translateX(0) translateY(-8px);
+    box-shadow: 0 3px 12px 0 rgba(18, 24, 58, 0.08);
+
+    a {
+      width: 100%;
+      display: block;
+      padding: 10px 10px;
+    }
+
+    .menu-item:first-child {
+      border-top: none;
+    }
+
+    .menu-item:hover > a {
+      color: #16a3fe;
+    }
+  }
+  .menu-item:hover > .menu-sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) translateY(0);
+  }
+  .menu-sub .menu-sub {
+    left: calc(100% - 25px);
+    top: 15px;
+    margin: 0;
+
+    .menu-item a {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+  .menu-mega {
+    position: absolute;
+    left: 50%;
+    background: #fff;
+    padding: 15px 10px;
+    top: 100%;
+    display: block !important;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .4s;
+    border-radius: 4px;
+    box-shadow: 0 3px 12px 0 rgba(18, 24, 58, 0.08);
+    transform: translateX(-50%) translateY(-8px);
+  }
+  .menu-item:hover > .menu-mega {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .menu-mega .menu-item a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .menu-btns {
+    display: flex;
+    margin-bottom: -10px;
+    margin-left: 10px;
+  }
+  .has-sub > a {
+    padding-right: 24px !important;
+    position: relative;
+
+    &:after {
+      right: 8px;
+    }
+  }
+  .menu-sub .has-sub > a {
+    padding-right: 35px;
+
+    &:after {
+      transform: translateY(-50%) rotate(-90deg);
+      right: 15px;
+    }
+  }
+  .has-sub.menu-item:last-child .menu-sub:not(.menu-mega) .menu-item > a {
+    padding-right: 20px !important;
+    padding-left: 35px;
+
+    &:after {
+      transform: translateY(-50%) rotate(90deg);
+      left: 15px;
+      right: auto;
+    }
+  }
+  .has-sub.menu-item:last-child .menu-mega {
+    left: auto;
+    right: 0;
+    transform: translateX(0) translateY(-8px);
+  }
+  .has-sub.menu-item:last-child:hover .menu-mega {
+    transform: translateX(0) translateY(0);
+  }
+  // home transparent header (before scroll): top-level menu links are white
+  // over the hero, blue on hover; once .has-fixed kicks in the defaults return
+  .is-transparent:not(.has-fixed):not(.is-light) .menu > .menu-item > a {
+    color: #fff;
+  }
+  .is-transparent:not(.has-fixed):not(.is-light) .menu > .menu-item:hover > a {
+    color: #16a3fe;
+  }
+}
+
+// ---- mid-desktop tweaks ----
+@media (min-width: 992px) and (max-width: 1199px) {
+  .logo img {
+    height: 58px;
+  }
+  .menu-btns > li {
+    padding: 6px;
+  }
+}
+
+// ---- wide desktop spacing ----
+@media (min-width: 1200px) {
+  .menu > .menu-item > a {
+    padding: 20px 15px;
+  }
+  .menu-item.has-sub > a {
+    padding-right: 23px !important;
+
+    &:after {
+      right: 8px;
+    }
+  }
+  .menu-sub a {
+    padding: 10px 15px;
+  }
+}

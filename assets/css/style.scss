@@ -1,0 +1,24 @@
+---
+# Master stylesheet — compiled by Jekyll to /assets/css/style.css.
+# Loaded by _includes/header.html on EVERY page (after vendor.bundle.css).
+# Source partials live in _sass/theme/. Order matters: later files
+# intentionally override earlier ones (cascade), do not re-sort.
+---
+
+@use "theme/palette";          // color custom props + txt-/bg-/btn- utilities
+@use "theme/fonts";            // Roboto @font-face
+@use "theme/base";             // reset + element defaults
+@use "theme/utilities";        // spacing/visibility/shape helper classes
+@use "theme/buttons";          // .btn theme variants + .vh-btn / .cpn-btns
+@use "theme/typography";       // .title/.lead heading system + lists
+@use "theme/forms";            // inputs, selects, validation states
+@use "theme/preloader";        // page preloader/spinner + icon helpers
+@use "theme/accordion";        // theme accordion (legal/FAQ pages)
+@use "theme/blocks";           // nk-block layout, cards/boxes, section heads
+@use "theme/plugin-pages";     // shared styles for integration plugin pages
+@use "theme/header";           // fixed site header & banner
+@use "theme/menu";             // navbar, dropdowns, mobile off-canvas nav
+@use "theme/sections";         // .section spacing system + decorative ovm shapes
+@use "theme/overrides";        // site-specific overrides (page header, home banner…)
+@use "theme/extras";           // late-cascade page extras (transaction cards, slider)
+@use "theme/integrations-menu"; // integrations mega-menu in the navbar

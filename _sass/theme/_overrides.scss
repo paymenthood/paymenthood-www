@@ -1,0 +1,352 @@
+// PaymentHood-specific overrides layered on top of the theme:
+// #pageHeader secondary-page banner, #homeBannerMask home hero,
+// about/feature items, and features-page bits.
+// Must stay LATE in the cascade (after all theme partials).
+// Extracted (pruned of unused rules) from style.css sections
+// "06. Override" and "Features Page".
+
+// ---- secondary-page banner (#pageHeader) ----
+
+#pageHeader {
+  min-height: 311px;
+  height: auto;
+  padding: 180px 0px 90px;
+  color: white;
+  margin-bottom: 50px;
+  background: var(--blue-200) url('../images/shape-x.png') no-repeat center top;
+  background-size: cover;
+
+  > p {
+    width: 40%;
+    max-width: 100%;
+  }
+}
+
+// Tablet & mobile: the banner grows with its content and the text widens so
+// it no longer overflows the blue area into the white section below.
+@media (max-width: 991px) {
+  #pageHeader {
+    padding: 150px 24px 60px;
+
+    > p {
+      width: 100%;
+      max-width: 560px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  #pageHeader {
+    padding: 120px 20px 48px;
+  }
+}
+
+// ---- home hero (#homeBannerMask) ----
+
+#homeBannerMask {
+  background: url("../images/home/banner-bg-large.webp") no-repeat right top;
+
+  &:before {
+    background-image: url('../images/home/banner-mask-small.svg');
+    background-position: 101% 101%;
+    right: -1px !important;
+    left: -1px !important;
+  }
+
+  &:after {
+    background-image: url('../images/shape-x.png'), linear-gradient(to left, rgba(var(--blue-200-rgb), 0) 10%, rgba(var(--blue-200-rgb), .6), rgba(var(--blue-200-rgb), 1) 70%);
+  }
+}
+
+@media (max-width: 991px) {
+  #homeBannerMask {
+    background: url("../images/home/banner-bg.webp") no-repeat right top;
+
+    &:after {
+      background-image: url('../images/shape-x.png'), linear-gradient(219deg, rgb(var(--blue-200-rgb), 31%), rgb(var(--blue-200-rgb), 42%), rgba(var(--blue-200-rgb), .95) 70%);
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  #homeBannerMask {
+    background-position-x: 81%;
+    background-size: 283%;
+  }
+
+  .banner {
+    min-height: 599px !important;
+    padding-bottom: 0;
+
+    .lead {
+      color: white !important;
+    }
+  }
+}
+
+// ---- about feature items ----
+
+.about-feature-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green-300);
+}
+
+.about-feature-item {
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px;
+  cursor: default;
+
+  &:hover {
+    background-color: white;
+    box-shadow: 0 5px 18px rgba(65, 80, 118, 0.2);
+  }
+}
+
+// ---- provider / integration feature lists ----
+
+#providersFeatures > li, #whmcsFeatures > li, #customIntegrationFeatures > li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#providerContentWrapper {
+  background: url("../images/home/globe.png") no-repeat 90% 90%;
+}
+
+#providerListImg {
+  position: absolute;
+  left: 20%;
+  top: 50px;
+}
+
+#verificationDivider {
+  width: 2px;
+  height: 100%;
+  --bs-bg-opacity: 1;
+}
+
+@media (max-width: 991px) {
+  #providerContentWrapper {
+    background-position: 20% 105%;
+  }
+
+  #verificationDivider {
+    width: 100%;
+    height: 1px;
+  }
+}
+
+@media (max-width: 575px) {
+  #providerListImg {
+    left: 0;
+    top: 150px;
+  }
+}
+
+// ---- hexagon section ----
+
+#hexagonSection {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:before {
+    left: 0;
+    top: 100px;
+    background: url("../images/home/polygon-line-left.png") no-repeat left top;
+  }
+
+  &:after {
+    right: 0;
+    bottom: 200px;
+    background: url("../images/home/polygon-line-right.png") no-repeat right bottom;
+  }
+}
+
+// ---- payment type cards ----
+
+.payment-type-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  border-radius: 8px;
+  padding: 60px 30px;
+  text-align: center;
+  background-color: var(--gray-100);
+  box-shadow: 0 5px 18px rgba(65, 80, 118, 0.2);
+  height: 100%;
+}
+
+@media (max-width: 575px) {
+  .payment-type-card {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+.icon-wrapper {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 139px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+  margin-bottom: 20px;
+
+  &.type-1 {
+    background-image: url("../images/home/icon-bg-a.png");
+  }
+
+  &.type-2 {
+    background-image: url("../images/home/icon-bg-a2.png");
+  }
+
+  &.type-3 {
+    background-image: url("../images/home/icon-bg-a3.png");
+  }
+}
+
+// ---- fraud section ----
+
+#fraudFeatures {
+  li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(var(--blue-100-rgb), .3);
+    color: var(--blue-100);
+    font-size: 20px;
+    font-weight: 500;
+    width: 39px;
+    height: 39px;
+  }
+}
+
+.fraud-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  > .itemIcon {
+    position: relative;
+    width: 63px;
+    height: 63px;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 17px;
+    font-size: 45px;
+    color: var(--blue-200);
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      border-radius: 10px;
+      border: 2px solid rgba(var(--blue-200-rgb), .3);
+      transform: rotate(45deg);
+    }
+  }
+
+  > .fraud-title, > p {
+    margin-bottom: 0;
+  }
+}
+
+// ---- security features ----
+
+#securityFeatures {
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+#securityFeaturesList .icon {
+  position: relative;
+
+  > em {
+    position: relative;
+    font-size: 3.75rem;
+    color: var(--blue-200);
+    z-index: 5;
+    margin-left: -5px;
+  }
+
+  &:before {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    content: '';
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: rgba(var(--blue-100-rgb), 0.5);
+    z-index: 4;
+  }
+}
+
+// ---- features page ----
+
+.feature-card {
+  margin-bottom: 60px;
+
+  > .feature-title {
+    color: var(--blue-600);
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  > .feature-desc {
+    color: var(--blue-400);
+    margin-bottom: 30px;
+  }
+
+  .feature-badge {
+    color: var(--blue-100);
+  }
+
+  .feature-icon {
+    position: relative;
+    width: 71px;
+    height: 71px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--blue-100-rgb), .12);
+    color: var(--blue-100);
+    font-size: 1.9rem;
+  }
+}

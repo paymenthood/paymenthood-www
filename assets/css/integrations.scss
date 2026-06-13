@@ -1,0 +1,40 @@
+---
+# Page stylesheet for integrations/index.html (/integrations/ hub) only.
+# Compiled by Jekyll to /assets/css/integrations.css.
+---
+
+// ── Card logos ────────────────────────────────────────────────────
+// Logo-forward: merchants recognise their platform by its logo.
+.integration-card-logo {
+  height: 72px;
+
+  img {
+    display: block;
+    height: 52px;
+    max-height: 52px;
+    width: auto;
+    max-width: 240px;
+    object-fit: contain;
+  }
+
+  // WHMCS, Phoca Cart & J2Commerce PNGs carry built-in whitespace, so a
+  // fixed height makes them look small/uneven. Size each so the visible
+  // marks land at a consistent size across the cards.
+  img[alt="WHMCS"] {
+    height: auto;
+    max-height: 140px;
+    max-width: 200px;
+  }
+
+  img[alt="Phoca Cart"] {
+    height: auto;
+    max-height: 140px;
+    max-width: 180px;
+  }
+
+  img[alt="J2Commerce"] {
+    height: auto;
+    max-height: 56px;
+    max-width: 200px;
+  }
+}

@@ -1,0 +1,12 @@
+---
+# Shared components for secondary pages — compiled to /assets/css/components.css.
+# Loaded by every page EXCEPT the home page (see CLAUDE.md). Themed per page
+# via --pp-* custom props set on #main-content. Partials in _sass/components/.
+---
+
+@use "components/shared";
+@use "components/product-hero";
+@use "components/product-sections";
+@use "components/faq";
+@use "components/cta";
+@use "components/install";

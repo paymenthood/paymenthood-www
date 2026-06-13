@@ -1,0 +1,208 @@
+// Icon helpers + full-screen page preloader/spinner (revealed/hidden by
+// scripts.js via .page-loaded on body); loaded on every page via
+// assets/css/style.scss; extracted (pruned of unused rules) from style.css
+// section "03.10 Misc".
+
+// ---- icon helpers ----
+.icon {
+  display: inline-block;
+}
+
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+}
+
+// ---- preloader overlay ----
+.preloader {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+
+  &:before, &:after {
+    position: absolute;
+    left: 0;
+    height: 51%;
+    width: 100%;
+    transition: all .6s ease;
+    background: #fff;
+    content: '';
+  }
+
+  &:before {
+    top: 0;
+  }
+}
+
+.page-loaded .preloader:before {
+  transform: translate(0, -100%);
+}
+
+.preloader:after {
+  bottom: 0;
+}
+
+.page-loaded .preloader:after {
+  transform: translate(0, 100%);
+}
+
+// ---- spinner ----
+.spinner {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  z-index: 1001;
+}
+
+.spinner-alt {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+
+  &:after, &:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &:before {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &:after {
+    border: 1px solid;
+    border-top-color: #fff;
+    border-right-color: transparent;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    animation: spin 1.5s linear infinite;
+  }
+
+  &.load-done {
+    transition: all .4s;
+    transform: scale(3);
+    opacity: 0;
+    border-color: transparent;
+
+    &:after, &:before {
+      opacity: 0;
+    }
+  }
+}
+
+// ---- owl carousel nav ----
+.owl-nav {
+  margin: 0 -10px 0;
+  padding-top: 40px;
+
+  button {
+    border: 1px solid #b9d2f4 !important;
+    border-radius: 50% !important;
+    height: 40px;
+    width: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    transition: all .4s;
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+
+    &.disabled {
+      opacity: 0.4;
+    }
+
+    &:after {
+      font-family: "themify";
+      font-size: 1rem;
+    }
+  }
+}
+
+.owl-prev:after {
+  content: '\e64a';
+}
+
+.owl-rtl .owl-prev:after {
+  content: '\e649';
+}
+
+.owl-next:after {
+  content: '\e649';
+}
+
+.owl-rtl .owl-next:after {
+  content: '\e64a';
+}
+
+// ---- owl carousel dots ----
+.owl-dot {
+  height: 6px;
+  width: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 4px;
+  transition: all .4s ease;
+  opacity: .4;
+  background: rgba(22, 163, 254, 0.8) !important;
+
+  &.active {
+    width: 20px;
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.owl-dots {
+  text-align: center;
+}
+
+// ---- carousel shadow fix ----
+.carousel-shadow-fix.owl-rtl .owl-stage-outer {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.carousel-shadow-fix .owl-item {
+  padding: 20px 0 40px;
+
+  > div {
+    transition: all .4s;
+  }
+
+  &.active > div {
+    opacity: 1;
+  }
+
+  &:not(.active) [class*='shadow'] {
+    box-shadow: none !important;
+  }
+}
+
+// ---- spinner rotation keyframes ----
+@keyframes spin {
+  0% { -webkit-transform: rotate(0deg); -ms-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}

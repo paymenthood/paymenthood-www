@@ -1,0 +1,229 @@
+// _product-hero.scss — product-page hero block: #main-content banner fix,
+// dark gradient hero, hero badge / lead / stat pills, visual card + logo box,
+// CTA button rows, hero payment-type boxes, provider mini pills. Rendered by
+// the shared product template _includes/integration-product.html on every
+// integrations/<slug>/ page (the hero/logo pieces also appear on install pages).
+
+// =============================================================
+// Product-page components (integrations/<slug>/ pages)
+// =============================================================
+// Themed via custom properties set in the page's own css on
+// #main-content — every var() below falls back to the default
+// blue theme, so pages on the default theme need no overrides:
+//   --pp-accent      deep accent (stats, step numbers, gradients)
+//   --pp-accent-rgb  same color as r,g,b for alpha tints
+//   --pp-hero-end    final stop of the hero gradient
+//   --pp-blob-rgb    hero decorative blob tint as r,g,b
+
+// ── Product hero ─────────────────────────────────────────────── //
+// The blue page banner (#pageHeader, style.css) ends in a 50px bottom
+// margin; on product/install pages the dark hero is the first block in
+// #main-content, so that margin shows as a stray white gap. The negative
+// margin collapses with it so the hero sits flush under the banner.
+#main-content {
+    margin-top: -50px;
+}
+
+.product-hero {
+    // The top layer fades from the #pageHeader banner blue into the
+    // themed diagonal below it, so the hero reads as a continuation of
+    // the banner instead of starting on a hard edge. The fade color is
+    // --blue-200 (#1940b0) at alpha 0 — rgba() can't take a hex var.
+    background:
+        linear-gradient(180deg, var(--blue-200) 0%, rgba(25, 64, 176, 0) 240px),
+        linear-gradient(135deg, var(--blue-600) 0%, var(--blue-200) 50%, var(--pp-hero-end, var(--blue-100)) 100%);
+    padding: 90px 0 70px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 600px; height: 600px;
+        border-radius: 50%;
+        // Soft glow rather than a solid disc — a flat fill leaves a visible
+        // circular edge that splits the hero into two tones on narrow screens.
+        background: radial-gradient(circle, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 70%);
+        top: -200px; right: -150px;
+        pointer-events: none;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        width: 400px; height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(var(--pp-blob-rgb, 22,163,254), .22) 0%, rgba(var(--pp-blob-rgb, 22,163,254), 0) 70%);
+        bottom: -150px; left: -100px;
+        pointer-events: none;
+    }
+    .container { position: relative; z-index: 1; }
+    h2 { line-height: 1.15; }
+}
+
+// Soft white for secondary text on dark strips/heroes
+.txt-white-soft { color: rgba(255,255,255,.65); }
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(8px);
+}
+
+.hero-lead {
+    color: rgba(255,255,255,.85);
+    max-width: 520px;
+}
+
+.hero-stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.18);
+    color: rgba(255,255,255,.9);
+    font-size: .82rem;
+    padding: 7px 16px;
+    border-radius: 50px;
+    backdrop-filter: blur(6px);
+
+    strong { color: #fff; }
+}
+
+.hero-visual-card {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 20px;
+    padding: 32px;
+    backdrop-filter: blur(12px);
+    color: #fff;
+}
+.logo-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    width: 100%;
+
+    img {
+        display: block;
+        width: 100%;
+        max-width: 240px;
+        height: auto;
+        margin-inline: auto;
+    }
+}
+.hero-stat-pill svg { flex-shrink: 0; opacity: .85; }
+.hero-source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,.8);
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover { color: #fff; text-decoration: underline; }
+}
+// Bootstrap's .border-2 only sets --bs-border-width, which .btn ignores —
+// map it to the button border variable so outline buttons get a 2px edge.
+.btn.border-2 { --bs-btn-border-width: 2px; }
+// CTA button rows (hero + bottom banner). In the hero, .hero-cta shrinks to
+// the chip row's width and the button row spans it (contributing 0 to the
+// wrapper's own sizing) with the buttons centered over the chips.
+.hero-cta { width: -moz-fit-content; width: fit-content; max-width: 100%; }
+.cta-buttons {
+    width: 0;
+    min-width: 100%;
+    justify-content: center;
+}
+// On phones, side-by-side buttons get cramped (text clips), so stack them at
+// their natural width, centered, and ease btn-lg's 1.25rem text/weight down.
+@media (max-width: 575.98px) {
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cta-buttons .btn {
+        --bs-btn-font-size: 1rem;
+        font-weight: 500 !important;
+    }
+}
+
+.payment-type-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+.payment-type-item {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+.payment-type-box {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
+.ptype-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.ptype-label {
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: rgba(255,255,255,.7);
+}
+.ptype-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 4px;
+}
+
+.provider-mini-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+.provider-mini-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: .75rem;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+}
+a.provider-mini-pill--more {
+    text-decoration: none;
+    transition: background .2s, border-color .2s;
+
+    &:hover {
+        background: rgba(255,255,255,.22);
+        border-color: rgba(255,255,255,.45);
+        color: #fff;
+    }
+}

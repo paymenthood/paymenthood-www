@@ -1,0 +1,41 @@
+// _cta.scss — bottom call-to-action banner (themed gradient + blob) and the
+// framed checkout screenshot block. Both are rendered by the shared product
+// template _includes/integration-product.html near the end of every
+// integrations/<slug>/ product page.
+
+// ── CTA banner ───────────────────────────────────────────────── //
+.cta-banner {
+    background: linear-gradient(135deg, var(--blue-600) 0%, var(--pp-accent, var(--blue-200)) 100%);
+    border-radius: 24px;
+    padding: 60px 48px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 400px; height: 400px;
+        border-radius: 50%;
+        background: rgba(var(--pp-blob-rgb, 22,163,254), .12);
+        top: -200px; right: -100px;
+        pointer-events: none;
+    }
+    h2 { color: #fff; }
+    p  { color: rgba(255,255,255,.8); }
+}
+
+// ── Framed checkout screenshot ───────────────────────────────── //
+.checkout-screenshot-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(18,24,58,.18), 0 4px 16px rgba(18,24,58,.1);
+    border: 1px solid var(--gray-200);
+    max-width: 908px;
+    margin: 0 auto;
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}

@@ -1,0 +1,77 @@
+// ============================================================
+// Bootstrap variable overrides (ICOCrypto theme build)
+// ------------------------------------------------------------
+// Reverse-engineered from the original prebuilt vendor.bundle.css
+// and verified rule-by-rule against it. These are plain Bootstrap
+// variables consumed by _sass/vendor/bootstrap/ (official v5.2.2
+// source, unmodified — never edit files in that folder; customize
+// HERE instead). Must be imported BEFORE bootstrap.
+// ============================================================
+
+// theme state colors ($primary/$secondary are stock)
+$success: #39d884;
+$info: #026bfb;
+$warning: #f6be26;
+$danger: #e6604a;
+
+// custom grid: extra `mb` phone breakpoint, xxl widened to 1600px
+$grid-breakpoints: (
+  xs: 0,
+  mb: 410px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+);
+
+$container-max-widths: (
+  mb: 100%,
+  sm: 100%,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1490px
+);
+
+// 30px gutters (theme spacing system depends on this)
+$grid-gutter-width: 1.875rem;
+
+// spacers: 5 shrunk to 2rem, 6 added (3rem), `gs` = gutter space
+// (enables m*/p*/g* utilities like .mt-6, .g-gs used in markup)
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 2,
+  6: $spacer * 3,
+  gs: $grid-gutter-width
+);
+
+$enable-negative-margins: true;
+
+// forms — theme text color on transparent fields
+$input-color: #415076;
+$input-bg: transparent;
+$input-placeholder-color: rgba(65, 80, 118, .6);
+
+// tables
+$table-border-color: rgba(22, 163, 254, .2);
+
+// buttons
+$btn-font-size: .75rem;
+$btn-font-weight: 500;
+$btn-line-height: 24px;
+$btn-font-size-sm: .8125rem;
+$btn-link-color: #16a3fe;
+$btn-link-hover-color: #16a3fe;
+
+// badges
+$badge-font-size: .8125rem;
+$badge-font-weight: 600;
+
+// progress
+$progress-bar-bg: rgba(22, 163, 254, .2);

@@ -1,0 +1,88 @@
+// Page section vertical-spacing system (.section + size modifiers across
+// breakpoints) and decorative .nk-ovm overlay shapes; loaded on every page
+// via assets/css/style.scss; extracted (pruned of unused rules) from
+// style.css section "05.03 Sections".
+
+// ---- base ----
+.nk-body {
+  min-width: 320px;
+}
+
+// ---- .section base + mobile-first spacing (repeated selectors are
+// ---- intentional cascade overrides — do not merge) ----
+.section {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  z-index: 2;
+}
+
+.section {
+  padding-top: 60px;
+}
+
+.section {
+  padding-bottom: 60px;
+}
+
+// ---- spacing per breakpoint ----
+@media (min-width: 576px) {
+  .section {
+    padding-top: 68px;
+  }
+  .section {
+    padding-bottom: 68px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: 80px;
+  }
+  .section {
+    padding-bottom: 80px;
+  }
+  .section-m {
+    padding-top: 80px !important;
+  }
+  .section-m {
+    padding-bottom: 80px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .section {
+    padding-top: 80px;
+  }
+  .section {
+    padding-bottom: 120px;
+  }
+  .section-l {
+    padding-top: 120px !important;
+  }
+  .section-l {
+    padding-bottom: 120px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .section {
+    padding-top: 150px;
+  }
+  .section {
+    padding-bottom: 150px;
+  }
+}
+
+// ---- spacing utility override ----
+[class*="section"].pdb-0 {
+  padding-bottom: 0 !important;
+}
+
+// ---- container gutter on small screens ----
+@media (max-width: 767px) {
+  .container {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}

@@ -1,0 +1,114 @@
+// ============================================================
+// Palette — site-wide color custom properties + color utilities
+// ------------------------------------------------------------
+// Every color on the site comes from these custom properties
+// (CLAUDE.md: never hardcode a hex that matches a var).
+// Each color has a hex var and a matching `-rgb` triplet var for
+// rgba() composition: rgba(var(--blue-200-rgb), .5).
+// Utility classes follow the master naming: txt-*, bg-*, btn-*.
+// ============================================================
+
+:root {
+  // NOTE: --green-300-rgb (35,201,157 = #23c99d) intentionally does not
+  // match --green-300 (#23a377): the rgb triplet keeps the brighter
+  // legacy green used in translucent fills. Preserved as-is.
+  --green-300: #23a377;
+  --green-300-rgb: 35, 201, 157;
+
+  --blue-30: #f6fafd;
+  --blue-30-rgb: 246, 250, 253;
+
+  --blue-50: #b9d2f4;
+  --blue-50-rgb: 185, 210, 244;
+
+  --blue-100: #16a3fe;
+  --blue-100-rgb: 22, 163, 254;
+
+  --blue-200: #1940b0;
+  --blue-200-rgb: 25, 64, 176;
+
+  --blue-400: #415076;
+  --blue-400-rgb: 65, 80, 118;
+
+  --blue-600: #12183a;
+  --blue-600-rgb: 18, 24, 58;
+
+  --gray-100: #f7f7f7;
+  --gray-100-rgb: 247, 247, 247;
+  --gray-200: #eceef4;
+  --gray-200-rgb: 236, 238, 244;
+}
+
+// ---------- Text colors ----------
+.txt-blue-50 {
+  color: var(--blue-50) !important;
+}
+
+.txt-blue-100 {
+  color: var(--blue-100);
+}
+
+.txt-blue-200 {
+  color: var(--blue-200);
+}
+
+.txt-blue-400 {
+  color: var(--blue-400);
+}
+
+.txt-blue-600 {
+  color: var(--blue-600);
+}
+
+.txt-green-300 {
+  color: var(--green-300);
+}
+
+// ---------- Backgrounds ----------
+.bg-blue-30 {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--blue-30-rgb), var(--bs-bg-opacity));
+}
+
+.bg-blue-100 {
+  background-color: rgba(var(--blue-100-rgb), var(--bs-bg-opacity));
+}
+
+.bg-blue-200 {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--blue-200-rgb), var(--bs-bg-opacity));
+}
+
+.bg-gray-200 {
+  background-color: var(--gray-200);
+}
+
+// ---------- Buttons ----------
+.btn-blue-300 {
+  color: white;
+  background-color: var(--blue-200);
+
+  &:hover {
+    background-color: var(--green-300);
+    --bs-link-hover-color: white;
+  }
+}
+
+.btn-green-300 {
+  color: white;
+  background-color: var(--green-300);
+
+  &:hover {
+    background-color: var(--blue-100);
+    --bs-link-hover-color: white;
+  }
+}
+
+// ---------- Borders / cards ----------
+.border-gray-100 {
+  --bs-border-color: var(--gray-100);
+}
+
+.card {
+  --bs-card-border-radius: 12px !important;
+}

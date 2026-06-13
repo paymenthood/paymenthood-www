@@ -1,0 +1,13 @@
+---
+# Vendor stylesheet bundle — compiled by Jekyll to /assets/css/vendor.bundle.css.
+# Loaded by _includes/header.html on EVERY page, before style.css.
+# Composition (order matters):
+#   1. bootstrap-overrides — theme's Bootstrap variables (project-owned, edit here)
+#   2. bootstrap           — official Bootstrap v5.2.2 Sass source, UNMODIFIED
+#   3. icocrypto-vendor-pack — the theme's other vendor libs, verbatim (do not edit)
+---
+
+/*! Theme Name: ICOCrypto @by Softnio @v2.1.0 @updated 11/22/2022 */
+@import "vendor/bootstrap-overrides";
+@import "vendor/bootstrap/bootstrap";
+@import "vendor/icocrypto-vendor-pack";
