@@ -32,7 +32,7 @@
     {%- assign ph_product = site.data.integrations[page.slug].product -%}
     {%- if ph_product -%}
         {%- assign ph_noun = ph_product.noun | default: 'plugin' -%}
-        {%- capture ph_title_full %}{{ page.title }} - Accept Payments with Multiple Providers{% endcapture -%}
+        {%- capture ph_title_full %}{{ page.title }}{% endcapture -%}
         {%- capture ph_desc_full %}{{ page.description }} Connect 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free {{ ph_noun }}. 5-minute setup.{% endcapture -%}
         {%- assign ph_seo = ph_seo | replace: page.title, ph_title_full | replace: page.description, ph_desc_full -%}
     {%- endif -%}
