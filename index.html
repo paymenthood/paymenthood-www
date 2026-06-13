@@ -97,6 +97,9 @@ description: Enterprise payment orchestration platform with a unified API for 15
             <!-- What is PaymentHood -->
             <div class="nk-block nk-block-features">
                 <div class="container">
+                    <div class="home-mcta d-lg-none" data-mcta>
+                        <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                    </div>
                     <div class="section-head wide-sm text-center">
                         <span class="animated" data-animate="fadeInUp" data-delay=".1">What is</span>
                         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Payment<span class="text-secondary">Hood!</span></h2>
@@ -238,6 +241,9 @@ description: Enterprise payment orchestration platform with a unified API for 15
             <!-- Multi Payment Type -->
             <div id="multiPaymentType" class="nk-block">
                 <div class="container">
+                    <div class="home-mcta d-lg-none" data-mcta>
+                        <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                    </div>
                     <div class="section-head wide-sm text-center">
                         <span class="animated fs-5" data-animate="fadeInUp" data-delay=".1">Supported</span>
                         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Multi <span class="txt-blue-200">Payment Type</span></h2>
@@ -361,6 +367,9 @@ description: Enterprise payment orchestration platform with a unified API for 15
 
         <section id="transactionControl" class="section bg-light-alt">
             <div class="container">
+                <div class="home-mcta d-lg-none" data-mcta>
+                    <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                </div>
                 <div class="section-head wide-sm text-center">
                     <span class="animated fs-5" data-animate="fadeInUp" data-delay=".1">Supported</span>
                     <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Flexible <span class="txt-blue-200">Transaction Control</span></h2>
@@ -483,6 +492,9 @@ description: Enterprise payment orchestration platform with a unified API for 15
 
         <section class="py-6 my-6">
             <div class="container">
+                <div class="home-mcta d-lg-none" data-mcta>
+                    <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                </div>
                 <div class="row align-items-center gx-6 gy-4">
                     <div class="col-lg-6">
                         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2"><span class="txt-blue-200">Integration</span> Modules</h2>
@@ -564,5 +576,28 @@ description: Enterprise payment orchestration platform with a unified API for 15
             </div>
         </section>
     </main>
+
+    <script>
+        // The mobile "Start 1-Month Free" CTAs ([data-mcta]) are repeated at the
+        // top of several sections. Keep only the topmost one currently in the
+        // viewport visible so two never show within a single screen.
+        (function () {
+            var ctas = Array.prototype.slice.call(document.querySelectorAll('[data-mcta]'));
+            if (ctas.length < 2 || !('IntersectionObserver' in window)) return;
+            var inView = new Set();
+            function refresh() {
+                var shown = ctas.filter(function (el) { return inView.has(el); })
+                    .sort(function (a, b) { return a.getBoundingClientRect().top - b.getBoundingClientRect().top; });
+                ctas.forEach(function (el) { el.classList.toggle('is-suppressed', el !== shown[0]); });
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { inView.add(e.target); } else { inView.delete(e.target); }
+                });
+                refresh();
+            });
+            ctas.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
 
     {% include footer.html %}

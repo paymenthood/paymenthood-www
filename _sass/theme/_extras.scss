@@ -37,6 +37,24 @@
   }
 }
 
+// ---- home mobile inline CTA ----
+// "Start 1-Month Free" repeated at the top of select sections on small screens
+// only (markup carries .d-lg-none — below 992px the header CTA lives in the
+// off-canvas nav). A script in index.html observes each one and adds
+// .is-suppressed so only the topmost CTA in the viewport stays visible —
+// never two at once in a single screen.
+.home-mcta {
+  text-align: center;
+  margin-top: -2.5rem; // pull up into the section's top padding (mobile-only element)
+  margin-bottom: 2rem;
+  transition: opacity 0.2s ease;
+}
+
+.home-mcta.is-suppressed {
+  visibility: hidden;
+  opacity: 0;
+}
+
 // ---- screenshot slider ----
 .linear-slider-wrapper {
   width: 100%;
