@@ -134,65 +134,94 @@
 }
 
 // ---- mobile off-canvas nav ----
-// In the narrow mobile nav the descriptions can't fit on one row beside the
-// logo, so hide them — show only the logos and the "View all plugins" link.
-// The logo tiles are also scaled down responsively (tablet, then phone) so
-// they don't overpower the narrow off-canvas panel.
+// The dark desktop card would drop a jarring blue block into the white drawer,
+// so on mobile the submenu blends into the drawer instead: no card, the brand
+// logos sit directly on the white (they're designed for it), and each plugin is
+// a plain list row with the same hairline dividers as the rest of the mobile
+// menu. Descriptions are dropped — the wordmark logos are the label.
 @media (max-width: 991px) {
   .integrations-menu {
-    .integration-desc {
-      display: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .integrations-menu-head {
+    color: rgba(65, 80, 118, .55);
+    padding: 14px 4px 4px;
+  }
+
+  .integration-link {
+    justify-content: flex-start;
+    gap: 0;
+    padding: 13px 4px !important;
+    border-radius: 0;
+    border-top: 1px solid rgba(219, 228, 247, .75);
+
+    &:hover {
+      background: transparent;
     }
+  }
 
-    .integration-link {
-      justify-content: center;
-    }
+  // First plugin row sits under the eyebrow with no double rule.
+  .integrations-menu-grid .menu-item:first-child .integration-link {
+    border-top: 0;
+  }
 
-    // Tablet / small-desktop off-canvas nav
-    .integration-logo {
-      width: 128px;
-      height: 56px;
-      padding: 8px 12px;
+  .integration-desc {
+    display: none;
+  }
 
-      img {
-        max-height: 34px;
-        max-width: 96px;
+  // Logos shown directly on the white drawer — transparent clipping window,
+  // left-aligned, normalized to one height so the list reads evenly.
+  .integration-logo {
+    flex: 0 0 auto;
+    width: auto;
+    height: 30px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    justify-content: flex-start;
 
-        &[alt="Phoca Cart"] {
-          max-height: 76px;
-          max-width: 100px;
-        }
+    img {
+      max-height: 22px;
+      max-width: 132px;
 
-        &[alt="J2Commerce"] {
-          max-height: 50px;
-          max-width: 108px;
-        }
+      // Phoca Cart's PNG has heavy vertical whitespace — size it larger than
+      // the 30px window so the clip trims the padding and the mark reads even.
+      &[alt="Phoca Cart"] {
+        max-height: 46px;
+        max-width: 46px;
+      }
+
+      &[alt="J2Commerce"] {
+        max-height: 22px;
+        max-width: 120px;
       }
     }
   }
-}
 
-// Phones — smallest panel, scale the tiles down further
-@media (max-width: 575px) {
-  .integrations-menu {
-    .integration-logo {
-      width: 104px;
-      height: 48px;
-      padding: 6px 10px;
+  // Muted chevron, always visible (no hover on touch) — signals each row taps
+  // through to its plugin page.
+  .integration-arrow {
+    margin-left: auto;
+    color: rgba(65, 80, 118, .4);
+    opacity: 1;
+    transform: none;
+  }
 
-      img {
-        max-height: 28px;
-        max-width: 80px;
+  // "View all" reads as the closing list row, not a floating CTA.
+  .integrations-menu-foot {
+    margin-top: 0;
+    padding: 13px 4px 4px;
+    border-top: 1px solid rgba(219, 228, 247, .75);
 
-        &[alt="Phoca Cart"] {
-          max-height: 62px;
-          max-width: 84px;
-        }
+    a {
+      font-size: 13.5px;
+      color: #16a3fe;
 
-        &[alt="J2Commerce"] {
-          max-height: 42px;
-          max-width: 90px;
-        }
+      &:hover {
+        color: #16a3fe;
       }
     }
   }
