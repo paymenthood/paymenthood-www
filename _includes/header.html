@@ -4,13 +4,17 @@
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-82EW36ZEBJ"></script>
+    <!-- Google Tag Manager -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-82EW36ZEBJ');
-    </script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WZ5M4HR8');</script>
+    <!-- End Google Tag Manager -->
     <!-- Preconnect hints (must be early in head for maximum benefit) -->
     <link rel="preconnect" href="https://console.paymenthood.com">
     <link rel="dns-prefetch" href="https://console.paymenthood.com">
@@ -23,18 +27,18 @@
     {% endif %}
 
     {%- comment -%}
-      Integration product pages (front matter `slug` + a matching product data file)
-      keep only the unique part of title/description in front matter; the shared
-      SEO suffixes are appended here, in one place, before the tags are emitted.
-      The visible page header (header-secondary) still shows the short versions.
+    Integration product pages (front matter `slug` + a matching product data file)
+    keep only the unique part of title/description in front matter; the shared
+    SEO suffixes are appended here, in one place, before the tags are emitted.
+    The visible page header (header-secondary) still shows the short versions.
     {%- endcomment -%}
     {%- capture ph_seo %}{% seo %}{% endcapture -%}
     {%- assign ph_product = site.data.integrations[page.slug].product -%}
     {%- if ph_product -%}
-        {%- assign ph_noun = ph_product.noun | default: 'plugin' -%}
-        {%- capture ph_title_full %}{{ page.title }}{% endcapture -%}
-        {%- capture ph_desc_full %}{{ page.description }} Connect 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free {{ ph_noun }}. 5-minute setup.{% endcapture -%}
-        {%- assign ph_seo = ph_seo | replace: page.title, ph_title_full | replace: page.description, ph_desc_full -%}
+    {%- assign ph_noun = ph_product.noun | default: 'plugin' -%}
+    {%- capture ph_title_full %}{{ page.title }}{% endcapture -%}
+    {%- capture ph_desc_full %}{{ page.description }} Connect 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free {{ ph_noun }}. 5-minute setup.{% endcapture -%}
+    {%- assign ph_seo = ph_seo | replace: page.title, ph_title_full | replace: page.description, ph_desc_full -%}
     {%- endif -%}
     {{ ph_seo }}
 
@@ -62,7 +66,7 @@
     <!-- Fav Icon  -->
     <link rel="icon" href="{{ '/favicon.png' | relative_url }}" type="image/png">
     <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
-    
+
     <!-- Preload fonts -->
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Light.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -73,7 +77,7 @@
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     <link rel="preload" as="image" href="{{ '/assets/images/shape-x.png' | relative_url }}" type="image/png">
-    
+
     <!-- Critical CSS for LCP (hero mask) - inlined to ensure immediate render -->
     <style>
         :root{--blue-200:#1940b0;--blue-200-rgb:25,64,176;--bs-bg-opacity:1;}
@@ -101,6 +105,12 @@
 </head>
 
 <body class="nk-body body-wider mode-onepage">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZ5M4HR8"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="nk-wrap">
         <header class="nk-header page-header is-transparent is-sticky is-shrink" id="header">
             <!-- Header @s -->
