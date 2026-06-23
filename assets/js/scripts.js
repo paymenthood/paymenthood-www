@@ -586,6 +586,14 @@ NioApp = function (NioApp, $, window, document) {
                     },
                     onInitialized: function() {
                         if($().waypoint) { Waypoint.refreshAll(); }
+                        $self.find('.owl-dot').each(function(i) {
+                            $(this).attr('aria-label', 'Go to slide ' + (i + 1));
+                        });
+                    },
+                    onChanged: function() {
+                        $self.find('.owl-dot').each(function(i) {
+                            $(this).attr('aria-label', 'Go to slide ' + (i + 1));
+                        });
                     }
                 });
                 
