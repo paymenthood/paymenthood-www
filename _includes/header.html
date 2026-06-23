@@ -70,7 +70,7 @@
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
-    <link rel="preload" as="image" href="{{ '/assets/images/shape-x.png' | relative_url }}" type="image/png">
+    <link rel="preload" as="image" href="{{ '/assets/images/shape-x.webp' | relative_url }}" type="image/webp">
 
     <!-- Critical CSS for LCP (hero mask) - inlined to ensure immediate render -->
     <style>
@@ -82,12 +82,12 @@
         .nk-ovm,.nk-ovm:before,.nk-ovm:after{position:absolute;top:0;right:0;bottom:0;left:0;background-repeat:no-repeat;background-size:cover;background-position:50% 50%;}
         .nk-ovm:before,.nk-ovm:after{content:"";bottom:-1px;left:-1px;}
         .mask-contain-bottom:before{background-size:contain;background-position:50% 100%;}
-        .shape-x:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}");}
+        .shape-x:after{background-image:url("{{ '/assets/images/shape-x.webp' | relative_url }}");}
         .shape-x.nk-ovm:after,.shape-x.nk-ovm:before{right:0!important;}
         #homeBannerMask{background:url("{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}") no-repeat right top;}
         #homeBannerMask:before{background-image:url("{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}");background-size:contain;background-position:101% 101%;right:-1px!important;left:-1px!important;}
-        #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
-        @media (max-width: 991px){#homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}#homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.png' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}}
+        #homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.webp' | relative_url }}"),linear-gradient(to left,rgba(var(--blue-200-rgb),0) 10%,rgba(var(--blue-200-rgb),.6),rgba(var(--blue-200-rgb),1) 70%);}
+        @media (max-width: 991px){#homeBannerMask{background:url("{{ '/assets/images/home/banner-bg.webp' | relative_url }}") no-repeat right top;}#homeBannerMask:after{background-image:url("{{ '/assets/images/shape-x.webp' | relative_url }}"),linear-gradient(219deg,rgb(var(--blue-200-rgb),31%),rgb(var(--blue-200-rgb),42%),rgba(var(--blue-200-rgb),.95) 70%);}}
         @media (max-width: 575px){#homeBannerMask{background-position-x:81%;background-size:283%;}}
         @media (min-width: 992px){.header-banner{min-height:98px;}}
     </style>
@@ -112,8 +112,8 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
                             <a href="{{ '/' | relative_url }}" class="logo-link">
-                                <img class="logo-dark" src="{{ '/assets/images/logo.png' | relative_url }}" srcset="{{ '/assets/images/logo2x.png' | relative_url }} 2x" alt="logo">
-                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.png' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.png' | relative_url }} 2x" alt="logo">
+                                <img class="logo-dark" src="{{ '/assets/images/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logo2x.webp' | relative_url }} 2x" alt="logo">
+                                <img class="logo-light" src="{{ '/assets/images/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logo-full-white2x.webp' | relative_url }} 2x" alt="logo">
                             </a>
                         </div>
                         <!-- Menu Toogle @s -->
@@ -158,7 +158,7 @@
                                                 </li>
                                                 <li class="menu-item">
                                                     <a class="menu-link integration-link" href="/integrations/j2commerce/">
-                                                        <span class="integration-logo"><img src="{{ '/assets/images/j2commerce/j2commerce-logo.png' | relative_url }}" alt="J2Commerce"></span>
+                                                        <span class="integration-logo"><img src="{{ '/assets/images/j2commerce/j2commerce-logo.webp' | relative_url }}" alt="J2Commerce"></span>
                                                         <span class="integration-desc">Payment plugin for J2Commerce on Joomla</span>
                                                         <em class="integration-arrow ti ti-arrow-right"></em>
                                                     </a>
