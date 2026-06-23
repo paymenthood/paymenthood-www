@@ -37,7 +37,7 @@ theme: minima
 
 # Sass configuration (sources in _sass/, entry files in assets/css/*.scss)
 sass:
-  style: expanded
+  style: compressed
   quiet_deps: true
   silence_deprecations:
     - import
