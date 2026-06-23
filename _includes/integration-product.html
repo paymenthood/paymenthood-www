@@ -57,7 +57,7 @@
         <div class="row align-items-center">
             <div class="col-lg-7">
                 <div class="hero-badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {{ p.platform }} Integration
                 </div>
                 <h2 class="h1 fw-bold text-white mb-4">{{ hero_title }}</h2>
@@ -65,23 +65,23 @@
                 <div class="hero-cta mb-4">
                 <div class="cta-buttons d-flex gap-3 mb-3">
                     <a href="{{ install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
-                        <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
+                        <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                         Installation Guide
                     </a>
                     <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
-                        <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download {{ noun_cap }}
+                        <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download {{ noun_cap }}<span class="visually-hidden"> (opens in new tab)</span>
                     </a>
                 </div>
                 <div class="d-flex flex-wrap gap-3">
-                    <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>15+</strong>&nbsp;Providers</div>
-                    <div class="hero-stat-pill"><svg class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg><strong>5 min</strong>&nbsp;Setup</div>
-                    <div class="hero-stat-pill"><svg class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg><strong>{{ compat_name }}</strong>&nbsp;{{ p.compat }}</div>
+                    <div class="hero-stat-pill"><svg aria-hidden="true" class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>15+</strong>&nbsp;Providers</div>
+                    <div class="hero-stat-pill"><svg aria-hidden="true" class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg><strong>5 min</strong>&nbsp;Setup</div>
+                    <div class="hero-stat-pill"><svg aria-hidden="true" class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg><strong>{{ compat_name }}</strong>&nbsp;{{ p.compat }}</div>
                 </div>
                 </div>
                 <a href="https://github.com/paymenthood/{{ p.repo }}" class="hero-source-link" target="_blank" rel="noopener">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2.1v3.1c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
-                    Free &amp; open source — view the {{ noun }} on GitHub
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2.1v3.1c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                    Free &amp; open source — view the {{ noun }} on GitHub<span class="visually-hidden"> (opens in new tab)</span>
                 </a>
             </div>
             <div class="col-lg-5 mt-5 mt-lg-0">
@@ -118,7 +118,7 @@
                         <span class="provider-mini-pill">Adyen</span>
                         <span class="provider-mini-pill">Braintree</span>
                         <span class="provider-mini-pill">PayTabs</span>
-                        <a href="{{ '/providers.html' | relative_url }}" class="provider-mini-pill provider-mini-pill--more">+9 More<svg class="ms-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                        <a href="{{ '/providers.html' | relative_url }}" class="provider-mini-pill provider-mini-pill--more">+9 More<svg aria-hidden="true" class="ms-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -180,11 +180,11 @@
                     <h3>One-Time Payments</h3>
                     <p class="ptype-desc">Process a single charge when {{ audience }} pay a {{ p.platform }} invoice. They select PaymentHood at checkout and pay through your active provider — the transaction completes immediately and the invoice is marked paid automatically.</p>
                     <ul class="use-case-list">
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Pay any open {{ p.platform }} invoice in one step</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Works with all 15+ payment providers</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Instant confirmation via secure provider callback</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Invoice marked paid in {{ p.platform }} automatically</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Charges in the invoice currency — multi-currency ready</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Pay any open {{ p.platform }} invoice in one step</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Works with all 15+ payment providers</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Instant confirmation via secure provider callback</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Invoice marked paid in {{ p.platform }} automatically</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Charges in the invoice currency — multi-currency ready</li>
                     </ul>
                 </div>
             </div>
@@ -194,11 +194,11 @@
                     <h3>Subscription &amp; Recurring</h3>
                     <p class="ptype-desc">Enable automatic recurring billing for any {{ p.platform }} product or service with a recurring cycle. PaymentHood creates a subscription agreement with the provider so your {{ audience }} are charged automatically on their billing cycle — no manual follow-up needed.</p>
                     <ul class="use-case-list">
-                        <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Renewal invoices charged automatically</li>
-                        <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Subscription agreement created securely at the provider</li>
-                        <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Supports every {{ p.platform }} billing cycle — monthly, annual, custom</li>
-                        <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Failed payments follow your {{ p.platform }} retry rules</li>
-                        <li><span class="uc-icon green"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Cancellations synced back to the provider</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Renewal invoices charged automatically</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Subscription agreement created securely at the provider</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Supports every {{ p.platform }} billing cycle — monthly, annual, custom</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Failed payments follow your {{ p.platform }} retry rules</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Cancellations synced back to the provider</li>
                     </ul>
                 </div>
             </div>
@@ -211,12 +211,12 @@
                     <h3>One-Time Payment</h3>
                     <p class="ptype-desc">Let {{ audience }} pay once at checkout using any of the 15+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured — with full order management handled automatically by {{ p.platform }}.</p>
                     <ul class="use-case-list use-case-list--grid">
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Physical product orders</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Digital downloads</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Service &amp; booking payments</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Multi-item cart checkout</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Variable product purchases</li>
-                        <li><span class="uc-icon blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Guest and account checkout</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Physical product orders</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Digital downloads</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Service &amp; booking payments</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Multi-item cart checkout</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Variable product purchases</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Guest and account checkout</li>
                     </ul>
                 </div>
             </div>
@@ -236,12 +236,12 @@
             </div>
         </div>
         <div class="feature-grid">
-            <div class="feat-card"><div class="feat-card-icon navy">🔌</div><h4>Native {{ p.platform }} Integration</h4><p>Registered as a standard {{ p.platform }} payment gateway — works seamlessly with your existing checkout flow.</p></div>
-            <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h4>15+ Global Providers</h4><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more — all through a single PaymentHood account.</p></div>
-            <div class="feat-card"><div class="feat-card-icon green">⚡</div><h4>Automatic Order Management</h4><p>{{ p.platform }} order statuses update automatically on payment success or failure. No manual order handling required.</p></div>
-            <div class="feat-card"><div class="feat-card-icon orange">🔒</div><h4>Sandbox &amp; Live Modes</h4><p>Test your full checkout flow in sandbox mode before going live. Switch environments with a single toggle in the admin.</p></div>
-            <div class="feat-card"><div class="feat-card-icon teal">📦</div><h4>Upload &amp; Activate — That's It</h4><p>Install the {{ noun }}, paste your PaymentHood API key, and you're ready to accept payments — no code, no webhooks.</p></div>
-            <div class="feat-card"><div class="feat-card-icon indigo">🎛️</div><h4>Centralized Provider Dashboard</h4><p>Manage provider credentials, view transactions, and configure settings from your PaymentHood account.</p></div>
+            <div class="feat-card"><div class="feat-card-icon navy">🔌</div><h3 class="h4">Native {{ p.platform }} Integration</h3><p>Registered as a standard {{ p.platform }} payment gateway — works seamlessly with your existing checkout flow.</p></div>
+            <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h3 class="h4">15+ Global Providers</h3><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more — all through a single PaymentHood account.</p></div>
+            <div class="feat-card"><div class="feat-card-icon green">⚡</div><h3 class="h4">Automatic Order Management</h3><p>{{ p.platform }} order statuses update automatically on payment success or failure. No manual order handling required.</p></div>
+            <div class="feat-card"><div class="feat-card-icon orange">🔒</div><h3 class="h4">Sandbox &amp; Live Modes</h3><p>Test your full checkout flow in sandbox mode before going live. Switch environments with a single toggle in the admin.</p></div>
+            <div class="feat-card"><div class="feat-card-icon teal">📦</div><h3 class="h4">Upload &amp; Activate — That's It</h3><p>Install the {{ noun }}, paste your PaymentHood API key, and you're ready to accept payments — no code, no webhooks.</p></div>
+            <div class="feat-card"><div class="feat-card-icon indigo">🎛️</div><h3 class="h4">Centralized Provider Dashboard</h3><p>Manage provider credentials, view transactions, and configure settings from your PaymentHood account.</p></div>
         </div>
     </div>
 </section>
@@ -260,21 +260,21 @@
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">1</div>
-                    <h5>Download the {{ noun_cap }}</h5>
+                    <h3 class="h5">Download the {{ noun_cap }}</h3>
                     <p>Grab the latest release from GitHub. It's a standard {{ ecosystem }} {{ noun }} package — no build steps, no dependencies.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">2</div>
-                    <h5>Install &amp; Enable in {{ ecosystem }}</h5>
+                    <h3 class="h5">Install &amp; Enable in {{ ecosystem }}</h3>
                     <p>Go to <em>{{ p.install_path }}</em>, upload the package, then enable the PaymentHood {{ noun }} — and it appears in your {{ p.platform }} payment methods.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">3</div>
-                    <h5>Connect Your PaymentHood Account</h5>
+                    <h3 class="h5">Connect Your PaymentHood Account</h3>
                     <p>Paste your PaymentHood API key in the {{ noun }} settings, choose sandbox or live mode, and save. Your store is now ready to accept payments.</p>
                 </div>
             </div>
@@ -282,7 +282,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-auto">
                 <a href="{{ install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
-                    <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
+                    <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                     View Full Installation Guide
                 </a>
             </div>
@@ -304,12 +304,12 @@
             </div>
         </div>
         <div class="row gy-4">
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h5>One {{ noun_cap }}, Any Provider</h5><p>Other solutions require a separate {{ noun }} for each payment gateway. PaymentHood gives you all 15+ providers through one unified {{ p.platform }} {{ noun }}.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h5>No {{ noun_cap }} Cost</h5><p>The {{ noun }} is completely free. PaymentHood earns only through your payment provider — you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h5>Sell to Any Market</h5><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs — without changing your {{ p.platform }} setup.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">⚙️</div><div><h5>No Code Required</h5><p>Works out of the box with any standard {{ p.platform }} installation. No custom development, no webhook setup, no API coding on your end.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🧾</div><div><h5>{{ p.platform }}-Native Behaviour</h5><p>Orders, statuses, emails, and refunds all flow through {{ p.platform }} as expected — customers and admins see no difference in the checkout experience.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔄</div><div><h5>Switch Providers Anytime</h5><p>Change your active payment provider from your PaymentHood dashboard without touching {{ p.platform }}. No {{ noun }} changes, no reinstallation.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h3 class="h5">One {{ noun_cap }}, Any Provider</h3><p>Other solutions require a separate {{ noun }} for each payment gateway. PaymentHood gives you all 15+ providers through one unified {{ p.platform }} {{ noun }}.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h3 class="h5">No {{ noun_cap }} Cost</h3><p>The {{ noun }} is completely free. PaymentHood earns only through your payment provider — you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h3 class="h5">Sell to Any Market</h3><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs — without changing your {{ p.platform }} setup.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">⚙️</div><div><h3 class="h5">No Code Required</h3><p>Works out of the box with any standard {{ p.platform }} installation. No custom development, no webhook setup, no API coding on your end.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🧾</div><div><h3 class="h5">{{ p.platform }}-Native Behaviour</h3><p>Orders, statuses, emails, and refunds all flow through {{ p.platform }} as expected — customers and admins see no difference in the checkout experience.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔄</div><div><h3 class="h5">Switch Providers Anytime</h3><p>Change your active payment provider from your PaymentHood dashboard without touching {{ p.platform }}. No {{ noun }} changes, no reinstallation.</p></div></div></div>
         </div>
     </div>
 </section>
@@ -356,12 +356,12 @@
                     <p class="mb-5 mw-narrow">{{ cta_text }}</p>
                     <div class="cta-buttons d-flex gap-3">
                         <a href="{{ install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
-                            <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
+                            <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                             Installation Guide
                         </a>
                         <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
-                            <svg class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            Download {{ noun_cap }}
+                            <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download {{ noun_cap }}<span class="visually-hidden"> (opens in new tab)</span>
                         </a>
                     </div>
                 </div>

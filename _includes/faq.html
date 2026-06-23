@@ -24,10 +24,10 @@
             <div class="col-lg-9">
 {% for faq in include.items %}
                 <div class="faq-item{% if include.first_open and forloop.first %} open{% endif %}">
-                    <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 class="faq-question m-0" onclick="toggleFaq(this)">
                         {{ faq.q }}
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-                    </div>
+                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </h3>
                     <div class="faq-answer">
                         {{ faq.a }}
                     </div>

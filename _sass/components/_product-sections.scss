@@ -72,7 +72,7 @@
     &.teal   { background: rgba(56,178,172,.1);  color: #38b2ac; }
     &.indigo { background: rgba(76,81,191,.1);   color: #4c51bf; }
 }
-.feat-card h4 {
+.feat-card h3 {
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--blue-600);
@@ -181,7 +181,7 @@
     position: relative;
     z-index: 1;
 }
-.how-step h5 {
+.how-step h3 {
     font-size: 1rem;
     font-weight: 700;
     color: var(--blue-600);
@@ -258,7 +258,7 @@
     background: var(--blue-30);
     color: var(--blue-200);
 }
-.why-card h5 {
+.why-card h3 {
     font-size: .98rem;
     font-weight: 700;
     color: var(--blue-600);

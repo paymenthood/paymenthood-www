@@ -16,6 +16,10 @@ Marketing site for PaymentHood (payment orchestration platform). Static Jekyll s
 - Front matter: `layout: none`, `title`, `description`, `nav_active` (`home|integrations|pricing|providers`). **No `permalink:`** — the folder path is the URL.
 - Stylesheet links go immediately after the header include, before `<main>`: `components.css` first, then the page CSS so it can override.
 
+## SEO & semantic HTML
+**All SEO + semantic-HTML conventions live in [.docs/seo-and-semantic-html.md](.docs/seo-and-semantic-html.md) — read it before editing pages or the shared `header.html`/`footer.html`/`faq.html`/`integration-product.html`.** It is a **shared standard kept byte-identical with the `VpnHood.www` repo** (edit both copies together). It covers seo-tag/JSON-LD/sitemap/robots & site metadata, generated structured data (FAQPage/SoftwareApplication/BreadcrumbList from includes — never hand-written), favicons/app-icons/manifest, the heading outline (one H1, no skipped levels), title-tag branding, inline-SVG a11y, `<ul><li>` link groups, and announcing `target="_blank"` new-tab links. These are binding for any markup change.
+- **Title rule (this site):** `{% seo %}` runs **without** `title=false`, so jekyll-seo-tag appends ` | PaymentHood` itself — page `title:` front matter must **not** contain the brand (it would render doubled). (VpnHood does the opposite via `title=false`; see the doc's §3 table.)
+
 ## Integration Pages (`integrations/…`)
 - Layout: `integrations/<slug>/index.html` (product), `integrations/<slug>/installation/index.html` (install guide), `integrations/index.html` (hub). The folder name **is** the URL slug (`phoca-cart`, not `phocacart`).
 - **All per-integration data lives in one file: `_data/integrations/<slug>.yml`** with three keys:

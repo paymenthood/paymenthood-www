@@ -11,7 +11,7 @@
     <!-- End Google Tag Manager -->
 
     <meta charset="utf-8">
-    <meta name="author" content="PaymentHood!">
+    <meta name="author" content="PaymentHood">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
     {% if page.noindex %}
     <meta name="robots" content="noindex, nofollow">
@@ -56,6 +56,9 @@
 
     <!-- Fav Icon  -->
     <link rel="icon" href="{{ '/favicon.png' | relative_url }}" type="image/png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon-16.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
     <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 
     <!-- Preload fonts -->
@@ -177,8 +180,8 @@
                                     <li class="menu-item"><a class="menu-link nav-link" href="/contact-us.html">Contact Us</a></li>
                                 </ul>
                                 <ul class="menu-btns">
-                                    <li><a href="https://console.paymenthood.com" target="_blank" class="vh-btn btn-md btn-auto btn-green-300 vh-btn-outline no-change"><span>Sign in to the Console</span></a></li>
-                                    <li><a href="https://console.paymenthood.com" target="_blank" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1 - Month Free</span></a></li>
+                                    <li><a href="https://console.paymenthood.com" target="_blank" rel="noopener" class="vh-btn btn-md btn-auto btn-green-300 vh-btn-outline no-change"><span>Sign in to the Console</span><span class="visually-hidden"> (opens in new tab)</span></a></li>
+                                    <li><a href="https://console.paymenthood.com" target="_blank" rel="noopener" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1 - Month Free</span><span class="visually-hidden"> (opens in new tab)</span></a></li>
                                 </ul>
                             </nav>
                         </div><!-- .header-navbar @e -->
