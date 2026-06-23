@@ -95,9 +95,10 @@
 }
 
 // ---- color variants ----
+// #1565c0 on white text = 5.22:1 (WCAG AA pass for all text sizes)
 .btn-blue-100 {
-  background-color: #16a3fe;
-  border-color: #16a3fe;
+  background-color: #1565c0;
+  border-color: #1565c0;
 
   &:hover, &:focus {
     background-color: var(--green-300);
@@ -116,8 +117,8 @@
 }
 
 .btn-blue-100.vh-btn-outline:hover, .btn-blue-100.vh-btn-outline:focus {
-  background-color: #16a3fe !important;
-  border-color: #16a3fe;
+  background-color: #1565c0 !important;
+  border-color: #1565c0;
   color: #fff !important;
 }
 
@@ -126,8 +127,8 @@
   border-color: var(--green-300);
 
   &:hover, &:focus {
-    background-color: #16a3fe;
-    border-color: #16a3fe;
+    background-color: #1565c0;
+    border-color: #1565c0;
     color: white;
   }
 
