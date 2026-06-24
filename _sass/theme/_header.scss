@@ -58,54 +58,12 @@
   flex-shrink: 0;
 }
 
-// ---- mobile navbar drawer ----
-.header-navbar {
-  position: fixed;
-  left: -280px;
-  top: 0;
-  width: 260px;
-  height: 100vh;
-
-  &.menu-mobile {
-    transition: all 0.4s;
-  }
-}
-
-.header-navbar::before, .header-navbar-overlay {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  content: '';
-  top: 0;
-}
-
-.header-navbar::before {
-  background: #fff;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: all .4s;
-}
-
-.header-navbar-overlay {
-  background: rgba(12, 25, 90, 0.7);
-  left: 100%;
-  width: 0;
-  z-index: -1;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .3s;
-  transition-delay: .2s;
-}
-
-.header-navbar.menu-shown {
-  left: 0 !important;
-  z-index: 10;
-
-  .header-navbar-overlay {
-    width: 100vw;
-    opacity: 1;
-    visibility: visible;
-  }
+// ---- mobile navbar drawer (Bootstrap Offcanvas below 992px) ----
+// .header-navbar is `.offcanvas-lg.offcanvas-start`: Bootstrap drives the
+// slide-in drawer, backdrop, focus-trap and ESC-to-close below lg. At lg+ the
+// offcanvas is static and the desktop layout rules further down take over.
+.header-navbar.offcanvas-lg {
+  --bs-offcanvas-width: 320px;
 }
 
 // ---- classic (desktop) navbar ----
@@ -154,21 +112,6 @@
 
 .overlay-menu-shown .has-fixed > .header-main {
   z-index: 16;
-}
-
-// ---- drawer width breakpoints ----
-@media (min-width: 375px) {
-  .header-navbar:not(.header-navbar-classic) {
-    left: -310px;
-    width: 290px;
-  }
-}
-
-@media (min-width: 576px) {
-  .header-navbar:not(.header-navbar-classic) {
-    left: -360px;
-    width: 340px;
-  }
 }
 
 // ---- logo light/dark variants & sizing ----

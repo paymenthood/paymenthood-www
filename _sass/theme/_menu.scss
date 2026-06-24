@@ -85,11 +85,21 @@
   transform: translateY(-50%) rotate(-180deg);
 }
 
+// mobile: tapping a parent (.menu-toggle) opens its submenu — scripts.js toggles
+// .open-nav on the item; the desktop hover dropdown is handled separately below.
+.menu-item.open-nav > .menu-sub {
+  display: block;
+}
+
 // ---- navbar toggle button ----
 .navbar-toggle {
   width: 44px;
   height: 44px;
   text-align: center;
+  border: 0;
+  background-color: transparent;
+  appearance: none;
+  cursor: pointer;
   border-radius: 50%;
   padding: 5px;
   display: inline-flex;
