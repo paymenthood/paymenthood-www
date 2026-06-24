@@ -97,8 +97,8 @@ description: Enterprise payment orchestration platform with a unified API for 15
             <!-- What is PaymentHood -->
             <div class="nk-block nk-block-features">
                 <div class="container">
-                    <div class="home-mcta d-lg-none" data-mcta>
-                        <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                    <div class="home-mcta" data-mcta>
+                        <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start Free</span></a>
                     </div>
                     <div class="section-head wide-sm text-center">
                         <span class="animated" data-animate="fadeInUp" data-delay=".1">What is</span>
@@ -241,8 +241,8 @@ description: Enterprise payment orchestration platform with a unified API for 15
             <!-- Multi Payment Type -->
             <div id="multiPaymentType" class="nk-block">
                 <div class="container">
-                    <div class="home-mcta d-lg-none" data-mcta>
-                        <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                    <div class="home-mcta" data-mcta>
+                        <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start Free</span></a>
                     </div>
                     <div class="section-head wide-sm text-center">
                         <span class="animated fs-5" data-animate="fadeInUp" data-delay=".1">Supported</span>
@@ -367,8 +367,8 @@ description: Enterprise payment orchestration platform with a unified API for 15
 
         <section id="transactionControl" class="section bg-light-alt">
             <div class="container">
-                <div class="home-mcta d-lg-none" data-mcta>
-                    <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                <div class="home-mcta" data-mcta>
+                    <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start Free</span></a>
                 </div>
                 <div class="section-head wide-sm text-center">
                     <span class="animated fs-5" data-animate="fadeInUp" data-delay=".1">Supported</span>
@@ -488,8 +488,8 @@ description: Enterprise payment orchestration platform with a unified API for 15
 
         <section class="py-6 my-6">
             <div class="container">
-                <div class="home-mcta d-lg-none" data-mcta>
-                    <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start 1-Month Free</span></a>
+                <div class="home-mcta" data-mcta>
+                    <a href="https://console.paymenthood.com" class="vh-btn btn-md btn-auto btn-green-300 no-change"><span>Start Free</span></a>
                 </div>
                 <div class="row align-items-center gx-6 gy-4">
                     <div class="col-lg-6">
@@ -574,9 +574,9 @@ description: Enterprise payment orchestration platform with a unified API for 15
     </main>
 
     <script>
-        // The mobile "Start 1-Month Free" CTAs ([data-mcta]) are repeated at the
-        // top of several sections. Keep only the topmost one currently in the
-        // viewport visible so two never show within a single screen.
+        // The "Start Free" CTAs ([data-mcta]) are repeated at the
+        // top of several sections (shown on all viewports). Keep only the topmost
+        // one currently in the viewport visible so two never show within a single screen.
         (function () {
             var ctas = Array.prototype.slice.call(document.querySelectorAll('[data-mcta]'));
             if (ctas.length < 2 || !('IntersectionObserver' in window)) return;
