@@ -50,6 +50,18 @@
   }
 }
 
+// ── Provider logo — fixed height so every card is the same size ─
+.provider-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
+// Razorpay wordmark has a different aspect ratio — needs extra height to read well
+img.provider-logo[alt="Razorpay"] {
+  height: 50px;
+}
+
 // ── Provider category pill ───────────────────────────────────────
 .provider-category {
   padding: 6px 16px;
