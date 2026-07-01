@@ -1,0 +1,108 @@
+---
+---
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+.about-stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+// ── Feature icon (matches site's about-feature-icon pattern) ─────────────────
+.about-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--blue-200);
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+// ── InfyniPay brand card ──────────────────────────────────────────────────────
+.about-brand-card {
+  background: #071327;
+  border-radius: 20px;
+  padding: 3rem 2rem 2.25rem;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(7, 19, 39, 0.45);
+}
+
+.about-powered-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 1.5rem;
+}
+
+.about-brand-wordmark {
+  font-size: clamp(2.8rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.about-wordmark-infyni { color: #ffffff; }
+.about-wordmark-pay {
+  background: linear-gradient(90deg, #1a5cff 0%, #60b4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-brand-tagline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: #1d6aff;
+    flex-shrink: 0;
+  }
+
+  span { color: #4d9eff; }
+}
+
+.about-brand-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 1.5rem 0;
+}
+
+.about-brand-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.about-brand-location {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.about-brand-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4d9eff;
+  text-decoration: none;
+
+  &:hover { color: #60b4ff; text-decoration: underline; }
+}
