@@ -14,13 +14,32 @@ description: Simple, transparent pricing. Start free, no credit card required.
 
   .pricing-card-main {
     border-radius: 24px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .pricing-card-main:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(25, 64, 176, 0.15);
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.25);
+    outline: none;
+  }
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  .volume-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
   }
 
   .price-large {
@@ -39,42 +58,7 @@ description: Simple, transparent pricing. Start free, no credit card required.
     flex-shrink: 0;
   }
 
-  .pricing-calculator {
-    background: linear-gradient(135deg, #f6fafd 0%, #ffffff 100%);
-    border-radius: 20px;
-    padding: 40px;
-  }
-
-  .volume-slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 8px;
-    border-radius: 5px;
-    background: #e0e7ff;
-    outline: none;
-  }
-
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #1940b0;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(25, 64, 176, 0.3);
-  }
-
-  .volume-slider::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #1940b0;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(25, 64, 176, 0.3);
-  }
-
-  .trust-badge {
+.trust-badge {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     border-radius: 12px;
@@ -102,19 +86,19 @@ description: Simple, transparent pricing. Start free, no credit card required.
       <div class="row justify-content-center text-center">
         <div class="col-lg-8">
           <h2 class="h1 mb-3 animated" data-animate="fadeInUp" data-delay=".1">
-            Pricing that grows with you
+            Free to start. Pay only to customize.
           </h2>
           <p class="fs-5 mb-4 animated" data-animate="fadeInUp" data-delay=".2" style="opacity: 0.9;">
-            One simple plan. No hidden fees. No surprises.
+            Full payment orchestration is free forever. Upgrade only when you want your own branding on checkout.
           </p>
           <div class="d-flex justify-content-center gap-3 flex-wrap animated" data-animate="fadeInUp" data-delay=".3">
             <div class="trust-badge">
               <em class="fas fa-clock"></em>
-              <span class="small">Start Free</span>
+              <span class="small fw-bold">Start Free</span>
             </div>
             <div class="trust-badge">
               <em class="fas fa-credit-card"></em>
-              <span class="small">No Card Required</span>
+              <span class="small fw-bold">No Card Required</span>
             </div>
           </div>
         </div>
@@ -125,174 +109,112 @@ description: Simple, transparent pricing. Start free, no credit card required.
   <!-- Main Pricing -->
   <section class="py-5" style="margin-top: -40px;">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10 col-xl-9">
-          <div class="pricing-card-main bg-white shadow-lg animated" data-animate="fadeInUp" data-delay=".4">
-            <div class="row g-0">
-              <!-- Left Side - Price -->
-              <div class="col-lg-5 bg-blue-200 text-white p-5">
-                <div class="mb-4">
-                  <div class="d-flex align-items-start">
-                    <span class="fs-3 mt-2">$</span>
-                    <span class="price-large">29</span>
-                  </div>
-                  <p class="fs-5 mb-0" style="opacity: 0.9;">per month</p>
-                </div>
-                <div class="mb-4 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
-                  <p class="mb-2" style="opacity: 0.9;">Plus transaction fees:</p>
-                  <p class="fs-4 fw-bold mb-0">0.4% over $5,000</p>
-                  <p class="small mb-0" style="opacity: 0.8;">monthly volume</p>
-                </div>
-                <a href="#" class="btn btn-white w-100 py-3 fw-bold" style="color: var(--blue-200);">
-                  Start Free
-                  <em class="fas fa-arrow-right ms-2"></em>
-                </a>
-                <div class="text-center small mt-3 mb-0">
-                <p>No credit card required</p>
-                </div>
+      <div class="row g-4 justify-content-center">
+
+        <!-- Free card -->
+        <div class="col-lg-5 col-md-10 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="pricing-card-main no-hover bg-white h-100 p-5 d-flex flex-column" style="border: 2px solid var(--blue-100)">
+            <div class="mb-4">
+              <span class="badge bg-blue-30 txt-blue-200 fw-semibold mb-3 px-3 py-2">Free</span>
+              <div class="d-flex align-items-start">
+                <span class="fs-3 txt-blue-600 mt-2">$</span>
+                <span class="price-large txt-blue-600">0</span>
               </div>
+              <p class="txt-blue-400 mb-0">No credit card. No time limit.</p>
+            </div>
 
-              <!-- Right Side - What's Included -->
-              <div class="col-lg-7 p-5">
-                <h3 class="txt-blue-600 mb-4 h4">Everything included</h3>
-                
-                <div class="row g-3">
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-eye-slash txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">Ad-Free Checkout</h3>
-                        <p class="txt-blue-400 small mb-0">Your brand front and center — no PaymentHood ads</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-infinity txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">Unlimited transactions</h3>
-                        <p class="txt-blue-400 small mb-0">Process as many payments as you need</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-plug txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">All payment gateways</h3>
-                        <p class="txt-blue-400 small mb-0">Connect any provider, anytime</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-chart-line txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">Real-time analytics</h3>
-                        <p class="txt-blue-400 small mb-0">Track performance and insights</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-shield-alt txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">Advanced fraud protection</h3>
-                        <p class="txt-blue-400 small mb-0">AI-powered security included</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-headset txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">24/7 Support</h3>
-                        <p class="txt-blue-400 small mb-0">Expert help whenever you need it</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="d-flex gap-3">
-                      <div class="feature-icon bg-blue-30">
-                        <em class="fas fa-code txt-blue-200 fs-5"></em>
-                      </div>
-                      <div>
-                        <h3 class="txt-blue-600 mb-1 h6">Complete API access</h3>
-                        <p class="txt-blue-400 small mb-0">Full developer documentation</p>
-                      </div>
-                    </div>
-                  </div>
-
-                    <div class="col-12">
-                        <div class="d-flex gap-3">
-                            <div class="feature-icon bg-blue-30">
-                                <i class="fas fa-puzzle-piece txt-blue-200 fs-5"></i>
-                            </div>
-                            <div>
-                                <h3 class="txt-blue-600 mb-1 h6">Seamless integration</h3>
-                                <p class="txt-blue-400 small mb-0">WHMCS module included</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="d-flex flex-column gap-3 flex-grow-1 mb-4">
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-plug txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">All payment gateways</h3><p class="txt-blue-400 small mb-0">Connect any provider, anytime</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-puzzle-piece txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">All platform integrations</h3><p class="txt-blue-400 small mb-0">WHMCS, WooCommerce, J2Store and more</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-infinity txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">Unlimited transactions</h3><p class="txt-blue-400 small mb-0">No volume caps, no extra fees</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-chart-line txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">Real-time analytics</h3><p class="txt-blue-400 small mb-0">Track performance and insights</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-shield-alt txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">Fraud protection</h3><p class="txt-blue-400 small mb-0">AI-powered security included</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-code txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">Full API access</h3><p class="txt-blue-400 small mb-0">Complete developer documentation</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-tag txt-blue-200 fs-5"></em></div>
+                <div><h3 class="txt-blue-600 mb-1 h6">PaymentHood checkout page</h3><p class="txt-blue-400 small mb-0">Standard checkout with PaymentHood branding</p></div>
               </div>
             </div>
+
+            <a href="https://console.paymenthood.com" class="btn btn-outline-primary w-100 py-3 fw-bold">
+              Start Free <em class="fas fa-arrow-right ms-2"></em>
+            </a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Pricing Calculator -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="text-center mb-5 animated" data-animate="fadeInUp" data-delay=".5">
-            <h2 class="txt-blue-600 mb-3">Calculate your cost</h2>
-            <p class="txt-blue-400">See exactly what you'll pay based on your transaction volume</p>
-          </div>
-
-          <div class="pricing-calculator animated" data-animate="fadeInUp" data-delay=".6">
-            <div class="row align-items-center">
-              <div class="col-lg-7 mb-4 mb-lg-0">
-                <label class="txt-blue-600 fw-semibold mb-3 d-block">Monthly transaction volume</label>
-                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100000" step="5000" value="10000">
-                <div class="d-flex justify-content-between mt-2">
-                  <span class="txt-blue-400 small">$0</span>
-                  <span class="txt-blue-600 fw-bold fs-4" id="volumeDisplay">$10,000</span>
-                  <span class="txt-blue-400 small">$100k+</span>
-                </div>
+        <!-- Pro card -->
+        <div class="col-lg-5 col-md-10 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="pricing-card-main bg-blue-200 text-white h-100 p-5 d-flex flex-column" style="position:relative;">
+            <div class="mb-4">
+              <span class="badge mb-3 px-3 py-2 fw-semibold" style="background:rgba(255,255,255,0.2);">Checkout Pro</span>
+              <div class="d-flex align-items-start">
+                <span class="fs-3 mt-2" style="opacity:.85;">$</span>
+                <span class="price-large">29</span>
               </div>
+              <p class="mb-0" style="opacity:.85;">per month</p>
+            </div>
 
-              <div class="col-lg-5">
-                <div class="text-center p-4 bg-white rounded-3 shadow-sm">
-                  <p class="txt-blue-400 small mb-2">You'll pay</p>
-                  <div class="txt-blue-200 fw-bold mb-2" style="font-size: 48px; line-height: 1;" id="totalCost">$49</div>
-                  <p class="txt-blue-400 small mb-0" id="breakdown">$29 base + $20 transaction fees</p>
-                </div>
+            <p class="mb-4" style="opacity:.9; border-bottom:1px solid rgba(255,255,255,.2); padding-bottom:1.25rem;">
+              Everything in Free, plus full control over how your checkout looks to customers.
+            </p>
+
+            <div class="d-flex flex-column gap-3 flex-grow-1 mb-4">
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-paint-brush fs-5"></em></div>
+                <div><h3 class="mb-1 h6">Custom checkout branding</h3><p class="small mb-0" style="opacity:.8;">Your logo, colors, and business name</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-globe fs-5"></em></div>
+                <div><h3 class="mb-1 h6">Custom domain</h3><p class="small mb-0" style="opacity:.8;">Customers stay on your domain through payment</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-eye-slash fs-5"></em></div>
+                <div><h3 class="mb-1 h6">Remove PaymentHood badge</h3><p class="small mb-0" style="opacity:.8;">Fully white-labeled checkout experience</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-comment-alt fs-5"></em></div>
+                <div><h3 class="mb-1 h6">Custom slogan and copy</h3><p class="small mb-0" style="opacity:.8;">Your own messaging on the checkout page</p></div>
+              </div>
+              <div class="d-flex gap-3 align-items-start">
+                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-headset fs-5"></em></div>
+                <div><h3 class="mb-1 h6">Priority support</h3><p class="small mb-0" style="opacity:.8;">Faster response times from our team</p></div>
               </div>
             </div>
+
+            <div class="mt-4 mb-4 p-3 rounded-3" style="background:rgba(255,255,255,0.1);">
+              <p class="small fw-semibold mb-2" style="opacity:.85;">Estimate your monthly cost</p>
+              <input type="range" class="volume-slider mb-2" id="volumeSlider" min="0" max="100000" step="1000" value="10000">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small" style="opacity:.7;">Volume: <span id="volumeDisplay">$10,000</span></span>
+                <span class="fw-bold fs-5" id="totalCost">$49</span>
+              </div>
+              <p class="small mb-0 mt-1" style="opacity:.6;" id="breakdown">$29 base + $20 transaction fees</p>
+            </div>
+
+            <a href="https://console.paymenthood.com" class="vh-btn btn-blue-100 w-100 justify-content-center">
+              <span>Get Started</span><em class="ti ti-arrow-right ps-2"></em>
+            </a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -309,36 +231,57 @@ description: Simple, transparent pricing. Start free, no credit card required.
           <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".8">
             <div class="col-md-6">
               <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">What's included when I start free?</h3>
-                <p class="txt-blue-400 mb-0">Everything. You get full access to all features with no credit card required.</p>
+                <h3 class="txt-blue-600 mb-3 h5">What's included in the free plan?</h3>
+                <p class="txt-blue-400 mb-0">Everything needed to accept payments: all gateways, all platform integrations, unlimited transactions, analytics, fraud protection, and full API access. Free forever, no credit card required.</p>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">How do transaction fees work?</h3>
-                <p class="txt-blue-400 mb-0">You only pay 0.4% on transactions that exceed $5,000 in monthly volume. First $5,000 has no transaction fees.</p>
+                <h3 class="txt-blue-600 mb-3 h5">Are there any transaction fees?</h3>
+                <p class="txt-blue-400 mb-0">No. PaymentHood charges no transaction fees at any volume. You pay only what your payment gateway charges directly.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h3 class="txt-blue-600 mb-3 h5">What does Checkout Pro add?</h3>
+                <p class="txt-blue-400 mb-0">Full control over how your checkout page looks: your logo, your colors, your domain, your slogan, and no PaymentHood badge. Everything else stays the same.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h3 class="txt-blue-600 mb-3 h5">Does the free plan show PaymentHood branding?</h3>
+                <p class="txt-blue-400 mb-0">Yes. On the free plan your checkout page shows PaymentHood branding. Upgrading to Checkout Pro removes it completely and lets you apply your own design.</p>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="p-4 h-100 border rounded-3">
                 <h3 class="txt-blue-600 mb-3 h5">Can I cancel anytime?</h3>
-                <p class="txt-blue-400 mb-0">Yes, absolutely. No contracts, no commitments. Cancel anytime with one click.</p>
+                <p class="txt-blue-400 mb-0">Yes. No contracts, no commitments. Cancel your Checkout Pro subscription anytime and drop back to the free plan instantly.</p>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">Are there any hidden fees?</h3>
-                <p class="txt-blue-400 mb-0">None. What you see is what you pay. No setup fees, no cancellation fees, no surprises.</p>
+                <h3 class="txt-blue-600 mb-3 h5">How long does it take to set up?</h3>
+                <p class="txt-blue-400 mb-0">For plugin integrations, setup takes under 5 minutes: download, upload, activate. For custom integrations, our team provides a dedicated migration guide and free support at no extra cost.</p>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">Does the free plan show ads?</h3>
-                <p class="txt-blue-400 mb-0">Yes. While you're on the free plan, a small PaymentHood ad appears on your checkout page. Upgrading to the paid plan removes the checkout ad.</p>
+                <h3 class="txt-blue-600 mb-3 h5">What happens if my transaction volume grows beyond $5,000/month?</h3>
+                <p class="txt-blue-400 mb-0">The base plan is $29/month. For volume above $5,000/month, a 0.4% fee applies to the excess amount. Our pricing calculator above shows your exact cost at any volume. There are no surprise charges.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 h-100 border rounded-3">
+                <h3 class="txt-blue-600 mb-3 h5">How long does it take to migrate from my current payment gateway?</h3>
+                <p class="txt-blue-400 mb-0">For WHMCS and WooCommerce and all our integration plugins, setup takes under 5 minutes, download, upload, activate. For custom integrations, our team provides a dedicated migration guide and free support at no extra cost.</p>
               </div>
             </div>
           </div>
@@ -347,45 +290,139 @@ description: Simple, transparent pricing. Start free, no credit card required.
     </div>
   </section>
 
+  <!-- Not Sure Yet -->
+  <section class="section bg-blue-30">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Still deciding?</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">We're here to help</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Not ready to start yet? Reach out and we'll help you figure out if PaymentHood is the right fit.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+
+        <div class="col-lg-4 col-md-6 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="card card-s3 p-4 h-100 text-center d-flex flex-column">
+            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-message-circle"></em></span>
+            <h3 class="txt-blue-600 h5">Chat with us</h3>
+            <p class="txt-blue-400 small flex-grow-1">Ask anything. Our AI assistant answers payment questions instantly, 24/7.</p>
+            <button class="vh-btn btn-blue-300 w-100 mt-3" onclick="document.getElementById('ph-chat-launcher').click()">
+              <span>Open Chat</span><em class="ti ti-message ps-2"></em>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="card card-s3 p-4 h-100 text-center d-flex flex-column">
+            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-mail"></em></span>
+            <h3 class="txt-blue-600 h5">Send us an email</h3>
+            <p class="txt-blue-400 small flex-grow-1">Prefer email? Write to us and we'll get back to you within one business day.</p>
+            <a href="/contact-us.html" class="vh-btn btn-blue-300 w-100 mt-3">
+              <span>Contact Us</span><em class="ti ti-arrow-right ps-2"></em>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </main>
 
+<!-- Chat widget (same as home page) -->
+<script src="https://app.fastbots.ai/embed.js" data-bot-id="cmr574lgr01ykp828ka55uvb1"></script>
+<button id="ph-chat-launcher" aria-label="Open chat">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"/></svg>
+</button>
+<div id="ph-email-gate" role="dialog" aria-modal="true" aria-label="Start chat">
+  <div class="pheg-header">
+    <div class="pheg-avatar">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
+    </div>
+    <div>
+      <div class="pheg-title">PaymentHood Support</div>
+      <div class="pheg-sub">Typically replies instantly</div>
+    </div>
+  </div>
+  <p class="pheg-msg">Hi there 👋 Before we start, what's your email so we can follow up if needed?</p>
+  <form id="ph-email-form" novalidate>
+    <input id="ph-email-input" class="pheg-input" type="email" placeholder="your@email.com" required autocomplete="email">
+    <button type="submit" class="pheg-submit">Start Chatting</button>
+  </form>
+  <p class="pheg-privacy">We'll never share your email with anyone.</p>
+</div>
 <script>
-  // Pricing Calculator
-  const slider = document.getElementById('volumeSlider');
-  const volumeDisplay = document.getElementById('volumeDisplay');
-  const totalCost = document.getElementById('totalCost');
-  const breakdown = document.getElementById('breakdown');
-
-  function calculatePrice(volume) {
-    const baseFee = 29;
-    const threshold = 5000;
-    const transactionRate = 0.004; // 0.4%
-
-    let transactionFee = 0;
-    if (volume > threshold) {
-      transactionFee = (volume - threshold) * transactionRate;
+  (function () {
+    var launcher  = document.getElementById('ph-chat-launcher');
+    var gate      = document.getElementById('ph-email-gate');
+    var form      = document.getElementById('ph-email-form');
+    function findFbBtn() {
+      // Fastbots injects its widget as a direct child of <body>, outside <main>
+      var candidates = document.querySelectorAll('body > div > button, body > button');
+      for (var i = 0; i < candidates.length; i++) {
+        var b = candidates[i];
+        if (b.id !== 'ph-chat-launcher' && !b.closest('#ph-email-gate')) return b;
+      }
+      return null;
     }
+    // Hide Fastbots native button until email captured
+    var watchFb = setInterval(function () {
+      var fb = findFbBtn();
+      if (!fb) return;
+      clearInterval(watchFb);
+      if (!localStorage.getItem('ph_visitor_email')) {
+        fb.parentElement.style.cssText = 'opacity:0;pointer-events:none;position:fixed;bottom:0;right:0';
+      }
+    }, 100);
+    function openBot() {
+      launcher.style.display = 'none';
+      function tryOpen(retries) {
+        var fb = findFbBtn();
+        if (fb) {
+          fb.parentElement.style.cssText = '';
+          setTimeout(function () { fb.click(); }, 200);
+        } else if (retries > 0) {
+          setTimeout(function () { tryOpen(retries - 1); }, 150);
+        }
+      }
+      tryOpen(20);
+    }
+    launcher.addEventListener('click', function () {
+      if (localStorage.getItem('ph_visitor_email')) { openBot(); return; }
+      gate.classList.toggle('open');
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('ph-email-input').value.trim();
+      if (!email) return;
+      localStorage.setItem('ph_visitor_email', email);
+      gate.classList.remove('open');
+      openBot();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') gate.classList.remove('open'); });
+    document.addEventListener('click', function (e) {
+      if (!gate.contains(e.target) && e.target !== launcher) gate.classList.remove('open');
+    });
+  })();
+</script>
 
-    const total = baseFee + transactionFee;
-    return { total: Math.round(total), transactionFee: Math.round(transactionFee), baseFee };
-  }
 
+<script>
+  var slider = document.getElementById('volumeSlider');
+  var volumeDisplay = document.getElementById('volumeDisplay');
+  var totalCost = document.getElementById('totalCost');
+  var breakdown = document.getElementById('breakdown');
   function updatePricing() {
-    const volume = parseInt(slider.value);
+    var volume = parseInt(slider.value);
     volumeDisplay.textContent = '$' + volume.toLocaleString();
-
-    const pricing = calculatePrice(volume);
-    totalCost.textContent = '$' + pricing.total;
-
-    if (pricing.transactionFee > 0) {
-      breakdown.textContent = `$${pricing.baseFee} base + $${pricing.transactionFee} transaction fees`;
-    } else {
-      breakdown.textContent = `$${pricing.baseFee} base fee only`;
-    }
+    var transactionFee = volume > 5000 ? Math.round((volume - 5000) * 0.004) : 0;
+    var total = 29 + transactionFee;
+    totalCost.textContent = '$' + total;
+    breakdown.textContent = transactionFee > 0
+      ? '$29 base + $' + transactionFee + ' transaction fees'
+      : '$29 base fee only';
   }
-
   slider.addEventListener('input', updatePricing);
-  updatePricing(); // Initial calculation
+  updatePricing();
 </script>
 
 {% include footer.html %}

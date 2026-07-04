@@ -1,6 +1,130 @@
 // Late-cascade page extras (home transaction-control cards, home screenshot
 // slider); extracted (pruned) from the tail of style.css.
 
+// ---- chat email gate widget ----
+#ph-chat-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-100) 0%, var(--blue-200) 100%);
+  box-shadow: 0 4px 20px rgba(25, 64, 176, 0.45);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  svg { width: 26px; height: 26px; fill: #fff; }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(25, 64, 176, 0.55);
+  }
+}
+
+#ph-email-gate {
+  position: fixed;
+  bottom: 94px;
+  right: 24px;
+  z-index: 9998;
+  width: 320px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+  padding: 1.5rem;
+  transform: scale(0.85) translateY(16px);
+  transform-origin: bottom right;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+
+  &.open {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+  }
+
+  .pheg-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+
+    .pheg-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-100), var(--blue-200));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      svg { width: 18px; height: 18px; fill: #fff; }
+    }
+
+    .pheg-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--blue-600);
+      line-height: 1.2;
+    }
+
+    .pheg-sub {
+      font-size: 0.75rem;
+      color: var(--blue-400);
+    }
+  }
+
+  .pheg-msg {
+    font-size: 0.85rem;
+    color: #374151;
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+
+  .pheg-input {
+    width: 100%;
+    padding: 0.6rem 0.875rem;
+    border: 1px solid var(--blue-100);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #111;
+    outline: none;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.18s ease;
+
+    &:focus { border-color: var(--blue-100); }
+    &::placeholder { color: #9ca3af; }
+  }
+
+  .pheg-submit {
+    width: 100%;
+    padding: 0.65rem;
+    background: linear-gradient(135deg, var(--blue-100) 0%, var(--blue-200) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.18s ease;
+
+    &:hover { opacity: 0.9; }
+  }
+
+  .pheg-privacy {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    text-align: center;
+    margin-top: 0.625rem;
+  }
+}
+
 // ---- transaction-control cards ----
 #transactionControl {
   background: url("../images/home/globe-particle.webp") no-repeat center 107%;
@@ -53,6 +177,64 @@
 .home-mcta.is-suppressed {
   visibility: hidden;
   opacity: 0;
+}
+
+// ---- customer logo cards ----
+.customer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 2rem;
+  background: #fff;
+  border: 1px solid var(--blue-100);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(25, 64, 176, 0.10);
+    border-color: var(--blue-200);
+  }
+}
+
+.customer-logo-wrap {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+
+.customer-logo--wide {
+  height: 36px;
+  max-width: 180px;
+}
+
+.customer-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.customer-text-logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #4a5568;
+  letter-spacing: -0.03em;
+
+  .clt-bit {
+    color: #1a5fcc;
+    font-style: italic;
+  }
 }
 
 // ---- screenshot slider ----
