@@ -370,7 +370,7 @@ description: Simple, transparent pricing. Start free, no credit card required.
       if (!fb) return;
       clearInterval(watchFb);
       if (!localStorage.getItem('ph_visitor_email')) {
-        fb.parentElement.style.cssText = 'opacity:0;pointer-events:none;position:fixed;bottom:0;right:0';
+        fb.style.display = 'none';
       }
     }, 100);
     function openBot() {
@@ -378,7 +378,7 @@ description: Simple, transparent pricing. Start free, no credit card required.
       function tryOpen(retries) {
         var fb = findFbBtn();
         if (fb) {
-          fb.parentElement.style.cssText = '';
+          fb.style.display = '';
           setTimeout(function () { fb.click(); }, 200);
         } else if (retries > 0) {
           setTimeout(function () { tryOpen(retries - 1); }, 150);
