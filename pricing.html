@@ -328,8 +328,7 @@ description: Simple, transparent pricing. Start free, no credit card required.
 
 </main>
 
-<!-- Chat widget (same as home page) -->
-<script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmr574lgr01ykp828ka55uvb1"></script>
+<!-- Chat email gate -->
 <button id="ph-chat-launcher" aria-label="Open chat">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"/></svg>
 </button>
@@ -346,46 +345,77 @@ description: Simple, transparent pricing. Start free, no credit card required.
   <p class="pheg-msg">Hi there 👋 Before we start, what's your email so we can follow up if needed?</p>
   <form id="ph-email-form" novalidate>
     <input id="ph-email-input" class="pheg-input" type="email" placeholder="your@email.com" required autocomplete="email">
-    <button type="submit" class="pheg-submit">Start Chatting</button>
+    <button type="submit" class="pheg-submit">Start Chatting →</button>
   </form>
   <p class="pheg-privacy">We'll never share your email with anyone.</p>
 </div>
 <script>
   (function () {
-    var launcher  = document.getElementById('ph-chat-launcher');
-    var gate      = document.getElementById('ph-email-gate');
-    var form      = document.getElementById('ph-email-form');
-    function findFbBtn() {
-      // Fastbots injects its widget as a direct child of <body>, outside <main>
-      var candidates = document.querySelectorAll('body > div > button, body > button');
-      for (var i = 0; i < candidates.length; i++) {
-        var b = candidates[i];
-        if (b.id !== 'ph-chat-launcher' && !b.closest('#ph-email-gate')) return b;
-      }
-      return null;
+    var launcher = document.getElementById('ph-chat-launcher');
+    var gate     = document.getElementById('ph-email-gate');
+    var form     = document.getElementById('ph-email-form');
+    var loaded   = false;
+    var watching = false;
+
+    // Fastbots toggles its iframe between classes "iframe-visible" and
+    // "iframe-hidden" on every open/close (including its own in-panel close
+    // button) — that's the only outside signal it gives us. Mirror it onto
+    // our launcher so the button reappears whenever the chat is closed.
+    function watchFastbotsPanel() {
+      if (watching) return;
+      var iframe = document.querySelector('iframe[class*="iframe-"]');
+      if (!iframe) return;
+      watching = true;
+      var sync = function () {
+        launcher.style.display = iframe.classList.contains('iframe-visible') ? 'none' : '';
+      };
+      new MutationObserver(sync).observe(iframe, { attributes: true, attributeFilter: ['class'] });
     }
-    // Hide Fastbots native button until email captured
-    var watchFb = setInterval(function () {
-      var fb = findFbBtn();
-      if (!fb) return;
-      clearInterval(watchFb);
-      if (!localStorage.getItem('ph_visitor_email')) {
-        fb.style.display = 'none';
-      }
-    }, 100);
+
     function openBot() {
-      launcher.style.display = 'none';
-      function tryOpen(retries) {
-        var fb = findFbBtn();
-        if (fb) {
-          fb.style.display = '';
-          setTimeout(function () { fb.click(); }, 200);
-        } else if (retries > 0) {
-          setTimeout(function () { tryOpen(retries - 1); }, 150);
-        }
+      if (loaded) {
+        launcher.style.display = 'none';
+        var btn = document.getElementById('chat-widget-push-to-talk');
+        if (btn) btn.click();
+        return;
       }
-      tryOpen(20);
+      loaded = true;
+      // Fastbots can take several seconds to boot — spin the launcher
+      // icon instead of hiding it so a click always gives feedback.
+      launcher.classList.add('loading');
+      var s = document.createElement('script');
+      s.src = 'https://app.fastbots.ai/embed.js';
+      s.setAttribute('data-bot-id', 'cmr574lgr01ykp828ka55uvb1');
+      s.onerror = function () {
+        console.error('[PaymentHood chat] Fastbots embed.js failed to load — likely blocked by an ad blocker/privacy extension or a network/firewall rule.');
+        launcher.classList.remove('loading');
+        loaded = false;
+      };
+      s.onload = function () {
+        console.log('[PaymentHood chat] Fastbots embed.js loaded and ran (onload fired). Waiting for its widget-config API call to finish and the button to appear...');
+      };
+      document.body.appendChild(s);
+      var tries = 0;
+      var iv = setInterval(function () {
+        tries++;
+        var btn = document.getElementById('chat-widget-push-to-talk');
+        if (btn && btn.style.visibility === 'visible') {
+          clearInterval(iv);
+          launcher.classList.remove('loading');
+          launcher.style.display = 'none';
+          btn.click();
+          watchFastbotsPanel();
+          return;
+        }
+        if (tries > 200) {
+          clearInterval(iv);
+          launcher.classList.remove('loading');
+          loaded = false;
+          console.error('[PaymentHood chat] Fastbots widget never became ready within 20s (button found: ' + !!btn + ').');
+        }
+      }, 100);
     }
+
     launcher.addEventListener('click', function () {
       if (localStorage.getItem('ph_visitor_email')) { openBot(); return; }
       gate.classList.toggle('open');
@@ -400,7 +430,7 @@ description: Simple, transparent pricing. Start free, no credit card required.
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') gate.classList.remove('open'); });
     document.addEventListener('click', function (e) {
-      if (!gate.contains(e.target) && e.target !== launcher) gate.classList.remove('open');
+      if (!gate.contains(e.target) && !launcher.contains(e.target)) gate.classList.remove('open');
     });
   })();
 </script>

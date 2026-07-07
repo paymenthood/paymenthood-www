@@ -2,6 +2,16 @@
 // slider); extracted (pruned) from the tail of style.css.
 
 // ---- chat email gate widget ----
+
+// Fastbots injects its own floating button (#chat-widget-push-to-talk) — we
+// use #ph-chat-launcher instead, so keep the Fastbots button visually hidden.
+// Its inline style.visibility is still set by Fastbots' iframe onload, which
+// we read in JS as a readiness signal before calling .click() programmatically.
+#chat-widget-push-to-talk {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 #ph-chat-launcher {
   position: fixed;
   bottom: 24px;
@@ -25,6 +35,17 @@
     transform: scale(1.1);
     box-shadow: 0 6px 28px rgba(25, 64, 176, 0.55);
   }
+
+  // Fastbots can take several seconds to boot; spin the icon so a click
+  // always gives immediate feedback instead of the button just vanishing.
+  &.loading {
+    cursor: wait;
+    svg { animation: ph-chat-spin 0.8s linear infinite; }
+  }
+}
+
+@keyframes ph-chat-spin {
+  to { transform: rotate(360deg); }
 }
 
 #ph-email-gate {

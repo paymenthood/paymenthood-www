@@ -7,7 +7,7 @@ lang: en
 author: PaymentHood
 
 # Social Media & SEO (consumed by jekyll-seo-tag)
-logo: /assets/images/logo2x.png
+logo: /assets/images/logos/logo2x.webp
 twitter:
   username: paymenthood
   card: summary_large_image
