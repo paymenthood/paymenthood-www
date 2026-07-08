@@ -348,6 +348,10 @@ description: Simple, transparent pricing. Start free, no credit card required.
     <button type="submit" class="pheg-submit">Start Chatting →</button>
   </form>
   <p class="pheg-privacy">We'll never share your email with anyone.</p>
+  <div id="ph-chat-error" class="pheg-error" hidden>
+    <p class="pheg-error-msg">Live chat couldn't load — this usually means a browser extension (ad blocker or privacy tool) is blocking it. Please reach us another way:</p>
+    <a href="/contact-us.html" class="pheg-submit d-block text-center text-decoration-none">Contact Us</a>
+  </div>
 </div>
 <script>
   (function () {
@@ -372,6 +376,28 @@ description: Simple, transparent pricing. Start free, no credit card required.
       new MutationObserver(sync).observe(iframe, { attributes: true, attributeFilter: ['class'] });
     }
 
+    var errorBox = document.getElementById('ph-chat-error');
+    var msg      = document.querySelector('.pheg-msg');
+    var privacy  = document.querySelector('.pheg-privacy');
+
+    function showChatForm() {
+      form.hidden = false;
+      msg.hidden = false;
+      privacy.hidden = false;
+      errorBox.hidden = true;
+    }
+
+    function showChatError(reason) {
+      console.error('[PaymentHood chat] Fastbots failed to initialize (' + reason + '). Likely blocked by an ad blocker/privacy extension, or a network/firewall rule.');
+      launcher.classList.remove('loading');
+      loaded = false;
+      form.hidden = true;
+      msg.hidden = true;
+      privacy.hidden = true;
+      errorBox.hidden = false;
+      gate.classList.add('open');
+    }
+
     function openBot() {
       if (loaded) {
         launcher.style.display = 'none';
@@ -380,19 +406,25 @@ description: Simple, transparent pricing. Start free, no credit card required.
         return;
       }
       loaded = true;
+      showChatForm();
       // Fastbots can take several seconds to boot — spin the launcher
       // icon instead of hiding it so a click always gives feedback.
       launcher.classList.add('loading');
+
       var s = document.createElement('script');
       s.src = 'https://app.fastbots.ai/embed.js';
       s.setAttribute('data-bot-id', 'cmr574lgr01ykp828ka55uvb1');
       s.onerror = function () {
-        console.error('[PaymentHood chat] Fastbots embed.js failed to load — likely blocked by an ad blocker/privacy extension or a network/firewall rule.');
-        launcher.classList.remove('loading');
-        loaded = false;
+        clearInterval(iv);
+        showChatError('embed.js failed to load');
       };
       s.onload = function () {
-        console.log('[PaymentHood chat] Fastbots embed.js loaded and ran (onload fired). Waiting for its widget-config API call to finish and the button to appear...');
+        // Fastbots' entire init routine is wrapped in a bare
+        // `window.onload = async () => {...}` assignment. Since we load
+        // it on demand (well after the page's own load event already
+        // fired), that handler registers too late and never runs on its
+        // own — call it ourselves the moment it's assigned.
+        if (typeof window.onload === 'function') window.onload();
       };
       document.body.appendChild(s);
       var tries = 0;
@@ -409,16 +441,16 @@ description: Simple, transparent pricing. Start free, no credit card required.
         }
         if (tries > 200) {
           clearInterval(iv);
-          launcher.classList.remove('loading');
-          loaded = false;
-          console.error('[PaymentHood chat] Fastbots widget never became ready within 20s (button found: ' + !!btn + ').');
+          showChatError('widget never became ready within 20s');
         }
       }, 100);
     }
 
     launcher.addEventListener('click', function () {
       if (localStorage.getItem('ph_visitor_email')) { openBot(); return; }
+      var opening = !gate.classList.contains('open');
       gate.classList.toggle('open');
+      if (opening && !loaded) showChatForm();
     });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
