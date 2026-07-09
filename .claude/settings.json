@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat > *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\DEVELO~1\\AppData\\Local\\Temp\\claude\\c--Users-Developer-source-repos-Ph-paymenthood-www\\e9fa3221-0db3-4729-a915-c9459c4f48ea\\scratchpad"
+    ]
+  }
+}
