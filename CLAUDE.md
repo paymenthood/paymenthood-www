@@ -66,7 +66,7 @@ Conventions:
 
 ## Fixed Design Decisions (don't revisit)
 - No contact-us form at the bottom of the home page.
-- Footer: no social-media links, no “Schedule App demo” link.
+- Footer: LinkedIn (`https://www.linkedin.com/company/paymenthood/`) and X (`https://x.com/PaymentHood`) icon links live under the logo in the brand column (`.footer-social` in `_sass/theme/_extras.scss`) — no other social platforms, no “Schedule App demo” link.
 - The home page does **not** load `components.css` — leave its markup and styles as they are.
 
 ## Gotchas
