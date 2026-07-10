@@ -56,8 +56,11 @@
 
     <!-- Fav Icon  -->
     <link rel="icon" href="{{ '/assets/images/logos/favicon.png' | relative_url }}" type="image/png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/logos/favicon-32.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/logos/favicon-16.png' | relative_url }}">
+    <!-- Light scheme: navy icon (default). Dark scheme: white icon so it stays visible on dark tab bars. -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/logos/favicon-32.png' | relative_url }}" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/logos/favicon-16.png' | relative_url }}" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/logos/favicon-32-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/logos/favicon-16-dark.png' | relative_url }}" media="(prefers-color-scheme: dark)">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/logos/apple-touch-icon.png' | relative_url }}">
     <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 
