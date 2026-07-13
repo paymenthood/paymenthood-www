@@ -1,0 +1,11 @@
+{
+  "name": "paymenthood-www",
+  "private": true,
+  "description": "Build tooling only (Jekyll itself is Ruby/Bundler-managed via Gemfile). Used by scripts/purge-css.mjs in the GitHub Actions deploy workflow.",
+  "scripts": {
+    "purge-css": "node scripts/purge-css.mjs"
+  },
+  "devDependencies": {
+    "purgecss": "8.0.0"
+  }
+}

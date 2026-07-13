@@ -5,6 +5,7 @@
 /.vs
 /_site/
 /.idea/
+/node_modules/
 
 # Editor workspace config — machine-specific (absolute paths, personal settings).
 /.vscode/
