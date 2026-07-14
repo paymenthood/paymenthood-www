@@ -69,12 +69,18 @@
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
-    <!-- Preload LCP images (home hero only — #homeBannerMask exists only on the home page) -->
+    <!-- Preload the LCP image for whichever hero this page renders.
+         Home has its own #homeBannerMask hero (banner-bg-large/banner-bg);
+         every other page's LCP element is #pageHeader (_overrides.scss),
+         whose background is shape-x.webp — that one needs fetchpriority=high
+         here instead, since it's undiscoverable until style.css parses otherwise. -->
     {% if page.url == '/' %}
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     <link rel="preload" as="image" href="{{ '/assets/images/shape-x.webp' | relative_url }}" type="image/webp">
+    {% else %}
+    <link rel="preload" as="image" href="{{ '/assets/images/shape-x.webp' | relative_url }}" type="image/webp" fetchpriority="high">
     {% endif %}
 
     <!-- Critical CSS for LCP (hero mask) - inlined to ensure immediate render -->
