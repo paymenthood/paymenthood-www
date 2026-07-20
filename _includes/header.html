@@ -2,12 +2,44 @@
 <html lang="en" class="js">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WZ5M4HR8');</script>
+    <!-- Google Tag Manager (deferred until first interaction / idle) -->
+    {%- comment -%}
+      Same GTM container and the same official snippet — only WHEN it runs has
+      changed. Loading it eagerly cost ~1.5s of mobile main-thread time
+      (Clarity 973ms + GA 356ms + GTM 215ms), which was 100% of the page's
+      Total Blocking Time and ~10 Lighthouse points on mobile.
+
+      It now loads on the first of: a real user interaction, or a 3s timeout —
+      so it is off the critical path but still fires on essentially every
+      genuine visit. dataLayer is created up front, so any dataLayer.push()
+      elsewhere on the page still queues normally and is picked up when GTM
+      initialises. Nothing about the container, tags, GA or Clarity changes.
+    {%- endcomment -%}
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var loaded = false;
+            function loadGTM() {
+                if (loaded) return;
+                loaded = true;
+                cleanup();
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            }
+            var EVENTS = ['scroll', 'pointerdown', 'keydown', 'touchstart', 'mousemove'];
+            function cleanup() {
+                EVENTS.forEach(function (e) { w.removeEventListener(e, loadGTM, { passive: true }); });
+            }
+            EVENTS.forEach(function (e) { w.addEventListener(e, loadGTM, { passive: true, once: true }); });
+            // Fallback so visitors who never interact are still measured.
+            w.setTimeout(loadGTM, 3000);
+        })(window, document, 'script', 'dataLayer', 'GTM-WZ5M4HR8');
+    </script>
     <!-- End Google Tag Manager -->
 
     <meta charset="utf-8">
@@ -28,7 +60,7 @@
     {%- if ph_product -%}
     {%- assign ph_noun = ph_product.noun | default: 'plugin' -%}
     {%- capture ph_title_full %}{{ page.title }}{% endcapture -%}
-    {%- capture ph_desc_full %}{{ page.description }} Connect 15+ global payment providers including PayPal, Stripe, and Authorize.net. Free {{ ph_noun }}. 5-minute setup.{% endcapture -%}
+    {%- capture ph_desc_full %}{{ page.description }} Connect 30+ global payment providers including PayPal, Stripe, and Authorize.net. Free {{ ph_noun }}. 5-minute setup.{% endcapture -%}
     {%- assign ph_seo = ph_seo | replace: page.title, ph_title_full | replace: page.description, ph_desc_full -%}
     {%- endif -%}
     {{ ph_seo }}
@@ -78,7 +110,14 @@
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
-    <link rel="preload" as="image" href="{{ '/assets/images/shape-x.webp' | relative_url }}" type="image/webp">
+    {%- comment -%}
+      shape-x.webp is #homeBannerMask's :after overlay — it stretches across the
+      whole hero, so Chrome attributes the home page's LCP to THIS image (not to
+      banner-bg*, which sits behind it). Measured on both mobile and desktop.
+      It therefore needs fetchpriority=high too; it's only ~25KB, so it doesn't
+      meaningfully compete with the banner for bandwidth.
+    {%- endcomment -%}
+    <link rel="preload" as="image" href="{{ '/assets/images/shape-x.webp' | relative_url }}" type="image/webp" fetchpriority="high">
     {% else %}
     <link rel="preload" as="image" href="{{ '/assets/images/shape-x.webp' | relative_url }}" type="image/webp" fetchpriority="high">
     {% endif %}
@@ -123,10 +162,19 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
                             <a href="{{ '/' | relative_url }}" class="logo-link">
-                                <img class="logo-dark" src="{{ '/assets/images/logos/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logos/logo2x.webp' | relative_url }} 2x" alt="logo">
-                                <img class="logo-light" src="{{ '/assets/images/logos/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logos/logo-full-white2x.webp' | relative_url }} 2x" alt="logo">
+                                <img class="logo-dark" src="{{ '/assets/images/logos/logo.webp' | relative_url }}" srcset="{{ '/assets/images/logos/logo2x.webp' | relative_url }} 2x" width="171" height="57" alt="logo">
+                                <img class="logo-light" src="{{ '/assets/images/logos/logo-full-white.webp' | relative_url }}" srcset="{{ '/assets/images/logos/logo-full-white2x.webp' | relative_url }} 2x" width="171" height="57" alt="logo">
                             </a>
                         </div>
+                        {%- comment -%}
+                          Mobile-only CTA. The main "Start Free" lives inside
+                          .header-navbar, which collapses into the offcanvas
+                          below 992px — so on phones it is hidden behind the
+                          hamburger. This surfaces it directly in the bar.
+                          d-lg-none matches the offcanvas-lg breakpoint, so
+                          exactly one of the two is ever visible.
+                        {%- endcomment -%}
+                        <a href="https://console.paymenthood.com" target="_blank" rel="noopener" class="header-cta-mobile vh-btn btn-auto btn-green-300 no-change d-lg-none"><span>Start Free</span><span class="visually-hidden"> (opens in new tab)</span></a>
                         <!-- Menu Toggle @s -->
                         <div class="header-nav-toggle">
                             <button type="button" class="navbar-toggle" data-bs-toggle="offcanvas" data-bs-target="#headerMenu" aria-controls="headerMenu" aria-label="Toggle menu">
@@ -151,35 +199,35 @@
                                             <ul class="integrations-menu-grid">
                                                 <li class="menu-item">
                                                     <a class="menu-link integration-link" href="/integrations/whmcs/">
-                                                        <span class="integration-logo"><img src="{{ '/assets/images/whmcs/whmcs-logo.png' | relative_url }}" alt="WHMCS"></span>
+                                                        <span class="integration-logo"><img src="{{ '/assets/images/whmcs/whmcs-logo.png' | relative_url }}" width="284" height="177" alt="WHMCS"></span>
                                                         <span class="integration-desc">Payment gateway module for WHMCS billing</span>
                                                         <em class="integration-arrow ti ti-arrow-right"></em>
                                                     </a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a class="menu-link integration-link" href="/integrations/woocommerce/">
-                                                        <span class="integration-logo"><img src="{{ '/assets/images/woocommerce/woo-logo.png' | relative_url }}" alt="WooCommerce"></span>
+                                                        <span class="integration-logo"><img src="{{ '/assets/images/woocommerce/woo-logo.png' | relative_url }}" width="446" height="113" alt="WooCommerce"></span>
                                                         <span class="integration-desc">Payment gateway plugin for WordPress stores</span>
                                                         <em class="integration-arrow ti ti-arrow-right"></em>
                                                     </a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a class="menu-link integration-link" href="/integrations/phoca-cart/">
-                                                        <span class="integration-logo"><img src="{{ '/assets/images/phocacart/phocacart-logo.png' | relative_url }}" alt="Phoca Cart"></span>
+                                                        <span class="integration-logo"><img src="{{ '/assets/images/phocacart/phocacart-logo.png' | relative_url }}" width="259" height="194" alt="Phoca Cart"></span>
                                                         <span class="integration-desc">Payment plugin for Phoca Cart on Joomla</span>
                                                         <em class="integration-arrow ti ti-arrow-right"></em>
                                                     </a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a class="menu-link integration-link" href="/integrations/j2commerce/">
-                                                        <span class="integration-logo"><img src="{{ '/assets/images/j2commerce/j2commerce-logo.webp' | relative_url }}" alt="J2Commerce"></span>
+                                                        <span class="integration-logo"><img src="{{ '/assets/images/j2commerce/j2commerce-logo.webp' | relative_url }}" width="669" height="180" alt="J2Commerce"></span>
                                                         <span class="integration-desc">Payment plugin for J2Commerce on Joomla</span>
                                                         <em class="integration-arrow ti ti-arrow-right"></em>
                                                     </a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a class="menu-link integration-link" href="/integrations/virtuemart/">
-                                                        <span class="integration-logo"><img src="{{ '/assets/images/virtuemart/virtuemart-logo.png' | relative_url }}" alt="VirtueMart"></span>
+                                                        <span class="integration-logo"><img src="{{ '/assets/images/virtuemart/virtuemart-logo.png' | relative_url }}" width="179" height="71" alt="VirtueMart"></span>
                                                         <span class="integration-desc">Payment plugin for VirtueMart on Joomla</span>
                                                         <em class="integration-arrow ti ti-arrow-right"></em>
                                                     </a>

@@ -1,6 +1,6 @@
 # Jekyll Configuration for GitHub Pages
 title: PaymentHood
-description: Enterprise payment orchestration platform with a unified API for 15+ payment providers. Accept payments in minutes without touching your code.
+description: Enterprise payment orchestration platform with a unified API for 30+ payment providers. Accept payments in minutes without touching your code.
 url: "https://www.paymenthood.com"
 baseurl: ""
 lang: en

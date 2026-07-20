@@ -37,15 +37,15 @@
 {%- capture install_url %}/integrations/{{ include.slug }}/installation/{% endcapture -%}
 {%- capture d_hero_title %}The Payment Gateway<br>Your <span class="txt-blue-50">{{ p.platform }} Store</span><br>Deserves{% endcapture -%}
 {%- assign hero_title = p.hero_title_html | default: d_hero_title -%}
-{%- capture lead %}Accept payments from 15+ global providers on your {{ store }} — PayPal, Stripe, Authorize.net, and more. One {{ noun }}. Zero complexity.{% endcapture -%}
-{%- capture subtitle %}One-Time Payments · 15+ Providers{% endcapture -%}
+{%- capture lead %}Accept payments from 30+ global providers on your {{ store }} — PayPal, Stripe, Authorize.net, and more. One {{ noun }}. Zero complexity.{% endcapture -%}
+{%- capture subtitle %}One-Time Payments · 30+ Providers{% endcapture -%}
 {%- capture payment_intro %}PaymentHood for {{ p.platform }} powers every standard checkout on your store — from single products to full cart orders.{% endcapture -%}
-{%- capture cta_text %}Free {{ noun }}. 15+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
+{%- capture cta_text %}Free {{ noun }}. 30+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
 {%- if p.supports_subscriptions -%}
-{%- capture lead %}Accept <strong class="text-white">one-time</strong> and <strong class="text-white">recurring subscription</strong> payments through 15+ global payment providers — all from a single, free {{ p.platform }} {{ noun }} with zero code changes.{% endcapture -%}
-{%- capture subtitle %}One-Time & Subscriptions · 15+ Providers{% endcapture -%}
+{%- capture lead %}Accept <strong class="text-white">one-time</strong> and <strong class="text-white">recurring subscription</strong> payments through 30+ global payment providers — all from a single, free {{ p.platform }} {{ noun }} with zero code changes.{% endcapture -%}
+{%- capture subtitle %}One-Time & Subscriptions · 30+ Providers{% endcapture -%}
 {%- capture payment_intro %}{{ p.platform }} generates both one-off invoices and recurring renewal invoices. PaymentHood handles both billing models through the same {{ noun }} — no extra configuration, no second gateway.{% endcapture -%}
-{%- capture cta_text %}Free {{ noun }}. 15+ global providers. One-time and subscription payments. No recurring fees, no complexity.{% endcapture -%}
+{%- capture cta_text %}Free {{ noun }}. 30+ global providers. One-time and subscription payments. No recurring fees, no complexity.{% endcapture -%}
 {%- endif -%}
 {%- capture providers_desc %}Connect any of these globally trusted providers to your {{ p.platform }} store through a single PaymentHood integration.{% endcapture -%}
 
@@ -74,7 +74,7 @@
                     </a>
                 </div>
                 <div class="d-flex flex-wrap gap-3">
-                    <div class="hero-stat-pill"><svg aria-hidden="true" class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>15+</strong>&nbsp;Providers</div>
+                    <div class="hero-stat-pill"><svg aria-hidden="true" class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>30+</strong>&nbsp;Providers</div>
                     <div class="hero-stat-pill"><svg aria-hidden="true" class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg><strong>5 min</strong>&nbsp;Setup</div>
                     <div class="hero-stat-pill"><svg aria-hidden="true" class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-7 9-7 9s-7-4-7-9V6l7-3z"/></svg><strong>{{ compat_name }}</strong>&nbsp;{{ p.compat }}</div>
                 </div>
@@ -150,7 +150,7 @@
 <section class="stats-bar">
     <div class="container">
         <div class="row text-center gy-4">
-            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Payment Providers</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">Payment Providers</div></div></div>
             <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">5min</div><div class="stat-label">Average Setup Time</div></div></div>
             {% if p.supports_subscriptions %}
             <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number">2</div><div class="stat-label">Payment Models Supported</div></div></div>
@@ -181,7 +181,7 @@
                     <p class="ptype-desc">Process a single charge when {{ audience }} pay a {{ p.platform }} invoice. They select PaymentHood at checkout and pay through your active provider — the transaction completes immediately and the invoice is marked paid automatically.</p>
                     <ul class="use-case-list">
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Pay any open {{ p.platform }} invoice in one step</li>
-                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Works with all 15+ payment providers</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Works with all 30+ payment providers</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Instant confirmation via secure provider callback</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Invoice marked paid in {{ p.platform }} automatically</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Charges in the invoice currency — multi-currency ready</li>
@@ -209,7 +209,7 @@
                 <div class="ptype-card onetime shadow-sm">
                     <div class="ptype-header-icon onetime">🛒</div>
                     <h3>One-Time Payment</h3>
-                    <p class="ptype-desc">Let {{ audience }} pay once at checkout using any of the 15+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured — with full order management handled automatically by {{ p.platform }}.</p>
+                    <p class="ptype-desc">Let {{ audience }} pay once at checkout using any of the 30+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured — with full order management handled automatically by {{ p.platform }}.</p>
                     <ul class="use-case-list use-case-list--grid">
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Physical product orders</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Digital downloads</li>
@@ -237,7 +237,7 @@
         </div>
         <div class="feature-grid">
             <div class="feat-card"><div class="feat-card-icon navy">🔌</div><h3 class="h4">Native {{ p.platform }} Integration</h3><p>Registered as a standard {{ p.platform }} payment gateway — works seamlessly with your existing checkout flow.</p></div>
-            <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h3 class="h4">15+ Global Providers</h3><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more — all through a single PaymentHood account.</p></div>
+            <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h3 class="h4">30+ Global Providers</h3><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more — all through a single PaymentHood account.</p></div>
             <div class="feat-card"><div class="feat-card-icon green">⚡</div><h3 class="h4">Automatic Order Management</h3><p>{{ p.platform }} order statuses update automatically on payment success or failure. No manual order handling required.</p></div>
             <div class="feat-card"><div class="feat-card-icon orange">🔒</div><h3 class="h4">Sandbox &amp; Live Modes</h3><p>Test your full checkout flow in sandbox mode before going live. Switch environments with a single toggle in the admin.</p></div>
             <div class="feat-card"><div class="feat-card-icon teal">📦</div><h3 class="h4">Upload &amp; Activate — That's It</h3><p>Install the {{ noun }}, paste your PaymentHood API key, and you're ready to accept payments — no code, no webhooks.</p></div>
@@ -304,7 +304,7 @@
             </div>
         </div>
         <div class="row gy-4">
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h3 class="h5">One {{ noun_cap }}, Any Provider</h3><p>Other solutions require a separate {{ noun }} for each payment gateway. PaymentHood gives you all 15+ providers through one unified {{ p.platform }} {{ noun }}.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h3 class="h5">One {{ noun_cap }}, Any Provider</h3><p>Other solutions require a separate {{ noun }} for each payment gateway. PaymentHood gives you all 30+ providers through one unified {{ p.platform }} {{ noun }}.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h3 class="h5">No {{ noun_cap }} Cost</h3><p>The {{ noun }} is completely free. PaymentHood earns only through your payment provider — you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h3 class="h5">Sell to Any Market</h3><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs — without changing your {{ p.platform }} setup.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">⚙️</div><div><h3 class="h5">No Code Required</h3><p>Works out of the box with any standard {{ p.platform }} installation. No custom development, no webhook setup, no API coding on your end.</p></div></div></div>
@@ -335,7 +335,7 @@
                         <tr><td>Provider agreement</td><td>Not required</td><td>Subscription created at provider</td></tr>
                         <tr><td>Cancellation</td><td>N/A</td><td><span class="check-yes">✓</span> Synced to provider</td></tr>
                         <tr><td>Best for</td><td>Single invoices &amp; one-off orders</td><td>Products with recurring billing cycles</td></tr>
-                        <tr><td>Supported providers</td><td><span class="check-yes">✓</span> All 15+ providers</td><td><span class="check-yes">✓</span> All 15+ providers</td></tr>
+                        <tr><td>Supported providers</td><td><span class="check-yes">✓</span> All 30+ providers</td><td><span class="check-yes">✓</span> All 30+ providers</td></tr>
                     </tbody>
                 </table>
             </div>

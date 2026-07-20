@@ -123,8 +123,8 @@
 }
 
 .btn-green-300 {
-  background-color: var(--green-300);
-  border-color: var(--green-300);
+  background-color: var(--green-400); // accessible green — white label needs 4.5:1
+  border-color: var(--green-400);
 
   &:hover, &:focus {
     background-color: #1565c0;

@@ -278,6 +278,12 @@
 
 #screenshotSlider > .linear-slider-items {
   gap: 5rem;
+
+  // The logos carry intrinsic width/height attributes so the browser can
+  // reserve space (no layout shift). Several also set an inline height, so
+  // width must stay proportional — otherwise the width attribute is taken
+  // verbatim and squashes them.
+  img { width: auto; }
 }
 
 // ---- footer social icons ----

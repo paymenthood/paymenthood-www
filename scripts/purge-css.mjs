@@ -70,6 +70,13 @@ const results = await new PurgeCSS().purge({
       /^ph-/, /^pheg-/,
     ],
     deep: [/carousel/, /modal/, /dropdown/, /tooltip/, /popover/, /toast/],
+    // Attribute selectors whose value contains a SPACE — e.g.
+    // .integration-logo img[alt="Phoca Cart"]. The extractor below tokenises
+    // on non-word chars, so "Phoca Cart" only ever yields "Phoca" and "Cart"
+    // separately and never matches the quoted two-word value; PurgeCSS then
+    // drops the rule. (Single-word ones like [alt="J2Commerce"] survive fine.)
+    // Keeping the whole .integration-logo block preserves every such variant.
+    greedy: [/integration-logo/],
   },
   defaultExtractor: (c) => c.match(/[\w-/:%.]+(?<!:)/g) || [],
 });

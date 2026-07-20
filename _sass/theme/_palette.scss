@@ -15,6 +15,13 @@
   --green-300: #23a377;
   --green-300-rgb: 35, 201, 157;
 
+  // Accessible variant of --green-300 for SOLID FILLS BEHIND WHITE TEXT
+  // (the .btn-green-300 CTA). White on --green-300 is only 3.19:1, which
+  // fails WCAG AA for the button's 12px label; this is the same hue scaled
+  // ~20% darker and measures 4.76:1. Use --green-300 for text/icons on light
+  // backgrounds (large headings pass at 3:1) and this for white-on-green.
+  --green-400: #1c825f;
+
   --blue-30: #f6fafd;
   --blue-30-rgb: 246, 250, 253;
 
@@ -96,7 +103,7 @@
 
 .btn-green-300 {
   color: white;
-  background-color: var(--green-300);
+  background-color: var(--green-400); // accessible green — white label needs 4.5:1
 
   &:hover {
     background-color: var(--blue-100);
