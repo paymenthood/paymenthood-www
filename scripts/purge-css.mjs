@@ -64,12 +64,19 @@ const results = await new PurgeCSS().purge({
       'open', 'open-nav', 'navbar-active', 'has-fixed', 'has-ovm', 'has-mask', 'loading',
       // animate.css keyframe classes assigned via data-animate at runtime
       /^fadeIn/, /^fadeOut/, /^animated$/,
-      // Bootstrap JS-driven interactive states (offcanvas/collapse/backdrop/etc.)
-      /show/, /collaps/, /fade/, /backdrop/, /offcanvas/, /active/, /disabled/,
+      // Bootstrap JS-driven interactive states that DO appear on this site:
+      // offcanvas (mobile nav) toggles .show/.offcanvas-backdrop at runtime;
+      // .collapse is used once; .active/.disabled are nav/form states.
+      /show/, /collaps/, /backdrop/, /offcanvas/, /active/, /disabled/,
       // custom chat widget elements
       /^ph-/, /^pheg-/,
     ],
-    deep: [/carousel/, /modal/, /dropdown/, /tooltip/, /popover/, /toast/],
+    // NOTE: previously `deep: [/carousel/,/modal/,/dropdown/,/tooltip/,/popover/,
+    // /toast/]` force-kept ~28KB of Bootstrap component CSS this site never uses
+    // (verified: 0 usages in markup — the mega-menu is custom .menu-mega, the
+    // logo strip is custom .linear-slider, not Owl/Bootstrap carousel). Removing
+    // it lets PurgeCSS drop those rules, which is what Lighthouse's "unused CSS"
+    // flagged. Re-add a component here only if you actually start using it.
     // Attribute selectors whose value contains a SPACE — e.g.
     // .integration-logo img[alt="Phoca Cart"]. The extractor below tokenises
     // on non-word chars, so "Phoca Cart" only ever yields "Phoca" and "Cart"
