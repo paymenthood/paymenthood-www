@@ -65,7 +65,7 @@
 </footer>
 <!-- JavaScript -->
 <script defer src="{{ '/assets/js/bootstrap.bundle.min.js' | relative_url }}?ver=522"></script>
-<script defer src="{{ '/assets/js/scripts.js' | relative_url }}?ver=300"></script>
+<script defer src="{{ '/assets/js/scripts.js' | relative_url }}?ver=301"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carouselContainer = document.querySelectorAll('.linear-slider-items');
@@ -75,6 +75,10 @@
             // Clone the carousel content to create a continuous loop
             const carouselItems = container.innerHTML;
             container.innerHTML += carouselItems;
+
+            // Content width is fixed after the clone — read it once. Reading
+            // scrollWidth inside the rAF loop forces a synchronous layout every frame.
+            const halfWidth = container.scrollWidth / 2;
 
             // Set up animation
             let scrollLeft = 0;
@@ -89,7 +93,7 @@
                 lastTimestamp = timestamp;
 
                 scrollLeft += scrollSpeed * deltaTime / 60; // Normalize speed
-                if (scrollLeft >= container.scrollWidth / 2) {
+                if (scrollLeft >= halfWidth) {
                     scrollLeft = 0;
                 }
                 container.style.transform = `translateX(-${scrollLeft}px)`;

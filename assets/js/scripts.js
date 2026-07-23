@@ -58,35 +58,30 @@
     }
 
     function initScrollReveal() {
-        var items = Array.prototype.slice.call(document.querySelectorAll('.animated[data-animate]'));
+        var items = document.querySelectorAll('.animated[data-animate]');
         if (!items.length) return;
 
-        var ticking = false;
-        function check() {
-            ticking = false;
-            var vh = window.innerHeight || document.documentElement.clientHeight;
-            // Reveal anything whose top has crossed ~92% of the viewport, then
-            // drop it from the watch list. Self-cleaning once everything shows.
-            items = items.filter(function (el) {
-                if (el.getBoundingClientRect().top < vh * 0.92) {
-                    reveal(el);
-                    return false;
+        // No IntersectionObserver (or JS) -> reveal everything so nothing stays hidden.
+        if (!('IntersectionObserver' in window)) {
+            Array.prototype.forEach.call(items, reveal);
+            return;
+        }
+
+        // The observer does the intersection work off the main thread, so there
+        // are zero per-scroll layout reads (no getBoundingClientRect thrash). The
+        // -8% bottom rootMargin reproduces the old `top < innerHeight * 0.92`
+        // trigger; elements already on screen fire on the first callback, which
+        // covers above-the-fold reveal on load.
+        var io = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    reveal(entry.target);
+                    obs.unobserve(entry.target);
                 }
-                return true;
             });
-            if (!items.length) {
-                window.removeEventListener('scroll', onScroll);
-                window.removeEventListener('resize', onScroll);
-            }
-        }
-        function onScroll() {
-            if (ticking) return;
-            ticking = true;
-            window.requestAnimationFrame(check);
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll);
-        check(); // reveal above-the-fold content on load
+        }, { rootMargin: '0px 0px -8% 0px' });
+
+        Array.prototype.forEach.call(items, function (el) { io.observe(el); });
     }
 
     // ---- Decorative overlay masks ----------------------------------------

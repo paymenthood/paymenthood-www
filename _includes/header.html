@@ -96,10 +96,15 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/logos/apple-touch-icon.png' | relative_url }}">
     <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 
-    <!-- Preload fonts -->
-    <link rel="preload" href="{{ '/assets/fonts/Roboto-Light.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ '/assets/fonts/Roboto-Medium.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ '/assets/fonts/Roboto-Bold.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    {%- comment -%}
+      Roboto is loaded @font-face with `font-display: swap` (see _sass/theme/_fonts.scss),
+      so text paints immediately in the fallback and swaps in Roboto later — the fonts are
+      NOT on the LCP path. Preloading ~260 KB of them at high priority competes for bandwidth
+      with the actual LCP element (the hero background image), whose measured load duration
+      (~4.5 s on throttled mobile) is what drags LCP. Let the fonts load normally via the CSS
+      so the hero image gets the bandwidth. (Do not re-add font preloads ahead of the hero
+      image preloads below.)
+    {%- endcomment -%}
 
     <!-- Preload the LCP image for whichever hero this page renders.
          Home has its own #homeBannerMask hero (banner-bg-large/banner-bg);
