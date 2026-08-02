@@ -1,0 +1,333 @@
+---
+---
+
+// Page stylesheet for /trust-center/ only. Shared pieces (feat-card, why-card,
+// use-case-list, section-eyebrow) come from components.css; this file holds the
+// page-unique parts: the section nav, the tokenization flow diagram, and the
+// compliance / incident / disclosure blocks.
+
+// ── Sticky section nav ────────────────────────────────────────────────────────
+// The theme's .header-main switches from absolute to fixed once the page scrolls,
+// so this bar has to pin *below* it. These offsets are the fixed-state header
+// heights per breakpoint (measured: 72 / 85 / 86 / 93). If the header's padding
+// ever changes in _sass/theme/_header.scss, these must change with it.
+// z-index stays under the header's 49 so the two never fight.
+.tc-nav-wrap {
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 72px;
+  z-index: 40;
+}
+
+@media (min-width: 768px)  { .tc-nav-wrap { top: 86px; } }
+@media (min-width: 1200px) { .tc-nav-wrap { top: 93px; } }
+
+// Jump targets must clear the fixed header *and* this sticky bar (~54px), or a
+// clicked section lands underneath both.
+#main-content section[id] { scroll-margin-top: 126px; }
+
+@media (min-width: 768px)  { #main-content section[id] { scroll-margin-top: 140px; } }
+@media (min-width: 1200px) { #main-content section[id] { scroll-margin-top: 147px; } }
+
+// Single row that scrolls sideways rather than wrapping, so the sticky bar stays
+// one line tall on narrow screens instead of eating a third of the viewport.
+.tc-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.35rem;
+  padding: 0.9rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+
+  a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--blue-400);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus-visible { color: var(--blue-200); }
+  }
+}
+
+// ── Overview callout ──────────────────────────────────────────────────────────
+.tc-callout {
+  background: var(--blue-600);
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+
+  h2 { color: #fff; }
+}
+
+.tc-eyebrow {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-300);
+  margin-bottom: 0.85rem;
+}
+
+.tc-callout-lead {
+  color: var(--blue-50);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.tc-principle {
+  height: 100%;
+  padding: 1.6rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+
+  h3 { color: var(--blue-600); margin-bottom: 0.5rem; }
+  p  { color: var(--blue-400); font-size: 0.9rem; line-height: 1.65; margin: 0; }
+}
+
+// ── Tokenization flow diagram ─────────────────────────────────────────────────
+// Horizontal on desktop, vertical on mobile. Connectors are pseudo-elements so
+// they stay decorative and never reach the accessibility tree.
+.tc-flow {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
+  margin: 0 0 1.75rem;
+}
+
+.tc-flow-step {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.6rem 0.9rem;
+  margin-right: 2.15rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+
+  &:last-child { margin-right: 0; }
+
+  // connector arrow
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -1.7rem;
+    width: 1.25rem;
+    height: 2px;
+    background: var(--blue-100);
+    transform: translateY(-50%);
+  }
+
+  &:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -1.75rem;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid var(--blue-100);
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+}
+
+// Colour-code the three zones of the flow so the story reads at a glance.
+.tc-flow-step--external { border-top: 3px solid var(--blue-400); }
+.tc-flow-step--token    { border-top: 3px solid var(--green-300); }
+.tc-flow-step--internal { border-top: 3px solid var(--blue-200); }
+
+.tc-flow-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+
+.tc-flow-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--blue-600);
+  margin-bottom: 0.35rem;
+}
+
+.tc-flow-desc {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--blue-400);
+}
+
+.tc-flow-note {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--blue-400);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 991px) {
+  .tc-flow {
+    flex-direction: column;
+  }
+
+  .tc-flow-step {
+    margin-right: 0;
+    margin-bottom: 2.15rem;
+
+    &:last-child { margin-bottom: 0; }
+
+    // rotate the connector to point downward
+    &:not(:last-child)::after {
+      top: auto;
+      bottom: -1.7rem;
+      right: 50%;
+      width: 2px;
+      height: 1.25rem;
+      transform: translateX(50%);
+    }
+
+    &:not(:last-child)::before {
+      top: auto;
+      bottom: -1.75rem;
+      right: 50%;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 7px solid var(--blue-100);
+      border-bottom: 0;
+      transform: translateX(50%);
+    }
+  }
+}
+
+// ── Compliance table ──────────────────────────────────────────────────────────
+.tc-compliance {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.tc-compliance-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 1.15rem 1.6rem;
+  border-bottom: 1px solid var(--gray-200);
+
+  &:last-child { border-bottom: 0; }
+}
+
+.tc-compliance-label {
+  flex: 0 0 12rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--blue-600);
+}
+
+.tc-compliance-value {
+  flex: 1 1 18rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--blue-400);
+}
+
+.tc-fineprint {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.87rem;
+  color: var(--blue-400);
+
+  a { color: var(--blue-200); font-weight: 600; }
+}
+
+// ── Incident response steps ───────────────────────────────────────────────────
+.tc-step {
+  height: 100%;
+  padding: 1.6rem 1.35rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  text-align: center;
+
+  h3 { color: var(--blue-600); margin-bottom: 0.5rem; }
+  p  { color: var(--blue-400); font-size: 0.85rem; line-height: 1.6; margin: 0; }
+}
+
+.tc-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--blue-200);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.85rem;
+}
+
+// ── Responsible disclosure ────────────────────────────────────────────────────
+.tc-disclosure {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 2.5rem;
+  background: var(--blue-30);
+  border: 1px solid var(--blue-100);
+  border-radius: 20px;
+
+  h2 { color: var(--blue-600); }
+  p  { color: var(--blue-400); line-height: 1.7; }
+}
+
+.tc-disclosure-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--blue-200);
+  color: #fff;
+}
+
+.tc-disclosure-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (max-width: 575px) {
+  .tc-disclosure {
+    flex-direction: column;
+    padding: 1.75rem;
+  }
+}
+
+// ── Security FAQ ──────────────────────────────────────────────────────────────
+.tc-faq {
+  height: 100%;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+
+  h3 { color: var(--blue-600); margin-bottom: 0.6rem; }
+  p  { color: var(--blue-400); font-size: 0.9rem; line-height: 1.65; margin: 0; }
+}

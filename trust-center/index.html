@@ -1,0 +1,282 @@
+---
+layout: none
+title: Trust Center
+description: PaymentHood's security architecture, tokenized data flow, encryption model, access control, infrastructure, compliance scope, and how to report a vulnerability.
+nav_active: security
+redirect_from: /security/
+---
+
+{% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/trust-center.css' | relative_url }}">
+
+<!-- Section nav. Deliberately outside <main>: position:sticky cannot work inside
+     an overflow-hidden ancestor, and #main-content carries .overflow-hidden. -->
+<nav class="tc-nav-wrap" aria-label="Trust Center sections">
+    <div class="container">
+        <ul class="tc-nav list-unstyled mb-0">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#data-flow">Data Flow</a></li>
+            <li><a href="#encryption">Encryption</a></li>
+            <li><a href="#access">Access Control</a></li>
+            <li><a href="#infrastructure">Infrastructure</a></li>
+            <li><a href="#compliance">Compliance</a></li>
+            <li><a href="#incident">Incident Response</a></li>
+            <li><a href="#disclosure">Disclosure</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main id="main-content" class="overflow-hidden">
+
+    <!-- 1. Security Overview -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="tc-callout animated" data-animate="fadeInUp" data-delay=".1">
+                        <span class="tc-eyebrow">Our security promise</span>
+                        <h2 class="h2 fw-bold mb-3">The safest card data is the card data we never hold</h2>
+                        <p class="tc-callout-lead">PaymentHood is built on a single principle: reduce what can be lost. We do not store, process, or transmit cardholder data. Card details travel directly from your customer to your payment provider's certified infrastructure, and PaymentHood orchestrates every payment using tokens alone.</p>
+                    </div>
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".2">
+                            <div class="tc-principle"><h3 class="h5">Minimise the blast radius</h3><p>If sensitive data never enters a system, it cannot leak from it. Tokenization is our first control, not our last.</p></div>
+                        </div>
+                        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
+                            <div class="tc-principle"><h3 class="h5">Isolate every merchant</h3><p>Each merchant's credentials are encrypted under their own dedicated key, so no two merchants ever share an encryption boundary.</p></div>
+                        </div>
+                        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
+                            <div class="tc-principle"><h3 class="h5">Make everything provable</h3><p>Signed webhooks and end to end audit logs mean security claims can be verified, not just trusted.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Security Architecture -->
+    <section class="section bg-light" id="architecture">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Security Architecture</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Where Card Data Goes, and Where It Does Not</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">The unified customer token model. Follow the card and you will see it never reaches us.</p>
+            </div>
+
+            <ol class="tc-flow list-unstyled animated" data-animate="fadeInUp" data-delay=".4">
+                <li class="tc-flow-step tc-flow-step--external">
+                    <span class="tc-flow-icon" aria-hidden="true">💳</span>
+                    <span class="tc-flow-title">Customer Card</span>
+                    <span class="tc-flow-desc">Entered by your customer at checkout</span>
+                </li>
+                <li class="tc-flow-step tc-flow-step--external">
+                    <span class="tc-flow-icon" aria-hidden="true">🏦</span>
+                    <span class="tc-flow-title">Provider</span>
+                    <span class="tc-flow-desc">Received by your provider's certified infrastructure</span>
+                </li>
+                <li class="tc-flow-step tc-flow-step--token">
+                    <span class="tc-flow-icon" aria-hidden="true">🎟️</span>
+                    <span class="tc-flow-title">Payment Token</span>
+                    <span class="tc-flow-desc">The provider returns a token. The card is never exposed</span>
+                </li>
+                <li class="tc-flow-step tc-flow-step--internal">
+                    <span class="tc-flow-icon" aria-hidden="true">⚙️</span>
+                    <span class="tc-flow-title">PaymentHood</span>
+                    <span class="tc-flow-desc">Orchestrates and routes using the token only</span>
+                </li>
+                <li class="tc-flow-step tc-flow-step--internal">
+                    <span class="tc-flow-icon" aria-hidden="true">🔐</span>
+                    <span class="tc-flow-title">Encrypted Storage</span>
+                    <span class="tc-flow-desc">Token stored with AES-256 under a per-merchant key</span>
+                </li>
+            </ol>
+
+            <p class="tc-flow-note animated" data-animate="fadeInUp" data-delay=".5">
+                Card data flows only between your customer and your provider. Everything PaymentHood touches is a token, which is precisely why we carry no PCI scope and neither does the integration you build on us.
+            </p>
+        </div>
+    </section>
+
+    <!-- 3. Data Flow & Tokenization -->
+    <section class="section" id="data-flow">
+        <div class="container">
+            <div class="row g-5 align-items-start">
+                <div class="col-lg-6">
+                    <div class="section-head">
+                        <span class="animated" data-animate="fadeInUp" data-delay=".1">Data Flow &amp; Tokenization</span>
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">One Customer Reference, <span class="txt-blue-200">Many Providers</span></h2>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".3">Your systems work with a customer ID and an amount. PaymentHood resolves everything behind it: which stored token to charge, which provider to route to, and in which currency.</p>
+                    </div>
+                    <ul class="use-case-list animated" data-animate="fadeInUp" data-delay=".4">
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Tokens are issued by the provider, never minted by us</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Your integration never handles a PAN, CVV, or expiry date</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Swap or add providers without re-collecting payment details</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-head">
+                        <span class="animated" data-animate="fadeInUp" data-delay=".1">Traceability</span>
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Every Action, <span class="txt-blue-200">On the Record</span></h2>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".3">PaymentHood records the full lifecycle of every payment: each status change, when it happened, who triggered it, and why, alongside every gateway interaction and webhook delivery attempt.</p>
+                    </div>
+                    <ul class="use-case-list animated" data-animate="fadeInUp" data-delay=".4">
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Complete payment lifecycle with actor and reason</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Every gateway call and webhook delivery attempt</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>End to end tracing for any investigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Encryption -->
+    <section class="section bg-blue-30" id="encryption">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Encryption</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Strong Cryptography at Every Layer</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">At rest, in transit, and in every notification we send.</p>
+            </div>
+            <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".4">
+                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon navy">🔐</div><h3 class="h4">AES-256 at Rest</h3><p>Every merchant's payment provider credentials are encrypted at rest with AES-256, using a dedicated key per merchant.</p></div></div>
+                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon blue">🗝️</div><h3 class="h4">Sealed Keys</h3><p>Encryption keys are themselves sealed with AES-256-GCM authenticated encryption under a master key held in a managed key service, never stored beside the data they protect.</p></div></div>
+                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon teal">🔒</div><h3 class="h4">TLS in Transit</h3><p>All traffic between your systems, your customers, and PaymentHood is protected with HTTPS/TLS. End to end, with no exceptions.</p></div></div>
+                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon orange">✍️</div><h3 class="h4">HMAC-SHA256 Webhooks</h3><p>Every webhook is signed and timestamped, so you can verify each notification came from PaymentHood and was not tampered with or replayed.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Authentication & Access Control -->
+    <section class="section" id="access">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Authentication &amp; Access Control</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Least Privilege, Enforced</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">Who can reach your account, and what they can do once they are in.</p>
+            </div>
+            <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".4">
+                <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">📱</div><div><h3 class="h5">Enforceable MFA</h3><p>Sensitive account actions are protected by TOTP multi-factor authentication using Google Authenticator or any compatible app. Administrators can make MFA mandatory across their entire team.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">👥</div><div><h3 class="h5">Role-Based Team Access</h3><p>Invite your team with role-based permissions so every member is scoped to exactly what they need and nothing more.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">🎫</div><div><h3 class="h5">JWT and OAuth 2.0</h3><p>API and session access use industry standard JWT tokens and OAuth 2.0 flows for authentication and session management.</p></div></div></div>
+                <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">🎛️</div><div><h3 class="h5">You Control the Secrets</h3><p>Generate and rotate your webhook signing secret at any time, or disable signing entirely. Add your own Authorization header when your endpoint requires one.</p></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Infrastructure & Availability -->
+    <section class="section bg-light" id="infrastructure">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Infrastructure &amp; Availability</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Built to Keep Running</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">Managed cloud infrastructure, asynchronous delivery, and isolated environments.</p>
+            </div>
+            <div class="feature-grid animated" data-animate="fadeInUp" data-delay=".4">
+                <div class="feat-card"><div class="feat-card-icon blue">☁️</div><h3 class="h4">Managed Cloud Platform</h3><p>PaymentHood runs on Microsoft Azure, with logs held in secure cloud logging under managed retention policies.</p></div>
+                <div class="feat-card"><div class="feat-card-icon green">🔁</div><h3 class="h4">Resilient Delivery</h3><p>Webhook events are queued and delivered asynchronously with automatic retries when your endpoint is temporarily unavailable, so a brief outage on your side never loses an event.</p></div>
+                <div class="feat-card"><div class="feat-card-icon indigo">🧪</div><h3 class="h4">Isolated Environments</h3><p>Sandbox and live are fully separated: separate credentials, separate configuration, no crossover. Going live is a credential swap, not a code change.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Compliance -->
+    <section class="section" id="compliance">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-head wide-sm text-center">
+                        <span class="animated" data-animate="fadeInUp" data-delay=".1">Compliance</span>
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Scope Reduction by Design</h2>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".3">The most reliable way to satisfy a cardholder data requirement is to remove the cardholder data.</p>
+                    </div>
+                    <div class="tc-compliance animated" data-animate="fadeInUp" data-delay=".4">
+                        <div class="tc-compliance-row">
+                            <span class="tc-compliance-label">Cardholder data</span>
+                            <span class="tc-compliance-value">Never stored, processed, or transmitted by PaymentHood</span>
+                        </div>
+                        <div class="tc-compliance-row">
+                            <span class="tc-compliance-label">PCI scope</span>
+                            <span class="tc-compliance-value">Card data is handled entirely within your payment provider's own certified environment. PaymentHood works only with provider issued tokens.</span>
+                        </div>
+                        <div class="tc-compliance-row">
+                            <span class="tc-compliance-label">Provider certification</span>
+                            <span class="tc-compliance-value">Each connected provider maintains its own certifications for the card data it handles on your behalf.</span>
+                        </div>
+                        <div class="tc-compliance-row">
+                            <span class="tc-compliance-label">Data residency and retention</span>
+                            <span class="tc-compliance-value">Audit and delivery logs are retained on Microsoft Azure under managed retention policies.</span>
+                        </div>
+                    </div>
+                    <p class="tc-fineprint animated" data-animate="fadeInUp" data-delay=".5">Need documentation for a vendor review or security questionnaire? <a href="/contact-us.html">Contact us</a> and we will work through it with you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Incident Response -->
+    <section class="section bg-blue-30" id="incident">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Incident Response</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">If Something Goes Wrong</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">How we detect, contain, and communicate.</p>
+            </div>
+            <div class="row g-4 justify-content-center animated" data-animate="fadeInUp" data-delay=".4">
+                <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">1</span><h3 class="h6">Detect</h3><p>Platform and gateway interactions are continuously logged, so anomalies surface against a complete record.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">2</span><h3 class="h6">Contain</h3><p>Per-merchant key isolation limits the reach of any single issue, and credentials can be rotated immediately.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">3</span><h3 class="h6">Investigate</h3><p>End to end audit trails let us reconstruct exactly what happened, when, and to which payments.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">4</span><h3 class="h6">Notify</h3><p>Affected merchants are contacted directly with what we know, what we have done, and what you should do.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Responsible Disclosure -->
+    <section class="section" id="disclosure">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="tc-disclosure animated" data-animate="fadeInUp" data-delay=".1">
+                        <div class="tc-disclosure-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div>
+                            <h2 class="h3 fw-bold mb-2">Responsible Disclosure</h2>
+                            <p class="mb-4">Found a vulnerability? We want to hear from you before anyone else does. Report it privately and we will acknowledge your message, investigate, and keep you updated until it is resolved. Please give us reasonable time to fix an issue before disclosing it publicly, and avoid accessing or modifying data that is not yours while testing.</p>
+                            <div class="tc-disclosure-actions">
+                                <a href="mailto:support@paymenthood.com?subject=Security%20Disclosure" class="btn btn-green-300 btn-lg px-4 rounded-pill">Report a Vulnerability</a>
+                                <a href="/contact-us.html" class="btn btn-outline-primary btn-lg px-4 rounded-pill">Security Questions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Security FAQ -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-head wide-sm text-center">
+                        <span class="animated" data-animate="fadeInUp" data-delay=".1">Security FAQ</span>
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Questions We Get Asked</h2>
+                    </div>
+                    <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".3">
+                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Does PaymentHood ever see my customer's card number?</h3><p>No. Card details go directly from your customer to your payment provider. PaymentHood receives only the token the provider issues in return.</p></div></div>
+                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Where are my provider credentials stored?</h3><p>Encrypted at rest with AES-256 under a key dedicated to your merchant account. That key is itself sealed with AES-256-GCM under a master key held in a managed key service.</p></div></div>
+                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Can I force my whole team to use MFA?</h3><p>Yes. Administrators can make TOTP multi-factor authentication mandatory for every member of the account.</p></div></div>
+                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">How do I know a webhook really came from you?</h3><p>Every webhook is signed with HMAC-SHA256 and timestamped. Verify the signature with your secret, which you can rotate at any time.</p></div></div>
+                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Is sandbox data separated from live data?</h3><p>Completely. Separate credentials, separate configuration, and no crossover between the two environments.</p></div></div>
+                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">What happens if my endpoint is down when an event fires?</h3><p>Events are queued and retried automatically. You can inspect every delivery attempt, including status, response code, and the exact payload.</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% include footer.html %}
