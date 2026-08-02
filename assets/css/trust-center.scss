@@ -213,37 +213,7 @@
   }
 }
 
-// ── Compliance table ──────────────────────────────────────────────────────────
-.tc-compliance {
-  background: #fff;
-  border: 1px solid var(--gray-200);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.tc-compliance-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  padding: 1.15rem 1.6rem;
-  border-bottom: 1px solid var(--gray-200);
-
-  &:last-child { border-bottom: 0; }
-}
-
-.tc-compliance-label {
-  flex: 0 0 12rem;
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--blue-600);
-}
-
-.tc-compliance-value {
-  flex: 1 1 18rem;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--blue-400);
-}
+// Compliance rows use the shared .fact-table component (_sass/components/_shared.scss).
 
 .tc-fineprint {
   margin-top: 1.25rem;

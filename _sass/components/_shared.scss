@@ -89,3 +89,44 @@
 
 .link-arrow:hover,
 .link-arrow:focus { gap: 10px; color: var(--blue-200); }
+
+// ── Fact table ───────────────────────────────────────────────── //
+// Label/value rows for at-a-glance reference blocks (Trust Center
+// compliance scope, About legal entity). Markup is a definition
+// list, which is what these pairs actually are:
+// <dl class="fact-table"><div class="fact-row">
+//   <dt class="fact-label">…</dt><dd class="fact-value">…</dd>
+// </div></dl>
+.fact-table {
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.fact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    padding: 18px 26px;
+    border-bottom: 1px solid var(--gray-200);
+
+    &:last-child { border-bottom: 0; }
+}
+
+.fact-label {
+    flex: 0 0 13rem;
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--blue-600);
+}
+
+.fact-value {
+    flex: 1 1 18rem;
+    margin: 0;
+    font-size: .9rem;
+    line-height: 1.65;
+    color: var(--blue-400);
+}
