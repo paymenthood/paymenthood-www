@@ -1,5 +1,5 @@
 /*!
- * PaymentHood site scripts — vanilla JS (no jQuery).
+ * PaymentHood site scripts: vanilla JS (no jQuery).
  * Replaces the legacy ICOCrypto jQuery theme bundle. Bootstrap 5 handles the
  * mobile menu (Offcanvas), the Integrations dropdown, and the home carousel via
  * data attributes; this file covers the few bits Bootstrap doesn't:
@@ -140,7 +140,7 @@
         document.querySelectorAll('a.menu-link[href*="#"]:not([href="#"])').forEach(function (link) {
             link.addEventListener('click', function (e) {
                 if (link.pathname !== window.location.pathname || link.hostname !== window.location.hostname) {
-                    return; // different page — let the browser navigate
+                    return; // different page; let the browser navigate
                 }
                 var target = document.getElementById(link.hash.slice(1));
                 if (!target) return;

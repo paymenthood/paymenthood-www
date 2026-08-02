@@ -2,14 +2,14 @@
   Shared FAQ section for integration product pages.
   Renders the visible accordion AND the FAQPage JSON-LD from one source: a list
   of `q:` / `a:` pairs passed in as `items` (typically from a per-page data file
-  such as _data/integrations/<slug>.yml). Answers may contain inline HTML —
+  such as _data/integrations/<slug>.yml). Answers may contain inline HTML -
   Google permits a/em/strong/br/ul/ol/li in FAQ answers.
 
   Parameters:
-    items      — (required) the list of {q, a} entries to render
-    eyebrow    — eyebrow label above the heading (default: FAQ)
-    bg         — section background class (default: bg-light)
-    first_open — true to render the first item expanded (default: false)
+    items      - (required) the list of {q, a} entries to render
+    eyebrow    - eyebrow label above the heading (default: FAQ)
+    bg         - section background class (default: bg-light)
+    first_open - true to render the first item expanded (default: false)
 {% endcomment %}
 <!-- Faq -->
 <section class="section {{ include.bg | default: 'bg-light' }}">

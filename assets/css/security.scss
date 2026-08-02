@@ -1,0 +1,66 @@
+---
+---
+
+// Page stylesheet for /security/ only. Everything reusable on this page comes
+// from components.css (feat-card, why-card, use-case-list, cta-banner,
+// section-eyebrow) — this file holds only the page-unique pieces.
+
+// ── Card-data trust callout ───────────────────────────────────────────────────
+// The page's headline claim; deep navy panel so it reads as the anchor
+// statement rather than one feature among many.
+.sec-trust-callout {
+  background: var(--blue-600);
+  border-radius: 20px;
+  padding: 3.5rem 3rem;
+  text-align: center;
+
+  h2 {
+    color: #fff;
+  }
+}
+
+.sec-trust-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(var(--green-300-rgb), 0.16);
+  color: var(--green-300);
+  margin-bottom: 1.5rem;
+}
+
+.sec-trust-lead {
+  color: var(--blue-50);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+// ── Sandbox capability chips ──────────────────────────────────────────────────
+.sec-sandbox-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2.5rem 0 0;
+
+  li {
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 999px;
+    padding: 0.55rem 1.15rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--blue-600);
+  }
+}
+
+.sec-isolation-note {
+  color: var(--blue-400);
+  font-size: 0.92rem;
+  max-width: 46rem;
+  margin: 1.75rem auto 0;
+}

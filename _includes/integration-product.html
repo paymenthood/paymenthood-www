@@ -16,7 +16,7 @@
       install_path    admin path in install step 2 ("Extensions → Manage → Install")
 
     OPTIONAL (defaults cover the regular case):
-      noun ........... plugin (default) | module | extension — woven through all copy
+      noun ........... plugin (default) | module | extension - woven through all copy
       audience ....... customers (default) | clients
       compat_name .... version-pill name when not the platform (e.g. "Joomla")
       hero_title_html  styled hero heading, rendered as <h2> (default "The Payment Gateway / Your <platform> Store / Deserves")
@@ -37,14 +37,14 @@
 {%- capture install_url %}/integrations/{{ include.slug }}/installation/{% endcapture -%}
 {%- capture d_hero_title %}The Payment Gateway<br>Your <span class="txt-blue-50">{{ p.platform }} Store</span><br>Deserves{% endcapture -%}
 {%- assign hero_title = p.hero_title_html | default: d_hero_title -%}
-{%- capture lead %}Accept payments from 30+ global providers on your {{ store }} — PayPal, Stripe, Authorize.net, and more. One {{ noun }}. Zero complexity.{% endcapture -%}
+{%- capture lead %}Accept payments from 30+ global providers on your {{ store }}: PayPal, Stripe, Authorize.net, and more. One {{ noun }}. Zero complexity.{% endcapture -%}
 {%- capture subtitle %}One-Time Payments · 30+ Providers{% endcapture -%}
-{%- capture payment_intro %}PaymentHood for {{ p.platform }} powers every standard checkout on your store — from single products to full cart orders.{% endcapture -%}
+{%- capture payment_intro %}PaymentHood for {{ p.platform }} powers every standard checkout on your store, from single products to full cart orders.{% endcapture -%}
 {%- capture cta_text %}Free {{ noun }}. 30+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
 {%- if p.supports_subscriptions -%}
-{%- capture lead %}Accept <strong class="text-white">one-time</strong> and <strong class="text-white">recurring subscription</strong> payments through 30+ global payment providers — all from a single, free {{ p.platform }} {{ noun }} with zero code changes.{% endcapture -%}
+{%- capture lead %}Accept <strong class="text-white">one-time</strong> and <strong class="text-white">recurring subscription</strong> payments through 30+ global payment providers, all from a single, free {{ p.platform }} {{ noun }} with zero code changes.{% endcapture -%}
 {%- capture subtitle %}One-Time & Subscriptions · 30+ Providers{% endcapture -%}
-{%- capture payment_intro %}{{ p.platform }} generates both one-off invoices and recurring renewal invoices. PaymentHood handles both billing models through the same {{ noun }} — no extra configuration, no second gateway.{% endcapture -%}
+{%- capture payment_intro %}{{ p.platform }} generates both one-off invoices and recurring renewal invoices. PaymentHood handles both billing models through the same {{ noun }}. No extra configuration, no second gateway.{% endcapture -%}
 {%- capture cta_text %}Free {{ noun }}. 30+ global providers. One-time and subscription payments. No recurring fees, no complexity.{% endcapture -%}
 {%- endif -%}
 {%- capture providers_desc %}Connect any of these globally trusted providers to your {{ p.platform }} store through a single PaymentHood integration.{% endcapture -%}
@@ -81,7 +81,7 @@
                 </div>
                 <a href="https://github.com/paymenthood/{{ p.repo }}" class="hero-source-link" target="_blank" rel="noopener">
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2.1v3.1c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
-                    Free &amp; open source — view the {{ noun }} on GitHub<span class="visually-hidden"> (opens in new tab)</span>
+                    Free &amp; open source: view the {{ noun }} on GitHub<span class="visually-hidden"> (opens in new tab)</span>
                 </a>
             </div>
             <div class="col-lg-5 mt-5 mt-lg-0">
@@ -133,7 +133,7 @@
             <div class="col-lg-8 text-center">
                 <p class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1">Real Checkout Experience</p>
                 <h2 class="txt-blue-600 fw-bold animated" data-animate="fadeInUp" data-delay=".15">What Your {{ audience | capitalize }} See at Checkout</h2>
-                <p class="txt-blue-400 mw-narrow animated" data-animate="fadeInUp" data-delay=".2">PaymentHood integrates directly into the {{ p.platform }} checkout flow — {{ audience }} stay on your site and pay through their preferred provider without any redirects or friction.</p>
+                <p class="txt-blue-400 mw-narrow animated" data-animate="fadeInUp" data-delay=".2">PaymentHood integrates directly into the {{ p.platform }} checkout flow, so {{ audience }} stay on your site and pay through their preferred provider without any redirects or friction.</p>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -178,13 +178,13 @@
                 <div class="ptype-card onetime">
                     <div class="ptype-header-icon onetime">🛒</div>
                     <h3>One-Time Payments</h3>
-                    <p class="ptype-desc">Process a single charge when {{ audience }} pay a {{ p.platform }} invoice. They select PaymentHood at checkout and pay through your active provider — the transaction completes immediately and the invoice is marked paid automatically.</p>
+                    <p class="ptype-desc">Process a single charge when {{ audience }} pay a {{ p.platform }} invoice. They select PaymentHood at checkout and pay through your active provider. The transaction completes immediately and the invoice is marked paid automatically.</p>
                     <ul class="use-case-list">
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Pay any open {{ p.platform }} invoice in one step</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Works with all 30+ payment providers</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Instant confirmation via secure provider callback</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Invoice marked paid in {{ p.platform }} automatically</li>
-                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Charges in the invoice currency — multi-currency ready</li>
+                        <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Charges in the invoice currency, multi-currency ready</li>
                     </ul>
                 </div>
             </div>
@@ -192,11 +192,11 @@
                 <div class="ptype-card subscription">
                     <div class="ptype-header-icon subscription">🔄</div>
                     <h3>Subscription &amp; Recurring</h3>
-                    <p class="ptype-desc">Enable automatic recurring billing for any {{ p.platform }} product or service with a recurring cycle. PaymentHood creates a subscription agreement with the provider so your {{ audience }} are charged automatically on their billing cycle — no manual follow-up needed.</p>
+                    <p class="ptype-desc">Enable automatic recurring billing for any {{ p.platform }} product or service with a recurring cycle. PaymentHood creates a subscription agreement with the provider so your {{ audience }} are charged automatically on their billing cycle, with no manual follow-up needed.</p>
                     <ul class="use-case-list">
                         <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Renewal invoices charged automatically</li>
                         <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Subscription agreement created securely at the provider</li>
-                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Supports every {{ p.platform }} billing cycle — monthly, annual, custom</li>
+                        <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Supports every {{ p.platform }} billing cycle: monthly, annual, custom</li>
                         <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Failed payments follow your {{ p.platform }} retry rules</li>
                         <li><span class="uc-icon green"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Cancellations synced back to the provider</li>
                     </ul>
@@ -209,7 +209,7 @@
                 <div class="ptype-card onetime shadow-sm">
                     <div class="ptype-header-icon onetime">🛒</div>
                     <h3>One-Time Payment</h3>
-                    <p class="ptype-desc">Let {{ audience }} pay once at checkout using any of the 30+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured — with full order management handled automatically by {{ p.platform }}.</p>
+                    <p class="ptype-desc">Let {{ audience }} pay once at checkout using any of the 30+ supported payment providers. PaymentHood bridges your {{ p.platform }} store to your PaymentHood account, routing each order through the provider you've configured, with full order management handled automatically by {{ p.platform }}.</p>
                     <ul class="use-case-list use-case-list--grid">
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Physical product orders</li>
                         <li><span class="uc-icon blue"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Digital downloads</li>
@@ -232,15 +232,15 @@
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Features</div>
                 <h2 class="h2 fw-bold txt-blue-600 mb-3">Everything Your {{ p.platform }} Store Needs</h2>
-                <p class="txt-blue-400 mw-narrow">One {{ noun }} connects your store to a world of payment options — with full native {{ p.platform }} compatibility.</p>
+                <p class="txt-blue-400 mw-narrow">One {{ noun }} connects your store to a world of payment options, with full native {{ p.platform }} compatibility.</p>
             </div>
         </div>
         <div class="feature-grid">
-            <div class="feat-card"><div class="feat-card-icon navy">🔌</div><h3 class="h4">Native {{ p.platform }} Integration</h3><p>Registered as a standard {{ p.platform }} payment gateway — works seamlessly with your existing checkout flow.</p></div>
-            <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h3 class="h4">30+ Global Providers</h3><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more — all through a single PaymentHood account.</p></div>
+            <div class="feat-card"><div class="feat-card-icon navy">🔌</div><h3 class="h4">Native {{ p.platform }} Integration</h3><p>Registered as a standard {{ p.platform }} payment gateway that works seamlessly with your existing checkout flow.</p></div>
+            <div class="feat-card"><div class="feat-card-icon blue">🌍</div><h3 class="h4">30+ Global Providers</h3><p>Connect PayPal, Stripe, Authorize.net, Adyen, Braintree, and many more, all through a single PaymentHood account.</p></div>
             <div class="feat-card"><div class="feat-card-icon green">⚡</div><h3 class="h4">Automatic Order Management</h3><p>{{ p.platform }} order statuses update automatically on payment success or failure. No manual order handling required.</p></div>
             <div class="feat-card"><div class="feat-card-icon orange">🔒</div><h3 class="h4">Sandbox &amp; Live Modes</h3><p>Test your full checkout flow in sandbox mode before going live. Switch environments with a single toggle in the admin.</p></div>
-            <div class="feat-card"><div class="feat-card-icon teal">📦</div><h3 class="h4">Upload &amp; Activate — That's It</h3><p>Install the {{ noun }}, paste your PaymentHood API key, and you're ready to accept payments — no code, no webhooks.</p></div>
+            <div class="feat-card"><div class="feat-card-icon teal">📦</div><h3 class="h4">Upload &amp; Activate: That's It</h3><p>Install the {{ noun }}, paste your PaymentHood API key, and you're ready to accept payments. No code, no webhooks.</p></div>
             <div class="feat-card"><div class="feat-card-icon indigo">🎛️</div><h3 class="h4">Centralized Provider Dashboard</h3><p>Manage provider credentials, view transactions, and configure settings from your PaymentHood account.</p></div>
         </div>
     </div>
@@ -261,14 +261,14 @@
                 <div class="how-step">
                     <div class="how-step-num">1</div>
                     <h3 class="h5">Download the {{ noun_cap }}</h3>
-                    <p>Grab the latest release from GitHub. It's a standard {{ ecosystem }} {{ noun }} package — no build steps, no dependencies.</p>
+                    <p>Grab the latest release from GitHub. It's a standard {{ ecosystem }} {{ noun }} package: no build steps, no dependencies.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">2</div>
                     <h3 class="h5">Install &amp; Enable in {{ ecosystem }}</h3>
-                    <p>Go to <em>{{ p.install_path }}</em>, upload the package, then enable the PaymentHood {{ noun }} — and it appears in your {{ p.platform }} payment methods.</p>
+                    <p>Go to <em>{{ p.install_path }}</em>, upload the package, then enable the PaymentHood {{ noun }}, and it appears in your {{ p.platform }} payment methods.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -300,15 +300,15 @@
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Why PaymentHood</div>
                 <h2 class="h2 fw-bold txt-blue-600 mb-3">Why {{ p.platform }} Stores Choose PaymentHood</h2>
-                <p class="txt-blue-400 mw-narrow">One {{ noun }} with real flexibility — no per-provider installs, no recurring fees, no lock-in.</p>
+                <p class="txt-blue-400 mw-narrow">One {{ noun }} with real flexibility: no per-provider installs, no recurring fees, no lock-in.</p>
             </div>
         </div>
         <div class="row gy-4">
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h3 class="h5">One {{ noun_cap }}, Any Provider</h3><p>Other solutions require a separate {{ noun }} for each payment gateway. PaymentHood gives you all 30+ providers through one unified {{ p.platform }} {{ noun }}.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h3 class="h5">No {{ noun_cap }} Cost</h3><p>The {{ noun }} is completely free. PaymentHood earns only through your payment provider — you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h3 class="h5">Sell to Any Market</h3><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs — without changing your {{ p.platform }} setup.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h3 class="h5">No {{ noun_cap }} Cost</h3><p>The {{ noun }} is completely free. PaymentHood earns only through your payment provider; you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h3 class="h5">Sell to Any Market</h3><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs, without changing your {{ p.platform }} setup.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">⚙️</div><div><h3 class="h5">No Code Required</h3><p>Works out of the box with any standard {{ p.platform }} installation. No custom development, no webhook setup, no API coding on your end.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🧾</div><div><h3 class="h5">{{ p.platform }}-Native Behaviour</h3><p>Orders, statuses, emails, and refunds all flow through {{ p.platform }} as expected — customers and admins see no difference in the checkout experience.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🧾</div><div><h3 class="h5">{{ p.platform }}-Native Behaviour</h3><p>Orders, statuses, emails, and refunds all flow through {{ p.platform }} as expected; customers and admins see no difference in the checkout experience.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔄</div><div><h3 class="h5">Switch Providers Anytime</h3><p>Change your active payment provider from your PaymentHood dashboard without touching {{ p.platform }}. No {{ noun }} changes, no reinstallation.</p></div></div></div>
         </div>
     </div>
@@ -321,7 +321,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Side by Side</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">One-Time vs. Subscription — at a Glance</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">One-Time vs. Subscription at a Glance</h2>
             </div>
         </div>
         <div class="row justify-content-center">

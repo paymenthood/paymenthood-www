@@ -45,11 +45,11 @@ faqs:
   - q: Is there a cost to use the plugin?
     a: >-
       No. The PaymentHood J2Commerce plugin is free to download and use. You pay only the
-      transaction fees charged by your chosen payment provider — there are no additional fees
+      transaction fees charged by your chosen payment provider; there are no additional fees
       from PaymentHood.
   - q: Can I switch payment providers without reinstalling the plugin?
     a: >-
-      Yes. Provider switching happens in your PaymentHood dashboard — just activate a different
+      Yes. Provider switching happens in your PaymentHood dashboard; just activate a different
       provider there. Your J2Commerce plugin continues working without any changes on the
       Joomla side.
 

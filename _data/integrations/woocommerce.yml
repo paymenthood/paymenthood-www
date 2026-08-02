@@ -2,7 +2,7 @@
 # `software` drives the SoftwareApplication JSON-LD (via _includes/software-application.html);
 # `faqs` drives the accordion + FAQPage JSON-LD (via _includes/faq.html). Answers may
 # contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
-# `product` drives the whole product page via _includes/integration-product.html —
+# `product` drives the whole product page via _includes/integration-product.html -
 # one shared template renders every integration from this data. See any other
 # integrations/<slug>.yml for the same shape.
 software:
@@ -47,10 +47,10 @@ faqs:
   - q: Is there a cost to use the plugin?
     a: >-
       No. The PaymentHood WooCommerce plugin is free to download and use. You pay only the
-      transaction fees charged by your chosen payment provider — there are no additional fees
+      transaction fees charged by your chosen payment provider; there are no additional fees
       from PaymentHood.
   - q: Can I switch payment providers without reinstalling the plugin?
     a: >-
-      Yes. Provider switching happens in your PaymentHood dashboard — just activate a different
+      Yes. Provider switching happens in your PaymentHood dashboard; just activate a different
       provider there. Your WooCommerce plugin continues working without any changes on the
       WordPress side.

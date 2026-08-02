@@ -1,4 +1,4 @@
-/* product-page.js — FAQ accordion shared by all integration product pages */
+/* product-page.js; FAQ accordion shared by all integration product pages */
 (function () {
     'use strict';
 

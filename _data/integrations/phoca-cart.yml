@@ -42,17 +42,17 @@ faqs:
       flow without processing real payments.
   - q: Will the plugin affect Phoca Cart's order and invoice system?
     a: >-
-      No. The plugin acts purely as a payment bridge. All standard Phoca Cart functionality —
-      order status updates, PDF invoices, email notifications, and stock management —
+      No. The plugin acts purely as a payment bridge. All standard Phoca Cart functionality
+      (order status updates, PDF invoices, email notifications, and stock management)
       continues to work exactly as configured.
   - q: Is there a cost to use the plugin?
     a: >-
       No. The PaymentHood Phoca Cart plugin is free to download and use. You pay only the
-      transaction fees charged by your chosen payment provider — there are no additional fees
+      transaction fees charged by your chosen payment provider; there are no additional fees
       from PaymentHood.
   - q: Can I switch payment providers without reinstalling the plugin?
     a: >-
       Yes. Provider switching happens entirely in your PaymentHood dashboard. Just activate a
-      different provider there — the Joomla plugin and Phoca Cart configuration remain
+      different provider there; the Joomla plugin and Phoca Cart configuration remain
       unchanged.
 

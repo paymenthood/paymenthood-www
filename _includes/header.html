@@ -4,12 +4,12 @@
 <head>
     <!-- Google Tag Manager (deferred until first interaction / idle) -->
     {%- comment -%}
-      Same GTM container and the same official snippet — only WHEN it runs has
+      Same GTM container and the same official snippet; only WHEN it runs has
       changed. Loading it eagerly cost ~1.5s of mobile main-thread time
       (Clarity 973ms + GA 356ms + GTM 215ms), which was 100% of the page's
       Total Blocking Time and ~10 Lighthouse points on mobile.
 
-      It now loads on the first of: a real user interaction, or a 3s timeout —
+      It now loads on the first of: a real user interaction, or a 3s timeout;
       so it is off the critical path but still fires on essentially every
       genuine visit. dataLayer is created up front, so any dataLayer.push()
       elsewhere on the page still queues normally and is picked up when GTM
@@ -98,7 +98,7 @@
 
     {%- comment -%}
       Roboto is loaded @font-face with `font-display: swap` (see _sass/theme/_fonts.scss),
-      so text paints immediately in the fallback and swaps in Roboto later — the fonts are
+      so text paints immediately in the fallback and swaps in Roboto later; the fonts are
       NOT on the LCP path. Preloading ~260 KB of them at high priority competes for bandwidth
       with the actual LCP element (the hero background image), whose measured load duration
       (~4.5 s on throttled mobile) is what drags LCP. Let the fonts load normally via the CSS
@@ -109,14 +109,14 @@
     <!-- Preload the LCP image for whichever hero this page renders.
          Home has its own #homeBannerMask hero (banner-bg-large/banner-bg);
          every other page's LCP element is #pageHeader (_overrides.scss),
-         whose background is shape-x.webp — that one needs fetchpriority=high
+         whose background is shape-x.webp, so that one needs fetchpriority=high
          here instead, since it's undiscoverable until style.css parses otherwise. -->
     {% if page.url == '/' %}
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     {%- comment -%}
-      shape-x.webp is #homeBannerMask's :after overlay — it stretches across the
+      shape-x.webp is #homeBannerMask's :after overlay; it stretches across the
       whole hero, so Chrome attributes the home page's LCP to THIS image (not to
       banner-bg*, which sits behind it). Measured on both mobile and desktop.
       It therefore needs fetchpriority=high too; it's only ~25KB, so it doesn't
@@ -174,7 +174,7 @@
                         {%- comment -%}
                           Mobile-only CTA. The main "Start Free" lives inside
                           .header-navbar, which collapses into the offcanvas
-                          below 992px — so on phones it is hidden behind the
+                          below 992px, so on phones it is hidden behind the
                           hamburger. This surfaces it directly in the bar.
                           d-lg-none matches the offcanvas-lg breakpoint, so
                           exactly one of the two is ever visible.
@@ -196,7 +196,6 @@
                             <nav class="header-menu offcanvas-body" id="header-menu">
                                 <ul class="menu">
                                     <li class="menu-item"><a class="menu-link nav-link" href="{{ '/' | relative_url }}">Home</a></li>
-                                    <li class="d-none menu-item"><a class="menu-link nav-link" href="/features.html">Features</a></li>
                                     <li class="menu-item has-sub has-mega">
                                         <a class="menu-link nav-link menu-toggle" href="#">Integrations</a>
                                         <div class="menu-sub menu-drop menu-mega integrations-menu">
@@ -244,6 +243,7 @@
                                         </div>
                                     </li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/providers.html">Providers</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="/security/">Security</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/pricing.html">Pricing</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/contact-us.html">Contact Us</a></li>
                                 </ul>
