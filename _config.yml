@@ -6,6 +6,11 @@ baseurl: ""
 lang: en
 author: PaymentHood
 
+# Single source of truth for the provider count shown on the home mosaic and the
+# product-page provider strip. providers.html renders this many cards; update
+# both together.
+provider_count: 36
+
 # Social Media & SEO (consumed by jekyll-seo-tag)
 logo: /assets/images/logos/logo2x.webp
 twitter:

@@ -45,8 +45,9 @@ faqs:
   - q: Is there a cost to use the plugin?
     a: >-
       No. The PaymentHood J2Commerce plugin is free to download and use. You pay only the
-      transaction fees charged by your chosen payment provider; there are no additional fees
-      from PaymentHood.
+      transaction fees charged by your chosen payment provider. PaymentHood takes no percentage
+      and no per-transaction cut at any volume. An optional
+      <a href="/pricing.html" class="txt-blue-100">Premium plan</a> adds white-label checkout branding.
   - q: Can I switch payment providers without reinstalling the plugin?
     a: >-
       Yes. Provider switching happens in your PaymentHood dashboard; just activate a different

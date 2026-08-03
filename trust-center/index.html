@@ -20,6 +20,7 @@ redirect_from: /security/
             <li><a href="#data-flow">Data Flow</a></li>
             <li><a href="#encryption">Encryption</a></li>
             <li><a href="#access">Access Control</a></li>
+            <li><a href="#fraud">Fraud &amp; Risk</a></li>
             <li><a href="#infrastructure">Infrastructure</a></li>
             <li><a href="#compliance">Compliance</a></li>
             <li><a href="#incident">Incident Response</a></li>
@@ -165,8 +166,28 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 6. Infrastructure & Availability -->
-    <section class="section bg-light" id="infrastructure">
+
+    <!-- 6. Fraud & Risk -->
+    <section class="section bg-light" id="fraud">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Fraud &amp; Risk</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Risk Signals, Watched Automatically</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">PaymentHood applies AI-assisted risk analysis to payment behaviour, so unusual activity surfaces without adding friction to ordinary checkouts.</p>
+            </div>
+            <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".4">
+                <div class="col-md-4"><div class="tc-principle"><h3 class="h5">Behaviour-based</h3><p>Payment activity is assessed against how your customers normally behave, rather than against a fixed list of rules that never changes.</p></div></div>
+                <div class="col-md-4"><div class="tc-principle"><h3 class="h5">AI-assisted</h3><p>Scoring is model-driven, so it keeps working as patterns shift instead of going stale the moment someone learns the rules.</p></div></div>
+                <div class="col-md-4"><div class="tc-principle"><h3 class="h5">Deliberately unpublished</h3><p>We do not document our signals, weightings, or thresholds. Publishing them would hand the people we are defending against a map of exactly what to avoid.</p></div></div>
+            </div>
+            <p class="tc-flow-note mt-4 animated" data-animate="fadeInUp" data-delay=".5">
+                Evaluating PaymentHood and need more than this? <a href="/contact-us.html">Talk to us</a> and we will go further under NDA than we will in public.
+            </p>
+        </div>
+    </section>
+
+    <!-- 7. Infrastructure & Availability -->
+    <section class="section" id="infrastructure">
         <div class="container">
             <div class="section-head wide-sm text-center">
                 <span class="animated" data-animate="fadeInUp" data-delay=".1">Infrastructure &amp; Availability</span>
@@ -181,8 +202,8 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 7. Compliance -->
-    <section class="section" id="compliance">
+    <!-- 8. Compliance -->
+    <section class="section bg-blue-30" id="compliance">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -215,8 +236,8 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 8. Incident Response -->
-    <section class="section bg-blue-30" id="incident">
+    <!-- 9. Incident Response -->
+    <section class="section" id="incident">
         <div class="container">
             <div class="section-head wide-sm text-center">
                 <span class="animated" data-animate="fadeInUp" data-delay=".1">Incident Response</span>
@@ -232,8 +253,8 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 9. Responsible Disclosure -->
-    <section class="section" id="disclosure">
+    <!-- 10. Responsible Disclosure -->
+    <section class="section bg-light" id="disclosure">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -255,27 +276,8 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 10. Security FAQ -->
-    <section class="section bg-light">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="section-head wide-sm text-center">
-                        <span class="animated" data-animate="fadeInUp" data-delay=".1">Security FAQ</span>
-                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Questions We Get Asked</h2>
-                    </div>
-                    <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".3">
-                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Does PaymentHood ever see my customer's card number?</h3><p>No. Card details go directly from your customer to your payment provider. PaymentHood receives only the token the provider issues in return.</p></div></div>
-                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Where are my provider credentials stored?</h3><p>Encrypted at rest with AES-256 under a key dedicated to your merchant account. That key is itself sealed with AES-256-GCM under a master key held in a managed key service.</p></div></div>
-                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Can I force my whole team to use MFA?</h3><p>Yes. Administrators can make TOTP multi-factor authentication mandatory for every member of the account.</p></div></div>
-                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">How do I know a webhook really came from you?</h3><p>Every webhook is signed with HMAC-SHA256 and timestamped. Verify the signature with your secret, which you can rotate at any time.</p></div></div>
-                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">Is sandbox data separated from live data?</h3><p>Completely. Separate credentials, separate configuration, and no crossover between the two environments.</p></div></div>
-                        <div class="col-md-6"><div class="tc-faq"><h3 class="h5">What happens if my endpoint is down when an event fires?</h3><p>Events are queued and retried automatically. You can inspect every delivery attempt, including status, response code, and the exact payload.</p></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- 11. Security FAQ -->
+    {% include faq.html items=site.data.trust_center.faqs eyebrow="Security FAQ" bg="bg-white" %}
 
 </main>
 

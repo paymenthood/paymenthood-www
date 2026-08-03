@@ -40,12 +40,12 @@
 {%- capture lead %}Accept payments from 30+ global providers on your {{ store }}: PayPal, Stripe, Authorize.net, and more. One {{ noun }}. Zero complexity.{% endcapture -%}
 {%- capture subtitle %}One-Time Payments · 30+ Providers{% endcapture -%}
 {%- capture payment_intro %}PaymentHood for {{ p.platform }} powers every standard checkout on your store, from single products to full cart orders.{% endcapture -%}
-{%- capture cta_text %}Free {{ noun }}. 30+ global providers. Five-minute setup. No recurring fees, no complexity.{% endcapture -%}
+{%- capture cta_text %}Free {{ noun }}. 30+ global providers. Five-minute setup. No transaction fees from PaymentHood.{% endcapture -%}
 {%- if p.supports_subscriptions -%}
 {%- capture lead %}Accept <strong class="text-white">one-time</strong> and <strong class="text-white">recurring subscription</strong> payments through 30+ global payment providers, all from a single, free {{ p.platform }} {{ noun }} with zero code changes.{% endcapture -%}
 {%- capture subtitle %}One-Time & Subscriptions · 30+ Providers{% endcapture -%}
 {%- capture payment_intro %}{{ p.platform }} generates both one-off invoices and recurring renewal invoices. PaymentHood handles both billing models through the same {{ noun }}. No extra configuration, no second gateway.{% endcapture -%}
-{%- capture cta_text %}Free {{ noun }}. 30+ global providers. One-time and subscription payments. No recurring fees, no complexity.{% endcapture -%}
+{%- capture cta_text %}Free {{ noun }}. 30+ global providers. One-time and subscription payments. No transaction fees from PaymentHood.{% endcapture -%}
 {%- endif -%}
 {%- capture providers_desc %}Connect any of these globally trusted providers to your {{ p.platform }} store through a single PaymentHood integration.{% endcapture -%}
 
@@ -118,7 +118,7 @@
                         <span class="provider-mini-pill">Adyen</span>
                         <span class="provider-mini-pill">Braintree</span>
                         <span class="provider-mini-pill">PayTabs</span>
-                        <a href="{{ '/providers.html' | relative_url }}" class="provider-mini-pill provider-mini-pill--more">+9 More<svg aria-hidden="true" class="ms-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                        <a href="{{ '/providers.html' | relative_url }}" class="provider-mini-pill provider-mini-pill--more">+{{ site.provider_count | minus: 6 }} More<svg aria-hidden="true" class="ms-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -300,12 +300,12 @@
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Why PaymentHood</div>
                 <h2 class="h2 fw-bold txt-blue-600 mb-3">Why {{ p.platform }} Stores Choose PaymentHood</h2>
-                <p class="txt-blue-400 mw-narrow">One {{ noun }} with real flexibility: no per-provider installs, no recurring fees, no lock-in.</p>
+                <p class="txt-blue-400 mw-narrow">One {{ noun }} with real flexibility: no per-provider installs, no transaction fees, no lock-in.</p>
             </div>
         </div>
         <div class="row gy-4">
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🔌</div><div><h3 class="h5">One {{ noun_cap }}, Any Provider</h3><p>Other solutions require a separate {{ noun }} for each payment gateway. PaymentHood gives you all 30+ providers through one unified {{ p.platform }} {{ noun }}.</p></div></div></div>
-            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h3 class="h5">No {{ noun_cap }} Cost</h3><p>The {{ noun }} is completely free. PaymentHood earns only through your payment provider; you pay only the transaction fees set by your chosen gateway.</p></div></div></div>
+            <div class="col-md-6"><div class="why-card"><div class="why-card-icon">💸</div><div><h3 class="h5">No {{ noun_cap }} Cost</h3><p>The {{ noun }} is free, and so is every payment feature. PaymentHood takes no percentage and no per-transaction cut; you pay only the processing fees set by your chosen gateway. An optional <a href="/pricing.html">Premium plan</a> adds white-label checkout branding.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🌍</div><div><h3 class="h5">Sell to Any Market</h3><p>Reach customers globally by activating region-specific providers like Tap (Middle East), Oxapay (crypto), or PayTabs, without changing your {{ p.platform }} setup.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">⚙️</div><div><h3 class="h5">No Code Required</h3><p>Works out of the box with any standard {{ p.platform }} installation. No custom development, no webhook setup, no API coding on your end.</p></div></div></div>
             <div class="col-md-6"><div class="why-card"><div class="why-card-icon">🧾</div><div><h3 class="h5">{{ p.platform }}-Native Behaviour</h3><p>Orders, statuses, emails, and refunds all flow through {{ p.platform }} as expected; customers and admins see no difference in the checkout experience.</p></div></div></div>

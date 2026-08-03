@@ -51,9 +51,10 @@ faqs:
       through the new provider without any reconfiguration.
   - q: Is the module free? Are there any transaction fees?
     a: >-
-      The WHMCS module itself is free and open-source (MIT license). PaymentHood charges a
-      small platform fee per transaction; see the <a href="/pricing.html" class="txt-blue-100">Pricing page</a>
-      for current rates. The payment provider may also charge their own processing fee.
+      The WHMCS module is free and open-source (MIT license), and so is every payment feature.
+      PaymentHood charges no percentage and no per-transaction fee at any volume. You pay only the
+      processing fees set by your chosen payment provider. An optional
+      <a href="/pricing.html" class="txt-blue-100">Premium plan</a> adds white-label checkout branding.
   - q: What happens if a subscription payment fails?
     a: >-
       PaymentHood reports the failed payment back to WHMCS via the standard callback. WHMCS

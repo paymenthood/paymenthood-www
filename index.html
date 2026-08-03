@@ -103,7 +103,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                     </div>
                     <div class="section-head wide-sm text-center">
                         <span class="animated" data-animate="fadeInUp" data-delay=".1">What is</span>
-                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Payment<span class="text-secondary">Hood!</span></h2>
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Payment<span class="text-secondary">Hood</span></h2>
                         <p class="animated" data-animate="fadeInUp" data-delay=".3">Your payment request comes in. PaymentHood picks the best provider, routes it automatically, and returns the result. Your integration code never changes.</p>
                     </div>
                     <div class="row align-items-center g-6">
@@ -117,7 +117,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                                 </span>
                                 <div>
                                     <h3 class="txt-blue-600 title-md h5">Receives Payment Requests</h3>
-                                    <p>Every payment request from your site or app hits PaymentHood first , regardless of which gateway the customer's method requires.</p>
+                                    <p>Every payment request from your site or app hits PaymentHood first, regardless of which gateway the customer's method requires.</p>
                                 </div>
                             </div>
                             <div class="about-feature-item d-flex flex-row gap-4 p-4 mb-3 animated" data-animate="fadeInUp" data-delay=".3">
@@ -201,7 +201,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                                 <li><img src="assets/images/home/providers-icon/revolut.png" alt="Revolut" width="136" height="30" loading="lazy" decoding="async"></li>
                                 <li><img src="assets/images/home/providers-icon/binance.png" alt="Binance" width="148" height="30" loading="lazy" decoding="async"></li>
                                 <li><img src="assets/images/home/providers-icon/bitpay.png" alt="BitPay" width="86" height="30" loading="lazy" decoding="async"></li>
-                                <li class="provider-mosaic-more"><a href="/providers.html">+25 more</a></li>
+                                <li class="provider-mosaic-more"><a href="/providers.html">+{{ site.provider_count | minus: 11 }} more</a></li>
                             </ul>
                         </div>
                     </div>
@@ -278,7 +278,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 16 16"><path fill="currentColor" d="M9.5 14h-8C.67 14 0 13.33 0 12.5V2.38C0 1.55.67.88 1.5.88h11c.83 0 1.5.67 1.5 1.5v7.25c0 .28-.22.5-.5.5s-.5-.22-.5-.5V2.38c0-.28-.22-.5-.5-.5h-11c-.28 0-.5.22-.5.5V12.5c0 .28.22.5.5.5h8c.28 0 .5.22.5.5s-.22.5-.5.5"/><path fill="currentColor" d="M4 3.62c-.28 0-.5-.22-.5-.5V.5c0-.28.22-.5.5-.5s.5.22.5.5v2.62c0 .28-.22.5-.5.5m6.12 0c-.28 0-.5-.22-.5-.5V.5c0-.28.22-.5.5-.5s.5.22.5.5v2.62c0 .28-.22.5-.5.5M13.5 6H.5C.22 6 0 5.78 0 5.5S.22 5 .5 5h13c.28 0 .5.22.5.5s-.22.5-.5.5m-1 10C10.57 16 9 14.43 9 12.5S10.57 9 12.5 9s3.5 1.57 3.5 3.5s-1.57 3.5-3.5 3.5m0-6a2.5 2.5 0 0 0 0 5a2.5 2.5 0 0 0 0-5"/><path fill="currentColor" d="M13.5 14a.47.47 0 0 1-.35-.15l-1-1a.5.5 0 0 1-.15-.35V11c0-.28.22-.5.5-.5s.5.22.5.5v1.29l.85.85c.2.2.2.51 0 .71c-.1.1-.23.15-.35.15"/></svg>
                                 </div>
                                 <h3 class="txt-blue-600 mb-0 h4">Subscription</h3>
-                                <p>Flexible billing cycles such as weekly, monthly, or yearly. It automatically handles renewals, proration.</p>
+                                <p>Flexible billing cycles such as weekly, monthly, or yearly, with renewals and proration handled automatically. Available today on WHMCS, with more platforms on the way.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 animated" data-animate="fadeInRight" data-delay=".5">
@@ -372,7 +372,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                     <div class="col-lg-4 d-flex flex-column align-items-start gap-2 animated" data-animate="fadeInUp" data-delay=".4">
                         <div class="icon"><em class="ikon ikon-document"></em></div>
                         <h3 class="txt-blue-600 mb-0 h5">Comprehensive audit logging</h3>
-                        <p>Industry-standard authentication protocols ensure secure access control and session management.</p>
+                        <p>Every payment records its full lifecycle: each status change, when it happened, who triggered it, and why, alongside every gateway call and webhook delivery.</p>
                     </div>
                 </div>
                 <a href="/trust-center/" class="vh-btn btn-blue-300 mt-5 animated" data-animate="fadeInUp" data-delay=".5">
@@ -485,7 +485,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                         <div class="section-head pb-5">
                             <span class="animated txt-blue-100 fs-5" data-animate="fadeInUp" data-delay=".1">Zero Effort</span>
                             <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Always Up to Date</h2>
-                            <p class="animated txt-blue-50" data-animate="fadeInUp" data-delay=".3">PaymentHood! keeps your payment system always up to date.</p>
+                            <p class="animated txt-blue-50" data-animate="fadeInUp" data-delay=".3">PaymentHood keeps your payment system always up to date.</p>
                         </div>
                         <p class="text-white animated" data-animate="fadeInUp" data-delay=".4">When providers change their APIs or release new versions, you <strong>don’t need to update</strong> your website or plugins. PaymentHood <strong>automatically adapts</strong> to these updates behind the scenes, ensuring uninterrupted payments and complete compatibility.</p>
                     </div>
@@ -511,7 +511,7 @@ description: Enterprise payment orchestration platform with a unified API for 30
                 <div class="row align-items-center gx-6 gy-4">
                     <div class="col-lg-6">
                         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2"><span class="txt-blue-200">Integration</span> Modules</h2>
-                        <p class="animated" data-animate="fadeInUp" data-delay=".3">PaymentHood connects some platforms, each with a dedicated module. Same fast experience across all of them: download, upload, activate. Up and running in under 5 minutes.</p>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".3">PaymentHood connects to the platforms you already run, each with a dedicated module. Same fast experience across all of them: download, upload, activate. Up and running in under 5 minutes.</p>
                         <ul id="whmcsFeatures" class="list-unstyled d-flex flex-column gap-3 p-0 mt-4">
                             <li class="animated" data-animate="fadeInUp" data-delay=".4">
                                 <svg aria-hidden="true" class="txt-blue-200" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><mask id="SVGIQLGgV2F"><g fill="none" stroke-linejoin="round" stroke-width="4"><path fill="#fff" stroke="#fff" d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke="#000" stroke-linecap="round" d="m16 24l6 6l12-12"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGIQLGgV2F)"/></svg>
@@ -630,6 +630,38 @@ description: Enterprise payment orchestration platform with a unified API for 30
                             <span class="customer-name">Modern IT Developer</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head wide-sm text-center">
+                    <span class="animated" data-animate="fadeInUp" data-delay=".1">Pricing</span>
+                    <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Free Forever. <span class="txt-blue-200">Pay Only to Brand It.</span></h2>
+                    <p class="animated" data-animate="fadeInUp" data-delay=".3">Every payment feature is free, with no transaction fees at any volume. Upgrade only when you want the checkout to carry your own branding.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-5 col-md-8 animated" data-animate="fadeInUp" data-delay=".3">
+                        <div class="card card-s3 p-4 h-100 text-center">
+                            <span class="badge bg-blue-30 txt-blue-200 fw-semibold mb-3 px-3 py-2 align-self-center">Free</span>
+                            <h3 class="txt-blue-600 h4 mb-2">$0 forever</h3>
+                            <p class="txt-blue-400 small mb-0">All {{ site.provider_count }} providers, every platform integration, unlimited transactions, analytics, and full API access.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-8 animated" data-animate="fadeInUp" data-delay=".4">
+                        <div class="card card-s3 p-4 h-100 text-center">
+                            <span class="badge bg-blue-30 txt-blue-200 fw-semibold mb-3 px-3 py-2 align-self-center">Premium</span>
+                            <h3 class="txt-blue-600 h4 mb-2">$29 / month</h3>
+                            <p class="txt-blue-400 small mb-0">Everything in Free, plus your own logo, colors, domain, and wording on the checkout page.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="/pricing.html" class="vh-btn btn-blue-300 mt-5 animated" data-animate="fadeInUp" data-delay=".5">
+                        <span>See Full Pricing</span><em class="ti ti-arrow-right ps-2"></em>
+                    </a>
                 </div>
             </div>
         </section>
