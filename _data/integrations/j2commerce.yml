@@ -14,7 +14,7 @@ product:
   compat: "4.0+"
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.J2Commerce/releases/latest/download/paymenthood-j2commerece.zip
   repo: PaymentHood.Plugins.J2Commerce
-  logo: { src: /assets/images/j2commerce/j2commerce-logo.png, width: 669, height: 180 }
+  logo: { src: /assets/images/j2commerce/j2commerce-logo.webp, width: 669, height: 180 }
   checkout_image: /assets/images/j2commerce/j2commerce-checkout.png
   ecosystem: Joomla                        # named in the default install steps
   install_path: 'Extensions → Manage → Install'

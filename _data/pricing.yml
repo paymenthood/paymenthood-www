@@ -1,0 +1,42 @@
+# FAQ entries for /pricing.html.
+# Rendered by _includes/faq.html, which emits both the accordion and the
+# FAQPage JSON-LD from this one source. Inline HTML is allowed in answers
+# (Google permits a/em/strong/br/ul/ol/li).
+#
+# Keep these consistent with the two plan cards on the page: every payment
+# feature is free, and Premium adds white-labeling only.
+
+faqs:
+  - q: What is included in the free plan?
+    a: >-
+      Everything needed to accept payments: all gateways, all platform integrations,
+      unlimited transactions, analytics, fraud protection, and full API access.
+      Free forever, no credit card required.
+
+  - q: Are there any transaction fees?
+    a: >-
+      Never, on either plan. PaymentHood takes no percentage and no per-transaction
+      cut, at any volume. You pay only what your own payment provider charges you
+      directly.
+
+  - q: What does Premium add?
+    a: >-
+      White-labeling, and nothing else. Every payment feature is already free.
+      Premium simply lets you put your own logo, colors, domain, and wording on the
+      checkout page and remove the PaymentHood badge.
+
+  - q: Does the free plan show PaymentHood branding?
+    a: >-
+      Yes. On the free plan your checkout page shows PaymentHood branding. Upgrading
+      to Premium removes it completely and lets you apply your own design.
+
+  - q: Can I cancel anytime?
+    a: >-
+      Yes. No contracts, no commitments. Cancel your Premium subscription anytime and
+      drop back to the free plan instantly.
+
+  - q: How long does it take to migrate from my current payment gateway?
+    a: >-
+      For WHMCS, WooCommerce, and all our integration plugins, setup takes under five
+      minutes: download, upload, activate. For custom integrations our team provides a
+      dedicated migration guide and free support at no extra cost.

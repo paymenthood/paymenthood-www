@@ -10,19 +10,29 @@
     overflow: hidden;
     margin-bottom: 12px;
 }
+// A real <button> (inside the h3) so the accordion is keyboard operable; the
+// reset strips the UA button chrome so it still reads as a heading row.
 .faq-question {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     padding: 20px 24px;
+    border: 0;
     background: #fff;
     cursor: pointer;
     font-weight: 600;
     color: var(--blue-600);
     font-size: .95rem;
+    font-family: inherit;
+    text-align: left;
     gap: 16px;
 
     &:hover { background: var(--blue-30); }
+    &:focus-visible {
+        outline: 2px solid var(--blue-200);
+        outline-offset: -2px;
+    }
     .faq-arrow {
         flex-shrink: 0;
         width: 28px; height: 28px;

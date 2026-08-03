@@ -1,0 +1,143 @@
+---
+---
+
+// Page stylesheet for /pricing.html only. Shared pieces (cards, section heads,
+// faq accordion) come from style.css and components.css; this file holds the
+// two plan cards and the hero trust badges.
+//
+// Replaces a former inline <style> block plus ~21 style="" attributes, which
+// CLAUDE.md disallows outside the product-stub --pp-* exception.
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+.pricing-hero-lead {
+  font-size: 1.15rem;
+  color: var(--blue-400);
+}
+
+// The hero sits on the white body, below the blue #pageHeader banner. These were
+// previously white-at-15% pills carried over from a dark-hero design, which made
+// them invisible against white.
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: var(--blue-30);
+  color: var(--blue-200);
+  font-weight: 700;
+}
+
+// ── Plan cards ────────────────────────────────────────────────────────────────
+// Padding comes from Bootstrap utilities in the markup (p-4 p-lg-5) so this
+// needs no breakpoint of its own.
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 24px;
+}
+
+.plan-card--free {
+  background: #fff;
+  border: 2px solid var(--blue-100);
+}
+
+.plan-card--premium {
+  position: relative;
+  background: var(--blue-200);
+  color: #fff;
+}
+
+// clamp() scales this down on narrow screens without a media query (the old
+// inline block used @media to drop it to 48px).
+.plan-price {
+  font-size: clamp(48px, 7vw, 72px);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.plan-currency {
+  margin-top: .5rem;
+  font-size: 1.75rem;
+}
+
+.plan-note { color: var(--blue-400); }
+
+.plan-summary {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--blue-400);
+}
+
+// Premium sits on blue, so its dividers and secondary text key off white.
+.plan-card--premium {
+  .plan-currency,
+  .plan-note { color: rgba(255, 255, 255, .85); }
+
+  .plan-summary {
+    color: rgba(255, 255, 255, .9);
+    border-bottom-color: rgba(255, 255, 255, .2);
+  }
+
+  .plan-badge { background: rgba(255, 255, 255, .2); color: #fff; }
+  .plan-feature-icon { background: rgba(255, 255, 255, .15); color: #fff; }
+  .plan-feature dt { color: #fff; }
+  .plan-feature dd { color: rgba(255, 255, 255, .8); }
+}
+
+// ── Feature list ──────────────────────────────────────────────────────────────
+// A definition list rather than a stack of headings: these are feature labels
+// with descriptions, not document sections, so they should not land in the
+// heading outline.
+.plan-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+  margin: 0 0 1.5rem;
+}
+
+.plan-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  dt {
+    margin-bottom: .15rem;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--blue-600);
+  }
+
+  dd {
+    margin: 0;
+    font-size: .85rem;
+    color: var(--blue-400);
+  }
+}
+
+.plan-feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--blue-30);
+  color: var(--blue-200);
+  font-size: 1.15rem;
+}
+
+// .plan-features already absorbs the slack (flex-grow), which is what keeps the
+// two cards equal height when one lists more features than the other.
+.plan-terms {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, .1);
+  font-size: .85rem;
+  color: rgba(255, 255, 255, .85);
+}

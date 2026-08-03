@@ -41,7 +41,6 @@ function walk(dir, exts, out = []) {
 const htmlFiles = walk(SITE, ['.html']);
 const jsFiles = [
   path.join(ROOT, 'assets/js/scripts.js'),
-  path.join(ROOT, 'assets/js/product-page.js'),
   path.join(ROOT, 'assets/js/bootstrap.bundle.min.js'),
 ];
 
@@ -60,7 +59,7 @@ const results = await new PurgeCSS().purge({
   css: cssFiles.map((f) => ({ raw: fs.readFileSync(f, 'utf8'), name: f })),
   safelist: {
     standard: [
-      // this site's own dynamically-toggled classes (scripts.js / product-page.js / inline chat-widget JS)
+      // this site's own dynamically-toggled classes (scripts.js / faq + chat-widget inline JS)
       'open', 'open-nav', 'navbar-active', 'has-fixed', 'has-ovm', 'has-mask', 'loading',
       // animate.css keyframe classes assigned via data-animate at runtime
       /^fadeIn/, /^fadeOut/, /^animated$/,

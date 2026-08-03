@@ -22,13 +22,15 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-9">
-{% for faq in include.items %}
+{% for faq in include.items %}{% assign faq_id = include.id_prefix | default: 'faq' | append: '-' | append: forloop.index %}
                 <div class="faq-item{% if include.first_open and forloop.first %} open{% endif %}">
-                    <h3 class="faq-question m-0" onclick="toggleFaq(this)">
-                        {{ faq.q }}
-                        <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    <h3 class="m-0">
+                        <button type="button" class="faq-question" aria-expanded="{% if include.first_open and forloop.first %}true{% else %}false{% endif %}" aria-controls="{{ faq_id }}">
+                            <span>{{ faq.q }}</span>
+                            <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
                     </h3>
-                    <div class="faq-answer">
+                    <div class="faq-answer" id="{{ faq_id }}">
                         {{ faq.a }}
                     </div>
                 </div>
@@ -37,6 +39,33 @@
         </div>
     </div>
 </section>
+{%- comment -%}
+  Behaviour lives with the markup so this include works on any page that drops
+  it in. It previously depended on assets/js/product-page.js, which only the
+  integration product template loaded, so the accordion was inert anywhere else.
+  Event delegation, so it also covers items rendered by more than one include.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (window.phFaqBound) return;
+    window.phFaqBound = true;
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.faq-question');
+      if (!btn) return;
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (i) {
+        i.classList.remove('open');
+        var b = i.querySelector('.faq-question');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  })();
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

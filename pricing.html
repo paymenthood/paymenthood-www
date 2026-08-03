@@ -10,77 +10,34 @@ image:
 ---
 
 {% include header-secondary.html %}
-
-<style>
-  .pricing-hero {
-    padding-bottom: 60px;
-  }
-
-  .pricing-card-main {
-    border-radius: 24px;
-  }
-
-  .price-large {
-    font-size: 72px;
-    line-height: 1;
-    font-weight: 700;
-  }
-
-  .feature-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-.trust-badge {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 12px 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  @media (max-width: 768px) {
-    .price-large {
-      font-size: 48px;
-    }
-    .pricing-hero {
-      padding: 40px 0;
-      padding-top: 100px;
-    }
-  }
-</style>
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/pricing.css' | relative_url }}">
 
 <main id="main-content">
-  <!-- Hero Section -->
-  <section class="pricing-hero">
+
+  <!-- Hero -->
+  <section class="section">
     <div class="container">
       <div class="row justify-content-center text-center">
         <div class="col-lg-8">
           <h2 class="h1 mb-3 animated" data-animate="fadeInUp" data-delay=".1">
             Free to start. Pay only to customize.
           </h2>
-          <p class="fs-5 mb-4 animated" data-animate="fadeInUp" data-delay=".2" style="opacity: 0.9;">
+          <p class="pricing-hero-lead mb-4 animated" data-animate="fadeInUp" data-delay=".2">
             Full payment orchestration is free forever. Upgrade only when you want your own branding on checkout.
           </p>
           <div class="d-flex justify-content-center gap-3 flex-wrap animated" data-animate="fadeInUp" data-delay=".3">
             <div class="trust-badge">
-              <em class="fas fa-clock"></em>
-              <span class="small fw-bold">Start Free</span>
+              <em class="fas fa-clock" aria-hidden="true"></em>
+              <span class="small">Start Free</span>
             </div>
             <div class="trust-badge">
-              <em class="fas fa-credit-card"></em>
-              <span class="small fw-bold">No Card Required</span>
+              <em class="fas fa-credit-card" aria-hidden="true"></em>
+              <span class="small">No Card Required</span>
             </div>
             <div class="trust-badge">
-              <em class="fas fa-percent"></em>
-              <span class="small fw-bold">No Transaction Fees</span>
+              <em class="fas fa-percent" aria-hidden="true"></em>
+              <span class="small">No Transaction Fees</span>
             </div>
           </div>
         </div>
@@ -88,106 +45,100 @@ image:
     </div>
   </section>
 
-  <!-- Main Pricing -->
-  <section class="py-5" style="margin-top: -40px;">
+  <!-- Plans -->
+  <section class="section pt-0">
     <div class="container">
       <div class="row g-4 justify-content-center">
 
-        <!-- Free card -->
+        <!-- Free -->
         <div class="col-lg-5 col-md-10 animated" data-animate="fadeInUp" data-delay=".3">
-          <div class="pricing-card-main no-hover bg-white h-100 p-5 d-flex flex-column" style="border: 2px solid var(--blue-100)">
+          <div class="plan-card plan-card--free p-4 p-lg-5">
             <div class="mb-4">
-              <span class="badge bg-blue-30 txt-blue-200 fw-semibold mb-3 px-3 py-2">Free</span>
+              <span class="badge plan-badge bg-blue-30 txt-blue-200 fw-semibold mb-3 px-3 py-2">Free</span>
               <div class="d-flex align-items-start">
-                <span class="fs-3 txt-blue-600 mt-2">$</span>
-                <span class="price-large txt-blue-600">0</span>
+                <span class="plan-currency txt-blue-600">$</span>
+                <span class="plan-price txt-blue-600">0</span>
               </div>
-              <p class="txt-blue-400 mb-0">No credit card. No time limit.</p>
+              <p class="plan-note mb-0">No credit card. No time limit.</p>
             </div>
 
-            <p class="txt-blue-400 mb-4 pb-4" style="border-bottom:1px solid var(--gray-200);">
+            <p class="plan-summary">
               Every payment feature, free forever. Nothing here is limited or time-boxed.
             </p>
 
-            <div class="d-flex flex-column gap-3 flex-grow-1 mb-4">
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-plug txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">All payment gateways</h3><p class="txt-blue-400 small mb-0">Connect any provider, anytime</p></div>
+            <dl class="plan-features">
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-plug"></em></span>
+                <div><dt>All payment gateways</dt><dd>Connect any provider, anytime</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-puzzle-piece txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">All platform integrations</h3><p class="txt-blue-400 small mb-0">WHMCS, WooCommerce, J2Store and more</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-puzzle-piece"></em></span>
+                <div><dt>All platform integrations</dt><dd>WHMCS, WooCommerce, J2Commerce, VirtueMart, Phoca Cart and more</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-infinity txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">Unlimited transactions</h3><p class="txt-blue-400 small mb-0">No volume caps, no extra fees</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-infinity"></em></span>
+                <div><dt>Unlimited transactions</dt><dd>No volume caps, no extra fees</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-chart-line txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">Real-time analytics</h3><p class="txt-blue-400 small mb-0">Track performance and insights</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-chart-line"></em></span>
+                <div><dt>Real-time analytics</dt><dd>Track performance and insights</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-shield-alt txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">Fraud protection</h3><p class="txt-blue-400 small mb-0">AI-powered security included</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-shield-alt"></em></span>
+                <div><dt>Fraud protection</dt><dd>AI-powered security included</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-code txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">Full API access</h3><p class="txt-blue-400 small mb-0">Complete developer documentation</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-code"></em></span>
+                <div><dt>Full API access</dt><dd>Complete developer documentation</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon bg-blue-30 flex-shrink-0"><em class="fas fa-tag txt-blue-200 fs-5"></em></div>
-                <div><h3 class="txt-blue-600 mb-1 h6">PaymentHood checkout page</h3><p class="txt-blue-400 small mb-0">Standard checkout with PaymentHood branding</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-tag"></em></span>
+                <div><dt>PaymentHood checkout page</dt><dd>Standard checkout with PaymentHood branding</dd></div>
               </div>
-            </div>
+            </dl>
 
-            <a href="https://console.paymenthood.com" class="btn btn-outline-primary w-100 py-3 fw-bold">
-              Start Free <em class="fas fa-arrow-right ms-2"></em>
+            <a href="https://console.paymenthood.com" class="vh-btn btn-blue-100 vh-btn-outline w-100 justify-content-center">
+              <span>Start Free</span><em class="ti ti-arrow-right ps-2"></em>
             </a>
           </div>
         </div>
 
-        <!-- Pro card -->
+        <!-- Premium -->
         <div class="col-lg-5 col-md-10 animated" data-animate="fadeInUp" data-delay=".4">
-          <div class="pricing-card-main bg-blue-200 text-white h-100 p-5 d-flex flex-column" style="position:relative;">
+          <div class="plan-card plan-card--premium p-4 p-lg-5">
             <div class="mb-4">
-              <span class="badge mb-3 px-3 py-2 fw-semibold" style="background:rgba(255,255,255,0.2);">Premium</span>
+              <span class="badge plan-badge mb-3 px-3 py-2 fw-semibold">Premium</span>
               <div class="d-flex align-items-start">
-                <span class="fs-3 mt-2" style="opacity:.85;">$</span>
-                <span class="price-large">29</span>
+                <span class="plan-currency">$</span>
+                <span class="plan-price">29</span>
               </div>
-              <p class="mb-0" style="opacity:.85;">per month</p>
+              <p class="plan-note mb-0">per month</p>
             </div>
 
-            <p class="mb-4" style="opacity:.9; border-bottom:1px solid rgba(255,255,255,.2); padding-bottom:1.25rem;">
+            <p class="plan-summary">
               <strong class="text-white">Everything in Free</strong>, plus one thing: the checkout becomes entirely yours.
             </p>
 
-            <div class="d-flex flex-column gap-3 flex-grow-1 mb-4">
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-paint-brush fs-5"></em></div>
-                <div><h3 class="mb-1 h6 text-white">Custom checkout branding</h3><p class="small mb-0" style="opacity:.8;">Your logo, colors, and business name</p></div>
+            <dl class="plan-features">
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-paint-brush"></em></span>
+                <div><dt>Custom checkout branding</dt><dd>Your logo, colors, and business name</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-globe fs-5"></em></div>
-                <div><h3 class="mb-1 h6 text-white">Custom domain</h3><p class="small mb-0" style="opacity:.8;">Customers stay on your domain through payment</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-globe"></em></span>
+                <div><dt>Custom domain</dt><dd>Customers stay on your domain through payment</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-eye-slash fs-5"></em></div>
-                <div><h3 class="mb-1 h6 text-white">Remove PaymentHood badge</h3><p class="small mb-0" style="opacity:.8;">Fully white-labeled checkout experience</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-eye-slash"></em></span>
+                <div><dt>Remove PaymentHood badge</dt><dd>Fully white-labeled checkout experience</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-comment-alt fs-5"></em></div>
-                <div><h3 class="mb-1 h6 text-white">Custom slogan and copy</h3><p class="small mb-0" style="opacity:.8;">Your own messaging on the checkout page</p></div>
+              <div class="plan-feature">
+                <span class="plan-feature-icon" aria-hidden="true"><em class="fas fa-comment-alt"></em></span>
+                <div><dt>Custom slogan and copy</dt><dd>Your own messaging on the checkout page</dd></div>
               </div>
-              <div class="d-flex gap-3 align-items-start">
-                <div class="feature-icon flex-shrink-0" style="background:rgba(255,255,255,.15)"><em class="fas fa-headset fs-5"></em></div>
-                <div><h3 class="mb-1 h6 text-white">Priority support</h3><p class="small mb-0" style="opacity:.8;">Faster response times from our team</p></div>
-              </div>
-            </div>
+            </dl>
 
-            <div class="mt-4 mb-4 p-3 rounded-3" style="background:rgba(255,255,255,0.1);">
-              <p class="small mb-0" style="opacity:.85;">Flat $29/month. No transaction fees, no volume limits, no contracts.</p>
-            </div>
+            <p class="plan-terms">Flat $29/month. No transaction fees, no volume limits, no contracts.</p>
 
             <a href="https://console.paymenthood.com" class="vh-btn btn-blue-100 w-100 justify-content-center">
               <span>Get Started</span><em class="ti ti-arrow-right ps-2"></em>
@@ -199,64 +150,9 @@ image:
     </div>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="text-center mb-5 animated" data-animate="fadeInUp" data-delay=".7">
-            <h2 class="txt-blue-600 mb-3">Frequently asked questions</h2>
-          </div>
+  {% include faq.html items=site.data.pricing.faqs eyebrow="Pricing FAQ" bg="bg-light" %}
 
-          <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".8">
-            <div class="col-md-6">
-              <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">What's included in the free plan?</h3>
-                <p class="txt-blue-400 mb-0">Everything needed to accept payments: all gateways, all platform integrations, unlimited transactions, analytics, fraud protection, and full API access. Free forever, no credit card required.</p>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">Are there any transaction fees?</h3>
-                <p class="txt-blue-400 mb-0">Never, on either plan. PaymentHood takes no percentage and no per-transaction cut, at any volume. You pay only what your own payment provider charges you directly.</p>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">What does Premium add?</h3>
-                <p class="txt-blue-400 mb-0">White-labeling, and nothing else. Every payment feature is already free. Premium simply lets you put your own logo, colors, domain, and wording on the checkout page and remove the PaymentHood badge.</p>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">Does the free plan show PaymentHood branding?</h3>
-                <p class="txt-blue-400 mb-0">Yes. On the free plan your checkout page shows PaymentHood branding. Upgrading to Premium removes it completely and lets you apply your own design.</p>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">Can I cancel anytime?</h3>
-                <p class="txt-blue-400 mb-0">Yes. No contracts, no commitments. Cancel your Premium subscription anytime and drop back to the free plan instantly.</p>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="p-4 h-100 border rounded-3">
-                <h3 class="txt-blue-600 mb-3 h5">How long does it take to migrate from my current payment gateway?</h3>
-                <p class="txt-blue-400 mb-0">For WHMCS and WooCommerce and all our integration plugins, setup takes under 5 minutes, download, upload, activate. For custom integrations, our team provides a dedicated migration guide and free support at no extra cost.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Not Sure Yet -->
+  <!-- Still deciding -->
   <section class="section bg-blue-30">
     <div class="container">
       <div class="section-head text-center">
@@ -268,22 +164,33 @@ image:
 
         <div class="col-lg-4 col-md-6 animated" data-animate="fadeInUp" data-delay=".2">
           <div class="card card-s3 p-4 h-100 text-center d-flex flex-column">
-            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-message-circle"></em></span>
+            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-comments" aria-hidden="true"></em></span>
             <h3 class="txt-blue-600 h5">Chat with us</h3>
             <p class="txt-blue-400 small flex-grow-1">Ask anything. Our AI assistant answers payment questions instantly, 24/7.</p>
-            <button class="vh-btn btn-blue-300 w-100 mt-3" onclick="document.getElementById('ph-chat-launcher').click()">
-              <span>Open Chat</span><em class="ti ti-message ps-2"></em>
+            <button type="button" class="vh-btn btn-blue-300 w-100 mt-3 justify-content-center" onclick="document.getElementById('ph-chat-launcher').click()">
+              <span>Open Chat</span><em class="ti ti-comment ps-2"></em>
             </button>
           </div>
         </div>
 
         <div class="col-lg-4 col-md-6 animated" data-animate="fadeInUp" data-delay=".3">
           <div class="card card-s3 p-4 h-100 text-center d-flex flex-column">
-            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-mail"></em></span>
+            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-email" aria-hidden="true"></em></span>
             <h3 class="txt-blue-600 h5">Send us an email</h3>
             <p class="txt-blue-400 small flex-grow-1">Prefer email? Write to us and we'll get back to you within one business day.</p>
-            <a href="/contact-us.html" class="vh-btn btn-blue-300 w-100 mt-3">
+            <a href="/contact-us.html" class="vh-btn btn-blue-300 w-100 mt-3 justify-content-center">
               <span>Contact Us</span><em class="ti ti-arrow-right ps-2"></em>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="card card-s3 p-4 h-100 text-center d-flex flex-column">
+            <span class="about-feature-icon mx-auto mb-3"><em class="ti ti-book" aria-hidden="true"></em></span>
+            <h3 class="txt-blue-600 h5">Read the docs</h3>
+            <p class="txt-blue-400 small flex-grow-1">Prefer to dig in yourself? The API reference and integration guides are open to everyone.</p>
+            <a href="https://docs.paymenthood.com/" target="_blank" rel="noopener" class="vh-btn btn-blue-300 w-100 mt-3 justify-content-center">
+              <span>Documentation</span><span class="visually-hidden"> (opens in new tab)</span><em class="ti ti-arrow-top-right ps-2"></em>
             </a>
           </div>
         </div>
@@ -294,8 +201,6 @@ image:
 
 </main>
 
-<!-- Chat email gate -->
 {% include chat-widget.html %}
-
 
 {% include footer.html %}
