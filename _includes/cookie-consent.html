@@ -1,0 +1,55 @@
+{%- comment -%}
+  Cookie consent banner. Pairs with the Consent Mode v2 / GTM gate in the
+  <head> of header.html, which exposes window.phConsent.
+
+  Nothing non-essential loads until accept() is called, so this banner is the
+  only thing standing between a visitor and Google Analytics / Microsoft
+  Clarity session recording. Reject is a real choice, not a dismiss: it is
+  stored, and GTM is never injected.
+
+  Rendered hidden and revealed by JS so it never appears for visitors who have
+  already chosen, and never blocks first paint.
+{%- endcomment -%}
+<div id="ph-consent" class="ph-consent" role="dialog" aria-modal="false" aria-labelledby="ph-consent-title" aria-describedby="ph-consent-desc" hidden>
+  <div class="ph-consent-inner">
+    <div class="ph-consent-copy">
+      <p id="ph-consent-title" class="ph-consent-title">We use cookies</p>
+      <p id="ph-consent-desc" class="ph-consent-text">Essential cookies keep the site working. We would also like analytics cookies to understand how the site is used, which includes session recording. These load only if you accept. Read our <a href="/privacy.html">Privacy Policy</a>.</p>
+    </div>
+    <div class="ph-consent-actions">
+      <button type="button" id="ph-consent-reject" class="ph-consent-btn ph-consent-btn--ghost">Reject</button>
+      <button type="button" id="ph-consent-accept" class="ph-consent-btn ph-consent-btn--accept">Accept</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var el = document.getElementById('ph-consent');
+    if (!el || !window.phConsent) return;
+
+    // Already chosen: never show the banner again.
+    if (window.phConsent.state()) return;
+
+    function close() {
+      el.hidden = true;
+      el.classList.remove('is-open');
+    }
+
+    document.getElementById('ph-consent-accept').addEventListener('click', function () {
+      window.phConsent.accept();
+      close();
+    });
+
+    document.getElementById('ph-consent-reject').addEventListener('click', function () {
+      window.phConsent.reject();
+      close();
+    });
+
+    // Reveal after paint so the banner never competes with LCP.
+    el.hidden = false;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { el.classList.add('is-open'); });
+    });
+  })();
+</script>

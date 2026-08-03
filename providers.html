@@ -1,6 +1,5 @@
 ---
 layout: none
-nav_active: providers
 title: Payment Providers
 description: Connect to 30+ payment providers through a single integration. Support for global, regional, and crypto gateways.
 ---
@@ -8,7 +7,7 @@ description: Connect to 30+ payment providers through a single integration. Supp
 {% include header-secondary.html %}
 <link rel="stylesheet" href="{{ '/assets/css/providers.css' | relative_url }}">
 
-<main class="overflow-hidden">
+<main id="main-content" class="overflow-hidden">
   <section class="section">
     <div class="container">
 
@@ -286,5 +285,7 @@ description: Connect to 30+ payment providers through a single integration. Supp
     });
   });
 </script>
+
+{% include chat-widget.html %}
 
 {% include footer.html %}

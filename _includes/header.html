@@ -2,28 +2,53 @@
 <html lang="en" class="js">
 
 <head>
-    <!-- Google Tag Manager (deferred until first interaction / idle) -->
+    <!-- Consent Mode v2 defaults + consent-gated Google Tag Manager -->
     {%- comment -%}
-      Same GTM container and the same official snippet; only WHEN it runs has
-      changed. Loading it eagerly cost ~1.5s of mobile main-thread time
-      (Clarity 973ms + GA 356ms + GTM 215ms), which was 100% of the page's
-      Total Blocking Time and ~10 Lighthouse points on mobile.
+      Two independent layers, on purpose:
 
-      It now loads on the first of: a real user interaction, or a 3s timeout;
-      so it is off the critical path but still fires on essentially every
-      genuine visit. dataLayer is created up front, so any dataLayer.push()
-      elsewhere on the page still queues normally and is picked up when GTM
-      initialises. Nothing about the container, tags, GA or Clarity changes.
+      1. Consent Mode v2 defaults deny every non-essential signal before any
+         tag can read them, so tags that respect consent behave correctly.
+      2. The GTM script itself is not injected until the visitor accepts.
+         Google Analytics and Microsoft Clarity are configured inside the GTM
+         container, not here, and container config lives outside this repo.
+         Gating the loader is therefore the only thing we can guarantee from
+         the site: no analytics cookies and no Clarity session recording can
+         start before consent, whatever the container is set to.
+
+      The existing performance deferral is unchanged: once consent exists, GTM
+      still waits for the first interaction or a 3s timeout. Loading it eagerly
+      cost ~1.5s of mobile main-thread time (Clarity 973ms + GA 356ms +
+      GTM 215ms), which was effectively all of the page's Total Blocking Time.
+      dataLayer is created up front so any dataLayer.push() elsewhere still
+      queues and is picked up when GTM initialises.
     {%- endcomment -%}
     <script>
         (function (w, d, s, l, i) {
+            var KEY = 'ph_consent';
+            var NON_ESSENTIAL = ['ad_storage', 'ad_user_data', 'ad_personalization', 'analytics_storage', 'personalization_storage'];
+
             w[l] = w[l] || [];
-            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-            var loaded = false;
-            function loadGTM() {
-                if (loaded) return;
-                loaded = true;
-                cleanup();
+            function gtag() { w[l].push(arguments); }
+
+            function signals(value) {
+                var o = { functionality_storage: 'granted', security_storage: 'granted' };
+                NON_ESSENTIAL.forEach(function (k) { o[k] = value; });
+                return o;
+            }
+
+            // Layer 1: deny everything non-essential before any tag can read it.
+            var def = signals('denied');
+            def.wait_for_update = 500;
+            gtag('consent', 'default', def);
+
+            var injected = false;
+            var EVENTS = ['scroll', 'pointerdown', 'keydown', 'touchstart', 'mousemove'];
+
+            function inject() {
+                if (injected) return;
+                injected = true;
+                EVENTS.forEach(function (e) { w.removeEventListener(e, inject, { passive: true }); });
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
                 var f = d.getElementsByTagName(s)[0],
                     j = d.createElement(s),
                     dl = l != 'dataLayer' ? '&l=' + l : '';
@@ -31,13 +56,34 @@
                 j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
                 f.parentNode.insertBefore(j, f);
             }
-            var EVENTS = ['scroll', 'pointerdown', 'keydown', 'touchstart', 'mousemove'];
-            function cleanup() {
-                EVENTS.forEach(function (e) { w.removeEventListener(e, loadGTM, { passive: true }); });
+
+            // Same deferral as before, but it only ever starts after consent.
+            function schedule() {
+                EVENTS.forEach(function (e) { w.addEventListener(e, inject, { passive: true, once: true }); });
+                w.setTimeout(inject, 3000);
             }
-            EVENTS.forEach(function (e) { w.addEventListener(e, loadGTM, { passive: true, once: true }); });
-            // Fallback so visitors who never interact are still measured.
-            w.setTimeout(loadGTM, 3000);
+
+            function read() { try { return w.localStorage.getItem(KEY); } catch (e) { return null; } }
+            function write(v) { try { w.localStorage.setItem(KEY, v); } catch (e) {} }
+
+            // Layer 2: the banner (cookie-consent.html) drives these.
+            w.phConsent = {
+                state: read,
+                accept: function () {
+                    write('granted');
+                    gtag('consent', 'update', signals('granted'));
+                    schedule();
+                },
+                reject: function () {
+                    write('denied');
+                    // Nothing is injected, so nothing to tear down.
+                }
+            };
+
+            if (read() === 'granted') {
+                gtag('consent', 'update', signals('granted'));
+                schedule();
+            }
         })(window, document, 'script', 'dataLayer', 'GTM-WZ5M4HR8');
     </script>
     <!-- End Google Tag Manager -->
@@ -81,7 +127,10 @@
         "url": "{{ site.url }}/contact-us.html"
       },
       "sameAs": [
-        "https://github.com/paymenthood"
+        "https://www.linkedin.com/company/paymenthood/",
+        "https://x.com/PaymentHood",
+        "https://github.com/paymenthood",
+        "https://docs.paymenthood.com"
       ]
     }
     </script>
@@ -154,10 +203,22 @@
 </head>
 
 <body class="nk-body body-wider mode-onepage">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZ5M4HR8"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+{%- comment -%}
+  Skip link (WCAG 2.4.1 Bypass Blocks). Must be the first focusable element in
+  the document so keyboard and screen-reader users can jump past the logo, the
+  six-item nav and the mega-menu on every page. Bootstrap's
+  .visually-hidden-focusable keeps it out of the way until it takes focus.
+  Its target is #main-content, which every page's <main> carries.
+{%- endcomment -%}
+<a href="#main-content" class="skip-link visually-hidden-focusable">Skip to main content</a>
+{% include cookie-consent.html %}
+{%- comment -%}
+  The GTM <noscript> iframe was removed deliberately. It fires the container
+  with no JavaScript, which means it cannot be gated by the consent banner and
+  would load tags before consent for every no-JS visitor. GTM's own tags need
+  JavaScript to do anything useful anyway, so the measurement loss is
+  negligible next to loading trackers without permission.
+{%- endcomment -%}
     <div class="nk-wrap">
         <header class="nk-header page-header is-transparent is-sticky is-shrink" id="header">
             <!-- Header @s -->
@@ -195,9 +256,14 @@
                             </div>
                             <nav class="header-menu offcanvas-body" id="header-menu">
                                 <ul class="menu">
-                                    <li class="menu-item"><a class="menu-link nav-link" href="{{ '/' | relative_url }}">Home</a></li>
+                                    {%- comment -%}
+                                      Active state is driven by each page's `nav_active` front matter.
+                                      The theme styles `.menu-item > a.active`; aria-current tells
+                                      screen readers which item is the current page.
+                                    {%- endcomment -%}
+                                    <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'home' %} active{% endif %}"{% if page.nav_active == 'home' %} aria-current="page"{% endif %} href="{{ '/' | relative_url }}">Home</a></li>
                                     <li class="menu-item has-sub has-mega">
-                                        <a class="menu-link nav-link menu-toggle" href="#">Integrations</a>
+                                        <a class="menu-link nav-link menu-toggle{% if page.nav_active == 'integrations' %} active{% endif %}" href="#">Integrations</a>
                                         <div class="menu-sub menu-drop menu-mega integrations-menu">
                                             <div class="integrations-menu-head">Payment plugins by platform</div>
                                             <ul class="integrations-menu-grid">
@@ -242,9 +308,9 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/trust-center/">Security</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/pricing.html">Pricing</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/contact-us.html">Contact Us</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'security' %} active{% endif %}"{% if page.nav_active == 'security' %} aria-current="page"{% endif %} href="/trust-center/">Security</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'pricing' %} active{% endif %}"{% if page.nav_active == 'pricing' %} aria-current="page"{% endif %} href="/pricing.html">Pricing</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'contact' %} active{% endif %}"{% if page.nav_active == 'contact' %} aria-current="page"{% endif %} href="/contact-us.html">Contact Us</a></li>
                                 </ul>
                                 <ul class="menu-btns">
                                     <li><a href="https://console.paymenthood.com" target="_blank" rel="noopener" class="vh-btn btn-md btn-auto btn-green-300 vh-btn-outline no-change"><span>Start Free</span><span class="visually-hidden"> (opens in new tab)</span></a></li>

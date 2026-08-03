@@ -1,6 +1,123 @@
 // Late-cascade page extras (home transaction-control cards, home screenshot
 // slider); extracted (pruned) from the tail of style.css.
 
+// ---- skip link (WCAG 2.4.1 Bypass Blocks) ----
+
+// Pairs with Bootstrap's .visually-hidden-focusable, which un-clips the link
+// the moment it takes focus. Fixed positioning means revealing it never shifts
+// the header layout, and the z-index clears both .header-main (49) and the
+// mobile offcanvas nav (1045).
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 2000;
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: var(--blue-200);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(18, 24, 58, .25);
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+// ---- cookie consent banner ----
+
+// Sits above the chat launcher (9999) because it gates analytics and should be
+// the first thing a visitor resolves. Translated off-screen until .is-open so
+// revealing it costs a transform, not a layout.
+.ph-consent {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  padding: 16px;
+  transform: translateY(110%);
+  transition: transform .35s cubic-bezier(.22, .61, .36, 1);
+
+  &.is-open { transform: translateY(0); }
+}
+
+.ph-consent-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: var(--blue-600);
+  box-shadow: 0 18px 50px rgba(6, 10, 30, .45);
+}
+
+.ph-consent-title {
+  margin: 0 0 4px;
+  font-size: .98rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ph-consent-text {
+  margin: 0;
+  font-size: .84rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .75);
+
+  a {
+    color: #7cc6ff;
+    text-decoration: underline;
+
+    &:hover { color: #a8dbff; }
+  }
+}
+
+.ph-consent-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.ph-consent-btn {
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: .86rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+
+.ph-consent-btn--accept {
+  background: var(--green-400);
+  color: #fff;
+
+  &:hover { background: var(--green-300); }
+}
+
+.ph-consent-btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .35);
+  color: #fff;
+
+  &:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+}
+
+@media (max-width: 767px) {
+  .ph-consent-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .ph-consent-actions .ph-consent-btn { flex: 1 1 0; }
+}
+
 // ---- chat email gate widget ----
 
 // Fastbots injects its own floating button (#chat-widget-push-to-talk) — we

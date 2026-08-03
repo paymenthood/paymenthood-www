@@ -3,6 +3,10 @@ layout: none
 nav_active: pricing
 title: Pricing
 description: Simple, transparent pricing. Start free, no credit card required.
+image:
+  path: /assets/images/og/pricing.jpg
+  width: 1200
+  height: 630
 ---
 
 {% include header-secondary.html %}
@@ -291,143 +295,7 @@ description: Simple, transparent pricing. Start free, no credit card required.
 </main>
 
 <!-- Chat email gate -->
-<button id="ph-chat-launcher" aria-label="Open chat">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"/></svg>
-</button>
-<div id="ph-email-gate" role="dialog" aria-modal="true" aria-label="Start chat">
-  <div class="pheg-header">
-    <div class="pheg-avatar">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
-    </div>
-    <div>
-      <div class="pheg-title">PaymentHood Support</div>
-      <div class="pheg-sub">Typically replies instantly</div>
-    </div>
-  </div>
-  <p class="pheg-msg">Hi there 👋 Before we start, what's your email so we can follow up if needed?</p>
-  <form id="ph-email-form" novalidate>
-    <input id="ph-email-input" class="pheg-input" type="email" placeholder="your@email.com" required autocomplete="email">
-    <button type="submit" class="pheg-submit">Start Chatting →</button>
-  </form>
-  <p class="pheg-privacy">We'll never share your email with anyone.</p>
-  <div id="ph-chat-error" class="pheg-error" hidden>
-    <p class="pheg-error-msg">Live chat couldn't load. This usually means a browser extension (ad blocker or privacy tool) is blocking it. Please reach us another way:</p>
-    <a href="/contact-us.html" class="pheg-submit d-block text-center text-decoration-none">Contact Us</a>
-  </div>
-</div>
-<script>
-  (function () {
-    var launcher = document.getElementById('ph-chat-launcher');
-    var gate     = document.getElementById('ph-email-gate');
-    var form     = document.getElementById('ph-email-form');
-    var loaded   = false;
-    var watching = false;
-
-    // Fastbots toggles its iframe between classes "iframe-visible" and
-    // "iframe-hidden" on every open/close (including its own in-panel close
-    // button); that's the only outside signal it gives us. Mirror it onto
-    // our launcher so the button reappears whenever the chat is closed.
-    function watchFastbotsPanel() {
-      if (watching) return;
-      var iframe = document.querySelector('iframe[class*="iframe-"]');
-      if (!iframe) return;
-      watching = true;
-      var sync = function () {
-        launcher.style.display = iframe.classList.contains('iframe-visible') ? 'none' : '';
-      };
-      new MutationObserver(sync).observe(iframe, { attributes: true, attributeFilter: ['class'] });
-    }
-
-    var errorBox = document.getElementById('ph-chat-error');
-    var msg      = document.querySelector('.pheg-msg');
-    var privacy  = document.querySelector('.pheg-privacy');
-
-    function showChatForm() {
-      form.hidden = false;
-      msg.hidden = false;
-      privacy.hidden = false;
-      errorBox.hidden = true;
-    }
-
-    function showChatError(reason) {
-      console.error('[PaymentHood chat] Fastbots failed to initialize (' + reason + '). Likely blocked by an ad blocker/privacy extension, or a network/firewall rule.');
-      launcher.classList.remove('loading');
-      loaded = false;
-      form.hidden = true;
-      msg.hidden = true;
-      privacy.hidden = true;
-      errorBox.hidden = false;
-      gate.classList.add('open');
-    }
-
-    function openBot() {
-      if (loaded) {
-        launcher.style.display = 'none';
-        var btn = document.getElementById('chat-widget-push-to-talk');
-        if (btn) btn.click();
-        return;
-      }
-      loaded = true;
-      showChatForm();
-      // Fastbots can take several seconds to boot; spin the launcher
-      // icon instead of hiding it so a click always gives feedback.
-      launcher.classList.add('loading');
-
-      var s = document.createElement('script');
-      s.src = 'https://app.fastbots.ai/embed.js';
-      s.setAttribute('data-bot-id', 'cmr574lgr01ykp828ka55uvb1');
-      s.onerror = function () {
-        clearInterval(iv);
-        showChatError('embed.js failed to load');
-      };
-      s.onload = function () {
-        // Fastbots' entire init routine is wrapped in a bare
-        // `window.onload = async () => {...}` assignment. Since we load
-        // it on demand (well after the page's own load event already
-        // fired), that handler registers too late and never runs on its
-        // own; call it ourselves the moment it's assigned.
-        if (typeof window.onload === 'function') window.onload();
-      };
-      document.body.appendChild(s);
-      var tries = 0;
-      var iv = setInterval(function () {
-        tries++;
-        var btn = document.getElementById('chat-widget-push-to-talk');
-        if (btn && btn.style.visibility === 'visible') {
-          clearInterval(iv);
-          launcher.classList.remove('loading');
-          launcher.style.display = 'none';
-          btn.click();
-          watchFastbotsPanel();
-          return;
-        }
-        if (tries > 200) {
-          clearInterval(iv);
-          showChatError('widget never became ready within 20s');
-        }
-      }, 100);
-    }
-
-    launcher.addEventListener('click', function () {
-      if (localStorage.getItem('ph_visitor_email')) { openBot(); return; }
-      var opening = !gate.classList.contains('open');
-      gate.classList.toggle('open');
-      if (opening && !loaded) showChatForm();
-    });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('ph-email-input').value.trim();
-      if (!email) return;
-      localStorage.setItem('ph_visitor_email', email);
-      gate.classList.remove('open');
-      openBot();
-    });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') gate.classList.remove('open'); });
-    document.addEventListener('click', function (e) {
-      if (!gate.contains(e.target) && !launcher.contains(e.target)) gate.classList.remove('open');
-    });
-  })();
-</script>
+{% include chat-widget.html %}
 
 
 {% include footer.html %}
