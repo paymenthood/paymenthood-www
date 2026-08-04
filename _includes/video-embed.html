@@ -1,0 +1,100 @@
+{%- comment -%}
+  Click-to-load YouTube embed ("facade" pattern) plus VideoObject structured data.
+
+  WHY IT IS NOT A PLAIN IFRAME:
+  A normal YouTube iframe loads third-party scripts and storage the moment the
+  page renders, which happens BEFORE the cookie banner is answered and would
+  undo the consent gate in header.html. Here nothing is requested from YouTube
+  until the visitor clicks play, and the click is itself the intent signal.
+  It is also ~500 KB of JavaScript that never loads for the majority who do not
+  watch. The poster is self-hosted for the same reason.
+
+  The iframe uses youtube-nocookie.com and autoplay=1 (autoplay applies only
+  after the click, never on page load).
+
+  Parameters:
+    id           - (required) YouTube video id
+    title        - (required) video title; used as the button label and schema name
+    poster       - (required) site-relative path to the poster image
+    description  - (required) one-sentence description for the schema
+    duration     - (required) ISO 8601, e.g. PT1M27S
+    upload_date  - (required) ISO 8601 date, e.g. 2026-08-04
+    eyebrow      - small label above the heading (optional)
+    heading      - section heading (optional; omit to render the player alone)
+    lead         - paragraph under the heading (optional)
+    bg           - section background class (default: bg-light)
+{%- endcomment -%}
+<section class="section {{ include.bg | default: 'bg-light' }}">
+    <div class="container">
+        {%- if include.heading %}
+        <div class="section-head wide-sm text-center">
+            {%- if include.eyebrow %}
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">{{ include.eyebrow }}</span>
+            {%- endif %}
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">{{ include.heading }}</h2>
+            {%- if include.lead %}
+            <p class="animated" data-animate="fadeInUp" data-delay=".3">{{ include.lead }}</p>
+            {%- endif %}
+        </div>
+        {%- endif %}
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="video-facade animated" data-animate="fadeInUp" data-delay=".4" data-video-id="{{ include.id }}">
+                    <img src="{{ include.poster | relative_url }}" alt="" width="1280" height="720" loading="lazy" decoding="async" class="video-facade-poster">
+                    <button type="button" class="video-facade-play">
+                        <span class="video-facade-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        </span>
+                        <span class="visually-hidden">Play video: {{ include.title }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  (function () {
+    if (window.phVideoBound) return;
+    window.phVideoBound = true;
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.video-facade-play');
+      if (!btn) return;
+      var box = btn.closest('.video-facade');
+      var id = box.getAttribute('data-video-id');
+      var frame = document.createElement('iframe');
+      // Only now does anything leave the page for YouTube.
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      frame.title = btn.querySelector('.visually-hidden').textContent;
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      frame.allowFullscreen = true;
+      frame.loading = 'lazy';
+      frame.className = 'video-facade-frame';
+      box.innerHTML = '';
+      box.appendChild(frame);
+    });
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ include.title | strip | jsonify }},
+  "description": {{ include.description | strip | jsonify }},
+  "thumbnailUrl": "{{ include.poster | absolute_url }}",
+  "uploadDate": "{{ include.upload_date }}",
+  "duration": "{{ include.duration }}",
+  "embedUrl": "https://www.youtube.com/embed/{{ include.id }}",
+  "contentUrl": "https://www.youtube.com/watch?v={{ include.id }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "PaymentHood",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ '/assets/images/logos/logo.png' | absolute_url }}"
+    }
+  }
+}
+</script>

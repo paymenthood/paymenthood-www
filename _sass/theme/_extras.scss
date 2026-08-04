@@ -25,6 +25,73 @@
   outline-offset: 2px;
 }
 
+// ---- click-to-load video facade ----
+
+// Lives in the theme, not components.css, because the home page deliberately
+// does not load components.css (see CLAUDE.md).
+// The box holds its 16:9 shape before the poster decodes, so revealing the
+// player never shifts the page (no CLS).
+.video-facade {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--blue-600);
+  box-shadow: 0 24px 60px rgba(18, 24, 58, .22);
+}
+
+.video-facade-poster,
+.video-facade-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.video-facade-poster { object-fit: cover; }
+
+.video-facade-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: rgba(18, 24, 58, .28);
+  cursor: pointer;
+  transition: background-color .25s;
+
+  &:hover { background: rgba(18, 24, 58, .12); }
+
+  &:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: -6px;
+  }
+}
+
+.video-facade-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  padding-left: 5px;
+  border-radius: 50%;
+  background: var(--blue-200);
+  color: #fff;
+  box-shadow: 0 10px 34px rgba(18, 24, 58, .45);
+  transition: transform .25s, background-color .25s;
+
+  .video-facade-play:hover & {
+    transform: scale(1.08);
+    background: var(--blue-100);
+  }
+}
+
 // ---- cookie consent banner ----
 
 // Sits above the chat launcher (9999) because it gates analytics and should be
