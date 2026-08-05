@@ -1,0 +1,116 @@
+---
+layout: none
+title: Sub-processors
+description: The third parties that process data on behalf of PaymentHood, what each one does, the data involved, where it is processed, and how we notify you before the list changes.
+nav_active: security
+noindex: true
+sitemap: false
+---
+
+{% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+{%- assign d = site.data.subprocessors -%}
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="section-head text-center">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Data processing</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Who Else Touches <span class="txt-blue-200">Your Data</span></h2>
+            <p class="animated" data-animate="fadeInUp" data-delay=".3">OmegaHood LLC is the data controller for PaymentHood. To run the service we use a small number of third parties, listed in full below. Each one processes data on our instructions under a written agreement, and none of them receives cardholder data.</p>
+          </div>
+
+          <dl class="fact-table animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="fact-row">
+              <dt class="fact-label">Last updated</dt>
+              <dd class="fact-value">{{ d.updated | date: "%-d %B %Y" }}</dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Notice of changes</dt>
+              <dd class="fact-value">We give at least <strong>{{ d.notice_days }} days' notice</strong> before a new sub-processor starts processing your data, so you have time to object.</dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Get notified</dt>
+              <dd class="fact-value">Email <a href="mailto:support@paymenthood.com?subject=Subscribe%20to%20sub-processor%20updates">support@paymenthood.com</a> with the subject "Subscribe to sub-processor updates" and we will notify you in writing before this list changes.</dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Objecting</dt>
+              <dd class="fact-value">If you object to a new sub-processor on reasonable data-protection grounds, tell us within the notice period and we will work with you on an alternative or, failing that, let you terminate without penalty.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The list -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-head wide-sm text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">The list</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Current Sub-processors</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Entries marked <strong>independent controller</strong> are not our sub-processors. They decide their own purposes for the data and you contract with them directly. They are listed so the picture is complete.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        {%- for s in d.subprocessors %}
+        <div class="col-lg-6 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="feat-card h-100">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <h3 class="h4 mb-0">{{ s.service }}</h3>
+              {%- if s.role == 'independent' %}
+              <span class="badge bg-blue-30 txt-blue-200 fw-semibold px-3 py-2">Independent controller</span>
+              {%- else %}
+              <span class="badge bg-blue-30 txt-blue-200 fw-semibold px-3 py-2">Processor</span>
+              {%- endif %}
+            </div>
+            <p class="txt-blue-400 small mb-3"><strong>{{ s.name }}</strong></p>
+
+            <dl class="subp-detail">
+              <div><dt>Purpose</dt><dd>{{ s.purpose }}</dd></div>
+              <div><dt>Data</dt><dd>{{ s.data }}</dd></div>
+              <div><dt>Location</dt><dd>{{ s.location }}</dd></div>
+              {%- if s.note %}
+              <div><dt>Note</dt><dd>{{ s.note }}</dd></div>
+              {%- endif %}
+              <div><dt>Agreement</dt><dd>
+                {%- if s.dpa contains 'http' %}
+                <a href="{{ s.dpa }}" target="_blank" rel="noopener">Data protection terms<span class="visually-hidden"> (opens in new tab)</span></a>
+                {%- else %}{{ s.dpa }}{%- endif %}
+              </dd></div>
+            </dl>
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner text-center animated" data-animate="fadeInUp" data-delay=".1">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="h3 fw-bold mb-3">Questions about how we handle data?</h2>
+            <p class="mb-4">We will answer processing, transfer and DPA questions directly, and provide what a vendor review needs.</p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+              <a href="/contact-us.html" class="btn btn-green-300 btn-lg px-4 rounded-pill">Contact Us</a>
+              <a href="/trust-center/" class="btn btn-outline-light btn-lg px-4 rounded-pill">Trust Center</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

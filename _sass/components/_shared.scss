@@ -90,6 +90,35 @@
 .link-arrow:hover,
 .link-arrow:focus { gap: 10px; color: var(--blue-200); }
 
+// ── Sub-processor detail list ────────────────────────────────── //
+// Compact label/value pairs inside a .feat-card on /sub-processors/.
+// Narrower than .fact-table, which is built for full-width rows.
+.subp-detail {
+    margin: 0;
+    font-size: .85rem;
+
+    > div {
+        display: flex;
+        gap: 10px;
+        padding: 6px 0;
+        border-top: 1px solid var(--gray-200);
+    }
+    > div:first-child { border-top: 0; }
+
+    dt {
+        flex: 0 0 5.5rem;
+        margin: 0;
+        font-weight: 700;
+        color: var(--blue-600);
+    }
+    dd {
+        flex: 1 1 auto;
+        margin: 0;
+        color: var(--blue-400);
+        line-height: 1.55;
+    }
+}
+
 // ── Fact table ───────────────────────────────────────────────── //
 // Label/value rows for at-a-glance reference blocks (Trust Center
 // compliance scope, About legal entity). Markup is a definition

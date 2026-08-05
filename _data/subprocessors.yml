@@ -1,0 +1,89 @@
+# Sub-processor register, rendered by /sub-processors/.
+#
+# THIS IS A BINDING PUBLIC COMMITMENT (GDPR Art. 28). Adding a vendor that
+# touches customer data WITHOUT adding it here puts you in breach of your own
+# DPA. Make editing this file a required step in vendor onboarding, and give
+# the stated notice period before the new vendor starts processing.
+#
+# `updated` drives the "last updated" date shown on the page. Bump it whenever
+# the list below changes - not on unrelated site deploys.
+updated: 2026-08-05
+notice_days: 30
+
+# role: "processor"            - acts on our instructions (Art. 28)
+#       "independent"          - independent controller; listed for transparency
+# Every entry needs: name (legal entity), purpose, data, location, dpa.
+# Leave `dpa: ` empty only if the vendor genuinely publishes none.
+subprocessors:
+  - name: Microsoft Corporation
+    service: Microsoft Azure
+    role: processor
+    purpose: Cloud hosting for the PaymentHood platform, and retention of audit and webhook delivery logs.
+    data: Account data, payment metadata and tokens, audit logs. No cardholder data.
+    location: TBC — confirm the Azure region(s) before publishing
+    dpa: https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA
+
+  - name: Microsoft Corporation
+    service: Microsoft Clarity
+    role: processor
+    purpose: Website analytics and session recording on our marketing site. Loads only after cookie consent is granted.
+    data: Website usage, pages viewed, clicks, approximate location from IP, session recordings.
+    location: United States
+    dpa: https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA
+
+  - name: Google LLC
+    service: Google Tag Manager and Google Analytics
+    role: processor
+    purpose: Website analytics on our marketing site. Loads only after cookie consent is granted.
+    data: Website usage, pages viewed, referrer, approximate location from IP, device and browser.
+    location: United States
+    dpa: https://business.safety.google/adsprocessorterms/
+
+  - name: Google LLC
+    service: YouTube
+    role: processor
+    purpose: Hosting the product video embedded on our home page. Nothing loads from YouTube until a visitor presses play.
+    data: IP address, device and browser, playback events. Only for visitors who choose to play the video.
+    location: United States
+    dpa: https://business.safety.google/adsprocessorterms/
+
+  - name: Fastbots
+    service: Fastbots chat widget
+    role: processor
+    purpose: The support chat on our website. Loads only when a visitor opens the chat.
+    data: Email address supplied by the visitor, and the content of the chat conversation.
+    location: United States
+    note: Fastbots uses OpenAI to generate responses, so chat content reaches OpenAI as an onward sub-processor.
+    dpa: https://fastbots.ai/dpa
+
+  - name: FormSubmit
+    service: FormSubmit
+    role: processor
+    purpose: Delivering messages sent through the contact form on our website.
+    data: Name, email address and message content submitted by the sender.
+    location: United States
+    dpa: https://formsubmit.co/privacy
+
+  - name: GitHub, Inc.
+    service: GitHub Pages
+    role: processor
+    purpose: Hosting and serving our public marketing website.
+    data: Server logs, including IP address and user agent.
+    location: United States
+    dpa: https://docs.github.com/en/site-policy/privacy-policies/github-data-protection-agreement
+
+  - name: InfyniPay B.V.
+    service: InfyniPay APIs
+    role: processor
+    purpose: Payment technology APIs licensed to OmegaHood LLC and used by parts of the PaymentHood platform.
+    data: Payment metadata and provider-issued tokens. No cardholder data.
+    location: Amsterdam, Netherlands
+    dpa: TBC — request the DPA reference from InfyniPay
+
+  - name: Your chosen payment providers
+    service: Payment processing
+    role: independent
+    purpose: Processing the payments you route to them. You choose and connect each provider, and your agreement is directly with them.
+    data: Cardholder data, which the provider collects directly from your customer. PaymentHood never receives it.
+    location: Varies by provider
+    dpa: See the agreement with each provider you enable
