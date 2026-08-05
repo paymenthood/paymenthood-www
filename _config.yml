@@ -57,6 +57,11 @@ plugins:
   - jekyll-redirect-from
 
 # Exclude files from processing
+# Jekyll skips dot-directories by default, so .well-known must be opted in or
+# /.well-known/security.txt (RFC 9116) never reaches _site.
+include:
+  - .well-known
+
 exclude:
   - README.md
   - CLAUDE.md

@@ -1,0 +1,165 @@
+---
+layout: none
+title: Vulnerability Disclosure Policy
+description: How to report a security vulnerability in PaymentHood, what is in scope, our safe harbour commitment, the rules of engagement, and what happens after you report.
+nav_active: security
+---
+
+{% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="section-head text-center">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Responsible disclosure</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Tell Us Before <span class="txt-blue-200">Anyone Else</span></h2>
+            <p class="animated" data-animate="fadeInUp" data-delay=".3">We handle payments, so a vulnerability in PaymentHood matters to every merchant on the platform. If you find one, report it privately and we will work it through with you. This page sets out exactly what we are asking for and what you get in return.</p>
+          </div>
+          <div class="text-center animated" data-animate="fadeInUp" data-delay=".4">
+            <a href="mailto:support@paymenthood.com?subject=Security%20Disclosure" class="vh-btn btn-green-300">
+              <span>Report a Vulnerability</span><em class="ti ti-arrow-right ps-2"></em>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scope -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="section-head wide-sm text-center">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Scope</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">What You May Test</h2>
+          </div>
+
+          <dl class="fact-table animated" data-animate="fadeInUp" data-delay=".3">
+            <div class="fact-row">
+              <dt class="fact-label">In scope</dt>
+              <dd class="fact-value">
+                <code>www.paymenthood.com</code>, <code>console.paymenthood.com</code>, <code>docs.paymenthood.com</code>,
+                the PaymentHood API, and our published integration plugins for WHMCS, WooCommerce, J2Commerce, VirtueMart and Phoca Cart.
+              </dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Out of scope</dt>
+              <dd class="fact-value">
+                Systems we do not operate. That includes your payment providers, our technology suppliers, marketplace listings,
+                and any third-party service reachable from our pages. Report issues in those directly to their owners.
+              </dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Not accepted</dt>
+              <dd class="fact-value">
+                Denial of service and volumetric testing, social engineering of our staff or customers, physical attacks,
+                spam or automated scanner output with no demonstrated impact, missing best-practice headers with no exploit path,
+                and reports that only restate a public CVE without showing it affects us.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rules of engagement -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide-sm text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Rules of engagement</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">How to Test Without Causing Harm</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">These exist because real merchants take real money through this platform.</p>
+      </div>
+      <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".4">
+        <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">🧪</div><div><h3 class="h5">Use your own test account</h3><p>Sign up for a free account and test against that. Never test against an account, merchant, or dataset that is not yours.</p></div></div></div>
+        <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">🛑</div><div><h3 class="h5">Stop at proof</h3><p>Once you can demonstrate a vulnerability, stop. Do not pivot further, escalate, or pull more data than the minimum needed to show impact.</p></div></div></div>
+        <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">🔒</div><div><h3 class="h5">Do not keep what you find</h3><p>If you encounter personal or cardholder data, stop immediately, tell us, and delete any copy you hold. Do not store, share, or publish it.</p></div></div></div>
+        <div class="col-md-6"><div class="why-card h-100"><div class="why-card-icon">🤝</div><div><h3 class="h5">Give us time</h3><p>Keep the issue private until we have shipped a fix or agreed a disclosure date with you. If we go quiet, chase us before going public.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe harbour -->
+  <section class="section bg-blue-30">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="card card-s3 p-4 p-lg-5 animated" data-animate="fadeInUp" data-delay=".1">
+            <div class="section-head wide-sm text-center">
+              <span>Safe harbour</span>
+              <h2 class="txt-blue-600">We Will Not Come After You</h2>
+            </div>
+            <p class="txt-blue-400">If you make a good-faith effort to follow this policy, we will treat your research as authorised. We will not pursue legal action against you, and we will not report you to law enforcement, for testing that stays within the scope and rules above.</p>
+            <p class="txt-blue-400 mb-0">If someone else brings a claim against you for research that followed this policy, tell us and we will confirm publicly that your testing was authorised. This protection covers what we control. It cannot extend to third parties, and it does not apply if you access other people's data, disrupt the service, or extort us.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What happens next -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="section-head wide-sm text-center">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">What happens next</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">After You Send the Report</h2>
+          </div>
+          <dl class="fact-table animated" data-animate="fadeInUp" data-delay=".3">
+            <div class="fact-row">
+              <dt class="fact-label">Acknowledgement</dt>
+              <dd class="fact-value">Within <strong>3 business days</strong>, from a human, confirming we have the report.</dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Initial assessment</dt>
+              <dd class="fact-value">Within <strong>10 business days</strong> we will tell you whether we could reproduce it, how we rate the severity, and roughly when we expect to fix it.</dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Progress updates</dt>
+              <dd class="fact-value">At least every <strong>14 days</strong> until the issue is closed, so you are never left guessing.</dd>
+            </div>
+            <div class="fact-row">
+              <dt class="fact-label">Reward</dt>
+              <dd class="fact-value">We do not run a paid bug bounty. What we offer is a straight answer, a real fix, and public credit on this page if you want it. Say so in your report and we will name you, or keep you anonymous if you prefer.</dd>
+            </div>
+          </dl>
+
+          <p class="txt-blue-400 small text-center mt-4 animated" data-animate="fadeInUp" data-delay=".4">
+            A good report includes the affected URL or endpoint, the steps to reproduce it, what an attacker gains, and anything that helps us see it quickly. Screenshots and a short video help more than a scanner export.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="cta-banner text-center animated" data-animate="fadeInUp" data-delay=".1">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="h3 fw-bold mb-3">Found something?</h2>
+            <p class="mb-4">Send it to <strong class="text-white">support@paymenthood.com</strong> with "Security Disclosure" in the subject line. Our machine-readable contact details are published at <a href="/.well-known/security.txt" class="text-white">/.well-known/security.txt</a>.</p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+              <a href="mailto:support@paymenthood.com?subject=Security%20Disclosure" class="btn btn-green-300 btn-lg px-4 rounded-pill">Report a Vulnerability</a>
+              <a href="/trust-center/" class="btn btn-outline-light btn-lg px-4 rounded-pill">Trust Center</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}
