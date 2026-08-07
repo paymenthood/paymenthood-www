@@ -25,6 +25,8 @@ product:
   hero_title_html: 'The Payment Gateway<br>Your <span class="txt-blue-50">WHMCS</span> Deserves'
   checkout_image: /assets/images/whmcs/whmcs-checkout.png
   install_path: 'Apps & Integrations'
+  marketplace_url: https://marketplace.whmcs.com/product/8379-paymenthood
+  marketplace_name: WHMCS Marketplace
 
 faqs:
   - q: Does PaymentHood support WHMCS subscriptions / automatic payments?

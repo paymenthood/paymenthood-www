@@ -17,6 +17,8 @@ product:
   checkout_image: /assets/images/virtuemart/checkout.png
   ecosystem: Joomla                        # named in the default install steps
   install_path: 'Extensions → Manage → Install'
+  marketplace_url: https://extensions.joomla.org/extension/e-commerce/payment-gateway/paymenthood-payment-gateway-for-virtuemart/
+  marketplace_name: Joomla Extensions Directory
 
 faqs:
   - q: Which Joomla and VirtueMart versions does the plugin support?

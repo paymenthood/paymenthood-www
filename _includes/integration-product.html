@@ -85,6 +85,12 @@
                         Download {{ noun_cap }}<span class="visually-hidden"> (opens in new tab)</span>
                     </a>
                 </div>
+                {%- if p.marketplace_url -%}
+                <a href="{{ p.marketplace_url }}" target="_blank" rel="noopener" class="d-inline-flex align-items-center gap-2 txt-green-300 fw-semibold text-decoration-none mb-3">
+                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span>Available on the official {{ p.marketplace_name }}<span class="visually-hidden"> (opens in new tab)</span></span>
+                </a>
+                {%- endif -%}
                 <div class="d-flex flex-wrap gap-3">
                     <div class="hero-stat-pill"><svg aria-hidden="true" class="txt-green-300" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><strong>30+</strong>&nbsp;Providers</div>
                     <div class="hero-stat-pill"><svg aria-hidden="true" class="text-warning" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg><strong>5 min</strong>&nbsp;Setup</div>

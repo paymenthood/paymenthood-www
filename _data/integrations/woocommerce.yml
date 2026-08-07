@@ -22,6 +22,8 @@ product:
   checkout_image: /assets/images/woocommerce/woo-checkout.png
   ecosystem: WordPress                     # named in the default install steps
   install_path: 'Plugins → Add New → Upload Plugin'
+  marketplace_url: https://wordpress.org/plugins/paymenthood/
+  marketplace_name: WordPress.org
 faqs:
   - q: Which WooCommerce versions does the plugin support?
     a: >-
