@@ -1,12 +1,29 @@
 // ============================================================
 // Fonts — Roboto self-hosted @font-face (assets/fonts/)
 // Weights: 300 (Light), 400 (Regular), 500 (Medium), 700 (Bold).
+//
+// SUBSETTED. The shipped woff2/woff files are Latin-only subsets, not the
+// upstream fonts. Each original carried 896 glyphs (255 Cyrillic, 100
+// Vietnamese, 75 Greek) that this site never renders; stripping them took the
+// four weights from 258 KB to 108 KB with no visual change. Range kept:
+//   U+0000-017F Latin + Latin Extended-A   U+2000-206F punctuation
+//   U+2500-257F box drawing (the file tree in the WHMCS install guide)
+//   plus the usual currency/arrow/typographic symbols.
+// Unsubsetted originals are in assets/fonts/_originals/ - to regenerate:
+//   pyftsubset _originals/Roboto-X.woff2 --unicodes="<range>" --layout-features='*' \
+//              --flavor=woff2 --output-file=Roboto-X.woff2
+//
+// .eot and .ttf are deliberately NOT referenced any more. Those files were
+// never subsetted, so a browser falling through to .ttf would have pulled a
+// full 180 KB face. woff2 covers every current browser and woff covers the
+// rest; the IE-only .eot is dead weight.
 // ============================================================
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/Roboto-Light.eot");
-  src: local("Roboto Light"), local("Roboto-Light"), url("../fonts/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Light.woff2") format("woff2"), url("../fonts/Roboto-Light.woff") format("woff"), url("../fonts/Roboto-Light.ttf") format("truetype");
+  src: local("Roboto Light"), local("Roboto-Light"),
+       url("../fonts/Roboto-Light.woff2") format("woff2"),
+       url("../fonts/Roboto-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -14,8 +31,9 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/Roboto-Regular.eot");
-  src: local("Roboto"), local("Roboto-Regular"), url("../fonts/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype");
+  src: local("Roboto"), local("Roboto-Regular"),
+       url("../fonts/Roboto-Regular.woff2") format("woff2"),
+       url("../fonts/Roboto-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -23,8 +41,9 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/Roboto-Medium.eot");
-  src: local("Roboto Medium"), local("Roboto-Medium"), url("../fonts/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Medium.woff2") format("woff2"), url("../fonts/Roboto-Medium.woff") format("woff"), url("../fonts/Roboto-Medium.ttf") format("truetype");
+  src: local("Roboto Medium"), local("Roboto-Medium"),
+       url("../fonts/Roboto-Medium.woff2") format("woff2"),
+       url("../fonts/Roboto-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -32,9 +51,57 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/Roboto-Bold.eot");
-  src: local("Roboto Bold"), local("Roboto-Bold"), url("../fonts/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Bold.woff2") format("woff2"), url("../fonts/Roboto-Bold.woff") format("woff"), url("../fonts/Roboto-Bold.ttf") format("truetype");
+  src: local("Roboto Bold"), local("Roboto-Bold"),
+       url("../fonts/Roboto-Bold.woff2") format("woff2"),
+       url("../fonts/Roboto-Bold.woff") format("woff");
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ── themify icon font (override) ─────────────────────────────────────────────
+// The vendor pack declares this family too, but that file is vendored verbatim
+// and must not be edited (CLAUDE.md), and its declaration offers no woff2 and
+// points at the full 54 KB face. style.css loads after vendor.bundle.css, so
+// this later @font-face for the same family/weight/style supersedes it.
+//
+// SUBSETTED TO 12 GLYPHS - 54 KB down to 1 KB. Adding a new icon to the site
+// means re-subsetting, or it will silently render as a blank box:
+//   ti-arrow-right e628   ti-arrow-top-right e65a   ti-book        e6b7
+//   ti-comment     e644   ti-comments        e643   ti-email       e75a
+//   ti-file        e6a4   ti-layout-grid2    e709   ti-package     e687
+//   ti-shield      e67b
+//   e649 / e64a — the Owl carousel prev/next arrows, which use the raw
+//                 codepoints in _preloader.scss rather than a .ti- class.
+// Regenerate with:
+//   pyftsubset _originals/themify.ttf --unicodes="U+e628,U+e65a,U+e6b7,U+e644,\
+//     U+e643,U+e75a,U+e6a4,U+e709,U+e687,U+e67b,U+e649,U+e64a" \
+//     --flavor=woff2 --output-file=themify.woff2
+@font-face {
+  font-family: 'themify';
+  src: url("../fonts/themify.woff2") format("woff2"),
+       url("../fonts/themify.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ── Ikon-Crypto icon font (override) ─────────────────────────────────────────
+// Same story as themify, with one extra problem: the vendor pack lists .ttf
+// FIRST in its src chain, so every browser downloaded the 35 KB TrueType file
+// even though a woff existed. woff2 first fixes the ordering as well as the size.
+//
+// SUBSETTED TO 3 GLYPHS - 35 KB down to 1.7 KB. These are the only ones used,
+// all in the home page "Key Features of Security" block:
+//   ikon-paricle-alt e907   ikon-document e909   ikon-donught e90c
+// Regenerate with:
+//   pyftsubset _originals/Ikon-Crypto.ttf --unicodes="U+e907,U+e909,U+e90c" \
+//     --flavor=woff2 --output-file=Ikon-Crypto.woff2
+@font-face {
+  font-family: 'Ikon-Crypto';
+  src: url("../fonts/Ikon-Crypto.woff2") format("woff2"),
+       url("../fonts/Ikon-Crypto.woff") format("woff");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
