@@ -72,13 +72,25 @@
         if (!carouselContainer.length) return;
 
         carouselContainer.forEach(container => {
+            // Geometry is read BEFORE the clone, for two reasons.
+            //
+            // 1. Reading scrollWidth straight after `innerHTML +=` forced a
+            //    synchronous layout - the exact write-then-read pair Chrome's
+            //    "forced reflow" insight flags. Reading first means the layout
+            //    the browser already has to do is enough.
+            // 2. scrollWidth/2 was also wrong. A flex gap sits BETWEEN items, so
+            //    appending a copy adds one extra gap: the width goes to 2W + gap,
+            //    and half of that is 40px short of where the pattern actually
+            //    repeats (measured: half=2518 vs true repeat=2558, gap=80).
+            //    The loop reset therefore jumped 40px on every cycle.
+            //
+            // The pattern repeats every (original width + one gap).
+            const gap = parseFloat(getComputedStyle(container).columnGap) || 0;
+            const halfWidth = container.scrollWidth + gap;
+
             // Clone the carousel content to create a continuous loop
             const carouselItems = container.innerHTML;
             container.innerHTML += carouselItems;
-
-            // Content width is fixed after the clone; read it once. Reading
-            // scrollWidth inside the rAF loop forces a synchronous layout every frame.
-            const halfWidth = container.scrollWidth / 2;
 
             // Set up animation
             let scrollLeft = 0;

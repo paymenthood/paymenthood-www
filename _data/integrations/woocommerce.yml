@@ -9,14 +9,14 @@ software:
   name: PaymentHood WooCommerce Plugin
   operating_system: WordPress 5.8+ with WooCommerce 6.0+
   version: "1.0.0"
-  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/download/v1.0.0/paymenthood-woocommerce.zip
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/latest/download/paymenthood-woocommerce.zip
 
 
 
 product:
   platform: WooCommerce                    # display name woven through all shared copy
   compat: "6.0+"                           # hero version pill ("WooCommerce 6.0+")
-  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/download/v1.0.0/paymenthood-woocommerce.zip
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/latest/download/paymenthood-woocommerce.zip
   repo: PaymentHood.Plugins.WooCommerce     # open-source repo under github.com/paymenthood
   logo: { src: /assets/images/woocommerce/woo-logo.png, width: 225, height: 225 }
   checkout_image: /assets/images/woocommerce/woo-checkout.png

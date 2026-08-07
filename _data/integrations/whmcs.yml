@@ -9,7 +9,7 @@ software:
   name: PaymentHood WHMCS Module
   operating_system: WHMCS 7.0+
   version: "1.2.0"
-  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/download/v1.2.0/paymenthood-whmcs.zip
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/latest/download/paymenthood-whmcs.zip
   release_notes: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/tag/v1.2.0
 
 product:
@@ -19,7 +19,7 @@ product:
   noun: module
   compat: "7.0+"
   supports_subscriptions: true
-  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/download/v1.2.0/paymenthood-whmcs.zip
+  download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/latest/download/paymenthood-whmcs.zip
   repo: PaymentHood.Plugins.WHMCS
   logo: { src: /assets/images/whmcs/whmcs-logo.png, width: 284, height: 177 }
   hero_title_html: 'The Payment Gateway<br>Your <span class="txt-blue-50">WHMCS</span> Deserves'
