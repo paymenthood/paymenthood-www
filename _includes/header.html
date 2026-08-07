@@ -171,7 +171,15 @@
          here instead, since it's undiscoverable until style.css parses otherwise. -->
     {% if page.url == '/' %}
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-large.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 992px)">
-    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 991px)">
+    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(min-width: 768px) and (max-width: 991px)">
+    {%- comment %}
+      Phones preload their own hero. #homeBannerMask is this page's LCP element
+      and the tablet file is 1280x731 — about three times the pixels a phone can
+      show. The media queries here must stay in step with the breakpoints in
+      _sass/theme/_overrides.scss, or a device downloads one file and paints
+      another.
+    {% endcomment -%}
+    <link rel="preload" as="image" href="{{ '/assets/images/home/banner-bg-phone.webp' | relative_url }}" type="image/webp" fetchpriority="high" media="(max-width: 767px)">
     <link rel="preload" as="image" href="{{ '/assets/images/home/banner-mask-small.svg' | relative_url }}" type="image/svg+xml">
     {%- comment -%}
       shape-x.webp is #homeBannerMask's :after overlay; it stretches across the

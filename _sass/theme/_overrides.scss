@@ -68,6 +68,21 @@
   }
 }
 
+// Phones get their own hero file. This div is the page's LCP element, and the
+// tier above was handing a 1280x731 / 71KB image to a ~412px viewport — roughly
+// three times the pixels the screen can show, on the slowest connections we
+// serve. banner-bg-phone.webp is 768x439 / 32KB, which is an exact match at the
+// DPR Lighthouse emulates and still oversampled on a typical phone.
+//
+// Deliberately scoped to 767px and below so tablets and desktop keep the larger
+// files untouched. The image sits under a 95%-opacity gradient, which is why it
+// tolerates the smaller size without a visible difference.
+@media (max-width: 767px) {
+  #homeBannerMask {
+    background-image: url("../images/home/banner-bg-phone.webp");
+  }
+}
+
 @media (max-width: 575px) {
   #homeBannerMask {
     background-position-x: 81%;
