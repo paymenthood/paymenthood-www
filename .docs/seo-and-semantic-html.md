@@ -149,8 +149,9 @@ PY
 ## 3. Title tags — brand on every page
 
 **The principle (both sites): the brand name must appear in every page's
-`<title>` (and therefore in the `og:title`/Twitter title derived from it).** A
-page's `title:` front matter is the single source for all three. The brand
+`<title>` (and therefore in the `og:title`/Twitter title derived from it).** The
+page title is the single source for all three — where it lives differs per site
+(see the table). The brand
 belongs in the title tag, **not** in a duplicate H1 — one descriptive H1 + brand
 in the title + the Organization JSON-LD is the SEO-optimal arrangement; don't
 reintroduce a brand H1 to "boost" the keyword.
@@ -158,9 +159,9 @@ reintroduce a brand H1 to "boost" the keyword.
 **The two sites wire the brand into the title differently — match the site you're
 editing:**
 
-| Site             | seo-tag call            | `<title>` source                | Brand in `title:` front matter?            |
-|------------------|-------------------------|---------------------------------|--------------------------------------------|
-| **VpnHood.www**  | `{% seo title=false %}` | a hand-written `<title>{{ page.title }}</title>` above the tag | **Yes** — every `title:` must contain `VpnHood!` (seo-tag won't append it). Convention: `Descriptive Keywords \| VpnHood!`; home is brand-first `VpnHood! — Free, Secure & Open-Source VPN`. |
+| Site | seo-tag call | `<title>` source | Brand in the page title? |
+| --- | --- | --- | --- |
+| **VpnHood.www** | `{% seo title=false %}` | a hand-written `<title>{{ page.title }}</title>` above the tag | **Yes** — every page title must contain `VpnHood!` (seo-tag won't append it). Titles live in the page's i18n data — `meta_title`/`meta_description` in `_data/i18n/<lang>/<page>.json`, injected into `page.title`/`page.description` at build time by `_plugins/i18n-meta.rb` (so they are translated like any other key); legal pages still declare `title:` front matter. Convention: `Descriptive Keywords \| VpnHood!`; home is brand-first `VpnHood! — Free, Secure & Open-Source VPN`. |
 | **paymenthood-www** | `{% seo %}` (default) | seo-tag emits it and **appends** ` \| PaymentHood` (the `site.title`) | **No** — `title:` must NOT contain the brand, or it would render doubled (`… \| PaymentHood \| PaymentHood`). |
 
 Why the difference: VpnHood uses `title=false` deliberately for a brand-first
@@ -168,15 +169,14 @@ home title and full separator control; PaymentHood lets seo-tag append the brand
 so it can never be forgotten. Both yield the brand in every `<title>` — don't
 "unify" one onto the other without a deliberate, tested migration.
 
-Audit titles for the brand (run in the relevant repo; set `BRAND`):
+Audit titles for the brand on the **rendered** output (both sites — VpnHood
+titles come from the i18n data, PaymentHood's brand is appended at render time,
+so front matter proves nothing; build first, then run in the repo root):
 
 ```bash
 BRAND="VpnHood"   # or "PaymentHood"
-for f in $(find . -name '*.html' -not -path './_site/*' -not -path './_archive/*' -not -path './assets/*'); do
-  t=$(awk '/^---/{n++;next} n==1 && /^title:/{sub(/^title:[ ]*/,"");print;exit}' "$f")
-  # VpnHood: every title must contain the brand. PaymentHood: seo-tag appends it,
-  # so check the *rendered* _site/<page> <title> instead of front matter.
-  echo "$f -> $t"
+for f in $(find _site -name '*.html'); do
+  grep -o '<title>[^<]*</title>' "$f" | grep -q "$BRAND" || echo "MISSING brand: $f"
 done
 ```
 
@@ -274,6 +274,53 @@ add a `target="_blank"` link (pages, `header.html`, `footer.html`, templates).
   links/buttons → `aria-label`; never put non-`listitem` children under `role="list"`.
 
 ---
+
+## 8. Translated pages — hreflang & language metadata
+
+Applies to any site in this family that ships generated translations (vhtranslator
+`site` mode). A site without translations emits none of this — every rule below is
+self-deactivating when no translated pages exist.
+
+- **`<html lang>` reflects the page's language**: `{{ page.lang | default: site.lang }}`.
+  Generated pages carry `lang:` front matter (added by the translator); source pages
+  leave it unset and inherit the site default.
+- **hreflang alternates are derived, never registered.** `header.html` finds a page's
+  translations by scanning `site.pages` for entries with a `lang` whose URL maps back to
+  the same source path — there is no hand-maintained language list to drift out of sync.
+- **Full reciprocal set or nothing.** A page emits hreflang only when it actually has
+  translations, and then always the complete set: one `<link rel="alternate">` per
+  language **including the page itself**, plus `hreflang="en"` for the source page and
+  `x-default` pointing at the source (English) page. Search engines ignore partial or
+  non-reciprocal sets.
+- **Canonicals stay within a language.** Every translated page canonicalizes to itself
+  (the jekyll-seo-tag default). Never canonicalize a translation to its English source —
+  that deindexes the translation.
+- **`og:locale` is territory-qualified** (`language_TERRITORY`: `fa_IR`, `zh_CN`, …, per
+  Facebook's locale registry — OG consumers ignore bare language codes and fall back to
+  `en_US`). The map lives in the language-metadata data file (`og_locale:` per language in
+  `_data/languages.yml`); the page generator stamps it as `locale:` on every clone and
+  `_config.yml` sets `locale:` for the source language, so **jekyll-seo-tag emits the tag
+  natively** (it resolves `page.locale || site.locale || page.lang`) — never hand-write the
+  `og:locale` meta itself. Meta-tag only: URLs, `<html lang>`, and hreflang all keep the
+  bare language code.
+- **`og:locale:alternate` is emitted alongside the hreflang set** — the Open Graph
+  counterpart, telling social/link-preview crawlers the page exists in other languages.
+  seo-tag only knows the *current* page's locale, so `header.html` emits the alternates
+  from the same `site.pages` scan that builds the hreflang links (no second scan), mapping
+  each language through the same `og_locale:` data so `og:locale` and its alternates always
+  agree (an unmapped language falls back to its bare code). Rules: one tag per *other*
+  available locale (**the page's own locale is excluded**, per the OG spec). Like hreflang,
+  it is emitted **only** when the page actually has translations — an untranslated page
+  (e.g. legal) keeps its lone `og:locale`.
+- **No `inLanguage` microdata in page bodies.** Language is declared by `<html lang>` and
+  hreflang only. Legacy body-level `<meta itemprop="inLanguage">` tags were removed
+  site-wide: they get copied verbatim into translations, where they lie.
+- **Titles keep the brand after translation too.** Translated titles flow through the
+  i18n data pipeline (`meta_title` keys), where the brand rule is carried by the
+  translation prompt (brand names never change) and audited on the rendered output
+  (§3). Pages that still declare a front-matter `title:` are additionally guarded by
+  the translator's `titleMustContain` setting, which rejects a translated page whose
+  title lost the brand before it is ever written.
 
 ## Why this matters (rationale, in one place)
 
