@@ -1,0 +1,95 @@
+# Single source of truth for /providers/square/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/square/index.html.
+
+name: Square
+slug: square
+status: live
+category: global
+region: US / Global
+logo: /assets/images/home/providers-icon/square.png
+accent: "#3e4348"
+accent_rgb: "62,67,72"
+accent_text: "#3e4348"   # computed: 9.99 on white, 9.48 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Square is a payment platform built around a unified view of online and in-person selling:
+  the same catalogue, inventory and customer records serve a physical till and a web checkout.
+  For merchants who sell in both places that shared ledger is the point, more than the online
+  rates.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Merchant accounts are available in the United States, Canada, Australia, Japan, the United
+  Kingdom, Ireland, France and Spain.
+coverage_short: "NA, EU, AU & JP"
+
+currencies: [USD, CAD, AUD, JPY, GBP, EUR]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express, Discover and JCB
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay, Google Pay and Cash App Pay
+  - label: Buy now, pay later
+    icon: bnpl
+    detail: Afterpay where Square offers it
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://squareup.com/
+  docs: https://developer.squareup.com/docs
+  pricing: https://squareup.com/us/en/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: OAuth access token scoped to the merchant, held server-side in PaymentHood
+  webhook: HMAC-signed event notification, verified before an order is released
+  verification: Server-side payment status re-check against the Square API before fulfilment
+
+faqs:
+  - q: Is Square only for physical shops?
+    a: >-
+      No, but that is where it is strongest. If you sell only online, a pure online processor will
+      usually give you more payment methods and better international reach. If you sell in both
+      places, Square's single inventory and customer record is hard to replicate.
+  - q: Which countries can open a Square account?
+    a: >-
+      The United States, Canada, Australia, Japan, the United Kingdom, Ireland, France and Spain.
+      Square does not onboard merchants outside those markets.
+  - q: Can I combine Square with another provider?
+    a: >-
+      Yes. A common setup is Square for the till and a broader online provider for the web
+      checkout, both behind one PaymentHood integration so your storefront code does not care
+      which is which.
+  - q: Does PaymentHood charge extra on top of Square?
+    a: >-
+      No. Square bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://developer.squareup.com/docs
+    - https://squareup.com/us/en/pricing
+  # NOTE: The country list is stated as membership, not as a total, so Square adding a
+  # market makes it incomplete rather than wrong. No re-check needed on a schedule.

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: woocommerce
+provider: sslcommerz
+nav_active: integrations
+title: "SSLCommerz Payment Gateway for WooCommerce"
+description: "Accept SSLCommerz payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/sslcommerz.yml and
+sitemap: false     #   _data/combos/woocommerce-sslcommerz.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00539b;--pp-accent-text:#00539b;--pp-accent-rgb:0,83,155;--pp-hero-end:#00539b;--pp-blob-rgb:0,83,155}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

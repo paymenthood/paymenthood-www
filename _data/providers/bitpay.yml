@@ -1,0 +1,87 @@
+# Single source of truth for /providers/bitpay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/bitpay/index.html.
+
+name: BitPay
+slug: bitpay
+status: live
+category: crypto
+region: Global
+logo: /assets/images/home/providers-icon/bitpay.png
+accent: "#113375"
+accent_rgb: "17,51,117"
+accent_text: "#113375"   # computed: 11.97 on white, 11.36 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  BitPay is one of the oldest crypto payment processors, accepting a wide range of
+  cryptocurrencies and settling to the merchant in either fiat or crypto. Its distinguishing
+  feature is compliance maturity: direct bank settlement in many countries and the reporting a
+  finance team actually needs.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Accepts payments worldwide. Direct bank settlement is available in a defined list of
+  countries and crypto settlement far more widely. Check BitPay's own list for your market.
+coverage_short: "Worldwide"
+
+currencies: [USD, EUR, GBP, BTC, ETH, USDC, USDT]
+
+methods:
+  - label: Cryptocurrency
+    icon: link
+    detail: A wide range of coins and tokens accepted at checkout
+  - label: Stablecoins
+    icon: link
+    detail: USDC, USDT, DAI, GUSD and other dollar-pegged tokens
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://bitpay.com/
+  docs: https://developer.bitpay.com/docs
+  pricing: https://bitpay.com/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API token bound to a merchant identity, held server-side in PaymentHood
+  webhook: Signed IPN callback, validated before an order is released
+  verification: Server-side invoice status re-check against the BitPay API before fulfilment
+
+faqs:
+  - q: Can I be paid in ordinary money?
+    a: >-
+      Yes. BitPay settles by bank transfer in USD, EUR and GBP across many countries, so you can
+      accept crypto without ever holding it. You can also elect settlement in several
+      cryptocurrencies instead. - q: How many cryptocurrencies does BitPay accept? a: >- A wide
+      range at checkout, including the major stablecoins. Note the distinction: what a buyer can
+      pay with is a much longer list than what you can be settled in, and both lists change, so
+      BitPay's own documentation is the one to trust. - q: Am I exposed to crypto price swings? a:
+      >- Only if you choose to be. These gateways quote the invoice in your pricing currency and
+      lock the rate for a short window, then settle to you in either fiat or crypto depending on
+      your setting. Settling in fiat removes the exposure; settling in crypto keeps it. Decide
+      that before you switch it on. - q: Does PaymentHood charge extra on top of BitPay? a: >- No.
+      BitPay bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://www.bitpay.com/resources/bitpay-supports-100-cryptocurrencies-for-merchants
+    - https://developer.bitpay.com/docs/settlement
+    - https://support.bitpay.com/hc/en-us/articles/115002990783-How-can-I-choose-to-receive-cryptocurrency-settlement

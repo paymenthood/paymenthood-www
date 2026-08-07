@@ -1,0 +1,94 @@
+# Single source of truth for /providers/oxapay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/oxapay/index.html.
+
+name: OxaPay
+slug: oxapay
+status: live
+category: crypto
+region: Global
+logo: /assets/images/home/providers-icon/oxapay.png
+accent: "#0f9d8f"
+accent_rgb: "15,157,143"
+accent_text: "#068074"   # computed: 4.83 on white, 4.58 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  OxaPay is a crypto payment gateway aimed at small and mid-sized online businesses,
+  supporting the major cryptocurrencies including USDT across the TRON, Ethereum and BNB
+  chains. Its appeal is low friction: no lengthy onboarding, and ready-made plugins for the
+  common e-commerce and hosting platforms.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Available globally. Onboarding is lighter than the incumbent processors, which is much of
+  its appeal to smaller merchants.
+coverage_short: "Global"
+
+currencies: [BTC, ETH, USDT, USDC, BNB, DAI, TON]
+
+methods:
+  - label: Cryptocurrency
+    icon: link
+    detail: Bitcoin, Ethereum, BNB, TON and others
+  - label: Stablecoins
+    icon: link
+    detail: USDT on TRC-20, ERC-20 and BEP-20, plus USDC and DAI
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://oxapay.com/
+  docs: https://docs.oxapay.com/
+  pricing: https://oxapay.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant API key, held server-side in PaymentHood
+  webhook: Signed callback, validated before an order is released
+  verification: Server-side invoice status re-check against the OxaPay API before fulfilment
+
+faqs:
+  - q: Why does the USDT network matter?
+    a: >-
+      USDT exists on several blockchains and they are not interchangeable. TRC-20 transfers cost
+      cents; ERC-20 transfers can cost several dollars at busy times. Offering the network your
+      customers actually use is the difference between a completed and an abandoned payment.
+  - q: Which coins should I switch on?
+    a: >-
+      Fewer than you think. USDT on TRC-20 plus one or two majors covers most real-world crypto
+      payment volume. A long list adds checkout choice paralysis without adding conversions.
+  - q: Am I exposed to crypto price swings?
+    a: >-
+      Only if you choose to be. These gateways quote the invoice in your pricing currency and lock
+      the rate for a short window, then settle to you in either fiat or crypto depending on your
+      setting. Settling in fiat removes the exposure; settling in crypto keeps it. Decide that
+      before you switch it on.
+  - q: Does PaymentHood charge extra on top of OxaPay?
+    a: >-
+      No. OxaPay bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://oxapay.com/
+    - https://oxapay.com/blog/crypto-payment-api/
+  # NOTE: The coin list is deliberately not enumerated here — it changes weekly and nobody
+  # is re-checking it. The page names the chains that matter (TRC-20 vs ERC-20 fees) and
+  # links out for the current list, which is the durable version of the same information.

@@ -1,0 +1,16 @@
+---
+layout: none
+slug: sslcommerz
+title: "SSLCommerz Payment Gateway Integration"
+description: "Accept SSLCommerz payments through one PaymentHood integration — Bangladesh. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/sslcommerz.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00539b;--pp-accent-text:#00539b;--pp-accent-rgb:0,83,155;--pp-hero-end:#00539b;--pp-blob-rgb:0,83,155}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

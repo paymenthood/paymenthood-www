@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: payfast
+nav_active: integrations
+title: "Payfast Payment Gateway for J2Commerce"
+description: "Accept Payfast payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/payfast.yml and
+sitemap: false     #   _data/combos/j2commerce-payfast.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#e63946;--pp-accent-text:#d2313e;--pp-accent-rgb:230,57,70;--pp-hero-end:#e63946;--pp-blob-rgb:230,57,70}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

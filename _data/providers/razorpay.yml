@@ -1,0 +1,89 @@
+# Single source of truth for /providers/razorpay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/razorpay/index.html.
+
+name: Razorpay
+slug: razorpay
+status: live
+category: regional
+region: India
+logo: /assets/images/home/providers-icon/razor.png
+accent: "#3395ff"
+accent_rgb: "51,149,255"
+accent_text: "#2774c7"   # computed: 4.76 on white, 4.52 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Razorpay is India's leading payment gateway, and its decisive feature is UPI — the real-time
+  account-to-account rail that now carries the majority of Indian digital payments. A checkout
+  in India without UPI is missing the method most customers reach for first.
+
+countries:
+  - India
+
+currencies: [INR, USD, EUR, GBP]
+
+methods:
+  - label: UPI
+    icon: mobile
+    detail: Real-time account-to-account payment, India's dominant method
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express, RuPay and Diners Club
+  - label: Netbanking
+    icon: bank
+    detail: Direct bank payment across Indian banks
+  - label: Wallets
+    icon: wallet
+    detail: Indian digital wallet balances
+  - label: EMI
+    icon: bnpl
+    detail: Card and cardless instalment options
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://razorpay.com/
+  docs: https://razorpay.com/docs/api/
+  pricing: https://razorpay.com/pricing/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Key ID and key secret, held server-side in PaymentHood
+  webhook: HMAC SHA256 signature on the X-Razorpay-Signature header, verified before an order is released
+  verification: Server-side payment status re-check against the Razorpay API before fulfilment
+
+faqs:
+  - q: Do I have to support UPI?
+    a: >-
+      If you sell to Indian consumers, effectively yes. UPI carries the majority of India's
+      digital payment volume and costs less to accept than cards. A card-only Indian checkout
+      loses a large share of orders. - q: Can I accept international payments? a: >- Yes —
+      Razorpay supports a wide range of currencies for international cards, with settlement to
+      your Indian bank account in INR. International acceptance usually needs separate approval,
+      so confirm it before launch. - q: Do I need an Indian entity? a: >- Generally yes. Razorpay
+      onboards Indian-registered businesses. If you are selling into India without one, a
+      merchant-of-record provider is usually the more practical route. - q: Does PaymentHood
+      charge extra on top of Razorpay? a: >- No. Razorpay bills you directly for its own fees, and
+      PaymentHood takes no percentage and no per-transaction cut at any volume. See <a
+      href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://razorpay.com/docs/payments/international-payments/
+    - https://razorpay.com/international-payment-gateway-india/

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: virtuemart
+provider: seerbit
+nav_active: integrations
+title: "SeerBit Payment Gateway for VirtueMart"
+description: "Accept SeerBit payments on VirtueMart with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/seerbit.yml and
+sitemap: false     #   _data/combos/virtuemart-seerbit.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00629b;--pp-accent-text:#00629b;--pp-accent-rgb:0,98,155;--pp-hero-end:#00629b;--pp-blob-rgb:0,98,155}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

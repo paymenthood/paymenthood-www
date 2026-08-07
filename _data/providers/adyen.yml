@@ -1,0 +1,98 @@
+# Single source of truth for /providers/adyen/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/adyen/index.html.
+
+name: Adyen
+slug: adyen
+status: live
+category: global
+region: Europe / Global
+logo: /assets/images/home/providers-icon/adyen.png
+accent: "#0abf53"
+accent_rgb: "10,191,83"
+accent_text: "#008433"   # computed: 4.83 on white, 4.58 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Adyen is an enterprise payment platform that combines gateway, risk and acquiring in one
+  contract, so a merchant deals with a single counterparty instead of stitching together a
+  gateway and a separate acquirer. It is built for large, multi-market volume and prices
+  accordingly.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Global, with local acquiring across Europe, North America, Asia-Pacific and Latin America.
+  Adyen sets a minimum volume expectation, so it suits established merchants rather than new
+  stores.
+coverage_short: "Global"
+
+currencies: [EUR, GBP, USD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Global and local card schemes with local acquiring in many markets
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay, Google Pay, PayPal and regional wallets
+  - label: Local methods
+    icon: link
+    detail: iDEAL, Bancontact, SOFORT, Klarna and market-specific rails
+  - label: Bank transfers
+    icon: bank
+    detail: SEPA and local bank payment rails
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.adyen.com/
+  docs: https://docs.adyen.com/
+  pricing: https://www.adyen.com/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API key plus merchant account identifier, held server-side in PaymentHood
+  webhook: HMAC-signed notification, validated before an order is released
+  verification: Server-side payment result re-check against the Adyen API before fulfilment
+
+faqs:
+  - q: Is Adyen a good fit for a small store?
+    a: >-
+      Usually not. Adyen prices and onboards for scale, and expects meaningful monthly volume. If
+      you are starting out, a provider with no volume floor is a better first choice — and
+      PaymentHood makes moving to Adyen later a dashboard change rather than a re-integration.
+  - q: What does Adyen's local acquiring actually buy me?
+    a: >-
+      When Adyen acquires locally rather than routing cross-border, the transaction looks domestic
+      to the issuing bank. That typically means a higher authorisation rate and lower scheme fees
+      in that market — the main reason large multi-market merchants choose it.
+  - q: Can I use Adyen for some markets and another provider elsewhere?
+    a: >-
+      Yes. Routing by country or currency is exactly what PaymentHood's orchestration layer is
+      for, and it is configured in the dashboard rather than in your checkout.
+  - q: Does PaymentHood charge extra on top of Adyen?
+    a: >-
+      No. Adyen bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://docs.adyen.com/
+    - https://www.adyen.com/pricing
+    - https://www.chargeflow.io/blog/stripe-vs-adyen

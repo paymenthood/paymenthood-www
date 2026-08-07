@@ -1,0 +1,91 @@
+# Single source of truth for /providers/binance/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/binance/index.html.
+
+name: Binance Pay
+slug: binance
+status: live
+category: crypto
+region: Global
+logo: /assets/images/home/providers-icon/binance.png
+accent: "#f0b90b"
+accent_rgb: "240,185,11"
+accent_text: "#8e6b00"   # computed: 4.94 on white, 4.68 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Binance Pay is a merchant payment service that lets Binance users pay from their exchange
+  balance. Because the transfer happens inside Binance rather than on a public blockchain, it
+  settles instantly and carries no network gas fee — the trade-off being that it only reaches
+  people who already hold a Binance account.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Available worldwide wherever Binance operates, though local regulation restricts or bars it
+  in some jurisdictions. Confirm availability for your own market before relying on it.
+coverage_short: "Global"
+
+currencies: [BTC, ETH, USDT, USDC, BNB]
+
+methods:
+  - label: Binance wallet
+    icon: wallet
+    detail: The buyer pays from their Binance exchange balance
+  - label: QR code
+    icon: qr
+    detail: Scan-to-pay from the Binance app
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://merchant.binance.com/
+  docs: https://developers.binance.com/docs/binance-pay/introduction
+  pricing: https://merchant.binance.com/en/products/payment-apis
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API key and secret with request signing, held server-side in PaymentHood
+  webhook: Signed order notification, verified before an order is released
+  verification: Server-side order status re-check against the Binance Pay API before fulfilment
+
+faqs:
+  - q: Who can actually pay with Binance Pay?
+    a: >-
+      Only people with a Binance account and a funded balance. That is a large audience in some
+      markets and almost nobody in others, so treat it as an additional method for a specific
+      segment rather than a general-purpose one.
+  - q: Why is it cheaper than an on-chain crypto payment?
+    a: >-
+      The transfer moves between Binance accounts rather than across a blockchain, so there is no
+      network fee and no confirmation wait. The cost is that both sides must be on Binance.
+  - q: Am I exposed to crypto price swings?
+    a: >-
+      Only if you choose to be. These gateways quote the invoice in your pricing currency and lock
+      the rate for a short window, then settle to you in either fiat or crypto depending on your
+      setting. Settling in fiat removes the exposure; settling in crypto keeps it. Decide that
+      before you switch it on.
+  - q: Does PaymentHood charge extra on top of Binance Pay?
+    a: >-
+      No. Binance Pay bills you directly for its own fees, and PaymentHood takes no percentage and
+      no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://developers.binance.com/docs/binance-pay/introduction
+    - https://merchant.binance.com/en/products/payment-apis

@@ -1,0 +1,16 @@
+---
+layout: none
+slug: seerbit
+title: "SeerBit Payment Gateway Integration"
+description: "Accept SeerBit payments through one PaymentHood integration — Africa. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/seerbit.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00629b;--pp-accent-text:#00629b;--pp-accent-rgb:0,98,155;--pp-hero-end:#00629b;--pp-blob-rgb:0,98,155}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

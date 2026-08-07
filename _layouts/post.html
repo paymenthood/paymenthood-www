@@ -1,0 +1,87 @@
+---
+layout: none
+---
+{% comment %}
+  Blog post layout. The site has no other Jekyll layouts by design — every page
+  is a standalone file — but posts are the one place where a layout earns its
+  keep, because the wrapper is identical for every article and the body is
+  authored as Markdown.
+
+  Front matter a post must carry: title, description, date. Optional: image,
+  author, tags, last_modified_at.
+
+  header-secondary.html renders `title` as the visible <h1> and `description`
+  as the standfirst, exactly as on every other secondary page — so post bodies
+  start at <h2> and must never contain their own <h1>.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="prose-links">
+  <article class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mb-5 pb-4 border-bottom">
+            <span class="section-eyebrow mb-0">{{ page.author | default: site.author }}</span>
+            <time datetime="{{ page.date | date_to_xmlschema }}" class="small text-muted">
+              {{ page.date | date: "%-d %B %Y" }}
+            </time>
+            {%- if page.last_modified_at and page.last_modified_at != page.date %}
+            <span class="small text-muted">· Updated {{ page.last_modified_at | date: "%-d %B %Y" }}</span>
+            {%- endif %}
+            {%- for tag in page.tags %}
+            <span class="badge badge-tag">{{ tag }}</span>
+            {%- endfor %}
+          </div>
+
+          {{ content }}
+
+          <div class="mt-5 pt-4 border-top">
+            <a href="/blog/" class="link-arrow">All articles</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner text-center">
+        <h2 class="h2 fw-bold mb-3">One integration, every payment provider</h2>
+        <p class="lead mb-4 mw-narrow mx-auto">PaymentHood gives you routing, failover, idempotency and webhook verification across {{ site.provider_count }}+ providers — without rebuilding any of it per provider.</p>
+        <div class="cta-buttons d-flex flex-wrap gap-3 justify-content-center">
+          <a href="{{ site.signup_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill">Create Free Account</a>
+          <a href="/providers.html" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2">Browse providers</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{%- comment %}
+  Article JSON-LD. Hand-written here rather than in an include because this is
+  the only layout that needs it and it is generated once for every post.
+{% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
+  "author": { "@type": "Organization", "name": {{ page.author | default: site.author | jsonify }} },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "logo": { "@type": "ImageObject", "url": "{{ site.logo | absolute_url }}" }
+  }
+}
+</script>
+
+{% include footer.html %}

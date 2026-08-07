@@ -1,0 +1,95 @@
+# Single source of truth for /providers/fincra/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/fincra/index.html.
+
+name: Fincra
+slug: fincra
+status: live
+category: regional
+region: Africa / Europe
+logo: /assets/images/home/providers-icon/Fincra-light.png
+accent: "#2b4eff"
+accent_rgb: "43,78,255"
+accent_text: "#2b4eff"   # computed: 5.77 on white, 5.48 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Fincra is a cross-border payments provider connecting African markets with the UK, EU and
+  US. It issues virtual named accounts in GBP, EUR and NGN, so an African business can be paid
+  as though it held a local account in its customer's country — which is the hard part of
+  cross-border collection.
+
+countries:
+  - Nigeria
+  - Ghana
+  - Kenya
+  - Uganda
+  - South Africa
+  - Zambia
+  - United Kingdom
+  - United States
+
+currencies: [NGN, GHS, KES, UGX, ZAR, ZMW, GBP, EUR, USD]
+
+methods:
+  - label: Virtual accounts
+    icon: bank
+    detail: Named accounts in GBP, EUR and NGN for local collection
+  - label: Bank transfer
+    icon: bank
+    detail: Local bank rails in each supported market
+  - label: Cards
+    icon: card
+    detail: Card collection where enabled
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://fincra.com/
+  docs: https://docs.fincra.com/
+  pricing: https://fincra.com/payment-apis/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API key and business identifier, held server-side in PaymentHood
+  webhook: Signed collection webhook, validated before an order is released
+  verification: Server-side transaction status re-check against the Fincra API before fulfilment
+
+faqs:
+  - q: What problem do virtual named accounts solve?
+    a: >-
+      Your UK or EU customer pays a local account in their own country and currency — no
+      international wire, no correspondent fees, no three-day wait — while you collect in an
+      African market. That is the whole point of the product.
+  - q: Which currencies can I collect in?
+    a: >-
+      NGN, GHS, KES, UGX, ZAR and ZMW across Africa, plus GBP, EUR and USD. Virtual named accounts
+      are specifically available in GBP, EUR and NGN.
+  - q: Is Fincra a checkout gateway or a treasury tool?
+    a: >-
+      Mostly the latter. It is strongest at cross-border collection and payouts. For everyday
+      domestic checkout you will usually still want a local gateway alongside it.
+  - q: Does PaymentHood charge extra on top of Fincra?
+    a: >-
+      No. Fincra bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://docs.fincra.com/v3.0/docs/supported-currencies-1
+    - https://fincra.com/payment-apis/

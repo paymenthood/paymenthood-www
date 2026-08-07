@@ -1,0 +1,74 @@
+{%- comment -%}
+  Highlights the .page-nav link for whichever section is currently in view.
+
+  Behaviour ships with the markup so any page that renders a .page-nav gets it,
+  the same pattern faq.html uses. Guarded by a window flag so a page including
+  it twice binds once.
+
+  IntersectionObserver rather than a scroll handler: no layout thrash, and it is
+  supported everywhere the rest of the site's JS already assumes. If the API is
+  missing the nav still works — it is anchor links, the highlight is the only
+  thing lost.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (window.phPageNavBound) return;
+    window.phPageNavBound = true;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var nav = document.querySelector('.page-nav');
+      if (!nav) return;
+
+      // The site header switches to position: fixed on scroll, so this nav has
+      // to stick below it. _provider.scss ships static fallbacks; measuring the
+      // real header keeps them correct if its padding or logo size ever change.
+      var header = document.querySelector('.header-main');
+      if (header) {
+        var syncHeaderHeight = function () {
+          var h = Math.round(header.getBoundingClientRect().height);
+          if (h > 0) document.documentElement.style.setProperty('--ph-header-h', h + 'px');
+        };
+        syncHeaderHeight();
+        window.addEventListener('resize', syncHeaderHeight);
+      }
+
+      if (!('IntersectionObserver' in window)) return;
+
+      var links = {};
+      nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        if (id) links[id] = a;
+      });
+
+      var targets = Object.keys(links)
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+      if (!targets.length) return;
+
+      var visible = new Set();
+
+      function paint() {
+        // The topmost section still on screen wins, so scrolling past a short
+        // section does not leave two links lit or none.
+        var best = null, bestTop = Infinity;
+        visible.forEach(function (el) {
+          var top = el.getBoundingClientRect().top;
+          if (top < bestTop) { bestTop = top; best = el; }
+        });
+        Object.keys(links).forEach(function (id) {
+          links[id].classList.toggle('active', !!best && best.id === id);
+        });
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        });
+        paint();
+      }, { rootMargin: '-72px 0px -55% 0px', threshold: 0 });
+
+      targets.forEach(function (el) { observer.observe(el); });
+    });
+  })();
+</script>

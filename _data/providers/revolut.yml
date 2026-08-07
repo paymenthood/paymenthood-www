@@ -1,0 +1,91 @@
+# Single source of truth for /providers/revolut/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/revolut/index.html.
+
+name: Revolut
+slug: revolut
+status: live
+category: regional
+region: UK / Europe
+logo: /assets/images/home/providers-icon/revolut.png
+accent: "#0666eb"
+accent_rgb: "6,102,235"
+accent_text: "#0666eb"   # computed: 5.11 on white, 4.85 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Revolut Business offers merchant acquiring alongside its business banking, so payments land
+  in a multi-currency account you already hold rather than settling to an external bank days
+  later. For merchants already banking with Revolut, that shortened settlement path is the
+  main draw.
+
+countries:
+  - United Kingdom
+  - European Economic Area
+  - United States
+  - Australia
+  - Singapore
+
+currencies: [GBP, EUR, USD, CAD, CHF, JPY, AUD, PLN, SEK, DKK, NOK, NZD, HKD, ZAR]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa and Mastercard, online and in person
+  - label: Revolut Pay
+    icon: wallet
+    detail: One-tap payment for Revolut account holders
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay and Google Pay
+  - label: Payment links
+    icon: link
+    detail: Shareable links and invoices, in a wider currency set than card acceptance
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.revolut.com/business/
+  docs: https://developer.revolut.com/docs/merchant/merchant-api
+  pricing: https://www.revolut.com/business/business-account-plans/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant API secret key, held server-side in PaymentHood
+  webhook: Signed order webhook, validated before an order is released
+  verification: Server-side order status re-check against the Revolut Merchant API before fulfilment
+
+faqs:
+  - q: How many currencies can I accept?
+    a: >-
+      A Revolut merchant account accepts card payments in a defined set including GBP, EUR, USD,
+      CAD, CHF, JPY, AUD and ZAR. Payment links and invoices reach a wider set. The two limits
+      differ, so check Revolut's current list for the one that applies to your flow. - q: What is
+      the real advantage over a standalone gateway? a: >- Settlement lands in the Revolut business
+      account you already operate, in the currency you accepted, without an external payout leg.
+      If you do not bank with Revolut, that advantage largely disappears. - q: Is it suitable
+      outside Europe? a: >- Coverage is strongest in the UK and EEA. Availability elsewhere is
+      narrower, so confirm your own market with Revolut before planning around it. - q: Does
+      PaymentHood charge extra on top of Revolut? a: >- No. Revolut bills you directly for its own
+      fees, and PaymentHood takes no percentage and no per-transaction cut at any volume. See <a
+      href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://www.revolut.com/business/payment-gateway/international-payment-gateway/
+    - https://help.revolut.com/en-EE/business/help/merchant-accounts/payments/in-which-currencies-can-i-accept-payments

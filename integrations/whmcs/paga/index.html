@@ -1,0 +1,18 @@
+---
+layout: none
+platform: whmcs
+provider: paga
+nav_active: integrations
+title: "Paga Payment Gateway for WHMCS"
+description: "Accept Paga payments on WHMCS with the free PaymentHood module. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/paga.yml and
+sitemap: false     #   _data/combos/whmcs-paga.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#b35900;--pp-accent-text:#b35900;--pp-accent-rgb:179,89,0;--pp-hero-end:#b35900;--pp-blob-rgb:179,89,0}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

@@ -1,0 +1,101 @@
+# Single source of truth for /providers/dpo/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+
+name: DPO Pay
+slug: dpo
+status: live
+category: regional
+region: Pan-Africa
+logo: /assets/images/home/providers-icon/dpo-light.png
+accent: "#0b7285"
+accent_rgb: "11,114,133"
+accent_text: "#0b7285"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  DPO Pay is a pan-African payment gateway operating in more than 20 African countries. It accepts
+  card and mobile money payments in a wide range of local currencies, which makes it the practical
+  option for merchants selling across several African markets from one storefront rather than
+  standing up a separate gateway per country.
+
+countries:
+  - Kenya
+  - Tanzania
+  - Uganda
+  - Rwanda
+  - Ethiopia
+  - Zambia
+  - Malawi
+  - Zimbabwe
+  - Botswana
+  - Namibia
+  - Mozambique
+  - Mauritius
+  - South Africa
+  - Nigeria
+  - Ghana
+  - Côte d'Ivoire
+
+currencies: [KES, TZS, UGX, RWF, ZMW, BWP, ETB, ZAR, NGN, USD, EUR, GBP]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa and Mastercard credit and debit cards
+  - label: Mobile money
+    icon: mobile
+    detail: The regional wallets in each market DPO covers
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://dpogroup.com/
+  docs: https://docs.dpopay.com/dpo-pay-by-network/docs/overview
+  pricing: https://dpogroup.com/online-payments/
+
+integration:
+  auth: Company token and service credentials, held server-side in PaymentHood
+  webhook: Callback validated and reconciled against the transaction record before the order is released
+  verification: Server-side transaction verification against DPO before fulfilment
+
+faqs:
+  - q: How many African countries does DPO Pay cover?
+    a: >-
+      More than 20, spanning East, West, Southern and North Africa — including Kenya, Tanzania,
+      Uganda, Rwanda, Ethiopia, Zambia, Malawi, Zimbabwe, Botswana, Namibia, Mozambique, Mauritius,
+      South Africa, Nigeria, Ghana and Côte d'Ivoire. Confirm your specific market with DPO before
+      launch, as coverage changes.
+  - q: When should I choose DPO over a country-specific provider?
+    a: >-
+      DPO is the pragmatic choice when you sell into several African markets and want one contract
+      instead of five. A single-country provider such as Paystack in Nigeria or Payfast in South
+      Africa will usually offer deeper local payment-method coverage in its home market. Running
+      both behind PaymentHood lets you use DPO for reach and a local provider where it wins — the
+      routing decision is made in the dashboard, not in your code.
+  - q: Which currencies can DPO settle in?
+    a: >-
+      DPO supports a broad set of African and major international currencies, including KES, TZS,
+      UGX, RWF, ZMW, BWP, ETB, ZAR, NGN, USD, EUR and GBP. Your available set depends on your
+      account and market.
+  - q: Does DPO support mobile money?
+    a: >-
+      Yes. Mobile money is offered alongside cards in the markets where DPO operates, which matters
+      in East Africa where wallet penetration is far higher than card penetration.
+  - q: Does PaymentHood add a fee on top of DPO?
+    a: >-
+      No. DPO bills you directly for its own fees. PaymentHood takes no percentage and no
+      per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://docs.dpopay.com/dpo-pay-by-network/docs/overview
+    - https://dpogroup.com/online-payments/
+    - https://www.odoo.com/documentation/19.0/applications/finance/payment_providers/dpo.html

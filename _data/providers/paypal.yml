@@ -1,0 +1,95 @@
+# Single source of truth for /providers/paypal/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/paypal/index.html.
+
+name: PayPal
+slug: paypal
+status: live
+category: global
+region: Global
+logo: /assets/images/home/providers-icon/paypal.png
+accent: "#003087"
+accent_rgb: "0,48,135"
+accent_text: "#003087"   # computed: 11.85 on white, 11.24 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  PayPal is a global payment provider that lets shoppers pay from a PayPal balance, a linked
+  bank account or a card without entering card details on the merchant's site. Its reach is
+  the widest of any provider here, which makes it the default way to accept a payment from a
+  market you have no local acquiring in.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Available in most countries and regions. Which features and payout options you get depends on the
+  country your PayPal business account is registered in.
+coverage_short: "Worldwide"
+
+currencies: [USD, EUR, GBP, CAD, AUD, JPY]
+
+methods:
+  - label: PayPal wallet
+    icon: wallet
+    detail: Pay from a PayPal balance, linked bank account or stored card
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express and Discover, including guest checkout
+  - label: Pay Later
+    icon: bnpl
+    detail: Instalment options where PayPal offers them in the buyer's market
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.paypal.com/
+  docs: https://developer.paypal.com/api/rest/
+  pricing: https://www.paypal.com/us/webapps/mpp/merchant-fees
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: OAuth client ID and secret, exchanged for a short-lived access token server-side in PaymentHood
+  webhook: Signed webhook event, verified against PayPal's published certificate before an order is released
+  verification: Server-side order capture and status re-check against the PayPal API before fulfilment
+
+faqs:
+  - q: Why offer PayPal when I already accept cards?
+    a: >-
+      Reach and trust. PayPal covers markets where you have no local acquiring, and a meaningful
+      share of shoppers will abandon a checkout that asks for card details but complete the same
+      order through a wallet they already trust. It is an addition to cards, not a replacement for
+      them.
+  - q: Which currencies can I charge in?
+    a: >-
+      PayPal supports the major world currencies including USD, EUR, GBP, CAD, AUD and JPY. Which ones
+      you can hold and withdraw depends on your account's registered country — check PayPal's own
+      list before committing to a currency.
+  - q: Can I run PayPal alongside a local provider?
+    a: >-
+      Yes, and that is usually the right setup. Route local-currency orders to your local provider
+      where the fees and authorisation rates are better, and let PayPal cover everything else. In
+      PaymentHood that routing is a dashboard rule, not a code change.
+  - q: Does PaymentHood charge extra on top of PayPal?
+    a: >-
+      No. PayPal bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://developer.paypal.com/api/rest/
+    - https://www.paypal.com/us/webapps/mpp/merchant-fees

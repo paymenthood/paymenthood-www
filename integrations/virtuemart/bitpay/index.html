@@ -1,0 +1,18 @@
+---
+layout: none
+platform: virtuemart
+provider: bitpay
+nav_active: integrations
+title: "BitPay Payment Gateway for VirtueMart"
+description: "Accept BitPay payments on VirtueMart with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/bitpay.yml and
+sitemap: false     #   _data/combos/virtuemart-bitpay.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#113375;--pp-accent-text:#113375;--pp-accent-rgb:17,51,117;--pp-hero-end:#113375;--pp-blob-rgb:17,51,117}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

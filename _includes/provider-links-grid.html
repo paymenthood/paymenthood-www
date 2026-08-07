@@ -1,0 +1,54 @@
+{%- comment -%}
+  Grid of live providers available on one platform, each linking to its
+  /integrations/<platform>/<provider>/ page.
+    {% include provider-links-grid.html platform="woocommerce" %}
+
+  Two jobs. For readers it answers the question the product page raises and does
+  not answer — "yes, but does it do MY provider?". For crawlers it is the only
+  internal path to the provider × platform pages; without it they are orphans
+  and will not rank no matter how good they are.
+
+  Sourced from _data/providers/*.yml: an entry appears only when its `status` is
+  `live` AND its `platforms` list contains this platform. Providers still in
+  development therefore never render, which is what keeps the page honest as
+  new data files land.
+
+  Params:
+    platform   - (required) platform slug, must match a _data/integrations/ key
+    heading    - section heading (default derived from the platform name)
+{%- endcomment -%}
+{%- assign plat = include.platform -%}
+{%- assign plat_name = site.data.breadcrumb_labels[plat] | default: plat -%}
+{%- assign shown = '' | split: '' -%}
+{%- for entry in site.data.providers -%}
+  {%- assign prov = entry[1] -%}
+  {%- if prov.status == 'live' and prov.platforms contains plat -%}
+    {%- assign shown = shown | push: prov -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if shown.size > 0 %}
+<section class="section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Providers</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ include.heading | default: 'Set up a provider on ' | append: plat_name }}</h2>
+                <p class="lead mw-narrow">Each guide covers the payment methods, currencies and setup steps for that provider on {{ plat_name }}.</p>
+            </div>
+        </div>
+        <div class="row gy-4">
+            {%- for prov in shown %}
+            <div class="col-lg-3 col-md-6">
+                <a href="/integrations/{{ plat }}/{{ prov.slug }}/" class="how-step">
+                    <h3 class="h5">{{ prov.name }}</h3>
+                    <p>{{ prov.region }} · {{ prov.methods | size }} payment methods</p>
+                    <span class="link-arrow">Setup guide
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                </a>
+            </div>
+            {%- endfor %}
+        </div>
+    </div>
+</section>
+{%- endif -%}

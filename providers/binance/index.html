@@ -1,0 +1,16 @@
+---
+layout: none
+slug: binance
+title: "Binance Pay Payment Gateway Integration"
+description: "Accept Binance Pay payments through one PaymentHood integration — Global. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/binance.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#f0b90b;--pp-accent-text:#8e6b00;--pp-accent-rgb:240,185,11;--pp-hero-end:#f0b90b;--pp-blob-rgb:240,185,11}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

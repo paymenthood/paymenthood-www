@@ -1,0 +1,90 @@
+# Single source of truth for /providers/amazon-pay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/amazon-pay/index.html.
+
+name: Amazon Pay
+slug: amazon-pay
+status: live
+category: global
+region: US / Europe
+logo: /assets/images/home/providers-icon/amazon.png
+accent: "#ff9900"
+accent_rgb: "255,153,0"
+accent_text: "#a76000"   # computed: 4.87 on white, 4.62 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Amazon Pay lets shoppers check out using the address and payment details already stored in
+  their Amazon account, so they never type card or shipping information into the merchant's
+  form. Its value is conversion on familiar credentials rather than breadth of payment
+  methods.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Merchant accounts are available in the United States, Japan and sixteen European countries
+  including the United Kingdom, Germany, France, Italy, Spain, Austria, Belgium, Denmark,
+  Ireland, Luxembourg, the Netherlands, Portugal, Sweden, Switzerland, Cyprus and Hungary.
+coverage_short: "US, JP & EU"
+
+currencies: [USD, EUR, GBP, JPY]
+
+methods:
+  - label: Amazon account
+    icon: wallet
+    detail: Checkout with the card and address already stored on the buyer's Amazon account
+  - label: Cards
+    icon: card
+    detail: The cards the buyer has on file with Amazon
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://pay.amazon.com/
+  docs: https://developer.amazon.com/docs/amazon-pay/intro.html
+  pricing: https://pay.amazon.com/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Public key ID with a private key signing each request, held server-side in PaymentHood
+  webhook: Signed Instant Payment Notification, validated before an order is released
+  verification: Server-side charge status re-check against the Amazon Pay API before fulfilment
+
+faqs:
+  - q: Where can I register as an Amazon Pay merchant?
+    a: >-
+      In the United States, Japan and sixteen European countries. Note this is about where your
+      business is established, not where your customers are — merchants outside those markets
+      cannot onboard.
+  - q: What does Amazon Pay actually improve?
+    a: >-
+      Checkout completion. The buyer reuses the address and card already on their Amazon account,
+      which removes the form-filling step where mobile checkouts most often get abandoned.
+  - q: Is multi-currency supported?
+    a: >-
+      Only for accounts with a EUR or GBP ledger currency. If your ledger is another currency you
+      are effectively single-currency, which is worth confirming before you build around it.
+  - q: Does PaymentHood charge extra on top of Amazon Pay?
+    a: >-
+      No. Amazon Pay bills you directly for its own fees, and PaymentHood takes no percentage and
+      no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://pay.amazon.eu/help/201810860
+    - https://developer.amazon.com/docs/amazon-pay-checkout/multi-currency-integration.html

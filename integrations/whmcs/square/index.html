@@ -1,0 +1,18 @@
+---
+layout: none
+platform: whmcs
+provider: square
+nav_active: integrations
+title: "Square Payment Gateway for WHMCS"
+description: "Accept Square payments on WHMCS with the free PaymentHood module. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/square.yml and
+sitemap: false     #   _data/combos/whmcs-square.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#3e4348;--pp-accent-text:#3e4348;--pp-accent-rgb:62,67,72;--pp-hero-end:#3e4348;--pp-blob-rgb:62,67,72}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

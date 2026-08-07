@@ -9,3 +9,22 @@
 
 # Editor workspace config — machine-specific (absolute paths, personal settings).
 /.vscode/
+
+# ── Documents ────────────────────────────────────────────────────────────────
+# This is a public repository. Internal working documents committed here are
+# world-readable, so no .md is tracked by default — the strategy plan that used
+# to live in .docs/ now sits outside the repo entirely.
+#
+# The four exceptions below are NOT documentation; they are part of the build
+# and removing them breaks the site:
+#   legals/*.md  -> rendered into /privacy.html and /terms.html via include_relative
+#   _posts/*.md  -> the blog itself
+#   CLAUDE.md    -> the conventions Claude Code reads before touching this repo
+*.md
+!legals/*.md
+!_posts/*.md
+!CLAUDE.md
+
+# Local tooling: useful on a developer's machine, no reason to publish.
+.claude/
+.docs/

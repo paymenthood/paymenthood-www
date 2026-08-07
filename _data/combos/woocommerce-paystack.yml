@@ -1,0 +1,71 @@
+# Combo file for /integrations/woocommerce/paystack/ — the reference standard.
+#
+# This is the file that makes a combo page worth publishing. The template can
+# already compose the platform and provider data files on its own; what it
+# CANNOT do is know anything true of this pairing and no other. That is what
+# `intro` and `notes` are for.
+#
+# The test for a good `notes` entry: could you copy it onto another combo page
+# by swapping two nouns? If yes, it is filler — delete it. A real entry names a
+# specific setting, a specific limitation, or a specific failure mode.
+#
+# Leave `verified_by` empty until a human has actually run this combination end
+# to end. The page stays out of the index until then.
+
+intro: >-
+  The PaymentHood plugin registers Paystack as a standard WooCommerce payment gateway, so it appears
+  in the normal checkout alongside your other methods and works with both the classic and block-based
+  checkout. Paystack's card, bank transfer, USSD and mobile money channels all arrive through that one
+  gateway entry — you do not install a plugin per payment method.
+
+notes:
+  - title: Your store currency has to be one Paystack accepts
+    body: >-
+      WooCommerce charges in a single store currency, set under WooCommerce → Settings → General.
+      Paystack settles in NGN, GHS, ZAR, KES and USD, and which of those your account can actually
+      charge in depends on the country you registered it in. If your store currency is outside that
+      set, the gateway will not appear at checkout — that is the first thing to check when Paystack
+      is configured but not showing.
+
+  - title: Block checkout and classic checkout both work
+    body: >-
+      The plugin registers through the standard WooCommerce gateway API, so it renders in the older
+      shortcode checkout and in the newer Cart/Checkout blocks without a separate setting. If you
+      have migrated to blocks and the method is missing, the cause is almost always the currency
+      mismatch above rather than block incompatibility.
+
+  - title: Webhooks need a publicly reachable store
+    body: >-
+      Paystack confirms payment by calling back to your server, and PaymentHood verifies that
+      callback's HMAC SHA512 signature before it marks an order paid. A local or firewalled staging
+      site never receives the callback, so orders sit in pending even though the payment succeeded.
+      Use sandbox mode on a publicly reachable URL when testing, not localhost.
+
+  - title: One-time orders only, for now
+    body: >-
+      The WooCommerce plugin covers standard one-off checkout. It does not yet drive WooCommerce
+      Subscriptions renewals, so a subscription product will take its first payment but not rebill.
+      If you need recurring billing today, WHMCS is the PaymentHood integration that supports it.
+
+faqs:
+  - q: Why is Paystack not appearing at my WooCommerce checkout?
+    a: >-
+      In order of likelihood: your WooCommerce store currency is not one your Paystack account can
+      charge in; the PaymentHood API key is missing or belongs to a different environment than the
+      one you enabled (sandbox key on a live store, or the reverse); or Paystack is added in the
+      PaymentHood dashboard but not enabled. Check the currency first — it is the most common cause.
+  - q: Does the plugin work with WooCommerce Subscriptions?
+    a: >-
+      Not yet. The WooCommerce plugin handles one-time checkout payments. Subscription renewals are
+      on the roadmap. WHMCS is currently the PaymentHood integration with recurring billing support.
+  - q: Can I offer Paystack and another provider in the same WooCommerce checkout?
+    a: >-
+      Yes, and it needs no plugin change. Enable both in your PaymentHood dashboard and they appear
+      as options at checkout. You can also route by currency or fail over automatically when one
+      provider is unreachable.
+
+verified_by:          # ← the name of whoever ran this combination end to end
+verified_on:
+sources:
+  - https://paystack.com/docs/payments/payment-channels/
+  - https://woocommerce.com/document/managing-orders/

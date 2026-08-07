@@ -1,0 +1,16 @@
+---
+layout: none
+slug: paypal
+title: "PayPal Payment Gateway Integration"
+description: "Accept PayPal payments through one PaymentHood integration — Global. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/paypal.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#003087;--pp-accent-text:#003087;--pp-accent-rgb:0,48,135;--pp-hero-end:#003087;--pp-blob-rgb:0,48,135}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

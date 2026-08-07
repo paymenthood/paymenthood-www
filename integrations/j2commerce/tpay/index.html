@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: tpay
+nav_active: integrations
+title: "Tpay Payment Gateway for J2Commerce"
+description: "Accept Tpay payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/tpay.yml and
+sitemap: false     #   _data/combos/j2commerce-tpay.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#5b2d90;--pp-accent-text:#5b2d90;--pp-accent-rgb:91,45,144;--pp-hero-end:#5b2d90;--pp-blob-rgb:91,45,144}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

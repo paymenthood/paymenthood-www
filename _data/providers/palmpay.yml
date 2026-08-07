@@ -1,0 +1,95 @@
+# Single source of truth for /providers/palmpay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/palmpay/index.html.
+
+name: PalmPay
+slug: palmpay
+status: live
+category: regional
+region: Nigeria
+logo: /assets/images/home/providers-icon/palmpay-light.png
+accent: "#6c2bd9"
+accent_rgb: "108,43,217"
+accent_text: "#6c2bd9"   # computed: 7.03 on white, 6.67 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  PalmPay is a Nigerian mobile money and wallet provider with a large consumer base built on
+  free transfers and agent distribution. For merchants it is a wallet acceptance channel:
+  customers pay from a PalmPay balance they already hold rather than reaching for a card.
+
+countries:
+  - Nigeria
+
+currencies: [NGN]
+
+methods:
+  - label: PalmPay wallet
+    icon: wallet
+    detail: Payment from the customer's PalmPay balance
+  - label: Bank transfer
+    icon: bank
+    detail: Transfer confirmed against the order
+  - label: Cards
+    icon: card
+    detail: Card payment where enabled on the account
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.palmpay.com/
+  docs: https://www.palmpay.com/
+  pricing: https://www.palmpay.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant credentials with request signing, held server-side in PaymentHood
+  webhook: Signed payment notification, validated before an order is released
+  verification: Server-side transaction status re-check before fulfilment
+
+faqs:
+  - q: PalmPay or OPay?
+    a: >-
+      They are direct competitors with overlapping but not identical user bases, and neither
+      reaches everyone. Merchants selling to Nigerian consumers at scale typically offer both,
+      which behind PaymentHood costs nothing extra — it is a dashboard toggle against the same
+      integration.
+  - q: Is PalmPay useful for B2B?
+    a: >-
+      Less so. Its strength is consumer wallets and agent distribution. For business customers,
+      bank transfer and card remain the expected methods.
+  - q: Why does bank transfer matter so much in Nigeria?
+    a: >-
+      Card penetration is lower than transfer usage, and card declines are common. A checkout
+      offering a one-time virtual account number — the customer transfers from any bank app and
+      the payment confirms in seconds — will convert materially better than one offering cards
+      alone. It is the single most important local method to enable.
+  - q: Does PaymentHood charge extra on top of PalmPay?
+    a: >-
+      No. PalmPay bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://en.wikipedia.org/wiki/PalmPay
+    - https://www.korahq.com/blog/how-to-accept-opay-palmpay-payments-kora-api
+  # NOTE: This one still needs a human, and volatility is not the reason. No public PalmPay
+  # merchant API documentation was found, so `links.docs` falls back to the website — the
+  # template detects that and hides the "Developer docs" link rather than mislabelling it.
+  # A wrong URL is wrong permanently, unlike an incomplete list. Get the real docs URL and
+  # confirm the method list from PalmPay directly before this page is published.

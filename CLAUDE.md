@@ -4,7 +4,8 @@ Marketing site for PaymentHood (payment orchestration platform). Static Jekyll s
 
 ## Build & Deploy
 - Jekyll 4.x pinned via `Gemfile`. Local build: `bundle exec jekyll build` (output `_site/`, gitignored).
-- **Pushing `main` deploys production.** `.github/workflows/jekyll.yml` builds and publishes to GitHub Pages (`build_type=workflow`); served at https://www.paymenthood.com behind Cloudflare (Cloudflare handles the http→https redirect). Never switch Pages back to the legacy branch builder — it runs Jekyll 3.9, not our pinned version.
+- **Pushing `main` deploys production.** `.github/workflows/jekyll.yml` builds and publishes to GitHub Pages (`build_type=workflow`); served at https://www.paymenthood.com. Never switch Pages back to the legacy branch builder — it runs Jekyll 3.9, not our pinned version.
+- **HTTPS is enforced by GitHub Pages, not Cloudflare.** This file previously said Cloudflare handled the http→https redirect; it does not. DNS for `www` and `docs` resolves straight to the GitHub Pages IPs (185.199.108-111.153), so Cloudflare is not proxying and nothing was redirecting — `http://` served 200 on both. The fix is the **Enforce HTTPS** checkbox in Settings → Pages, per repository. Verify with `curl -sIL http://www.paymenthood.com/` rather than assuming.
 - Plugins (wired in `_config.yml`):
   - `jekyll-seo-tag` — `{% seo %}` in the headers emits title/canonical/OG/Twitter tags. Page `title:` must **not** end in “| PaymentHood” (the tag appends the site name itself).
   - `jekyll-sitemap` — auto-generates `/sitemap.xml`; never hand-write one (a manual file silently disables the plugin).

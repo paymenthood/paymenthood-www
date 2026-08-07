@@ -1,0 +1,87 @@
+# Single source of truth for /providers/snapscan/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+
+name: SnapScan
+slug: snapscan
+status: live
+category: regional
+region: South Africa
+logo: /assets/images/home/providers-icon/SnapScan-light.png
+accent: "#00b4a0"
+accent_rgb: "0,180,160"
+accent_text: "#007f70"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  SnapScan is a South African QR-code payment app. At checkout the customer scans a QR code with
+  the SnapScan app and approves the payment with a PIN or biometric — no card details are entered
+  on the merchant's site. Launched in 2013, it was one of the first mobile payment apps in South
+  Africa and is accepted by tens of thousands of merchants.
+
+countries:
+  - South Africa
+
+currencies: [ZAR]
+
+methods:
+  - label: QR code
+    icon: qr
+    detail: Customer scans at checkout and approves in the SnapScan app
+  - label: Payment links
+    icon: link
+    detail: A shareable link for invoices, email and social selling
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.snapscan.co.za/
+  docs: https://developer.snapscan.co.za/
+  pricing: https://www.snapscan.co.za/
+
+integration:
+  auth: Merchant API key, held server-side in PaymentHood
+  webhook: Signed payment notification, validated before the order is released
+  verification: Server-side payment status re-check against the SnapScan merchant API before fulfilment
+
+faqs:
+  - q: How does a SnapScan payment work at online checkout?
+    a: >-
+      The customer selects SnapScan, a QR code containing your merchant SnapCode plus the order
+      amount and reference is displayed, and they scan it with the SnapScan app. They approve with
+      a PIN or biometric, and the merchant is notified in real time. Because the amount and order
+      reference are embedded in the code, the customer does not retype anything.
+  - q: Does the customer need the SnapScan app?
+    a: >-
+      Yes — SnapScan is an app-based wallet, so it only reaches customers who have installed it.
+      That is exactly why it belongs alongside cards and pay-by-bank rather than replacing them.
+      PaymentHood lets you offer all three from one integration.
+  - q: Is SnapScan suitable for a desktop checkout?
+    a: >-
+      It works, since the customer scans the on-screen code with their phone. It is strongest on
+      mobile-heavy traffic and for invoice or link-based selling, where the payment link can be sent
+      directly to the customer.
+  - q: Can I use SnapScan and Zapper together?
+    a: >-
+      Yes. They are competing QR wallets with different user bases, and offering both costs you
+      nothing extra behind PaymentHood — both are configured in the dashboard against the same
+      checkout integration.
+  - q: Does PaymentHood charge on top of SnapScan's fees?
+    a: >-
+      No. SnapScan bills you directly. PaymentHood takes no percentage and no per-transaction cut —
+      see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://developer.snapscan.co.za/
+    - https://www.snapscan.co.za/
+    - https://smesouthafrica.co.za/snapscan-vs-zapper-online-payments-made-easier/
+  # NOTE: pricing URL points at the marketing site — a public merchant pricing
+  # page was not confirmed. Replace before publishing.

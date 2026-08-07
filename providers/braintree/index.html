@@ -1,0 +1,16 @@
+---
+layout: none
+slug: braintree
+title: "Braintree Payment Gateway Integration"
+description: "Accept Braintree payments through one PaymentHood integration — US / Global. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/braintree.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#009cde;--pp-accent-text:#0079ad;--pp-accent-rgb:0,156,222;--pp-hero-end:#009cde;--pp-blob-rgb:0,156,222}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

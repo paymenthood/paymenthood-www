@@ -1,0 +1,92 @@
+# Single source of truth for /providers/paga/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/paga/index.html.
+
+name: Paga
+slug: paga
+status: live
+category: regional
+region: Nigeria
+logo: /assets/images/home/providers-icon/Paga-light.png
+accent: "#b35900"
+accent_rgb: "179,89,0"
+accent_text: "#b35900"   # computed: 4.83 on white, 4.58 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Paga is one of Nigeria's longest-running mobile money operators, with a wallet and a
+  nationwide agent network. Its merchant collection tools cover wallet payments, bank USSD and
+  payment links, which reach customers who have neither a card nor a smartphone banking app.
+
+countries:
+  - Nigeria
+
+currencies: [NGN]
+
+methods:
+  - label: Paga wallet
+    icon: wallet
+    detail: The customer authorises payment from their Paga wallet
+  - label: Bank USSD
+    icon: ussd
+    detail: One-time-use bank shortcode collection
+  - label: Payment links
+    icon: link
+    detail: A shareable link created through the payment request API
+  - label: Cards
+    icon: card
+    detail: Card payment through Paga Checkout
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.mypaga.com/
+  docs: https://developer-docs.paga.com/docs/overview-1
+  pricing: https://www.mypaga.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Principal, credential and API key with request hashing, held server-side in PaymentHood
+  webhook: Signed payment notification, validated before an order is released
+  verification: Server-side transaction status query against the Paga API before fulfilment
+
+faqs:
+  - q: Who does Paga reach that a card gateway does not?
+    a: >-
+      Customers with no card and often no smartphone. Between the wallet, bank USSD and the agent
+      network, Paga can collect from people a card-only checkout simply cannot serve.
+  - q: Are payment links useful for an online store?
+    a: >-
+      More than you would expect in Nigeria, where a lot of selling happens over WhatsApp and
+      Instagram rather than on a storefront. A link converts a chat into a paid order without a
+      checkout page.
+  - q: Why does bank transfer matter so much in Nigeria?
+    a: >-
+      Card penetration is lower than transfer usage, and card declines are common. A checkout
+      offering a one-time virtual account number — the customer transfers from any bank app and
+      the payment confirms in seconds — will convert materially better than one offering cards
+      alone. It is the single most important local method to enable.
+  - q: Does PaymentHood charge extra on top of Paga?
+    a: >-
+      No. Paga bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://developer-docs.paga.com/docs/overview-1
+    - https://developer-docs.paga.com/docs/business-rest-api-operations

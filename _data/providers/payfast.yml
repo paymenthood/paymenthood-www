@@ -1,0 +1,97 @@
+# Single source of truth for /providers/payfast/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+
+name: Payfast
+slug: payfast
+status: live
+category: regional
+region: South Africa
+logo: /assets/images/home/providers-icon/PayFast-light.png
+accent: "#e63946"
+accent_rgb: "230,57,70"
+accent_text: "#d2313e"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Payfast is a South African payment gateway that lets local businesses accept card payments,
+  Instant EFT, QR-code wallets and buy-now-pay-later through a single hosted checkout. It settles
+  in South African Rand and is one of the most widely supported gateways across South African
+  e-commerce platforms.
+
+countries:
+  - South Africa
+
+currencies: [ZAR]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa and Mastercard credit and debit cards
+  - label: Instant EFT
+    icon: bank
+    detail: Direct bank payment, confirmed in real time
+  - label: QR wallets
+    icon: qr
+    detail: Scan-to-pay via mobile wallet apps
+  - label: Mobicred
+    icon: credit
+    detail: Revolving credit facility, checked out like a card
+  - label: Store cards
+    icon: credit
+    detail: Retailer-issued credit accounts
+  - label: MTN MoMo
+    icon: mobile
+    detail: Mobile money wallet
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://payfast.io/
+  docs: https://developers.payfast.co.za/
+  pricing: https://payfast.io/fees/
+
+integration:
+  auth: Merchant ID and merchant key, held server-side in PaymentHood
+  webhook: ITN (Instant Transaction Notification) — signature validated, source IP confirmed against Payfast's published ranges
+  verification: Server-side confirmation before fulfilment; an ITN that fails any single check does not mark the order paid
+
+faqs:
+  - q: What is Payfast ITN and why does it matter?
+    a: >-
+      ITN stands for Instant Transaction Notification — the server-to-server callback Payfast sends
+      when a payment completes. It is the only trustworthy signal that a payment succeeded, because
+      the browser redirect can be tampered with or simply never happen. A correct ITN handler must
+      validate the signature, confirm the request came from a Payfast IP address, and check that the
+      amount paid matches the order. PaymentHood performs all three before releasing an order.
+  - q: Which currencies does Payfast support?
+    a: >-
+      Payfast settles in South African Rand (ZAR). If you need to charge in other currencies,
+      route those transactions to a different provider in your PaymentHood dashboard — the same
+      checkout integration covers both.
+  - q: Do I need a Payfast account of my own?
+    a: >-
+      Yes. You register directly with Payfast and connect your merchant credentials to PaymentHood.
+      Funds settle from Payfast into your own bank account; PaymentHood never holds merchant money.
+  - q: Can I use Payfast and another South African provider at the same time?
+    a: >-
+      Yes — that is the main reason to run Payfast behind PaymentHood. You can keep Payfast for
+      cards while sending Instant EFT to a different provider, or fail over automatically if one
+      provider has an outage, without touching your store's checkout.
+  - q: Does PaymentHood add a fee on top of Payfast?
+    a: >-
+      No. Payfast's fees are billed to you by Payfast. PaymentHood takes no percentage and no
+      per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://developers.payfast.co.za/
+    - https://payfast.io/
+    - https://woocommerce.com/document/payfast-payment-gateway/

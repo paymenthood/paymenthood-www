@@ -1,0 +1,16 @@
+---
+layout: none
+slug: tap
+title: "Tap Payments Payment Gateway Integration"
+description: "Accept Tap Payments payments through one PaymentHood integration — MENA. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/tap.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#1a56db;--pp-accent-text:#1a56db;--pp-accent-rgb:26,86,219;--pp-hero-end:#1a56db;--pp-blob-rgb:26,86,219}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: woocommerce
+provider: amazon-pay
+nav_active: integrations
+title: "Amazon Pay Payment Gateway for WooCommerce"
+description: "Accept Amazon Pay payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/amazon-pay.yml and
+sitemap: false     #   _data/combos/woocommerce-amazon-pay.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#ff9900;--pp-accent-text:#a76000;--pp-accent-rgb:255,153,0;--pp-hero-end:#ff9900;--pp-blob-rgb:255,153,0}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

@@ -1,0 +1,91 @@
+# Single source of truth for /providers/quidax/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/quidax/index.html.
+
+name: Quidax
+slug: quidax
+status: live
+category: crypto
+region: Africa
+logo: /assets/images/home/providers-icon/quidax-light.png
+accent: "#3d5afe"
+accent_rgb: "61,90,254"
+accent_text: "#3d5afe"   # computed: 5.13 on white, 4.87 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Quidax is an African crypto and stablecoin infrastructure provider offering on- and
+  off-ramps between stablecoins and local African currencies. Its practical use is
+  cross-border: settling in USDT or USDC and converting to Naira, Cedi, Rand or Shilling, in
+  markets where conventional cross-border rails are slow or expensive.
+
+countries:
+  - Nigeria
+  - Ghana
+  - South Africa
+  - Kenya
+
+currencies: [NGN, GHS, ZAR, KES, XAF, XOF, USD]
+
+methods:
+  - label: Stablecoins
+    icon: link
+    detail: USDT and USDC, paired against African local currencies
+  - label: Crypto on/off ramp
+    icon: link
+    detail: Conversion between crypto and local currency
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.quidax.io/
+  docs: https://www.quidax.io/c/stablecoin-api/
+  pricing: https://www.quidax.io/c/business/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API key held server-side in PaymentHood
+  webhook: Signed event callback, validated before an order is released
+  verification: Server-side transaction status re-check before fulfilment
+
+faqs:
+  - q: Why would an African business want stablecoin settlement?
+    a: >-
+      Speed and currency access. A cross-border payment that takes days through correspondent
+      banking can settle in minutes in USDT, and businesses in markets with restricted access to
+      hard currency can hold value in a dollar-pegged token. Those are the real drivers, not
+      speculation.
+  - q: Which local currencies does Quidax handle?
+    a: >-
+      Naira, Cedi, Rand, Kenyan Shilling and the CFA francs, alongside USD. Availability depends
+      on your market and account status.
+  - q: Is this a substitute for a normal payment gateway?
+    a: >-
+      No. It is a cross-border and treasury tool. For everyday domestic checkout in Nigeria or
+      South Africa you still want a conventional provider — which is exactly the case for running
+      both behind PaymentHood.
+  - q: Does PaymentHood charge extra on top of Quidax?
+    a: >-
+      No. Quidax bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://www.quidax.io/c/stablecoin-api/
+    - https://www.quidax.io/c/business/
+    - https://blog.quidax.io/best-stablecoin-payment-infrastructure-in-2026/

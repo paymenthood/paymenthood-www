@@ -1,0 +1,18 @@
+---
+layout: none
+platform: woocommerce
+provider: paytabs
+nav_active: integrations
+title: "PayTabs Payment Gateway for WooCommerce"
+description: "Accept PayTabs payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/paytabs.yml and
+sitemap: false     #   _data/combos/woocommerce-paytabs.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#d81e34;--pp-accent-text:#d81e34;--pp-accent-rgb:216,30,52;--pp-hero-end:#d81e34;--pp-blob-rgb:216,30,52}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

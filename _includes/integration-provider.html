@@ -1,0 +1,401 @@
+{% comment %}
+  Shared template for every /integrations/<platform>/<provider>/ page — the
+  provider × platform matrix (Pillar A of .docs/seo-content-plan.md).
+    {% include integration-provider.html platform="woocommerce" provider="paystack" %}
+
+  It composes THREE data sources and writes nothing of its own:
+    _data/integrations/<platform>.yml  → product.* (install path, ecosystem, compat, plugin)
+    _data/providers/<provider>.yml     → methods, countries, currencies, webhook mechanism
+    _data/combos/<platform>-<provider>.yml → the human-written part (optional, see below)
+
+  ─────────────────────────────────────────────────────────────────────────────
+  WHY THE COMBO FILE EXISTS
+
+  Composing two data files yields ~10 varying data points. That is real
+  differentiation but it is NOT a page — 40 pages built only from name
+  substitution is precisely the "scaled content abuse" pattern Google penalises,
+  and .docs/seo-content-plan.md §1 warns against it in this exact wording.
+
+  So the publication gate here is stricter than the provider pages': a combo
+  page needs BOTH a verified provider data file AND a combo file carrying
+  `intro`, at least one `notes` entry, and `verified_by`. Until both hold, the
+  template renders a review banner and the stub stays noindex.
+
+  Fifteen genuinely useful combo pages beat forty templated ones. Build them in
+  the order your Search Console data says people actually search for.
+  ─────────────────────────────────────────────────────────────────────────────
+
+  FAQPage / BreadcrumbList JSON-LD come from the shared faq.html and
+  breadcrumb.html includes — never hand-write either here.
+{% endcomment %}
+{%- assign p = site.data.integrations[include.platform].product -%}
+{%- assign d = site.data.providers[include.provider] -%}
+{%- capture combo_key %}{{ include.platform }}-{{ include.provider }}{% endcapture -%}
+{%- assign combo = site.data.combos[combo_key] -%}
+{%- assign labels = site.data.breadcrumb_labels -%}
+
+{%- comment %} ---- derived tokens, mirroring integration-product.html ---- {% endcomment -%}
+{%- assign noun = p.noun | default: 'plugin' -%}
+{%- assign noun_cap = noun | capitalize -%}
+{%- assign ecosystem = p.ecosystem | default: p.platform -%}
+{%- assign compat_name = p.compat_name | default: p.platform -%}
+{%- assign install_url = '/integrations/' | append: include.platform | append: '/installation/' -%}
+{%- assign product_url = '/integrations/' | append: include.platform | append: '/' -%}
+{%- assign provider_url = '/providers/' | append: include.provider | append: '/' -%}
+
+{%- comment %} Combo FAQs first (specific beats generic), then the provider's own. {% endcomment -%}
+{%- assign faqs = '' | split: '' -%}
+{%- if combo.faqs -%}{%- assign faqs = faqs | concat: combo.faqs -%}{%- endif -%}
+{%- assign faqs = faqs | concat: d.faqs -%}
+
+{%- comment %} Publishable only when both halves have been signed off. {% endcomment -%}
+{%- assign ready = false -%}
+{%- if d.verification.verified_by and combo.verified_by and combo.intro and combo.notes -%}
+{%- assign ready = true -%}
+{%- endif -%}
+
+{%- comment %}
+  Section backgrounds, resolved here rather than inline. Two reasons: an include
+  param cannot contain a Liquid tag — passing a conditional as the faq.html `bg`
+  value is a syntax error — and the light/white alternation depends on whether
+  the optional Specifics section renders, so computing it in one place is the
+  only way both branches stay strictly alternating instead of stacking two light
+  bands together.
+
+  (No Liquid tag may appear in this comment even as an example: per CLAUDE.md,
+  Liquid still parses tags inside comment blocks.)
+{% endcomment -%}
+{%- if combo.notes -%}
+{%- assign setup_bg = 'bg-light' -%}{%- assign why_bg = '' -%}
+{%- assign faq_bg = 'bg-light' -%}{%- assign related_bg = '' -%}
+{%- else -%}
+{%- assign setup_bg = '' -%}{%- assign why_bg = 'bg-light' -%}
+{%- assign faq_bg = '' -%}{%- assign related_bg = 'bg-light' -%}
+{%- endif -%}
+
+<main id="main-content" class="prose-links">
+
+<!-- Hero -->
+<section class="product-hero tc-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="hero-badge">
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {{ p.platform }} · {{ d.region }}
+                </div>
+                <h2 class="h1 fw-bold text-white mb-4">Accept <span class="txt-blue-50">{{ d.name }}</span><br>payments on {{ p.platform }}</h2>
+                <p class="lead mb-4 hero-lead">
+                    {%- if combo.intro %}{{ combo.intro }}{% else %}Install the free PaymentHood {{ noun }} for {{ p.platform }}, connect your {{ d.name }} account, and {{ d.name }} appears as a payment option at checkout. No custom gateway code, and no second integration when you add another provider later.{% endif %}
+                </p>
+                <ul class="chip-row mb-5">
+                    {%- for c in d.currencies %}
+                    <li class="chip chip--dark">{{ c }}</li>
+                    {%- endfor %}
+                </ul>
+                <div class="hero-cta mb-4">
+                    <div class="cta-buttons d-flex flex-wrap gap-3 mb-3">
+                        <a href="{{ site.signup_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
+                            <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                            Create Free Account
+                        </a>
+                        <a href="{{ p.download_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center" target="_blank" rel="noopener">
+                            <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download the {{ noun }}<span class="visually-hidden"> (opens in new tab)</span>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="hero-stat-pill"><strong>{{ compat_name }}</strong>&nbsp;{{ p.compat }}</div>
+                        <div class="hero-stat-pill"><strong>{{ d.methods | size }}</strong>&nbsp;payment methods</div>
+                        <div class="hero-stat-pill"><strong>Free</strong>&nbsp;{{ noun }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="hero-visual-card">
+                    <div class="combo-lockup mb-4">
+                        <div class="combo-tile">
+                            <img src="{{ p.logo.src | relative_url }}" alt="{{ p.platform }}">
+                        </div>
+                        <div class="combo-plus" aria-hidden="true">+</div>
+                        <div class="combo-tile">
+                            <img src="{{ d.logo | relative_url }}" alt="{{ d.name }}">
+                        </div>
+                    </div>
+                    <dl class="spec-list">
+                        <div><dt>Platform</dt><dd>{{ compat_name }} {{ p.compat }}</dd></div>
+                        <div><dt>Provider</dt><dd>{{ d.name }}</dd></div>
+                        <div><dt>Install via</dt><dd>{{ p.install_path }}</dd></div>
+                        <div><dt>Billing</dt><dd>{% if p.supports_subscriptions %}One-time &amp; recurring{% else %}One-time{% endif %}</dd></div>
+                        <div><dt>PaymentHood fee</dt><dd>None</dd></div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<nav class="page-nav" aria-label="On this page">
+    <div class="container">
+        <ul>
+            <li><a href="#compatibility">Compatibility</a></li>
+            <li><a href="#methods">Payment methods</a></li>
+            {%- if combo.notes %}<li><a href="#specifics">Specifics</a></li>{% endif %}
+            <li><a href="#setup">Setup</a></li>
+            <li><a href="#why">Why PaymentHood</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Compatibility -->
+<section class="section anchor-offset" id="compatibility">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Compatibility</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ d.name }} on {{ p.platform }} at a glance</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <dl class="fact-table">
+                    <div class="fact-row">
+                        <dt class="fact-label">{{ compat_name }} version</dt>
+                        <dd class="fact-value">{{ compat_name }} {{ p.compat }}</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Where you install it</dt>
+                        <dd class="fact-value">{{ ecosystem }} admin → <em>{{ p.install_path }}</em></dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Coverage</dt>
+                        <dd class="fact-value">
+                            {%- if d.countries %}
+                            <ul class="chip-row">
+                                {%- for c in d.countries %}
+                                <li class="chip">{{ c }}</li>
+                                {%- endfor %}
+                            </ul>
+                            {%- else %}
+                            {{ d.coverage }}
+                            {%- endif %}
+                        </dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Currencies</dt>
+                        <dd class="fact-value">
+                            <ul class="chip-row">
+                                {%- for c in d.currencies %}
+                                <li class="chip chip--code">{{ c }}</li>
+                                {%- endfor %}
+                            </ul>
+                        </dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Billing models</dt>
+                        <dd class="fact-value">{% if p.supports_subscriptions %}One-time checkout and recurring renewals — {{ p.platform }} generates both, and the {{ noun }} handles both.{% else %}One-time checkout payments. Recurring billing is not supported by the {{ p.platform }} {{ noun }} yet.{% endif %}</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Cost</dt>
+                        <dd class="fact-value">The {{ noun }} is free and open source. You pay {{ d.name }}'s own fees, published on
+                            <a href="{{ d.links.pricing }}" target="_blank" rel="noopener">their pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
+                            PaymentHood adds nothing on top.</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment methods -->
+<section class="section bg-light anchor-offset" id="methods">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Payment methods</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">What {{ p.platform }} customers can pay with</h2>
+                <p class="lead mw-narrow">Each method {{ d.name }} supports appears in your {{ p.platform }} checkout. Enabling one is a PaymentHood dashboard setting — nothing changes on the {{ ecosystem }} side.</p>
+            </div>
+        </div>
+        <div class="method-grid">
+            {%- for m in d.methods %}
+            <div class="method-card">
+                <div class="method-icon">{% include method-icon.html key=m.icon %}</div>
+                <div>
+                    <h3>{{ m.label }}</h3>
+                    <p>{{ m.detail }}</p>
+                </div>
+            </div>
+            {%- endfor %}
+        </div>
+    </div>
+</section>
+
+{%- if combo.notes %}
+<!-- The human-written part: what is true of this pairing and no other. -->
+<section class="section anchor-offset" id="specifics">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Specifics</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">Running {{ d.name }} on {{ p.platform }}</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="feature-grid">
+                    {%- for n in combo.notes %}
+                    <div class="feat-card">
+                        <h3 class="h4">{{ n.title }}</h3>
+                        <p>{{ n.body }}</p>
+                    </div>
+                    {%- endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%- endif %}
+
+<!-- Setup -->
+<section class="section {{ setup_bg }} anchor-offset" id="setup">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Setup</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">Connect {{ d.name }} to {{ p.platform }}</h2>
+                <p class="lead mw-narrow">Four steps, no code. The full walkthrough with screenshots is in the <a href="{{ install_url }}">{{ p.platform }} installation guide</a>.</p>
+            </div>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">1</div>
+                    <h3 class="h5">Open a {{ d.name }} account</h3>
+                    <p>Register with {{ d.name }} and finish their onboarding. Funds settle from {{ d.name }} to your own bank account.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">2</div>
+                    <h3 class="h5">Add it in PaymentHood</h3>
+                    <p>Paste your {{ d.name }} credentials into the PaymentHood dashboard. They stay server-side and never reach your storefront.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">3</div>
+                    <h3 class="h5">Install the {{ noun }}</h3>
+                    <p>Download the {{ p.platform }} {{ noun }} and install it from <em>{{ p.install_path }}</em> in your {{ ecosystem }} admin.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="how-step">
+                    <div class="how-step-num">4</div>
+                    <h3 class="h5">Enable and test</h3>
+                    <p>Paste your PaymentHood API key into the {{ noun }} settings, run a sandbox order end to end, then switch to live.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-auto">
+                <a href="{{ install_url }}" class="btn btn-blue-300 btn-lg px-4 rounded-pill">Full {{ p.platform }} installation guide</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why through PaymentHood -->
+<section class="section {{ why_bg }} anchor-offset" id="why">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Why PaymentHood</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">Rather than a direct {{ d.name }} {{ noun }}</h2>
+                <p class="lead mw-narrow">A single-provider {{ noun }} works until you need a second provider. These are the parts you would otherwise build and maintain yourself.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <dl class="fact-table mb-5">
+                    <div class="fact-row">
+                        <dt class="fact-label">Webhook security</dt>
+                        <dd class="fact-value">{{ d.integration.webhook }}</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Payment verification</dt>
+                        <dd class="fact-value">{{ d.integration.verification }}</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Credentials</dt>
+                        <dd class="fact-value">{{ d.integration.auth }}</dd>
+                    </div>
+                </dl>
+                <ul class="check-list list-unstyled p-0">
+                    <li>Add a second provider without touching your {{ p.platform }} checkout</li>
+                    <li>Automatic failover when {{ d.name }} is unreachable, instead of a failed order</li>
+                    <li>Idempotent charge creation, so a double-submitted order is not a double charge</li>
+                    <li>One reconciliation view across every provider you run</li>
+                    <li>Free and open source — <a href="https://github.com/paymenthood/{{ p.repo }}" target="_blank" rel="noopener">read the {{ noun }} on GitHub<span class="visually-hidden"> (opens in new tab)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="anchor-offset" id="faq">
+{% include faq.html items=faqs eyebrow="FAQ" bg=faq_bg first_open=true %}
+</div>
+
+<!-- Related -->
+<section class="section {{ related_bg }}">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Related</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">Keep reading</h2>
+            </div>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <a href="{{ provider_url }}" class="how-step">
+                    <h3 class="h5">{{ d.name }} overview</h3>
+                    <p>Coverage, currencies, payment methods and how PaymentHood secures the {{ d.name }} integration.</p>
+                    <span class="link-arrow">Read more</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <a href="{{ product_url }}" class="how-step">
+                    <h3 class="h5">PaymentHood for {{ p.platform }}</h3>
+                    <p>The {{ noun }} itself: features, billing models and every provider it can reach.</p>
+                    <span class="link-arrow">Read more</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <a href="/providers.html" class="how-step">
+                    <h3 class="h5">All payment providers</h3>
+                    <p>Every provider PaymentHood connects to, filterable by global, regional and crypto.</p>
+                    <span class="link-arrow">Browse providers</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+    <div class="container">
+        <div class="cta-banner text-center">
+            <h2 class="h2 fw-bold mb-3">Accept {{ d.name }} on {{ p.platform }} today</h2>
+            <p class="lead mb-4 mw-narrow">Free {{ noun }}, no PaymentHood transaction fee, and room to add another provider whenever you need one.</p>
+            <div class="cta-buttons d-flex flex-wrap gap-3 justify-content-center">
+                <a href="{{ site.signup_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill">Create Free Account</a>
+                <a href="{{ install_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2">Installation guide</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+{% include page-nav-scrollspy.html %}

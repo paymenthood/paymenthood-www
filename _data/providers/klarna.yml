@@ -1,0 +1,95 @@
+# Single source of truth for /providers/klarna/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/klarna/index.html.
+
+name: Klarna
+slug: klarna
+status: live
+category: global
+region: Europe / US
+logo: /assets/images/home/providers-icon/klarna.png
+accent: "#ffb3c7"
+accent_rgb: "255,179,199"
+accent_text: "#936372"   # computed: 4.92 on white, 4.67 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Klarna is a buy-now-pay-later provider: the shopper splits the purchase into instalments or
+  defers it, and the merchant is paid in full up front with Klarna carrying the credit risk.
+  It raises average order value on considered purchases, which is why it sits alongside cards
+  rather than replacing them.
+
+countries:
+  - Sweden
+  - Norway
+  - Denmark
+  - Finland
+  - Germany
+  - United Kingdom
+  - United States
+
+currencies: [SEK, NOK, DKK, EUR, GBP, USD]
+
+methods:
+  - label: Pay in instalments
+    icon: bnpl
+    detail: The order is split into scheduled payments
+  - label: Pay later
+    icon: bnpl
+    detail: The shopper is invoiced after delivery
+  - label: Pay now
+    icon: card
+    detail: Immediate payment through Klarna's checkout
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.klarna.com/
+  docs: https://docs.klarna.com/
+  pricing: https://www.klarna.com/business/pricing/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API username and password issued per market, held server-side in PaymentHood
+  webhook: Signed push notification, validated before an order is released
+  verification: Server-side order status re-check against the Klarna API before fulfilment
+
+faqs:
+  - q: Do I carry the credit risk with Klarna?
+    a: >-
+      No. Klarna pays you the full order value and takes on the customer's repayment risk, which
+      is the core of the product. In exchange Klarna's per-transaction fee is materially higher
+      than a card fee.
+  - q: Which markets does Klarna cover?
+    a: >-
+      The Nordics, Germany, the United Kingdom and the United States, in SEK, NOK, DKK, EUR, GBP
+      and USD. Availability is defined per market, so confirm your specific one with Klarna.
+  - q: When is buy-now-pay-later worth the higher fee?
+    a: >-
+      On considered purchases with a large enough basket that the instalment option changes the
+      decision — furniture, electronics, travel. On low-value repeat purchases the fee rarely pays
+      for itself.
+  - q: Does PaymentHood charge extra on top of Klarna?
+    a: >-
+      No. Klarna bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://docs.klarna.com/payments/web-payments/before-you-start/data-requirements/puchase-countries-currencies-locales/
+    - https://docs.verifone.com/online-payments/advanced-payment-methods-apms/klarna

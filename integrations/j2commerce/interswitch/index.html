@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: interswitch
+nav_active: integrations
+title: "Interswitch Payment Gateway for J2Commerce"
+description: "Accept Interswitch payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/interswitch.yml and
+sitemap: false     #   _data/combos/j2commerce-interswitch.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#c8102e;--pp-accent-text:#c8102e;--pp-accent-rgb:200,16,46;--pp-hero-end:#c8102e;--pp-blob-rgb:200,16,46}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

@@ -1,0 +1,16 @@
+---
+layout: none
+slug: square
+title: "Square Payment Gateway Integration"
+description: "Accept Square payments through one PaymentHood integration — US / Global. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/square.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#3e4348;--pp-accent-text:#3e4348;--pp-accent-rgb:62,67,72;--pp-hero-end:#3e4348;--pp-blob-rgb:62,67,72}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

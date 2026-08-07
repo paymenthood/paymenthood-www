@@ -1,0 +1,98 @@
+# Single source of truth for /providers/stitch/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+
+name: Stitch
+slug: stitch
+status: live
+category: regional
+region: South Africa
+logo: /assets/images/home/providers-icon/Stitch-light.png
+accent: "#1f6feb"
+accent_rgb: "31,111,235"
+accent_text: "#1e6ce6"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Stitch is a South African payments platform built around direct bank APIs. A single Stitch
+  integration reaches cards, manual and direct EFT, the bank-native rails such as Capitec Pay,
+  Absa Pay and Nedbank Direct, plus the mobile wallets and buy-now-pay-later options South African
+  shoppers expect — without the merchant negotiating a separate integration with each bank.
+
+countries:
+  - South Africa
+
+currencies: [ZAR]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa and Mastercard credit and debit cards
+  - label: Bank APIs
+    icon: bank
+    detail: Capitec Pay, Absa Pay and Nedbank Direct EFT
+  - label: Manual EFT
+    icon: bank
+    detail: Reference-matched bank transfer for customers who prefer it
+  - label: Mobile wallets
+    icon: wallet
+    detail: Apple Pay, Google Pay and Samsung Pay
+  - label: DebiCheck
+    icon: recurring
+    detail: Authenticated recurring debit orders
+  - label: Buy now, pay later
+    icon: bnpl
+    detail: Deferred-payment options at checkout
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://stitch.money/
+  docs: https://stitch.money/
+  pricing: https://stitch.money/
+
+integration:
+  auth: OAuth client credentials, held server-side in PaymentHood
+  webhook: Signed event callback, validated before the order is released
+  verification: Server-side payment status re-check against Stitch before fulfilment
+
+faqs:
+  - q: What does Stitch do that a normal card gateway does not?
+    a: >-
+      Stitch connects directly to South African bank APIs, so a customer can pay from inside their
+      own bank's authentication flow — Capitec Pay, Absa Pay or Nedbank Direct EFT — rather than
+      entering card details. Bank-native rails typically authorise at a higher rate than cards in
+      South Africa, which is the practical reason to offer them.
+  - q: Why route Stitch through PaymentHood rather than integrating it directly?
+    a: >-
+      Two reasons. First, you keep the option of adding or swapping providers later without
+      rebuilding your checkout. Second, PaymentHood handles the parts every direct integration has
+      to rebuild anyway — idempotency, webhook signature verification, server-side re-verification
+      and failover. If you will only ever use Stitch, a direct integration is a reasonable choice.
+  - q: Does Stitch support recurring payments?
+    a: >-
+      Stitch supports DebiCheck authenticated debit orders for recurring collection. Whether that
+      fits your billing model depends on your product — check with Stitch before committing to it.
+  - q: Which currencies does Stitch support?
+    a: >-
+      South African Rand (ZAR). For cross-border currencies, add a second provider in your
+      PaymentHood dashboard and route by currency; your checkout integration does not change.
+  - q: Does PaymentHood charge on top of Stitch's fees?
+    a: >-
+      No. Stitch bills you directly. PaymentHood takes no percentage and no per-transaction cut —
+      see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://stitch.money/payment-methods
+    - https://stitch.money/
+    - https://www.bizcommunity.com/article/stitch-and-absa-launch-absa-pay-for-merchants-236327a
+  # NOTE: docs and pricing URLs point at the marketing site — a public developer
+  # portal URL was not confirmed. Replace before publishing.

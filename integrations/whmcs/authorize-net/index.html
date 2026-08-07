@@ -1,0 +1,18 @@
+---
+layout: none
+platform: whmcs
+provider: authorize-net
+nav_active: integrations
+title: "Authorize.net Payment Gateway for WHMCS"
+description: "Accept Authorize.net payments on WHMCS with the free PaymentHood module. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/authorize-net.yml and
+sitemap: false     #   _data/combos/whmcs-authorize-net.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#0072c6;--pp-accent-text:#0072c6;--pp-accent-rgb:0,114,198;--pp-hero-end:#0072c6;--pp-blob-rgb:0,114,198}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

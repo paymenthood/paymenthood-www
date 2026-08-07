@@ -26,6 +26,18 @@
     line-height: 1.7;
   }
 
+  // Legal copy is dense prose full of inline cross-references, so its links are
+  // the clearest case on the site of a link that has to be distinguishable
+  // without colour. The site-wide link colour (#16a3fe, _sass/theme/_base.scss)
+  // measures 2.73:1 on this white card — under the 4.5:1 AA minimum — and it
+  // sits at only 1.10:1 against the surrounding body text, so colour alone
+  // cannot mark it either. --blue-200 fixes the first, the underline the second.
+  article a {
+    color: var(--blue-200);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   h2 {
     color: var(--blue-200);
     font-size: 1.8rem;

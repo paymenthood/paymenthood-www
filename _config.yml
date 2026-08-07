@@ -11,6 +11,10 @@ author: PaymentHood
 # both together.
 provider_count: 36
 
+# Console sign-up destination. The integration plugins are useless without an
+# account, so this is the primary CTA on every product page.
+signup_url: https://console.paymenthood.com/auth/signup
+
 # Social Media & SEO (consumed by jekyll-seo-tag)
 logo: /assets/images/logos/logo2x.webp
 twitter:
@@ -34,6 +38,19 @@ defaults:
       type: "pages"
     values:
       layout: "default"
+  # Posts are the one content type with a Jekyll layout (_layouts/post.html);
+  # every other page is a standalone file with `layout: none`.
+  #
+  # `permalink` is set HERE and not at the top level of this file. A top-level
+  # `permalink:` key also rewrites *page* URLs — it silently turns /pricing.html
+  # into /pricing/, /providers.html into /providers/ and so on, breaking every
+  # existing URL on the live site. Scoped to posts, it only affects posts.
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: /blog/:title/
 
 # Build settings
 markdown: kramdown

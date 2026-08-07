@@ -1,0 +1,98 @@
+# Single source of truth for /providers/2checkout/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/2checkout/index.html.
+
+name: 2Checkout
+slug: 2checkout
+status: live
+category: global
+region: Global
+logo: /assets/images/home/providers-icon/2checkout.png
+accent: "#0072ce"
+accent_rgb: "0,114,206"
+accent_text: "#0072ce"   # computed: 4.89 on white, 4.63 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  2Checkout, now part of Verifone, sells as a merchant of record: it becomes the seller on the
+  buyer's statement and takes on tax calculation, remittance and compliance in each market.
+  For software and digital-goods businesses selling worldwide, that removes the VAT and
+  sales-tax burden entirely.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Sells into most countries and territories worldwide, with a broad set of payment methods and
+  billing currencies. The available set narrows by region, and 2Checkout's own documentation is
+  authoritative on what your account can actually use.
+coverage_short: "Worldwide"
+
+currencies: [USD, EUR, GBP]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Global and regional card schemes
+  - label: Digital wallets
+    icon: wallet
+    detail: PayPal and regional wallets
+  - label: Local methods
+    icon: link
+    detail: Market-specific rails, which vary by buyer country
+  - label: Bank transfer
+    icon: bank
+    detail: Where offered in the buyer's market
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.2checkout.com/
+  docs: https://verifone.cloud/docs/2checkout
+  pricing: https://www.2checkout.com/pricing/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant code and secret key, held server-side in PaymentHood
+  webhook: Instant Payment Notification with a signature, validated before an order is released
+  verification: Server-side order status re-check against the 2Checkout API before fulfilment
+
+faqs:
+  - q: What does merchant of record mean for me?
+    a: >-
+      2Checkout is the legal seller for the transaction, so it calculates, collects and remits
+      sales tax and VAT in each market and appears on the buyer's statement. You avoid registering
+      for tax in every country you sell into — the reason it is popular with SaaS and digital
+      goods.
+  - q: What is the trade-off?
+    a: >-
+      Cost and ownership. Merchant-of-record pricing is well above a plain gateway's, and the
+      customer relationship, refunds and chargebacks sit partly with 2Checkout rather than with
+      you.
+  - q: Is it a good fit for physical goods?
+    a: >-
+      Rarely. The model is built for digital goods and subscriptions, where tax treatment is the
+      hard part. For physical goods a conventional gateway is usually both cheaper and simpler.
+  - q: Does PaymentHood charge extra on top of 2Checkout?
+    a: >-
+      No. 2Checkout bills you directly for its own fees, and PaymentHood takes no percentage and
+      no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://verifone.cloud/docs/2checkout/Documentation/03Billing-and-payments/Payment-methods
+    - https://www.2checkout.com/

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: opay
+nav_active: integrations
+title: "OPay Payment Gateway for J2Commerce"
+description: "Accept OPay payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/opay.yml and
+sitemap: false     #   _data/combos/j2commerce-opay.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00873d;--pp-accent-text:#00843b;--pp-accent-rgb:0,135,61;--pp-hero-end:#00873d;--pp-blob-rgb:0,135,61}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

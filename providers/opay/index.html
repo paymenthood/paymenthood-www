@@ -1,0 +1,16 @@
+---
+layout: none
+slug: opay
+title: "OPay Payment Gateway Integration"
+description: "Accept OPay payments through one PaymentHood integration — Nigeria. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/opay.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00873d;--pp-accent-text:#00843b;--pp-accent-rgb:0,135,61;--pp-hero-end:#00873d;--pp-blob-rgb:0,135,61}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: phoca-cart
+provider: paypal
+nav_active: integrations
+title: "PayPal Payment Gateway for Phoca Cart"
+description: "Accept PayPal payments on Phoca Cart with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/paypal.yml and
+sitemap: false     #   _data/combos/phoca-cart-paypal.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#003087;--pp-accent-text:#003087;--pp-accent-rgb:0,48,135;--pp-hero-end:#003087;--pp-blob-rgb:0,48,135}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: woocommerce
+provider: braintree
+nav_active: integrations
+title: "Braintree Payment Gateway for WooCommerce"
+description: "Accept Braintree payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/braintree.yml and
+sitemap: false     #   _data/combos/woocommerce-braintree.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#009cde;--pp-accent-text:#0079ad;--pp-accent-rgb:0,156,222;--pp-hero-end:#009cde;--pp-blob-rgb:0,156,222}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

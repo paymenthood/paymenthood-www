@@ -1,0 +1,92 @@
+# Single source of truth for /providers/zapper/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+#
+# ⚠ This file is the thinnest of the eight. Independent detail on Zapper's
+# merchant API was not confirmed during research, so several fields a full
+# provider page wants (settlement timing, developer portal URL, published fee
+# structure) are deliberately absent rather than guessed. Fill them from
+# Zapper's own merchant documentation before this page is indexed.
+
+name: Zapper
+slug: zapper
+status: live
+category: regional
+region: South Africa
+logo: /assets/images/home/providers-icon/Zapper-light.png
+accent: "#4c6ef5"
+accent_rgb: "76,110,245"
+accent_text: "#4665e6"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Zapper is a South African QR-code payment app. The customer scans a code at checkout — on screen,
+  on an invoice or at a point of sale — and confirms the payment inside the Zapper app, so no card
+  details are entered on the merchant's site. It competes directly with SnapScan and has a
+  substantial installed base in South African retail and hospitality.
+
+countries:
+  - South Africa
+
+currencies: [ZAR]
+
+methods:
+  - label: QR code
+    icon: qr
+    detail: Customer scans at checkout and confirms in the Zapper app
+  - label: Payment links
+    icon: link
+    detail: A shareable code or link that can be attached to invoices
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.zapper.com/
+  docs: https://www.zapper.com/
+  pricing: https://www.zapper.com/
+
+integration:
+  auth: Merchant API credentials, held server-side in PaymentHood
+  webhook: Payment notification validated before the order is released
+  verification: Server-side payment status re-check before fulfilment
+
+faqs:
+  - q: How is Zapper different from SnapScan?
+    a: >-
+      Both are South African QR wallets and both work the same way from the customer's side — scan,
+      confirm in the app, done. They differ mainly in installed base and in the merchant networks
+      that have adopted them. Since neither reaches every customer, most merchants who offer QR
+      payment offer both, which behind PaymentHood is a dashboard toggle rather than a second
+      integration.
+  - q: Do I need a Zapper merchant account?
+    a: >-
+      Yes. You register with Zapper directly and connect the merchant credentials to PaymentHood.
+      Funds settle from Zapper to your bank account; PaymentHood never holds merchant money.
+  - q: Where does QR payment actually help conversion?
+    a: >-
+      On mobile-heavy traffic and on invoice or social selling, where sending a scannable code is
+      faster than asking a customer to type card details on a phone. On a desktop-heavy B2B
+      checkout, cards and pay-by-bank will usually carry more volume.
+  - q: Can I run Zapper alongside cards and Instant EFT?
+    a: >-
+      Yes, and you should. Each method reaches customers the others miss. PaymentHood presents all
+      configured methods through one checkout and one integration.
+  - q: Does PaymentHood take a cut of Zapper transactions?
+    a: >-
+      No. Zapper bills you directly for its own fees. PaymentHood takes no percentage and no
+      per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://smesouthafrica.co.za/snapscan-vs-zapper-online-payments-made-easier/
+    - https://netcash.co.za/blog/Newsroom/netcash-partners-with-zapper-and-snapscan-to-expand-mobile-payments-acceptance-options-for-smes/
+  # NOTE: website, docs and pricing URLs are unconfirmed placeholders. Verify the
+  # correct Zapper merchant domain before publishing — this is the weakest data
+  # file of the eight.

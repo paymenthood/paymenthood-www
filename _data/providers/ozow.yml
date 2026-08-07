@@ -1,0 +1,101 @@
+# Single source of truth for /providers/ozow/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+
+name: Ozow
+slug: ozow
+status: live
+category: regional
+region: South Africa
+logo: /assets/images/home/providers-icon/Ozow-light.png
+accent: "#0aa2c0"
+accent_rgb: "10,162,192"
+accent_text: "#007e94"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Ozow is a South African pay-by-bank provider. Instead of entering card details, the customer
+  picks their bank at checkout, authorises the payment inside their own online banking session,
+  and the merchant is notified in real time. Because no card is involved there is nothing to
+  charge back and no card data touches the merchant's site.
+
+countries:
+  - South Africa
+
+currencies: [ZAR]
+
+methods:
+  - label: Instant EFT
+    icon: bank
+    detail: Customer authorises a real-time bank transfer during checkout
+  - label: Bank API payments
+    icon: bank
+    detail: Direct bank-API rails where the customer's bank supports them
+
+banks:
+  - FNB
+  - Absa
+  - Standard Bank
+  - Nedbank
+  - RMB
+  - Capitec
+  - TymeBank
+  - Investec
+  - Discovery Bank
+  - African Bank
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://ozow.com/
+  docs: https://ozow.com/
+  pricing: https://ozow.com/
+
+integration:
+  auth: API key and site code, signed per request; credentials stay server-side in PaymentHood
+  webhook: Signed notification, validated before the order is released
+  verification: Server-side status re-check against Ozow before fulfilment
+
+faqs:
+  - q: What is pay-by-bank and how is it different from a card payment?
+    a: >-
+      With pay-by-bank the customer authorises a transfer straight from their bank account inside
+      their own banking session — no card number is entered anywhere. For the merchant that means
+      no card data to protect and no card chargeback route. The trade-off is that refunds are
+      handled as outbound transfers rather than card reversals.
+  - q: Which South African banks work with Ozow?
+    a: >-
+      Ozow covers the major South African retail banks, including FNB, Absa, Standard Bank, Nedbank,
+      RMB, Capitec, TymeBank, Investec, Discovery Bank and African Bank. Check
+      <a href="https://ozow.com/" target="_blank" rel="noopener">ozow.com<span class="visually-hidden"> (opens in new tab)</span></a>
+      for the current list before you rely on a specific bank.
+  - q: Should I offer Ozow instead of cards, or as well?
+    a: >-
+      As well. Pay-by-bank and cards suit different customers, and offering both measurably reduces
+      abandoned checkouts. Running both behind PaymentHood means one integration rather than two,
+      and you can add or remove either without a code change.
+  - q: What happens if Ozow is unavailable?
+    a: >-
+      PaymentHood's routing can fail a transaction over to another configured South African provider
+      instead of showing the customer an error. That failover is configured in the dashboard — your
+      storefront code is unchanged.
+  - q: Does PaymentHood charge extra on top of Ozow?
+    a: >-
+      No. Ozow bills you directly for its own transaction fees. PaymentHood takes no percentage and
+      no per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://ozow.com/
+    - https://en.wikipedia.org/wiki/Ozow
+    - https://docs.ebanx.com/docs/pay-in/processing/payment-methods/country-specific/south-africa/ozow
+  # NOTE: the developer-docs and pricing URLs above both point at the marketing
+  # site because a public docs URL was not confirmed. Replace with the real
+  # developer portal before publishing.

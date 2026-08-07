@@ -1,0 +1,16 @@
+---
+layout: none
+slug: stripe
+title: "Stripe Payment Gateway Integration"
+description: "Accept Stripe payments through one PaymentHood integration — Global. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/stripe.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#635bff;--pp-accent-text:#6159f9;--pp-accent-rgb:99,91,255;--pp-hero-end:#635bff;--pp-blob-rgb:99,91,255}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

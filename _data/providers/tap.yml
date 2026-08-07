@@ -1,0 +1,98 @@
+# Single source of truth for /providers/tap/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/tap/index.html.
+
+name: Tap Payments
+slug: tap
+status: live
+category: regional
+region: MENA
+logo: /assets/images/home/providers-icon/tap.png
+accent: "#1a56db"
+accent_rgb: "26,86,219"
+accent_text: "#1a56db"   # computed: 6.18 on white, 5.86 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Tap Payments is a Gulf-focused payment gateway offering the local methods that dominate the
+  region's checkouts — mada in Saudi Arabia, KNET in Kuwait, Benefit in Bahrain, Fawry in
+  Egypt — alongside international cards. In these markets local schemes carry more volume than
+  global cards, which is why a card-only checkout underperforms there.
+
+countries:
+  - Saudi Arabia
+  - Kuwait
+  - United Arab Emirates
+  - Bahrain
+  - Qatar
+  - Oman
+  - Egypt
+
+currencies: [SAR, KWD, AED, BHD, QAR, OMR, EGP, USD, EUR, GBP]
+
+methods:
+  - label: Local schemes
+    icon: card
+    detail: mada, KNET, Benefit and Fawry
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard and American Express
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay and Google Pay
+  - label: Buy now, pay later
+    icon: bnpl
+    detail: Tabby and regional instalment providers
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.tap.company/
+  docs: https://developers.tap.company/
+  pricing: https://www.tap.company/en/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Secret API key, held server-side in PaymentHood
+  webhook: Signed charge notification, validated before an order is released
+  verification: Server-side charge status re-check against the Tap API before fulfilment
+
+faqs:
+  - q: Why can't I just accept Visa and Mastercard in the Gulf?
+    a: >-
+      You can, but you will leave volume behind. mada in Saudi Arabia and KNET in Kuwait are the
+      debit schemes most consumers actually carry, and a checkout without them loses the shoppers
+      who have no international card at all.
+  - q: Which countries does Tap cover?
+    a: >-
+      Saudi Arabia, Kuwait, the UAE, Bahrain, Qatar, Oman and Egypt, in the local currencies of
+      each plus USD, EUR and GBP.
+  - q: Do I need a local entity?
+    a: >-
+      For local acquiring in most Gulf markets, generally yes. Confirm the requirement with Tap
+      for your specific market before planning a launch around it.
+  - q: Does PaymentHood charge extra on top of Tap Payments?
+    a: >-
+      No. Tap Payments bills you directly for its own fees, and PaymentHood takes no percentage
+      and no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood
+      pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://developers.tap.company/
+    - https://support.tap.company/en/support/solutions/articles/153000140299-what-currencies-are-supported-by-tap-payments-

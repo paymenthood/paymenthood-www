@@ -1,0 +1,121 @@
+# Single source of truth for /providers/paystack/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# the template links to the provider's own pricing page instead.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/paystack/index.html. Until then the page builds but stays out
+# of the index.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Paystack
+slug: paystack
+status: live                 # live | development — only `live` may be published
+category: regional
+region: Nigeria, Ghana, South Africa, Kenya & Côte d'Ivoire
+logo: /assets/images/home/providers-icon/paystack-light.png
+accent: "#00c3f7"
+accent_rgb: "0,195,247"
+accent_text: "#007b9d"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+# Lead paragraph. Written to be lifted verbatim as a featured snippet or an LLM
+# citation: direct definition first, no marketing wind-up.
+summary: >-
+  Paystack is a payment gateway that lets businesses in Nigeria, Ghana, South Africa,
+  Kenya and Côte d'Ivoire accept card, bank transfer, USSD and mobile money payments
+  through one API. It is a full-stack processor rather than an aggregator, which means
+  a merchant account is opened directly with Paystack in each supported country.
+
+countries:
+  - Nigeria
+  - Ghana
+  - South Africa
+  - Kenya
+  - Côte d'Ivoire
+
+currencies: [NGN, GHS, ZAR, KES, USD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard and Verve debit and credit cards
+  - label: Bank transfer
+    icon: bank
+    detail: Customer-initiated transfer to a generated account number
+  - label: USSD
+    icon: ussd
+    detail: Nigerian bank shortcodes, no smartphone required
+  - label: Mobile money
+    icon: mobile
+    detail: M-PESA, MTN, AirtelTigo and Vodafone, in the countries where each operates
+  - label: QR
+    icon: qr
+    detail: Scan-to-pay at checkout
+  - label: Dedicated Virtual Account
+    icon: bank
+    detail: A persistent account number per customer, for recurring collections
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://paystack.com/
+  docs: https://paystack.com/docs/api/
+  pricing: https://paystack.com/pricing
+  channels: https://paystack.com/docs/payments/payment-channels/
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual PaymentHood.Services provider implementation, not to the provider's docs.
+integration:
+  auth: Secret key, held server-side in PaymentHood — never exposed to the storefront
+  webhook: HMAC SHA512 signature on the x-paystack-signature header, verified before any order is marked paid
+  verification: Server-side transaction re-verification against the Paystack API before fulfilment
+
+faqs:
+  - q: Which countries can use Paystack with PaymentHood?
+    a: >-
+      Paystack supports merchants registered in Nigeria, Ghana, South Africa, Kenya and
+      Côte d'Ivoire. You open the Paystack account yourself in your country of registration,
+      then connect it to PaymentHood — PaymentHood does not resell or sit in the flow of funds.
+  - q: Which currencies does Paystack support?
+    a: >-
+      Nigerian Naira (NGN), Ghanaian Cedi (GHS), South African Rand (ZAR), Kenyan Shilling (KES)
+      and US Dollar (USD). Which of these you can actually charge in depends on the country your
+      Paystack account is registered in.
+  - q: Does PaymentHood charge extra on top of Paystack's fees?
+    a: >-
+      No. You pay Paystack's own transaction fees directly to Paystack, and PaymentHood takes no
+      percentage and no per-transaction cut at any volume. See
+      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and
+      <a href="https://paystack.com/pricing" target="_blank" rel="noopener">Paystack's pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
+  - q: How are Paystack webhooks secured?
+    a: >-
+      Paystack signs every webhook with an HMAC SHA512 digest in the <em>x-paystack-signature</em>
+      header. PaymentHood verifies that signature and independently re-queries the Paystack API to
+      confirm the transaction before an order is marked paid, so a forged or replayed webhook
+      cannot complete an order.
+  - q: Can I switch from Paystack to another provider later?
+    a: >-
+      Yes. Your store talks to PaymentHood, not to Paystack, so switching provider is a change in
+      the PaymentHood dashboard. No plugin update, no code change and no second checkout integration.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://paystack.com/docs/payments/payment-channels/
+    - https://paystack.com/docs/api/
+    - https://paystack.com/pricing

@@ -1,0 +1,92 @@
+# Single source of truth for /providers/braintree/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/braintree/index.html.
+
+name: Braintree
+slug: braintree
+status: live
+category: global
+region: US / Global
+logo: /assets/images/home/providers-icon/braintree.png
+accent: "#009cde"
+accent_rgb: "0,156,222"
+accent_text: "#0079ad"   # computed: 4.84 on white, 4.59 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Braintree is PayPal's full-stack payment platform for merchants who want card processing and
+  PayPal acceptance under one integration. It supports merchants across North America, Europe,
+  Asia-Pacific and Australia and can present prices in many currencies, though an account is
+  configured for its home currency by default.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Merchant accounts are available across North America, Europe, Asia-Pacific and Australia.
+  Multi-currency acceptance has to be enabled explicitly — it is not on by default.
+coverage_short: "NA, EU & APAC"
+
+currencies: [USD, EUR, GBP, AUD, CAD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express, Discover and JCB
+  - label: PayPal
+    icon: wallet
+    detail: PayPal acceptance under the same Braintree integration
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay, Google Pay and Venmo in the US
+  - label: Buy now, pay later
+    icon: bnpl
+    detail: PayPal Pay Later where available
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.braintreepayments.com/
+  docs: https://developer.paypal.com/braintree/docs
+  pricing: https://www.braintreepayments.com/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant ID with public and private keys, held server-side in PaymentHood
+  webhook: Signed webhook payload, verified before an order is released
+  verification: Server-side transaction status re-check against the Braintree API before fulfilment
+
+faqs:
+  - q: How is Braintree different from using PayPal directly?
+    a: >-
+      Braintree gives you card processing and PayPal acceptance through one integration and one
+      settlement relationship, with more control over the checkout. Plain PayPal is quicker to
+      enable but keeps cards and wallet as separate concerns. - q: Does my Braintree account
+      accept multiple currencies automatically? a: >- No. A Braintree merchant account is
+      configured for its home currency, and additional currencies have to be added deliberately.
+      This trips up merchants who assume the headline currency figure applies to them on day one.
+      - q: Braintree or Stripe? a: >- Braintree is the stronger choice if PayPal and Venmo matter
+      to your buyers, since they are native rather than bolted on. Stripe generally has the
+      broader set of European and Asian local methods. Behind PaymentHood you are not locked into
+      the decision. - q: Does PaymentHood charge extra on top of Braintree? a: >- No. Braintree
+      bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://developer.paypal.com/braintree/docs/reference/general/currencies
+    - https://developer.paypal.com/braintree/docs/reference/general/countries/ruby/

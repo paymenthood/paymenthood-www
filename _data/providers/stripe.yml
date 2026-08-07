@@ -1,0 +1,98 @@
+# Single source of truth for /providers/stripe/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/stripe/index.html.
+
+name: Stripe
+slug: stripe
+status: live
+category: global
+region: Global
+logo: /assets/images/home/providers-icon/stripe.png
+accent: "#635bff"
+accent_rgb: "99,91,255"
+accent_text: "#6159f9"   # computed: 4.88 on white, 4.63 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Stripe is a developer-oriented payment processor available to businesses in a defined list of
+  countries and able to charge in a wide range of currencies. Alongside cards it exposes the local methods
+  that actually convert in each market — SEPA debit in Europe, iDEAL in the Netherlands,
+  Alipay in Asia — through one API.
+
+# No `countries` list: coverage is too broad to render as chips, so the
+# template falls back to this sentence. The two fields are exclusive.
+coverage: >-
+  Businesses can register in a defined list of countries, which is far shorter than the list of places
+  Stripe can take a card from. Charging is supported in a wide range of currencies, and the available
+  local payment methods differ per market.
+coverage_short: "Global"
+
+currencies: [USD, EUR, GBP]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express, Discover, JCB and UnionPay
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay, Google Pay and Link
+  - label: Bank debits and transfers
+    icon: bank
+    detail: SEPA Direct Debit, ACH, BACS and local bank rails
+  - label: Local methods
+    icon: link
+    detail: iDEAL, Bancontact, Alipay, Przelewy24 and others by market
+  - label: Buy now, pay later
+    icon: bnpl
+    detail: Klarna, Afterpay and Affirm where Stripe offers them
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://stripe.com/
+  docs: https://docs.stripe.com/api
+  pricing: https://stripe.com/pricing
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Restricted secret key, held server-side in PaymentHood and never exposed to the storefront
+  webhook: Signature on the Stripe-Signature header, verified with the endpoint secret before an order is released
+  verification: Server-side PaymentIntent status re-check against the Stripe API before fulfilment
+
+faqs:
+  - q: Which countries can register a Stripe account?
+    a: >-
+      Stripe onboards businesses from a defined list of countries, which is much shorter than the
+      list of places Stripe can accept a card from. Check your own country of incorporation
+      against Stripe's current list rather than assuming. - q: Why route Stripe through
+      PaymentHood instead of integrating it directly? a: >- If Stripe will be your only provider
+      forever, a direct integration is reasonable. PaymentHood earns its place the moment you need
+      a second one — a local African or MENA provider Stripe does not reach, or a fallback for
+      when Stripe declines — because that becomes a dashboard change instead of a second checkout
+      build. - q: Does PaymentHood support Stripe's local payment methods? a: >- The methods
+      available to your Stripe account are offered through the same PaymentHood checkout. Which
+      ones you can enable depends on your Stripe account's country and approval status, not on
+      PaymentHood. - q: Does PaymentHood charge extra on top of Stripe? a: >- No. Stripe bills you
+      directly for its own fees, and PaymentHood takes no percentage and no per-transaction cut at
+      any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://docs.stripe.com/api
+    - https://stripe.com/pricing
+    - https://dodopayments.com/blogs/stripe-supported-countries-alternatives

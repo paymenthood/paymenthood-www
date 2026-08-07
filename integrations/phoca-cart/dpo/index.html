@@ -1,0 +1,18 @@
+---
+layout: none
+platform: phoca-cart
+provider: dpo
+nav_active: integrations
+title: "DPO Pay Payment Gateway for Phoca Cart"
+description: "Accept DPO Pay payments on Phoca Cart with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/dpo.yml and
+sitemap: false     #   _data/combos/phoca-cart-dpo.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#0b7285;--pp-accent-text:#0b7285;--pp-accent-rgb:11,114,133;--pp-hero-end:#0b7285;--pp-blob-rgb:11,114,133}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

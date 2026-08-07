@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: zapper
+nav_active: integrations
+title: "Zapper Payment Gateway for J2Commerce"
+description: "Accept Zapper payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/zapper.yml and
+sitemap: false     #   _data/combos/j2commerce-zapper.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#4c6ef5;--pp-accent-text:#4665e6;--pp-accent-rgb:76,110,245;--pp-hero-end:#4c6ef5;--pp-blob-rgb:76,110,245}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

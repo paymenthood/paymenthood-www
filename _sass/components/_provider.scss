@@ -1,0 +1,406 @@
+// _provider.scss — components introduced by the provider pages
+// (_includes/provider-detail.html) and the provider × platform pages
+// (_includes/integration-provider.html).
+//
+// Everything here is a pattern the existing partials genuinely cannot express:
+// a sticky in-page nav, data chips, icon-led method cards, the two-logo combo
+// lockup, a dark-theme spec list, connected step flow, and the review banner.
+// Anything the shared/product partials already cover (feat-card, fact-table,
+// how-step, cta-banner, check-list) is reused rather than re-implemented.
+//
+// Themed by the same --pp-* custom properties as the product pages, so every
+// rule falls back to the default blue when a page sets none.
+//
+// ── --pp-accent-text ─────────────────────────────────────────── //
+// Provider brand colours are chosen to look right as large fills, and most of
+// them are far too light to be readable AS TEXT: measured against white and
+// against .bg-light, seven of the eight provider accents fail WCAG AA 4.5:1
+// (Paystack cyan lands at 2.07:1). So anything that renders the accent as text
+// or as a small graphic uses --pp-accent-text — the same hue darkened until it
+// passes — while fills, gradients and glows keep the true brand --pp-accent.
+//
+// The fallback chain is var(--pp-accent-text, var(--pp-accent)), so pages that
+// set only --pp-accent (every existing integrations/<slug>/ product page)
+// render exactly as they do today.
+//
+// These rules re-declare selectors owned by _product-sections.scss at equal
+// specificity. That is deliberate and it is why this partial is @use'd LAST in
+// assets/css/components.scss — later wins, so no !important is needed. Keep it
+// last if you reorder that file.
+.section-eyebrow { color: var(--pp-accent-text, var(--pp-accent, var(--blue-200))); }
+.stat-number     { color: var(--pp-accent-text, var(--pp-accent, var(--blue-200))); }
+
+// ── Review banner ────────────────────────────────────────────── //
+// Shown while a provider data file has no `verification.verified_by`. Amber
+// rather than red: this is "not checked yet", not "broken". Bootstrap 5.2 has
+// no *-subtle background utilities (those arrived in 5.3), hence a component.
+.review-banner {
+    background: #fff8e6;
+    border-bottom: 1px solid #f2dfae;
+    border-left: 4px solid #d99e0b;
+    padding: 16px 0;
+    font-size: .875rem;
+    color: #6b5312;
+
+    code {
+        background: rgba(217, 158, 11, .12);
+        color: #6b5312;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-size: .92em;
+    }
+}
+
+// ── Sticky in-page nav ───────────────────────────────────────── //
+// Provider and combo pages run long. This keeps the section list reachable
+// without a scroll back to the top. Scrolls horizontally on narrow screens
+// instead of wrapping into a two-line block that eats the viewport.
+//
+// It must stick BELOW the site header, which scripts.js switches to
+// position: fixed (z-index 49) as soon as the page scrolls past 10px — at
+// top: 0 this nav would slide underneath it and vanish. page-nav-scrollspy.html
+// measures .header-main and writes the real height to --ph-header-h; the
+// fallbacks below match the header's own sizes (57px logo + 24px padding,
+// 65px + 24px from 992px up) so the nav still lands correctly without JS.
+// z-index stays under the header's 49 so the header always wins an overlap.
+:root { --ph-header-h: 81px; }
+
+@media (min-width: 992px) {
+    :root { --ph-header-h: 89px; }
+}
+
+.page-nav {
+    position: sticky;
+    top: var(--ph-header-h);
+    z-index: 20;
+    background: rgba(255, 255, 255, .92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-200);
+
+    ul {
+        display: flex;
+        gap: 4px;
+        margin: 0;
+        padding: 10px 0;
+        list-style: none;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    ul::-webkit-scrollbar { display: none; }
+
+    a {
+        display: block;
+        white-space: nowrap;
+        padding: 7px 15px;
+        border-radius: 50px;
+        font-size: .85rem;
+        font-weight: 600;
+        color: var(--blue-400);
+        text-decoration: none;
+        transition: background .2s, color .2s;
+    }
+    a:hover,
+    a:focus-visible {
+        background: var(--blue-30);
+        color: var(--pp-accent-text, var(--pp-accent, var(--blue-200)));
+    }
+    a.active {
+        background: rgba(var(--pp-accent-rgb, 25, 64, 176), .12);
+        color: var(--pp-accent-text, var(--pp-accent, var(--blue-200)));
+    }
+}
+
+// Anchored sections must clear BOTH the fixed site header and this nav when
+// jumped to, or the heading lands underneath them. 56px is the nav's own height
+// (10px padding × 2 + a 36px pill), plus a little breathing room.
+.anchor-offset { scroll-margin-top: calc(var(--ph-header-h) + 68px); }
+
+// ── Data chips ───────────────────────────────────────────────── //
+// Country names and ISO currency codes as scannable tokens. A comma-joined
+// sentence is unreadable at eight currencies; a chip row is instant.
+// Deliberately no flag emoji — Windows renders those as bare letter pairs.
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 6px 13px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--blue-600);
+    line-height: 1.3;
+}
+
+// Currency codes read as data, so they get the tracking to match.
+.chip--code {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .06em;
+    background: var(--blue-30);
+    border-color: rgba(var(--pp-accent-rgb, 25, 64, 176), .28);
+    color: var(--pp-accent-text, var(--pp-accent, var(--blue-200)));
+}
+
+// On the dark hero card.
+.chip--dark {
+    background: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .2);
+    color: rgba(255, 255, 255, .9);
+}
+
+// ── Method cards ─────────────────────────────────────────────── //
+// Denser than .feat-card and icon-led, because the payment-method grid is a
+// scan target rather than a read target.
+.method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.method-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 22px;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+
+    &:hover {
+        border-color: rgba(var(--pp-accent-rgb, 25, 64, 176), .45);
+        box-shadow: 0 12px 32px rgba(var(--pp-accent-rgb, 25, 64, 176), .1);
+        transform: translateY(-3px);
+    }
+    h3 {
+        font-size: .98rem;
+        font-weight: 700;
+        color: var(--blue-600);
+        margin: 0 0 5px;
+    }
+    p {
+        font-size: .85rem;
+        line-height: 1.55;
+        color: var(--blue-400);
+        margin: 0;
+    }
+}
+
+.method-icon {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--pp-accent-rgb, 25, 64, 176), .1);
+    color: var(--pp-accent-text, var(--pp-accent, var(--blue-200)));
+
+    svg { width: 22px; height: 22px; }
+}
+
+// ── Combo lockup ─────────────────────────────────────────────── //
+// The "<platform> + <provider>" logo pair that opens every combo page. It says
+// what the page is about before a word is read.
+.combo-lockup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.combo-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px 26px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+    min-width: 132px;
+    min-height: 96px;
+
+    img {
+        display: block;
+        max-width: 150px;
+        max-height: 46px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+.combo-plus {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .16);
+    border: 1px solid rgba(255, 255, 255, .3);
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+// ── Spec list (dark) ─────────────────────────────────────────── //
+// Label/value rows inside .hero-visual-card. .subp-detail is the light-theme
+// equivalent; this is the same idea against glass.
+.spec-list {
+    margin: 0;
+    font-size: .84rem;
+
+    > div {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 9px 0;
+        border-top: 1px solid rgba(255, 255, 255, .14);
+    }
+    > div:first-child { border-top: 0; }
+
+    dt {
+        margin: 0;
+        font-weight: 500;
+        color: rgba(255, 255, 255, .62);
+    }
+    dd {
+        margin: 0;
+        font-weight: 600;
+        color: #fff;
+        text-align: right;
+    }
+}
+
+// ── Step flow ────────────────────────────────────────────────── //
+// .how-step with a connector line, so three steps read as a sequence rather
+// than three unrelated cards. The line is drawn behind the numbered circles
+// (.how-step-num already carries z-index: 1) and only on wide layouts, where
+// the steps actually sit in a row.
+.step-flow {
+    position: relative;
+
+    @media (min-width: 992px) {
+        &::before {
+            content: '';
+            position: absolute;
+            top: 44px;
+            left: 16.6%;
+            right: 16.6%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(var(--pp-accent-rgb, 25, 64, 176), .08),
+                rgba(var(--pp-accent-rgb, 25, 64, 176), .35),
+                rgba(var(--pp-accent-rgb, 25, 64, 176), .08));
+        }
+    }
+}
+
+// ── Linked cards ─────────────────────────────────────────────── //
+// .how-step used as a whole-card link (platform availability, related pages).
+// Keeps the card's own colors rather than inheriting the global link green.
+a.how-step {
+    display: block;
+    height: 100%;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 26px;
+    text-align: left;
+    text-decoration: none;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+
+    &:hover,
+    &:focus-visible {
+        border-color: rgba(var(--pp-accent-rgb, 25, 64, 176), .45);
+        box-shadow: 0 14px 34px rgba(var(--pp-accent-rgb, 25, 64, 176), .12);
+        transform: translateY(-4px);
+    }
+    &:hover .link-arrow { gap: 10px; }
+}
+
+// ── Post tag badge ───────────────────────────────────────────── //
+// Doubled selector for the same reason as the platform colorways in
+// _shared.scss: style.css sets `.badge:not(.badge-outline) { color: #fff }` at
+// (0,2,0), so a plain `.txt-blue-600` utility loses and the label renders white
+// on a light chip — 1.05:1, effectively invisible.
+.badge.badge-tag {
+    background: var(--blue-30);
+    color: var(--blue-200);
+    font-weight: 600;
+}
+
+// ── Source note ──────────────────────────────────────────────── //
+// The "checked against X on DATE" line under fact blocks. Small, quiet, and
+// the reason a reader trusts the numbers above it.
+.source-note {
+    font-size: .8rem;
+    color: var(--blue-400);
+    margin-top: 14px;
+
+    a { color: var(--pp-accent-text, var(--pp-accent, var(--blue-200))); }
+}
+
+// ── Motion ───────────────────────────────────────────────────── //
+@media (prefers-reduced-motion: reduce) {
+    .method-card,
+    a.how-step,
+    .page-nav a,
+    .link-arrow {
+        transition: none;
+    }
+    .method-card:hover,
+    a.how-step:hover {
+        transform: none;
+    }
+}
+
+// ── Inline links in prose ────────────────────────────────────── //
+// Two fixes, both scoped to blocks this partial owns.
+//
+// 1. Underline. A link inside a paragraph or a fact-table value is surrounded
+//    by text, so colour alone does not distinguish it (WCAG 1.4.1 Use of
+//    Colour; Lighthouse "link-in-text-block"). Card-sized and nav links are not
+//    in a text block and stay clean.
+//
+// 2. Colour. The site-wide link colour set in _sass/theme/_base.scss is
+//    #16a3fe, which measures 2.73:1 on white — below the 4.5:1 AA threshold for
+//    body text. That is a pre-existing site-wide issue and fixing it globally
+//    would restyle every link on every page, so this only corrects the blocks
+//    introduced here, using --blue-200 (8.74:1). Worth fixing at the theme
+//    level separately.
+// Applied via `class="prose-links"` on the <main> of the templates this partial
+// serves (provider-detail, integration-provider, _layouts/post) — deliberately
+// NOT global, so the existing integrations/<slug>/ product pages keep the exact
+// link styling they ship with today.
+.prose-links {
+    p a,
+    li a,
+    dd a,
+    .faq-answer a {
+        color: var(--blue-200);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    // Dark bands: --blue-200 is unreadable on the hero gradient and the CTA
+    // banner, so links there stay white and lean on the underline alone.
+    .product-hero p a,
+    .cta-banner p a {
+        color: #fff;
+    }
+}

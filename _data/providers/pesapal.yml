@@ -1,0 +1,90 @@
+# Single source of truth for /providers/pesapal/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+
+name: Pesapal
+slug: pesapal
+status: live
+category: regional
+region: East & Southern Africa
+logo: /assets/images/home/providers-icon/Pesapal-light.png
+accent: "#f7941d"
+accent_rgb: "247,148,29"
+accent_text: "#a5600b"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Pesapal is an East African payment service provider that lets businesses accept mobile money,
+  card and bank payments across Kenya, Uganda, Tanzania, Rwanda, Malawi, Zambia and Zimbabwe
+  through one integration. Mobile money — not cards — is the dominant payment method in most of
+  these markets, which is what makes Pesapal a practical default for the region.
+
+countries:
+  - Kenya
+  - Uganda
+  - Tanzania
+  - Rwanda
+  - Malawi
+  - Zambia
+  - Zimbabwe
+
+currencies: [KES, UGX, TZS, RWF, ZMW, USD, EUR, GBP]
+
+methods:
+  - label: Mobile money
+    icon: mobile
+    detail: The regional wallets, including M-PESA and Airtel Money
+  - label: Cards
+    icon: card
+    detail: Visa and Mastercard credit and debit cards
+  - label: Bank transfer
+    icon: bank
+    detail: Local bank payment where supported
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.pesapal.com/
+  docs: https://www.pesapal.com/business/online/api-plugins
+  pricing: https://www.pesapal.com/business
+
+integration:
+  auth: Consumer key and consumer secret exchanged for a bearer token, held server-side in PaymentHood
+  webhook: Registered IPN (Instant Payment Notification) callback, validated before the order is released
+  verification: Server-side transaction status re-check against Pesapal before fulfilment
+
+faqs:
+  - q: Which countries does Pesapal cover?
+    a: >-
+      Kenya, Uganda, Tanzania, Rwanda, Malawi, Zambia and Zimbabwe. Which payment methods and
+      currencies are available to you depends on the country your Pesapal account is registered in.
+  - q: Can I collect M-PESA payments through PaymentHood?
+    a: >-
+      Yes, via Pesapal. Mobile money is offered alongside cards in the same checkout, so a customer
+      who has no card can still complete the order.
+  - q: Which currencies can I charge in?
+    a: >-
+      Pesapal supports KES, UGX, TZS, RWF, ZMW, USD, EUR and GBP. Local-currency collection is
+      available in the markets where Pesapal operates directly.
+  - q: Do I need a separate integration for each East African country?
+    a: >-
+      No. One Pesapal account behind one PaymentHood integration covers the markets your account is
+      approved for. If you later add a second provider for a country Pesapal does not reach, that is
+      a dashboard change rather than a new checkout build.
+  - q: Does PaymentHood take a cut of Pesapal transactions?
+    a: >-
+      No. Pesapal bills its own fees to you directly. PaymentHood takes no percentage and no
+      per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  # Sign-off recorded 2026-08-07 on the site owner's instruction. Precisely what
+  # it attests to, so nobody later reads more into it than is there:
+  #   - every URL in this file resolves (scripts/check-provider-data.mjs)
+  #   - no fee, count or completeness claim is present (same script)
+  #   - the `integration:` block describes PaymentHood's own implementation
+  #   - provider facts trace to the `sources` below
+  # It does NOT attest that a person re-read every field against those sources.
+  verified_by: PaymentHood
+  sources:
+    - https://www.pesapal.com/business/online/api-plugins
+    - https://www.pesapal.com/business
+    - https://support.resrequest.com/interfaces/payment-gateways/pesapal/

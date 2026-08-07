@@ -1,0 +1,98 @@
+# Single source of truth for /providers/paytabs/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/paytabs/index.html.
+
+name: PayTabs
+slug: paytabs
+status: live
+category: regional
+region: MENA
+logo: /assets/images/home/providers-icon/paytabs.png
+accent: "#d81e34"
+accent_rgb: "216,30,52"
+accent_text: "#d81e34"   # computed: 5.05 on white, 4.79 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  PayTabs is a MENA payment gateway covering the Gulf plus Egypt, Jordan and Iraq. It combines
+  international cards with the region's local schemes and wallets — mada, KNET, STC Pay — and
+  the instalment products such as valu and Tabby that carry real weight in Egyptian and Gulf
+  checkouts.
+
+countries:
+  - Saudi Arabia
+  - United Arab Emirates
+  - Egypt
+  - Kuwait
+  - Oman
+  - Jordan
+  - Iraq
+
+currencies: [SAR, AED, EGP, KWD, OMR, JOD, USD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express, mada, UnionPay and Maestro
+  - label: Digital wallets
+    icon: wallet
+    detail: Apple Pay, Samsung Pay and STC Pay
+  - label: Local methods
+    icon: link
+    detail: KNET, valu, aman and Meeza QR
+  - label: Buy now, pay later
+    icon: bnpl
+    detail: Tabby and regional instalment options
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.paytabs.com/
+  docs: https://support.paytabs.com/en/support/solutions
+  pricing: https://www.paytabs.com/en/pricing/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Profile ID and server key, held server-side in PaymentHood
+  webhook: Signed transaction callback, validated before an order is released
+  verification: Server-side transaction query against the PayTabs API before fulfilment
+
+faqs:
+  - q: PayTabs or Tap — which for the Gulf?
+    a: >-
+      They overlap heavily. PayTabs reaches further into Egypt, Jordan and Iraq; Tap is strongest
+      in Kuwait and Saudi Arabia. The honest answer is to compare the quoted rates for your own
+      market and volume — and behind PaymentHood you can run both and route between them.
+  - q: Which countries does PayTabs cover?
+    a: >-
+      Saudi Arabia, the UAE, Egypt, Kuwait, Oman, Jordan and Iraq, each in its local currency plus
+      USD.
+  - q: Does it support instalments?
+    a: >-
+      Yes — valu and aman in Egypt and Tabby in the Gulf. These matter more in the region than
+      they do in Europe, and a checkout without them will underperform on higher-value baskets.
+  - q: Does PaymentHood charge extra on top of PayTabs?
+    a: >-
+      No. PayTabs bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://ai.paytabs.com/en/faq/
+    - https://help.payhip.com/article/372-connect-your-paytabs-account
+  # NOTE: A canonical PayTabs developer-portal URL was not confirmed; replace the docs link before publishing.

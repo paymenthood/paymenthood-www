@@ -1,0 +1,16 @@
+---
+layout: none
+slug: paytabs
+title: "PayTabs Payment Gateway Integration"
+description: "Accept PayTabs payments through one PaymentHood integration — MENA. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/paytabs.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#d81e34;--pp-accent-text:#d81e34;--pp-accent-rgb:216,30,52;--pp-hero-end:#d81e34;--pp-blob-rgb:216,30,52}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

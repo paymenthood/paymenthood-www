@@ -49,6 +49,18 @@
   color: #fff;
 }
 
+// ── Plan badge ────────────────────────────────────────────────────────────────
+// Doubled selector, for the same reason as the platform colorways in
+// _sass/components/_shared.scss: style.css's `.badge:not(.badge-outline)` sets
+// both a white foreground and its own background at (0,2,0), so the
+// `bg-blue-30 txt-blue-200` utilities in the markup lose and the Free badge
+// renders white on #16a3fe — 2.72:1, effectively unreadable. Owning both
+// properties here at matching specificity is what actually fixes it.
+.badge.plan-badge {
+  background: var(--blue-30);
+  color: var(--blue-200);
+}
+
 // clamp() scales this down on narrow screens without a media query (the old
 // inline block used @media to drop it to 48px).
 .plan-price {
@@ -81,7 +93,10 @@
     border-bottom-color: rgba(255, 255, 255, .2);
   }
 
-  .plan-badge { background: rgba(255, 255, 255, .2); color: #fff; }
+  // .badge.plan-badge, not .plan-badge — it has to outrank the base rule above
+  // regardless of source order. White on the premium card's --blue-200 is
+  // 8.74:1, so this variant is fine as it stands.
+  .badge.plan-badge { background: rgba(255, 255, 255, .2); color: #fff; }
   .plan-feature-icon { background: rgba(255, 255, 255, .15); color: #fff; }
   .plan-feature dt { color: #fff; }
   .plan-feature dd { color: rgba(255, 255, 255, .8); }
@@ -99,10 +114,18 @@
   margin: 0 0 1.5rem;
 }
 
+// A <dl> may only contain dt/dd groups, or <div>s that themselves contain the
+// dt/dd directly. The earlier markup put a <span> icon and a wrapper <div>
+// inside each .plan-feature, which made the list invalid and left the dt/dd
+// with no <dl> ancestor as far as the accessibility tree was concerned.
+//
+// So the icon now lives inside the <dt> and is lifted out of the text flow,
+// with the row reserving a matching left gutter. The rendering is unchanged:
+// 48px icon at the left, label and description stacked beside it.
 .plan-feature {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  position: relative;
+  padding-left: calc(48px + 1rem);
+  min-height: 48px;
 
   dt {
     margin-bottom: .15rem;
@@ -119,10 +142,12 @@
 }
 
 .plan-feature-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   width: 48px;
   height: 48px;
   border-radius: 12px;

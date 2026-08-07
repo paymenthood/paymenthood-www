@@ -1,0 +1,16 @@
+---
+layout: none
+slug: palmpay
+title: "PalmPay Payment Gateway Integration"
+description: "Accept PalmPay payments through one PaymentHood integration — Nigeria. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/palmpay.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#6c2bd9;--pp-accent-text:#6c2bd9;--pp-accent-rgb:108,43,217;--pp-hero-end:#6c2bd9;--pp-blob-rgb:108,43,217}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

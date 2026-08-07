@@ -1,0 +1,87 @@
+# Single source of truth for /providers/sslcommerz/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/sslcommerz/index.html.
+
+name: SSLCommerz
+slug: sslcommerz
+status: live
+category: regional
+region: Bangladesh
+logo: /assets/images/home/providers-icon/sslcommerz.png
+accent: "#00539b"
+accent_rgb: "0,83,155"
+accent_text: "#00539b"   # computed: 7.75 on white, 7.35 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  SSLCommerz is Bangladesh's largest payment gateway, used by well over ten thousand
+  businesses. Its importance is the mobile financial services it aggregates — bKash, Nagad,
+  Rocket — which carry far more Bangladeshi consumer volume than cards do.
+
+countries:
+  - Bangladesh
+
+currencies: [BDT, USD, EUR, GBP, SGD, INR, MYR]
+
+methods:
+  - label: Mobile financial services
+    icon: mobile
+    detail: bKash, Nagad, Rocket and other Bangladeshi wallets
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express and local debit cards
+  - label: Internet banking
+    icon: bank
+    detail: Direct bank payment across Bangladeshi banks
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.sslcommerz.com/
+  docs: https://developer.sslcommerz.com/
+  pricing: https://www.sslcommerz.com/pricing/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Store ID and store password, held server-side in PaymentHood
+  webhook: Instant Payment Notification with signature validation before an order is released
+  verification: Server-side transaction validation against the SSLCommerz API before fulfilment
+
+faqs:
+  - q: Why do mobile wallets matter more than cards in Bangladesh?
+    a: >-
+      Mobile financial services like bKash and Nagad reach far more consumers than credit cards
+      do. A Bangladeshi checkout built around cards will convert poorly; one built around MFS will
+      not.
+  - q: Which currencies can I charge in?
+    a: >-
+      BDT plus USD, EUR, GBP, SGD, INR and MYR, with conversion to BDT at the prevailing rate.
+      Confirm the conversion terms with SSLCommerz — they affect what you actually receive.
+  - q: What integration options are there?
+    a: >-
+      Hosted payment pages, an embedded checkout, or the full REST API. Behind PaymentHood you get
+      the hosted flow without integrating any of them yourself.
+  - q: Does PaymentHood charge extra on top of SSLCommerz?
+    a: >-
+      No. SSLCommerz bills you directly for its own fees, and PaymentHood takes no percentage and
+      no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://paymentgateways.org/gateway/sslcommerz
+    - https://www.sslcommerz.com/

@@ -1,0 +1,104 @@
+# Single source of truth for /providers/tpay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/tpay/index.html.
+
+name: Tpay
+slug: tpay
+status: live
+category: regional
+region: MENA / Africa
+logo: /assets/images/home/providers-icon/tpay.png
+accent: "#5b2d90"
+accent_rgb: "91,45,144"
+accent_text: "#5b2d90"   # computed: 9.45 on white, 8.96 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Tpay (TPAY MOBILE) is a mobile-payments acquirer for the Middle East, Africa and Türkiye,
+  reaching consumers through direct carrier billing, mobile wallets and mobile money across
+  the region. It bills the purchase to the customer's phone account, so it reaches people with
+  no card and no bank account at all.
+
+countries:
+  - Egypt
+  - Saudi Arabia
+  - United Arab Emirates
+  - Jordan
+  - Qatar
+  - Kuwait
+  - Bahrain
+  - Oman
+  - Iraq
+  - Tunisia
+  - Algeria
+  - Morocco
+  - Türkiye
+  - Nigeria
+  - Kenya
+  - Ghana
+  - Tanzania
+  - Uganda
+  - Zambia
+  - Zimbabwe
+  - Mozambique
+
+currencies: [EGP, SAR, AED, NGN, KES, GHS, TRY]
+
+methods:
+  - label: Direct carrier billing
+    icon: mobile
+    detail: The purchase is charged to the customer's mobile phone account
+  - label: Mobile wallets
+    icon: wallet
+    detail: Regional wallet balances
+  - label: Mobile money
+    icon: mobile
+    detail: African mobile money networks
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.tpaymobile.com/
+  docs: https://www.tpaymobile.com/products/coverage/
+  pricing: https://www.tpaymobile.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant credentials issued per market, held server-side in PaymentHood
+  webhook: Signed billing notification, validated before an order is released
+  verification: Server-side transaction status re-check before fulfilment
+
+faqs:
+  - q: What is direct carrier billing?
+    a: >-
+      The purchase is charged to the customer's mobile phone bill or prepaid balance instead of a
+      card. No bank account, no card and no app are needed — which is why it reaches audiences no
+      card gateway can. - q: What is it actually good for? a: >- Low-value digital purchases:
+      games, subscriptions, video, education. Carrier billing fees are far higher than card fees
+      and per-transaction limits are low, so it does not suit physical goods or large baskets. -
+      q: How many markets does Tpay cover? a: >- Markets across the Middle East, Africa and
+      Türkiye, connected to a large number of mobile payment channels. Coverage is defined per
+      operator, so confirm your specific market and network. - q: Does PaymentHood charge extra on
+      top of Tpay? a: >- No. Tpay bills you directly for its own fees, and PaymentHood takes no
+      percentage and no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood
+      pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://www.tpaymobile.com/products/coverage/
+    - https://www.tpaymobile.com/company/

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: kuda
+nav_active: integrations
+title: "Kuda Payment Gateway for J2Commerce"
+description: "Accept Kuda payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/kuda.yml and
+sitemap: false     #   _data/combos/j2commerce-kuda.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#40196d;--pp-accent-text:#40196d;--pp-accent-rgb:64,25,109;--pp-hero-end:#40196d;--pp-blob-rgb:64,25,109}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

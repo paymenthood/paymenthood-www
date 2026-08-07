@@ -1,0 +1,87 @@
+# Single source of truth for /providers/kuda/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/kuda/index.html.
+
+name: Kuda
+slug: kuda
+status: live
+category: regional
+region: Nigeria
+logo: /assets/images/home/providers-icon/kuda-light.png
+accent: "#40196d"
+accent_rgb: "64,25,109"
+accent_text: "#40196d"   # computed: 13.31 on white, 12.63 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Kuda is a licensed Nigerian digital bank whose Business Open API gives merchants virtual
+  accounts, transfers and instant settlement. It is a banking API rather than a card gateway —
+  the distinction matters, because card acceptance is not what it is for.
+
+countries:
+  - Nigeria
+
+currencies: [NGN]
+
+methods:
+  - label: Virtual accounts
+    icon: bank
+    detail: A dedicated account number per customer or per transaction
+  - label: Bank transfer
+    icon: bank
+    detail: Collection and instant settlement over Nigerian bank rails
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://kuda.com/
+  docs: https://kuda.com/en-ng/business/open-api/
+  pricing: https://www.kuda.com/en-ng/business/api-pricing/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API key and client credentials, held server-side in PaymentHood
+  webhook: Signed credit notification, validated before an order is released
+  verification: Server-side transaction confirmation before fulfilment
+
+faqs:
+  - q: Can I accept card payments through Kuda?
+    a: >-
+      No — and this is the thing to get straight before choosing it. The Kuda Open API is built
+      around bank transfers and virtual accounts, not card acquiring. If you need cards, pair it
+      with a card provider; behind PaymentHood both run through one checkout.
+  - q: What is Kuda actually best at?
+    a: >-
+      Collections and payouts over Nigerian bank rails, with a real banking licence behind them.
+      Virtual accounts per customer make reconciliation straightforward, which is why it suits
+      recurring collections and marketplace payouts.
+  - q: Why does bank transfer matter so much in Nigeria?
+    a: >-
+      Card penetration is lower than transfer usage, and card declines are common. A checkout
+      offering a one-time virtual account number — the customer transfers from any bank app and
+      the payment confirms in seconds — will convert materially better than one offering cards
+      alone. It is the single most important local method to enable.
+  - q: Does PaymentHood charge extra on top of Kuda?
+    a: >-
+      No. Kuda bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://kuda.com/en-ng/business/open-api/
+    - https://www.kuda.com/en-ng/business/api-pricing/

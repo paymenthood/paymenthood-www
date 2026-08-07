@@ -1,0 +1,103 @@
+# Single source of truth for /providers/seerbit/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/seerbit/index.html.
+
+name: SeerBit
+slug: seerbit
+status: live
+category: regional
+region: Africa
+logo: /assets/images/home/providers-icon/seerbit-light.png
+accent: "#00629b"
+accent_rgb: "0,98,155"
+accent_text: "#00629b"   # computed: 6.52 on white, 6.19 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  SeerBit is a pan-African payment gateway covering West, East and Southern Africa, with local
+  acquiring in several markets. It accepts cards, USSD, bank transfer and direct debit through
+  one integration, which suits merchants selling across more than one African country from a
+  single storefront.
+
+countries:
+  - Nigeria
+  - Ghana
+  - Kenya
+  - Uganda
+  - Benin
+  - Senegal
+  - Côte d'Ivoire
+  - South Africa
+
+currencies: [NGN, GHS, KES, UGX, XOF, ZAR, USD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Verve, Visa and Mastercard
+  - label: USSD
+    icon: ussd
+    detail: Bank shortcode payment
+  - label: Bank transfer
+    icon: bank
+    detail: Transfer confirmed against the order
+  - label: Direct debit
+    icon: recurring
+    detail: Authorised recurring debit from the customer's account
+  - label: Mobile money
+    icon: mobile
+    detail: Regional wallets in the markets where SeerBit operates
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.seerbit.com/
+  docs: https://doc.seerbit.com/
+  pricing: https://www.seerbit.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Public and secret keys exchanged for a bearer token, held server-side in PaymentHood
+  webhook: Signed transaction notification, validated before an order is released
+  verification: Server-side transaction query against the SeerBit API before fulfilment
+
+faqs:
+  - q: Which African markets does SeerBit cover?
+    a: >-
+      Nigeria, Ghana, Kenya, Uganda, Benin, Senegal, Côte d'Ivoire and South Africa. The
+      Francophone West African coverage is less common among Nigerian-origin gateways and is a
+      genuine reason to pick it.
+  - q: SeerBit or a single-country provider?
+    a: >-
+      If you sell into one market, a local specialist usually offers deeper method coverage there.
+      SeerBit earns its place when you sell into several African countries and want one contract
+      instead of five.
+  - q: Does it support recurring billing?
+    a: >-
+      Direct debit is supported for authorised recurring collection. Confirm the mandate rules for
+      your specific market with SeerBit before building a subscription product on it.
+  - q: Does PaymentHood charge extra on top of SeerBit?
+    a: >-
+      No. SeerBit bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://www.seerbit.com/
+    - https://www.seerbit.com/local-acquiring-in-africa
+    - https://support.wix.com/en/article/connecting-seerbit-as-a-payment-provider

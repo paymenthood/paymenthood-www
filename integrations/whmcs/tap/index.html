@@ -1,0 +1,18 @@
+---
+layout: none
+platform: whmcs
+provider: tap
+nav_active: integrations
+title: "Tap Payments Payment Gateway for WHMCS"
+description: "Accept Tap Payments payments on WHMCS with the free PaymentHood module. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/tap.yml and
+sitemap: false     #   _data/combos/whmcs-tap.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#1a56db;--pp-accent-text:#1a56db;--pp-accent-rgb:26,86,219;--pp-hero-end:#1a56db;--pp-blob-rgb:26,86,219}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

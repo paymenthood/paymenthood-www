@@ -1,0 +1,18 @@
+---
+layout: none
+platform: virtuemart
+provider: binance
+nav_active: integrations
+title: "Binance Pay Payment Gateway for VirtueMart"
+description: "Accept Binance Pay payments on VirtueMart with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/binance.yml and
+sitemap: false     #   _data/combos/virtuemart-binance.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#f0b90b;--pp-accent-text:#8e6b00;--pp-accent-rgb:240,185,11;--pp-hero-end:#f0b90b;--pp-blob-rgb:240,185,11}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

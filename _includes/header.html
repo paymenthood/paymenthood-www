@@ -2,6 +2,16 @@
 <html lang="en" class="js">
 
 <head>
+    {%- comment -%}
+      charset MUST stay the first thing in <head>. The HTML spec requires the
+      character encoding declaration to appear entirely within the first 1024
+      bytes of the document; below the Consent Mode/GTM script it landed at
+      ~2890 bytes on every real page, so the browser had to guess the encoding
+      before it ever reached the declaration. Nothing may be inserted above it —
+      not a comment, not a script, not a preconnect.
+    {%- endcomment -%}
+    <meta charset="utf-8">
+
     <!-- Consent Mode v2 defaults + consent-gated Google Tag Manager -->
     {%- comment -%}
       Two independent layers, on purpose:
@@ -88,7 +98,6 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <meta charset="utf-8">
     <meta name="author" content="PaymentHood">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
     {% if page.noindex %}

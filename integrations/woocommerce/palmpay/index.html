@@ -1,0 +1,18 @@
+---
+layout: none
+platform: woocommerce
+provider: palmpay
+nav_active: integrations
+title: "PalmPay Payment Gateway for WooCommerce"
+description: "Accept PalmPay payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/palmpay.yml and
+sitemap: false     #   _data/combos/woocommerce-palmpay.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#6c2bd9;--pp-accent-text:#6c2bd9;--pp-accent-rgb:108,43,217;--pp-hero-end:#6c2bd9;--pp-blob-rgb:108,43,217}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

@@ -1,0 +1,97 @@
+# Single source of truth for /providers/opay/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/opay/index.html.
+
+name: OPay
+slug: opay
+status: live
+category: regional
+region: Nigeria
+logo: /assets/images/home/providers-icon/opay-light.png
+accent: "#00873d"
+accent_rgb: "0,135,61"
+accent_text: "#00843b"   # computed: 4.81 on white, 4.57 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  OPay is a Nigerian fintech with one of the country's largest consumer wallet bases, and its
+  Cashier API lets merchants accept payment from that wallet as well as by card, bank
+  transfer, USSD and agent reference code. The wallet reach is the reason to add it — those
+  customers are already funded.
+
+countries:
+  - Nigeria
+
+currencies: [NGN]
+
+methods:
+  - label: OPay wallet
+    icon: wallet
+    detail: Payment from the customer's OPay balance, including QR
+  - label: Cards
+    icon: card
+    detail: 3-D Secure card payments
+  - label: Bank transfer
+    icon: bank
+    detail: Transfer confirmed against the order
+  - label: USSD
+    icon: ussd
+    detail: Bank shortcode payment
+  - label: Agent reference
+    icon: mobile
+    detail: A reference code paid at an agent location
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.opayweb.com/
+  docs: https://doc.opaycheckout.com/
+  pricing: https://www.opayweb.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: Merchant ID with public and private keys and request signing, held server-side in PaymentHood
+  webhook: Signed callback, validated before an order is released
+  verification: Server-side order query against the OPay API before fulfilment
+
+faqs:
+  - q: Why add OPay if I already take cards and transfers?
+    a: >-
+      Wallet reach. OPay has one of Nigeria's largest funded consumer wallet bases, and paying
+      from a wallet balance is one tap with no card decline risk. It converts a segment that a
+      card-only checkout loses.
+  - q: Does OPay offer hosted checkout?
+    a: >-
+      Yes — Express Checkout is a hosted flow, and there are server-to-server APIs if you want to
+      control the experience yourself. Behind PaymentHood you get the hosted flow without
+      integrating it directly.
+  - q: Why does bank transfer matter so much in Nigeria?
+    a: >-
+      Card penetration is lower than transfer usage, and card declines are common. A checkout
+      offering a one-time virtual account number — the customer transfers from any bank app and
+      the payment confirms in seconds — will convert materially better than one offering cards
+      alone. It is the single most important local method to enable.
+  - q: Does PaymentHood charge extra on top of OPay?
+    a: >-
+      No. OPay bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://doc.opaycheckout.com/
+    - https://documentation.opaycheckout.com/

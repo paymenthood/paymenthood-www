@@ -1,0 +1,16 @@
+---
+layout: none
+slug: bitpay
+title: "BitPay Payment Gateway Integration"
+description: "Accept BitPay payments through one PaymentHood integration — Global. Free plugins, no PaymentHood transaction fee."
+noindex: true      # ← remove once _data/providers/bitpay.yml is human-verified
+sitemap: false     # ← remove together with noindex, never separately
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#113375;--pp-accent-text:#113375;--pp-accent-rgb:17,51,117;--pp-hero-end:#113375;--pp-blob-rgb:17,51,117}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: pesapal
+nav_active: integrations
+title: "Pesapal Payment Gateway for J2Commerce"
+description: "Accept Pesapal payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/pesapal.yml and
+sitemap: false     #   _data/combos/j2commerce-pesapal.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#f7941d;--pp-accent-text:#a5600b;--pp-accent-rgb:247,148,29;--pp-hero-end:#f7941d;--pp-blob-rgb:247,148,29}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

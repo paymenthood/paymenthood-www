@@ -1,0 +1,90 @@
+# Single source of truth for /providers/moniepoint/.
+#
+# RULE: every factual claim rendered on the provider page comes from this file,
+# and every field traces to a URL in `verification.sources`. Nothing is written
+# from memory. `fees` is deliberately absent from the schema — provider pricing
+# changes without notice, so the template links to the provider's own pricing
+# page rather than restating a number that will go stale.
+#
+# accent_text is computed, not chosen: it is `accent` darkened until it clears
+# WCAG AA (4.5:1) on white and on .bg-light. Use it for text and small icons;
+# `accent` stays the true brand colour for fills and gradients.
+#
+# Set `verification.verified_by` once every field is checked against the sources
+# below, then delete `noindex`/`sitemap: false` from providers/moniepoint/index.html.
+
+name: Moniepoint
+slug: moniepoint
+status: live
+category: regional
+region: Nigeria
+logo: /assets/images/home/providers-icon/Moniepoint-light.png
+accent: "#0357ee"
+accent_rgb: "3,87,238"
+accent_text: "#0357ee"   # computed: 5.83 on white, 5.53 on bg-light
+
+# Lead paragraph, written to be lifted verbatim as a featured snippet or an
+# LLM citation: definition first, no marketing wind-up.
+summary: >-
+  Moniepoint is a Nigerian business banking and payments group best known for the
+  agent-banking network that processes a large share of the country's in-person transactions.
+  For online merchants it provides card, transfer and agent-cash collection, with Monnify as
+  its developer-facing gateway.
+
+countries:
+  - Nigeria
+
+currencies: [NGN]
+
+methods:
+  - label: Bank transfer
+    icon: bank
+    detail: Virtual account collection confirmed in real time
+  - label: Cards
+    icon: card
+    detail: Verve, Mastercard and Visa
+  - label: Agent network
+    icon: mobile
+    detail: Cash collection through Moniepoint agents
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://moniepoint.com/
+  docs: https://developers.monnify.com/
+  pricing: https://moniepoint.com/
+
+# What PaymentHood does on the merchant's behalf — keep accurate to the actual
+# implementation, not to the provider's own marketing.
+integration:
+  auth: API credentials exchanged for a bearer token, held server-side in PaymentHood
+  webhook: Signed transaction webhook, validated before an order is released
+  verification: Server-side transaction status re-check before fulfilment
+
+faqs:
+  - q: How does Moniepoint relate to Monnify?
+    a: >-
+      Monnify is Moniepoint's payment gateway product — the developer-facing collection API. If
+      you are integrating online payments you are working with Monnify; Moniepoint is the wider
+      banking and agent business around it.
+  - q: What does the agent network add for an online merchant?
+    a: >-
+      Cash reach. Customers without a bank app can pay in cash at an agent and have the order
+      confirmed, which no purely digital gateway can offer.
+  - q: Why does bank transfer matter so much in Nigeria?
+    a: >-
+      Card penetration is lower than transfer usage, and card declines are common. A checkout
+      offering a one-time virtual account number — the customer transfers from any bank app and
+      the payment confirms in seconds — will convert materially better than one offering cards
+      alone. It is the single most important local method to enable.
+  - q: Does PaymentHood charge extra on top of Moniepoint?
+    a: >-
+      No. Moniepoint bills you directly for its own fees, and PaymentHood takes no percentage and
+      no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-07
+  verified_by:
+  sources:
+    - https://moniepoint.com/blog/how-we-made-monnify-the-faster-and-better-payment-gateway-in-nigeria
+    - https://developers.monnify.com/

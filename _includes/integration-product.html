@@ -49,7 +49,15 @@
 {%- endif -%}
 {%- capture providers_desc %}Connect any of these globally trusted providers to your {{ p.platform }} store through a single PaymentHood integration.{% endcapture -%}
 
-<main id="main-content">
+{%- comment -%}
+  `prose-links` (see _sass/components/_provider.scss) gives inline links inside
+  paragraphs, list items and FAQ answers a readable colour plus an underline.
+  Without it the why-card's "Premium plan" link renders in the site-wide
+  #16a3fe, which is 2.73:1 on white and 2.92:1 against the text around it —
+  failing both the AA contrast minimum and WCAG 1.4.1. The class deliberately
+  leaves the dark hero and CTA banner alone.
+{%- endcomment -%}
+<main id="main-content" class="prose-links">
 
 <!-- Hero -->
 <section class="product-hero tc-light">
@@ -63,8 +71,12 @@
                 <h2 class="h1 fw-bold text-white mb-4">{{ hero_title }}</h2>
                 <p class="lead mb-5 hero-lead">{{ lead }}</p>
                 <div class="hero-cta mb-4">
-                <div class="cta-buttons d-flex gap-3 mb-3">
-                    <a href="{{ install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
+                <div class="cta-buttons d-flex flex-wrap gap-3 mb-3">
+                    <a href="{{ site.signup_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
+                        <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                        Create Free Account
+                    </a>
+                    <a href="{{ install_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center">
                         <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                         Installation Guide
                     </a>
@@ -293,6 +305,10 @@
 <!-- Providers -->
 {% include providers-strip.html description=providers_desc %}
 
+<!-- Per-provider setup guides. Also the only internal path to the
+     /integrations/<platform>/<provider>/ pages — do not remove. -->
+{% include provider-links-grid.html platform=include.slug %}
+
 <!-- Why -->
 <section class="section">
     <div class="container">
@@ -354,8 +370,12 @@
                 <div class="col-lg-8">
                     <h2 class="h2 fw-bold mb-4">Start Accepting Payments on Your {{ p.platform }} Store</h2>
                     <p class="mb-5 mw-narrow">{{ cta_text }}</p>
-                    <div class="cta-buttons d-flex gap-3">
-                        <a href="{{ install_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
+                    <div class="cta-buttons d-flex flex-wrap gap-3">
+                        <a href="{{ site.signup_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill d-inline-flex align-items-center justify-content-center">
+                            <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                            Create Free Account
+                        </a>
+                        <a href="{{ install_url }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2 d-inline-flex align-items-center justify-content-center">
                             <svg aria-hidden="true" class="me-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4c2.5-1.5 5.5-1.5 8 0v16c-2.5-1.5-5.5-1.5-8 0V4z"/><path d="M22 4c-2.5-1.5-5.5-1.5-8 0v16c2.5-1.5 5.5-1.5 8 0V4z"/></svg>
                             Installation Guide
                         </a>

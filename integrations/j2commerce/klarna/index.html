@@ -1,0 +1,18 @@
+---
+layout: none
+platform: j2commerce
+provider: klarna
+nav_active: integrations
+title: "Klarna Payment Gateway for J2Commerce"
+description: "Accept Klarna payments on J2Commerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+noindex: true      # ← remove only when BOTH _data/providers/klarna.yml and
+sitemap: false     #   _data/combos/j2commerce-klarna.yml are human-verified
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#ffb3c7;--pp-accent-text:#936372;--pp-accent-rgb:255,179,199;--pp-hero-end:#ffb3c7;--pp-blob-rgb:255,179,199}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}
