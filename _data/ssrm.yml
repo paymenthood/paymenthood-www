@@ -1,0 +1,166 @@
+# Shared Security Responsibility Model — /trust-center/shared-responsibility/
+#
+# Derived from the CAIQ v4.0.3 self-assessment. If this file and the CAIQ ever
+# disagree, the CAIQ is the source and this is stale.
+#
+# Deliberately absent: per-domain answered/unanswered counts. They change every
+# time a control is closed, and a stale scorecard on a public page is worse than
+# no scorecard. Ownership is durable; tallies are not. The full answers live on
+# the CSA STAR Registry, which is where a reviewer should read them.
+#
+# Nothing here may state a control that section A or B of the internal claims
+# register does not support.
+
+parties:
+  - id: azure
+    name: Microsoft Azure
+    role: Infrastructure provider
+    icon: cloud
+    owns: >-
+      Physical and environmental security, host hardening, hypervisor isolation and
+      platform redundancy — backed by Azure's own ISO 27001, SOC 1/2/3 and PCI DSS
+      attestations. PaymentHood operates no facilities and no physical equipment.
+
+  - id: paymenthood
+    name: PaymentHood
+    role: The orchestration service
+    icon: shield
+    owns: >-
+      Application security, tenant isolation, encryption of the provider credentials
+      you give us, webhook signing, audit logging, and the availability of the
+      payment API.
+
+  - id: merchant
+    name: You
+    role: The merchant
+    icon: user
+    owns: >-
+      Your own integration: how you store the API key we issue, who you grant console
+      access to, whether your endpoint verifies our webhook signature, and any channel
+      through which you collect payment details yourself.
+
+# Primary owner per CCM v4 domain. "Inherited" means the control is satisfied by
+# Azure and PaymentHood does not implement it independently.
+domains:
+  - code: A&A
+    name: Audit & Assurance
+    owner: paymenthood
+  - code: AIS
+    name: Application & Interface Security
+    owner: paymenthood
+  - code: BCR
+    name: Business Continuity & Resilience
+    owner: shared
+  - code: CCC
+    name: Change Control & Configuration
+    owner: paymenthood
+  - code: CEK
+    name: Cryptography, Encryption & Key Management
+    owner: paymenthood
+  - code: DCS
+    name: Datacenter Security
+    owner: azure
+  - code: DSP
+    name: Data Security & Privacy Lifecycle
+    owner: shared
+  - code: GRC
+    name: Governance, Risk & Compliance
+    owner: paymenthood
+  - code: HRS
+    name: Human Resources Security
+    owner: paymenthood
+  - code: IAM
+    name: Identity & Access Management
+    owner: shared
+  - code: IPY
+    name: Interoperability & Portability
+    owner: paymenthood
+  - code: IVS
+    name: Infrastructure & Virtualization Security
+    owner: shared
+  - code: LOG
+    name: Logging & Monitoring
+    owner: paymenthood
+  - code: SEF
+    name: Security Incident Management
+    owner: shared
+  - code: STA
+    name: Supply Chain Management & Accountability
+    owner: shared
+  - code: TVM
+    name: Threat & Vulnerability Management
+    owner: paymenthood
+  - code: UEM
+    name: Universal Endpoint Management
+    owner: paymenthood
+
+# The ones merchants most often assume are ours. Each must be defensible against
+# the internal claims register.
+merchant_duties:
+  - icon: key
+    title: The API key we issue you
+    body: >-
+      It authenticates as your application. User self-registration and user-generated
+      API keys are disabled by default, but the key you hold is yours to store safely
+      and to replace if it is ever exposed.
+
+  - icon: users
+    title: Who you invite to the console
+    body: >-
+      We enforce multi-factor authentication and check every permission server-side on
+      every request. We cannot know which of your staff should be able to issue a refund.
+
+  - icon: card
+    title: Any channel where you take card details yourself
+    body: >-
+      Card data reaches your provider directly and never passes through PaymentHood. If
+      you also collect payment details some other way — over the phone, or on a form you
+      built — that channel is yours to assess.
+
+  - icon: link
+    title: Your provider relationships
+    body: >-
+      You hold the contract with each payment provider and settle directly with them.
+      Their fees, their coverage and their compliance posture are theirs to state.
+
+  - icon: signature
+    title: Acting on the webhooks we send
+    body: >-
+      Every webhook is signed with HMAC-SHA256 over the timestamp and body. Your endpoint
+      must verify that signature, and must never treat a browser redirect back to your
+      site as proof that a payment succeeded.
+
+  - icon: flask
+    title: Testing before you go live
+    body: >-
+      Every account gets a sandbox with its own API keys, isolated from live data and
+      running against your provider's test credentials. Proving your integration there —
+      including that your endpoint validates our signature — is yours to do before you
+      switch to live keys.
+
+  - icon: database
+    title: What you put in the fields we give you
+    body: >-
+      Metadata and reference fields are stored as you send them. Do not place cardholder
+      data or unnecessary personal data in them.
+
+# Stated plainly so nobody discovers it halfway through a vendor review. Every
+# line here is a "No" in the CAIQ; keep the two in step.
+limits:
+  - title: No independent audit
+    body: >-
+      No SOC 2 report, ISO 27001 certificate or PCI DSS Attestation of Compliance exists
+      for PaymentHood. Our CAIQ is a self-assessment, not a certification, and we say so
+      on the register itself.
+  - title: No independent penetration test
+    body: >-
+      We run automated dependency and code scanning on every change, but no third-party
+      penetration test has been commissioned to date.
+  - title: No customer-managed keys
+    body: >-
+      Credentials are encrypted with our key, not a key you supply or control.
+  - title: No rotation of the master credential key
+    body: >-
+      Individual secrets you control — your webhook signing secret, your provider
+      credentials — can be replaced at any time from your dashboard. The master key that
+      seals the credential store cannot currently be rotated without re-encryption.

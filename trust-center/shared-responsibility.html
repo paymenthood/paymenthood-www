@@ -1,0 +1,181 @@
+---
+layout: none
+title: Shared Security Responsibility Model
+description: Who is responsible for what across PaymentHood, Microsoft Azure and you — control ownership by CCM domain, your responsibilities as a merchant, and the limits we state plainly.
+nav_active: security
+permalink: /trust-center/shared-responsibility/
+---
+
+{% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/trust-center.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/ssrm.css' | relative_url }}">
+
+<nav class="tc-nav-wrap" aria-label="Page sections">
+    <div class="container">
+        <ul class="tc-nav list-unstyled mb-0">
+            <li><a href="/trust-center/">&larr; Trust Center</a></li>
+            <li><a href="#parties">The Three Parties</a></li>
+            <li><a href="#ownership">Ownership by Domain</a></li>
+            <li><a href="#yours">What Is Yours</a></li>
+            <li><a href="#limits">What We Do Not Do</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main id="main-content" class="overflow-hidden">
+
+    <!-- Intro -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="tc-callout animated" data-animate="fadeInUp" data-delay=".1">
+                        <span class="tc-eyebrow">Shared Security Responsibility Model</span>
+                        <h2 class="h2 fw-bold mb-3">Security is a boundary, not a promise</h2>
+                        <p class="tc-callout-lead">Every cloud service divides responsibility with the people who use it, and most incidents happen where each side assumed the other had it covered. This page draws that line. It is the companion to our CSA CAIQ self-assessment: the questionnaire says what is in place, this says who owns each part.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. The three parties -->
+    <section class="section bg-light" id="parties">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">The Three Parties</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Three Layers, Three Owners</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">PaymentHood sits between the platform underneath and the integration you build on top. Each layer is somebody's job.</p>
+            </div>
+
+            <div class="ssrm-parties animated" data-animate="fadeInUp" data-delay=".4">
+                {% for p in site.data.ssrm.parties %}
+                <div class="ssrm-party ssrm-party--{{ p.id }}">
+                    <div class="ssrm-party-head">
+                        <span class="ssrm-party-icon" aria-hidden="true">{% include ssrm-icon.html name=p.icon %}</span>
+                        <div>
+                            <h3 class="h5 mb-0">{{ p.name }}</h3>
+                            <span class="ssrm-party-role">{{ p.role }}</span>
+                        </div>
+                    </div>
+                    <p>{{ p.owns }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Ownership by CCM domain -->
+    <section class="section" id="ownership">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Control Ownership</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Mapped to CSA CCM v4</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">Primary owner for each of the seventeen Cloud Controls Matrix domains. <strong>Shared</strong> means the control only works if both sides hold up their end.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="ssrm-legend animated" data-animate="fadeInUp" data-delay=".35">
+                        <span class="ssrm-key ssrm-key--azure">Microsoft Azure</span>
+                        <span class="ssrm-key ssrm-key--paymenthood">PaymentHood</span>
+                        <span class="ssrm-key ssrm-key--shared">Shared with you</span>
+                    </div>
+
+                    <ul class="ssrm-domains list-unstyled animated" data-animate="fadeInUp" data-delay=".4">
+                        {% for d in site.data.ssrm.domains %}
+                        <li class="ssrm-domain ssrm-domain--{{ d.owner }}">
+                            <span class="ssrm-domain-code">{{ d.code }}</span>
+                            <span class="ssrm-domain-name">{{ d.name }}</span>
+                            <span class="ssrm-domain-owner">
+                                {%- if d.owner == 'azure' -%}Azure
+                                {%- elsif d.owner == 'shared' -%}Shared
+                                {%- else -%}PaymentHood
+                                {%- endif -%}
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <p class="tc-fineprint animated" data-animate="fadeInUp" data-delay=".5">Datacenter Security is inherited: PaymentHood operates no physical equipment, so those controls are satisfied by Azure's own attestations rather than implemented by us.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. What is yours -->
+    <section class="section bg-blue-30" id="yours">
+        <div class="container">
+            <div class="section-head wide-sm text-center">
+                <span class="animated" data-animate="fadeInUp" data-delay=".1">Your Responsibilities</span>
+                <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">The Ones People Assume Are Ours</h2>
+                <p class="animated" data-animate="fadeInUp" data-delay=".3">Nothing here is a surprise once it is written down. That is the point of writing it down.</p>
+            </div>
+
+            <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".4">
+                {% for duty in site.data.ssrm.merchant_duties %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="ssrm-duty h-100">
+                        <span class="ssrm-duty-icon" aria-hidden="true">{% include ssrm-icon.html name=duty.icon %}</span>
+                        <h3 class="h6">{{ duty.title }}</h3>
+                        <p>{{ duty.body }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Honest limits -->
+    <section class="section" id="limits">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-head wide-sm text-center">
+                        <span class="animated" data-animate="fadeInUp" data-delay=".1">Stated Plainly</span>
+                        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">What We Do Not Do</h2>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".3">A responsibility model that only lists strengths is marketing. These are the gaps, so you find them here rather than three weeks into a vendor review.</p>
+                    </div>
+
+                    <div class="ssrm-limits animated" data-animate="fadeInUp" data-delay=".4">
+                        {% for l in site.data.ssrm.limits %}
+                        <div class="ssrm-limit">
+                            <h3 class="h6">{{ l.title }}</h3>
+                            <p>{{ l.body }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="tc-disclosure animated" data-animate="fadeInUp" data-delay=".1">
+                        <div class="tc-disclosure-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <div>
+                            <h2 class="h3 fw-bold mb-2">Running a vendor review?</h2>
+                            <p class="mb-4">Send us the questionnaire. We answer it against this model rather than around it, and we will go further under NDA than we will in public — including on architecture and on our fraud signals.</p>
+                            <div class="tc-disclosure-actions">
+                                <a href="/contact-us.html" class="btn btn-green-300 btn-lg px-4 rounded-pill">Request Documentation</a>
+                                <a href="/trust-center/" class="btn btn-outline-primary btn-lg px-4 rounded-pill">Back to Trust Center</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

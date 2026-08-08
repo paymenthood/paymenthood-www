@@ -14,9 +14,11 @@ faqs:
 
   - q: Where are my provider credentials stored?
     a: >-
-      Encrypted at rest with AES-256 under a key dedicated to your merchant account.
-      That key is itself sealed with AES-256-GCM under a master key held in a managed
-      key service.
+      Encrypted at rest with AES-256-GCM authenticated encryption. The key ring that
+      protects them is itself sealed under a master key supplied to the service at
+      runtime, so it is never stored alongside the credentials it protects. Provider
+      credentials are decrypted only for the moment an outbound call is made, and are
+      never written back in the clear or included in log output.
 
   - q: Can I force my whole team to use MFA?
     a: >-

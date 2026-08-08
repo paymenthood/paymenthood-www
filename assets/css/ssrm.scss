@@ -1,0 +1,231 @@
+---
+---
+
+// Page stylesheet for /trust-center/shared-responsibility/ only. Loaded after
+// trust-center.css, which supplies the sticky section nav, .tc-callout and
+// .tc-disclosure. This file holds the parts unique to the responsibility model:
+// the three-party row, the domain ownership list, the duty grid and the limits.
+
+// ── The three parties ─────────────────────────────────────────────────────────
+// Equal columns on desktop; the middle card (PaymentHood) is the one being
+// evaluated, so it carries the accent treatment and the others recede.
+.ssrm-parties {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.ssrm-party {
+  padding: 1.9rem 1.6rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 18px;
+  border-top: 3px solid var(--blue-100);
+
+  p {
+    margin: 0;
+    color: var(--blue-400);
+    font-size: 0.89rem;
+    line-height: 1.7;
+  }
+}
+
+.ssrm-party-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.05rem;
+
+  h3 { color: var(--blue-600); }
+}
+
+.ssrm-party-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--blue-30);
+  color: var(--blue-400);
+}
+
+.ssrm-party-role {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+  margin-top: 0.2rem;
+}
+
+.ssrm-party--paymenthood {
+  border-top-color: var(--green-300);
+  box-shadow: 0 8px 30px rgba(16, 42, 86, 0.07);
+
+  .ssrm-party-icon { background: var(--green-300); color: #fff; }
+}
+
+.ssrm-party--merchant .ssrm-party-icon { background: var(--blue-200); color: #fff; }
+
+@media (max-width: 991px) {
+  .ssrm-parties { grid-template-columns: 1fr; }
+}
+
+// ── Domain ownership ──────────────────────────────────────────────────────────
+// A list, not a <table>: there are only three columns and the middle one is the
+// only prose. A list reflows to two lines on a phone without the horizontal
+// scroll a table would force.
+.ssrm-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.ssrm-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.34rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  color: var(--blue-400);
+
+  &::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+}
+
+.ssrm-key--azure        { color: var(--blue-200); }
+.ssrm-key--paymenthood  { color: var(--green-300); }
+.ssrm-key--shared       { color: var(--blue-600); }
+
+.ssrm-domains {
+  margin: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ssrm-domain {
+  display: grid;
+  grid-template-columns: 4.25rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--gray-200);
+
+  &:last-child { border-bottom: 0; }
+  &:nth-child(even) { background: var(--blue-30); }
+}
+
+.ssrm-domain-code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--blue-200);
+}
+
+.ssrm-domain-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--blue-600);
+}
+
+// The owner pill carries the same three colours as the legend. Text sits on a
+// tinted background rather than the accent itself, so contrast stays above 4.5:1
+// for every one of the three — the accents are chosen for borders, not for text.
+.ssrm-domain-owner {
+  justify-self: end;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ssrm-domain--azure       .ssrm-domain-owner { background: #e8eefb; color: #1f4491; }
+.ssrm-domain--paymenthood .ssrm-domain-owner { background: #e4f5ec; color: #14663f; }
+.ssrm-domain--shared      .ssrm-domain-owner { background: #eceff4; color: var(--blue-600); }
+
+@media (max-width: 575px) {
+  .ssrm-domain {
+    grid-template-columns: 4.25rem 1fr;
+    row-gap: 0.4rem;
+  }
+
+  .ssrm-domain-owner {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+// ── Merchant duties ───────────────────────────────────────────────────────────
+.ssrm-duty {
+  padding: 1.6rem;
+  background: #fff;
+  border: 1px solid var(--blue-100);
+  border-radius: 16px;
+
+  h3 { color: var(--blue-600); margin-bottom: 0.5rem; }
+  p  { color: var(--blue-400); font-size: 0.855rem; line-height: 1.65; margin: 0; }
+}
+
+.ssrm-duty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--blue-200);
+  color: #fff;
+  margin-bottom: 0.9rem;
+}
+
+// ── Honest limits ─────────────────────────────────────────────────────────────
+// Muted rather than alarming. These are disclosures, not warnings; styling them
+// as warnings would overstate them and undermine the page's credibility.
+.ssrm-limits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.ssrm-limit {
+  position: relative;
+  padding: 1.4rem 1.5rem 1.4rem 1.75rem;
+  background: var(--blue-30);
+  border-radius: 14px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.4rem;
+    bottom: 1.4rem;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--blue-100);
+  }
+
+  h3 { color: var(--blue-600); margin-bottom: 0.4rem; }
+  p  { color: var(--blue-400); font-size: 0.855rem; line-height: 1.65; margin: 0; }
+}
+
+@media (max-width: 767px) {
+  .ssrm-limits { grid-template-columns: 1fr; }
+}

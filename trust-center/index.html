@@ -23,6 +23,7 @@ redirect_from: /security/
             <li><a href="#fraud">Fraud &amp; Risk</a></li>
             <li><a href="#infrastructure">Infrastructure</a></li>
             <li><a href="#compliance">Compliance</a></li>
+            <li><a href="#responsibility">Responsibility</a></li>
             <li><a href="#incident">Incident Response</a></li>
             <li><a href="#disclosure">Disclosure</a></li>
         </ul>
@@ -46,7 +47,7 @@ redirect_from: /security/
                             <div class="tc-principle"><h3 class="h5">Minimise the blast radius</h3><p>If sensitive data never enters a system, it cannot leak from it. Tokenization is our first control, not our last.</p></div>
                         </div>
                         <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
-                            <div class="tc-principle"><h3 class="h5">Isolate every merchant</h3><p>Each merchant's credentials are encrypted under their own dedicated key, so no two merchants ever share an encryption boundary.</p></div>
+                            <div class="tc-principle"><h3 class="h5">Isolate every merchant</h3><p>Authorization is checked server-side on every request against your application and merchant scope, so one merchant's data is never reachable from another's session or API key.</p></div>
                         </div>
                         <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
                             <div class="tc-principle"><h3 class="h5">Make everything provable</h3><p>Signed webhooks and end to end audit logs mean security claims can be verified, not just trusted.</p></div>
@@ -90,12 +91,12 @@ redirect_from: /security/
                 <li class="tc-flow-step tc-flow-step--internal">
                     <span class="tc-flow-icon" aria-hidden="true">🔐</span>
                     <span class="tc-flow-title">Encrypted Storage</span>
-                    <span class="tc-flow-desc">Token stored with AES-256 under a per-merchant key</span>
+                    <span class="tc-flow-desc">Token sealed with AES-256-GCM at rest</span>
                 </li>
             </ol>
 
             <p class="tc-flow-note animated" data-animate="fadeInUp" data-delay=".5">
-                Card data flows only between your customer and your provider. Everything PaymentHood touches is a token, which is precisely why we carry no PCI scope and neither does the integration you build on us.
+                Card data flows only between your customer and your provider. Everything PaymentHood touches is a token — which means adding PaymentHood brings no cardholder data into your environment, and no new PCI obligation with it.
             </p>
         </div>
     </section>
@@ -141,8 +142,8 @@ redirect_from: /security/
                 <p class="animated" data-animate="fadeInUp" data-delay=".3">At rest, in transit, and in every notification we send.</p>
             </div>
             <div class="row g-4 animated" data-animate="fadeInUp" data-delay=".4">
-                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon navy">🔐</div><h3 class="h4">AES-256 at Rest</h3><p>Every merchant's payment provider credentials are encrypted at rest with AES-256, using a dedicated key per merchant.</p></div></div>
-                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon blue">🗝️</div><h3 class="h4">Sealed Keys</h3><p>Encryption keys are themselves sealed with AES-256-GCM authenticated encryption under a master key held in a managed key service, never stored beside the data they protect.</p></div></div>
+                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon navy">🔐</div><h3 class="h4">AES-256 at Rest</h3><p>Every merchant's payment provider credentials are sealed at rest with AES-256-GCM, and are decrypted only for the moment a provider call is made — never written back in the clear.</p></div></div>
+                <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon blue">🗝️</div><h3 class="h4">Sealed Keys</h3><p>The key ring that protects your credentials is itself sealed with AES-256-GCM authenticated encryption, under a master key supplied to the service at runtime and never stored beside the data it protects.</p></div></div>
                 <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon teal">🔒</div><h3 class="h4">TLS in Transit</h3><p>All traffic between your systems, your customers, and PaymentHood is protected with HTTPS/TLS. End to end, with no exceptions.</p></div></div>
                 <div class="col-md-6"><div class="feat-card h-100"><div class="feat-card-icon orange">✍️</div><h3 class="h4">HMAC-SHA256 Webhooks</h3><p>Every webhook is signed and timestamped, so you can verify each notification came from PaymentHood and was not tampered with or replayed.</p></div></div>
             </div>
@@ -219,7 +220,7 @@ redirect_from: /security/
                         </div>
                         <div class="fact-row">
                             <dt class="fact-label">PCI scope</dt>
-                            <dd class="fact-value">Card data is handled entirely within your payment provider's own certified environment. PaymentHood works only with provider issued tokens.</dd>
+                            <dd class="fact-value">Card data is handled entirely within your payment provider's certified environment, and PaymentHood works only with provider-issued tokens. Adding PaymentHood introduces no cardholder data into your systems, so it adds nothing to whatever PCI obligation your own channels already carry.</dd>
                         </div>
                         <div class="fact-row">
                             <dt class="fact-label">Provider certification</dt>
@@ -236,7 +237,29 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 9. Incident Response -->
+    <!-- 9. Shared responsibility -->
+    <section class="section" id="responsibility">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="tc-disclosure animated" data-animate="fadeInUp" data-delay=".1">
+                        <div class="tc-disclosure-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+                        </div>
+                        <div>
+                            <h2 class="h3 fw-bold mb-2">Who Is Responsible for What</h2>
+                            <p class="mb-4">Most security incidents happen at the seam, where each side assumed the other had it covered. Our Shared Security Responsibility Model draws that line explicitly across all seventeen CSA Cloud Controls Matrix domains — including a plain list of the things we do not do.</p>
+                            <div class="tc-disclosure-actions">
+                                <a href="/trust-center/shared-responsibility/" class="btn btn-green-300 btn-lg px-4 rounded-pill">Read the Responsibility Model</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Incident Response -->
     <section class="section" id="incident">
         <div class="container">
             <div class="section-head wide-sm text-center">
@@ -246,14 +269,14 @@ redirect_from: /security/
             </div>
             <div class="row g-4 justify-content-center animated" data-animate="fadeInUp" data-delay=".4">
                 <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">1</span><h3 class="h6">Detect</h3><p>Platform and gateway interactions are continuously logged, so anomalies surface against a complete record.</p></div></div>
-                <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">2</span><h3 class="h6">Contain</h3><p>Per-merchant key isolation limits the reach of any single issue, and credentials can be rotated immediately.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">2</span><h3 class="h6">Contain</h3><p>Provider credentials are stored encrypted and never logged, so a single issue does not expose them — and any credential can be replaced from your dashboard without redeploying anything.</p></div></div>
                 <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">3</span><h3 class="h6">Investigate</h3><p>End to end audit trails let us reconstruct exactly what happened, when, and to which payments.</p></div></div>
                 <div class="col-md-3 col-sm-6"><div class="tc-step"><span class="tc-step-num">4</span><h3 class="h6">Notify</h3><p>Affected merchants are contacted directly with what we know, what we have done, and what you should do.</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- 10. Responsible Disclosure -->
+    <!-- 11. Responsible Disclosure -->
     <section class="section bg-light" id="disclosure">
         <div class="container">
             <div class="row justify-content-center">
@@ -276,7 +299,7 @@ redirect_from: /security/
         </div>
     </section>
 
-    <!-- 11. Security FAQ -->
+    <!-- 12. Security FAQ -->
     {% include faq.html items=site.data.trust_center.faqs eyebrow="Security FAQ" bg="bg-white" %}
 
 </main>
