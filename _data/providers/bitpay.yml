@@ -67,20 +67,38 @@ faqs:
     a: >-
       Yes. BitPay settles by bank transfer in USD, EUR and GBP across many countries, so you can
       accept crypto without ever holding it. You can also elect settlement in several
-      cryptocurrencies instead. - q: How many cryptocurrencies does BitPay accept? a: >- A wide
-      range at checkout, including the major stablecoins. Note the distinction: what a buyer can
-      pay with is a much longer list than what you can be settled in, and both lists change, so
-      BitPay's own documentation is the one to trust. - q: Am I exposed to crypto price swings? a:
-      >- Only if you choose to be. These gateways quote the invoice in your pricing currency and
+      cryptocurrencies instead.
+  - q: How many cryptocurrencies does BitPay accept?
+    a: >-
+      A wide range at checkout, including the major stablecoins. Note the distinction: what a
+      buyer can pay with is a much longer list than what you can be settled in, and both lists
+      change, so BitPay's own documentation is the one to trust.
+  - q: Am I exposed to crypto price swings?
+    a: >-
+      Only if you choose to be. These gateways quote the invoice in your pricing currency and
       lock the rate for a short window, then settle to you in either fiat or crypto depending on
       your setting. Settling in fiat removes the exposure; settling in crypto keeps it. Decide
-      that before you switch it on. - q: Does PaymentHood charge extra on top of BitPay? a: >- No.
-      BitPay bills you directly for its own fees, and PaymentHood takes no percentage and no
+      that before you switch it on.
+  - q: Does PaymentHood charge extra on top of BitPay?
+    a: >-
+      No. BitPay bills you directly for its own fees, and PaymentHood takes no percentage and no
       per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07
-  verified_by:
+  verified_by: >-
+    Site owner, 2026-08-08. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - PaymentHood's OWN claims — that the module is free, what it costs, how
+        it authenticates, what it does on the merchant's behalf — are confirmed
+        correct by the site owner.
+      - The provider's coverage, currencies, payment methods and onboarding
+        terms are reproduced from that provider's own published documentation,
+        listed under `sources` below. They remain the provider's statements to
+        make and to keep current. PaymentHood does not independently audit them,
+        and the page links to the provider's own pages so a reader can check.
+      - Machine-checked on the same date: every URL resolves, and no fee, count
+        or completeness claim is present (scripts/check-provider-data.mjs).
   sources:
     - https://www.bitpay.com/resources/bitpay-supports-100-cryptocurrencies-for-merchants
     - https://developer.bitpay.com/docs/settlement

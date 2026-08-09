@@ -84,21 +84,39 @@ integration:
 faqs:
   - q: What is direct carrier billing?
     a: >-
-      The purchase is charged to the customer's mobile phone bill or prepaid balance instead of a
-      card. No bank account, no card and no app are needed — which is why it reaches audiences no
-      card gateway can. - q: What is it actually good for? a: >- Low-value digital purchases:
-      games, subscriptions, video, education. Carrier billing fees are far higher than card fees
-      and per-transaction limits are low, so it does not suit physical goods or large baskets. -
-      q: How many markets does Tpay cover? a: >- Markets across the Middle East, Africa and
-      Türkiye, connected to a large number of mobile payment channels. Coverage is defined per
-      operator, so confirm your specific market and network. - q: Does PaymentHood charge extra on
-      top of Tpay? a: >- No. Tpay bills you directly for its own fees, and PaymentHood takes no
-      percentage and no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood
-      pricing</a>.
+      The purchase is charged to the customer's mobile phone bill or prepaid balance instead of
+      a card. No bank account, no card and no app are needed — which is why it reaches audiences
+      no card gateway can.
+  - q: What is it actually good for?
+    a: >-
+      Low-value digital purchases: games, subscriptions, video, education. Carrier billing fees
+      are far higher than card fees and per-transaction limits are low, so it does not suit
+      physical goods or large baskets.
+  - q: How many markets does Tpay cover?
+    a: >-
+      Markets across the Middle East, Africa and Türkiye, connected to a large number of mobile
+      payment channels. Coverage is defined per operator, so confirm your specific market and
+      network.
+  - q: Does PaymentHood charge extra on top of Tpay?
+    a: >-
+      No. Tpay bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07
-  verified_by:
+  verified_by: >-
+    Site owner, 2026-08-08. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - PaymentHood's OWN claims — that the module is free, what it costs, how
+        it authenticates, what it does on the merchant's behalf — are confirmed
+        correct by the site owner.
+      - The provider's coverage, currencies, payment methods and onboarding
+        terms are reproduced from that provider's own published documentation,
+        listed under `sources` below. They remain the provider's statements to
+        make and to keep current. PaymentHood does not independently audit them,
+        and the page links to the provider's own pages so a reader can check.
+      - Machine-checked on the same date: every URL resolves, and no fee, count
+        or completeness claim is present (scripts/check-provider-data.mjs).
   sources:
     - https://www.tpaymobile.com/products/coverage/
     - https://www.tpaymobile.com/company/

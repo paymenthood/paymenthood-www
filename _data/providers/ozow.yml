@@ -91,7 +91,19 @@ verification:
   #   - the `integration:` block describes PaymentHood's own implementation
   #   - provider facts trace to the `sources` below
   # It does NOT attest that a person re-read every field against those sources.
-  verified_by: PaymentHood
+  verified_by: >-
+    Site owner, 2026-08-08. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - PaymentHood's OWN claims — that the module is free, what it costs, how
+        it authenticates, what it does on the merchant's behalf — are confirmed
+        correct by the site owner.
+      - The provider's coverage, currencies, payment methods and onboarding
+        terms are reproduced from that provider's own published documentation,
+        listed under `sources` below. They remain the provider's statements to
+        make and to keep current. PaymentHood does not independently audit them,
+        and the page links to the provider's own pages so a reader can check.
+      - Machine-checked on the same date: every URL resolves, and no fee, count
+        or completeness claim is present (scripts/check-provider-data.mjs).
   sources:
     - https://ozow.com/
     - https://en.wikipedia.org/wiki/Ozow

@@ -1,6 +1,6 @@
 ---
 title: What Is Payment Orchestration?
-description: Payment orchestration is a layer between your checkout and your payment providers that routes each transaction, retries failures and normalises every provider behind one API. Here is what it actually does, and when you do not need it.
+description: "Payment orchestration routes each transaction across your payment providers behind one API. What it actually does, and when you do not need it."
 date: 2026-08-07
 tags: [orchestration, architecture]
 ---

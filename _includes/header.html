@@ -111,13 +111,18 @@
     keep only the unique part of title/description in front matter; the shared
     SEO suffixes are appended here, in one place, before the tags are emitted.
     The visible page header (header-secondary) still shows the short versions.
+
+    Keep this suffix short. Google truncates a description at roughly 160
+    characters, and whatever is appended here eats into the budget of every
+    page that uses it — a long suffix silently cut the unique half of ten
+    descriptions off the end of the search result.
     {%- endcomment -%}
     {%- capture ph_seo %}{% seo %}{% endcapture -%}
     {%- assign ph_product = site.data.integrations[page.slug].product -%}
     {%- if ph_product -%}
     {%- assign ph_noun = ph_product.noun | default: 'plugin' -%}
     {%- capture ph_title_full %}{{ page.title }}{% endcapture -%}
-    {%- capture ph_desc_full %}{{ page.description }} Connect 30+ global payment providers including PayPal, Stripe, and Authorize.net. Free {{ ph_noun }}. 5-minute setup.{% endcapture -%}
+    {%- capture ph_desc_full %}{{ page.description }} Connect 30+ providers including PayPal, Stripe and Adyen. Free {{ ph_noun }}, 5-minute setup.{% endcapture -%}
     {%- assign ph_seo = ph_seo | replace: page.title, ph_title_full | replace: page.description, ph_desc_full -%}
     {%- endif -%}
     {{ ph_seo }}

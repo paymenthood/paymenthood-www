@@ -75,23 +75,40 @@ integration:
 faqs:
   - q: Which countries can register a Stripe account?
     a: >-
-      Stripe onboards businesses from a defined list of countries, which is much shorter than the
-      list of places Stripe can accept a card from. Check your own country of incorporation
-      against Stripe's current list rather than assuming. - q: Why route Stripe through
-      PaymentHood instead of integrating it directly? a: >- If Stripe will be your only provider
-      forever, a direct integration is reasonable. PaymentHood earns its place the moment you need
-      a second one — a local African or MENA provider Stripe does not reach, or a fallback for
-      when Stripe declines — because that becomes a dashboard change instead of a second checkout
-      build. - q: Does PaymentHood support Stripe's local payment methods? a: >- The methods
-      available to your Stripe account are offered through the same PaymentHood checkout. Which
-      ones you can enable depends on your Stripe account's country and approval status, not on
-      PaymentHood. - q: Does PaymentHood charge extra on top of Stripe? a: >- No. Stripe bills you
-      directly for its own fees, and PaymentHood takes no percentage and no per-transaction cut at
-      any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+      Stripe onboards businesses from a defined list of countries, which is much shorter than
+      the list of places Stripe can accept a card from. Check your own country of incorporation
+      against Stripe's current list rather than assuming.
+  - q: Why route Stripe through PaymentHood instead of integrating it directly?
+    a: >-
+      If Stripe will be your only provider forever, a direct integration is reasonable.
+      PaymentHood earns its place the moment you need a second one — a local African or MENA
+      provider Stripe does not reach, or a fallback for when Stripe declines — because that
+      becomes a dashboard change instead of a second checkout build.
+  - q: Does PaymentHood support Stripe's local payment methods?
+    a: >-
+      The methods available to your Stripe account are offered through the same PaymentHood
+      checkout. Which ones you can enable depends on your Stripe account's country and approval
+      status, not on PaymentHood.
+  - q: Does PaymentHood charge extra on top of Stripe?
+    a: >-
+      No. Stripe bills you directly for its own fees, and PaymentHood takes no percentage and no
+      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07
-  verified_by:
+  verified_by: >-
+    Site owner, 2026-08-08. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - PaymentHood's OWN claims — that the module is free, what it costs, how
+        it authenticates, what it does on the merchant's behalf — are confirmed
+        correct by the site owner.
+      - The provider's coverage, currencies, payment methods and onboarding
+        terms are reproduced from that provider's own published documentation,
+        listed under `sources` below. They remain the provider's statements to
+        make and to keep current. PaymentHood does not independently audit them,
+        and the page links to the provider's own pages so a reader can check.
+      - Machine-checked on the same date: every URL resolves, and no fee, count
+        or completeness claim is present (scripts/check-provider-data.mjs).
   sources:
     - https://docs.stripe.com/api
     - https://stripe.com/pricing

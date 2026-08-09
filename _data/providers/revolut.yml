@@ -73,19 +73,36 @@ faqs:
     a: >-
       A Revolut merchant account accepts card payments in a defined set including GBP, EUR, USD,
       CAD, CHF, JPY, AUD and ZAR. Payment links and invoices reach a wider set. The two limits
-      differ, so check Revolut's current list for the one that applies to your flow. - q: What is
-      the real advantage over a standalone gateway? a: >- Settlement lands in the Revolut business
-      account you already operate, in the currency you accepted, without an external payout leg.
-      If you do not bank with Revolut, that advantage largely disappears. - q: Is it suitable
-      outside Europe? a: >- Coverage is strongest in the UK and EEA. Availability elsewhere is
-      narrower, so confirm your own market with Revolut before planning around it. - q: Does
-      PaymentHood charge extra on top of Revolut? a: >- No. Revolut bills you directly for its own
-      fees, and PaymentHood takes no percentage and no per-transaction cut at any volume. See <a
-      href="/pricing.html">PaymentHood pricing</a>.
+      differ, so check Revolut's current list for the one that applies to your flow.
+  - q: What is the real advantage over a standalone gateway?
+    a: >-
+      Settlement lands in the Revolut business account you already operate, in the currency you
+      accepted, without an external payout leg. If you do not bank with Revolut, that advantage
+      largely disappears.
+  - q: Is it suitable outside Europe?
+    a: >-
+      Coverage is strongest in the UK and EEA. Availability elsewhere is narrower, so confirm
+      your own market with Revolut before planning around it.
+  - q: Does PaymentHood charge extra on top of Revolut?
+    a: >-
+      No. Revolut bills you directly for its own fees, and PaymentHood takes no percentage and
+      no per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07
-  verified_by:
+  verified_by: >-
+    Site owner, 2026-08-08. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - PaymentHood's OWN claims — that the module is free, what it costs, how
+        it authenticates, what it does on the merchant's behalf — are confirmed
+        correct by the site owner.
+      - The provider's coverage, currencies, payment methods and onboarding
+        terms are reproduced from that provider's own published documentation,
+        listed under `sources` below. They remain the provider's statements to
+        make and to keep current. PaymentHood does not independently audit them,
+        and the page links to the provider's own pages so a reader can check.
+      - Machine-checked on the same date: every URL resolves, and no fee, count
+        or completeness claim is present (scripts/check-provider-data.mjs).
   sources:
     - https://www.revolut.com/business/payment-gateway/international-payment-gateway/
     - https://help.revolut.com/en-EE/business/help/merchant-accounts/payments/in-which-currencies-can-i-accept-payments

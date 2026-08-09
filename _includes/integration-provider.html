@@ -203,6 +203,37 @@
                             PaymentHood adds nothing on top.</dd>
                     </div>
                 </dl>
+
+                {%- comment -%}
+                Attribution for the third-party half of this page.
+
+                Everything above about the {{ noun }} itself is PaymentHood's own
+                claim and PaymentHood stands behind it. Coverage, currencies and
+                payment methods are not: they are reproduced from the provider's
+                published documentation and change when the provider changes
+                them. Saying so, and linking to the source on the same screen,
+                is both the honest framing and the useful one — a reader
+                checking a detail should land on the provider's own page, not
+                take ours on trust.
+
+                Reuses .source-note (components.css), the same quiet treatment
+                the provider pages already use for their equivalent line, rather
+                than introducing a second class that says the same thing.
+
+                Falls back to the website when a data file has no distinct docs
+                URL, and calls it "their own site" in that case — several files
+                fall back to the marketing site, and labelling that
+                "documentation" would be a small lie repeated on many pages.
+                {%- endcomment -%}
+                <p class="source-note">
+                    Coverage, currencies and payment methods as published by {{ d.name }}, who set
+                    and update them. For the current list see
+                    {%- if d.links.docs and d.links.docs != d.links.website %}
+                    <a href="{{ d.links.docs }}" target="_blank" rel="noopener">{{ d.name }}'s own documentation<span class="visually-hidden"> (opens in new tab)</span></a>.
+                    {%- else %}
+                    <a href="{{ d.links.website }}" target="_blank" rel="noopener">{{ d.name }}'s own site<span class="visually-hidden"> (opens in new tab)</span></a>.
+                    {%- endif %}
+                </p>
             </div>
         </div>
     </div>
