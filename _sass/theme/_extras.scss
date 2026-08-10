@@ -1,6 +1,38 @@
 // Late-cascade page extras (home transaction-control cards, home screenshot
 // slider); extracted (pruned) from the tail of style.css.
 
+// ---- footer certification badge ----
+
+// The CSA STAR artwork is a blue ring, and the footer is --blue-200, so the ring
+// measures 1.15:1 against it and effectively disappears. The badge is drawn for
+// light backgrounds, so it sits on a white chip. Removing .footer-cert-chip
+// leaves white lettering floating with no visible badge.
+.footer-cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  small { line-height: 1.4; }
+}
+
+.footer-cert-chip {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  padding: 3px;
+  border-radius: 50%;
+  background: #fff;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
 // ---- skip link (WCAG 2.4.1 Bypass Blocks) ----
 
 // Pairs with Bootstrap's .visually-hidden-focusable, which un-clips the link

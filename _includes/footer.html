@@ -22,9 +22,21 @@
                                     </a>
                                 </li>
                             </ul>
-                            <a href="https://cloudsecurityalliance.org/star/registry/omegahood-llc/services/paymenthood" target="_blank" rel="noopener" class="d-inline-flex align-items-center gap-2 mt-3 text-decoration-none text-reset" aria-label="View our CSA STAR Registry listing (opens in new tab)">
-                                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-                                <small class="fw-semibold">Listed on CSA STAR Registry &middot; Level 1 Self-Assessment<span class="visually-hidden"> (opens in new tab)</span></small>
+                            {%- comment -%}
+                              CSA STAR badge. The official artwork is a blue ring, and the
+                              footer is --blue-200, so the ring measures 1.15:1 against it and
+                              disappears - leaving the white lettering floating with no badge.
+                              The white chip is what makes it read; the badge is drawn for
+                              light backgrounds. Do not drop .footer-cert-chip.
+                            {%- endcomment -%}
+                            <a href="https://cloudsecurityalliance.org/star/registry/omegahood-llc/services/paymenthood" target="_blank" rel="noopener" class="footer-cert mt-3 text-decoration-none text-reset">
+                                <span class="footer-cert-chip">
+                                    <picture>
+                                        <source srcset="{{ '/assets/images/logos/csa-star-level1.webp' | relative_url }}" type="image/webp">
+                                        <img src="{{ '/assets/images/logos/csa-star-level1.png' | relative_url }}" width="160" height="160" loading="lazy" decoding="async" alt="">
+                                    </picture>
+                                </span>
+                                <small class="fw-semibold">Listed on CSA STAR Registry<br>Level 1 Self-Assessment<span class="visually-hidden"> (opens in new tab)</span></small>
                             </a>
                         </div>
                     </div>
