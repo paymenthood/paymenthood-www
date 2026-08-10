@@ -79,8 +79,11 @@ faqs:
       storefront code is unchanged.
   - q: Does PaymentHood charge extra on top of Ozow?
     a: >-
-      No. Ozow bills you directly for its own transaction fees. PaymentHood takes no percentage and
-      no per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+      No. PaymentHood adds nothing to what Ozow charges: no percentage, no per-transaction cut,
+      and no volume threshold where that changes. Ozow bills you directly for its own processing
+      fees, and you keep that relationship. PaymentHood's only paid plan is Premium at $29 a
+      month, which adds white-label checkout branding and nothing to your transaction cost. See
+      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07

@@ -90,10 +90,13 @@ faqs:
       Paystack account is registered in.
   - q: Does PaymentHood charge extra on top of Paystack's fees?
     a: >-
-      No. You pay Paystack's own transaction fees directly to Paystack, and PaymentHood takes no
-      percentage and no per-transaction cut at any volume. See
-      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and
-      <a href="https://paystack.com/pricing" target="_blank" rel="noopener">Paystack's pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
+      No. PaymentHood adds nothing to what Paystack charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. Paystack bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and <a
+      href="https://paystack.com/pricing" target="_blank" rel="noopener">Paystack's pricing
+      page<span class="visually-hidden"> (opens in new tab)</span></a>.
   - q: How are Paystack webhooks secured?
     a: >-
       Paystack signs every webhook with an HMAC SHA512 digest in the <em>x-paystack-signature</em>

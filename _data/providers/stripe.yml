@@ -91,8 +91,11 @@ faqs:
       status, not on PaymentHood.
   - q: Does PaymentHood charge extra on top of Stripe?
     a: >-
-      No. Stripe bills you directly for its own fees, and PaymentHood takes no percentage and no
-      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+      No. PaymentHood adds nothing to what Stripe charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. Stripe bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07

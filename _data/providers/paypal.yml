@@ -84,8 +84,11 @@ faqs:
       PaymentHood that routing is a dashboard rule, not a code change.
   - q: Does PaymentHood charge extra on top of PayPal?
     a: >-
-      No. PayPal bills you directly for its own fees, and PaymentHood takes no percentage and no
-      per-transaction cut at any volume. See <a href="/pricing.html">PaymentHood pricing</a>.
+      No. PaymentHood adds nothing to what PayPal charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. PayPal bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07

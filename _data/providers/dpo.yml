@@ -82,8 +82,11 @@ faqs:
       in East Africa where wallet penetration is far higher than card penetration.
   - q: Does PaymentHood add a fee on top of DPO?
     a: >-
-      No. DPO bills you directly for its own fees. PaymentHood takes no percentage and no
-      per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+      No. PaymentHood adds nothing to what DPO charges: no percentage, no per-transaction cut,
+      and no volume threshold where that changes. DPO bills you directly for its own processing
+      fees, and you keep that relationship. PaymentHood's only paid plan is Premium at $29 a
+      month, which adds white-label checkout branding and nothing to your transaction cost. See
+      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07

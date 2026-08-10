@@ -1,0 +1,50 @@
+# FAQs for /providers.html (the hub), rendered by _includes/faq.html.
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page owns the "choosing between
+# providers" intent. It must NOT answer questions about one named provider -
+# those belong to /providers/<slug>/ - and it must NOT answer platform questions.
+# Every answer here has to still make sense with no provider name in it.
+
+faqs:
+  - q: How many payment providers does PaymentHood support?
+    a: >-
+      PaymentHood connects to more than 30 payment providers, covering global processors,
+      regional gateways across Africa, the Middle East, South Asia and Europe, and crypto
+      payment networks. You integrate once and activate whichever of them you need, and
+      the full current list is on this page with a dedicated page for each provider.
+
+  - q: Can I use more than one payment provider at the same time?
+    a: >-
+      Yes. Running several providers at once is the main reason to use an orchestration
+      layer. You might take domestic cards through a local gateway for better approval
+      rates while routing international customers elsewhere, and PaymentHood decides which
+      provider handles each payment without your checkout code knowing the difference.
+
+  - q: How do I switch payment providers?
+    a: >-
+      You activate the new provider in your PaymentHood dashboard and it takes effect
+      immediately. There is no code change, no redeployment and no new plugin to install,
+      because your integration talks to PaymentHood rather than to the provider directly.
+      Stored customer tokens stay valid because they were issued by the provider, not by us.
+
+  - q: Does PaymentHood charge extra for using a payment provider?
+    a: >-
+      No. PaymentHood takes no percentage and no per-transaction cut at any volume, whichever
+      providers you enable. Each provider bills you directly for its own processing fees on
+      the terms you agreed with them. PaymentHood's only paid plan is Premium at $29 a month,
+      which adds white-label checkout branding and nothing to your transaction cost.
+
+  - q: Which payment provider should I choose?
+    a: >-
+      Start from where your customers actually are rather than from a fee table. The provider
+      that settles in your customers' currency and supports the methods they already use will
+      usually beat a cheaper one they cannot pay with. Because switching later costs nothing,
+      the first choice matters far less than it does with a direct integration.
+
+  - q: What is the difference between a payment gateway and payment orchestration?
+    a: >-
+      A payment gateway moves one transaction from your checkout to a bank. Payment
+      orchestration sits above several gateways and decides which one each transaction
+      should use, handling routing, failover and reconciliation across all of them. You
+      still need at least one gateway; orchestration is what stops you rebuilding when
+      you add the second.

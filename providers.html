@@ -66,6 +66,87 @@ description: Connect to 36 payment providers through a single integration. Globa
 
     </div>
   </section>
+  {%- comment %}
+    Hub copy. This page owns the "choosing between providers" intent
+    (.docs/seo-page-ownership.md): comparing categories, running several at once,
+    switching. It deliberately describes NO individual provider - each of those has
+    its own page and would be cannibalised by a summary here.
+    Counts are computed from _data/providers/, never hardcoded.
+  {% endcomment -%}
+  {%- assign g = 0 -%}{%- assign r = 0 -%}{%- assign c = 0 -%}
+  {%- for e in site.data.providers -%}
+    {%- if e[1].status == "live" -%}
+      {%- case e[1].category -%}
+        {%- when "global" -%}{%- assign g = g | plus: 1 -%}
+        {%- when "regional" -%}{%- assign r = r | plus: 1 -%}
+        {%- when "crypto" -%}{%- assign c = c | plus: 1 -%}
+      {%- endcase -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Types of payment providers</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The providers above fall into three groups, and most businesses end up using more than one.
+            The {{ g }} <strong>global processors</strong> handle cards almost anywhere and are the usual
+            default for a first integration. The {{ r }} <strong>regional gateways</strong> exist because
+            a local acquirer often converts far better in its own market: it supports the payment methods
+            people there actually use, settles in the local currency, and looks domestic to the issuing
+            bank rather than like a foreign transaction. The {{ c }} <strong>crypto networks</strong> settle
+            in digital assets, and several convert to ordinary currency before payout.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Those categories are also the filter buttons above, so you can narrow the list before opening
+            any individual provider page.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">How to choose a payment provider</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The instinct is to compare fee tables first. That is usually the wrong order. A provider that
+            is fractionally cheaper but does not support the payment method your customer expects will lose
+            you the whole sale, not a percentage of it, so the more useful questions are where your customers
+            are, what they normally pay with, and which currency you want to be paid in.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            After that, weigh how much onboarding each provider expects. Some open an account in a day;
+            others price and underwrite for scale and expect meaningful monthly volume before they are
+            interested. Each provider page here states which markets and methods it covers and links to
+            the provider's own pricing, because published rates change without notice and a stale figure
+            on our page would be worse than none.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Using several payment providers at once</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            One integration connects you to every provider on this page, which changes what choosing one
+            actually costs. Normally a provider decision is close to permanent: the integration is built
+            against that provider's API, so replacing it means development work, testing and a release.
+            That is what makes merchants stay on a provider that stopped suiting them.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Through PaymentHood the provider is configuration rather than code. You can run a local gateway
+            for domestic cards and a global processor for everyone else, add a regional provider when you
+            open a new market, or move away from one entirely, and your checkout never changes. Because the
+            payment tokens are issued by the provider rather than by us, the switch does not invalidate
+            saved customer payment details either. That is also why the first choice matters less than it
+            appears to: it is reversible.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include faq.html items=site.data.providers_hub.faqs eyebrow="Provider FAQ" bg="bg-white" %}
 </main>
 
 <script>

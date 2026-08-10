@@ -66,8 +66,11 @@ faqs:
       checkout integration.
   - q: Does PaymentHood charge on top of SnapScan's fees?
     a: >-
-      No. SnapScan bills you directly. PaymentHood takes no percentage and no per-transaction cut —
-      see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+      No. PaymentHood adds nothing to what SnapScan charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. SnapScan bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07

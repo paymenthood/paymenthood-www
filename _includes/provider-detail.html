@@ -86,6 +86,7 @@
         <ul>
             <li><a href="#overview">Overview</a></li>
             <li><a href="#methods">Payment methods</a></li>
+            <li><a href="#fees">Fees</a></li>
             <li><a href="#orchestration">What PaymentHood adds</a></li>
             <li><a href="#platforms">Platforms</a></li>
             <li><a href="#setup">Setup</a></li>
@@ -100,7 +101,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">At a glance</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ d.name }} in summary</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">What is {{ d.name }}?</h2>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -203,7 +204,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Payment methods</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">What your customers can pay with</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ d.name }} payment methods</h2>
                 <p class="lead mw-narrow">Every method below runs through the same PaymentHood checkout. Turning one on or off is a dashboard setting, not a code change.</p>
             </div>
         </div>
@@ -221,6 +222,68 @@
     </div>
 </section>
 
+<!-- Fees. "<provider> fees" and "<provider> pricing" are among the highest-volume
+     queries for every provider on this site, and until now no H2 matched them.
+
+     NO NUMBERS. Provider pricing changes without notice and a stale rate is the
+     fastest way to lose merchant trust (same reasoning as the `fees` field being
+     deliberately absent from the data schema). This section explains what DRIVES
+     the price, using only fields already in the data file, and sends the reader
+     to the provider's own page for the figure. -->
+<section class="section anchor-offset" id="fees">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <div class="section-eyebrow">Cost</div>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ d.name }} fees and pricing</h2>
+                <p class="txt-blue-400 mw-narrow">Two separate bills, and only one of them exists.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <dl class="fact-table">
+                    <div class="fact-row">
+                        <dt class="fact-label">What PaymentHood charges</dt>
+                        <dd class="fact-value">Nothing on your {{ d.name }} transactions. No percentage and no
+                            per-transaction cut, at any volume. Every payment feature is free, and the optional
+                            <a href="/pricing.html">Premium plan</a> only adds white-label checkout branding.</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">What {{ d.name }} charges</dt>
+                        <dd class="fact-value">{{ d.name }} sets its own rates and bills you directly. PaymentHood
+                            never sits between you and that invoice, so switching to or from {{ d.name }} changes
+                            what you pay {{ d.name }} and nothing else.</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">What moves the rate</dt>
+                        <dd class="fact-value">Payment providers price per market and per method rather than as a
+                            single global figure.
+                            {%- if d.countries and d.countries.size > 1 %} {{ d.name }} operates across
+                            {{ d.countries.size }} countries, so the country the payment is taken in matters.{%- endif %}
+                            {%- if d.currencies and d.currencies.size > 1 %} It settles in
+                            {% for c in d.currencies %}{{ c }}{% unless forloop.last %}, {% endunless %}{% endfor %},
+                            and cross-currency transactions are not priced the same as domestic ones.{%- endif %}
+                            {%- if d.methods and d.methods.size > 1 %} It also accepts
+                            {{ d.methods.size }} different payment methods, and card, transfer and wallet rails
+                            each carry their own cost.{%- endif %}</dd>
+                    </div>
+                    <div class="fact-row">
+                        <dt class="fact-label">Where to check the figure</dt>
+                        <dd class="fact-value">
+                            {%- if d.links.pricing != d.links.website %}{{ d.name }} publishes current rates on
+                            <a href="{{ d.links.pricing }}" target="_blank" rel="noopener">their pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
+                            {%- else %}{{ d.name }} publishes current rates on
+                            <a href="{{ d.links.website }}" target="_blank" rel="noopener">their own site<span class="visually-hidden"> (opens in new tab)</span></a>.
+                            {%- endif %}
+                            That is the authority, not this page. We deliberately quote no numbers here, because a
+                            rate that has quietly changed is worse than no rate at all.</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- What PaymentHood adds. This is the section that differentiates the page from
      the provider's own marketing site, and the reason it deserves to rank. -->
 <section class="section anchor-offset" id="orchestration">
@@ -228,7 +291,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Integration</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">What PaymentHood handles for you</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">How PaymentHood works with {{ d.name }}</h2>
                 <p class="lead mw-narrow">A direct {{ d.name }} integration is not just an API call. These are the parts every team ends up rebuilding — and the parts PaymentHood ships already done.</p>
             </div>
         </div>
@@ -267,7 +330,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Availability</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">Use {{ d.name }} on your platform</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">{{ d.name }} integrations by platform</h2>
                 <p class="lead mw-narrow">Install the free PaymentHood plugin for your store, then enable {{ d.name }} in your dashboard.</p>
             </div>
         </div>
@@ -294,7 +357,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Setup</div>
-                <h2 class="h2 fw-bold txt-blue-600 mb-3">Connecting {{ d.name }} takes three steps</h2>
+                <h2 class="h2 fw-bold txt-blue-600 mb-3">How to connect {{ d.name }}</h2>
             </div>
         </div>
         <div class="row gy-4 justify-content-center step-flow">

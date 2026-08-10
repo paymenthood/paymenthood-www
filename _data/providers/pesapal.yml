@@ -71,8 +71,11 @@ faqs:
       a dashboard change rather than a new checkout build.
   - q: Does PaymentHood take a cut of Pesapal transactions?
     a: >-
-      No. Pesapal bills its own fees to you directly. PaymentHood takes no percentage and no
-      per-transaction cut — see <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+      No. PaymentHood adds nothing to what Pesapal charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. Pesapal bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
 
 verification:
   verified_on: 2026-08-07
