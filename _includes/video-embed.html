@@ -18,7 +18,12 @@
     poster       - (required) site-relative path to the poster image
     description  - (required) one-sentence description for the schema
     duration     - (required) ISO 8601, e.g. PT1M27S
-    upload_date  - (required) ISO 8601 date, e.g. 2026-08-04
+    upload_date  - (required) FULL ISO 8601 timestamp WITH a timezone offset,
+                   e.g. 2026-08-04T13:00:05-07:00. A bare date (2026-08-04) is
+                   accepted by Google but raises "Datetime property uploadDate is
+                   missing a timezone" in the Rich Results Test, because it cannot
+                   tell which timezone midnight refers to. YouTube exposes the exact
+                   value: curl the watch page and grep for "uploadDate".
     eyebrow      - small label above the heading (optional)
     heading      - section heading (optional; omit to render the player alone)
     lead         - paragraph under the heading (optional)
