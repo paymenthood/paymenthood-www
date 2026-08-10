@@ -1,0 +1,32 @@
+# Canonical author identities.
+#
+# Git records whatever name/email was configured on the machine that made the
+# commit. Over this repo's life a few wrong or stale identities got recorded.
+# This file maps them to the right person WITHOUT rewriting history, so
+# `git log`, `git shortlog`, `git blame` and GitHub's contributor graph all show
+# one entry per human.
+#
+# Format:  Correct Name <correct@email>  Wrong Name <wrong@email>
+#
+# WHY NOT REWRITE HISTORY INSTEAD:
+# The earliest wrong-identity commit is 535f939 (2025-10-01). Rewriting it means
+# rewriting all 358 commits after it, including 143 of Bob's and 35 of Peter's,
+# and force-pushing. Bob committed 3 days before this file was written, so his
+# clone (and everyone else's) would break. Not worth it to correct a name.
+
+# Wrong identity: a different company's address, recorded because the global git
+# config pointed at it before this repo got a local override. 21 commits,
+# Oct 2025 to Jan 2026. Global config has since been corrected.
+luka <lukahood@paymenthood.com> amirhAva <Abdolmanaf@avainfotech.co>
+
+# Same person, older addresses from before the paymenthood.com address existed
+# and from the shared VpnHood theme lineage.
+luka <lukahood@paymenthood.com> Luka <luka@paymenthood.com>
+luka <lukahood@paymenthood.com> luka <luka@vpnhood.com>
+luka <lukahood@paymenthood.com> Luka <luka@vpnhood.com>
+
+# Same person, two spellings.
+Peter <peter@vpnhood.com> petervhood <peter@vpnhood.com>
+
+# Same person, two addresses.
+Bob <bob@paymenthood.com> Bob <bob@vpnhood.com>
