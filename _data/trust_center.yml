@@ -39,3 +39,22 @@ faqs:
     a: >-
       Events are queued and retried automatically. You can inspect every delivery attempt,
       including status, response code, and the exact payload.
+
+# Compliance badges rendered in the #compliance section of /trust-center/.
+#
+# A badge here is a public compliance claim that a merchant's security review may
+# rely on, so list ONLY certifications, attestations or registry listings that
+# PaymentHood has actually been granted. Add an entry when it is awarded and
+# publicly verifiable — never when it is planned, in progress, or applied for.
+# `url` should point at the issuing body's own listing so a reviewer can confirm
+# it independently; omit it only if the issuer publishes no public record.
+certifications:
+  - name: CSA STAR Level 1
+    description: >-
+      Listed on the Cloud Security Alliance STAR Registry with a published Level 1
+      Self-Assessment, documenting our cloud security controls against the Cloud
+      Controls Matrix.
+    logo: /assets/images/logos/csa-star-level1.png
+    logo_webp: /assets/images/logos/csa-star-level1.webp
+    url: https://cloudsecurityalliance.org/star/registry/omegahood-llc/services/paymenthood
+    url_label: View the STAR Registry listing

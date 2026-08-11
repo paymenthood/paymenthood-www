@@ -2,10 +2,20 @@
 layout: none
 title: Payment Engineering Blog
 description: Practical writing on payment orchestration, routing, failover and provider integration — from the team building PaymentHood.
+nav_active: blog
 ---
 {% include header-secondary.html %}
 {% include breadcrumb.html %}
 <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
+
+{%- comment -%}
+  How many articles are visible before "Load More" is pressed. Every post is
+  rendered into the page either way — the script at the foot of this file only
+  collapses the overflow — so raising or lowering this changes nothing about
+  what a crawler sees.
+{%- endcomment -%}
+{%- assign page_size = 4 -%}
 
 <main id="main-content">
   <section class="section">
@@ -17,21 +27,80 @@ description: Practical writing on payment orchestration, routing, failover and p
         </div>
       </div>
       {%- else %}
-      <div class="row gy-4">
+      <div class="row" id="blog-grid" data-page-size="{{ page_size }}">
         {%- for post in site.posts %}
-        <div class="col-lg-4 col-md-6">
-          <a href="{{ post.url | relative_url }}" class="how-step card-lift d-block h-100 text-decoration-none">
-            <time datetime="{{ post.date | date_to_xmlschema }}" class="section-eyebrow">{{ post.date | date: "%-d %B %Y" }}</time>
-            <h2 class="h5 mt-2">{{ post.title }}</h2>
-            <p>{{ post.description | default: post.excerpt | strip_html | truncate: 140 }}</p>
-            <span class="link-arrow">Read article</span>
+        <div class="col-md-6 blog-card{% if forloop.index > page_size %} is-hidden{% endif %}">
+          <a href="{{ post.url | relative_url }}" class="blog-card-link">
+            {%- if post.tags.first %}
+            {%- comment -%}
+              Tag display names reuse the breadcrumb label map so "woocommerce"
+              renders as "WooCommerce" here exactly as it does in a trail.
+            {%- endcomment -%}
+            {%- comment -%}
+              `capitalize` lowercases everything after the first letter, so it
+              must never touch a mapped label — it would turn WooCommerce into
+              Woocommerce. Unmapped tags get it as a fallback.
+            {%- endcomment -%}
+            {%- assign tag_label = site.data.breadcrumb_labels[post.tags.first] -%}
+            {%- unless tag_label -%}{%- assign tag_label = post.tags.first | replace: '-', ' ' | capitalize -%}{%- endunless -%}
+            <span class="badge badge-tag">{{ tag_label }}</span>
+            {%- endif %}
+            <h2 class="blog-card-title">{{ post.title }}</h2>
+            <time datetime="{{ post.date | date_to_xmlschema }}" class="blog-card-date">{{ post.date | date: "%B %-d, %Y" }}</time>
           </a>
         </div>
         {%- endfor %}
+      </div>
+
+      <div class="blog-more" id="blog-more" hidden>
+        <button type="button" class="vh-btn btn-md btn-auto btn-blue-100 vh-btn-outline" id="blog-load-more"><span>Load More</span></button>
       </div>
       {%- endif %}
     </div>
   </section>
 </main>
+
+<script>
+  // Progressive paging for the article list. Every post is already in the DOM;
+  // this adds .js-paged so the CSS can collapse the overflow, which means the
+  // full list stays reachable when the script does not run.
+  (function () {
+    var grid = document.getElementById('blog-grid');
+    var wrap = document.getElementById('blog-more');
+    var btn = document.getElementById('blog-load-more');
+    if (!grid || !wrap || !btn) return;
+
+    var step = parseInt(grid.getAttribute('data-page-size'), 10) || 6;
+    grid.classList.add('js-paged');
+
+    function hiddenCards() {
+      return grid.querySelectorAll('.blog-card.is-hidden');
+    }
+
+    if (hiddenCards().length) wrap.hidden = false;
+
+    btn.addEventListener('click', function () {
+      var batch = hiddenCards();
+      var revealed = Math.min(step, batch.length);
+
+      for (var i = 0; i < revealed; i++) {
+        batch[i].classList.remove('is-hidden');
+      }
+
+      // Send focus to the first article that just appeared, so a keyboard or
+      // screen-reader user lands on the new content instead of on a button
+      // that may have just vanished.
+      if (revealed) {
+        var target = batch[0].querySelector('.blog-card-link');
+        if (target) {
+          target.setAttribute('tabindex', '-1');
+          target.focus();
+        }
+      }
+
+      if (!hiddenCards().length) wrap.hidden = true;
+    });
+  })();
+</script>
 
 {% include footer.html %}

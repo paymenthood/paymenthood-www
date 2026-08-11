@@ -15,7 +15,7 @@ Marketing site for PaymentHood (payment orchestration platform). Static Jekyll s
 ## Page Anatomy
 - Home (`index.html`) uses `{% include header.html %}`. **Every other page** uses `{% include header-secondary.html %}`, which renders `page.title` as the visible `<h1>` — so titles must read well as a heading, and section titles start at `<h2>`.
 - Front matter: `layout: none`, `title`, `description`, `nav_active`. **No `permalink:`** — the folder path is the URL.
-- `nav_active` drives the header's active-nav highlight (`header.html` compares it per menu item and emits `.active` + `aria-current="page"`). Valid values are exactly the top-level menu items: `home|integrations|security|pricing|contact`. **Omit it on pages with no matching menu item** (Terms, Privacy, About, Providers, 404, thank-you) — a value that matches nothing is fine, but a wrong one lights up the wrong tab. Add a value here only when you add the matching menu item.
+- `nav_active` drives the header's active-nav highlight (`header.html` compares it per menu item and emits `.active` + `aria-current="page"`). Valid values are exactly the top-level menu items: `home|integrations|security|pricing|blog|contact`. Posts get `nav_active: blog` from the posts defaults in `_config.yml`, not from per-post front matter. **Omit it on pages with no matching menu item** (Terms, Privacy, About, Providers, 404, thank-you) — a value that matches nothing is fine, but a wrong one lights up the wrong tab. Add a value here only when you add the matching menu item.
 - Stylesheet links go immediately after the header include, before `<main>`: `components.css` first, then the page CSS so it can override.
 
 ## SEO & semantic HTML

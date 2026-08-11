@@ -231,7 +231,34 @@ redirect_from: /security/
                             <dd class="fact-value">Audit and delivery logs are retained on Microsoft Azure under managed retention policies.</dd>
                         </div>
                     </dl>
-                    <p class="tc-fineprint animated" data-animate="fadeInUp" data-delay=".5">Need documentation for a vendor review or security questionnaire? <a href="/contact-us.html">Contact us</a> and we will work through it with you.</p>
+                    {%- comment -%}
+                      Cards come from `certifications` in _data/trust_center.yml — see the
+                      note there before adding one. The grid fills left to right as entries
+                      are added; nothing here is per-badge.
+                    {%- endcomment -%}
+                    <h3 class="h5 fw-bold txt-blue-600 text-center mt-5 mb-4 animated" data-animate="fadeInUp" data-delay=".5">Certifications and Registry Listings</h3>
+                    <div class="row g-4 justify-content-center">
+                        {%- for cert in site.data.trust_center.certifications %}
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="tc-cert animated" data-animate="fadeInUp" data-delay=".5">
+                                <span class="tc-cert-chip">
+                                    <picture>
+                                        {%- if cert.logo_webp %}
+                                        <source srcset="{{ cert.logo_webp | relative_url }}" type="image/webp">
+                                        {%- endif %}
+                                        <img src="{{ cert.logo | relative_url }}" width="160" height="160" loading="lazy" decoding="async" alt="">
+                                    </picture>
+                                </span>
+                                <h4 class="tc-cert-name">{{ cert.name }}</h4>
+                                <p class="tc-cert-desc">{{ cert.description }}</p>
+                                {%- if cert.url %}
+                                <a href="{{ cert.url }}" class="link-arrow" target="_blank" rel="noopener">{{ cert.url_label | default: "View public listing" }}<span class="visually-hidden"> (opens in new tab)</span></a>
+                                {%- endif %}
+                            </div>
+                        </div>
+                        {%- endfor %}
+                    </div>
+                    <p class="tc-fineprint animated" data-animate="fadeInUp" data-delay=".6">Need documentation for a vendor review or security questionnaire? <a href="/contact-us.html">Contact us</a> and we will work through it with you.</p>
                 </div>
             </div>
         </div>

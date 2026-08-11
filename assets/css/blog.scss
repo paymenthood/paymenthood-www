@@ -1,0 +1,60 @@
+---
+# Blog listing page (/blog/) — compiled to /assets/css/blog.css.
+# Post pages themselves are laid out by _layouts/post.html and need nothing here.
+---
+
+// ── Article cards ─────────────────────────────────────────────────────────────
+// Deliberately borderless: with no thumbnail there is nothing for a boxed card
+// to frame, so a hairline rule separates entries and the title carries the
+// weight. The list reads as a column of headlines rather than a wall of boxes.
+.blog-card {
+  display: flex;
+}
+
+.blog-card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1.75rem 0 2rem;
+  border-top: 1px solid var(--gray-200);
+  text-decoration: none;
+
+  &:hover .blog-card-title,
+  &:focus-visible .blog-card-title {
+    color: var(--blue-200);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--blue-200);
+    outline-offset: 4px;
+  }
+}
+
+.blog-card-title {
+  margin: 0.9rem 0 0.75rem;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--blue-600);
+  transition: color 0.2s ease;
+}
+
+.blog-card-date {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: var(--blue-400);
+}
+
+// ── Load More ─────────────────────────────────────────────────────────────────
+// Both rules are gated on .js-paged, which the page script adds. Without it the
+// overflow cards stay on screen and the button stays hidden, so no article is
+// ever stranded behind a button that cannot be pressed.
+.js-paged .blog-card.is-hidden {
+  display: none;
+}
+
+.blog-more {
+  margin-top: 2.25rem;
+  text-align: center;
+}

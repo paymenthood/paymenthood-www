@@ -51,6 +51,7 @@ defaults:
     values:
       layout: "post"
       permalink: /blog/:title/
+      nav_active: blog
 
 # Build settings
 markdown: kramdown
