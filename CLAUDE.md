@@ -22,6 +22,11 @@ Marketing site for PaymentHood (payment orchestration platform). Static Jekyll s
 **All SEO + semantic-HTML conventions live in [.docs/seo-and-semantic-html.md](.docs/seo-and-semantic-html.md) — read it before editing pages or the shared `header.html`/`footer.html`/`faq.html`/`integration-product.html`.** It is a **shared standard kept byte-identical with the `VpnHood.www` repo** (edit both copies together). It covers seo-tag/JSON-LD/sitemap/robots & site metadata, generated structured data (FAQPage/SoftwareApplication/BreadcrumbList from includes — never hand-written), favicons/app-icons/manifest, the heading outline (one H1, no skipped levels), title-tag branding, image & inline-SVG a11y (decorative `alt=""`/`aria-hidden` vs descriptive; no redundant alt), `<ul><li>` link groups, and announcing `target="_blank"` new-tab links. These are binding for any markup change.
 - **Title rule (this site):** `{% seo %}` runs **without** `title=false`, so jekyll-seo-tag appends ` | PaymentHood` itself — page `title:` front matter must **not** contain the brand (it would render doubled). (VpnHood does the opposite via `title=false`; see the doc's §3 table.)
 
+## Security headers & disclosure
+- **HTTP security headers are set at the Cloudflare edge, not in this repo** — GitHub Pages cannot send custom headers. The configured rules are documented in [.docs/security-headers.md](.docs/security-headers.md); the Cloudflare dashboard has no version control, so change that file in the same commit as any rule change.
+- `security.txt` has one body, `_includes/security-txt.html`, served at both `/.well-known/security.txt` (RFC 9116) and `/security.txt` (Open Bug Bounty verifies ownership by fetching exactly that URL). Never inline it into either copy.
+- Researcher credits on `/disclosure/#hall-of-fame` come from `_data/security_researchers.yml`. Adding a name there is the whole publication step — the `Acknowledgments:` field in `security.txt` already points at the section.
+
 ## Integration Pages (`integrations/…`)
 - Layout: `integrations/<slug>/index.html` (product), `integrations/<slug>/installation/index.html` (install guide), `integrations/index.html` (hub). The folder name **is** the URL slug (`phoca-cart`, not `phocacart`).
 - **All per-integration data lives in one file: `_data/integrations/<slug>.yml`** with three keys:

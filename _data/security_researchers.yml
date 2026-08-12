@@ -1,0 +1,26 @@
+# Security researchers credited in the Acknowledgments section of /disclosure/.
+#
+# Rendered by disclosure/index.html and pointed at by the `Acknowledgments:`
+# field in _includes/security-txt.html. Adding a name here is the entire
+# publication step — no template edit is needed.
+#
+# Only add someone once the report is triaged, accepted, and the fix has
+# shipped. A name here is a public statement that we agreed the finding was
+# real, so it cannot be walked back quietly.
+#
+# Use the exact string the researcher asked to be credited under, including
+# their preferred capitalisation and any handle. Ask if they did not say.
+# Researchers who asked to stay anonymous are omitted entirely rather than
+# listed as "Anonymous" — a running count of unnamed entries would leak how
+# many issues we have had.
+#
+# Deliberately no severity, no vulnerability class, and no date beyond the
+# year. A public list of what broke and when is a map for the next attacker.
+#
+# Newest year first. Within a year, keep names in the order they were credited.
+# A year whose list is empty is skipped when rendering, so leaving the current
+# year in place with no names costs nothing.
+
+years:
+  - year: 2026
+    researchers: []

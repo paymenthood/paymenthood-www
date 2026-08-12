@@ -128,7 +128,7 @@ nav_active: security
             </div>
             <div class="fact-row">
               <dt class="fact-label">Reward</dt>
-              <dd class="fact-value">We do not run a paid bug bounty. What we offer is a straight answer, a real fix, and public credit on this page if you want it. Say so in your report and we will name you, or keep you anonymous if you prefer.</dd>
+              <dd class="fact-value">We do not run a paid bug bounty. What we offer is a straight answer, a real fix, and <a href="#hall-of-fame">public credit on this page</a> if you want it. Say so in your report and we will name you, or keep you anonymous if you prefer.</dd>
             </div>
           </dl>
 
@@ -140,8 +140,46 @@ nav_active: security
     </div>
   </section>
 
+  <!-- Acknowledgments / hall of fame -->
+  {%- assign credited_count = 0 -%}
+  {%- for group in site.data.security_researchers.years -%}
+    {%- assign credited_count = credited_count | plus: group.researchers.size -%}
+  {%- endfor -%}
+  <section class="section bg-light" id="hall-of-fame">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="section-head wide-sm text-center">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Acknowledgments</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">The People Who <span class="txt-blue-200">Told Us First</span></h2>
+            <p class="animated" data-animate="fadeInUp" data-delay=".3">Everyone here found something real, reported it privately, and gave us time to ship a fix before anyone else knew. Names appear exactly as each researcher asked to be credited. Anyone who preferred to stay anonymous is not listed.</p>
+          </div>
+
+          {%- if credited_count == 0 %}
+          <div class="card card-s3 p-4 p-lg-5 text-center animated" data-animate="fadeInUp" data-delay=".4">
+            <p class="txt-blue-400 mb-0">Nobody is listed yet — this programme is new and no report has been accepted through it so far. If you are the first, this is where your name goes. Tell us in your report how you would like to be credited.</p>
+          </div>
+          {%- else %}
+          {%- for group in site.data.security_researchers.years %}
+          {%- if group.researchers.size > 0 %}
+          <div class="mb-4 animated" data-animate="fadeInUp" data-delay=".4">
+            <h3 class="h5 txt-blue-600 mb-3">{{ group.year }}</h3>
+            <ul class="chip-row">
+              {%- for researcher in group.researchers %}
+              <li class="chip">{{ researcher }}</li>
+              {%- endfor %}
+            </ul>
+          </div>
+          {%- endif %}
+          {%- endfor %}
+          {%- endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="section bg-light">
+  <section class="section">
     <div class="container">
       <div class="cta-banner text-center animated" data-animate="fadeInUp" data-delay=".1">
         <div class="row justify-content-center">
