@@ -17,9 +17,12 @@ signup_url: https://console.paymenthood.com/auth/signup
 
 # Social Media & SEO (consumed by jekyll-seo-tag)
 logo: /assets/images/logos/logo2x.webp
-twitter:
-  username: paymenthood
-  card: summary_large_image
+# No `twitter:` key on purpose — the PaymentHood X account was disabled. In
+# jekyll-seo-tag's template that one key gates both `twitter:site` (which becomes
+# a bare "@" once the username is gone) and `twitter:creator` (which falls back to
+# `author` and so names the dead handle). Removing it drops both. It does NOT cost
+# the large-image preview: the template already defaults `twitter:card` to
+# summary_large_image whenever the page has an image, which every page does.
 social:
   name: PaymentHood
   links:
