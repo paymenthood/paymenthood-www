@@ -1,0 +1,33 @@
+{%- comment -%}
+  Shared body for BOTH copies of security.txt. Do not inline this into either
+  file — two hand-maintained copies drift, and a security contact that is wrong
+  in one of them is worse than having none.
+
+  Published at two URLs on purpose:
+    /.well-known/security.txt  — the location RFC 9116 requires; canonical.
+    /security.txt              — the legacy location. OpenBugBounty verifies
+                                 domain ownership by fetching exactly this URL
+                                 and matching the OpenBugBounty: line below, so
+                                 it is a functional requirement, not a fallback.
+
+  `OpenBugBounty:` is not a registered RFC 9116 field and conforming parsers must
+  ignore it, which is why the same URL is also given as a `Policy:` — that is the
+  registered field for "the terms we accept reports under", so standards-based
+  tooling still finds the programme. Keep both lines: dropping the Policy hides
+  it from tools, dropping the OpenBugBounty line breaks domain verification.
+
+  Expires is REQUIRED and must be a future RFC 3339 timestamp. It is derived from
+  build time plus one year so every deploy refreshes it; a hardcoded date would
+  silently lapse and invalidate the file. A site left unbuilt for a year still
+  goes stale — that is the one thing to watch.
+{%- endcomment -%}
+Contact: mailto:luka@paymenthood.com
+Contact: mailto:support@paymenthood.com
+Contact: {{ '/contact-us.html' | absolute_url }}
+Expires: {{ site.time | date: '%s' | plus: 31536000 | date: '%Y-%m-%dT%H:%M:%SZ' }}
+Policy: {{ '/disclosure/' | absolute_url }}
+Policy: https://openbugbounty.org/bugbounty/luka/
+OpenBugBounty: https://openbugbounty.org/bugbounty/luka/
+Preferred-Languages: en
+Canonical: {{ '/.well-known/security.txt' | absolute_url }}
+Canonical: {{ '/security.txt' | absolute_url }}

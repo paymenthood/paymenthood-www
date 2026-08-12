@@ -4,20 +4,11 @@ layout: none
 sitemap: false
 ---
 {%- comment -%}
-  RFC 9116 security contact file.
-
-  Expires is REQUIRED and must be a future RFC 3339 timestamp. Hardcoding a date
-  means it silently expires and the file becomes invalid, so it is derived here
-  from the build time plus one year: every deploy refreshes it. If the site is
-  not rebuilt for a year it will still go stale, which is the one thing to watch.
+  RFC 9116 security contact file — the canonical copy. Body is shared with the
+  legacy /security.txt via the include; see the notes in it before editing.
 
   This directory starts with a dot, and Jekyll skips dotfiles by default, so
   `.well-known` must stay listed under `include:` in _config.yml or this file
   will never appear in _site.
 {%- endcomment -%}
-Contact: mailto:support@paymenthood.com
-Contact: {{ '/contact-us.html' | absolute_url }}
-Expires: {{ site.time | date: '%s' | plus: 31536000 | date: '%Y-%m-%dT%H:%M:%SZ' }}
-Policy: {{ '/disclosure/' | absolute_url }}
-Preferred-Languages: en
-Canonical: {{ '/.well-known/security.txt' | absolute_url }}
+{%- include security-txt.html -%}

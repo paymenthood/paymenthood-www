@@ -1,0 +1,7 @@
+Contact: luka@paymenthood.com
+Encryption: 
+Acknowledgements: 
+Policy: https://www.paymenthood.com/disclosure/
+Signature: 
+Hiring: 
+OpenBugBounty: https://openbugbounty.org/bugbounty/luka/
