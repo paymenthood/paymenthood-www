@@ -1,5 +1,5 @@
 ---
-title: What Is Payment Orchestration?
+title: "What Is Payment Orchestration? A Clear Definition"
 description: "Payment orchestration routes each transaction across your payment providers behind one API. What it actually does, and when you do not need it."
 date: 2026-08-07
 tags: [orchestration, architecture]
@@ -123,7 +123,8 @@ unusual, or when payments *are* the product.
 [PaymentHood](/) is a payment orchestration platform with a unified API across
 {{ site.provider_count }}+ providers, with routing, failover, idempotency,
 webhook signature verification and server-side confirmation handled for you. For
-stores on WooCommerce, WHMCS, VirtueMart, Phoca Cart or J2Commerce there are
+stores on [WooCommerce](/integrations/woocommerce/), [WHMCS](/integrations/whmcs/),
+VirtueMart, Phoca Cart or J2Commerce there are
 [free plugins](/integrations/) so the integration is a plugin install rather than
 a development project, and provider changes happen in a dashboard rather than in
 your checkout code.
