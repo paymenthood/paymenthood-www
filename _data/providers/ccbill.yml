@@ -1,0 +1,154 @@
+# Single source of truth for /providers/ccbill/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# the template links to the provider's own pricing page instead.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/ccbill/index.html. Until then the page builds but stays out
+# of the index.
+#
+# THREE THINGS ARE STILL OPEN — see the NOTE comments below: the logo asset,
+# the brand accent, and the `integration:` block.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: CCBill
+slug: ccbill
+status: live                 # live | development — only `live` may be published
+category: global
+region: Global
+
+# NOTE: filename is the one supplied — "ccbil", one L, and a .jpg. It differs
+# from every sibling in this folder in two ways that show on the page: the others
+# are transparent PNGs carrying a DARK mark for light surfaces (see
+# paystack-light.png), this is a WHITE mark baked onto a solid blue rectangle.
+# JPEG cannot hold transparency, so the block cannot be removed by re-encoding —
+# it needs a dark-on-transparent PNG to match the other cards.
+logo: /assets/images/home/providers-icon/ccbil-light.jpg
+
+# Brand colour sampled from that logo's background, not guessed: #0073ac is the
+# dominant pixel value (the neighbouring #0072ae/#0071ab are JPEG ringing).
+# Contrast computed, per _sass/components/_provider.scss:
+#   #0073ac — 5.19:1 on #ffffff, 4.92:1 on #f8f9fa  (fills, gradients)
+#   #006292 — 6.64:1 on #ffffff, 6.30:1 on #f8f9fa  (text and small icons)
+accent: "#0073ac"
+accent_rgb: "0,115,172"
+accent_text: "#006292"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+# Lead paragraph. Written to be lifted verbatim as a featured snippet or an LLM
+# citation: direct definition first, no marketing wind-up.
+summary: >-
+  CCBill is a payment facilitator for subscription and high-risk businesses. Merchants are
+  onboarded as sub-merchants under CCBill's own acquiring relationships rather than opening a
+  direct merchant account, which is how it accepts verticals that mainstream processors
+  commonly decline — dating, streaming media, content-creator platforms and adult among them.
+  Its billing engine is built around recurring charges rather than one-off payments.
+
+# No `countries` list: card acceptance is worldwide, so chips would misrepresent
+# it. The template falls back to this sentence — the two fields are exclusive.
+coverage: >-
+  Card payments are accepted worldwide, but in a fixed set of currencies rather than a broad
+  list, so the currency you can charge in matters more here than the country you sell into.
+  ACH is the exception and is limited to the United States and some Canadian customers.
+  Which businesses can onboard is decided by CCBill's own underwriting, which is where the
+  high-risk vertical support actually lives.
+coverage_short: "Global"
+
+currencies: [USD, EUR, GBP, CAD, AUD, JPY]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Credit and debit cards, accepted worldwide — CCBill's most widely used method
+  - label: CCBill Pay
+    icon: wallet
+    detail: CCBill's stored-payment checkout; supported only on English-language FlexForms
+  - label: ACH
+    icon: bank
+    detail: US customers and a small portion of Canadian customers, in USD only
+  - label: Recurring billing
+    icon: recurring
+    detail: Subscription rebills, with renewal, cancellation and expiry events raised per subscriber
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://ccbill.com/
+  docs: https://ccbill.com/doc/
+  pricing: https://ccbill.com/pricing
+  methods: https://ccbill.com/doc/accepted-payment-methods
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual PaymentHood.Services provider implementation, not to the provider's docs.
+#
+# NOTE: UNVERIFIED. The PaymentHood.Services CCBill implementation was not
+# reachable from this repo, so the three lines below are written from CCBill's
+# documented mechanisms and what the integration structurally requires. Confirm
+# each against the code before clearing the review gate.
+integration:
+  auth: OAuth bearer token issued against a CCBill application ID and secret key, held server-side in PaymentHood — never exposed to the storefront
+  webhook: CCBill webhooks carry no signature, so delivery is accepted only from CCBill's published sender IP ranges and never trusted on its own
+  verification: Server-side transaction re-verification against the CCBill API before fulfilment, which is what actually authorises the order
+
+faqs:
+  - q: What kind of businesses is CCBill for?
+    a: >-
+      CCBill is a payment facilitator built around subscription billing and the high-risk
+      verticals that mainstream processors often decline — its own published list includes
+      dating, streaming media, content-creator platforms, CBD and adult. You are onboarded
+      as a sub-merchant under CCBill's acquiring relationships rather than opening a direct
+      merchant account, so approval is decided by CCBill's underwriting.
+  - q: Which currencies does CCBill support?
+    a: >-
+      US Dollar (USD), Euro (EUR), British Pound (GBP), Canadian Dollar (CAD), Australian
+      Dollar (AUD) and Japanese Yen (JPY). Cards are accepted worldwide within those
+      currencies; ACH is the exception, limited to US customers and a small portion of
+      Canadian customers, in USD only.
+  - q: Does CCBill handle subscriptions and recurring payments?
+    a: >-
+      Yes — recurring billing is what the platform is built around rather than an add-on.
+      CCBill raises separate events for successful and failed renewals, cancellations,
+      expiries and billing-date changes, so a subscription's whole lifecycle is visible to
+      your store rather than just the first sale.
+  - q: How are CCBill webhooks secured?
+    a: >-
+      This one is worth knowing: CCBill does <em>not</em> sign its webhooks. There is no HMAC
+      digest or shared secret to verify, only a published set of sender IP ranges. That makes
+      the callback weaker evidence than a signed one, which is why PaymentHood treats it as a
+      prompt rather than proof — the order is authorised by an independent server-side
+      re-query of the CCBill API, so a forged or replayed callback cannot complete an order.
+  - q: Does PaymentHood charge extra on top of CCBill's fees?
+    a: >-
+      No. PaymentHood adds nothing to what CCBill charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. CCBill bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and <a
+      href="https://ccbill.com/pricing" target="_blank" rel="noopener">CCBill's pricing
+      page<span class="visually-hidden"> (opens in new tab)</span></a>.
+  - q: Can I switch from CCBill to another provider later?
+    a: >-
+      Yes. Your store talks to PaymentHood, not to CCBill, so switching provider is a change in
+      the PaymentHood dashboard. No plugin update, no code change and no second checkout
+      integration. Active subscriptions are the one thing to plan for, since those live with
+      the provider that created them.
+
+verification:
+  verified_on: 2026-08-13
+  # Left empty deliberately. A human clears this after checking every field
+  # against `sources`, and specifically after resolving the three NOTEs above:
+  # the logo asset, the provisional accent, and the `integration:` block.
+  verified_by:
+  sources:
+    - https://ccbill.com/
+    - https://ccbill.com/doc/
+    - https://ccbill.com/doc/accepted-payment-methods
+    - https://ccbill.com/doc/supported-languages-flexforms
+    - https://ccbill.com/doc/ccbill-restful-transaction-api/
+    - https://ccbill.com/doc/webhooks-user-guide/

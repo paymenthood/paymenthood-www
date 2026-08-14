@@ -18,6 +18,7 @@ amazon-pay: Amazon Pay
 authorize-net: Authorize.net
 binance: Binance Pay
 bitpay: BitPay
+ccbill: CCBill
 dpo: DPO Pay
 opay: OPay
 oxapay: OxaPay

@@ -9,7 +9,7 @@ author: PaymentHood
 # Single source of truth for the provider count shown on the home mosaic and the
 # product-page provider strip. providers.html renders this many cards; update
 # both together.
-provider_count: 36
+provider_count: 37
 
 # Console sign-up destination. The integration plugins are useless without an
 # account, so this is the primary CTA on every product page.
