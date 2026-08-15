@@ -1,8 +1,10 @@
 ---
 layout: none
-slug: ccbill
-title: "CCBill Payment Gateway Integration"
-description: "Accept CCBill payments through one PaymentHood integration — subscription and high-risk billing, worldwide cards. Free plugins, no extra fee."
+platform: woocommerce
+provider: ccbill
+nav_active: integrations
+title: "CCBill Payment Gateway for WooCommerce"
+description: "Accept CCBill payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
 ---
 {% include header-secondary.html %}
 {% include breadcrumb.html %}
@@ -10,5 +12,5 @@ description: "Accept CCBill payments through one PaymentHood integration — sub
 <style>
 #main-content{--pp-accent:#0073ac;--pp-accent-text:#006292;--pp-accent-rgb:0,115,172;--pp-hero-end:#0073ac;--pp-blob-rgb:0,115,172}
 </style>
-{% include provider-detail.html slug=page.slug %}
+{% include integration-provider.html platform=page.platform provider=page.provider %}
 {% include footer.html %}

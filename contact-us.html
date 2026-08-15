@@ -78,7 +78,17 @@ nav_active: contact
       </div>
       <div class="col-lg-7">
         <div class="bg-blue-30 p-4 p-md-5 rounded animated" data-animate="fadeInRight" data-delay=".2">
-          <form action="https://formsubmit.co/support@paymenthood.com" method="POST">
+          {%- comment -%}
+            Posts to our own API rather than to formsubmit.co, which used to receive every
+            visitor's name, email and message on a free third-party host and had to be declared
+            as a sub-processor. The old markup also carried support@paymenthood.com in the form
+            action, in plain sight of every scraper that read the page source.
+
+            Submitted with fetch, so the visitor stays on the page and sees the failure when
+            there is one. The endpoint is anonymous but rate limited per IP, and `website` below
+            is a honeypot the server checks.
+          {%- endcomment -%}
+          <form id="contact-form" method="POST" novalidate>
             <!-- Name Field -->
             <div class="mb-4 animated" data-animate="fadeInUp" data-delay=".3">
               <label for="name" class="form-label txt-blue-600 fw-semibold mb-2">
@@ -124,19 +134,65 @@ nav_active: contact
               ></textarea>
             </div>
 
-            <!-- Hidden Fields -->
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://www.paymenthood.com/thank-you.html" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="text" name="_honey" style="display:none">
+            <!-- Honeypot. Hidden from people, filled in by bots; the server drops any submission
+                 that carries a value here. Not type="hidden": bots skip those. -->
+            <div style="position:absolute;left:-9999px" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
 
             <!-- Submit Button -->
             <div class="text-end animated" data-animate="fadeInUp" data-delay=".7">
-              <button type="submit" class="vh-btn btn-blue-300 border-0 btn-lg px-5 py-3">
+              <p id="contact-status" class="text-start mb-3" role="status" aria-live="polite" hidden></p>
+              <button type="submit" id="contact-submit" class="vh-btn btn-blue-300 border-0 btn-lg px-5 py-3">
                 <em class="fas fa-paper-plane me-2"></em>Send Message
               </button>
             </div>
           </form>
+
+          <script>
+            (function () {
+              var form = document.getElementById('contact-form');
+              var button = document.getElementById('contact-submit');
+              var status = document.getElementById('contact-status');
+
+              function show(message, isError) {
+                status.textContent = message;
+                status.className = 'text-start mb-3 ' + (isError ? 'text-danger' : 'txt-blue-600');
+                status.hidden = false;
+              }
+
+              form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                if (!form.checkValidity()) { form.reportValidity(); return; }
+
+                button.disabled = true;
+                show('Sending…', false);
+
+                var data = new FormData(form);
+                fetch('https://appapi.paymenthood.com/api/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: data.get('name'),
+                    email: data.get('email'),
+                    message: data.get('message'),
+                    website: data.get('website')
+                  })
+                }).then(function (response) {
+                  if (response.ok) { window.location.href = '/thank-you.html'; return; }
+                  // 429 is the rate limiter, and it is the one failure the visitor can act on.
+                  show(response.status === 429
+                    ? 'Too many messages from this connection. Please try again shortly.'
+                    : 'Something went wrong sending your message. Please email support@paymenthood.com instead.', true);
+                  button.disabled = false;
+                }).catch(function () {
+                  show('Could not reach our servers. Please email support@paymenthood.com instead.', true);
+                  button.disabled = false;
+                });
+              });
+            })();
+          </script>
         </div>
       </div>
     </div>

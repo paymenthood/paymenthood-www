@@ -7,17 +7,21 @@
 # contain inline HTML (a/em/strong/br/ul/ol/li are allowed in FAQ rich results).
 software:
   name: PaymentHood WHMCS Module
-  operating_system: WHMCS 7.0+
-  version: "1.2.0"
+  # Source of truth is the git tag in PaymentHood.Plugins.WHMCS (latest: v1.2.3) and
+  # the `features` list in modules/gateways/paymenthood/whmcs.json. The WHMCS
+  # Marketplace listing must match these; it drifted to 8.0+/1.2.3 while this file
+  # still said 7.0+/1.2.0. Re-read both before changing anything here.
+  operating_system: WHMCS 8.0+
+  version: "1.2.3"
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/latest/download/paymenthood-whmcs.zip
-  release_notes: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/tag/v1.2.0
+  release_notes: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/tag/v1.2.3
 
 product:
   platform: WHMCS
   store: WHMCS
   audience: clients
   noun: module
-  compat: "7.0+"
+  compat: "8.0+"
   supports_subscriptions: true
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.WHMCS/releases/latest/download/paymenthood-whmcs.zip
   repo: PaymentHood.Plugins.WHMCS
@@ -37,9 +41,8 @@ faqs:
       action required.
   - q: Which WHMCS versions are supported?
     a: >-
-      PaymentHood is compatible with WHMCS 7.0 and above, including the latest WHMCS 8.x
-      releases. It uses the official WHMCS gateway callback API so compatibility is maintained
-      across upgrades.
+      PaymentHood requires WHMCS 8.0 or later. It uses the official WHMCS gateway callback
+      API, so compatibility is maintained across upgrades.
   - q: Do I need a PaymentHood account?
     a: >-
       Yes, a free PaymentHood account is required to use the module. When you activate the

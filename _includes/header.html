@@ -12,6 +12,16 @@
     {%- endcomment -%}
     <meta charset="utf-8">
 
+    {%- comment -%}
+      The one security header GitHub Pages lets us set, because <meta> can carry it.
+      HSTS, X-Frame-Options and X-Content-Type-Options are response headers only, and
+      Pages does not allow custom headers — they need a proxy (Cloudflare) in front of
+      the domain. A meta CSP is deliberately NOT set here: this page loads GTM, Clarity,
+      Fastbots and YouTube plus inline consent scripts, so any policy strict enough to
+      be worth having would break the site. Add CSP at the proxy, in report-only first.
+    {%- endcomment -%}
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <!-- Consent Mode v2 defaults + consent-gated Google Tag Manager -->
     {%- comment -%}
       Two independent layers, on purpose:

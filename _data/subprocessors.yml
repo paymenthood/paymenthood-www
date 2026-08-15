@@ -7,7 +7,7 @@
 #
 # `updated` drives the "last updated" date shown on the page. Bump it whenever
 # the list below changes - not on unrelated site deploys.
-updated: 2026-08-05
+updated: 2026-08-15
 notice_days: 30
 
 # role: "processor"            - acts on our instructions (Art. 28)
@@ -20,7 +20,7 @@ subprocessors:
     role: processor
     purpose: Cloud hosting for the PaymentHood platform, and retention of audit and webhook delivery logs.
     data: Account data, payment metadata and tokens, audit logs. No cardholder data.
-    location: TBC — confirm the Azure region(s) before publishing
+    location: West US (California, United States)
     dpa: https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA
 
   - name: Microsoft Corporation
@@ -56,14 +56,6 @@ subprocessors:
     note: Fastbots uses OpenAI to generate responses, so chat content reaches OpenAI as an onward sub-processor.
     dpa: https://fastbots.ai/dpa
 
-  - name: FormSubmit
-    service: FormSubmit
-    role: processor
-    purpose: Delivering messages sent through the contact form on our website.
-    data: Name, email address and message content submitted by the sender.
-    location: United States
-    dpa: https://formsubmit.co/privacy
-
   - name: GitHub, Inc.
     service: GitHub Pages
     role: processor
@@ -75,10 +67,10 @@ subprocessors:
   - name: InfyniPay B.V.
     service: InfyniPay APIs
     role: processor
-    purpose: Payment technology APIs licensed to OmegaHood LLC and used by parts of the PaymentHood platform.
+    purpose: Payment technology APIs licensed to OmegaHood LLC and used by parts of the PaymentHood platform. InfyniPay B.V. is a supplier to OmegaHood LLC and is not a party to your agreement.
     data: Payment metadata and provider-issued tokens. No cardholder data.
     location: Amsterdam, Netherlands
-    dpa: TBC — request the DPA reference from InfyniPay
+    dpa: Covered by the commercial agreement between OmegaHood LLC and InfyniPay B.V. Available to customers on request.
 
   - name: Your chosen payment providers
     service: Payment processing

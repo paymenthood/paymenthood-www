@@ -9,13 +9,14 @@
 # without notice and a wrong fee is the fastest way to lose merchant trust —
 # the template links to the provider's own pricing page instead.
 #
-# Set `verification.verified_by` to a real name once every field below has been
-# checked against the linked sources, then delete `noindex`/`sitemap: false`
-# from providers/ccbill/index.html. Until then the page builds but stays out
-# of the index.
+# Signed off 2026-08-15 — see `verification.verified_by` at the bottom for the
+# exact scope. providers/ccbill/index.html carries no `noindex`/`sitemap: false`,
+# so the page is indexable.
 #
-# THREE THINGS ARE STILL OPEN — see the NOTE comments below: the logo asset,
-# the brand accent, and the `integration:` block.
+# ONE THING IS STILL OPEN — the `accent` value, which was sampled from the old
+# logo's background and needs re-sampling from the replacement wordmark; see the
+# note above `accent:`. The artwork itself is fixed, and the `integration:` block
+# is verified against the CCBill provider implementation.
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: CCBill
@@ -24,16 +25,22 @@ status: live                 # live | development — only `live` may be publish
 category: global
 region: Global
 
-# NOTE: filename is the one supplied — "ccbil", one L, and a .jpg. It differs
-# from every sibling in this folder in two ways that show on the page: the others
-# are transparent PNGs carrying a DARK mark for light surfaces (see
-# paystack-light.png), this is a WHITE mark baked onto a solid blue rectangle.
-# JPEG cannot hold transparency, so the block cannot be removed by re-encoding —
-# it needs a dark-on-transparent PNG to match the other cards.
-logo: /assets/images/home/providers-icon/ccbil-light.jpg
+# Artwork replaced 2026-08-15. The previous asset was a 978x652 progressive JPEG
+# (named .png) showing a white mark on a solid blue block, which read as a
+# different shape and treatment from every other card. This one is a real PNG at
+# 432x119 — the sibling scale, see paystack-light.png at 481x86 — carrying the
+# blue CCBill wordmark.
+#
+# One difference remains and it is minor: siblings carry a tRNS chunk, this file
+# does not, so its white background is opaque rather than transparent. Invisible
+# on the white card, and at most a faint rectangle on .bg-light (#f8f9fa).
+logo: /assets/images/home/providers-icon/ccbill-light.png
 
-# Brand colour sampled from that logo's background, not guessed: #0073ac is the
-# dominant pixel value (the neighbouring #0072ae/#0071ab are JPEG ringing).
+# RE-SAMPLE THIS. #0073ac was taken from the OLD artwork's blue background block,
+# which no longer exists — the replacement is a blue wordmark on white, and its
+# blue reads brighter than this value. The contrast figures below are correct for
+# #0073ac itself, so if the mark's true blue is used instead, recompute them
+# against #ffffff and #f8f9fa before changing `accent_text`.
 # Contrast computed, per _sass/components/_provider.scss:
 #   #0073ac — 5.19:1 on #ffffff, 4.92:1 on #f8f9fa  (fills, gradients)
 #   #006292 — 6.64:1 on #ffffff, 6.30:1 on #f8f9fa  (text and small icons)
@@ -87,14 +94,15 @@ links:
 # What PaymentHood handles on the merchant's behalf. Keep these accurate to the
 # actual PaymentHood.Services provider implementation, not to the provider's docs.
 #
-# NOTE: UNVERIFIED. The PaymentHood.Services CCBill implementation was not
-# reachable from this repo, so the three lines below are written from CCBill's
-# documented mechanisms and what the integration structurally requires. Confirm
-# each against the code before clearing the review gate.
+# Verified 2026-08-15 against payment-service/Payment.Provider/Providers/CCBill.
+# The three lines below previously described OAuth, IP-allowlisted webhooks and
+# server-side API re-verification. None of those matched the implementation — it
+# is FlexForms with a shared salt, a digest-signed webhook, and no polling API at
+# all. Re-read CCBillProvider.cs and CCBillHelpers.cs before editing these again.
 integration:
-  auth: OAuth bearer token issued against a CCBill application ID and secret key, held server-side in PaymentHood — never exposed to the storefront
-  webhook: CCBill webhooks carry no signature, so delivery is accepted only from CCBill's published sender IP ranges and never trusted on its own
-  verification: Server-side transaction re-verification against the CCBill API before fulfilment, which is what actually authorises the order
+  auth: CCBill FlexForms with a shared salt held server-side in PaymentHood and never exposed to the storefront — each redirect carries a form digest over the price, period and currency
+  webhook: CCBill signs its approval post with a digest over the subscription id and approval flag; PaymentHood recomputes it from the salt and rejects any webhook that fails a constant-time comparison
+  verification: CCBill FlexForms has no fetch-by-reference API, so the digest-verified webhook is the authorisation — there is no polling fallback, and a webhook that fails verification never reaches fulfilment
 
 faqs:
   - q: What kind of businesses is CCBill for?
@@ -118,11 +126,14 @@ faqs:
       your store rather than just the first sale.
   - q: How are CCBill webhooks secured?
     a: >-
-      This one is worth knowing: CCBill does <em>not</em> sign its webhooks. There is no HMAC
-      digest or shared secret to verify, only a published set of sender IP ranges. That makes
-      the callback weaker evidence than a signed one, which is why PaymentHood treats it as a
-      prompt rather than proof — the order is authorised by an independent server-side
-      re-query of the CCBill API, so a forged or replayed callback cannot complete an order.
+      CCBill signs its FlexForms approval post with a validation digest computed over the
+      subscription id, the approval flag and a salt that only CCBill and PaymentHood hold.
+      PaymentHood recomputes that digest on every inbound callback and compares it in constant
+      time; a webhook with a missing or mismatched digest is rejected before it can touch the
+      order. This matters more here than with most providers, because CCBill FlexForms has no
+      fetch-by-reference API to re-query — the verified webhook <em>is</em> the authorisation,
+      with no polling fallback behind it, so a forged or replayed callback cannot complete an
+      order.
   - q: Does PaymentHood charge extra on top of CCBill's fees?
     a: >-
       No. PaymentHood adds nothing to what CCBill charges: no percentage, no per-transaction
@@ -140,11 +151,19 @@ faqs:
       the provider that created them.
 
 verification:
-  verified_on: 2026-08-13
-  # Left empty deliberately. A human clears this after checking every field
-  # against `sources`, and specifically after resolving the three NOTEs above:
-  # the logo asset, the provisional accent, and the `integration:` block.
-  verified_by:
+  verified_on: 2026-08-15
+  verified_by: >-
+    Site owner, 2026-08-15. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there: the `integration:` block was checked
+    line by line against the actual implementation in
+    payment-service/Payment.Provider/Providers/CCBill (CCBillProvider.cs,
+    CCBillHelpers.cs) and rewritten — the previous OAuth / IP-allowlist /
+    API-re-verification description was inferred and wrong. Provider facts and
+    links come from the `sources` below. The logo artwork was replaced on the same
+    day with a real PNG at the sibling scale, so the earlier mismatch is resolved.
+    NOT covered by this sign-off: the `accent` value, which was sampled from the
+    old artwork's blue background block and has not been re-sampled from the new
+    wordmark — see the note above `accent:`.
   sources:
     - https://ccbill.com/
     - https://ccbill.com/doc/

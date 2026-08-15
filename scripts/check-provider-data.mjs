@@ -2,7 +2,8 @@
 //
 // The gate was originally "a human reads every field". That is the right rule
 // for claims only a person can judge, and the wrong rule for everything else —
-// with 36 provider files and 180 combo pages, a purely human gate never opens
+// with a provider file per gateway and a combo page per gateway x platform,
+// a purely human gate never opens
 // and the pages stay unpublished forever.
 //
 // So the gate is split. This script owns the part a machine does better:
@@ -14,6 +15,9 @@
 //   3. No banned claim patterns: no fees, no counts, no completeness claims.
 //      These are the things that go stale without anyone noticing, and the
 //      reason they are banned is documented in .claude/skills/provider-page.
+//   4. Every platform in `platforms:` has a combo page on disk. Those pages are
+//      hand-written stubs — nothing generates them — so adding a provider
+//      silently creates N dead URLs until someone remembers to make them.
 //
 // What it deliberately does NOT check is whether the characterisation is right
 // ("Kuda has no card acceptance"). That still needs a person — but it is a
@@ -112,6 +116,17 @@ for (const file of files) {
   if (d.accent_text && !/^#[0-9a-f]{6}$/i.test(d.accent_text)) issues.push(`accent_text is not a hex colour: ${d.accent_text}`);
   if (!d.links.website) issues.push('missing links.website');
   if (!d.sources.length) issues.push('verification.sources is empty');
+
+  // Combo pages (integrations/<platform>/<provider>/) are hand-written stubs —
+  // no loop builds them from this data. So `platforms:` is a promise the repo
+  // does not keep on its own: CCBill listed five platforms and shipped with all
+  // five pages absent, every one a 404 that nothing else reported. Only the
+  // missing direction is checked; a stub for a platform no longer listed here
+  // still renders, it just advertises a combination we no longer claim.
+  for (const plat of (d.platforms || '').replace(/[[\]]/g, '').split(',').map((s) => s.trim()).filter(Boolean)) {
+    if (!fs.existsSync(path.join(ROOT, 'integrations', plat, d.slug ?? '', 'index.html')))
+      issues.push(`missing combo page: integrations/${plat}/${d.slug}/index.html`);
+  }
 
   // Banned claims — check the prose only, not the comment header that explains
   // the rule (it necessarily contains examples of what it forbids).
