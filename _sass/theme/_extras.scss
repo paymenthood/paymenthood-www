@@ -424,6 +424,9 @@
 }
 
 // ---- customer logo cards ----
+// .customer-card is an <a> since 2026-08-15 — every logo links out to the customer's own
+// site, so a reader can check it. Keep the colour rules below independent of :link/:visited
+// or the names will change colour once a visitor has been there.
 .customer-card {
   display: flex;
   flex-direction: column;
