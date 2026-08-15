@@ -194,7 +194,7 @@ for every one of them.
 
 [PaymentHood](/) handles that layer: decline classification, retry and failover
 rules, idempotency and webhook signature verification across
-{{ site.provider_count }}+ providers behind one API. If you are running
+{{ site.provider_floor }} providers behind one API. If you are running
 WooCommerce, WHMCS, VirtueMart, Phoca Cart or J2Commerce, the
 [free plugins](/integrations/) mean it is a plugin install rather than a
 development project, and the retry and routing rules live in a dashboard instead

@@ -88,7 +88,7 @@ and they all cost real money.
 
 ## Where PaymentHood fits
 
-[PaymentHood](/) puts {{ site.provider_count }}+ providers behind one API and one
+[PaymentHood](/) puts {{ site.provider_floor }} providers behind one API and one
 plugin, so switching a provider on is a dashboard change rather than an
 integration project. If the one you need is not in the
 [provider directory](/providers.html) yet, that is a request rather than a dead

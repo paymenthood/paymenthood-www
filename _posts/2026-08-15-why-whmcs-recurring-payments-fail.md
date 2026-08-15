@@ -104,7 +104,7 @@ gateway mid-renewal-cycle.
 
 If your renewals are failing, the problem is almost always that your gateway can't
 do merchant-initiated payments — and that's exactly the gap PaymentHood closes.
-It connects WHMCS to {{ site.provider_count }}+ providers through one free module,
+It connects WHMCS to {{ site.provider_floor }} providers through one free module,
 with tokenised recurring support, automatic failover, webhook verification and
 server-side confirmation handled for you. There's no per-transaction fee from
 PaymentHood; you pay only your chosen provider's processing fees.

@@ -6,10 +6,20 @@ baseurl: ""
 lang: en
 author: PaymentHood
 
-# Single source of truth for the provider count shown on the home mosaic and the
-# product-page provider strip. providers.html renders this many cards; update
-# both together.
+# Two numbers on purpose, and they are not interchangeable.
+#
+# `provider_count` is the EXACT count, and only belongs where the page derives
+# something from it (the "+N more" mosaic links, the pricing line). It must match
+# the number of `status: live` records in _data/providers/. Never write it as
+# "{{ site.provider_count }}+" — that renders "37+", which claims more than we have.
+#
+# `provider_floor` is the CLAIM, and belongs in every SEO- and Ads-facing sentence.
+# It is a floor, not a count, so it stays true as providers are added and never
+# needs editing. Google Ads matches ad copy against the landing page, so an exact
+# number that drifts out of sync between pages reads as misrepresentation on review.
+# Only bump this when the real count crosses the next ten.
 provider_count: 37
+provider_floor: "30+"
 
 # Console sign-up destination. The integration plugins are useless without an
 # account, so this is the primary CTA on every product page.

@@ -63,7 +63,7 @@ you control, not scattered across separate integrations.
 
 ## Where PaymentHood fits
 
-[PaymentHood](/) connects WooCommerce to {{ site.provider_count }}+ payment
+[PaymentHood](/) connects WooCommerce to {{ site.provider_floor }} payment
 providers through one free, open-source plugin — with routing, automatic
 failover, webhook verification and one reconciliation view. You offer as many
 methods as you like at checkout while maintaining a single integration, and you

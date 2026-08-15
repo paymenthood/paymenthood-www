@@ -36,7 +36,7 @@ region, the local provider's official plugin is usually the simplest route.
 ## 5. PaymentHood (free, open-source, multi-provider)
 
 Instead of a plugin per gateway, one free open-source plugin connects WooCommerce
-to {{ site.provider_count }}+ providers at once, with routing and automatic
+to {{ site.provider_floor }} providers at once, with routing and automatic
 failover. This is the option to look at when you expect more than one provider, a
 fallback, or multiple markets.
 
@@ -60,7 +60,7 @@ Two things quietly turn "free" into paid:
 ## Where PaymentHood fits
 
 [PaymentHood](/) is free and open-source, connects WooCommerce to
-{{ site.provider_count }}+ providers through one plugin, and handles routing,
+{{ site.provider_floor }} providers through one plugin, and handles routing,
 failover, webhook verification and reconciliation for you — with no
 per-transaction fee from us (you pay only your chosen provider's processing
 fees). An optional plan adds white-label checkout branding.

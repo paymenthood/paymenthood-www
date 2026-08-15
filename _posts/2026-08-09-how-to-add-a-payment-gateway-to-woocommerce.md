@@ -54,7 +54,7 @@ them through a single layer is less work over time.
    ([free and open-source](/integrations/woocommerce/)).
 2. **[Create a free PaymentHood account]({{ site.signup_url }})** and connect the
    providers you want — cards, wallets, and regional gateways,
-   {{ site.provider_count }}+ supported.
+   {{ site.provider_floor }} supported.
 3. **Add or switch providers from the dashboard** — no reinstall, no code, no
    touching your checkout.
 
@@ -85,7 +85,7 @@ re-integrating every time your needs change.
 
 ## Where PaymentHood fits
 
-[PaymentHood](/) connects WooCommerce to {{ site.provider_count }}+ payment
+[PaymentHood](/) connects WooCommerce to {{ site.provider_floor }} payment
 providers through one free, open-source plugin — with routing, automatic
 failover, webhook verification and server-side confirmation handled for you. You
 install it once, then add or switch providers from a dashboard instead of in

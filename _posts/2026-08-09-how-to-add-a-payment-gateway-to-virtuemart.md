@@ -39,7 +39,7 @@ separate reconciliation.
 1. **Install the PaymentHood plugin** for VirtueMart
    ([free and open-source](/integrations/virtuemart/)).
 2. **[Create a free PaymentHood account]({{ site.signup_url }})** and connect the
-   providers you want, {{ site.provider_count }}+ supported.
+   providers you want, {{ site.provider_floor }} supported.
 3. **Manage providers from the dashboard** — add or switch them without
    installing another Joomla plugin.
 
@@ -58,7 +58,7 @@ happen to have a maintained VirtueMart extension.
 
 ## Where PaymentHood fits
 
-[PaymentHood](/) connects VirtueMart to {{ site.provider_count }}+ payment
+[PaymentHood](/) connects VirtueMart to {{ site.provider_floor }} payment
 providers through one free, open-source plugin — with routing, failover, webhook
 verification and server-side confirmation handled for you. Instead of hunting for
 a maintained plugin per gateway, you install one and manage providers from a

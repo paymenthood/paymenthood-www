@@ -122,7 +122,7 @@
     {%- if ph_product -%}
     {%- assign ph_noun = ph_product.noun | default: 'plugin' -%}
     {%- capture ph_title_full %}{{ page.title }}{% endcapture -%}
-    {%- capture ph_desc_full %}{{ page.description }} Connect 30+ providers including PayPal, Stripe and Adyen. Free {{ ph_noun }}, 5-minute setup.{% endcapture -%}
+    {%- capture ph_desc_full %}{{ page.description }} Connect {{ site.provider_floor }} providers including PayPal, Stripe and Adyen. Free {{ ph_noun }}, 5-minute setup.{% endcapture -%}
     {%- assign ph_seo = ph_seo | replace: page.title, ph_title_full | replace: page.description, ph_desc_full -%}
     {%- endif -%}
     {{ ph_seo }}

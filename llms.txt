@@ -7,7 +7,7 @@ sitemap: false
 ---
 # PaymentHood
 
-> Payment orchestration platform. One unified API across {{ site.provider_count }}+ payment
+> Payment orchestration platform. One unified API across {{ site.provider_floor }} payment
 > providers, with health-aware routing, automatic failover, idempotent charge creation,
 > server-side payment verification, webhook signature validation and cross-provider
 > reconciliation. Free plugins for WooCommerce, WHMCS, VirtueMart, Phoca Cart and J2Commerce.

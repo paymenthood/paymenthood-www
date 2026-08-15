@@ -170,7 +170,7 @@ others without changing your checkout code.
 ## Where PaymentHood fits
 
 [PaymentHood](/) is a payment orchestration platform with a unified API across
-{{ site.provider_count }}+ providers, with routing, failover, idempotency,
+{{ site.provider_floor }} providers, with routing, failover, idempotency,
 webhook signature verification and server-side confirmation handled for you. For
 stores on [WooCommerce](/integrations/woocommerce/), [WHMCS](/integrations/whmcs/),
 VirtueMart, Phoca Cart or J2Commerce there are

@@ -51,7 +51,7 @@ That covers one provider. In WHMCS specifically, the friction is:
    ([free and open-source](/integrations/whmcs/)) — the gateway module plus its
    addon and hooks.
 2. **[Create a free PaymentHood account]({{ site.signup_url }})** and connect the
-   providers you want, {{ site.provider_count }}+ supported.
+   providers you want, {{ site.provider_floor }} supported.
 3. **Manage providers from the dashboard** — add, switch, or route between them
    without touching WHMCS or reinstalling anything.
 
@@ -83,7 +83,7 @@ re-solving the same problems per gateway.
 
 ## Where PaymentHood fits
 
-[PaymentHood](/) connects WHMCS to {{ site.provider_count }}+ payment providers
+[PaymentHood](/) connects WHMCS to {{ site.provider_floor }} payment providers
 through one free, open-source module — with routing, automatic failover,
 subscription/recurring support, webhook verification and server-side
 confirmation handled for you. Orders, renewals, statuses and refunds flow through
