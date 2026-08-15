@@ -5,6 +5,8 @@ date: 2026-08-07
 tags: [orchestration, architecture]
 ---
 
+> **Payment orchestration** is a software layer between your online checkout and your payment providers. It decides which provider handles each transaction, automatically retries a failed payment through another provider, and presents every provider behind one API and one reconciliation view.
+
 Payment orchestration is a software layer that sits between your checkout and
 your payment providers. Instead of your application talking directly to Paystack,
 Payfast or Stripe, it talks to the orchestration layer, which decides **which
@@ -15,6 +17,25 @@ reconciliation view.
 The short version: a payment gateway moves one transaction to one processor.
 An orchestration layer decides which processor, handles it failing, and keeps
 the result consistent across all of them.
+
+## Payment orchestration vs. payment gateway
+
+A payment gateway and a payment orchestration layer are not competitors — the
+orchestration layer sits *above* your gateways and coordinates them. The
+difference is what each is responsible for:
+
+| | Payment gateway | Payment orchestration |
+| --- | --- | --- |
+| **Scope** | One connection to one processor | Many providers behind one API |
+| **Routing** | None — it *is* the destination | Chooses a provider per transaction |
+| **Failover** | None — if it is down, you are down | Retries through another provider |
+| **Reconciliation** | One report, in its own format | One normalised ledger across providers |
+| **Adding a provider** | A new integration in your code | A change in a dashboard |
+| **Best for** | One market, one currency, one provider | Multiple providers, markets, or a fallback |
+
+Put plainly: a gateway *moves* a payment; orchestration *decides which gateway
+moves it* and keeps every gateway consistent. You still need gateways —
+orchestration is how you run more than one without re-integrating each time.
 
 ## The problem it exists to solve
 
@@ -118,6 +139,34 @@ Buying it makes sense when payments are important to your business but are not
 your business. Building it makes sense when your routing logic is genuinely
 unusual, or when payments *are* the product.
 
+## Frequently asked questions
+
+**What is payment orchestration in simple terms?**
+It is a layer between your checkout and your payment providers that picks a provider
+for each payment, retries through another if one fails, and shows all of them behind a
+single API and one report — so you can run several providers without building a separate
+integration for each.
+
+**What is the difference between payment orchestration and a payment gateway?**
+A payment gateway is a single connection to one processor. Payment orchestration sits
+above your gateways: it routes each transaction to a provider, fails over when one is
+down, and reconciles them all in one place. You use orchestration to manage several
+gateways, not instead of them.
+
+**Do I need payment orchestration?**
+If you sell in one country, in one currency, through one provider you are happy with,
+probably not. It earns its place once you add a second provider, need a fallback for
+outages, or sell across markets and currencies.
+
+**Is payment orchestration expensive?**
+It varies. Some platforms charge a per-transaction fee on top of your provider's fees;
+others do not. PaymentHood, for example, adds no per-transaction fee — you pay only your
+chosen provider's processing fees.
+
+**Can I keep my existing payment provider?**
+Yes. Orchestration connects to the providers you already use and lets you add or switch
+others without changing your checkout code.
+
 ## Where PaymentHood fits
 
 [PaymentHood](/) is a payment orchestration platform with a unified API across
@@ -131,3 +180,52 @@ your checkout code.
 
 If you want to see which providers are covered in your market, the
 [provider directory](/providers.html) lists all of them.
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is payment orchestration in simple terms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is a layer between your checkout and your payment providers that picks a provider for each payment, retries through another if one fails, and shows all of them behind a single API and one report, so you can run several providers without building a separate integration for each."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between payment orchestration and a payment gateway?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A payment gateway is a single connection to one processor. Payment orchestration sits above your gateways: it routes each transaction to a provider, fails over when one is down, and reconciles them all in one place. You use orchestration to manage several gateways, not instead of them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need payment orchestration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you sell in one country, in one currency, through one provider you are happy with, probably not. It earns its place once you add a second provider, need a fallback for outages, or sell across markets and currencies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is payment orchestration expensive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It varies. Some platforms charge a per-transaction fee on top of your provider's fees; others do not. PaymentHood, for example, adds no per-transaction fee, so you pay only your chosen provider's processing fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I keep my existing payment provider?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Orchestration connects to the providers you already use and lets you add or switch others without changing your checkout code."
+      }
+    }
+  ]
+}
+</script>
