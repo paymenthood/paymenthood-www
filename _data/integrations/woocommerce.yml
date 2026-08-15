@@ -7,7 +7,13 @@
 # integrations/<slug>.yml for the same shape.
 software:
   name: PaymentHood WooCommerce Plugin
-  operating_system: WordPress 5.8+ with WooCommerce 6.0+
+  # Source of truth is the plugin header in PaymentHood.Plugins.WooCommerce/paymenthood.php:
+  #   Requires at least: 6.0      <- WordPress, NOT WooCommerce
+  #   WC requires at least: 8.0   <- WooCommerce
+  # Those two were previously conflated here, publishing "WooCommerce 6.0+ on
+  # WordPress 5.8+" — both below the real floor, so a merchant on WooCommerce 7
+  # would install and break. Re-read the header before changing these.
+  operating_system: WordPress 6.0+ with WooCommerce 8.0+
   version: "1.0.0"
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/latest/download/paymenthood-woocommerce.zip
 
@@ -15,7 +21,7 @@ software:
 
 product:
   platform: WooCommerce                    # display name woven through all shared copy
-  compat: "6.0+"                           # hero version pill ("WooCommerce 6.0+")
+  compat: "8.0+"                           # hero version pill ("WooCommerce 8.0+"); matches `WC requires at least` in the plugin header
   download_url: https://github.com/paymenthood/PaymentHood.Plugins.WooCommerce/releases/latest/download/paymenthood-woocommerce.zip
   repo: PaymentHood.Plugins.WooCommerce     # open-source repo under github.com/paymenthood
   logo: { src: /assets/images/woocommerce/woo-logo.png, width: 225, height: 225 }
@@ -27,8 +33,8 @@ product:
 faqs:
   - q: Which WooCommerce versions does the plugin support?
     a: >-
-      PaymentHood for WooCommerce requires WooCommerce 6.0 or higher on WordPress 5.8+.
-      It is tested with the latest stable WooCommerce releases.
+      PaymentHood for WooCommerce requires WooCommerce 8.0 or higher on WordPress 6.0+,
+      with PHP 8.0+. It is tested up to WooCommerce 10.8.
   - q: Does PaymentHood support WooCommerce Subscriptions?
     a: >-
       Not at this time. The current version supports one-time checkout payments only.
