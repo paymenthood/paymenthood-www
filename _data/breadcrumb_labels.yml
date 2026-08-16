@@ -29,3 +29,6 @@ seerbit: SeerBit
 snapscan: SnapScan
 sslcommerz: SSLCommerz
 tap: Tap Payments
+bizum: Bizum
+ideal: iDEAL
+bancontact: Bancontact

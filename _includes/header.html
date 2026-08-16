@@ -341,6 +341,15 @@
                                             </ul>
                                         </div>
                                     </li>
+                                    {%- comment -%}
+                                      Providers sits next to Integrations on purpose. "Do you support X?"
+                                      is the first question most buyers arrive with, and until 2026-08-16
+                                      the page that answers it was reachable only from one button halfway
+                                      down the home page — so on every other page there was no route to it
+                                      at all. It is also the hub for 37 provider pages, which were getting
+                                      their internal links from that single home-page button.
+                                    {%- endcomment -%}
+                                    <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'providers' %} active{% endif %}"{% if page.nav_active == 'providers' %} aria-current="page"{% endif %} href="/providers.html">Providers</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'security' %} active{% endif %}"{% if page.nav_active == 'security' %} aria-current="page"{% endif %} href="/trust-center/">Security</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'pricing' %} active{% endif %}"{% if page.nav_active == 'pricing' %} aria-current="page"{% endif %} href="/pricing.html">Pricing</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'blog' %} active{% endif %}"{% if page.nav_active == 'blog' %} aria-current="page"{% endif %} href="/blog/">Blog</a></li>

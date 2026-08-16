@@ -18,7 +18,7 @@ author: PaymentHood
 # needs editing. Google Ads matches ad copy against the landing page, so an exact
 # number that drifts out of sync between pages reads as misrepresentation on review.
 # Only bump this when the real count crosses the next ten.
-provider_count: 37
+provider_count: 40
 provider_floor: "30+"
 
 # Console sign-up destination. The integration plugins are useless without an

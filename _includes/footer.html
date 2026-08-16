@@ -41,6 +41,13 @@
                         <div class="wgs-title wgs-title-s3 t-cap">Quick Access</div>
                         <div class="wgs-body">
                             <ul class="wgs-links">
+                                {%- comment -%}
+                                  Providers is listed first: it is the hub for every provider page on the
+                                  site, and a site-wide footer link is what gives those pages internal
+                                  reach from anywhere, not just from the home page.
+                                {%- endcomment -%}
+                                <li><a href="/providers.html">Payment Providers</a></li>
+                                <li><a href="/integrations/">Integrations</a></li>
                                 <li><a href="/trust-center/">Security</a></li>
                                 <li><a href="/pricing.html">Pricing</a></li>
                                 <li><a href="https://docs.paymenthood.com/" target="_blank" rel="noopener">Documentation<span class="visually-hidden"> (opens in new tab)</span></a></li>

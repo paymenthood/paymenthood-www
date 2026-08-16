@@ -117,6 +117,12 @@ for (const file of files) {
   if (!d.links.website) issues.push('missing links.website');
   if (!d.sources.length) issues.push('verification.sources is empty');
 
+  // `logo` being present is not the same as the file existing. CCBill shipped pointing at
+  // ccbil-light.jpg while the file on disk was ccbil-light.png, so the providers grid rendered
+  // a broken image and nothing reported it — the field was set, which was all anyone checked.
+  if (d.logo && !fs.existsSync(path.join(ROOT, d.logo.replace(/^\//, ''))))
+    issues.push(`logo file does not exist: ${d.logo}`);
+
   // Combo pages (integrations/<platform>/<provider>/) are hand-written stubs —
   // no loop builds them from this data. So `platforms:` is a promise the repo
   // does not keep on its own: CCBill listed five platforms and shipped with all
@@ -182,6 +188,21 @@ for (const file of files) {
     // reporting every unsigned file as signed.
     signed: /^[ \t]*verified_by:[ \t]*\S/m.test(data),
   });
+}
+
+// `provider_count` in _config.yml is hand-maintained — Jekyll config cannot compute it —
+// and it drives the "+N more" mosaic link and the "All N providers" line on pricing. It
+// drifts every time a provider is published, because publishing happens in the data file
+// and nothing points back at the config. Only meaningful on a full run: a single-slug run
+// legitimately sees fewer files.
+if (!only.length) {
+  const liveCount = files.filter((f) =>
+    /^status:\s*live/m.test(fs.readFileSync(path.join(DIR, f), 'utf8'))).length;
+  const cfg = fs.readFileSync(path.join(ROOT, '_config.yml'), 'utf8').match(/^provider_count:\s*(\d+)/m);
+  if (cfg && Number(cfg[1]) !== liveCount) {
+    problems++;
+    console.log(`\n✗ _config.yml\n    provider_count is ${cfg[1]} but ${liveCount} providers are status: live`);
+  }
 }
 
 const live = pages.filter((p) => p.published);

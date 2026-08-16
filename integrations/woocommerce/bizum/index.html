@@ -1,0 +1,16 @@
+---
+layout: none
+platform: woocommerce
+provider: bizum
+nav_active: integrations
+title: "Bizum Payment Gateway for WooCommerce"
+description: "Accept Bizum payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#00b7c3;--pp-accent-text:#007681;--pp-accent-rgb:0,183,195;--pp-hero-end:#00b7c3;--pp-blob-rgb:0,183,195}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

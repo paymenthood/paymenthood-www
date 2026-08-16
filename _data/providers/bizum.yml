@@ -1,0 +1,126 @@
+# Single source of truth for /providers/bizum/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+#
+# Bizum is served by the shared PPRO provider in payment-service
+# (Payment.Provider/Providers/Ppro). One class covers Bizum, iDEAL and Bancontact;
+# the PaymentProviderType selects the scheme. Everything in `integration:` below was
+# read from that code on 2026-08-15, not from PPRO's documentation.
+#
+# PUBLISHED 2026-08-16. The artwork arrived, so the review gate came off here and
+# on the five integrations/*/bizum/index.html pages, and `status` went to `live`.
+# The first file supplied was bizum-dark.png — the white, for-dark-backgrounds
+# variant, which renders invisible on the white provider card. It was replaced
+# with bizum-light.png before publishing; keep that distinction in mind if the
+# artwork is ever refreshed.
+
+name: Bizum
+slug: bizum
+status: live            # live | development - only `live` may be published.
+# Flipped to live on 2026-08-16 once bizum-light.png landed. Bancontact is still
+# `development` on the same rule: while it says `development` the provider is kept
+# off the /providers grid and out of the count, which is what stops a card from
+# rendering a broken image.
+category: regional
+region: Spain
+
+# Sampled from the delivered artwork on 2026-08-16: #05c0c7 is far and away the
+# dominant opaque pixel value in bizum-light.png, so it is the mark's actual
+# turquoise and replaces the provisional #00b7c3. Contrast is computed:
+#   #05c0c7 — 2.24:1 on #ffffff  (fills and gradients ONLY, never text)
+#   #007681 — 5.37:1 on #ffffff, 5.10:1 on #f8f9fa  (text and small icons)
+# accent_text is unchanged: it already matches the sampled brand darkened to 62%
+# (#03777b, 5.35:1) to within a rounding step, and it passes on both surfaces.
+logo: /assets/images/home/providers-icon/bizum-light.png
+accent: "#05c0c7"
+accent_rgb: "5,192,199"
+accent_text: "#007681"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Bizum is a mobile payment scheme run by Spain's banks. The customer confirms the payment inside
+  their own banking app using a phone number rather than a card, so nothing card-shaped reaches the
+  merchant and there is no card chargeback route against the order. PaymentHood reaches Bizum
+  through PPRO's Global API, as a browser redirect.
+
+countries:
+  - Spain
+
+currencies: [EUR]
+
+methods:
+  - label: Bank app confirmation
+    icon: bank
+    detail: Customer approves the payment inside their own Spanish banking app
+  - label: Refunds
+    icon: recurring
+    detail: Refundable through the same scheme for up to a year after the payment
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://bizum.es/
+  # developer.ppro.com resolves in DNS but refuses HTTP, so it can be neither
+  # linked nor cited. PPRO's payment-methods page was opened but does NOT list
+  # Bizum, so it would be a false citation here — this falls back to the marketing
+  # site, per the rule for unconfirmable developer docs.
+  docs: https://www.ppro.com/
+  pricing: https://www.ppro.com/
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual provider implementation, not to PPRO's docs.
+integration:
+  auth: PPRO Global API bearer key plus a Merchant-Id header, held server-side in PaymentHood and never exposed to the storefront — sandbox and live keys are separate, and each is rejected by the other environment
+  webhook: Where a signing secret is configured, the PPRO-Signature header is verified as an HMAC-SHA256 over the timestamp and the exact raw body, inside a five-minute replay window; PPRO's older non-HMAC header is refused outright
+  verification: Status comes from re-reading the charge at PPRO rather than from the callback — PPRO's webhooks are configured per account and carry no merchant reference, so the server-side poll is what authorises fulfilment
+
+faqs:
+  - q: How does a Bizum payment work at checkout?
+    a: >-
+      The customer is redirected from your store to complete the payment, confirms it in their own
+      banking app, and is returned to you. No card number appears anywhere in the flow, which means
+      no cardholder data touches your site and no card chargeback route exists against the order.
+  - q: Which country and currency does Bizum cover?
+    a: >-
+      Euro payments from customers in Spain. If you sell beyond Spain you will want a card provider
+      alongside it — running both behind PaymentHood is one integration rather than two, and either
+      can be added or removed without a code change.
+  - q: Can I authorise now and capture later?
+    a: >-
+      No. Bizum through PPRO is a redirect sale, completed in a single step rather than authorised
+      and captured separately. Refunds are supported, back through the same scheme for up to a year
+      after the payment.
+  - q: How does PaymentHood know the payment succeeded?
+    a: >-
+      By re-reading the charge at PPRO rather than by trusting an inbound callback. PPRO's webhooks
+      are configured per account and carry no merchant reference, so the server-side check is what
+      releases the order. Where a signing secret is configured, callbacks are additionally verified
+      as an HMAC over the exact raw body, inside a five-minute replay window.
+  - q: Does PaymentHood charge extra on top of Bizum?
+    a: >-
+      No. PaymentHood adds nothing to your processing cost: no percentage, no per-transaction cut,
+      and no volume threshold where that changes. PaymentHood's only paid plan is Premium at $29 a
+      month, which adds white-label checkout branding and nothing to your transaction cost. See
+      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-15
+  verified_by: >-
+    Site owner, 2026-08-15. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - The `integration:` block was read line by line from the PPRO provider
+        implementation in payment-service (PproProvider.cs, PproProviderConfig.cs,
+        PproWebhookSignature.cs, Dtos/PproDtos.cs). It describes what that code
+        does, not what PPRO's documentation says it could do.
+      - Scheme facts — consumer country, euro-only, redirect-only, refundable —
+        come from the same code and from the provider pages under `sources`.
+      - Resolved 2026-08-16, having been open at sign-off: the logo asset now
+        exists (bizum-light.png, 480x120, transparent) and `accent` was re-sampled
+        from it — #05c0c7 is the dominant opaque pixel value by a wide margin,
+        replacing the provisional #00b7c3. accent_text was re-checked against the
+        new value and stands. The review gate came off on the same date.
+      - `docs` no longer points at developer.ppro.com: that host resolves in DNS
+        but refuses HTTP, so it could be neither linked nor cited. PPRO's
+        payment-methods page does not list Bizum, so citing it here would be a
+        false attribution — the marketing site is the honest fallback.
+  sources:
+    - https://bizum.es/
+    - https://www.ppro.com/

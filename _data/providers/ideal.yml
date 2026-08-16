@@ -1,0 +1,122 @@
+# Single source of truth for /providers/ideal/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+#
+# iDEAL is served by the shared PPRO provider in payment-service
+# (Payment.Provider/Providers/Ppro). One class covers Bizum, iDEAL and Bancontact;
+# the PaymentProviderType selects the scheme. Everything in `integration:` below was
+# read from that code on 2026-08-15, not from PPRO's documentation.
+#
+# PUBLISHED 2026-08-16. The artwork arrived, so the review gate came off here and
+# on the five integrations/*/ideal/index.html pages, and `status` went to `live`.
+# Bizum and Bancontact are still gated on the same condition this page cleared:
+# a dark-on-transparent logo that reads against a white card.
+
+name: iDEAL
+slug: ideal
+status: live            # live | development - only `live` may be published.
+# Flipped to live on 2026-08-16: the artwork landed as ideal.png (480x125, ratio
+# 3.84, transparent), the accent was re-sampled against it, and the review gates
+# were removed from providers/ideal/index.html and the five
+# integrations/*/ideal/index.html pages. Bizum and Bancontact stay `development`
+# — their artwork is still outstanding.
+category: regional
+region: Netherlands
+
+# Confirmed against the delivered artwork: sampling the opaque pixels of ideal.png
+# gives #cd0069/#cd0065, so the published brand value below is right to within a
+# rounding step and is kept as the cleaner of the two. Contrast is computed:
+#   #cc0066 — 5.59:1 on #ffffff, 5.30:1 on #f8f9fa  (fills, gradients)
+#   #b8005c — 6.58:1 on #ffffff, 6.24:1 on #f8f9fa  (text and small icons)
+logo: /assets/images/home/providers-icon/ideal.png
+accent: "#cc0066"
+accent_rgb: "204,0,102"
+accent_text: "#b8005c"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  iDEAL is the Dutch bank-transfer scheme and the way most online payments in the Netherlands are
+  made. The customer picks their bank at checkout and authorises the payment inside their own
+  banking session, so no card is involved and there is nothing card-shaped for the merchant to
+  store. PaymentHood reaches iDEAL through PPRO's Global API, as a browser redirect.
+
+countries:
+  - Netherlands
+
+currencies: [EUR]
+
+methods:
+  - label: Bank redirect
+    icon: bank
+    detail: Customer authorises the payment inside their own Dutch bank's session
+  - label: Refunds
+    icon: recurring
+    detail: Refundable through the same scheme for up to a year after the payment
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.ideal.nl/
+  # developer.ppro.com resolves in DNS but refuses HTTP, so it can be neither
+  # linked nor cited. Per the rule for unconfirmable developer docs this points at
+  # PPRO's own payment-methods page, which was opened and does list iDEAL.
+  docs: https://www.ppro.com/payment-methods/
+  pricing: https://www.ppro.com/
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual provider implementation, not to PPRO's docs.
+integration:
+  auth: PPRO Global API bearer key plus a Merchant-Id header, held server-side in PaymentHood and never exposed to the storefront — sandbox and live keys are separate, and each is rejected by the other environment
+  webhook: Where a signing secret is configured, the PPRO-Signature header is verified as an HMAC-SHA256 over the timestamp and the exact raw body, inside a five-minute replay window; PPRO's older non-HMAC header is refused outright
+  verification: Status comes from re-reading the charge at PPRO rather than from the callback — PPRO's webhooks are configured per account and carry no merchant reference, so the server-side poll is what authorises fulfilment
+
+faqs:
+  - q: Why is iDEAL worth offering to Dutch customers?
+    a: >-
+      Because it is what Dutch shoppers expect to see. Paying by bank is the default habit in the
+      Netherlands, and a checkout that offers only cards asks people to change how they normally
+      pay — which is where carts get abandoned.
+  - q: Is there a maximum iDEAL payment amount?
+    a: >-
+      Not one the scheme publishes. The ceiling on an iDEAL payment is set by the consumer's own
+      bank, so it varies from customer to customer rather than by merchant, and cannot be known in
+      advance at checkout.
+  - q: Can I authorise now and capture later?
+    a: >-
+      No. iDEAL has no separate capture step at all — the payment completes in a single redirect.
+      Refunds are supported, back through the same scheme for up to a year after the payment.
+  - q: How does PaymentHood confirm the payment?
+    a: >-
+      By re-reading the charge at PPRO rather than by trusting an inbound callback. PPRO's webhooks
+      are configured per account and carry no merchant reference, so the server-side check is what
+      releases the order. Where a signing secret is configured, callbacks are additionally verified
+      as an HMAC over the exact raw body, inside a five-minute replay window.
+  - q: Does PaymentHood charge extra on top of iDEAL?
+    a: >-
+      No. PaymentHood adds nothing to your processing cost: no percentage, no per-transaction cut,
+      and no volume threshold where that changes. PaymentHood's only paid plan is Premium at $29 a
+      month, which adds white-label checkout branding and nothing to your transaction cost. See
+      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-15
+  verified_by: >-
+    Site owner, 2026-08-15. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - The `integration:` block was read line by line from the PPRO provider
+        implementation in payment-service (PproProvider.cs, PproProviderConfig.cs,
+        PproWebhookSignature.cs, Dtos/PproDtos.cs). It describes what that code
+        does, not what PPRO's documentation says it could do.
+      - Scheme facts — consumer country, euro-only, redirect-only, no separate
+        capture, refundable — come from the same code and from the provider pages
+        under `sources`.
+      - Resolved 2026-08-16, having been open at sign-off: the logo asset now
+        exists (ideal.png) and the `accent` was re-sampled against it — the
+        opaque pixels give #cd0069/#cd0065 against a published #cc0066, so the
+        value stands. The review gate was removed on the same date.
+      - Known and NOT ours to fix: https://www.ideal.nl/ redirects to a target
+        returning HTTP 500. Confirmed from two independent clients on 2026-08-16
+        and on every path tried, so it is an outage at iDEAL rather than a wrong
+        URL — it is still their canonical site. Re-check before assuming rot.
+  sources:
+    - https://www.ideal.nl/
+    - https://www.ppro.com/payment-methods/
+    - https://www.ppro.com/

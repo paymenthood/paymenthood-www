@@ -1,0 +1,16 @@
+---
+layout: none
+platform: woocommerce
+provider: bancontact
+nav_active: integrations
+title: "Bancontact Payment Gateway for WooCommerce"
+description: "Accept Bancontact payments on WooCommerce with the free PaymentHood plugin. Install in minutes, no gateway code."
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#0066b3;--pp-accent-text:#005498;--pp-accent-rgb:0,102,179;--pp-hero-end:#0066b3;--pp-blob-rgb:0,102,179}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

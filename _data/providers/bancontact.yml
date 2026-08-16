@@ -1,0 +1,112 @@
+# Single source of truth for /providers/bancontact/. See paystack.yml for the
+# schema contract and the verification rule — both apply here unchanged.
+#
+# Bancontact is served by the shared PPRO provider in payment-service
+# (Payment.Provider/Providers/Ppro). One class covers Bizum, iDEAL and Bancontact;
+# the PaymentProviderType selects the scheme. Everything in `integration:` below was
+# read from that code on 2026-08-15, not from PPRO's documentation.
+#
+# PUBLISHED. The logo landed as bancontact-light.png, `status` is `live`, and the
+# noindex/sitemap pairs have been removed from providers/bancontact/index.html and
+# from the five integrations/*/bancontact/index.html pages. Nothing here is held back.
+
+name: Bancontact
+slug: bancontact
+status: live
+
+category: regional
+region: Belgium
+
+# Re-sampled from the artwork on 2026-08-16. The provisional value was a dark navy
+# (#1e3791); the real wordmark is a brighter blue, so it was replaced rather than
+# kept. Contrast recomputed for the new pair:
+#   #0066b3 — 5.91:1 on #ffffff, 5.61:1 on #f8f9fa  (fills, gradients)
+#   #005498 — 7.72:1 on #ffffff, 7.32:1 on #f8f9fa  (text and small icons)
+logo: /assets/images/home/providers-icon/bancontact-light.png
+accent: "#0066b3"
+accent_rgb: "0,102,179"
+accent_text: "#005498"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss
+
+summary: >-
+  Bancontact is Belgium's domestic payment scheme and the country's most familiar way to pay
+  online. The customer authorises the payment through their own bank rather than by entering card
+  details, so nothing card-shaped reaches the merchant. PaymentHood reaches Bancontact through
+  PPRO's Global API, as a browser redirect.
+
+countries:
+  - Belgium
+
+currencies: [EUR]
+
+methods:
+  - label: Bank redirect
+    icon: bank
+    detail: Customer authorises the payment through their own Belgian bank
+  - label: Refunds
+    icon: recurring
+    detail: Refundable through the same scheme for up to a year after the payment
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.bancontact.com/
+  # developer.ppro.com resolves in DNS but refuses HTTP, so it can be neither
+  # linked nor cited. Per the rule for unconfirmable developer docs this points at
+  # PPRO's own payment-methods page, which was opened and does list Bancontact.
+  docs: https://www.ppro.com/payment-methods/
+  pricing: https://www.ppro.com/
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual provider implementation, not to PPRO's docs.
+integration:
+  auth: PPRO Global API bearer key plus a Merchant-Id header, held server-side in PaymentHood and never exposed to the storefront — sandbox and live keys are separate, and each is rejected by the other environment
+  webhook: Where a signing secret is configured, the PPRO-Signature header is verified as an HMAC-SHA256 over the timestamp and the exact raw body, inside a five-minute replay window; PPRO's older non-HMAC header is refused outright
+  verification: Status comes from re-reading the charge at PPRO rather than from the callback — PPRO's webhooks are configured per account and carry no merchant reference, so the server-side poll is what authorises fulfilment
+
+faqs:
+  - q: How does Bancontact work at checkout?
+    a: >-
+      The customer is redirected from your store, authorises the payment with their own bank, and
+      is returned to you. No card number is entered on your site, so no cardholder data touches
+      your systems.
+  - q: Are the QR code and in-app flows supported?
+    a: >-
+      Not through this integration. PaymentHood supports Bancontact as a browser redirect; the QR
+      and app-intent flows need checkout components this integration does not provide. For a web
+      checkout the redirect is the flow customers see anyway.
+  - q: Can I authorise now and capture later?
+    a: >-
+      No. Bancontact through PPRO is a redirect sale, completed in a single step rather than
+      authorised and captured separately. Refunds are supported, back through the same scheme for
+      up to a year after the payment.
+  - q: How does PaymentHood confirm the payment?
+    a: >-
+      By re-reading the charge at PPRO rather than by trusting an inbound callback. PPRO's webhooks
+      are configured per account and carry no merchant reference, so the server-side check is what
+      releases the order. Where a signing secret is configured, callbacks are additionally verified
+      as an HMAC over the exact raw body, inside a five-minute replay window.
+  - q: Does PaymentHood charge extra on top of Bancontact?
+    a: >-
+      No. PaymentHood adds nothing to your processing cost: no percentage, no per-transaction cut,
+      and no volume threshold where that changes. PaymentHood's only paid plan is Premium at $29 a
+      month, which adds white-label checkout branding and nothing to your transaction cost. See
+      <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+verification:
+  verified_on: 2026-08-15
+  verified_by: >-
+    Site owner, 2026-08-15. Scope of this sign-off, stated precisely so nobody
+    later reads more into it than is there:
+      - The `integration:` block was read line by line from the PPRO provider
+        implementation in payment-service (PproProvider.cs, PproProviderConfig.cs,
+        PproWebhookSignature.cs, Dtos/PproDtos.cs). It describes what that code
+        does, not what PPRO's documentation says it could do.
+      - Scheme facts — consumer country, euro-only, redirect-only, refundable, and
+        the absence of the QR and app-intent flows — come from the same code and
+        from the provider pages under `sources`.
+      - The logo artwork landed on 2026-08-16, and `accent` was re-sampled from it
+        on the same date. Nothing on this page is held back.
+  sources:
+    - https://www.bancontact.com/
+    - https://www.ppro.com/payment-methods/
+    - https://www.ppro.com/
