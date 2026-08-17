@@ -3,6 +3,13 @@ layout: none
 platform: virtuemart
 provider: dpo
 nav_active: integrations
+# Excluded from the index on 2026-08-17. This exact URL had been in the sitemap for
+# three months and had not earned a single impression in Search Console, while 200
+# near-identical combo pages competed for the same crawl budget. It still renders and
+# still links onward - it is simply not a candidate for search. Delete these two lines
+# if this pairing ever gets its own genuinely unique content.
+noindex: true
+sitemap: false
 title: "DPO Pay Payment Gateway for VirtueMart"
 description: "Accept DPO Pay payments on VirtueMart with the free PaymentHood plugin. Install in minutes, no gateway code."
 ---
