@@ -1,0 +1,218 @@
+---
+layout: none
+nav_active: integrations
+title: "Joomla Payment Plugin"
+description: "One free plugin, 30+ payment providers — for VirtueMart, Phoca Cart and J2Commerce on Joomla 4.0+. No code, no extension per gateway."
+---
+{% comment %}
+  Joomla platform hub. NOT a product stub - there is no `joomla` entry in
+  _data/integrations/, because Joomla is the CMS and the three carts below are the
+  products. So this page does not use _includes/integration-product.html; it is a
+  hand-written category page in the style of integrations/index.html.
+
+  It exists for one measured reason: "joomla payment plugin" and "joomla payment
+  gateway" together drew ~85 impressions and zero clicks in the first three months,
+  while /integrations/j2commerce/ already ranked around position 9 - so Google
+  credits the site on Joomla, but no page addressed the platform-level query.
+
+  Every factual claim here (Joomla 4.0+, the Extensions -> Manage -> Install path)
+  is identical across all three carts' data files. Verify there before changing it.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "PaymentHood Payment Plugins for Joomla",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "VirtueMart Payment Plugin", "url": "{{ site.url }}/integrations/virtuemart/" },
+    { "@type": "ListItem", "position": 2, "name": "Phoca Cart Payment Plugin", "url": "{{ site.url }}/integrations/phoca-cart/" },
+    { "@type": "ListItem", "position": 3, "name": "J2Commerce Payment Plugin", "url": "{{ site.url }}/integrations/j2commerce/" }
+  ]
+}
+</script>
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/integrations.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+  <section class="section">
+    <div class="container">
+
+      <!-- Intro -->
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Joomla</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">One Plugin Instead of One Per Gateway</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">The usual way to take payments on Joomla is to install a separate extension for every provider — one for PayPal, another for Stripe, another for whichever local provider your customers actually use. Each brings its own settings, its own update cycle and its own way of breaking. PaymentHood is a single plugin that reaches {{ site.provider_floor }} providers, so adding or switching a provider happens in a dashboard instead of in your extension manager.</p>
+      </div>
+
+      <!-- The three Joomla carts -->
+      <div class="row g-4">
+
+        <!-- VirtueMart -->
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".2">
+            <span class="badge badge-joomla align-self-start mb-3">Joomla</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/virtuemart/virtuemart-logo.png' | relative_url }}" alt="">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">VirtueMart Payment Plugin</h3>
+            <p class="mb-4">The longest-established Joomla shopping cart. PaymentHood registers as a native VirtueMart payment method, so it appears at checkout exactly where your customers expect it.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Native VirtueMart payment method</li>
+              <li>One-time payments out of the box</li>
+              <li>{{ site.provider_floor }} providers without extra extensions</li>
+              <li>Joomla 4.0+</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/virtuemart/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/virtuemart/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phoca Cart -->
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".3">
+            <span class="badge badge-joomla align-self-start mb-3">Joomla</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/phocacart/phocacart-logo.png' | relative_url }}" alt="">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">Phoca Cart Payment Plugin</h3>
+            <p class="mb-4">A lightweight cart that runs a large number of small Joomla stores. PaymentHood plugs straight into the Phoca Cart payment layer and turns it into a checkout reaching cards, wallets and crypto.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Native Phoca Cart integration</li>
+              <li>Accept cards, wallets &amp; crypto</li>
+              <li>{{ site.provider_floor }} providers, one configuration</li>
+              <li>Joomla 4.0+</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/phoca-cart/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/phoca-cart/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- J2Commerce -->
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".4">
+            <span class="badge badge-joomla align-self-start mb-3">Joomla</span>
+            <div class="integration-card-logo d-flex align-items-center overflow-hidden mb-4">
+              <img src="{{ '/assets/images/j2commerce/j2commerce-logo.webp' | relative_url }}" alt="">
+            </div>
+            <h3 class="txt-blue-600 fs-4 mb-3">J2Commerce Payment Plugin</h3>
+            <p class="mb-4">A full commerce component for Joomla, formerly shipped as J2Store. One PaymentHood plugin replaces the drawer of separate gateway extensions a J2Commerce store usually accumulates.</p>
+            <ul class="check-list list-unstyled p-0 mb-4">
+              <li>Built for J2Commerce on Joomla</li>
+              <li>One-time payments out of the box</li>
+              <li>{{ site.provider_floor }} providers without extra extensions</li>
+              <li>Joomla 4.0+</li>
+            </ul>
+            <div class="mt-auto d-flex flex-wrap align-items-center gap-3">
+              <a href="/integrations/j2commerce/" class="vh-btn btn-md btn-blue-100"><span>View Plugin</span></a>
+              <a href="/integrations/j2commerce/installation/" class="link-arrow">Install guide <em class="ti ti-arrow-right"></em></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Which cart am I on? -->
+      <div class="text-center mt-5 pt-5">
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Not sure which cart your site runs?</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Open your Joomla administrator and go to <em>Extensions &rarr; Manage &rarr; Manage</em>, then look for one of these three components.</p>
+      </div>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">com_virtuemart</h3>
+            <p class="small mb-0">You are on VirtueMart. It adds its own top-level admin menu, and payment methods are configured under <em>VirtueMart &rarr; Payment Methods</em>.</p>
+          </div>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">com_phocacart</h3>
+            <p class="small mb-0">You are on Phoca Cart. Payment methods live under <em>Components &rarr; Phoca Cart &rarr; Payment Methods</em>.</p>
+          </div>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">com_j2store</h3>
+            <p class="small mb-0">You are on J2Commerce. The component still carries the J2Store name from before the rename, and payment plugins are listed under its Payment Methods screen.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Value strip -->
+      <div class="bg-blue-200 tc-light rounded-4 p-4 p-md-5 mt-5 animated" data-animate="fadeInUp" data-delay=".2">
+        <div class="wide text-center">
+          <h2 class="mb-3">Why Joomla stores consolidate on one plugin</h2>
+          <p class="lead mb-0 txt-blue-50">Every gateway extension you install is another thing to update, another place a Joomla upgrade can break, and another set of credentials to keep straight. One integration removes all of that — and every provider account stays contracted in your own name, with funds settling directly to you.</p>
+        </div>
+        <div class="row g-4 mt-3 text-center">
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">{{ site.provider_floor }}</div>
+            <div class="small mt-2 txt-blue-50">Providers, one extension</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">3</div>
+            <div class="small mt-2 txt-blue-50">Joomla carts supported</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">$0</div>
+            <div class="small mt-2 txt-blue-50">To download and run</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">0%</div>
+            <div class="small mt-2 txt-blue-50">PaymentHood transaction fee</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="text-center mt-5 pt-5">
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Live in three steps</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">The standard Joomla install route — no FTP access and no file editing.</p>
+      </div>
+      <div class="row g-4 mt-4 text-center">
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="icon-circle step-num mx-auto mb-3">1</div>
+          <h3 class="txt-blue-600 fs-5 mb-2 h4">Download the plugin</h3>
+          <p class="small mb-0">Pick the plugin for your cart and download the ZIP. It is free, with no purchase step and no approval to wait on.</p>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="icon-circle step-num mx-auto mb-3">2</div>
+          <h3 class="txt-blue-600 fs-5 mb-2 h4">Install it in Joomla</h3>
+          <p class="small mb-0">Upload the ZIP through <em>Extensions &rarr; Manage &rarr; Install</em>, then paste your PaymentHood API credentials into the plugin settings.</p>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="icon-circle step-num mx-auto mb-3">3</div>
+          <h3 class="txt-blue-600 fs-5 mb-2 h4">Turn on your providers</h3>
+          <p class="small mb-0">Enable the providers you want from your PaymentHood dashboard. Adding another later does not touch your Joomla site at all.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".2">
+        <h2 class="txt-blue-600 mb-3">Start with the cart you already run</h2>
+        <p class="lead mb-4">Create a free account, install the plugin for your cart, and switch on the providers your customers use. The <a href="/providers.html">provider directory</a> shows which are available in your market.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+            <span>Start Free</span>
+            <em class="ti ti-arrow-right ps-2"></em>
+          </a>
+          <a href="/integrations/" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+            <span>All Integrations</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {% include faq.html items=site.data.joomla.faqs eyebrow="Joomla FAQ" bg="bg-light" first_open=true %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

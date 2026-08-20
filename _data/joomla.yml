@@ -1,0 +1,56 @@
+# FAQs for the /integrations/joomla/ hub. Rendered by _includes/faq.html, which
+# also emits the FAQPage JSON-LD from this same list - never hand-write that schema.
+#
+# Every factual claim here traces to the three Joomla integration data files:
+#   compat "Joomla 4.0+" and install_path "Extensions -> Manage -> Install" are
+#   identical across _data/integrations/{virtuemart,phoca-cart,j2commerce}.yml.
+# If a cart's compat ever diverges from the other two, this page stops being able
+# to state one version and the answers below need splitting per cart.
+
+faqs:
+  - q: Which Joomla shopping cart does the PaymentHood plugin support?
+    a: >-
+      All three of the widely used ones: <a href="/integrations/virtuemart/" class="txt-blue-100">VirtueMart</a>,
+      <a href="/integrations/phoca-cart/" class="txt-blue-100">Phoca Cart</a> and
+      <a href="/integrations/j2commerce/" class="txt-blue-100">J2Commerce</a>. Each has its own
+      PaymentHood plugin built for that cart's payment API, and all three connect to the same
+      PaymentHood account. If you run more than one Joomla site on different carts, you configure
+      your providers once and both sites use them.
+
+  - q: Do I need a separate plugin for every payment gateway in Joomla?
+    a: >-
+      Not with PaymentHood, and that is the whole point of it. The usual Joomla pattern is one
+      third-party extension per gateway - one for PayPal, another for Stripe, another for a local
+      provider - each with its own settings, its own update cycle and its own way of breaking. The
+      PaymentHood plugin is a single extension that reaches every provider on your account, so
+      adding or switching a provider happens in your PaymentHood dashboard rather than by installing
+      another extension.
+
+  - q: Is the Joomla payment plugin free?
+    a: >-
+      Yes. All three Joomla plugins are free to download and use, and PaymentHood takes no
+      percentage and no per-transaction fee. You keep your own account with each payment provider
+      and they bill you directly for their own processing fees. The only paid plan is Premium at
+      $29 a month, which adds white-label checkout branding and changes nothing about your
+      transaction costs. See <a href="/pricing.html" class="txt-blue-100">pricing</a>.
+
+  - q: Which version of Joomla is required?
+    a: >-
+      Joomla 4.0 or newer, for all three carts. Installation is the standard Joomla route -
+      <em>Extensions &rarr; Manage &rarr; Install</em> - so no FTP access or file editing is needed.
+      Each plugin has its own step-by-step install guide linked from its page.
+
+  - q: Can I accept local payment methods as well as cards on Joomla?
+    a: >-
+      Yes. The same plugin reaches card processors, regional providers and crypto gateways, so a
+      Joomla store can offer cards alongside the local rails its customers actually use - bank
+      transfer schemes in Europe, mobile-money and bank-API providers across Africa, and others by
+      market. Which ones are available depends on your country; the
+      <a href="/providers.html" class="txt-blue-100">provider directory</a> lists them all.
+
+  - q: Do I need a developer to set this up?
+    a: >-
+      No. Installing the plugin is a normal Joomla extension install, and connecting it to your
+      PaymentHood account is a matter of pasting API credentials into the plugin settings. There is
+      no code to write in your template or your cart, and adding a provider later does not touch
+      your site at all.
