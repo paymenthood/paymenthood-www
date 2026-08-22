@@ -1,0 +1,192 @@
+---
+layout: none
+title: Payment Orchestration
+description: How PaymentHood routes each payment to the right provider, retries technical failures through another, and reconciles every provider in one ledger — with no change to your checkout code.
+---
+
+{% include header-secondary.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro: what the layer is, in one screen -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">The Orchestration Layer</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">One integration between your checkout and every provider</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">
+          Your checkout talks to PaymentHood. PaymentHood talks to
+          <a href="/providers.html">{{ site.provider_floor }} payment providers</a>.
+          Which provider handles a given payment stops being code and becomes configuration.
+        </p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".3">
+            Every extra provider you integrate directly is another API, another webhook format,
+            another set of error codes to maintain. An orchestration layer collapses all of that
+            into one connection: your store integrates once — through a
+            <a href="/integrations/">free plugin</a> or the API — and every provider behind the
+            layer becomes available without another line of code. If the concept is new to you,
+            start with our plain-English explainer,
+            <a href="/blog/what-is-payment-orchestration/">what payment orchestration is</a>;
+            this page is about what the layer actually does with each payment.
+          </p>
+        </div>
+      </div>
+      <div class="row gy-4 justify-content-center mt-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="how-step-num">1</div>
+            <h3 class="h5">Your checkout calls one API</h3>
+            <p>The store never talks to a provider directly. One request, one format, whichever providers you run behind it.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".5">
+            <div class="how-step-num">2</div>
+            <h3 class="h5">The layer picks the provider</h3>
+            <p>Routing rules weigh currency, country, payment method, amount and live provider health, then hand the payment to the best match.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".6">
+            <div class="how-step-num">3</div>
+            <h3 class="h5">The result is verified and recorded</h3>
+            <p>The payment is confirmed with the provider server-side, then lands in one normalised ledger next to every other provider's transactions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capability overview -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Capabilities</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">What the orchestration layer handles for you</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Routing is the visible part. Most of the engineering is in everything that keeps many providers behaving like one.</p>
+      </div>
+      <div class="feature-grid animated" data-animate="fadeInUp" data-delay=".3">
+        <div class="feat-card"><div class="feat-card-icon navy">🧭</div><h3 class="h4">Smart Routing</h3><p>Every transaction gets a decision: rules on currency, country, method and amount, weighed against each provider's current health.</p></div>
+        <div class="feat-card"><div class="feat-card-icon blue">🔁</div><h3 class="h4">Automatic Failover</h3><p>A timeout or outage at one provider retries through another before your customer ever sees an error. Hard declines are never re-run.</p></div>
+        <div class="feat-card"><div class="feat-card-icon orange">🔑</div><h3 class="h4">Idempotent Charges</h3><p>Timeouts, double-clicks and repeated retries return the original result instead of charging the card a second time.</p></div>
+        <div class="feat-card"><div class="feat-card-icon teal">🛡️</div><h3 class="h4">Webhook Verification</h3><p>Each provider signs callbacks its own way. The layer verifies every signature scheme once, correctly, for all of them.</p></div>
+        <div class="feat-card"><div class="feat-card-icon green">✅</div><h3 class="h4">Server-Side Confirmation</h3><p>An order is marked paid only when the provider confirms the capture to your server — never because a browser hit the success URL.</p></div>
+        <div class="feat-card"><div class="feat-card-icon indigo">📒</div><h3 class="h4">One Reconciliation Ledger</h3><p>Every provider's transactions, normalised into a single view, so finance stops merging settlement reports by hand.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep dive -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Routing: every payment gets a decision</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            A single-provider checkout has no decisions to make — and that is exactly its weakness.
+            The provider that converts best for domestic cards is rarely the one that supports the
+            wallet your international customers expect, and neither may settle in the currency you
+            want to hold. Routing turns that from a rebuild into a rule: one currency to one
+            provider, another market to another, and the rest to your default.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Because the rules live in your dashboard rather than in checkout code, adding a market
+            means activating a provider, not scheduling a development project. It is also the
+            structural fix for the checkout error that quietly kills international sales —
+            <a href="/blog/payment-method-not-available-for-your-currency/">"payment method not
+            available for your currency"</a> — because the layer simply routes that customer to a
+            provider that does accept it.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Failover: a provider's outage is not your outage</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Every provider has bad days. With one integration, their downtime is your downtime:
+            every sale fails until they recover, and you usually learn it from customers. With
+            orchestration, a technical failure — a timeout, a server error, a gateway outage —
+            is retried through another active provider while the customer is still on the page.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The discipline is in what <em>not</em> to retry. A hard decline like insufficient funds
+            is a bank's answer, not a technical fault; re-running it through another provider cannot
+            succeed. The layer classifies each failure before deciding, a distinction we unpack in
+            <a href="/blog/why-payments-fail/">why payments fail</a> and in our guide to
+            <a href="/blog/payment-gateway-downtime-failover/">payment gateway downtime and failover</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Verification: paid means the provider said so</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Two verification habits separate a robust payment system from a lucky one. First, no
+            order is marked paid because a browser was redirected to a success page — that redirect
+            is attacker-controllable, and trusting it is how stores end up
+            <a href="/blog/payment-successful-order-still-pending/">shipping unpaid orders or
+            holding paid ones</a>. The payment is real when your server confirms it with the
+            provider. Second, every webhook signature is verified — each provider signs callbacks
+            differently, and the layer implements each scheme once, centrally, instead of leaving it
+            to whoever wired up that provider.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Card data follows the same principle of never trusting the edges: with hosted checkout,
+            card details are entered on a hosted payment page and never touch your server, which is
+            what keeps a store on the short SAQ A path rather than a full audit —
+            <a href="/blog/do-you-need-pci-compliance-to-accept-payments/">how PCI scope actually
+            works</a>, and our <a href="/trust-center/">trust center</a> covers the rest of the
+            security posture.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Reconciliation: one ledger, whatever the mix</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Five providers means five settlement reports, five formats, five definitions of a
+            refund. Orchestration normalises all of it into a single ledger, so "what did we take
+            yesterday" is one query rather than a spreadsheet merge — and
+            <a href="/blog/payment-reconciliation-across-multiple-providers/">the numbers finally
+            match</a> across store, providers and bank.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">When you do not need orchestration</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            One country, one currency, one provider you are happy with, and no concrete plan to
+            change any of it: keep the direct integration. Orchestration earns its place at the
+            second provider, the second market, or the first outage that cost real money — the
+            honest test is in our <a href="/blog/what-is-payment-orchestration/">orchestration
+            explainer</a>. PaymentHood adds no per-transaction fee either way, so the question is
+            only architectural, never a margin trade.
+          </p>
+
+          <!-- CTA -->
+          <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 mb-3">Add orchestration without a rebuild</h3>
+            <p class="lead mb-4">Create an account, connect your providers, and route your first payment — your checkout code never changes.</p>
+            <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+              <span>Create Your Free Account</span>
+              <em class="ti ti-arrow-right ps-2"></em>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include providers-strip.html eyebrow="Route Across" title="One layer, every provider" description="Activate any of them from your dashboard and the routing rules take it from there." %}
+
+  {% include faq.html items=site.data.payment_orchestration.faqs eyebrow="Orchestration FAQ" bg="bg-light" %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

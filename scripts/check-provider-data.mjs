@@ -52,6 +52,10 @@ const BANNED = [
     why: 'settlement timing — changes without notice' },
 ];
 
+// Strip carriage returns before parsing. Written with fromCharCode so the
+// helper carries no escape sequences of its own.
+const normalise = (s) => s.split(String.fromCharCode(13)).join('');
+
 function parse(text) {
   // Deliberately not a YAML library: this only needs scalars, the `links:`
   // block and the sources list, and the repo has no JS dependency for YAML.
@@ -107,7 +111,14 @@ let problems = 0;
 const seen = new Map();
 
 for (const file of files) {
-  const text = fs.readFileSync(path.join(DIR, file), 'utf8');
+  // CRLF is normalised away before anything parses this. Every regex below is
+  // anchored to a newline immediately after a key, so on a CRLF file the extra
+  // carriage return sits between them and none of them match — which reported
+  // `summary` and `links.website` missing on every provider written on Windows.
+  // Most of the repo is CRLF, so the gate was only ever really checking the few
+  // LF files. Same failure mode as the block-scalar note in parse(): the check
+  // was measuring the parser, not the data.
+  const text = normalise(fs.readFileSync(path.join(DIR, file), 'utf8'));
   const d = parse(text);
   const issues = [];
 
@@ -179,7 +190,7 @@ for (const file of files) {
   const stub = path.join(ROOT, 'providers', slug, 'index.html');
   if (!fs.existsSync(stub)) continue;
   const fm = fs.readFileSync(stub, 'utf8');
-  const data = fs.readFileSync(path.join(DIR, file), 'utf8');
+  const data = normalise(fs.readFileSync(path.join(DIR, file), 'utf8'));
   pages.push({
     slug,
     published: !/^noindex:\s*true/m.test(fm),

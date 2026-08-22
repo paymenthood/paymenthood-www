@@ -19,6 +19,7 @@ Operated by OmegaHood LLC. Marketing site: {{ site.url }} · API documentation: 
 ## Product
 
 - [Home]({{ site.url }}/): What PaymentHood does and who it is for.
+- [Payment orchestration]({{ site.url }}/payment-orchestration/): How the orchestration layer works — routing, failover, idempotency, verification, reconciliation.
 - [Pricing]({{ site.url }}/pricing.html): Plans. PaymentHood takes no cut of transactions at any volume.
 - [Payment providers]({{ site.url }}/providers.html): Every supported provider, filterable by global, regional and crypto.
 - [Integrations]({{ site.url }}/integrations/): The e-commerce and billing platforms with a ready-made PaymentHood plugin.

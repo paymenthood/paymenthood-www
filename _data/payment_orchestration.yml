@@ -1,0 +1,56 @@
+# FAQs for /payment-orchestration/ (the orchestration pillar page), rendered by
+# _includes/faq.html.
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page owns "how PaymentHood's
+# orchestration layer works" - routing, failover, idempotency, verification,
+# reconciliation. It must NOT redefine payment orchestration (the blog post
+# /blog/what-is-payment-orchestration/ owns the definition and its FAQ owns the
+# definitional questions), must NOT describe named providers, and must NOT
+# answer platform setup questions. Every answer here is about behaviour of the
+# layer itself.
+
+faqs:
+  - q: How does PaymentHood decide which provider handles a payment?
+    a: >-
+      Each payment is routed by rules you set in your dashboard, using the
+      transaction's currency, country, payment method and amount, plus the
+      current health of each provider. A rule can be as simple as sending one
+      currency to one provider. The routing decision itself takes milliseconds,
+      and your checkout code never sees it.
+
+  - q: What happens when a payment provider goes down?
+    a: >-
+      PaymentHood retries the payment through another active provider instead of
+      returning an error to your customer. Only technical failures - timeouts,
+      server errors, gateway outages - are retried elsewhere. A hard decline such
+      as insufficient funds is returned as a decline, because retrying it through
+      another provider cannot succeed and only irritates the customer's bank.
+
+  - q: Can a payment be charged twice if a request is retried?
+    a: >-
+      No. Charge creation is idempotent. Every payment carries an idempotency
+      key, so a repeated request - a network timeout, a double-click, a retry
+      that fires twice - returns the result of the original payment instead of
+      creating a second charge.
+
+  - q: Does an orchestration layer add latency or a point of failure?
+    a: >-
+      Both concerns are fair. The routing decision adds milliseconds, and the
+      layer is one more dependency between your checkout and your providers. In
+      practice the trade runs the other way: a single-provider integration is
+      down whenever that provider is down, while an orchestrated checkout keeps
+      taking payments through the others.
+
+  - q: Do I need to change my code to change routing rules?
+    a: >-
+      No. Routing lives in configuration, not in your checkout code. Adding a
+      provider, changing a rule or retiring a provider happens in the
+      PaymentHood dashboard and takes effect immediately - no deployment, no
+      plugin update, no new integration.
+
+  - q: Does payment orchestration change my PCI compliance scope?
+    a: >-
+      It can keep it small. With PaymentHood's hosted checkout, card details are
+      entered on a hosted payment page and never touch your server, which is the
+      SAQ A path - the shortest self-assessment. That holds for every provider
+      you route to, so adding one more does not reopen the question.

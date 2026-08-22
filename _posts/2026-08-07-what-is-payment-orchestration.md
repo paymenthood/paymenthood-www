@@ -3,6 +3,7 @@ title: "What Is Payment Orchestration? A Clear Definition"
 description: "Payment orchestration routes each transaction across your payment providers behind one API. What it actually does, and when you do not need it."
 date: 2026-08-07
 tags: [orchestration, architecture]
+image: /assets/images/og/payment-orchestration.jpg
 ---
 
 > **Payment orchestration** is a software layer between your online checkout and your payment providers. It decides which provider handles each transaction, automatically retries a failed payment through another provider, and presents every provider behind one API and one reconciliation view.
@@ -17,6 +18,14 @@ reconciliation view.
 The short version: a payment gateway moves one transaction to one processor.
 An orchestration layer decides which processor, handles it failing, and keeps
 the result consistent across all of them.
+
+<figure class="figure d-block w-100 my-4">
+  <picture>
+    <source srcset="/assets/images/blog/payment-orchestration-architecture.webp" type="image/webp">
+    <img src="/assets/images/blog/payment-orchestration-architecture.jpg" alt="A store checkout connected to one orchestration layer, which routes each payment to one of five providers and reroutes around an unavailable one." width="1408" height="768" class="figure-img img-fluid rounded w-100" loading="lazy" decoding="async">
+  </picture>
+  <figcaption class="figure-caption">One integration for the store. The routing decision — and the reroute when a provider is unavailable — happens in the layer, not in your checkout code.</figcaption>
+</figure>
 
 ## Payment orchestration vs. payment gateway
 
@@ -77,6 +86,14 @@ provider rather than returning an error to the customer. The distinction that
 matters is between a **technical** failure, which is worth retrying elsewhere,
 and a **hard decline** such as insufficient funds, which is not. Retrying a hard
 decline elsewhere just annoys the customer's bank.
+
+<figure class="figure d-block w-100 my-4">
+  <picture>
+    <source srcset="/assets/images/blog/payment-orchestration-failover.webp" type="image/webp">
+    <img src="/assets/images/blog/payment-orchestration-failover.jpg" alt="Two paths from the orchestration layer: the first breaks at a failed link, while the second carries the payment through to a successful result." width="1408" height="768" class="figure-img img-fluid rounded w-100" loading="lazy" decoding="async">
+  </picture>
+  <figcaption class="figure-caption">A technical failure is retried through another provider. A hard decline is not — that is the issuer’s answer, and no amount of rerouting changes it.</figcaption>
+</figure>
 
 ### Idempotency
 
@@ -170,8 +187,9 @@ others without changing your checkout code.
 ## Where PaymentHood fits
 
 [PaymentHood](/) is a payment orchestration platform with a unified API across
-{{ site.provider_floor }} providers, with routing, failover, idempotency,
-webhook signature verification and server-side confirmation handled for you. For
+{{ site.provider_floor }} providers, with [routing, failover, idempotency,
+webhook signature verification and server-side
+confirmation](/payment-orchestration/) handled for you. For
 stores on [WooCommerce](/integrations/woocommerce/), [WHMCS](/integrations/whmcs/),
 VirtueMart, Phoca Cart or J2Commerce there are
 [free plugins](/integrations/) so the integration is a plugin install rather than
