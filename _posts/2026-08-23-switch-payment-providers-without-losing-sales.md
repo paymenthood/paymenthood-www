@@ -3,6 +3,7 @@ title: "How to Switch Payment Providers Without Losing Sales or Rewriting Code"
 description: "Switching payment provider feels risky — re-integration, downtime, broken renewals. Why it's hard, how to do it safely, and how to make it a dashboard change."
 date: 2026-08-23
 tags: [payments]
+image: /assets/images/blog/switch-payment-providers-without-losing-sales.jpg
 ---
 
 Most merchants know months before they act that they should switch payment

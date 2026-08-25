@@ -3,6 +3,7 @@ title: "Do You Need PCI Compliance to Accept Card Payments?"
 description: "PCI compliance sounds daunting, but for most stores it's a short questionnaire — if card data never touches your server. How your integration decides your scope."
 date: 2026-08-20
 tags: [payments, security]
+image: /assets/images/blog/do-you-need-pci-compliance-to-accept-payments.jpg
 ---
 
 At some point after you start taking card payments, a message arrives that makes

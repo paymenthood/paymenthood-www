@@ -24,6 +24,13 @@ layout: none
       <div class="row justify-content-center">
         <div class="col-lg-8">
 
+          {%- assign hero_img = page.image.path | default: page.image -%}
+          {%- if hero_img and hero_img != '/assets/images/og-image.jpg' %}
+          <img src="{{ hero_img | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}"
+               class="rounded-4 mb-4 w-100" width="1200" height="675"
+               style="height:auto;aspect-ratio:16/9;object-fit:cover" fetchpriority="high" decoding="async">
+          {%- endif %}
+
           <div class="d-flex flex-wrap align-items-center gap-3 mb-5 pb-4 border-bottom">
             <span class="section-eyebrow mb-0">{{ page.author | default: site.author }}</span>
             <time datetime="{{ page.date | date_to_xmlschema }}" class="small text-muted">
@@ -72,6 +79,7 @@ layout: none
   "@type": "Article",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.description | jsonify }},
+  "image": "{{ page.image.path | default: page.image | absolute_url }}",
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },

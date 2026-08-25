@@ -3,6 +3,7 @@ title: How to Add a Payment Gateway to WHMCS (Step-by-Step)
 description: "How to add a payment gateway to WHMCS — the manual, module-per-gateway way, and one free module that connects every provider, recurring billing included."
 date: 2026-08-09
 tags: [whmcs, payments]
+image: /assets/images/blog/how-to-add-a-payment-gateway-to-whmcs.jpg
 ---
 
 WHMCS automates billing and provisioning for hosting and SaaS businesses, but to

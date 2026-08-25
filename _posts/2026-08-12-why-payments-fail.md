@@ -3,6 +3,7 @@ title: "Why Payments Fail, and What to Do About Each One"
 description: "A failed payment is three different problems with three different fixes. How to tell them apart, what to retry, when to retry it, and what to tell the customer."
 date: 2026-08-12
 tags: [payments, reliability]
+image: /assets/images/blog/why-payments-fail.jpg
 ---
 
 Most checkouts treat a failed payment as one event: the charge did not go

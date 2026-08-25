@@ -3,6 +3,7 @@ title: How to Add a Payment Gateway to VirtueMart (Joomla)
 description: "How to add a payment gateway to VirtueMart on Joomla — the per-gateway way and one plugin for many providers. Step by step, no code."
 date: 2026-08-09
 tags: [virtuemart, joomla, payments]
+image: /assets/images/blog/how-to-add-a-payment-gateway-to-virtuemart.jpg
 ---
 
 VirtueMart is the e-commerce component for Joomla, and out of the box it handles

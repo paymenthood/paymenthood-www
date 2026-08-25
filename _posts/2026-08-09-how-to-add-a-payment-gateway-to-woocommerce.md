@@ -3,6 +3,7 @@ title: How to Add a Payment Gateway to WooCommerce (No Code)
 description: "Two ways to add a payment gateway to WooCommerce — the manual, one-plugin-per-provider route, and one free plugin that connects them all. Step by step."
 date: 2026-08-09
 tags: [woocommerce, payments]
+image: /assets/images/blog/how-to-add-a-payment-gateway-to-woocommerce.jpg
 ---
 
 WooCommerce ships with a few payment options out of the box — direct bank
