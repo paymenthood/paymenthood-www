@@ -4,6 +4,7 @@ description: "How to add a payment gateway to WHMCS — the manual, module-per-g
 date: 2026-08-09
 tags: [whmcs, payments]
 hero: /assets/images/blog/how-to-add-a-payment-gateway-to-whmcs.svg
+image: /assets/images/og/blog/how-to-add-a-payment-gateway-to-whmcs.jpg
 ---
 
 WHMCS automates billing and provisioning for hosting and SaaS businesses, but to

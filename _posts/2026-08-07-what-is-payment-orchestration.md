@@ -3,8 +3,8 @@ title: "What Is Payment Orchestration? A Clear Definition"
 description: "Payment orchestration routes each transaction across your payment providers behind one API. What it actually does, and when you do not need it."
 date: 2026-08-07
 tags: [orchestration, architecture]
-image: /assets/images/og/payment-orchestration.jpg
-hero: /assets/images/blog/what-is-payment-orchestration.svg
+image: /assets/images/og/blog/what-is-payment-orchestration.jpg
+hero: /assets/images/blog/what-is-payment-orchestration.jpg
 ---
 
 > **Payment orchestration** is a software layer between your online checkout and your payment providers. It decides which provider handles each transaction, automatically retries a failed payment through another provider, and presents every provider behind one API and one reconciliation view.
@@ -91,7 +91,7 @@ decline elsewhere just annoys the customer's bank.
 <figure class="figure d-block w-100 my-4">
   <picture>
     <source srcset="/assets/images/blog/payment-orchestration-failover.webp" type="image/webp">
-    <img src="/assets/images/blog/payment-orchestration-failover.jpg" alt="Two paths from the orchestration layer: the first breaks at a failed link, while the second carries the payment through to a successful result." width="1408" height="768" class="figure-img img-fluid rounded w-100" loading="lazy" decoding="async">
+    <img src="/assets/images/blog/payment-orchestration-failover.jpg" alt="Two paths from the orchestration layer: the first breaks at a failed link, while the second carries the payment through to a successful result." width="1376" height="768" class="figure-img img-fluid rounded w-100" loading="lazy" decoding="async">
   </picture>
   <figcaption class="figure-caption">A technical failure is retried through another provider. A hard decline is not — that is the issuer’s answer, and no amount of rerouting changes it.</figcaption>
 </figure>

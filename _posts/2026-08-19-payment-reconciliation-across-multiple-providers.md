@@ -4,6 +4,7 @@ description: "Your store says one number, your providers say another, the bank a
 date: 2026-08-19
 tags: [payments, orchestration]
 hero: /assets/images/blog/payment-reconciliation-across-multiple-providers.svg
+image: /assets/images/og/blog/payment-reconciliation-across-multiple-providers.jpg
 ---
 
 It is the first working day of the month. You open your store's orders report and it

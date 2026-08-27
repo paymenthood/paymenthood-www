@@ -4,6 +4,7 @@ description: "A failed payment is three different problems with three different 
 date: 2026-08-12
 tags: [payments, reliability]
 hero: /assets/images/blog/why-payments-fail.svg
+image: /assets/images/og/blog/why-payments-fail.jpg
 ---
 
 Most checkouts treat a failed payment as one event: the charge did not go

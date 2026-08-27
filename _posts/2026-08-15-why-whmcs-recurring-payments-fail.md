@@ -4,6 +4,7 @@ description: "WHMCS automatic renewals fail silently when a gateway can't do mer
 date: 2026-08-15
 tags: [whmcs, payments]
 hero: /assets/images/blog/why-whmcs-recurring-payments-fail.svg
+image: /assets/images/og/blog/why-whmcs-recurring-payments-fail.jpg
 ---
 
 The failure is quiet, which is what makes it expensive. A hosting or SaaS customer

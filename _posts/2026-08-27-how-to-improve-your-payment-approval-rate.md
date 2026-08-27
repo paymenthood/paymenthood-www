@@ -4,6 +4,7 @@ description: "A few percent of your legitimate payments get declined for no good
 date: 2026-08-27
 tags: [payments]
 hero: /assets/images/blog/how-to-improve-your-payment-approval-rate.svg
+image: /assets/images/og/blog/how-to-improve-your-payment-approval-rate.jpg
 ---
 
 Most stores watch for payments that *fail loudly* — the error message, the stuck

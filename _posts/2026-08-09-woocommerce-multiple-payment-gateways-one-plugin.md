@@ -4,6 +4,7 @@ description: "How to offer multiple payment gateways in WooCommerce — enable s
 date: 2026-08-09
 tags: [woocommerce, payments]
 hero: /assets/images/blog/woocommerce-multiple-payment-gateways-one-plugin.svg
+image: /assets/images/og/blog/woocommerce-multiple-payment-gateways-one-plugin.jpg
 ---
 
 Offering more than one way to pay lifts conversion — some customers reach for a

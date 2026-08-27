@@ -3,7 +3,8 @@ title: "Customer Paid but the Order Is Still Pending: Why It Happens"
 description: "A customer's card was charged but the order sits unpaid. Why the browser return is not the payment event, how to diagnose stuck orders, and how to stop them happening."
 date: 2026-08-17
 tags: [payments, woocommerce, whmcs]
-hero: /assets/images/blog/payment-successful-order-still-pending.svg
+hero: /assets/images/blog/payment-successful-order-still-pending.jpg
+image: /assets/images/og/blog/payment-successful-order-still-pending.jpg
 ---
 
 The email always reads the same way. *"I paid — my bank shows the money left my

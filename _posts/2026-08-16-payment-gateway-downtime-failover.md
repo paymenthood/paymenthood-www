@@ -4,6 +4,7 @@ description: "When a payment gateway goes down, every sale fails until it recove
 date: 2026-08-16
 tags: [payments, orchestration]
 hero: /assets/images/blog/payment-gateway-downtime-failover.svg
+image: /assets/images/og/blog/payment-gateway-downtime-failover.jpg
 ---
 
 Here is the version of this that keeps founders up at night: it is a normal

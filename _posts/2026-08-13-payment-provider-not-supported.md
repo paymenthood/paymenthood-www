@@ -3,7 +3,8 @@ title: "Your Payment Provider Isn't Supported. What Now?"
 description: "Four options when the payment provider you need has no plugin for your platform — what each one actually costs, and how to tell which ones are open to you."
 date: 2026-08-13
 tags: [payments, integration]
-hero: /assets/images/blog/payment-provider-not-supported.svg
+hero: /assets/images/blog/payment-provider-not-supported.jpg
+image: /assets/images/og/blog/payment-provider-not-supported.jpg
 ---
 
 You chose a payment provider for good reasons. It settles in your currency, it

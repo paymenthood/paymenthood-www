@@ -4,6 +4,7 @@ description: "Switching payment provider feels risky — re-integration, downtim
 date: 2026-08-23
 tags: [payments]
 hero: /assets/images/blog/switch-payment-providers-without-losing-sales.svg
+image: /assets/images/og/blog/switch-payment-providers-without-losing-sales.jpg
 ---
 
 Most merchants know months before they act that they should switch payment
