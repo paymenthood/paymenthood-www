@@ -24,9 +24,8 @@ layout: none
       <div class="row justify-content-center">
         <div class="col-lg-8">
 
-          {%- assign hero_img = page.image.path | default: page.image -%}
-          {%- if hero_img and hero_img != '/assets/images/og-image.jpg' %}
-          <img src="{{ hero_img | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}"
+          {%- if page.hero %}
+          <img src="{{ page.hero | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}"
                class="rounded-4 mb-4 w-100" width="1200" height="675"
                style="height:auto;aspect-ratio:16/9;object-fit:cover" fetchpriority="high" decoding="async">
           {%- endif %}

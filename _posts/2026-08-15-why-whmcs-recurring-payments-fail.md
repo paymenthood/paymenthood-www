@@ -3,7 +3,7 @@ title: "Why WHMCS Recurring Payments Fail (and How to Fix Renewals)"
 description: "WHMCS automatic renewals fail silently when a gateway can't do merchant-initiated payments. Why it happens, how to diagnose it, and how to fix recurring payments."
 date: 2026-08-15
 tags: [whmcs, payments]
-image: /assets/images/blog/why-whmcs-recurring-payments-fail.jpg
+hero: /assets/images/blog/why-whmcs-recurring-payments-fail.svg
 ---
 
 The failure is quiet, which is what makes it expensive. A hosting or SaaS customer

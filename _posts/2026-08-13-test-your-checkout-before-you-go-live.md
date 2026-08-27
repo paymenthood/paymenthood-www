@@ -3,7 +3,7 @@ title: "Test Your Checkout Before You Go Live"
 description: "Most stores test one thing: a card that works. The failures that cost you money are on the paths nobody tries. A short pre-launch checklist."
 date: 2026-08-13
 tags: [payments, checkout]
-image: /assets/images/blog/test-your-checkout-before-you-go-live.jpg
+hero: /assets/images/blog/test-your-checkout-before-you-go-live.svg
 ---
 
 Almost every store tests its checkout the same way: put a test card in, see the

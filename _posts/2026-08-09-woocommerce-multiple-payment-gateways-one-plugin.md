@@ -3,7 +3,7 @@ title: "WooCommerce Multiple Payment Gateways: One Plugin for All"
 description: "How to offer multiple payment gateways in WooCommerce — enable several the standard way, or use one plugin to route across all of them."
 date: 2026-08-09
 tags: [woocommerce, payments]
-image: /assets/images/blog/woocommerce-multiple-payment-gateways-one-plugin.jpg
+hero: /assets/images/blog/woocommerce-multiple-payment-gateways-one-plugin.svg
 ---
 
 Offering more than one way to pay lifts conversion — some customers reach for a

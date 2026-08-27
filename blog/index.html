@@ -31,9 +31,8 @@ nav_active: blog
         {%- for post in site.posts %}
         <div class="col-md-6 blog-card{% if forloop.index > page_size %} is-hidden{% endif %}">
           <a href="{{ post.url | relative_url }}" class="blog-card-link">
-            {%- assign thumb = post.image.path | default: post.image -%}
-            {%- if thumb and thumb != '/assets/images/og-image.jpg' %}
-            <img src="{{ thumb | relative_url }}" alt="" class="blog-card-img" width="600" height="338" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-bottom:1rem;display:block">
+            {%- if post.hero %}
+            <img src="{{ post.hero | relative_url }}" alt="" class="blog-card-img" width="600" height="338" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-bottom:1rem;display:block">
             {%- endif %}
             {%- if post.tags.first %}
             {%- comment -%}

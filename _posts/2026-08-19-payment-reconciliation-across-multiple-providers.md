@@ -3,7 +3,7 @@ title: "Payment Reconciliation Across Multiple Providers: Why the Numbers Never 
 description: "Your store says one number, your providers say another, the bank a third. Why multi-provider reconciliation breaks and how to fix it for good."
 date: 2026-08-19
 tags: [payments, orchestration]
-image: /assets/images/blog/payment-reconciliation-across-multiple-providers.jpg
+hero: /assets/images/blog/payment-reconciliation-across-multiple-providers.svg
 ---
 
 It is the first working day of the month. You open your store's orders report and it

@@ -4,6 +4,7 @@ description: "Payment orchestration routes each transaction across your payment 
 date: 2026-08-07
 tags: [orchestration, architecture]
 image: /assets/images/og/payment-orchestration.jpg
+hero: /assets/images/blog/what-is-payment-orchestration.svg
 ---
 
 > **Payment orchestration** is a software layer between your online checkout and your payment providers. It decides which provider handles each transaction, automatically retries a failed payment through another provider, and presents every provider behind one API and one reconciliation view.

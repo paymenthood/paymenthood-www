@@ -3,7 +3,7 @@ title: Best Free Payment Gateway Plugins for WooCommerce (2026)
 description: "The best free payment gateway plugins for WooCommerce, what 'free' actually means, and how to pick the right one — including a multi-provider option."
 date: 2026-08-09
 tags: [woocommerce, payments]
-image: /assets/images/blog/best-free-payment-gateway-plugins-woocommerce.jpg
+hero: /assets/images/blog/best-free-payment-gateway-plugins-woocommerce.svg
 ---
 
 The best free payment gateway plugins for WooCommerce all come with one catch

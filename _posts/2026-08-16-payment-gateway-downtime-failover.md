@@ -3,7 +3,7 @@ title: "Payment Gateway Downtime: What to Do When a Provider Fails"
 description: "When a payment gateway goes down, every sale fails until it recovers. Why outages happen, and how automatic failover keeps your checkout working."
 date: 2026-08-16
 tags: [payments, orchestration]
-image: /assets/images/blog/payment-gateway-downtime-failover.jpg
+hero: /assets/images/blog/payment-gateway-downtime-failover.svg
 ---
 
 Here is the version of this that keeps founders up at night: it is a normal

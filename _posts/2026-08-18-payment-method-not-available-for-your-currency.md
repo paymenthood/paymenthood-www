@@ -3,7 +3,7 @@ title: "Why Your Checkout Says 'Payment Method Not Available for Your Currency'"
 description: "The checkout error that quietly kills international sales — why a provider rejects a currency, how to diagnose it, and how to accept payments in any currency."
 date: 2026-08-18
 tags: [payments]
-image: /assets/images/blog/payment-method-not-available-for-your-currency.jpg
+hero: /assets/images/blog/payment-method-not-available-for-your-currency.svg
 ---
 
 A customer in another country reaches your checkout, picks a payment method, and
