@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-beasties-container>
+
+<head>
+  <meta charset="utf-8">
+
+  <base href="/">
+
+  <meta name="color-scheme" content="light dark">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png">
+
+  <!-- add to homescreen for ios -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <style>
+    #app-preloader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100%;
+      background: #f7f9fc;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      transition: opacity 0.25s ease-out;
+    }
+    #app-preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #app-preloader svg {
+      width: 48px;
+      height: 48px;
+    }
+    #app-preloader svg circle {
+      fill: #3880ff;
+      animation: spinner-fade-out 1s linear infinite;
+    }
+    @keyframes spinner-fade-out {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    #app-preloader .preloader-text {
+      margin-top: 16px;
+      font-size: 16px;
+      color: #425466;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+  </style>
+<style>:root{--ion-color-primary:#0054e9;--ion-color-primary-rgb:0, 84, 233;--ion-color-primary-contrast:#fff;--ion-color-primary-contrast-rgb:255, 255, 255;--ion-color-primary-shade:#004acd;--ion-color-primary-tint:#1a65eb;--ion-color-secondary:#0163aa;--ion-color-secondary-rgb:1, 99, 170;--ion-color-secondary-contrast:#fff;--ion-color-secondary-contrast-rgb:255, 255, 255;--ion-color-secondary-shade:#015796;--ion-color-secondary-tint:#1a73b3;--ion-color-tertiary:#6030ff;--ion-color-tertiary-rgb:96, 48, 255;--ion-color-tertiary-contrast:#fff;--ion-color-tertiary-contrast-rgb:255, 255, 255;--ion-color-tertiary-shade:#542ae0;--ion-color-tertiary-tint:#7045ff;--ion-color-success:#2dd55b;--ion-color-success-rgb:45, 213, 91;--ion-color-success-contrast:#000;--ion-color-success-contrast-rgb:0, 0, 0;--ion-color-success-shade:#28bb50;--ion-color-success-tint:#42d96b;--ion-color-warning:#ffc409;--ion-color-warning-rgb:255, 196, 9;--ion-color-warning-contrast:#000;--ion-color-warning-contrast-rgb:0, 0, 0;--ion-color-warning-shade:#e0ac08;--ion-color-warning-tint:#ffca22;--ion-color-danger:#c5000f;--ion-color-danger-rgb:197, 0, 15;--ion-color-danger-contrast:#fff;--ion-color-danger-contrast-rgb:255, 255, 255;--ion-color-danger-shade:#ad000d;--ion-color-danger-tint:#cb1a27;--ion-color-light:#f4f5f8;--ion-color-light-rgb:244, 245, 248;--ion-color-light-contrast:#000;--ion-color-light-contrast-rgb:0, 0, 0;--ion-color-light-shade:#d7d8da;--ion-color-light-tint:#f5f6f9;--ion-color-medium:#636469;--ion-color-medium-rgb:99, 100, 105;--ion-color-medium-contrast:#fff;--ion-color-medium-contrast-rgb:255, 255, 255;--ion-color-medium-shade:#57585c;--ion-color-medium-tint:#737478;--ion-color-dark:#222428;--ion-color-dark-rgb:34, 36, 40;--ion-color-dark-contrast:#fff;--ion-color-dark-contrast-rgb:255, 255, 255;--ion-color-dark-shade:#1e2023;--ion-color-dark-tint:#383a3e}html{--ion-dynamic-font:-apple-system-body;--ion-font-family:var(--ion-default-font)}body{background:var(--ion-background-color);color:var(--ion-text-color)}@supports (padding-top: 20px){html{--ion-safe-area-top:var(--ion-statusbar-padding)}}@supports (padding-top: env(safe-area-inset-top)){html{--ion-safe-area-top:env(safe-area-inset-top);--ion-safe-area-bottom:env(safe-area-inset-bottom);--ion-safe-area-left:env(safe-area-inset-left);--ion-safe-area-right:env(safe-area-inset-right)}}*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}html{width:100%;height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:0;padding:0;position:fixed;width:100%;max-width:100%;height:100%;max-height:100%;transform:translateZ(0);text-rendering:optimizeLegibility;overflow:hidden;touch-action:manipulation;-webkit-user-drag:none;-ms-content-zooming:none;word-wrap:break-word;overscroll-behavior-y:none;-webkit-text-size-adjust:none;text-size-adjust:none}html{font-family:var(--ion-font-family)}@supports (-webkit-touch-callout: none){html{font:var(--ion-dynamic-font, 16px var(--ion-font-family))}}body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol}:root{--ion-background-color:#f7f9fc}:root{--ion-color-primary:#3880ff;--ion-color-primary-rgb:56, 128, 255;--ion-color-primary-contrast:#ffffff;--ion-color-primary-contrast-rgb:255, 255, 255;--ion-color-primary-shade:#3171e0;--ion-color-primary-tint:#4c8dff;--ion-color-secondary:#3dc2ff;--ion-color-secondary-rgb:61, 194, 255;--ion-color-secondary-contrast:#ffffff;--ion-color-secondary-contrast-rgb:255, 255, 255;--ion-color-secondary-shade:#36abe0;--ion-color-secondary-tint:#50c8ff;--ion-color-tertiary:#5260ff;--ion-color-tertiary-rgb:82, 96, 255;--ion-color-tertiary-contrast:#ffffff;--ion-color-tertiary-contrast-rgb:255, 255, 255;--ion-color-tertiary-shade:#4854e0;--ion-color-tertiary-tint:#6370ff;--ion-color-success:#2dd36f;--ion-color-success-rgb:45, 211, 111;--ion-color-success-contrast:#ffffff;--ion-color-success-contrast-rgb:255, 255, 255;--ion-color-success-shade:#28ba62;--ion-color-success-tint:#42d77d;--ion-color-warning:#ffc409;--ion-color-warning-rgb:255, 196, 9;--ion-color-warning-contrast:#000000;--ion-color-warning-contrast-rgb:0, 0, 0;--ion-color-warning-shade:#e0ac08;--ion-color-warning-tint:#ffca22;--ion-color-danger:#eb445a;--ion-color-danger-rgb:235, 68, 90;--ion-color-danger-contrast:#ffffff;--ion-color-danger-contrast-rgb:255, 255, 255;--ion-color-danger-shade:#cf3c4f;--ion-color-danger-tint:#ed576b;--ion-color-dark:#222428;--ion-color-dark-rgb:34, 36, 40;--ion-color-dark-contrast:#ffffff;--ion-color-dark-contrast-rgb:255, 255, 255;--ion-color-dark-shade:#1e2023;--ion-color-dark-tint:#383a3e;--ion-color-medium:#92949c;--ion-color-medium-rgb:146, 148, 156;--ion-color-medium-contrast:#ffffff;--ion-color-medium-contrast-rgb:255, 255, 255;--ion-color-medium-shade:#808289;--ion-color-medium-tint:#9d9fa6;--ion-color-light:#f4f5f8;--ion-color-light-rgb:244, 245, 248;--ion-color-light-contrast:#000000;--ion-color-light-contrast-rgb:0, 0, 0;--ion-color-light-shade:#d7d8da;--ion-color-light-tint:#f5f6f9}</style><link rel="stylesheet" href="styles-3UT3HK4J.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-3UT3HK4J.css"></noscript></head>
+
+<body>
+  <!-- Global preloader: lives OUTSIDE app-root so Angular bootstrap doesn't remove it.
+       Removed programmatically by the app when data is ready. -->
+  <div id="app-preloader">
+    <!-- Exact replica of ion-spinner[name="circles"] from Ionic source:
+         viewBox 0 0 64 64, 8 circles r=5, transform translate(32,32),
+         positioned at top: 32*sin(2πi/8)%, left: 32*cos(2πi/8)%,
+         animation-delay: 1000*(i/8) - 1000 ms -->
+    <svg viewBox="0 0 64 64">
+      <circle r="5" cx="52.5" cy="32" style="animation-delay: -1000ms"/>
+      <circle r="5" cx="46.5" cy="46.5" style="animation-delay: -875ms"/>
+      <circle r="5" cx="32" cy="52.5" style="animation-delay: -750ms"/>
+      <circle r="5" cx="17.5" cy="46.5" style="animation-delay: -625ms"/>
+      <circle r="5" cx="11.5" cy="32" style="animation-delay: -500ms"/>
+      <circle r="5" cx="17.5" cy="17.5" style="animation-delay: -375ms"/>
+      <circle r="5" cx="32" cy="11.5" style="animation-delay: -250ms"/>
+      <circle r="5" cx="46.5" cy="17.5" style="animation-delay: -125ms"/>
+    </svg>
+    <p class="preloader-text">Loading payment options...</p>
+  </div>
+
+  <app-root></app-root>
+<link rel="modulepreload" href="chunk-C6BRVQQU.js"><link rel="modulepreload" href="chunk-YY3K7GUI.js"><link rel="modulepreload" href="chunk-MCLC2OHA.js"><link rel="modulepreload" href="chunk-MSSF4GWO.js"><link rel="modulepreload" href="chunk-TXYBWULK.js"><link rel="modulepreload" href="chunk-E3WVONM2.js"><link rel="modulepreload" href="chunk-UVKQE7YY.js"><link rel="modulepreload" href="chunk-RMFJLMM2.js"><link rel="modulepreload" href="chunk-BXOUY6OH.js"><link rel="modulepreload" href="chunk-XR33YVDZ.js"><script src="polyfills-TDCRLYKL.js" type="module"></script><script src="main-ZJ75UROH.js" type="module"></script></body>
+
+</html>
