@@ -64,7 +64,7 @@ Every lever above assumes you can send a payment down more than one path, decide
 which, and retry across them — which means multiple providers, retry logic that
 classifies declines correctly, and routing rules that live somewhere you can change.
 Build that per-provider and it's a project on its own; it's also exactly what a
-[payment orchestration platform](/blog/what-is-payment-orchestration/) does, and the
+[payment orchestration platform](/payment-orchestration/) does, and the
 same machinery that provides
 [failover when a provider goes down](/blog/payment-gateway-downtime-failover/).
 

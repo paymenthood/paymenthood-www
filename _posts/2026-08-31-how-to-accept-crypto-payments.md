@@ -77,7 +77,7 @@ you're maintaining it twice.
 
 The cleaner model is to treat crypto as **one more method behind a single
 integration**, exactly like a card or a local rail — which is what a
-[payment orchestration platform](/blog/what-is-payment-orchestration/) does. You
+[payment orchestration layer](/payment-orchestration/) does. You
 present crypto to the customers who want it, keep cards for everyone else, and manage
 all of it in one place instead of one integration per method. It's the same reasoning
 that lets you [offer local payment methods](/blog/local-payment-methods-why-cards-lose-sales/)

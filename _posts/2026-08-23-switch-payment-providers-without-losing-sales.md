@@ -53,7 +53,7 @@ is itself a build.
 
 ## How orchestration removes the risk
 
-With a [payment orchestration platform](/blog/what-is-payment-orchestration/) your
+With a [payment orchestration platform](/payment-orchestration/) your
 checkout integrates once — with the orchestration layer, not with each provider.
 Providers sit behind it, so **switching one becomes a configuration change rather
 than a code change.** You can:

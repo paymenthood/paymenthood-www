@@ -68,7 +68,7 @@ Do that and you stay on the short SAQ A path, whichever provider you use.
 ## How PaymentHood keeps you in the smallest scope
 
 [PaymentHood](/) is a
-[payment orchestration platform](/blog/what-is-payment-orchestration/), and it is
+[payment orchestration platform](/payment-orchestration/), and it is
 built so that **card details pass directly from your customer to your chosen payment
 provider's certified environment.** PaymentHood — and your store — work only with the
 tokens the provider returns, never the card number. Cardholder data never lands in

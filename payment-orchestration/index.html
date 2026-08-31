@@ -16,9 +16,12 @@ description: How PaymentHood routes each payment to the right provider, retries 
         <span class="animated" data-animate="fadeInUp" data-delay=".1">The Orchestration Layer</span>
         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">One integration between your checkout and every provider</h2>
         <p class="lead animated" data-animate="fadeInUp" data-delay=".3">
-          Your checkout talks to PaymentHood. PaymentHood talks to
-          <a href="/providers.html">{{ site.provider_floor }} payment providers</a>.
-          Which provider handles a given payment stops being code and becomes configuration.
+          <strong>Payment orchestration is a software layer between your checkout and your
+          payment providers</strong> that routes each transaction to the right provider, retries
+          technical failures through another, and reconciles them all in one ledger. Your checkout
+          talks to PaymentHood; PaymentHood talks to
+          <a href="/providers.html">{{ site.provider_floor }} payment providers</a>, so which
+          provider handles a given payment stops being code and becomes configuration.
         </p>
       </div>
       <div class="row justify-content-center">

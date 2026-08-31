@@ -88,7 +88,7 @@ practice that means a gateway (or an orchestration layer) that:
 ## How PaymentHood handles WHMCS renewals
 
 [PaymentHood](/) is a
-[payment orchestration platform](/blog/what-is-payment-orchestration/) with a
+[payment orchestration platform](/payment-orchestration/) with a
 [free WHMCS module](/integrations/whmcs/), and recurring billing is built in rather
 than bolted on. When a customer pays with a method that supports agreements — such
 as PayPal, Stripe or Authorize.net — PaymentHood creates the subscription agreement
