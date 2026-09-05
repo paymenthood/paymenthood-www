@@ -1,0 +1,61 @@
+# FAQs for /integrations/hosting/ (segment page H1), rendered by _includes/faq.html.
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page owns the SEGMENT - payments
+# for hosting, VPN, domain and managed-service businesses. It must NOT own
+# "whmcs payment gateway": /integrations/whmcs/ is the platform page for that
+# query and this page links to it. Nothing here may restate the WHMCS product
+# page's feature list or its installation steps.
+#
+# Every claim below is checked: WHMCS 8.0+ and subscription support come from
+# _data/integrations/whmcs.yml; the crypto providers from _data/providers/;
+# recurring support being WHMCS-only among the plugins is why the "other
+# platforms" answer is worded the way it is.
+
+faqs:
+  - q: Which billing systems does PaymentHood work with?
+    a: >-
+      There is a free module for <a href="/integrations/whmcs/" class="txt-blue-100">WHMCS 8.0+</a>,
+      free plugins for <a href="/integrations/woocommerce/" class="txt-blue-100">WooCommerce</a> and
+      the three <a href="/integrations/joomla/" class="txt-blue-100">Joomla carts</a>, and a REST API
+      for anything custom. Hosting companies running their own control panel or a
+      home-grown billing system use the API directly.
+
+  - q: Do automatic renewals work?
+    a: >-
+      Yes, on WHMCS. When a client first pays with a method that supports
+      agreements - PayPal, Stripe or Authorize.net among others - the agreement is
+      created at the provider, and the renewal invoices WHMCS generates afterwards
+      are charged automatically with no client action. Renewal results flow back
+      through the standard WHMCS gateway callback, so your billing stays the
+      source of truth.
+
+  - q: Can I accept crypto for hosting plans?
+    a: >-
+      Yes. OxaPay, BitPay, Binance Pay and Quidax are all available from the same
+      integration, alongside cards and local methods. For hosting and VPN
+      businesses this matters twice over: a meaningful share of customers prefer
+      it, and a crypto payment cannot be charged back the way a card can.
+
+  - q: My customers are spread across many countries. Does one provider cover that?
+    a: >-
+      Rarely, and that is usually the reason a hosting company ends up here. A
+      customer who cannot pay with the method they trust does not switch methods -
+      they leave. PaymentHood connects {{ site.provider_floor }} providers through
+      one integration, so adding a local method for a market is enabling a
+      provider rather than building another gateway module.
+
+  - q: What happens if my payment provider suspends my account?
+    a: >-
+      Hosting is treated as an elevated-risk category by many providers, and a
+      hold or review is not a rare event. With one provider it stops all revenue
+      until it is resolved. With several already connected, the others keep
+      working and you change which one is the default from a dashboard, with no
+      redeploy and no change to your billing system.
+
+  - q: What does it cost?
+    a: >-
+      The module and every payment feature are free. PaymentHood charges no
+      percentage and no per-transaction fee at any volume - you pay only the
+      processing fees set by your chosen provider. An optional
+      <a href="/pricing.html" class="txt-blue-100">Premium plan</a> at $29 a month
+      adds white-label checkout branding.

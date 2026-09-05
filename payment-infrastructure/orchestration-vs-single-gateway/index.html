@@ -1,0 +1,252 @@
+---
+layout: none
+title: "Payment Orchestration vs a Single Gateway"
+description: "One gateway is the right answer for longer than vendors admit — and the wrong one eventually. The three moments that change the maths, and what the honest alternatives actually are."
+---
+{% comment %}
+  Cluster page under the /payment-infrastructure/ pillar. Originally briefed as
+  "Best Stripe Alternatives for AI Startups"; reframed because a page whose
+  answer to "alternatives to Stripe" is "us" ranks for nothing and converts
+  nobody. The searcher's real question is whether to leave one gateway at all.
+
+  OWNERSHIP (see .docs/seo-page-ownership.md):
+    - /blog/what-is-payment-orchestration/  owns the DEFINITION and the
+      gateway-vs-orchestration comparison TABLE. Do not rebuild that table here.
+    - /payment-orchestration/               owns the product capability tour.
+    - this page                             owns the DECISION: cost, risk,
+      timing, and what the alternatives genuinely are.
+
+  The competitor list is deliberate and must stay honest - Adyen, Paddle, Lemon
+  Squeezy, Primer and Spreedly are real answers for real situations, and some of
+  those situations are not ours. A comparison page that cannot name a case where
+  the reader should pick someone else is an advert, and reads like one.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">The Decision</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">One gateway is right for longer than anyone selling you a layer will admit</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">
+          If you sell in one country, in one currency, through a provider you are happy with, a single
+          gateway is not a compromise — it is the correct architecture, and adding anything on top of
+          it is complexity you are paying for and not using. This page is about the three specific
+          moments when that stops being true, and what your options honestly are when it does.
+          If the terminology is new,
+          <a href="/blog/what-is-payment-orchestration/">what payment orchestration is</a> defines it
+          first; this page assumes you have that and asks whether you need it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What a single gateway is good at -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">What a single gateway is genuinely good at</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Worth stating plainly, because most comparison pages skip it. One provider means one SDK,
+            one dashboard, one support relationship, one set of error codes to learn, and one place to
+            look when something is wrong. Documentation from the large providers is genuinely
+            excellent. You can be taking money in an afternoon.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            None of that is a trap, and none of it is a reason to add a layer. The reason to look
+            further is not that a single gateway is bad. It is that a single gateway makes one
+            assumption — that this provider can take every payment you will ever want — and that
+            assumption expires in a predictable way.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three moments -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Timing</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Three moments that change the answer</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Nearly every team that outgrows one provider does it at one of these. Two you can see coming.</p>
+      </div>
+      <div class="row gy-4 justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="how-step-num">1</div>
+            <h3 class="h5">A market you cannot serve</h3>
+            <p>Your provider will not settle the currency, or does not offer the method the market actually uses. The customer is willing to pay and cannot. No amount of optimising your existing provider fixes this one.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".5">
+            <div class="how-step-num">2</div>
+            <h3 class="h5">An outage with a number on it</h3>
+            <p>Downtime stops being an inconvenience the first time you can express it in revenue. That is the point at which "we have one provider" turns from a simplification into a risk you are carrying deliberately.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".6">
+            <div class="how-step-num">3</div>
+            <h3 class="h5">A hold you did not expect</h3>
+            <p>A risk review, a volume spike, a reserve. This is the one nobody plans for, it has nothing to do with engineering, and it takes 100% of your revenue with it for as long as it lasts.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4">
+        <div class="col-lg-8">
+          <p class="txt-blue-400 text-center animated" data-animate="fadeInUp" data-delay=".3">
+            The third is why this decision has a timing component at all. The first two give you notice;
+            the third does not, and it is the worst possible moment to start a payments migration —
+            which is the argument for making the change while nothing is wrong.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The real alternatives -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">The four honest options</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            When one provider stops being enough there are four routes, and they are genuinely
+            different trades rather than four brands of the same thing.
+          </p>
+
+          <h3 class="txt-blue-600 h4 mt-4 animated" data-animate="fadeInUp" data-delay=".2">1. Switch to a different single provider</h3>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Sometimes correct, and often underrated. If your problem is one market and a competitor
+            covers both it and your existing one, moving is simpler than layering. Adyen and
+            Checkout.com are built for exactly this — broad international coverage under one contract.
+            The catch is that you have paid a migration cost to arrive at the same architecture, and
+            the assumption that broke will break again with a different market.
+            <a href="/blog/switch-payment-providers-without-losing-sales/">Switching without losing
+            sales</a> covers how to do it safely if this is your answer.
+          </p>
+
+          <h3 class="txt-blue-600 h4 mt-4 animated" data-animate="fadeInUp" data-delay=".2">2. Add a second direct integration</h3>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The intuitive move, and the one that costs the most over time. Two providers is not twice
+            the work — it is twice the integration plus a third system nobody scoped, the one that
+            decides which provider a payment goes to, keeps one identity for a payment across both,
+            reconciles them, and gets updated whenever either provider changes an API. That coordinator
+            is a product, and building it is discussed in
+            <a href="/payment-infrastructure/failover/">how failover is actually built</a>.
+          </p>
+
+          <h3 class="txt-blue-600 h4 mt-4 animated" data-animate="fadeInUp" data-delay=".2">3. Move to a merchant of record</h3>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Paddle, Lemon Squeezy and Polar become the legal seller of your product. They take on sales
+            tax and VAT registration, invoicing and compliance, which for a small team selling
+            digitally into many countries is a real and sometimes decisive benefit. The trade is
+            equally real: they own the customer relationship and the payment rails, their percentage
+            is meaningfully higher, and you have replaced one dependency with a deeper one.
+            <strong>If what you actually want is someone to handle tax liability, an orchestration
+            layer is the wrong tool and a merchant of record is the right one.</strong> PaymentHood is
+            not a merchant of record and does not pretend to be.
+          </p>
+
+          <h3 class="txt-blue-600 h4 mt-4 animated" data-animate="fadeInUp" data-delay=".2">4. Put a layer above the providers you already have</h3>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Orchestration — PaymentHood, Primer, Spreedly and others. Your application integrates once
+            with the layer; the providers sit behind it and you keep your own accounts, your own
+            contracts and your own negotiated rates. Adding a provider becomes configuration rather
+            than a project, and the coordination problem from option two is the product you are
+            buying rather than the code you are writing.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The trade here is honest too: it is another dependency in your payment path, and it is
+            worth asking any orchestration vendor what it costs per transaction, because several
+            charge a percentage on top of your provider's fees. That is the question that decides
+            whether the layer pays for itself.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cost -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Counting the cost properly</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The comparison people run is layer fees against zero, which makes a single gateway look
+            free. It is not free; its costs are just distributed somewhere nobody invoices you for.
+          </p>
+          <ul class="check-list list-unstyled p-0 mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <li><strong>Engineering time</strong> — every provider added the direct way, plus the coordination code between them, plus maintenance as APIs change.</li>
+            <li><strong>Sales that never happened</strong> — customers in markets you cannot take money in, and the ones who abandoned because their method was missing.</li>
+            <li><strong>Approval rate</strong> — a few percent of legitimate payments declined for routing reasons, which is silent and adds up. <a href="/blog/how-to-improve-your-payment-approval-rate/">Improving approval rate</a> puts numbers on it.</li>
+            <li><strong>Outage exposure</strong> — hours of total revenue stoppage multiplied by however often your provider has a bad day.</li>
+            <li><strong>Concentration risk</strong> — the cost of a hold, which is not gradual. It is everything, until it is resolved.</li>
+          </ul>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Run that comparison and the answer for a single-market business is usually still the single
+            gateway. Run it for a business selling into several countries and it usually is not. The
+            point is to run it rather than assume either way.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Where PaymentHood fits</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <a href="/">PaymentHood</a> is option four, with the per-transaction question answered
+            up front: <strong>no percentage and no per-transaction fee at any volume.</strong> You pay
+            only your chosen provider's processing fees, every provider account stays contracted in
+            your name, and funds settle directly from the provider to you — PaymentHood is not a
+            processor, an acquirer or a merchant of record, and never holds your money. The only paid
+            plan is Premium at $29 a month for white-label checkout branding.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Practically, that means you can keep the provider you have. Add PaymentHood above it, connect
+            a second provider when a market or an outage makes the case, and your checkout code does not
+            change either time. For stores on <a href="/integrations/woocommerce/">WooCommerce</a>,
+            <a href="/integrations/whmcs/">WHMCS</a> or <a href="/integrations/joomla/">Joomla</a> the
+            integration is a free plugin rather than a development project.
+          </p>
+
+          <!-- CTA -->
+          <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 mb-3">Make the change while nothing is broken</h3>
+            <p class="lead mb-4">Create a free account, connect the provider you already use, and add the second one whenever you need it.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+                <span>Create Your Free Account</span>
+                <em class="ti ti-arrow-right ps-2"></em>
+              </a>
+              <a href="/pricing.html" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+                <span>See pricing</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include faq.html items=site.data.orchestration_vs_gateway.faqs eyebrow="Comparison FAQ" bg="bg-light" %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

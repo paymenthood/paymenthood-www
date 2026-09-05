@@ -1,0 +1,64 @@
+# FAQs for /payment-infrastructure/global-payments/ (cluster C4).
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page owns the OPERATIONAL
+# question - how to actually accept payments in markets you do not live in.
+# It must NOT restate /blog/local-payment-methods-why-cards-lose-sales/ (which
+# owns WHY local methods matter, the persuasion argument) and must NOT become a
+# second provider directory - /providers.html is authoritative and this page
+# links to it.
+#
+# ACCURACY NOTE: PaymentHood routes BY currency; it does not perform currency
+# conversion - the provider does. The "pricing vs settlement" answer below is
+# worded to keep that distinction, and must not be softened into implying we
+# convert.
+
+faqs:
+  - q: How do I accept payments from another country?
+    a: >-
+      Three things have to line up, and a missing one of them is a lost sale:
+      a provider that supports the customer's <strong>payment method</strong>, a
+      provider that will process the <strong>currency</strong> you are charging,
+      and a settlement path that gets the money to an account you hold. Cards
+      alone satisfy the first only in markets where cards are the habit, which is
+      fewer markets than most teams assume.
+
+  - q: Do I need a local entity to accept local payment methods?
+    a: >-
+      It varies by method and by market, and it is the question worth asking
+      before anything else. Some methods are open to foreign merchants through a
+      provider that has local acquiring; others require a registered local entity
+      or a local bank account. The provider is the authority on their own market,
+      so check with them rather than assuming either way.
+
+  - q: Does PaymentHood convert currencies?
+    a: >-
+      No. PaymentHood routes a payment to a provider that can process the
+      currency you are charging in; any conversion happens at the provider or the
+      customer's bank on their terms. That distinction matters when you compare
+      quotes - the conversion spread is part of your provider's pricing, not
+      something an orchestration layer adds or removes.
+
+  - q: Which payment methods matter outside Europe and North America?
+    a: >-
+      Mobile money and USSD across much of Africa, UPI in India, instant EFT and
+      QR in South Africa, wallets across Nigeria, carrier billing in parts of
+      MENA. In several of these markets the local method is not an alternative to
+      cards - it is what people actually have. The
+      <a href="/providers.html" class="txt-blue-100">provider directory</a> lists
+      what is available in each.
+
+  - q: Is crypto a serious option for international sales?
+    a: >-
+      For some businesses, yes - and for a specific reason beyond preference. A
+      crypto payment settles without depending on card rails reaching a market,
+      and it cannot be charged back. Providers such as OxaPay, BitPay, Binance Pay
+      and Quidax settle to you without requiring you to hold crypto yourself. See
+      <a href="/blog/how-to-accept-crypto-payments/" class="txt-blue-100">how to accept crypto payments</a>.
+
+  - q: How many providers do I actually need?
+    a: >-
+      Fewer than the directory suggests. Start with one that covers your largest
+      market properly, then add one per market that is materially underserved -
+      judged by checkout abandonment and declines in that country, not by how
+      many logos you can display. Because adding one is configuration rather than
+      a build, there is no reason to add them speculatively.

@@ -1,0 +1,60 @@
+# FAQs for /payment-infrastructure/ (pillar page P1), rendered by _includes/faq.html.
+#
+# SCOPE (see .docs/seo-page-ownership.md): this pillar owns "payment
+# infrastructure" as an ARCHITECTURE topic for product and engineering teams -
+# what the acceptance layer of a payment stack has to do, and where its boundary
+# with a billing engine sits. It must NOT redefine payment orchestration (the
+# blog post what-is-payment-orchestration owns the definition), must NOT restate
+# the capability tour on /payment-orchestration/ (that page owns the product
+# capability and the conversion intent), and must NOT claim billing-engine
+# features - metering, plans, proration, dunning, invoicing and tax are all
+# explicitly outside what PaymentHood does, and saying so is the point of the
+# boundary section rather than an omission.
+
+faqs:
+  - q: What is payment infrastructure?
+    a: >-
+      Payment infrastructure is the layer of your product that turns an intent to
+      pay into money you can rely on: choosing a provider, handling the attempt,
+      confirming the result, and recording it once. It is distinct from a billing
+      engine, which decides <em>what</em> to charge - plans, usage, proration,
+      invoices and tax. Most products need both, and they fail in different ways.
+
+  - q: Is payment infrastructure the same as a payment gateway?
+    a: >-
+      No. A gateway is one connection to one processor - a component of the
+      infrastructure, not the whole of it. The infrastructure is everything
+      around it: which gateway a payment goes to, what happens when that gateway
+      fails, how a duplicate is prevented, how the result is verified, and how
+      several gateways end up in one set of numbers.
+
+  - q: When does a SaaS product outgrow a single payment provider?
+    a: >-
+      Usually at one of three moments: a second market whose customers cannot pay
+      with what you offer, a provider outage that costs a visible amount of
+      revenue, or an account review that freezes your ability to charge at all.
+      The first two are predictable and the third is not, which is why teams
+      tend to add redundancy after the third rather than before it.
+
+  - q: Does PaymentHood replace Stripe Billing or Chargebee?
+    a: >-
+      No. PaymentHood is the acceptance and orchestration layer, not a billing
+      engine. It does not meter usage, generate invoices, run plans or proration,
+      handle dunning schedules, or calculate tax. You keep whatever you use for
+      those and put PaymentHood underneath it, so the decision of <em>what</em> to
+      charge stays where it is and the decision of <em>how</em> to take the money
+      stops being hard-wired to one provider.
+
+  - q: Do I need to change my checkout code to add a provider?
+    a: >-
+      Not with an orchestration layer in place. Your application talks to one API
+      or one plugin, and which provider handles a given payment becomes
+      configuration. That is the practical difference between adding your fifth
+      provider in an afternoon and scheduling it as a project.
+
+  - q: Does PaymentHood hold my money?
+    a: >-
+      No. PaymentHood is not a processor, an acquirer or a merchant of record.
+      You hold your own account with each provider, funds settle directly from
+      that provider to you, and PaymentHood takes no percentage and no
+      per-transaction fee at any volume.

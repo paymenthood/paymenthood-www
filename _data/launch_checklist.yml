@@ -1,0 +1,55 @@
+# FAQs for /payment-infrastructure/checklist/ (commercial page I5).
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page is the ENGINEERING
+# checklist for putting a payment integration into production. It must NOT
+# duplicate /blog/test-your-checkout-before-you-go-live/, which is the
+# merchant-level list (test a decline, check the order status, refund it, watch
+# the emails, then do one for real). That page is for the store owner; this one
+# is for whoever wrote the integration. Each links to the other once.
+
+faqs:
+  - q: What should I test before taking real payments?
+    a: >-
+      The failure paths, because the success path is the one you have already
+      run a hundred times. In order of how much they cost when wrong: a timeout
+      where the provider succeeded and did not tell you, a webhook arriving
+      twice, a webhook arriving out of order, a declined card, and a refund. If
+      you only have time for one, make it the first.
+
+  - q: How do I test a payment timeout?
+    a: >-
+      Do not wait for one. Force it - block the provider's response at the
+      network level after the request leaves, or point the integration at a stub
+      that accepts the charge and then never replies. Then check the only thing
+      that matters: does your system end up with one charge and a correct order
+      state, or two charges?
+
+  - q: Do I need to verify webhook signatures if the URL is secret?
+    a: >-
+      Yes. A URL is not a credential - it leaks through logs, proxies, browser
+      history and error reports, and it never rotates. Verify the signature on
+      every inbound webhook, compare in constant time, and reject anything that
+      fails rather than logging it and continuing.
+
+  - q: Should an order be marked paid when the customer returns to my site?
+    a: >-
+      No. The browser redirect proves the customer's browser was redirected and
+      nothing else - it is attacker-controllable, and honest customers close the
+      tab before it happens. Mark the order paid when your server has confirmed
+      the capture with the provider, and treat the redirect as a navigation
+      event only.
+
+  - q: What is the most commonly missed item on this list?
+    a: >-
+      Deriving the idempotency key from the request instead of from the order.
+      It looks correct, passes every test written against the happy path, and
+      protects nothing - because a retry is a new request and gets a new key.
+      The key has to identify the payment attempt and be reproducible from data
+      you already store.
+
+  - q: How long should this take?
+    a: >-
+      Working through the list against an existing integration is usually an
+      afternoon, and most teams find two or three genuine gaps. Building the
+      items you are missing is the longer part, which is the argument for
+      checking before launch rather than after the first incident.

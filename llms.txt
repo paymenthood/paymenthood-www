@@ -20,6 +20,11 @@ Operated by OmegaHood LLC. Marketing site: {{ site.url }} · API documentation: 
 
 - [Home]({{ site.url }}/): What PaymentHood does and who it is for.
 - [Payment orchestration]({{ site.url }}/payment-orchestration/): How the orchestration layer works — routing, failover, idempotency, verification, reconciliation.
+- [Payment infrastructure for SaaS]({{ site.url }}/payment-infrastructure/): What the payment layer of a product has to do, and where it ends and billing begins.
+- [Payment failover]({{ site.url }}/payment-infrastructure/failover/): The architecture of failover — error classification, rerouting, and duplicate prevention.
+- [Orchestration vs a single gateway]({{ site.url }}/payment-infrastructure/orchestration-vs-single-gateway/): When one provider stops being enough, and the four honest alternatives.
+- [Accepting global payments]({{ site.url }}/payment-infrastructure/global-payments/): Local methods by market, and the difference between presentment, processing and settlement currency.
+- [Payment integration launch checklist]({{ site.url }}/payment-infrastructure/checklist/): Engineering checks before a payment integration goes to production.
 - [Pricing]({{ site.url }}/pricing.html): Plans. PaymentHood takes no cut of transactions at any volume.
 - [Payment providers]({{ site.url }}/providers.html): Every supported provider, filterable by global, regional and crypto.
 - [Integrations]({{ site.url }}/integrations/): The e-commerce and billing platforms with a ready-made PaymentHood plugin.
@@ -31,6 +36,8 @@ Operated by OmegaHood LLC. Marketing site: {{ site.url }} · API documentation: 
 - [VirtueMart]({{ site.url }}/integrations/virtuemart/): Payment plugin for Joomla + VirtueMart.
 - [Phoca Cart]({{ site.url }}/integrations/phoca-cart/): Payment plugin for Joomla + Phoca Cart.
 - [J2Commerce]({{ site.url }}/integrations/j2commerce/): Payment plugin for Joomla + J2Commerce.
+- [Joomla]({{ site.url }}/integrations/joomla/): Which of the three Joomla carts a site runs, and the plugin for each.
+- [Hosting & VPN companies]({{ site.url }}/integrations/hosting/): Payments for hosting, VPN, domain and managed-service businesses, including WHMCS billing.
 
 ## Provider guides
 {% assign provider_pages = site.pages | where_exp: "p", "p.url contains '/providers/'" | where_exp: "p", "p.noindex != true" | sort: "title" %}

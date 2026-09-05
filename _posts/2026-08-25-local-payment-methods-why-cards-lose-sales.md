@@ -65,6 +65,10 @@ it's the same reason it solves the related
 [currency-mismatch problem](/blog/payment-method-not-available-for-your-currency/):
 the decision about *how* a customer pays lives in configuration you control.
 
+For the operational side of this — which method to enable in which market, and the
+difference between the currency you charge and the one you settle in — see
+[accepting global payments](/payment-infrastructure/global-payments/).
+
 ## How PaymentHood offers local methods
 
 [PaymentHood](/) connects your store to {{ site.provider_floor }} providers —

@@ -1,0 +1,260 @@
+---
+layout: none
+title: "Accepting Global Payments: Local Methods by Market"
+description: "Selling internationally is three problems, not one: the method the customer uses, the currency you charge, and where the money settles. What to enable, market by market."
+---
+{% comment %}
+  Cluster page under the /payment-infrastructure/ pillar.
+
+  OWNERSHIP (see .docs/seo-page-ownership.md):
+    - /blog/local-payment-methods-why-cards-lose-sales/  owns WHY local methods
+      matter (the persuasion argument, abandonment, trust).
+    - /providers.html                                    is the authoritative
+      directory and owns provider-by-provider detail.
+    - this page                                          owns the OPERATIONAL
+      question: what to actually turn on, in which market, and in what order.
+  Do not let this page grow into a second provider directory. Regions below name
+  providers only as examples and link to the directory for the real list.
+
+  ACCURACY: every provider named here is `status: live` in _data/providers/ and
+  its region/method claims come from that file. PaymentHood routes BY currency
+  and does NOT convert currency - the provider does. Keep that distinction in
+  any edit; it is the one claim on this page that is easy to get subtly wrong.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Global Payments</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">"We accept international payments" usually means "we accept international cards"</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">
+          Which is a much smaller claim, and in several of the world's fastest-growing markets it is
+          close to no claim at all. Selling across borders is three separate problems wearing one
+          name: the <strong>method</strong> your customer actually uses, the <strong>currency</strong>
+          you are charging in, and the <strong>settlement</strong> path that ends at an account you
+          hold. Get two of the three right and you still lose the sale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The three -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row gy-4 justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="how-step-num">1</div>
+            <h3 class="h5">Method</h3>
+            <p>What the customer reaches for. In much of the world that is not a card — it is a wallet, a bank transfer, a QR code or a phone balance. If it is missing they do not substitute; they leave.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".5">
+            <div class="how-step-num">2</div>
+            <h3 class="h5">Currency</h3>
+            <p>What you charge in, which is not the same as what you settle in, which is not the same as what the customer's bank converts at. Three different numbers that teams routinely treat as one.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".6">
+            <div class="how-step-num">3</div>
+            <h3 class="h5">Settlement</h3>
+            <p>Where the money lands and under whose name. This is the one with the paperwork — some markets are open to a foreign merchant through a provider with local acquiring, others expect a local entity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- By region -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">By Market</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">What people actually pay with</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">A sample, not a directory. The <a href="/providers.html">full provider list</a> is authoritative and filterable by market.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".2">
+            <h3 class="txt-blue-600 fs-4 mb-3">Nigeria &amp; West Africa</h3>
+            <p class="mb-3">Wallets, bank transfers, virtual accounts and USSD carry a large share of consumer payments, and card penetration understates real purchasing power badly.</p>
+            <ul class="check-list list-unstyled p-0 mb-0">
+              <li>Paystack, OPay, Monnify, Moniepoint</li>
+              <li>PalmPay, Paga, Kuda, Interswitch</li>
+              <li>USSD and virtual accounts, not just cards</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 fs-4 mb-3">South Africa</h3>
+            <p class="mb-3">Instant EFT is a mainstream checkout choice rather than a fallback, and QR payments are widely used in person and online.</p>
+            <ul class="check-list list-unstyled p-0 mb-0">
+              <li>Ozow, Payfast, Stitch</li>
+              <li>SnapScan and Zapper for QR</li>
+              <li>Instant EFT alongside cards</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".4">
+            <h3 class="txt-blue-600 fs-4 mb-3">East &amp; Pan-Africa</h3>
+            <p class="mb-3">Mobile money is the primary rail across much of the region, and a checkout without it is invisible to most of the market.</p>
+            <ul class="check-list list-unstyled p-0 mb-0">
+              <li>Pesapal across East and Southern Africa</li>
+              <li>DPO Pay pan-African</li>
+              <li>SeerBit and Fincra for multi-country coverage</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".2">
+            <h3 class="txt-blue-600 fs-4 mb-3">Europe</h3>
+            <p class="mb-3">Bank-redirect methods dominate specific countries so completely that offering only cards reads as a foreign site.</p>
+            <ul class="check-list list-unstyled p-0 mb-0">
+              <li>iDEAL in the Netherlands</li>
+              <li>Bizum in Spain, Bancontact in Belgium</li>
+              <li>Klarna for pay-later, Revolut across the UK and EU</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 fs-4 mb-3">India, MENA &amp; South Asia</h3>
+            <p class="mb-3">Real-time account-to-account rails have moved faster here than anywhere, and cards are a minority of consumer volume in several of these markets.</p>
+            <ul class="check-list list-unstyled p-0 mb-0">
+              <li>Razorpay for UPI and netbanking in India</li>
+              <li>PayTabs and Tap Payments across MENA</li>
+              <li>SSLCommerz in Bangladesh, Tpay across MENA and Africa</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".4">
+            <h3 class="txt-blue-600 fs-4 mb-3">Everywhere: crypto</h3>
+            <p class="mb-3">The only method on this page that does not care which market the customer is in — and the only one that cannot be charged back.</p>
+            <ul class="check-list list-unstyled p-0 mb-0">
+              <li>OxaPay, BitPay, Binance Pay, Quidax</li>
+              <li>Settles to you without holding crypto</li>
+              <li>Useful where card rails are unreliable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep dive -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">The currency question, stated precisely</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Three distinct decisions get collapsed into "do you support EUR?", and separating them
+            prevents most of the confusion:
+          </p>
+          <ul class="check-list list-unstyled p-0 mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <li><strong>Presentment</strong> — the currency the customer sees. Showing a price in a currency they do not think in costs conversions before the payment is even attempted.</li>
+            <li><strong>Processing</strong> — the currency the provider will actually accept. A provider that cannot process the currency you are charging in will decline, and that decline looks to your logs like a card problem.</li>
+            <li><strong>Settlement</strong> — the currency that arrives in your account, and the spread applied to get there. This is priced by the provider, and it is where the real cost of cross-border sits.</li>
+          </ul>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Worth being exact about the division of labour here: an orchestration layer decides
+            <em>which provider</em> handles a payment in a given currency. It does not perform the
+            conversion — the provider or the customer's bank does, on their terms. So when you compare
+            providers on cross-border cost, you are comparing their spreads, and no layer above them
+            changes that number.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The failure this causes at checkout has its own page:
+            <a href="/blog/payment-method-not-available-for-your-currency/">why your checkout says
+            "payment method not available for your currency"</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">The approval-rate tax nobody itemises</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            A cross-border card transaction is scrutinised harder than a domestic one by everyone in
+            the chain. The same card, the same customer and the same amount can be approved locally
+            and refused when presented from abroad, and none of that shows up as an error you would
+            investigate — it arrives as an ordinary decline.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Which makes local acquiring a revenue decision rather than a coverage one. Presenting a
+            payment through a provider that acquires locally in the customer's market is the single
+            change that most reliably moves the number, and it is the mechanism behind most of
+            <a href="/blog/how-to-improve-your-payment-approval-rate/">improving your approval
+            rate</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">A sane order of operations</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Expanding market by market beats enabling everything, and it is measurable at each step.
+          </p>
+          <ol class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <li><strong>Find where you are already losing.</strong> Look at checkout abandonment and decline rate by country. The markets worth fixing are the ones with traffic and no conversions.</li>
+            <li><strong>Name the method, not the provider.</strong> Decide that you need UPI, or instant EFT, or mobile money. Then pick a provider because it offers that, rather than picking a provider and discovering what it offers.</li>
+            <li><strong>Check the entity requirement early.</strong> Whether a foreign merchant can offer that method at all is a business question with a long answer, and it should not surface after the integration work.</li>
+            <li><strong>Enable, then measure that country alone.</strong> Aggregate numbers hide a market-specific win completely.</li>
+            <li><strong>Repeat for the next market.</strong> Not all of them at once — each addition should have a reason you could state.</li>
+          </ol>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">How PaymentHood fits</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <a href="/">PaymentHood</a> is what makes step five cheap. Your checkout integrates once,
+            and <a href="/providers.html">{{ site.provider_floor }} providers</a> — global, regional
+            and crypto — sit behind it, so entering a market means enabling a provider and writing a
+            routing rule rather than commissioning another integration. Payments are routed by
+            currency, so the customer is put in front of a provider that can actually process what
+            you are charging.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Every provider account stays contracted in your own name, and funds settle directly from
+            that provider to you — PaymentHood is not a processor, an acquirer or a merchant of
+            record, takes no percentage and no per-transaction fee, and never holds your money. If a
+            provider you need is not in the directory yet, we integrate it at no cost.
+          </p>
+
+          <!-- CTA -->
+          <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 mb-3">Open the next market without another integration</h3>
+            <p class="lead mb-4">Create a free account, browse the directory for your market, and enable the methods your customers already use.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+                <span>Create Your Free Account</span>
+                <em class="ti ti-arrow-right ps-2"></em>
+              </a>
+              <a href="/providers.html" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+                <span>Browse providers</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include faq.html items=site.data.global_payments.faqs eyebrow="Global Payments FAQ" bg="bg-light" %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

@@ -123,6 +123,9 @@ description: How PaymentHood routes each payment to the right provider, retries 
             succeed. The layer classifies each failure before deciding, a distinction we unpack in
             <a href="/blog/why-payments-fail/">why payments fail</a> and in our guide to
             <a href="/blog/payment-gateway-downtime-failover/">payment gateway downtime and failover</a>.
+            If you are designing this rather than buying it, the architecture — and the duplicate
+            charge a naive retry can create — is in
+            <a href="/payment-infrastructure/failover/">how payment failover is actually built</a>.
           </p>
 
           <div class="section-head mt-5">

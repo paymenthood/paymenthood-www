@@ -133,6 +133,10 @@ probably is not, and the customer never needs to know.
 issuer is the same institution no matter which acquirer asks. Retrying a stolen
 card elsewhere is not a routing strategy.
 
+The design that makes the first of those safe — including why a retry needs an
+identity that outlives the provider it was sent to — is in [how payment failover is
+actually built](/payment-infrastructure/failover/).
+
 **It is a judgement call for soft declines.** A different acquirer can present a
 transaction differently — local versus cross-border, a different descriptor, a
 different MCC — and that occasionally changes the outcome. It is worth testing

@@ -76,3 +76,8 @@ WooCommerce, WHMCS, VirtueMart, Phoca Cart and J2Commerce, and give you more tha
 one provider behind a single checkout — so the failover in the last section is a
 setting rather than a project. And once you are live, [Why Payments Fail](/blog/why-payments-fail/)
 covers what to do about the declines you will start seeing.
+
+If you wrote the integration yourself rather than installing a plugin, there is a
+longer engineering version of this list — idempotency, webhook signatures, unknown
+states — in the [payment integration launch
+checklist](/payment-infrastructure/checklist/).

@@ -155,7 +155,10 @@ their API.
 
 Buying it makes sense when payments are important to your business but are not
 your business. Building it makes sense when your routing logic is genuinely
-unusual, or when payments *are* the product.
+unusual, or when payments *are* the product. If you are mapping out what the whole
+layer has to do before deciding, [payment infrastructure for
+SaaS](/payment-infrastructure/) breaks it into five jobs and marks where billing
+stops and payments begin.
 
 ## Frequently asked questions
 

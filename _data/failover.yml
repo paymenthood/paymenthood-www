@@ -1,0 +1,62 @@
+# FAQs for /payment-infrastructure/failover/ (cluster page C3), rendered by
+# _includes/faq.html.
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page owns the ARCHITECTURE of
+# payment failover - how it is designed and what it must not break. It must NOT
+# duplicate /blog/payment-gateway-downtime-failover/ (which owns "my provider is
+# down right now, what do I do"), must NOT redefine payment orchestration (the
+# blog post what-is-payment-orchestration owns the definition), and must NOT
+# restate the capability list from /payment-orchestration/.
+
+faqs:
+  - q: What is payment failover?
+    a: >-
+      Payment failover is the ability to complete a payment through a different
+      provider when the first one cannot take it. It has three parts: noticing
+      that the attempt failed for a technical reason rather than a real decline,
+      sending the payment somewhere else, and making certain the customer is not
+      charged twice in the process. A design that does the first two and skips
+      the third is worse than having no failover at all.
+
+  - q: Which payment failures should be retried through another provider?
+    a: >-
+      Only technical ones - timeouts, connection errors, HTTP 5xx responses and
+      provider outages. A hard decline such as insufficient funds or a blocked
+      card is the issuer's answer, and the issuer does not change because a
+      different acquirer asks. Re-running a declined card through provider after
+      provider looks like card testing and can put your account under review.
+
+  - q: How does failover cause double charges?
+    a: >-
+      Through the timeout. If a provider captures a payment but the response
+      never reaches you, your system sees a failure while the customer's card has
+      already been charged. Retrying that payment anywhere - the same provider or
+      a different one - charges them a second time. The fix is an idempotency key
+      that identifies the payment attempt rather than the HTTP request, so a
+      repeat returns the original result instead of creating a new charge.
+
+  - q: Can I build payment failover with two direct integrations?
+    a: >-
+      You can, and the routing part is the easy fifth of it. The rest is error
+      classification per provider, an idempotency key that survives being handed
+      to a second provider, two webhook signature schemes, two sets of state
+      transitions, and a reconciliation view that can tell one payment attempted
+      twice from two payments. That work does not shrink as you add providers -
+      it multiplies.
+
+  - q: Where should failover logic live in a payment stack?
+    a: >-
+      Above the providers, never inside one. If the retry decision lives in your
+      checkout it has to be redeployed to change, which is the worst possible
+      time to ship code. If it lives inside a provider integration it cannot see
+      the other providers. A layer that sits between your checkout and all of
+      your providers is the only place that can hold one identity for a payment
+      across all of them.
+
+  - q: Does failover help with declined cards?
+    a: >-
+      No, and expecting it to is the most common misunderstanding. Declines are
+      an issuer decision about the card, not a fault in the path the payment
+      took. What genuinely lifts approval rates is routing - presenting the
+      payment through a provider with local acquiring in the customer's market -
+      which is a decision made before the attempt, not a reaction after it.

@@ -1,0 +1,194 @@
+---
+layout: none
+nav_active: integrations
+title: "Payment Gateway for Hosting Companies & WHMCS"
+description: "Hosting, VPN and domain businesses bill on renewal, sell worldwide, and get classified as high risk. What that does to payments, and how one integration covers it."
+---
+{% comment %}
+  Segment page for hosting / VPN / domain / managed-service businesses.
+
+  NOT a product stub. /integrations/<slug>/ is normally rendered from the shared
+  _includes/integration-product.html template driven by _data/integrations/<slug>.yml,
+  but "hosting" is an industry, not a platform with a plugin - there is no
+  hosting.yml under _data/integrations/ and there should not be. Like
+  /integrations/joomla/, this is hand-written in the style of integrations/index.html.
+
+  OWNERSHIP (see .docs/seo-page-ownership.md). This page owns the SEGMENT
+  ("payment gateway for hosting companies", "payment gateway for vpn business").
+  It must NOT own "whmcs payment gateway" - /integrations/whmcs/ is the platform
+  page for that family and already ranks for it. Every WHMCS specific here is one
+  sentence plus a link; the moment this page explains a WHMCS setting it is
+  competing with the page that exists to explain it.
+
+  Why this page exists, measured: WHMCS combo pages are the site's strongest
+  proven traffic (/integrations/whmcs/razorpay/ alone ran a 33% CTR), and the
+  outbound sales motion is aimed at hosting companies - but nothing on the site
+  addressed the industry, only the software.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/integrations.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+  <section class="section">
+    <div class="container">
+
+      <!-- Intro -->
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">For Hosting &amp; Infrastructure</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Hosting billing is not ordinary e-commerce</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">A shop takes a payment once. A hosting company takes the same payment every month, from customers in countries it has never visited, in a business category that half of the payment industry files under elevated risk. Those three facts turn payments from a checkout feature into an operational dependency — and they are why hosting, VPN, domain and managed-service businesses outgrow a single provider earlier than almost anyone else.</p>
+      </div>
+
+      <!-- The four problems -->
+      <div class="row g-4 mt-4">
+        <div class="col-md-6">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".2">
+            <h3 class="txt-blue-600 fs-4 mb-3">Renewals fail quietly</h3>
+            <p class="mb-0">A renewal is a merchant-initiated charge against a stored agreement, with nobody at the keyboard. Plenty of gateways take the first payment perfectly and cannot do the second one at all, so the invoice sits unpaid, dunning runs, and a happy customer is suspended for a reason neither of you chose. The diagnosis is in <a href="/blog/why-whmcs-recurring-payments-fail/">why WHMCS recurring payments fail</a>.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 fs-4 mb-3">Your customers are everywhere</h3>
+            <p class="mb-0">Infrastructure sells across borders by default. A customer in Lagos, São Paulo or Jakarta who cannot pay with the method they actually use does not switch methods — they close the tab. One provider is strong in some of those markets and absent in the rest, which is the whole content of <a href="/blog/local-payment-methods-why-cards-lose-sales/">why cards alone lose sales abroad</a>.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".4">
+            <h3 class="txt-blue-600 fs-4 mb-3">You are a risk category</h3>
+            <p class="mb-0">Hosting, VPN and domain resale attract holds, reserves and account reviews that a clothing store never sees. It is not a reflection on your business; it is how the category is underwritten. With one provider, a review stops every payment you take until it clears. With several already connected, it stops one of them.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-lift h-100 animated" data-animate="fadeInUp" data-delay=".5">
+            <h3 class="txt-blue-600 fs-4 mb-3">Fraud arrives at signup</h3>
+            <p class="mb-0">Cheap plans and instant provisioning make a hosting signup form an ideal place to validate stolen cards, and the bill for that lands on you as declines, fees and eventually a merchant review. Attempt limits, distinct-card limits and rules that react to repeated rejections are the controls that matter — see <a href="/blog/card-testing-fraud-signup-forms/">card testing on signup forms</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHMCS -->
+      <div class="text-center mt-5 pt-5">
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">If you bill on WHMCS</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">The free PaymentHood module connects WHMCS to {{ site.provider_floor }} providers at once, with automatic renewals on the providers that support agreements. Install it once and add providers afterwards without touching WHMCS again.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4 animated" data-animate="fadeInUp" data-delay=".3">
+          <a href="/integrations/whmcs/" class="vh-btn btn-lg btn-blue-100">
+            <span>WHMCS Module</span>
+            <em class="ti ti-arrow-right ps-2"></em>
+          </a>
+          <a href="/integrations/whmcs/installation/" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+            <span>Installation Guide</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Not on WHMCS -->
+      <div class="text-center mt-5 pt-5">
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">If you bill on something else</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">WHMCS is the most common answer in this industry and far from the only one.</p>
+      </div>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">WordPress &amp; WooCommerce</h3>
+            <p class="small mb-3">Common for shared hosting and small managed-service shops selling plans as products. Free plugin, same provider list.</p>
+            <a href="/integrations/woocommerce/" class="link-arrow">WooCommerce plugin <em class="ti ti-arrow-right"></em></a>
+          </div>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">Joomla carts</h3>
+            <p class="small mb-3">VirtueMart, Phoca Cart and J2Commerce each have a free plugin. If you are not sure which cart your site runs, the hub identifies it.</p>
+            <a href="/integrations/joomla/" class="link-arrow">Joomla payment plugins <em class="ti ti-arrow-right"></em></a>
+          </div>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">Your own panel</h3>
+            <p class="small mb-3">Plenty of hosts bill from a control panel they wrote themselves. One REST API call creates a payment and returns a checkout URL.</p>
+            <a href="https://docs.paymenthood.com/" class="link-arrow" target="_blank" rel="noopener">API documentation <em class="ti ti-arrow-right"></em><span class="visually-hidden"> (opens in new tab)</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Value strip -->
+      <div class="bg-blue-200 tc-light rounded-4 p-4 p-md-5 mt-5 animated" data-animate="fadeInUp" data-delay=".2">
+        <div class="wide text-center">
+          <h2 class="mb-3">Why infrastructure businesses consolidate</h2>
+          <p class="lead mb-0 txt-blue-50">Every provider you add the ordinary way is another module, another set of credentials, another webhook format and another thing that breaks on a billing-system upgrade. One integration removes all of it — and every provider account stays contracted in your own name, with funds settling directly to you. PaymentHood is not a processor and never holds your money.</p>
+        </div>
+        <div class="row g-4 mt-3 text-center">
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">{{ site.provider_floor }}</div>
+            <div class="small mt-2 txt-blue-50">Providers, one module</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">0%</div>
+            <div class="small mt-2 txt-blue-50">PaymentHood transaction fee</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">$0</div>
+            <div class="small mt-2 txt-blue-50">To install and run</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="fs-1 fw-bold text-white lh-1">1</div>
+            <div class="small mt-2 txt-blue-50">Dashboard for every provider</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Providers that matter here -->
+      <div class="text-center mt-5 pt-5">
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">The providers this industry actually asks for</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Cards are the floor, not the answer. These are the additions that change conversion for an international customer base.</p>
+      </div>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".2">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">Crypto</h3>
+            <p class="small mb-0">OxaPay, BitPay, Binance Pay and Quidax. Preferred by a real share of hosting and VPN customers, settled without you holding crypto, and not chargeback-able. <a href="/blog/how-to-accept-crypto-payments/">How crypto acceptance works</a>.</p>
+          </div>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".3">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">Local methods</h3>
+            <p class="small mb-0">iDEAL in the Netherlands, Bizum in Spain, UPI in India, mobile money and USSD across Africa. Each one is the default way to pay somewhere your cards convert badly.</p>
+          </div>
+        </div>
+        <div class="col-md-4 animated" data-animate="fadeInUp" data-delay=".4">
+          <div class="card h-100">
+            <h3 class="txt-blue-600 fs-5 mb-2 h4">Agreement-capable cards</h3>
+            <p class="small mb-0">PayPal, Stripe and Authorize.net among others create a reusable agreement at first payment, which is what lets a renewal charge itself later without the customer present.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-center mt-4 mb-0 animated" data-animate="fadeInUp" data-delay=".2">
+        The <a href="/providers.html">full provider directory</a> shows what is available in each market.
+      </p>
+
+      <!-- CTA -->
+      <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".2">
+        <h2 class="txt-blue-600 mb-3">Add a second provider before you need one</h2>
+        <p class="lead mb-4">Create a free account, install the module for your billing system, and switch on the providers your customers already use. Adding another later never touches your billing system again.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+            <span>Start Free</span>
+            <em class="ti ti-arrow-right ps-2"></em>
+          </a>
+          <a href="/contact-us.html" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+            <span>Talk to us</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {% include faq.html items=site.data.hosting.faqs eyebrow="Hosting FAQ" bg="bg-light" first_open=true %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

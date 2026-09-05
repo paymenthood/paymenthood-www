@@ -1,0 +1,267 @@
+---
+layout: none
+title: "Payment Failover: How to Survive a Provider Outage"
+description: "A provider outage does not have to become your outage. How payment failover is actually built — detecting the right failures, rerouting them, and never charging the customer twice."
+---
+{% comment %}
+  Cluster page under the /payment-infrastructure/ pillar.
+
+  OWNERSHIP (see .docs/seo-page-ownership.md). Three pages on this site touch
+  failover and they are deliberately different:
+    - /blog/payment-gateway-downtime-failover/  -> "my provider is down right
+      now, what do I do" (incident, merchant-facing).
+    - /payment-orchestration/                   -> the capability as a product,
+      one section among six.
+    - this page                                 -> the ARCHITECTURE: how failover
+      is designed, and the duplicate charge it must never cause.
+  Each links to the other two. None of them repeats the others' paragraphs.
+
+  Hand-written page, not a product stub: there is no data file driving it beyond
+  _data/failover.yml (FAQs only), because this is a concept page rather than a
+  plugin or a provider.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Payment Architecture</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Their outage, or yours?</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">
+          <strong>Payment failover is the ability to complete a payment through a different provider
+          when the first one cannot take it.</strong> Every payment provider has bad days — outages,
+          maintenance windows, rate limits, account reviews. Failover is the part of your payment
+          stack that decides whether their bad day becomes yours. This page is about how it is built,
+          which is a different question from what it is.
+        </p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".3">
+            If a provider is failing on you right now, the practical triage is in
+            <a href="/blog/payment-gateway-downtime-failover/">what to do when a payment gateway goes
+            down</a>. Read that first if the site is on fire. Come back here when you want to make sure
+            the next outage is boring.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The three layers -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Anatomy</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Failover is three problems, not one</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Teams build the first two and discover the third in production, usually through a customer complaint.</p>
+      </div>
+      <div class="row gy-4 justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".4">
+            <div class="how-step-num">1</div>
+            <h3 class="h5">Classification</h3>
+            <p>Decide whether this failure is worth moving at all. A timeout is worth moving. A declined card is not — and telling them apart correctly is most of the work.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".5">
+            <div class="how-step-num">2</div>
+            <h3 class="h5">Rerouting</h3>
+            <p>Send the payment somewhere that can take it. This is the part everyone pictures when they hear the word, and the smallest part of the build.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="how-step animated" data-animate="fadeInUp" data-delay=".6">
+            <div class="how-step-num">3</div>
+            <h3 class="h5">Duplicate prevention</h3>
+            <p>Guarantee the customer is charged once. Skip this and your failover does not protect revenue — it manufactures refunds and chargebacks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep dive -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Layer 1: not every failure deserves a second provider</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            A failed payment is not one event. It is three, and only one of them is a failover case.
+          </p>
+          <ul class="check-list list-unstyled p-0 mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <li><strong>Technical failure</strong> — a timeout, a connection reset, an HTTP 500, a provider outage. Nobody made a decision about this payment. This is the failover case.</li>
+            <li><strong>Hard decline</strong> — insufficient funds, a stolen card, a closed account. The issuer decided, and the issuer is the same institution no matter which provider asks.</li>
+            <li><strong>Soft decline</strong> — a risk score, a velocity rule, an unusual cross-border pattern. Another provider sometimes presents it differently and it clears. A judgement call, not a rule.</li>
+          </ul>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Getting this wrong in the safe-looking direction is expensive. Retry a hard decline through
+            four providers and you have not recovered a sale — you have shown the customer's bank a
+            pattern that looks exactly like card testing, and given your own provider a reason to review
+            your account. The full breakdown of the three categories, with what to tell the customer in
+            each case, is in <a href="/blog/why-payments-fail/">why payments fail</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Layer 2: rerouting is the easy part</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Choosing where a payment goes next is a lookup. Somewhere you hold a list of the providers
+            that can take this currency and this payment method, in an order you control, and you walk
+            down it. That logic is a morning's work.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            What makes it hard is everything the second provider does not share with the first. A
+            different authentication scheme. A different set of error codes, with a different opinion
+            about which of them are retryable. A different webhook signature format. A different
+            definition of when a payment is final. Adding a fallback provider is not adding a fallback —
+            it is adding a second integration, and then a third thing that keeps both of them
+            consistent. That third thing is the actual product, and deciding whether to build it is the
+            subject of <a href="/blog/what-is-payment-orchestration/">what payment orchestration is</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Layer 3: the double charge, and why it is the whole game</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Here is the sequence that turns a failover feature into a liability. It is not an edge case.
+            It is the normal failure mode of a network.
+          </p>
+          <ol class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <li>Your checkout sends a charge to provider A.</li>
+            <li>Provider A receives it, authorises it, and charges the customer's card.</li>
+            <li>The response never arrives. A load balancer drops it, a timeout fires, a container restarts.</li>
+            <li>Your system sees no answer. As far as it knows, the payment failed.</li>
+            <li>Failover does its job and sends the payment to provider B.</li>
+            <li>Provider B charges the card. <strong>The customer has now paid twice.</strong></li>
+          </ol>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Nothing in that sequence is a bug. Every component behaved correctly. The failure is
+            architectural: the payment had no identity that outlived a single HTTP request, so there was
+            no way to ask <em>did this already happen?</em> before trying again.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The fix is an <strong>idempotency key</strong>, and the detail that decides whether it works
+            is what the key is attached to. A key generated per HTTP request protects nothing — the retry
+            is a new request, so it gets a new key, and the second charge goes through. The key has to
+            identify the <em>payment attempt</em>: derived from your own order reference, stored with the
+            order, and reused by every retry of that attempt, including the one that goes somewhere else.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Which produces the requirement most people miss on a first build: <strong>the key cannot
+            belong to a provider.</strong> Provider A's idempotency key means nothing to provider B. If
+            your only protection is the provider's own key, then the exact moment you need it — crossing
+            from one provider to another — is the exact moment it stops working. The identity has to be
+            held one level above both of them, an argument developed further in
+            <a href="/blog/how-payment-orchestration-works/">how payment orchestration works</a>.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            There is a second half to the same problem. After a timeout you do not know the outcome, and
+            guessing costs money in both directions: assume success and you ship goods nobody paid for,
+            assume failure and you either lose the sale or charge twice. Something has to go back to the
+            provider and ask what actually happened to that payment rather than inferring it from a dead
+            connection. Doing that across several providers at once is its own exercise —
+            <a href="/blog/payment-reconciliation-across-multiple-providers/">why the numbers never
+            match</a> is what it looks like when nobody does.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Where the logic has to live</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            There are three places to put failover logic and two of them are wrong.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Inside a provider integration</strong> is wrong because it cannot see the other
+            providers. <strong>In your checkout</strong> is wrong for a subtler reason: it makes every
+            change to your failover behaviour a deployment. The moment you most want to move traffic away
+            from a provider is the moment they are having an incident, and shipping code to production
+            during someone else's incident is how a bad hour becomes a bad day.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The third place is a layer between your checkout and every provider you run. It is the only
+            position that can see all of them at once, hold one identity for a payment across all of
+            them, and be reconfigured without touching your application. That is the structural argument
+            for orchestration, and the same argument that makes
+            <a href="/blog/switch-payment-providers-without-losing-sales/">switching providers</a> a
+            configuration change rather than a project.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Before you call it done</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Whether you build this or buy it, these are the questions worth answering out loud. Most
+            implementations answer the first two and stop.
+          </p>
+          <ul class="check-list list-unstyled p-0 mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <li>Which specific error codes from each provider count as retryable, and who revisits that list when a provider changes their API?</li>
+            <li>What is the identity of a payment attempt, and does it survive being handed to a second provider?</li>
+            <li>After a timeout, what goes back and asks the provider what happened — and how long does the order sit in an unknown state first?</li>
+            <li>Can you move traffic away from a provider without a deployment?</li>
+            <li>Does your reporting distinguish one payment attempted twice from two separate payments?</li>
+            <li>Have you tested it? Not the happy path — the timeout, against a provider that succeeds and does not tell you.</li>
+          </ul>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The last one is the one nobody does before launch, which is why it belongs on a
+            <a href="/blog/test-your-checkout-before-you-go-live/">pre-launch checklist</a> rather than
+            in a post-mortem.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">How PaymentHood fits</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <a href="/">PaymentHood</a> is the layer described two sections ago. Your checkout integrates
+            once — through a <a href="/integrations/">free plugin</a> or the API — and every provider you
+            enable sits behind it, so the providers you can fall back to become an account setting rather
+            than a build. Moving the default provider for a currency is a change in a dashboard, which
+            means you can do it while a provider is having an incident without shipping anything. On card
+            payments the provider is selected for you rather than put to the shopper, and that selection
+            has an order behind it.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Layer three is handled where it has to be. Charge creation is idempotent on <strong>your own
+            order reference</strong>, checked before any provider is contacted — so the identity of a
+            payment lives above the providers instead of inside one of them, exactly as the double-charge
+            problem demands. Webhook signatures are verified centrally and orders are confirmed
+            server-side rather than from a browser redirect, so a second provider is not a second chance
+            to get either of those wrong.
+          </p>
+
+          <!-- CTA -->
+          <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 mb-3">Stop depending on one provider having a good day</h3>
+            <p class="lead mb-4">Create a free account, connect a second provider, and route your first payment. Your checkout code does not change.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+                <span>Create Your Free Account</span>
+                <em class="ti ti-arrow-right ps-2"></em>
+              </a>
+              <a href="/payment-orchestration/" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+                <span>How the layer works</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include faq.html items=site.data.failover.faqs eyebrow="Failover FAQ" bg="bg-light" first_open=true %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

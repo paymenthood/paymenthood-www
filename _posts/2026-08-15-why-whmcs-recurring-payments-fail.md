@@ -111,6 +111,9 @@ with tokenised recurring support, automatic failover, webhook verification and
 server-side confirmation handled for you. There's no per-transaction fee from
 PaymentHood; you pay only your chosen provider's processing fees.
 
+Renewals are one of four payment problems specific to this industry —
+[payments for hosting companies](/integrations/hosting/) covers the other three.
+
 [Create a free PaymentHood account]({{ site.signup_url }}), see the
 [WHMCS integration](/integrations/whmcs/) and its
 [installation guide](/integrations/whmcs/installation/), or browse the full

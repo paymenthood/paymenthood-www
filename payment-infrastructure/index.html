@@ -1,0 +1,257 @@
+---
+layout: none
+title: "Payment Infrastructure for SaaS: Routing & Failover"
+description: "What the payment layer of a SaaS product actually has to do — pick a provider, survive an outage, never double-charge, and prove the money arrived. Where it ends and billing begins."
+---
+{% comment %}
+  Pillar page for the payment-infrastructure cluster (C2, C3, C4, I5 sit under it).
+
+  OWNERSHIP (see .docs/seo-page-ownership.md). This site now has two capability
+  hubs and they are NOT interchangeable:
+    - /payment-orchestration/  -> the PRODUCT capability, conversion intent.
+      Owns "payment orchestration", "smart routing payments".
+    - this page                -> the ARCHITECTURE topic for product and
+      engineering teams. Owns "payment infrastructure", "payment stack",
+      "payment infrastructure for saas".
+  The split is product noun vs practice noun. Each links to the other once; do
+  not let either grow a section that restates the other.
+
+  The boundary section is deliberate and load-bearing: PaymentHood has no
+  metering, plans, proration, dunning, invoicing or tax, and this page says so
+  out loud. That is positioning, not a gap - it is what makes the page credible
+  to the exact reader who has already been sold a "billing platform" that turned
+  out to be a payments platform, or the reverse.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Payment Infrastructure</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">The part of your product that turns intent into money</h2>
+        <p class="lead animated" data-animate="fadeInUp" data-delay=".3">
+          <strong>Payment infrastructure is the layer that takes a customer's intent to pay and turns
+          it into money you can rely on</strong> — choosing a provider, handling the attempt,
+          confirming what happened, and recording it exactly once. For most SaaS products it starts as
+          twenty lines against one provider's SDK and stays that way until the first time it is not
+          enough. This page is about what it eventually has to do, and how to tell which parts you
+          actually need.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The boundary -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">First, a boundary</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Billing decides what to charge. Payments decide how to take it.</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Almost every confused payments project starts by treating these as one system. They are
+            two, they fail differently, and vendors on both sides of the line are happy to let you
+            assume otherwise.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            A <strong>billing engine</strong> answers <em>what does this customer owe?</em> — plans and
+            price books, metered usage, seats, proration when someone upgrades mid-cycle, invoices,
+            dunning schedules, sales tax and VAT. When it breaks you invoice the wrong amount.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Payment infrastructure</strong> answers <em>how do we actually collect it, and how
+            do we know we did?</em> — which provider takes this payment, what happens when that
+            provider is unavailable, how a retry avoids charging twice, how the result is verified,
+            and how five providers become one set of numbers. When it breaks you lose the sale, or
+            take it twice, or ship something nobody paid for.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Knowing which of the two is hurting is most of the diagnosis. If your revenue numbers are
+            wrong, look at billing. If money is arriving late, twice, or not at all, look here.
+          </p>
+          <div class="bg-blue-200 tc-light rounded-4 p-4 p-md-5 mt-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <p class="lead mb-0 txt-blue-50">
+              PaymentHood sits on the payments side of that line, and only there. It does not meter
+              usage, run plans or proration, issue invoices, manage dunning, or calculate tax — you
+              keep whatever you already use for those. What it changes is that <em>how</em> you take
+              the money stops being hard-wired to a single provider.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The five jobs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">The work</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Five jobs the payment layer has to do</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">One provider gives you the first for free and leaves you the other four. That asymmetry is why payment code grows.</p>
+      </div>
+      <div class="feature-grid animated" data-animate="fadeInUp" data-delay=".3">
+        <div class="feat-card"><div class="feat-card-icon navy">🧭</div><h3 class="h4">Routing</h3><p>Deciding which provider takes this payment, from currency, country, method and amount. With one provider there is no decision — which is exactly what limits you at the second market.</p></div>
+        <div class="feat-card"><div class="feat-card-icon blue">🔁</div><h3 class="h4">Failover</h3><p>Completing the payment when the first attempt fails for a technical reason, without treating a declined card as an outage and without charging anyone twice.</p></div>
+        <div class="feat-card"><div class="feat-card-icon orange">🔑</div><h3 class="h4">Idempotency</h3><p>One payment attempt keeps one identity, so a timeout, a double-click or a retry returns the original result instead of creating a second charge.</p></div>
+        <div class="feat-card"><div class="feat-card-icon teal">🛡️</div><h3 class="h4">Verification</h3><p>Believing the provider, not the browser. Signed webhooks checked properly, and an order marked paid only when your server confirms the capture.</p></div>
+        <div class="feat-card"><div class="feat-card-icon indigo">📒</div><h3 class="h4">Reconciliation</h3><p>Several providers, several settlement formats, one ledger — so finance answers "what did we take yesterday" with a query rather than a spreadsheet merge.</p></div>
+        <div class="feat-card"><div class="feat-card-icon green">🚦</div><h3 class="h4">Risk controls</h3><p>Rules that stop the traffic you do not want: velocity limits, repeated failures from one customer, distinct cards in a window, blocked regions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep dive -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="section-head">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Routing: the first thing one provider cannot do</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            A single-provider integration has no routing decision to make, and for one country in one
+            currency that is a feature. It stops being one the moment your customers are somewhere your
+            provider is weak — a currency it will not settle, a method it does not offer, an acquirer
+            with no local presence and therefore a worse approval rate on exactly the cards you want to
+            accept.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The mistake is treating that as a provider-selection problem and re-running the evaluation.
+            It is a structural problem: any single provider is the wrong answer somewhere. Routing turns
+            "which provider" from a decision baked into your checkout into a rule you can change, which
+            is what makes <a href="/payment-infrastructure/global-payments/">accepting payments across
+            several markets</a> a configuration exercise instead of a rebuild per country.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Failover and idempotency: two halves of one problem</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            These are usually planned as separate tickets and that is the error. Failover without
+            idempotency is not a safety feature — it is an automated way to charge customers twice,
+            because the failure it most often reacts to is a timeout, and a timeout means you do not
+            know whether the first charge succeeded.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The requirement that falls out of that: the identity of a payment attempt has to live above
+            the providers, not inside one of them, because a provider's own idempotency key is
+            meaningless to the next provider. This is the single most common gap in a home-built
+            payment layer, and it is unpacked properly in
+            <a href="/payment-infrastructure/failover/">how payment failover is actually built</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Verification: the two habits that separate robust from lucky</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            First, never mark an order paid because a browser arrived at your success URL. That redirect
+            is attacker-controllable and it is also just unreliable — customers close tabs. The payment
+            is real when your server asks the provider and the provider confirms the capture, which is
+            why <a href="/blog/payment-successful-order-still-pending/">orders get stuck between paid
+            and pending</a> in systems that trust the redirect.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Second, verify every webhook signature. Each provider signs differently — an HMAC digest in
+            a header here, a form-encoded signature plus a source-IP check there — and an unverified
+            callback endpoint is an open invitation to forge a "payment succeeded" event and take goods
+            without paying. Implemented once centrally this is a solved problem; implemented per
+            provider by whoever added that provider, it is a lottery. The mechanics are in
+            <a href="/blog/webhooks-for-payment-events/">webhooks for payment events</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Risk: the rules that pay for themselves early</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Most SaaS products do not have a fraud problem until they have a signup form and a
+            $1 plan, and then they have one immediately. The traffic is not trying to buy your product —
+            it is validating stolen cards against anything that will take a small charge, which leaves
+            you with the declines, the fees and eventually the account review. What stops it is dull and
+            effective: limits on attempts per customer per window, limits on distinct cards, and a rule
+            that reacts to repeated provider rejections rather than waiting for a human.
+            <a href="/blog/card-testing-fraud-signup-forms/">Card testing on signup forms</a> covers
+            what the pattern looks like and which controls actually bite.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Build or buy</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Building this is entirely possible and teams do it well. What they underestimate is the
+            ratio: routing, the interesting part, is perhaps a fifth of the work. The rest is
+            idempotency, per-provider error classification, a signature scheme for each provider, state
+            machines that agree with each other, reconciliation, and then maintaining all of it as every
+            provider changes their API on their own schedule.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The honest test is not technical. Build it when your routing logic is genuinely unusual, or
+            when payments <em>are</em> the product. Buy it when payments are critical to the business but
+            are not the business — the comparison in
+            <a href="/payment-infrastructure/orchestration-vs-single-gateway/">orchestration versus a
+            single gateway</a> is the same decision framed by cost rather than by capability, and
+            <a href="/blog/single-payment-processor-limitations/">the limits of a single payment
+            processor</a> covers what you are carrying while you decide.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            One trend raises the stakes on all of it. Software that pays on a user's behalf retries
+            instantly and identically rather than hesitating the way a person does, which turns a
+            tolerable weakness in a payment layer into a visible one —
+            <a href="/blog/risks-of-letting-ai-agents-pay/">the risks of letting AI agents make
+            payments</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">How PaymentHood fits</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <a href="/">PaymentHood</a> is the payments half of the boundary above, delivered as one
+            integration. Your product talks to one API — or a
+            <a href="/integrations/">free plugin</a> if you are on WooCommerce, WHMCS or Joomla — and
+            <a href="/providers.html">{{ site.provider_floor }} providers</a> sit behind it, with
+            routing, failover, idempotency, webhook verification and reconciliation handled once rather
+            than once per provider. Every provider account stays contracted in your own name and funds
+            settle directly to you; PaymentHood is not a processor, an acquirer or a merchant of record,
+            and takes no percentage and no per-transaction fee at any volume.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            What it does not do is the other half. No metering, no plans, no proration, no invoices, no
+            dunning, no tax. Keep your billing engine. This layer goes underneath it.
+          </p>
+
+          <!-- CTA -->
+          <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="txt-blue-600 mb-3">Put the payment layer somewhere you can change it</h3>
+            <p class="lead mb-4">Create a free account, connect the providers you already use, and take a payment. Your billing stack does not move.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="{{ site.signup_url }}" class="vh-btn btn-lg btn-blue-100">
+                <span>Create Your Free Account</span>
+                <em class="ti ti-arrow-right ps-2"></em>
+              </a>
+              <a href="/payment-infrastructure/checklist/" class="vh-btn btn-lg btn-green-300 vh-btn-outline">
+                <span>Pre-launch checklist</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include providers-strip.html eyebrow="Route Across" title="One integration, every provider" description="Global, regional and crypto providers, activated from a dashboard rather than added in code." %}
+
+  {% include faq.html items=site.data.payment_infrastructure.faqs eyebrow="Infrastructure FAQ" bg="bg-light" %}
+</main>
+
+{% include chat-widget.html %}
+
+{% include footer.html %}

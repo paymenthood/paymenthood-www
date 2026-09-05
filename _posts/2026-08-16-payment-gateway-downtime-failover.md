@@ -80,6 +80,9 @@ discover the hard part isn't having two providers, it's **coordinating** them:
 This coordination layer is exactly what a
 [payment orchestration platform](/blog/what-is-payment-orchestration/) is: one
 integration that sits above your providers and moves each payment to a healthy one.
+If you are designing that layer rather than reacting to an outage, [how payment
+failover is actually built](/payment-infrastructure/failover/) covers the
+architecture — including the duplicate charge a naive retry can create.
 
 ## How PaymentHood keeps your checkout up
 

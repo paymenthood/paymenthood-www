@@ -1,0 +1,56 @@
+# FAQs for /payment-infrastructure/orchestration-vs-single-gateway/ (cluster C2).
+#
+# SCOPE (see .docs/seo-page-ownership.md): this page owns the DECISION - one
+# gateway or a layer above several. It must NOT redefine payment orchestration
+# (that belongs to /blog/what-is-payment-orchestration/, which also owns the
+# gateway-vs-orchestration comparison TABLE) and must NOT restate the capability
+# tour on /payment-orchestration/. Its job is the cost, risk and timing of the
+# choice, and naming the real alternatives honestly.
+
+faqs:
+  - q: Do I need payment orchestration if I only use one provider today?
+    a: >-
+      Not for its own sake. The question is whether you can see a second provider
+      coming - a market your current one does not serve, a method your customers
+      keep asking for, or a level of revenue where an outage stops being an
+      inconvenience. Orchestration costs little to adopt early and a great deal
+      to retrofit during an incident, which is the whole of the timing argument.
+
+  - q: Is an orchestration layer another point of failure?
+    a: >-
+      It is another dependency, and that concern is fair. The trade runs the
+      other way in practice: a single-provider checkout is down whenever that one
+      provider is down, which is a certainty rather than a risk, while a layer
+      above several providers lets you keep selling through the others. You are
+      exchanging one guaranteed single point of failure for one you can route
+      around.
+
+  - q: What are the real alternatives to a single payment gateway?
+    a: >-
+      Broadly three. Add a second direct integration and coordinate them
+      yourself. Move to a merchant of record such as Paddle or Lemon Squeezy,
+      which takes tax and compliance off you but makes them the seller. Or put an
+      orchestration layer - PaymentHood, Primer, Spreedly and others - above the
+      providers you already hold accounts with. They are genuinely different
+      trades, not three brands of the same thing.
+
+  - q: Does orchestration replace my payment gateway?
+    a: >-
+      No, it sits above your gateways and coordinates them. You keep your
+      accounts and your negotiated rates with each provider, and money still
+      moves through them. What changes is that your application stops being wired
+      to any one of them.
+
+  - q: Will an orchestration layer slow down my checkout?
+    a: >-
+      The routing decision is measured in milliseconds and is not what customers
+      experience. The parts of a checkout that are actually slow are the provider
+      redirect and the customer's own decision-making, neither of which the layer
+      adds to.
+
+  - q: Does orchestration cost extra per transaction?
+    a: >-
+      It depends entirely on the platform, and this is worth checking before
+      anything else. Several charge a fee per transaction on top of your
+      provider's processing fees. PaymentHood does not, at any volume - the only
+      paid plan is Premium at $29 a month for white-label checkout branding.

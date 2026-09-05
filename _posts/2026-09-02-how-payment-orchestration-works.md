@@ -63,6 +63,10 @@ The discipline is in what *not* to retry:
   the issuer's answer, not a fault; re-running it elsewhere can't succeed and can look
   like card testing.
 
+The full architecture of this step — the three layers it needs and the one most
+teams miss — is in [how payment failover is actually
+built](/payment-infrastructure/failover/).
+
 Getting that distinction right is also most of what
 [lifts your payment approval rate](/blog/how-to-improve-your-payment-approval-rate/),
 and it's the same machinery behind
