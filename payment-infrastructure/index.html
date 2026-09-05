@@ -165,7 +165,7 @@ description: "What the payment layer of a SaaS product actually has to do — pi
             callback endpoint is an open invitation to forge a "payment succeeded" event and take goods
             without paying. Implemented once centrally this is a solved problem; implemented per
             provider by whoever added that provider, it is a lottery. The mechanics are in
-            <a href="/blog/webhooks-for-payment-events/">webhooks for payment events</a>.
+            <a href="/blog/webhook-verification-reconciliation/">webhooks for payment events</a>.
           </p>
 
           <div class="section-head mt-5">
@@ -180,6 +180,242 @@ description: "What the payment layer of a SaaS product actually has to do — pi
             that reacts to repeated provider rejections rather than waiting for a human.
             <a href="/blog/card-testing-fraud-signup-forms/">Card testing on signup forms</a> covers
             what the pattern looks like and which controls actually bite.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Reconciliation: the job that only exists once there are two</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            With one provider, reconciliation is barely a task. The provider's dashboard is the
+            ledger, its settlement report is the source of truth, and finance works directly from it.
+            The moment a second provider takes real money that arrangement quietly stops working, and
+            the failure is not loud enough to force anyone to fix it.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Each provider reports in its own shape: different field names for the same amount,
+            different treatment of fees — deducted per transaction by some, netted at payout by
+            others — different timing between capture and settlement, different currencies at
+            different conversion points, and different identifiers for what your system considers one
+            order. None of these are errors. They are simply not the same schema, and nothing
+            reconciles them by default.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            What happens in practice is a monthly spreadsheet merge that someone owns personally,
+            takes a day, and gets less reliable as volume grows. Refunds and chargebacks land in it
+            late and out of order. The question "what did we take yesterday, net of fees, across
+            everything" becomes a research project rather than a query, and the answer arrives too
+            slowly to act on.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The architectural fix is to normalise at the point of capture rather than at the point of
+            reporting. Every transaction gets one internal identity and one internal shape when it
+            happens, whichever provider handled it, and the provider's own reference is stored
+            alongside rather than instead. Reconciliation then becomes a comparison between two
+            records that already describe the same thing, instead of an attempt to reconstruct that
+            relationship a month later from two reports that were never designed to be compared.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">One gateway, two gateways, or a layer: an honest comparison</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            There are three arrangements in common use, and the middle one is the one most teams end
+            up in by accident rather than by choice.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>A single gateway</strong> is the right answer far more often than the payments
+            industry likes to admit. One integration, one dashboard, one settlement report, one
+            support relationship, one set of webhooks to verify. If you sell in one country, in one
+            currency, and your volume is small enough that a provider outage is an annoying afternoon
+            rather than a material loss, adding anything to this is cost without benefit. The honest
+            test is whether you have already written a conditional in your checkout that chooses
+            between providers — if not, you probably do not need a layer yet.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Two gateways wired in directly</strong> is where the trouble starts, because it
+            looks like the cheap version of the third option and behaves like the expensive one. Each
+            provider brings its own SDK, its own webhook format and signature scheme, its own error
+            vocabulary, and its own idea of what an order identifier is. The routing decision ends up
+            in application code, so changing it is a deployment. The two reconciliations are done by
+            hand. Nothing is shared, so every fix has to be made twice, and the second implementation
+            is always the less careful one because it was written under deadline to unblock a market.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>An orchestration layer</strong> is the same set of providers with the shared
+            concerns extracted: one interface for your application, routing as configuration, one
+            webhook verification path, one idempotency scheme, one normalised ledger. The cost is a
+            dependency between your checkout and something else, plus a small amount of latency, plus
+            the discipline of not putting business logic in two places.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The choice between the second and third is not really about features — anything a layer
+            does can be built. It is about where the work accumulates. Direct integrations put a fixed
+            cost on every provider you will ever add, forever; a layer pays that cost once and makes
+            the next provider approximately free. That trade only makes sense if there will be a next
+            provider, which is why the honest recommendation for a single-market business is to stay
+            where you are. The comparison in full, including when not to move, is in
+            <a href="/payment-infrastructure/orchestration-vs-single-gateway/">orchestration versus a
+            single gateway</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Scope: the cheapest security decision available</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The most effective thing a payment layer can do about card data security is never receive
+            any. If card details go from the customer's browser to the provider directly — through a
+            hosted field, a redirect or a provider-hosted checkout — and what comes back to you is a
+            token, then the sensitive data never touches your servers, never enters your logs, never
+            appears in a database backup and never sits in an error tracker.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            This is worth stating as architecture rather than compliance, because it changes what a
+            breach of your systems can cost. A token is bound to one provider and one merchant, so an
+            attacker who takes your whole database has taken a set of references that are worthless
+            anywhere else. The alternative — accepting raw card numbers to feel in control of the
+            checkout experience — pulls your entire application into the compliance scope of the card
+            networks and turns every server that has ever touched the request into something you must
+            defend at a much higher standard.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The related design point is where tokens live. A token issued by a provider belongs to
+            that provider, which has a consequence people meet at the worst moment: it does not
+            transfer. Switching providers does not move stored payment methods with you, and a
+            failover that reroutes a payment cannot reuse the first provider's token at the second.
+            Plan for that before it is urgent, rather than discovering it during a migration.
+            <a href="/blog/do-you-need-pci-compliance-to-accept-payments/">What PCI scope actually
+            means</a> covers the compliance side in plain terms.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Testing a payment layer without taking real money</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Payment code is unusually hard to test well, because the interesting paths are the ones
+            that are inconvenient to produce. Everyone tests a successful card. Almost nobody tests
+            the timeout, and the timeout is where the double charges live.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Provider sandboxes cover the first category well: specific test cards produce specific
+            declines, so hard declines, soft declines and expired cards are all straightforward to
+            exercise. What sandboxes generally will not do is fail in the ways that actually break
+            systems — hang and never respond, accept a charge and never deliver the webhook, deliver
+            the same webhook three times, or deliver events out of order. Those have to be simulated
+            at your own boundary.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Four tests are worth having before a payment layer carries meaningful volume: send the
+            same webhook twice and confirm one effect; kill the connection mid-charge and confirm the
+            system reaches a resolved state without a second charge; deliver a webhook out of order
+            and confirm an order never moves backwards from paid to pending; and send a webhook with
+            a deliberately invalid signature and confirm it is rejected rather than logged and
+            processed. Each one takes an afternoon and each corresponds to an incident that is
+            otherwise inevitable. There is a broader pre-launch list in
+            <a href="/blog/test-your-checkout-before-you-go-live/">test your checkout before you go
+            live</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">The states a payment can be in, and the one that hurts</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Most payment bugs are not arithmetic. They are a system that models fewer states than
+            reality contains. The comfortable model has two: a payment succeeded, or it failed. Real
+            payments have at least four, and the fourth is the one that produces the support tickets.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Succeeded</strong> and <strong>failed</strong> are answers — the provider told you
+            something definite, and you can act on it. <strong>Pending</strong> is also an answer: the
+            provider has accepted the payment and will resolve it later, which is normal for bank
+            transfers and several local methods, and requires only that your system can wait without
+            treating the delay as a failure.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Unknown</strong> is not an answer. A request timed out, a connection reset, a
+            response never arrived. The charge may have succeeded, may have failed, or may still be in
+            flight, and no amount of inspection at your end will tell you which. A system that has no
+            representation for this state must map it onto one of the other three, and both choices
+            are wrong: call it failed and you may retry a payment that already went through; call it
+            succeeded and you may deliver goods nobody paid for.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            This single omission is the root of most double charges. It is also why idempotency and
+            server-side confirmation are not two separate features but two halves of the same answer:
+            the key lets you ask again safely, and the confirmation is how you find out what actually
+            happened. A payment layer that models "unknown" explicitly, and resolves it by asking the
+            provider rather than guessing, avoids an entire class of incident that otherwise recurs
+            forever.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">When each job actually becomes necessary</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            None of this needs to exist on day one, and building it all before you have customers is
+            its own mistake. The jobs arrive in a fairly predictable order, and the useful skill is
+            recognising which one you have just reached rather than either building ahead or
+            discovering it during an incident.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>One provider, one market.</strong> Verification matters immediately — trusting the
+            redirect is wrong on day one, not at scale — and idempotency costs almost nothing to add
+            while there is one code path. Everything else is premature.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>The first signup form with a cheap plan.</strong> Risk controls become urgent
+            faster than anything else on this list, usually within days of the form being findable.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>The second market.</strong> Routing appears, whether or not you call it that. The
+            moment a currency or country decides which provider should take a payment, that decision
+            exists somewhere — the only question is whether it is a rule you can change or an
+            <code>if</code> statement in a checkout controller.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>The second provider taking real money.</strong> Reconciliation starts the same day
+            and is usually noticed a quarter later. Failover becomes possible for the first time, and
+            worth building before the outage rather than during it.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Recurring revenue.</strong> Every unattended charge multiplies the cost of every
+            weakness above, because there is nobody present to retry, re-enter a card, or notice that
+            something failed. This is where a payment layer that was adequate becomes the constraint.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Evaluating what you already have</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Nine questions, answerable in an afternoon by whoever owns the checkout. They are ordered
+            so that a "no" early on matters more than a "no" late.
+          </p>
+          <ol class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <li>Is an order marked paid only after your server independently confirms the capture with
+              the provider — never because a browser reached a success URL?</li>
+            <li>Is every inbound webhook signature verified before the payload is trusted, for every
+              provider, in one place rather than once per integration?</li>
+            <li>Does every charge carry an idempotency key derived from the order and attempt, so a
+              timeout followed by a retry cannot create a second payment?</li>
+            <li>Does your system have a state for "we do not know what happened", and a process that
+              resolves it by asking the provider rather than assuming?</li>
+            <li>If your primary provider stopped accepting payments for six hours, how long would it
+              take to route around it — and has that path ever run?</li>
+            <li>Is the decision about which provider takes a payment configuration you can change, or
+              is it compiled into your checkout?</li>
+            <li>Can you answer "what did we take yesterday, net of fees, across every provider"
+              without exporting anything?</li>
+            <li>Do you know your approval rate split by country, method and first-payment versus
+              renewal — rather than as one blended number?</li>
+            <li>Are there limits on payment attempts, distinct cards and repeated failures per
+              customer, and do they act automatically?</li>
+          </ol>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The first four are correctness: a "no" there is a bug waiting for traffic, regardless of
+            size. The middle three are resilience and become urgent at the second provider. The last
+            two are visibility — the ones that decide whether you find problems yourself or hear about
+            them from customers. A longer version, with what to do about each answer, is the
+            <a href="/payment-infrastructure/checklist/">payment infrastructure readiness
+            checklist</a>.
           </p>
 
           <div class="section-head mt-5">
@@ -205,7 +441,7 @@ description: "What the payment layer of a SaaS product actually has to do — pi
             One trend raises the stakes on all of it. Software that pays on a user's behalf retries
             instantly and identically rather than hesitating the way a person does, which turns a
             tolerable weakness in a payment layer into a visible one —
-            <a href="/blog/risks-of-letting-ai-agents-pay/">the risks of letting AI agents make
+            <a href="/blog/automated-retries-payment-idempotency/">the risks of letting AI agents make
             payments</a>.
           </p>
 

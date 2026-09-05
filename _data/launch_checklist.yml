@@ -53,3 +53,19 @@ faqs:
       afternoon, and most teams find two or three genuine gaps. Building the
       items you are missing is the longer part, which is the argument for
       checking before launch rather than after the first incident.
+
+  - q: How long should working through this take?
+    a: >-
+      A single pass takes an afternoon if you resist fixing anything while you go.
+      Mark each item yes, no, or not yet relevant, and only then decide what to act
+      on. What matters is the list of no answers in the confirmation and failure
+      sections - it is almost always short and almost always contains something worth
+      doing that week.
+
+  - q: Which items genuinely cannot wait?
+    a: >-
+      Three. Confirm payments server-side rather than trusting a browser redirect,
+      verify every webhook signature, and send an idempotency key derived from the
+      order and attempt. Each of these is wrong to omit at any size, and all three are
+      cheap while there is still one code path. Everything else has a stage at which
+      it becomes relevant.

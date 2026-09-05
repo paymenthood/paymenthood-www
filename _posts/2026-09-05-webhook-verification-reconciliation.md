@@ -1,8 +1,9 @@
 ---
-title: "Payment Webhooks: Signing, Retries and Idempotency"
-description: "A payment webhook is the only trustworthy news that money moved. How to verify one properly, why your handler must be idempotent, and what a small payload is for."
+title: "Webhook Verification and Reconciliation, Explained"
+description: "How webhook verification prevents double-processing, and how reconciliation keeps your transaction records in sync once more than one provider is taking money."
 date: 2026-09-05
 tags: [webhooks, architecture]
+redirect_from: /blog/webhooks-for-payment-events/
 ---
 
 The browser redirect after checkout tells you a browser was redirected. That is
@@ -105,6 +106,119 @@ the event permanently.
 for a long time, which means a handler that has been broken for an hour may get an
 hour of history delivered at once when it recovers. That is the moment idempotency
 earns its place.
+
+## Webhooks are the news, not the record
+
+Everything above makes a single webhook trustworthy. It does not make your books
+correct, and the difference matters as soon as a second provider starts taking
+money.
+
+A webhook is an event: *this happened, probably just now*. A ledger is a
+statement: *this is what is true, as of today, across everything*. Events are
+delivered individually, out of order, sometimes twice, and occasionally not at
+all — providers retry a handful of times and then stop. A verified webhook tells
+you what one provider believes about one payment at one moment. It does not tell
+you that you heard about every payment.
+
+That last gap is the one nobody plans for, because it is silent by construction.
+A payment that succeeded and whose webhook never arrived looks — from inside your
+system — exactly like a payment that never happened. There is no error, no failed
+job, no alert. The money is at the provider and your database does not know.
+
+## Reconciliation is the check that webhooks were enough
+
+Reconciliation is the periodic comparison between what you think happened and
+what each provider says happened. It is the only mechanism that catches the
+failure mode above, and it is boring in the way that load-bearing things usually
+are.
+
+The shape of it is simple. For a period — a day is a reasonable default — pull
+the provider's own list of transactions, compare it against your records, and
+produce three sets:
+
+- **In both, and matching.** The overwhelming majority. Nothing to do.
+- **At the provider, not in your system.** A payment you never learned about. A
+  lost webhook, almost always. The customer paid and may currently be waiting for
+  something you have not delivered.
+- **In your system, not at the provider.** Rarer and more alarming: something
+  marked paid that the provider has no record of. Usually a bug in your own
+  handling, occasionally a test transaction against the wrong environment.
+
+The first time a team runs this, the second set is almost never empty. That is
+not a sign of a badly built system; it is the normal background rate of webhook
+delivery meeting a system that had no way to notice.
+
+## Why several providers make it a different job
+
+With one provider, reconciliation is mostly a formality — its dashboard is the
+ledger, and its settlement report is the source of truth that finance already
+uses.
+
+With several, that stops being available, and not because anything is broken.
+Each provider reports in its own shape: different field names, different
+treatment of fees (deducted per transaction by some, netted at payout by others),
+different timing between capture and settlement, different currencies at
+different conversion points, and different identifiers for what you consider one
+order. None of that is an error. It is simply not the same schema, and nothing
+reconciles it by default.
+
+So the question "what did we take yesterday, net of fees, across everything"
+becomes a manual merge that somebody owns, takes a day, and degrades as volume
+grows. Refunds and chargebacks arrive late and out of order and make it worse.
+
+The fix is structural rather than clerical: normalise at the point of capture,
+not at the point of reporting. Every transaction gets one internal identity and
+one internal shape the moment it happens, whichever provider handled it, and the
+provider's own reference is stored alongside rather than instead. Reconciliation
+then compares two records that already describe the same thing, instead of
+reconstructing that relationship a month later from two reports that were never
+designed to be compared.
+
+## A practical checklist
+
+Nine things, in the order they are worth doing:
+
+- Verify every signature, for every provider, in one place.
+- Treat the endpoint URL as public. It is.
+- Make the handler idempotent on the provider's event identifier.
+- Never move an order backwards; guard state transitions explicitly.
+- Return 2xx quickly and do the work asynchronously, so retries are not caused
+  by your own latency.
+- Re-query the provider for the authoritative state rather than trusting the
+  payload's contents.
+- Log every received event, including rejected ones, with enough detail to
+  replay it.
+- Reconcile daily against each provider's own transaction list.
+- Alert on the count of provider-side transactions your system never saw — not
+  on zero, but on a change in the rate.
+
+The first six make individual events trustworthy. The last three are how you
+find out when that was not enough. The wider architecture these sit inside is in
+<a href="/payment-infrastructure/">what payment infrastructure has to do</a>.
+
+## When a webhook never arrives
+
+Everything above assumes the event reaches you. Some will not, and the useful
+skill is diagnosing that quickly rather than assuming the payment failed.
+
+Work outward. **Did the provider send it?** Every major provider keeps a delivery
+log showing attempts, response codes and retries - check there first, because it
+answers whether the problem is yours at all. **Did it reach your server?** A 4xx
+or 5xx in the provider's log points at your endpoint; timeouts point at
+reachability or latency. **Did your handler accept it?** A verified signature that
+fails, an event type you do not handle, or an exception after the 200 all look
+like silence from outside.
+
+Two failure modes are worth knowing because they are invisible in normal
+monitoring. Returning a 200 and then throwing means the provider considers the
+event delivered and will never retry it - the event is gone permanently. And
+responding slowly can cause duplicates rather than losses, because a provider
+that times out waiting for you will retry an event you already processed.
+
+This is exactly why reconciliation exists as a separate mechanism rather than as
+a nice-to-have. Webhooks are a fast path that is usually right; the daily
+comparison is the slow path that is always right. Systems that rely only on the
+first one are correct until the day they quietly are not.
 
 ## What PaymentHood does
 

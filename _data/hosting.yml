@@ -59,3 +59,22 @@ faqs:
       processing fees set by your chosen provider. An optional
       <a href="/pricing.html" class="txt-blue-100">Premium plan</a> at $29 a month
       adds white-label checkout branding.
+
+  - q: How do I tell whether my churn is a payment problem?
+    a: >-
+      Split cancellations into two buckets: ones a customer requested, and ones
+      that began with a failed charge. The second group is involuntary churn, and
+      unlike the first it responds to purely technical work. Most billing systems
+      record enough to separate them retrospectively; the figure is usually higher
+      than teams expect, because the two are reported as one number. From there,
+      approval rate split by country and by first-payment-versus-renewal tells you
+      where it is concentrated.
+
+  - q: Will adding a second provider disturb the payments I already take?
+    a: >-
+      No. Providers are added alongside the one you use rather than replacing it,
+      and existing agreements stay where they were created - a renewal set up at
+      one provider keeps charging there. The reason to add the second one before
+      you need it is that a provider which has never taken a live payment is not a
+      tested fallback; connect it early, let it carry some real traffic, and its
+      problems surface on an ordinary day rather than during an incident.

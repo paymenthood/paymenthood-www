@@ -1,8 +1,9 @@
 ---
-title: "The Risks of Letting AI Agents Make Payments"
-description: "An agent does not retry a payment the way a person does. It retries instantly, identically, and without doubt — which turns a tolerable weakness in your payment layer into a real one."
+title: "Idempotency and Failover When Systems Retry Automatically"
+description: "Scripts, bots and AI agents do not retry a payment the way a person does. Why that matters for idempotency, duplicate charges and unresolved payment state."
 date: 2026-09-05
 tags: [architecture, payments]
+redirect_from: /blog/risks-of-letting-ai-agents-pay/
 ---
 
 Most writing about AI agents and money is about authority: how much an agent may
@@ -84,6 +85,84 @@ a standard where human hesitation is no longer papering over the gaps:
 - **Rate limits have to exist on your side.** Not because the agent is hostile, but
   because it does not get tired.
 
+## Deriving a key that actually protects you
+
+An idempotency key is the whole defence, and it is usually the part implemented
+wrongly — not because the concept is hard, but because the wrong derivation looks
+correct in every test that gets written.
+
+The rule is that the key must identify **the payment attempt**, not the request.
+A key generated fresh per HTTP call provides no protection at all: the retry
+carries a different key, the provider sees an unrelated payment, and you get two
+charges. This is the single most common implementation error, and it passes every
+happy-path test, because the happy path never retries.
+
+Derive it from something stable that both the caller and the retry already know —
+the order identifier plus an attempt number is usually enough. If you cannot name
+what makes it stable, it is not stable.
+
+The subtlety that catches people out is **which** retries share a key:
+
+- A retry after a **timeout** is the *same* attempt. It must reuse the original
+  key, so the provider can tell you what happened to the first request instead of
+  performing a new charge.
+- A retry after a **definitive decline** is a *new* attempt. It needs a new key —
+  reuse the old one and you will get the cached decline back forever and conclude,
+  wrongly, that the card is dead.
+
+Automation makes both cases sharper. A human who sees a timeout waits, reloads,
+and often gives up; a script retries in milliseconds, sometimes in parallel, and
+keeps going. A key that is merely usually-correct will be found out.
+
+## What the provider gives you, and what it does not
+
+Most major providers support idempotency keys, and it is tempting to treat that
+as the problem being solved. It solves one layer of it.
+
+The provider guarantees that two requests carrying the same key produce one
+charge, generally within a retention window measured in hours or days. That is
+real and valuable. Three things it does not do:
+
+**It does not span providers.** A key is scoped to the provider that received it.
+If a retry is routed elsewhere — which is exactly what failover does — the second
+provider has never seen that key and will happily create a second payment. Retry
+identity has to live above the providers, in your own layer, or failover and
+idempotency actively work against each other. That is the design problem in
+<a href="/payment-infrastructure/failover/">how failover is actually built</a>.
+
+**It does not cover your own side.** If your system creates a second payment
+record before the call, or your job runner starts two workers on the same task,
+the provider never sees a duplicate key because your system genuinely made two
+distinct attempts. The guarantee protects the network hop, not your orchestration
+of it.
+
+**It expires.** A retry that arrives after the retention window is a new payment
+as far as the provider is concerned. Automated systems with long backoff schedules
+can and do cross that boundary.
+
+## Proving it works before it matters
+
+Idempotency is easy to believe you have and hard to notice you do not, because
+the failure only appears under conditions nobody reproduces casually. Four tests
+settle it, and each takes an afternoon:
+
+- **Send the same charge twice with the same key.** Expect one payment and two
+  identical responses.
+- **Kill the connection mid-charge, then retry.** Expect the system to reach a
+  resolved state with exactly one charge — this is the test that finds a key
+  generated per request.
+- **Fire two workers at the same payment simultaneously.** Expect one charge, not
+  a race that both sides win.
+- **Retry after a decline with the old key.** Expect a new attempt to be possible;
+  if you get the cached decline back, your key is too coarse.
+
+None of these require a provider sandbox that simulates failure. They require
+breaking the connection at your own boundary, which you control. The broader
+pre-launch list is in
+<a href="/blog/test-your-checkout-before-you-go-live/">test your checkout before
+you go live</a>, and the failure taxonomy that decides what deserves a retry at
+all is in <a href="/blog/why-payments-fail/">why payments fail</a>.
+
 ## What this is not
 
 Worth being clear about the boundary, because this space attracts overclaiming.
@@ -97,6 +176,32 @@ What we do is the layer underneath all of that — and the argument of this post
 that the layer underneath is where the failures actually happen. An agent framework
 with excellent spending controls sitting on a payment integration whose idempotency
 key is generated per request will still double-charge customers.
+
+## If you think it has already happened
+
+Duplicate charges are usually discovered from the customer side, which means by
+the time anyone looks the transaction is days old and the logs have rotated.
+Three checks find them without a rebuild.
+
+**Look for charges close together with the same amount and customer.** A window
+of a few minutes catches almost all retry duplicates, because automated retries
+are fast by nature. If two charges are hours apart, that is a different problem -
+usually a scheduler running twice.
+
+**Compare provider transaction counts against your own.** If the provider shows
+more successful payments than your system recorded, the difference is either
+duplicates or payments whose confirmation never arrived. Both matter and they
+need different fixes.
+
+**Check whether refunds cluster.** Support refunding the same customer twice in a
+month, repeatedly, is the human-visible shadow of a duplicate-charge bug that
+nobody has traced to its cause.
+
+Once found, the fix is upstream rather than in the refunding. Duplicates are
+almost always one of three things: a key generated per request instead of per
+attempt, a retry that moved providers and lost its identity, or two workers
+racing on one task. Each is cheap to fix and expensive to leave, because the rate
+is proportional to traffic and therefore grows exactly as the business does.
 
 ## Where PaymentHood fits
 

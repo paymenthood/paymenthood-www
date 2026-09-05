@@ -103,6 +103,183 @@ The important property of all of these is that they degrade gracefully for real
 customers. A limit of six distinct cards a day is invisible to essentially every
 legitimate user and fatal to a testing run.
 
+## What the attack actually is
+
+It helps to be precise about the economics, because they explain every design
+choice the attacker makes and therefore every control that works.
+
+Someone has a list of card numbers of unknown quality — bought, scraped, or
+generated from a known BIN range. The numbers are worth very little in that
+state and a great deal once sorted into "live" and "dead". Sorting them requires
+putting each one through a real authorisation against a real merchant and
+reading the answer. That is the entire operation: your signup form is being used
+as a validation oracle.
+
+Three consequences follow directly.
+
+The attacker does not want your product. Provisioning is irrelevant to them, and
+so is completing the purchase. An authorisation that is immediately abandoned is
+a perfectly good result — which is why "but they never actually subscribed" is
+not reassurance.
+
+The attacker wants small amounts. A low-value charge attracts less issuer
+scrutiny and is less likely to be noticed by the cardholder before the card can
+be resold. This is why free trials with a verification charge and cheap entry
+plans are targeted far more than expensive ones.
+
+The attacker wants volume and speed. The value is in the throughput of the
+sorting operation, so the traffic arrives in bursts, and the same infrastructure
+gets pointed at many merchants. You are rarely singled out; you are simply on a
+list of forms that accept cards without much friction.
+
+## Reading the pattern in your own data
+
+The signature is not a single suspicious transaction. It is a *shape*, and it is
+visible in data you already have.
+
+**Approval rate collapses in a window.** Ordinary traffic approves most of the
+time. A validation run inverts that, because most of the cards being tested are
+dead. A sharp drop in approval rate over minutes, against a normal-looking
+transaction count, is the clearest single indicator.
+
+**Distinct cards per customer identity goes vertical.** Real customers use one
+card, occasionally two. Ten distinct card numbers against one account, one email
+pattern, one IP or one device in a short window is not a customer having
+trouble.
+
+**The failures are structurally similar.** A genuine decline mix is varied —
+insufficient funds, expired, do-not-honour, all in proportion. A validation run
+produces a narrow band of codes repeated at speed, because the population being
+tested is homogeneous.
+
+**Signup metadata degenerates.** Sequential or algorithmic email addresses,
+disposable domains, identical user agents, and an implausible signup-to-payment
+time — humans take tens of seconds to fill a form; scripts do not.
+
+**Amounts are identical and minimal.** Every attempt is the same small figure,
+because they are all the same probe.
+
+Any one of these is weak evidence. Two or three together, in the same window, is
+the attack.
+
+## Ordering the response
+
+The controls that work are unglamorous, and the order matters more than the
+sophistication — a rate limit deployed today outperforms a scoring model
+deployed next quarter.
+
+Start with **velocity limits**, which cost nothing and stop the cheap version
+outright: attempts per identity per window, attempts per IP, and distinct card
+numbers per account. Cap these low enough that a real customer never notices and
+a sorting run dies immediately.
+
+Then add a **reaction to repeated failure**. The important asymmetry is that a
+legitimate customer who fails three times usually stops; a script does not. A
+rule that escalates on consecutive declines — cooling off, requiring a
+challenge, or blocking the identity — turns the attacker's own throughput
+requirement against them.
+
+Then remove the reward. If the outcome of a successful authorisation is instant
+provisioning, the attack has a second payoff beyond card validation. Introducing
+even a short verification step between payment and provisioning removes it, and
+costs a real customer almost nothing.
+
+Only after those are in place is a scoring model or a third-party fraud tool
+worth the integration effort, because by then you are catching the residual
+rather than the bulk.
+
+## What the attack actually is
+
+It helps to be precise about the economics, because they explain every design
+choice the attacker makes and therefore every control that works.
+
+Someone has a list of card numbers of unknown quality. The numbers are worth very
+little in that state and a great deal once sorted into "live" and "dead". Sorting
+them requires putting each one through a real authorisation against a real
+merchant and reading the answer. That is the entire operation: your signup form
+is being used as a validation oracle.
+
+Three consequences follow directly.
+
+The attacker does not want your product. Provisioning is irrelevant to them, and
+so is completing the purchase. An authorisation that is immediately abandoned is
+a perfectly good result — which is why "but none of them subscribed" is not
+reassurance.
+
+The attacker wants small amounts. A low-value charge attracts less issuer
+scrutiny and is less likely to be noticed by the cardholder before the card can
+be resold. This is why free trials with a verification charge, and cheap entry
+plans, are targeted far more than expensive ones.
+
+The attacker wants volume and speed. The value is in throughput, so traffic
+arrives in bursts, and the same infrastructure is pointed at many merchants. You
+are rarely singled out; you are on a list of forms that accept cards without much
+friction.
+
+## Reading the pattern in your own data
+
+The signature is not a single suspicious transaction. It is a *shape*, and it is
+visible in data you already have.
+
+**Approval rate collapses in a window.** Ordinary traffic approves most of the
+time. A validation run inverts that, because most cards being tested are dead. A
+sharp drop in approval rate over minutes, against a normal-looking transaction
+count, is the clearest single indicator.
+
+**Distinct cards per identity goes vertical.** Real customers use one card,
+occasionally two. Ten distinct card numbers against one account, one email
+pattern, one IP or one device in a short window is not a customer having trouble.
+
+**The failures are structurally similar.** A genuine decline mix is varied. A
+validation run produces a narrow band of codes repeated at speed, because the
+population being tested is homogeneous.
+
+**Signup metadata degenerates.** Sequential or algorithmic email addresses,
+disposable domains, identical user agents, and an implausible signup-to-payment
+time — humans take tens of seconds to fill a form; scripts do not.
+
+**Amounts are identical and minimal.** Every attempt is the same small figure,
+because they are all the same probe.
+
+Any one of these is weak evidence. Two or three together, in the same window, is
+the attack.
+
+## Ordering the response
+
+The order matters more than the sophistication — a rate limit deployed today
+outperforms a scoring model deployed next quarter.
+
+Start with **velocity limits**, which cost nothing and stop the cheap version
+outright: attempts per identity per window, attempts per IP, and distinct card
+numbers per account. Set them low enough that a real customer never notices and a
+sorting run dies immediately.
+
+Then add a **reaction to repeated failure**. The useful asymmetry is that a
+legitimate customer who fails three times usually stops; a script does not. A
+rule that escalates on consecutive declines — cooling off, requiring a challenge,
+or blocking the identity — turns the attacker's own throughput requirement
+against them.
+
+Then remove the reward. If a successful authorisation results in instant
+provisioning, the attack has a second payoff beyond card validation. A short
+verification step between payment and provisioning removes it and costs a real
+customer almost nothing.
+
+Only after those are in place is a scoring model or third-party fraud tool worth
+the integration effort, because by then you are catching the residual rather than
+the bulk.
+
+Two related points sit elsewhere. A burst of card testing looks a lot like a
+provider problem in your metrics — approval rate collapses either way — so it is
+worth knowing how the two are told apart before you reroute traffic that was never
+going to succeed: <a href="/payment-infrastructure/failover/">how failover is
+actually built</a> covers why a decline must never mark a provider unhealthy. And
+if you sell hosting, VPN or domains, this attack is not an occasional event but a
+standing condition of the category — <a href="/integrations/hosting/">payments for
+hosting companies</a> covers what else changes. Where these controls sit among the
+other jobs of a payment layer is in <a href="/payment-infrastructure/">what payment
+infrastructure has to do</a>.
+
 ## Don't provision before the money clears
 
 A separate failure that makes card testing much more expensive: acting on the

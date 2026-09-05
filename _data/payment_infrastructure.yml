@@ -58,3 +58,29 @@ faqs:
       You hold your own account with each provider, funds settle directly from
       that provider to you, and PaymentHood takes no percentage and no
       per-transaction fee at any volume.
+
+  - q: Do we need all of this before launching?
+    a: >-
+      No, and building it all up front is its own mistake. Confirming payments
+      server-side, verifying webhook signatures and carrying an idempotency key are
+      worth having on day one because each is a defect waiting for traffic rather
+      than a scaling concern. Routing, failover and reconciliation only become real
+      work once a second provider is taking money. Risk controls are the exception
+      to the ordering - they become urgent within days of a cheap plan being
+      findable, whatever your stage.
+
+  - q: What is the difference between this and a billing platform?
+    a: >-
+      A billing platform decides what a customer owes: plans, metered usage,
+      proration, invoices, dunning schedules and tax. Payment infrastructure decides
+      how that amount is collected and how you know it arrived. They fail
+      differently - a billing bug invoices the wrong amount, a payments bug loses the
+      sale, takes it twice, or ships something nobody paid for. Most products need
+      both, and confusing them is why payments projects stall.
+
+  - q: How do we know which part is causing a problem?
+    a: >-
+      Look at the symptom. Wrong amounts on invoices, incorrect proration or tax
+      figures point at billing. Money arriving late, twice, or not at all - orders
+      stuck between paid and pending, duplicate charges, a market that converts badly
+      - point at the payment layer. The two are rarely the same incident.

@@ -60,3 +60,29 @@ faqs:
       took. What genuinely lifts approval rates is routing - presenting the
       payment through a provider with local acquiring in the customer's market -
       which is a decision made before the attempt, not a reaction after it.
+
+  - q: How many failed attempts should trigger a reroute?
+    a: >-
+      Fewer than certainty requires and more than one. A single timeout is not an
+      outage - networks lose packets - and a layer that reroutes on the first error
+      moves traffic away from healthy providers constantly. Waiting for proof is the
+      opposite failure: every attempt spent proving it was a real customer who did
+      not pay. A short rolling window with a threshold, counting technical failures
+      only, is the workable middle. The exact number matters less than having a
+      cooldown after which the provider is re-tested rather than written off.
+
+  - q: Does failover help with a declined card?
+    a: >-
+      No, and treating it as though it does costs money. The issuer decides whether
+      a card is approved, and the issuer is the same institution whichever provider
+      carries the request. Retrying a declined card elsewhere fails again, costs a
+      second fee, and adds another failed authorisation to that card. Failover
+      addresses one thing: the provider could not give you an answer at all.
+
+  - q: Will a stored card work at the backup provider?
+    a: >-
+      No. A token belongs to the provider that issued it, so a saved card at provider
+      A cannot be charged by provider B. For an attended checkout this is invisible
+      because the customer can enter details again. For unattended renewals it is
+      decisive, and it is why a subscription business needs its second provider
+      collecting agreements from the start rather than standing by unused.

@@ -130,6 +130,75 @@ description: "Thirty-one checks for a payment integration going into production 
           </ul>
 
           <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">8. Multi-provider readiness</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Skip this section entirely if you run one provider and intend to keep it that way —
+            that is a legitimate position and most of what follows is cost without benefit. It
+            becomes relevant the moment a second provider is taking real money, or the moment you
+            write a conditional in application code that chooses between providers.
+          </p>
+          <ul class="check-list list-unstyled p-0 mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <li>The routing decision is configuration you can change without a deployment, not a branch in a checkout controller.</li>
+            <li>A retry that moves to a second provider keeps an identity your own system owns — a provider's idempotency key is scoped to that provider and does not travel.</li>
+            <li>Provider health is tracked per provider, over a rolling window, counting technical failures only. A decline is the provider working correctly and must never mark it unhealthy.</li>
+            <li>An unhealthy provider is re-tested after a cooldown rather than being written off permanently by a fifteen-minute incident.</li>
+            <li>Every transaction carries one internal identifier assigned at capture, with the provider's own reference stored alongside rather than instead — <a href="/payment-infrastructure/failover/">how failover is actually built</a> covers why this is load-bearing.</li>
+            <li>You know that stored payment methods do not transfer between providers, and your renewal flow does not silently depend on them doing so.</li>
+            <li>Your second provider has taken a real payment. An account you opened but never used is not a fallback.</li>
+          </ul>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">9. Measurement</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Everything above is correctness. This section is how you find out that something has
+            drifted, which is the failure mode that costs the most over time because nothing alerts
+            on it.
+          </p>
+          <ul class="check-list list-unstyled p-0 mb-4 animated" data-animate="fadeInUp" data-delay=".2">
+            <li>Approval rate is reported split by country, by payment method and by provider — not as one blended figure that averages a healthy market with a broken one.</li>
+            <li>First payments and renewals are counted separately. They have different approval rates and different failure modes, and combining them hides the one that costs existing revenue.</li>
+            <li>The <em>mix</em> of decline reasons is tracked over time, not just the total. A shift in the mix is a signal well before the aggregate moves — <a href="/blog/why-payments-fail/">why payments fail</a> has the taxonomy.</li>
+            <li>Technical failure rate is alerted on separately from declines. It is the only one of the two that is yours to fix.</li>
+            <li>You can state how many cancellations last month began as a failed charge rather than a customer decision.</li>
+            <li>Someone looks at these numbers on a schedule. A dashboard nobody opens is not measurement.</li>
+          </ul>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">How to use this without stopping everything</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            A checklist this long invites two bad responses: doing all of it before shipping
+            anything, or filing it and doing none of it. Neither is necessary, because the items
+            are not equally urgent and they do not all become relevant at the same stage.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Sections 3 and 4 are correctness and never wait.</strong> Confirming payments
+            server-side, verifying webhook signatures and carrying an idempotency key are wrong to
+            omit on day one, not at scale. Each is a defect that is merely waiting for enough
+            traffic to become an incident, and all three are cheap while there is one code path.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Section 6 becomes urgent the week a signup form is findable</strong>, usually
+            faster than teams expect, and typically before any other item on this list.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Sections 5 and 9 arrive with the second provider</strong>, and are usually
+            noticed a quarter after they arrived. <strong>Section 8 is only relevant once there is
+            a second provider at all</strong> — attempting it earlier is building for a problem you
+            do not have.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The practical way through it is a single pass, marking each item yes, no, or not yet
+            relevant, and resisting the urge to fix anything during that pass. What matters is the
+            resulting list of "no" answers in sections 3 and 4, which is almost always short and
+            almost always contains something worth doing this week. The reasoning behind why these
+            jobs exist at all is in <a href="/payment-infrastructure/">what payment infrastructure
+            has to do</a>.
+          </p>
+
+          <div class="section-head mt-5">
             <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">How PaymentHood fits</h2>
           </div>
           <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">

@@ -69,6 +69,35 @@ description: "Hosting, VPN and domain businesses bill on renewal, sell worldwide
         </div>
       </div>
 
+      <!-- The renewal year -->
+      <div class="row justify-content-center mt-5 pt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">The shape of the revenue</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">One sale, then eleven silent ones</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">A retail checkout is a conversation. The customer is present, they are paying attention, and if the card fails they see the error and try another one. Almost all of the payment tooling written in the last decade assumes that person is there.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Infrastructure billing works the other way around. The customer is present exactly once — at signup — and absent for every charge after it. A monthly plan sold in January is one attended payment and eleven unattended ones, and the eleven are where the revenue actually lives. They are also the ones nobody is watching when they fail.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">That inversion changes what a payment failure costs you. When a first payment fails, you have lost a sale you never had: unpleasant, but the customer walked in and walked out and you are no worse off than before they arrived. When a renewal fails, you have already delivered a month of service, you are still carrying the cost of the server it ran on, and the person whose card quietly expired has no idea anything is wrong. You do not lose a prospect. You lose a paying customer, after paying to serve them.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The second-order effect is worse than the first. Suspension is usually automated, so the customer discovers the problem when their site goes down — not when their card failed. The support ticket that follows is not about billing. It is an outage complaint from someone who believes they paid you, and by the time it is resolved you have spent support time, lost their trust, and often refunded something to keep them.</p>
+        </div>
+      </div>
+
+      <!-- Involuntary churn -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">The number nobody watches</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Involuntary churn hides inside your churn rate</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Most hosting businesses track churn as a single figure. Inside it are two completely different events that happen to produce the same row in a report.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3"><strong>Voluntary churn</strong> is a customer deciding to leave. It is a product problem, a pricing problem or a competitor problem, and the fix is somewhere in your business.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3"><strong>Involuntary churn</strong> is a customer who still wants the service and whose payment did not go through. An expired card, a bank that declined a merchant-initiated charge it did not recognise, a provider outage during the renewal run, a rejected currency. The customer made no decision at all. The fix is entirely in your payment layer.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">These two get averaged together and reported as one number, which is why the payment layer rarely gets blamed for a churn problem it is causing. If you cannot split them, the first useful thing you can do is start: tag every cancellation with whether a human requested it or a charge failed. The proportion is usually higher than expected, and unlike voluntary churn it responds to purely technical work.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">It also compounds in a way voluntary churn does not. A customer who chose to leave is gone once. A renewal path that fails for a whole class of customers — one country, one card type, one provider having a bad week — fails again next month, and the month after, quietly, until somebody looks.</p>
+        </div>
+      </div>
+
       <!-- WHMCS -->
       <div class="text-center mt-5 pt-5">
         <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">If you bill on WHMCS</h2>
@@ -167,6 +196,79 @@ description: "Hosting, VPN and domain businesses bill on renewal, sell worldwide
       <p class="text-center mt-4 mb-0 animated" data-animate="fadeInUp" data-delay=".2">
         The <a href="/providers.html">full provider directory</a> shows what is available in each market.
       </p>
+
+      <!-- Underwriting -->
+      <div class="row justify-content-center mt-5 pt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Why the category is treated this way</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">You are underwritten on what your customers can do with the service</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Hosting companies are often surprised to be classified as elevated risk, because nothing about the business feels risky from the inside. You sell a real service, you deliver it reliably, and your customers are ordinary businesses. The classification is not a judgement about you. It is about what the product can be used for by somebody else.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Three properties drive it, and infrastructure has all three at once. The service is <strong>provisioned instantly</strong>, so a fraudulent order is fulfilled before any human review is possible. It is <strong>sold internationally</strong>, so a large share of transactions are cross-border and card-not-present. And it can be <strong>used to host anything</strong> — including content or activity that generates complaints, which arrive at the acquirer rather than at you.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">A domain or VPN business adds a fourth: the product is frequently bought by people who specifically want to be difficult to identify. That is a legitimate demand and a large market, and it is also exactly the profile a risk model is built to flag.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">What that means practically is not that you will be declined — plenty of providers serve this category happily — but that <em>reviews are a normal event rather than a crisis</em>. A rolling reserve, a request for documentation, a temporary hold while a spike is investigated: these happen to healthy hosting businesses, and they usually happen without much warning.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The question worth asking is therefore not "how do I avoid a review" but "what happens to my revenue during one". With a single provider the answer is that everything stops: new signups, renewals, upgrades, all of it, for as long as the review takes. With a second provider already connected and tested, a hold is an inconvenience in a dashboard rather than a business interruption.</p>
+        </div>
+      </div>
+
+      <!-- Continuity -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Continuity</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">A second provider is only useful if it is already live</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The instinct when a provider fails is to integrate another one immediately. This is the worst possible moment to do it. Integration work under outage pressure is where credentials get pasted into the wrong environment, webhooks go unverified, and a test transaction is skipped because the queue of unpaid invoices is growing.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">A backup provider that exists only as an account you opened is not a backup. It has never taken a live payment, its webhook has never reached your billing system, and nobody has confirmed that a renewal actually charges through it. The first time you find out is the day you need it.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The version that works is unglamorous: a second provider connected, verified with real transactions, and carrying a small share of live traffic continuously so that its failures surface on an ordinary Tuesday instead of during an incident. That is also the only way to know its approval rate on your actual customer mix, which is information you cannot get from a pricing page.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The architecture behind doing that safely — how a retry keeps its identity when it moves between providers, and why that is harder than it looks — is covered in <a href="/payment-infrastructure/failover/">how payment failover is actually built</a>.</p>
+        </div>
+      </div>
+
+      <!-- Currency -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Pricing across borders</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Billing in one currency is a decision, not a default</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Almost every hosting company starts by pricing in one currency, usually USD or EUR, because the costs are denominated there and one price list is simpler than twelve. That is a reasonable decision and it stays reasonable for a long time. It is worth knowing what it costs, because the cost is invisible.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">A cross-border, cross-currency card charge is a different transaction from a domestic one, even when the card number looks identical. It is routed differently, it is scored differently by the issuer, and it carries a conversion the customer sees on their statement but not on your checkout. Issuers decline cross-border charges more readily than domestic ones — particularly unattended, merchant-initiated ones, which is precisely what every renewal is.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">So the same customer who paid successfully at signup, while present and able to approve a step-up challenge, can fail silently at renewal three months later, on the same card, for no reason that appears anywhere in your billing system. Nothing changed except that nobody was there to answer the bank.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The practical response is not necessarily to price in every local currency, which brings its own accounting problem. It is to make sure that in your largest non-domestic markets the payment can be taken by a provider that settles locally, and to offer the method those customers already use rather than only the card that has to travel furthest. That is the argument in <a href="/blog/local-payment-methods-why-cards-lose-sales/">why cards alone cost you sales abroad</a>, and it applies with extra force to a business whose revenue depends on the tenth charge as much as the first.</p>
+        </div>
+      </div>
+
+      <!-- What to measure -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Instrumentation</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Four numbers worth separating</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Payment problems in this industry are rarely dramatic. They are a percentage that drifts, spread across enough customers that no single ticket reveals it. Four splits make them visible, and none of them require new tooling — only that the figure stops being reported as one number.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3"><strong>First payment versus renewal.</strong> These have different approval rates and different failure modes, and averaging them hides the one that costs you existing revenue. If you measure only one thing from this list, measure this.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3"><strong>Approval rate by country.</strong> A global average is a blend of markets where you convert fine and markets where you barely convert at all. The second group is invisible until it is separated, and it is where adding one local method changes the number most.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3"><strong>Decline reason, over time.</strong> Not the total, the mix. A rising share of one reason code is a signal well before the aggregate moves — and it distinguishes a problem you can fix from customers who genuinely have no funds. The taxonomy is in <a href="/blog/why-payments-fail/">why payments fail</a>.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3"><strong>Suspensions caused by payment failure.</strong> The bridge between the payment layer and the business. If nobody has counted how many suspensions began as a declined renewal rather than a customer decision, that number is doing damage nobody has attributed yet.</p>
+        </div>
+      </div>
+
+      <!-- Rollout -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-9">
+          <div class="section-head">
+            <span class="animated" data-animate="fadeInUp" data-delay=".1">Getting there</span>
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Adding providers without a migration</h2>
+          </div>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">The reason most hosting companies stay on one provider longer than they should is that the second one has historically cost as much as the first. Another module to install, another set of credentials in the billing system, another webhook format to handle, another thing that breaks when the billing software updates. Multiply that by the number of markets you sell into and the project never reaches the top of anyone's list.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">Consolidating that work into one integration changes the sequence. The billing system talks to a single layer; providers are switched on behind it. The first provider is the only integration you perform. The fifth is a toggle.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">It also changes who can do it. Adding a local method for a new market stops being an engineering ticket scheduled against a release and becomes an operational decision someone can make the week they need it — which matters in a business where entering a new country is a sales decision, not a product one.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">One property is worth being explicit about, because it is the usual objection: every provider account stays contracted in your own name. You keep your own rates, your own relationship and your own settlement, and funds move from the provider directly to you. PaymentHood is not a processor, is not a merchant of record, and never sits in the flow of funds.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".3">None of this is specific to hosting in its mechanics — routing, failover, idempotency and reconciliation are the same jobs in any business that outgrows one provider. What is specific to this industry is how early they arrive, and how much a failed unattended charge costs. The general version is in <a href="/payment-infrastructure/">what payment infrastructure has to do</a>.</p>
+        </div>
+      </div>
 
       <!-- CTA -->
       <div class="text-center mt-5 pt-5 animated" data-animate="fadeInUp" data-delay=".2">

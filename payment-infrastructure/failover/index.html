@@ -198,6 +198,81 @@ description: "A provider outage does not have to become your outage. How payment
           </p>
 
           <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Detecting the outage without causing one</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Rerouting assumes you know a provider is unhealthy. That judgement is harder than it
+            sounds, because the two obvious approaches are both wrong in opposite directions.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Reacting to a single failure</strong> makes the system flap. One timeout is not
+            an outage — networks lose packets, providers have slow seconds, and a layer that
+            reroutes on the first error will move traffic away from a perfectly healthy provider
+            constantly, which loses you the approval-rate advantage that provider had and makes
+            behaviour impossible to reason about.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Waiting for certainty</strong> fails the other way. By the time a provider has
+            failed enough times to be unambiguously down, every one of those failures was a real
+            customer who did not pay. The whole value of failover is spending a small number of
+            failed attempts to learn something, then not spending any more.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            What works in between is a rolling window with a threshold and a cooldown. Count
+            <em>technical</em> failures only — declines are the provider working correctly and must
+            never count toward its health — over a short window. Cross the threshold and the
+            provider is marked unhealthy, so subsequent payments route elsewhere without paying the
+            timeout cost again. Then, crucially, let it back: after a cooldown, send a small share
+            of traffic to it and restore it fully if that succeeds. A provider that is marked down
+            and never re-tested is a provider you have permanently lost, usually after a
+            fifteen-minute incident.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Two details matter more than the numbers you pick. Health must be tracked
+            <strong>per provider, not globally</strong>, or one bad provider degrades routing for
+            all of them. And the timeout you set on the outbound call is itself part of detection:
+            too long and each failure costs the customer thirty seconds of spinner before you even
+            begin the second attempt, which is often worse for conversion than the outage.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">What failover cannot fix</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Failover is narrow, and overselling it produces worse systems than not having it. It
+            addresses exactly one failure mode: the provider could not give you an answer. Three
+            things it is regularly and wrongly expected to solve are worth naming.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>It does not fix declines.</strong> The issuer, not the acquirer, decides whether
+            a card is approved, and the issuer is the same institution no matter which provider
+            carries the request. Retrying a stolen or expired card through a second provider will
+            fail again, cost a second fee, and add another failed authorisation to that card's
+            history. The categories and what each deserves are in
+            <a href="/blog/why-payments-fail/">why payments fail</a>.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>It does not carry stored payment methods across.</strong> A token belongs to the
+            provider that issued it. If a customer's saved card lives at provider A and A is down,
+            provider B cannot charge it — it has never seen that card. For one-off checkouts this
+            is invisible because the customer is present and can enter details again. For renewals
+            it is decisive, and it is why a business built on recurring revenue needs its second
+            provider collecting agreements from the start rather than standing by unused.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>It does not survive an account problem.</strong> If a provider suspends your
+            account rather than having an outage, failover works exactly as designed and keeps
+            working — but only if the second provider is also live and underwritten. This is the
+            case that catches businesses in elevated-risk categories, where the interruption is
+            commercial rather than technical.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Failover is one of several jobs a payment layer performs, and it is easier to size
+            correctly next to the others — routing, idempotency, verification and reconciliation —
+            in <a href="/payment-infrastructure/">what payment infrastructure has to do</a>.
+          </p>
+
+          <div class="section-head mt-5">
             <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Before you call it done</h2>
           </div>
           <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">

@@ -201,6 +201,137 @@ description: "Selling internationally is three problems, not one: the method the
           </p>
 
           <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Why one provider rarely covers a region well</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The reason no single processor is strong everywhere is structural rather than a matter
+            of effort. Domestic payment methods are built on domestic infrastructure — a national
+            bank-transfer scheme, a mobile-money network, a local card scheme — and access to that
+            infrastructure generally requires a local entity, local licensing, and a relationship
+            with local banks. A provider that has done that work in one country has done a large
+            amount of work that transfers nowhere.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            So global providers do the sensible thing and reach these methods through partners.
+            That works, and it also explains what you observe in practice: the method appears in
+            the list, but the settlement is slower, the fee is higher, the failure modes are less
+            well documented, and support escalations take longer because a second company is
+            involved. It is genuinely available. It is not the same as a direct connection, and on
+            a large volume in that market the difference is measurable.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The practical consequence is that "does provider X support country Y" is the wrong
+            question. Nearly every large provider will say yes. The questions that separate them
+            are which <em>methods</em> they support there, whether they settle in the local
+            currency or convert, whether the connection is direct or through a partner, and what
+            their approval rate looks like on your own traffic — a number you can only get by
+            sending some.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Adding a market without adding an integration</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The reason most companies expand slower than their demand does is that each new market
+            has historically cost an integration. Evaluate providers, sign a contract, get
+            underwritten, build the integration, learn a new webhook format, add a new
+            reconciliation source, and keep all of it working through every future change to your
+            billing system. Repeated per country, this is a permanent tax on expansion, and it is
+            why teams end up serving a market badly for a year because doing it properly never
+            reaches the top of the backlog.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The alternative is to pay the integration cost once, against a layer, and let each
+            additional provider be configuration behind it. The contracts and the underwriting do
+            not disappear — those are between you and each provider, and they still take the time
+            they take. What disappears is the engineering work per provider, and with it the reason
+            the decision keeps getting deferred.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            That changes who makes the call. Deciding to accept a local method stops being a
+            release-planning question and becomes an operational one, which matters because
+            entering a market is a commercial decision made on commercial timing. The same shift is
+            what makes a second provider viable as insurance rather than as a project — the
+            argument in <a href="/payment-infrastructure/failover/">how failover is actually
+            built</a>, and one of the jobs described in
+            <a href="/payment-infrastructure/">what payment infrastructure has to do</a>.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">Four kinds of &quot;local method&quot;, and why the difference matters</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            &quot;Local payment methods&quot; is used as though it names one thing. It names at least four,
+            and they behave differently enough that treating them alike produces a checkout that
+            technically works and practically does not.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Bank redirects.</strong> The customer is sent to their own bank, authenticates
+            there, and approves the transfer. iDEAL in the Netherlands and Bizum in Spain work this
+            way. They are typically irreversible once completed, which removes chargeback risk, and
+            they carry no stored credential &mdash; so nothing about them supports an unattended
+            renewal later. A subscription business needs to know that before designing around them.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Wallets.</strong> A balance or stored instrument the customer already trusts,
+            often with app-based authentication. Conversion is usually strong because the customer
+            never types a card number, and the wallet may itself be funded by a card or a bank
+            account &mdash; which means the underlying decline reasons belong to somebody else.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Mobile money.</strong> A phone-number-addressed balance, dominant across large
+            parts of Africa and South Asia, and frequently the primary account rather than a
+            secondary one. For a meaningful share of these customers there is no card to fall back
+            to, so accepting cards is not a partial answer &mdash; it is no answer.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Domestic card schemes.</strong> Cards that look like cards and are not routed
+            like them. They may not be reachable through international acquiring at all, which is
+            how a market can appear to have high card penetration and still convert badly for you.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            The design consequence is that the question is never only whether you can accept a
+            method. It is also whether it settles in a currency you want, whether it supports
+            refunds through the same channel, and whether it can be charged again without the
+            customer present. Those answers vary by category, and the third one decides whether a
+            method can carry a subscription at all.
+          </p>
+
+          <div class="section-head mt-5">
+            <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">What changes operationally, not just technically</h2>
+          </div>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            Adding a market is usually discussed as an integration problem. The integration is the
+            short part. Four operational things change at the same time, and each is easier to plan
+            for than to discover.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Refunds stop being symmetric.</strong> A card refund returns along the path the
+            payment took. Several local methods do not support that, and the refund becomes a bank
+            transfer requiring details you never collected. Decide how support will handle it before
+            the first request rather than during it.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Settlement timing diverges.</strong> Different methods and different providers
+            pay out on different schedules and sometimes in different currencies. Finance now
+            reconciles several rhythms rather than one, which is a real cost even when every
+            payment succeeds.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Support receives questions it cannot answer.</strong> A customer reporting that
+            their bank app says pending is asking about a scheme your team has never used. A short
+            internal note per method &mdash; what the customer sees, how long it takes, what pending
+            means &mdash; prevents most of those escalations.
+          </p>
+          <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
+            <strong>Pending becomes a real state.</strong> Bank transfers and several local methods
+            confirm asynchronously, sometimes hours later. A system that models only success and
+            failure will either release goods too early or treat a normal delay as a failure. That
+            state, and the one that is genuinely dangerous, are covered in
+            <a href="/payment-infrastructure/">what payment infrastructure has to do</a>.
+          </p>
+
+          <div class="section-head mt-5">
             <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".1">A sane order of operations</h2>
           </div>
           <p class="txt-blue-400 animated" data-animate="fadeInUp" data-delay=".2">
