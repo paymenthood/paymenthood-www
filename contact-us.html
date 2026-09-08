@@ -79,14 +79,15 @@ nav_active: contact
       <div class="col-lg-7">
         <div class="bg-blue-30 p-4 p-md-5 rounded animated" data-animate="fadeInRight" data-delay=".2">
           {%- comment -%}
-            Posts to our own API rather than to formsubmit.co, which used to receive every
-            visitor's name, email and message on a free third-party host and had to be declared
-            as a sub-processor. The old markup also carried support@paymenthood.com in the form
-            action, in plain sight of every scraper that read the page source.
+            Posts to formsubmit.co, which mails the submission to support@paymenthood.com.
+            The address lives in the form action, so it is visible to anything that reads the
+            page source.
 
-            Submitted with fetch, so the visitor stays on the page and sees the failure when
-            there is one. The endpoint is anonymous but rate limited per IP, and `website` below
-            is a honeypot the server checks.
+            Two spam defences, both verified by FormSubmit on their side:
+              - `_captcha` is on, so FormSubmit interposes its own captcha page between the
+                POST and the mail, then forwards to `_next` once it is solved. Turning this
+                off is what leaves the endpoint open to unattended bots.
+              - `_honey` below is a honeypot; FormSubmit drops any submission that fills it.
           {%- endcomment -%}
           <form id="contact-form" action="https://formsubmit.co/support@paymenthood.com" method="POST">
             <!-- Name Field -->
@@ -141,9 +142,9 @@ nav_active: contact
               <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
             </div>
 
-            <!-- FormSubmit config: skip captcha, format the email as a table, and send the
+            <!-- FormSubmit config: require its captcha, format the email as a table, and send the
                  visitor to the thank-you page on success. -->
-            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_captcha" value="true" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_next" value="https://www.paymenthood.com/thank-you.html" />
 
