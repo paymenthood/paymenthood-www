@@ -25,26 +25,26 @@ the result consistent across all of them.
     <source srcset="/assets/images/blog/payment-orchestration-architecture.webp" type="image/webp">
     <img src="/assets/images/blog/payment-orchestration-architecture.jpg" alt="A store checkout connected to one orchestration layer, which routes each payment to one of five providers and reroutes around an unavailable one." width="1408" height="768" class="figure-img img-fluid rounded w-100" loading="lazy" decoding="async">
   </picture>
-  <figcaption class="figure-caption">One integration for the store. The routing decision — and the reroute when a provider is unavailable — happens in the layer, not in your checkout code.</figcaption>
+  <figcaption class="figure-caption">One integration for the store. The routing decision happens in the layer, not in your checkout code, and so does the reroute when a provider is unavailable.</figcaption>
 </figure>
 
 ## Payment orchestration vs. payment gateway
 
-A payment gateway and a payment orchestration layer are not competitors — the
+A payment gateway and a payment orchestration layer are not competitors. The
 orchestration layer sits *above* your gateways and coordinates them. The
 difference is what each is responsible for:
 
 | | Payment gateway | Payment orchestration |
 | --- | --- | --- |
 | **Scope** | One connection to one processor | Many providers behind one API |
-| **Routing** | None — it *is* the destination | Chooses a provider per transaction |
-| **Failover** | None — if it is down, you are down | Retries through another provider |
+| **Routing** | None; it *is* the destination | Chooses a provider per transaction |
+| **Failover** | None; if it is down, you are down | Retries through another provider |
 | **Reconciliation** | One report, in its own format | One normalised ledger across providers |
 | **Adding a provider** | A new integration in your code | A change in a dashboard |
 | **Best for** | One market, one currency, one provider | Multiple providers, markets, or a fallback |
 
 Put plainly: a gateway *moves* a payment; orchestration *decides which gateway
-moves it* and keeps every gateway consistent. You still need gateways —
+moves it* and keeps every gateway consistent. You still need gateways;
 orchestration is how you run more than one without re-integrating each time.
 
 ## The problem it exists to solve
@@ -58,12 +58,12 @@ two integrations, two webhook formats, two sets of error codes, and a checkout
 that has to know which one to call.
 
 **Wave two: a provider has a bad day.** Every provider does. Without a fallback,
-their outage is your outage — every transaction fails for as long as it lasts,
+their outage is your outage. Every transaction fails for as long as it lasts,
 and you find out from customers rather than from monitoring.
 
 **Wave three: economics.** Different providers price differently by card type,
 by currency, by volume tier. Once you have more than one, routing on cost or on
-authorisation rate becomes worth real money — but only if the routing decision
+authorisation rate becomes worth real money, but only if the routing decision
 is somewhere you can change it.
 
 Orchestration is the answer to all three: one integration, many providers,
@@ -81,8 +81,8 @@ BIN this hour*.
 
 ### Failover and retries
 
-When a provider declines for a technical reason — a timeout, a 500, a gateway
-outage — the orchestration layer retries the same payment through another
+When a provider declines for a technical reason (a timeout, a 500, a gateway
+outage), the orchestration layer retries the same payment through another
 provider rather than returning an error to the customer. The distinction that
 matters is between a **technical** failure, which is worth retrying elsewhere,
 and a **hard decline** such as insufficient funds, which is not. Retrying a hard
@@ -93,7 +93,7 @@ decline elsewhere just annoys the customer's bank.
     <source srcset="/assets/images/blog/payment-orchestration-failover.webp" type="image/webp">
     <img src="/assets/images/blog/payment-orchestration-failover.jpg" alt="Two paths from the orchestration layer: the first breaks at a failed link, while the second carries the payment through to a successful result." width="1376" height="768" class="figure-img img-fluid rounded w-100" loading="lazy" decoding="async">
   </picture>
-  <figcaption class="figure-caption">A technical failure is retried through another provider. A hard decline is not — that is the issuer’s answer, and no amount of rerouting changes it.</figcaption>
+  <figcaption class="figure-caption">A technical failure is retried through another provider. A hard decline is not: that is the issuer’s answer, and no amount of rerouting changes it.</figcaption>
 </figure>
 
 ### Idempotency
@@ -106,7 +106,7 @@ repeated request returns the original result instead of creating a new payment.
 
 ### Webhook verification
 
-Every provider signs its callbacks differently — Paystack uses an HMAC SHA512
+Every provider signs its callbacks differently. Paystack uses an HMAC SHA512
 digest in a header, Payfast uses ITN with a signature plus a source-IP check.
 Getting any of them wrong means an attacker can forge a "payment succeeded"
 callback and take goods without paying. Orchestration centralises that
@@ -142,13 +142,13 @@ Skip it if:
 
 The honest test is whether you would notice the second and third waves above.
 If you are already writing a `if (currency == "ZAR")` branch in your checkout,
-you have started building an orchestration layer — the question is only whether
+you have started building an orchestration layer. The question is only whether
 you keep building it yourself.
 
 ## Build versus buy
 
 Building it is entirely possible. What teams underestimate is that the
-interesting part — routing — is perhaps a fifth of the work. The rest is
+interesting part, routing, is perhaps a fifth of the work. The rest is
 idempotency, signature verification per provider, retry classification, health
 checks, reconciliation, and then maintaining all of it as each provider changes
 their API.
@@ -165,7 +165,7 @@ stops and payments begin.
 **What is payment orchestration in simple terms?**
 It is a layer between your checkout and your payment providers that picks a provider
 for each payment, retries through another if one fails, and shows all of them behind a
-single API and one report — so you can run several providers without building a separate
+single API and one report, so you can run several providers without building a separate
 integration for each.
 
 **What is the difference between payment orchestration and a payment gateway?**
@@ -181,7 +181,7 @@ outages, or sell across markets and currencies.
 
 **Is payment orchestration expensive?**
 It varies. Some platforms charge a per-transaction fee on top of your provider's fees;
-others do not. PaymentHood, for example, adds no per-transaction fee — you pay only your
+others do not. PaymentHood, for example, adds no per-transaction fee. You pay only your
 chosen provider's processing fees.
 
 **Can I keep my existing payment provider?**

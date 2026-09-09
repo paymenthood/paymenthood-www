@@ -1,21 +1,21 @@
 ---
 title: How to Add a Payment Gateway to WooCommerce (No Code)
-description: "Two ways to add a payment gateway to WooCommerce — the manual, one-plugin-per-provider route, and one free plugin that connects them all. Step by step."
+description: "Two ways to add a payment gateway to WooCommerce: the manual, one-plugin-per-provider route, and one free plugin that connects them all. Step by step."
 date: 2026-08-09
 tags: [woocommerce, payments]
 hero: /assets/images/blog/how-to-add-a-payment-gateway-to-woocommerce.svg
 image: /assets/images/og/blog/how-to-add-a-payment-gateway-to-woocommerce.jpg
 ---
 
-WooCommerce ships with a few payment options out of the box — direct bank
-transfer, cheque, cash on delivery — but the moment you want to take actual card
+WooCommerce ships with a few payment options out of the box (direct bank
+transfer, cheque, cash on delivery), but the moment you want to take actual card
 payments, you need a **payment gateway**. This guide covers the two ways to add
 one, step by step, and when each makes sense.
 
 ## The two approaches
 
-**1. One plugin per provider.** Most gateways — Stripe, PayPal, Adyen, and
-hundreds of regional providers — publish their own WooCommerce plugin. You
+**1. One plugin per provider.** Most gateways (Stripe, PayPal, Adyen, and
+hundreds of regional providers) publish their own WooCommerce plugin. You
 install it, paste in your API keys, enable it at checkout. Simple, until you
 want a second provider, a fallback, or a provider your region needs that has no
 maintained plugin.
@@ -49,15 +49,15 @@ That covers one provider. The friction shows up later:
 
 ## Method 2: Add every gateway with one plugin
 
-If you expect more than one provider — or you sell across markets — connecting
+If you expect more than one provider, or you sell across markets, connecting
 them through a single layer is less work over time.
 
 1. **Install the PaymentHood plugin** for WooCommerce
    ([free and open-source](/integrations/woocommerce/)).
 2. **[Create a free PaymentHood account]({{ site.signup_url }})** and connect the
-   providers you want — cards, wallets, and regional gateways,
+   providers you want: cards, wallets, and regional gateways,
    {{ site.provider_floor }} supported.
-3. **Add or switch providers from the dashboard** — no reinstall, no code, no
+3. **Add or switch providers from the dashboard:** no reinstall, no code, no
    touching your checkout.
 
 Because the integration is one plugin, adding a fifth provider is a dashboard
@@ -70,7 +70,7 @@ route to another automatically, so their outage doesn't become yours.
   WooCommerce → Settings → Payments, and that your store currency is one the
   provider supports.
 - **"Payment method not available for your currency."** The provider doesn't
-  settle in your store currency — change currency, or use a provider (or
+  settle in your store currency: change currency, or use a provider (or
   orchestration layer) that covers it.
 - **Test payments work, live ones fail.** You're likely still on test/sandbox
   keys, or the provider account isn't fully activated for live payments.
@@ -88,7 +88,7 @@ re-integrating every time your needs change.
 ## Where PaymentHood fits
 
 [PaymentHood](/) connects WooCommerce to {{ site.provider_floor }} payment
-providers through one free, open-source plugin — with routing, automatic
+providers through one free, open-source plugin, with routing, automatic
 failover, webhook verification and server-side confirmation handled for you. You
 install it once, then add or switch providers from a dashboard instead of in
 your code.

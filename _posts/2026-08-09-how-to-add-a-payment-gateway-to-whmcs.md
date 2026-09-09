@@ -1,6 +1,6 @@
 ---
 title: How to Add a Payment Gateway to WHMCS (Step-by-Step)
-description: "How to add a payment gateway to WHMCS — the manual, module-per-gateway way, and one free module that connects every provider, recurring billing included."
+description: "How to add a payment gateway to WHMCS: the manual, module-per-gateway way, and one free module that connects every provider, recurring billing included."
 date: 2026-08-09
 tags: [whmcs, payments]
 hero: /assets/images/blog/how-to-add-a-payment-gateway-to-whmcs.svg
@@ -9,14 +9,14 @@ image: /assets/images/og/blog/how-to-add-a-payment-gateway-to-whmcs.jpg
 
 WHMCS automates billing and provisioning for hosting and SaaS businesses, but to
 actually charge a customer's card you need a **payment gateway module**. This
-guide covers the two ways to add one, step by step — and the WHMCS-specific
+guide covers the two ways to add one, step by step, and the WHMCS-specific
 detail most guides skip: recurring billing.
 
 ## The two approaches
 
 **1. One module per gateway.** WHMCS ships with gateway modules, and providers
 publish their own. You activate the module, enter your API credentials, and it
-appears at checkout. Fine for one provider — but each additional gateway is
+appears at checkout. Fine for one provider, but each additional gateway is
 another module, another set of credentials, and its own handling of automatic
 renewals.
 
@@ -41,7 +41,7 @@ We'll walk through both.
 That covers one provider. In WHMCS specifically, the friction is:
 
 - **Recurring billing.** Hosting renews. For automatic renewals to work, the
-  gateway must support tokenised/merchant-initiated payments — and each module
+  gateway must support tokenised/merchant-initiated payments, and each module
   handles this differently, or not at all.
 - **No failover.** If your provider has an outage on a renewal run, those
   invoices fail and dunning kicks in.
@@ -50,11 +50,11 @@ That covers one provider. In WHMCS specifically, the friction is:
 ## Method 2: Add every gateway with one module
 
 1. **Install the PaymentHood module** for WHMCS
-   ([free and open-source](/integrations/whmcs/)) — the gateway module plus its
+   ([free and open-source](/integrations/whmcs/)): the gateway module plus its
    addon and hooks.
 2. **[Create a free PaymentHood account]({{ site.signup_url }})** and connect the
    providers you want, {{ site.provider_floor }} supported.
-3. **Manage providers from the dashboard** — add, switch, or route between them
+3. **Manage providers from the dashboard:** add, switch, or route between them
    without touching WHMCS or reinstalling anything.
 
 Because it's one module, adding another provider is a dashboard change, not a new
@@ -80,13 +80,13 @@ standard callback, and if a provider fails, payments can route to another.
 One provider, one currency, no renewals to worry about? A single gateway module
 is the simplest thing that works. Hosting or SaaS with **recurring billing**,
 multiple markets, or a need for a fallback? One module that connects every
-provider — and handles renewals and callbacks consistently — saves you from
+provider, and handles renewals and callbacks consistently, saves you from
 re-solving the same problems per gateway.
 
 ## Where PaymentHood fits
 
 [PaymentHood](/) connects WHMCS to {{ site.provider_floor }} payment providers
-through one free, open-source module — with routing, automatic failover,
+through one free, open-source module, with routing, automatic failover,
 subscription/recurring support, webhook verification and server-side
 confirmation handled for you. Orders, renewals, statuses and refunds flow through
 WHMCS as expected, and you switch providers from a dashboard rather than in code.

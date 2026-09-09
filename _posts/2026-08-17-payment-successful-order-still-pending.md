@@ -7,7 +7,7 @@ hero: /assets/images/blog/payment-successful-order-still-pending.jpg
 image: /assets/images/og/blog/payment-successful-order-still-pending.jpg
 ---
 
-The email always reads the same way. *"I paid — my bank shows the money left my
+The email always reads the same way. *"I paid. My bank shows the money left my
 account. Why does my order say pending?"* You open the admin, and there it is: an
 order stuck on **Pending payment**, or a WHMCS invoice still marked **Unpaid**,
 while the money is quite definitely sitting at your payment provider.
@@ -35,7 +35,7 @@ it while leaving the payment perfectly intact:
 - **The customer closes the tab** as soon as they see "payment approved", or their
   phone rings, or the app switches away and never comes back.
 - **The session is gone on return.** The redirect back is a cross-site navigation,
-  and browser cookie policies — SameSite, and Safari's tracking prevention — will
+  and browser cookie policies (SameSite, and Safari's tracking prevention) will
   drop a session cookie that was not explicitly set up to survive it. Your return
   handler runs with no session, so it cannot tell which cart this payment belongs
   to. This one is nasty because it usually affects only some browsers, so in your
@@ -53,11 +53,11 @@ webhooks have their own failure modes, and they are quieter than the redirect on
 
 **Delivery is not guaranteed.** Providers retry a handful of times and then give
 up. If your server was down, slow, or mid-deploy during that window, the event is
-gone permanently. Nothing tells you it was lost — from your side, a payment that
+gone permanently. Nothing tells you it was lost: from your side, a payment that
 never arrived and a notification that never arrived look identical.
 
-**Timeouts count as failures.** If your webhook handler does real work inline —
-sending the confirmation email, calling an ERP, generating a licence — a slow
+**Timeouts count as failures.** If your webhook handler does real work inline
+(sending the confirmation email, calling an ERP, generating a licence), a slow
 downstream service can push you past the provider's timeout. The provider records
 a failed delivery and retries, and if the handler is not idempotent, the retries
 can double-apply what the first one already did.
@@ -65,14 +65,14 @@ can double-apply what the first one already did.
 **Some providers have no useful webhook at all.** PPRO's Global API, which is how
 schemes like [iDEAL](/providers/ideal/) and [Bancontact](/providers/bancontact/)
 are reached, configures webhooks per account rather than per payment, and they
-carry no merchant reference — so a callback cannot be matched to an order on its
+carry no merchant reference, so a callback cannot be matched to an order on its
 own. There the only reliable answer is to ask the provider directly.
 
 **And a webhook can be forged.** If you act on an unsigned callback you have built
 a way for anyone to mark orders paid. Every provider that signs its callbacks
 expects you to verify the signature before you trust a single field in it.
 
-## Why "just retry" is the wrong instinct
+## Why retrying is the wrong instinct
 
 The reflex is to have the customer pay again, or to retry the charge. Both make it
 worse, because the real problem is ambiguity, not failure.
@@ -80,7 +80,7 @@ worse, because the real problem is ambiguity, not failure.
 When a request times out, you cannot tell **"the payment did not happen"** from
 **"the payment happened and the answer was lost"**. Those two look identical from
 outside and need opposite responses. Retry the first and you recover the sale;
-retry the second and you charge someone twice — and now you have a stuck order
+retry the second and you charge someone twice, and now you have a stuck order
 *and* a duplicate charge to refund.
 
 You do not fix ambiguity by guessing. You fix it by asking the only party that
@@ -111,7 +111,7 @@ time, look at what was deploying or degraded during that window.
 ## The fix: three layers, in this order
 
 **Treat the webhook as a fast hint, not as proof.** Verify its signature, then use
-it as a prompt to go and check — not as the fact itself. It makes the common case
+it as a prompt to go and check, not as the fact itself. It makes the common case
 instant, and it should never be the only path to a completed order.
 
 **Treat the provider's API as the source of truth.** Before you fulfil, re-read the
@@ -135,7 +135,7 @@ completion step do nothing if it has already run.
 This is the layer PaymentHood is: your store integrates once, and the reconciling
 happens on our side rather than in your checkout code.
 
-Every provider integration verifies callbacks before acting on them — signature
+Every provider integration verifies callbacks before acting on them: signature
 checks where the provider signs, and a server-side re-read of the charge before
 anything is treated as paid. Where a provider offers no reliable callback, the
 integration polls the provider instead of trusting a redirect. Payment state is

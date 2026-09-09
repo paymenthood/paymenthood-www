@@ -31,7 +31,7 @@ Three details decide whether verification actually works:
 
 **Verify against the raw request body.** The signature covers the exact bytes that
 were sent. If your framework parses the JSON and you re-serialise it before
-hashing, key order and whitespace change and every signature fails — or worse, you
+hashing, key order and whitespace change and every signature fails, or worse, you
 "fix" it by skipping verification. Capture the raw body before anything touches it.
 
 **Compare in constant time.** A naive string comparison returns faster on an early
@@ -45,7 +45,7 @@ verification decorative.
 ## Make the handler idempotent
 
 Webhooks are delivered at least once, not exactly once. The same event will arrive
-twice — a retry after your server was slow, a provider being cautious, a network
+twice: a retry after your server was slow, a provider being cautious, a network
 hiccup between the 200 you sent and the 200 they recorded.
 
 So the handler has to be safe to run repeatedly. In practice that means acting on
@@ -72,7 +72,7 @@ event that preceded it, especially when the first delivery was retried and the
 second was not.
 
 If your handler assigns state unconditionally, a late-arriving earlier event will
-downgrade a completed order — and the customer who paid an hour ago is suddenly
+downgrade a completed order, and the customer who paid an hour ago is suddenly
 pending again. Treat your payment states as a one-way progression and refuse
 transitions that go the wrong way. Terminal states like refunded and failed should
 be genuinely terminal.
@@ -83,7 +83,7 @@ by reading the payment back.
 
 ## Small payloads are a feature
 
-A minimal webhook body — an identifier and a state — looks unhelpful and is
+A minimal webhook body, an identifier and a state, looks unhelpful and is
 deliberate. A large payload invites your handler to trust attacker-supplied
 amounts and statuses, and it goes stale between being generated and being
 processed.
@@ -116,13 +116,13 @@ money.
 A webhook is an event: *this happened, probably just now*. A ledger is a
 statement: *this is what is true, as of today, across everything*. Events are
 delivered individually, out of order, sometimes twice, and occasionally not at
-all — providers retry a handful of times and then stop. A verified webhook tells
+all: providers retry a handful of times and then stop. A verified webhook tells
 you what one provider believes about one payment at one moment. It does not tell
 you that you heard about every payment.
 
 That last gap is the one nobody plans for, because it is silent by construction.
-A payment that succeeded and whose webhook never arrived looks — from inside your
-system — exactly like a payment that never happened. There is no error, no failed
+A payment that succeeded and whose webhook never arrived looks, from inside your
+system, exactly like a payment that never happened. There is no error, no failed
 job, no alert. The money is at the provider and your database does not know.
 
 ## Reconciliation is the check that webhooks were enough
@@ -132,7 +132,7 @@ what each provider says happened. It is the only mechanism that catches the
 failure mode above, and it is boring in the way that load-bearing things usually
 are.
 
-The shape of it is simple. For a period — a day is a reasonable default — pull
+The shape of it is simple. For a period (a day is a reasonable default) pull
 the provider's own list of transactions, compare it against your records, and
 produce three sets:
 
@@ -150,7 +150,7 @@ delivery meeting a system that had no way to notice.
 
 ## Why several providers make it a different job
 
-With one provider, reconciliation is mostly a formality — its dashboard is the
+With one provider, reconciliation is mostly a formality: its dashboard is the
 ledger, and its settlement report is the source of truth that finance already
 uses.
 
@@ -189,7 +189,7 @@ Nine things, in the order they are worth doing:
 - Log every received event, including rejected ones, with enough detail to
   replay it.
 - Reconcile daily against each provider's own transaction list.
-- Alert on the count of provider-side transactions your system never saw — not
+- Alert on the count of provider-side transactions your system never saw, not
   on zero, but on a change in the rate.
 
 The first six make individual events trustworthy. The last three are how you
@@ -223,8 +223,8 @@ first one are correct until the day they quietly are not.
 ## What PaymentHood does
 
 [PaymentHood](/) sits on both sides of this. Inbound, it verifies each provider's
-own signature scheme centrally — Stripe's timestamped HMAC, Paystack's SHA512
-digest, Payfast's ITN and the rest — so adding a provider is not another chance
+own signature scheme centrally (Stripe's timestamped HMAC, Paystack's SHA512
+digest, Payfast's ITN and the rest), so adding a provider is not another chance
 for someone to get signature verification wrong.
 
 Outbound, the webhook you receive follows one documented convention rather than
@@ -234,8 +234,8 @@ counts as accepted; anything else is retried automatically, and every attempt is
 recorded with its status code where you can see it.
 
 When you configure a signing secret, each delivery carries an HMAC-SHA256
-signature over `{timestamp}.{body}` in a `t=…,v1=…` header, which you verify by
-recomputing the same value and rejecting timestamps outside your tolerance — the
+signature over `{timestamp}.{body}` in a `t=...,v1=...` header, which you verify by
+recomputing the same value and rejecting timestamps outside your tolerance, the
 same shape as the provider schemes above, so you can reuse well-known verification
 code. A fixed `Authorization` header is available alongside it: the header proves
 the caller knows a shared secret, and the signature additionally proves the body
@@ -244,5 +244,5 @@ reference](https://docs.paymenthood.com/webhooks/signing/).
 
 [Create a free PaymentHood account]({{ site.signup_url }}), or run your current
 integration against the [payment integration launch
-checklist](/payment-infrastructure/checklist/) — the webhook section is where most
+checklist](/payment-infrastructure/checklist/): the webhook section is where most
 teams find something.

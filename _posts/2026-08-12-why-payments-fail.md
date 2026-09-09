@@ -34,7 +34,7 @@ changes it.
 {: .table}
 
 **Do not retry these. Not later, not through another provider.** The correct
-response is to ask the customer for a different payment method — not to try the
+response is to ask the customer for a different payment method, not to try the
 same card again with different framing.
 
 ## 2. Soft declines: the issuer said not now
@@ -52,7 +52,7 @@ Same card, same customer, different moment, plausibly a different answer.
 {: .table}
 
 Code 05 deserves its own note. It is the most common decline and the least
-informative — issuers use it as a catch-all when they do not want to tell you
+informative. Issuers use it as a catch-all when they do not want to tell you
 why. Treat it as soft, but cap the attempts rather than retrying it like an
 insufficient-funds decline.
 
@@ -88,15 +88,15 @@ standing with the issuer no favours.
 Retrying is not one behaviour with one delay. Match the schedule to what you are
 waiting for:
 
-- **Technical failure** — retry once, immediately, ideally through a *different*
+- **Technical failure:** retry once, immediately, ideally through a *different*
   provider. You are not waiting for anything to change; you are routing around
   something broken.
-- **Insufficient funds (51)** — you are waiting for money to arrive in an
+- **Insufficient funds (51):** you are waiting for money to arrive in an
   account. Retrying five minutes later is noise. Retry on a scale of days, and
   where you can, aligned with local pay cycles.
-- **Velocity limits (61, 65)** — you are waiting for a rolling limit to reset.
+- **Velocity limits (61, 65):** you are waiting for a rolling limit to reset.
   Hours, not minutes.
-- **Issuer unavailable (91)** — you are waiting for someone else's system to come
+- **Issuer unavailable (91):** you are waiting for someone else's system to come
   back. Minutes.
 
 For subscriptions the same logic drives your dunning schedule: attempts spread
@@ -104,7 +104,7 @@ over days for funding problems, and a much shorter cycle for technical ones.
 
 ## Retries create double charges unless you stop them
 
-Every retry mechanism needs an **idempotency key** — a value you send with the
+Every retry mechanism needs an **idempotency key**, a value you send with the
 charge so that a repeated request returns the original result instead of creating
 a second payment. Without one, a timeout followed by a retry is a genuine risk of
 charging a real customer twice.
@@ -114,7 +114,7 @@ The subtlety that catches people out is **which** retries share a key:
 - A retry after a **timeout** is the *same* payment attempt. It must reuse the
   original key, so the provider can tell you what happened to the first request
   rather than performing a new charge.
-- A retry after a **definitive decline** is a *new* attempt. It needs a new key —
+- A retry after a **definitive decline** is a *new* attempt. It needs a new key;
   reuse the old one and you will get the cached decline back forever and conclude,
   wrongly, that the card is dead.
 
@@ -133,13 +133,13 @@ probably is not, and the customer never needs to know.
 issuer is the same institution no matter which acquirer asks. Retrying a stolen
 card elsewhere is not a routing strategy.
 
-The design that makes the first of those safe — including why a retry needs an
-identity that outlives the provider it was sent to — is in [how payment failover is
+The design that makes the first of those safe, including why a retry needs an
+identity that outlives the provider it was sent to, is in [how payment failover is
 actually built](/payment-infrastructure/failover/).
 
 **It is a judgement call for soft declines.** A different acquirer can present a
-transaction differently — local versus cross-border, a different descriptor, a
-different MCC — and that occasionally changes the outcome. It is worth testing
+transaction differently (local versus cross-border, a different descriptor, a
+different MCC), and that occasionally changes the outcome. It is worth testing
 with your own traffic, and it is not worth assuming.
 
 ## What to tell the customer
@@ -148,13 +148,13 @@ Your error copy is part of your recovery rate. Two rules cover most of it.
 
 **Do not explain the decline.** You usually do not know the real reason, and
 "insufficient funds" is a humiliating thing to display to someone standing at a
-counter when you are guessing. "That card was declined — please try another card
+counter when you are guessing. "That card was declined. Please try another card
 or payment method" is accurate for every hard and soft decline.
 
 **Never tell a customer they were not charged unless you have verified it.** For
 declines you can say it safely, because a decline is an answer. For a timeout you
 cannot, because the charge may have gone through. Say something honest about the
-uncertainty — that you are confirming and will email them — and then go and
+uncertainty (that you are confirming and will email them) and then go and
 confirm it server-side.
 
 That second rule follows from a broader one worth stating plainly: **an order is
@@ -164,7 +164,7 @@ browser reached your success URL, which an attacker controls.
 ## Measure the right number
 
 The metric is **authorisation rate**: approved authorisations divided by
-attempted ones. The aggregate figure is nearly useless on its own — what makes it
+attempted ones. The aggregate figure is nearly useless on its own. What makes it
 actionable is the segmentation:
 
 - **By provider.** Two providers on the same traffic rarely perform identically.
@@ -194,7 +194,7 @@ is definitely yours to fix.
 ## Where PaymentHood fits
 
 Everything above is implementable yourself, and the classification table is the
-easy part — the work is keeping it correct across providers as each one changes
+easy part; the work is keeping it correct across providers as each one changes
 its codes, plus idempotency, failover health checks and server-side confirmation
 for every one of them.
 

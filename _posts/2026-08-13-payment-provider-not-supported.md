@@ -1,6 +1,6 @@
 ---
 title: "Your Payment Provider Isn't Supported. What Now?"
-description: "Four options when the payment provider you need has no plugin for your platform — what each one actually costs, and how to tell which ones are open to you."
+description: "Four options when the payment provider you need has no plugin for your platform: what each one actually costs, and how to tell which ones are open to you."
 date: 2026-08-13
 tags: [payments, integration]
 hero: /assets/images/blog/payment-provider-not-supported.jpg
@@ -16,7 +16,7 @@ look.
 
 ## Option 1: Build the integration yourself
 
-Always possible, and consistently underestimated — because the charge call is the
+Always possible, and consistently underestimated, because the charge call is the
 small part. What follows it is webhook handling with correct signature
 verification, refunds and partial refunds, idempotency so a timeout cannot double
 charge, server-side confirmation, reconciliation into your accounting, and a
@@ -51,7 +51,7 @@ plugin author owes you nothing, and the platform did not promise your provider.
 So the real question is not whether asking works. It is whether you have anyone
 to ask.
 
-## Why "we'll add it" usually means a quarter
+## Why a provider request usually means a quarter
 
 When every provider is its own plugin, adding one means writing a new plugin.
 Even when someone else writes it, the result lands on you: install it, configure
@@ -60,7 +60,7 @@ long because the unit of work is large and it ends on your side.
 
 It only collapses when providers sit behind a single interface. Then adding one
 is an adapter written once by the vendor, and nothing about your checkout
-changes — same API, same plugin, same code. The new provider shows up as an
+changes: same API, same plugin, same code. The new provider shows up as an
 option you switch on.
 
 That is the difference between a quarter and a day: not effort, but where the
@@ -68,7 +68,7 @@ work lands.
 
 ## What that looks like in practice
 
-A merchant recently asked us for [CCBill](/providers/ccbill/) — a payment
+A merchant recently asked us for [CCBill](/providers/ccbill/), a payment
 facilitator built around subscription billing and the high-risk verticals most
 processors decline, not one of the mainstream names. It was live within 24 hours,
 and added to the platform itself rather than bolted onto that one account, so
@@ -85,7 +85,7 @@ Ask your current setup one question: *if I needed a new provider next month, who
 would I ask?*
 
 If the answer is a person or a vendor, you have four options. If the answer is
-"nobody" — you would be searching a plugin directory and hoping — you have three,
+"nobody" (you would be searching a plugin directory and hoping), you have three,
 and they all cost real money.
 
 ## Where PaymentHood fits

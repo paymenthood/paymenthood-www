@@ -1,6 +1,6 @@
 ---
 title: "How to Switch Payment Providers Without Losing Sales or Rewriting Code"
-description: "Switching payment provider feels risky — re-integration, downtime, broken renewals. Why it's hard, how to do it safely, and how to make it a dashboard change."
+description: "Switching payment provider feels risky: re-integration, downtime, broken renewals. Why it's hard, how to do it safely, and how to make it a dashboard change."
 date: 2026-08-23
 tags: [payments]
 hero: /assets/images/blog/switch-payment-providers-without-losing-sales.svg
@@ -9,7 +9,7 @@ image: /assets/images/og/blog/switch-payment-providers-without-losing-sales.jpg
 
 Most merchants know months before they act that they should switch payment
 provider. Fees crept up, authorisation rates are mediocre, support is slow, or a
-better local option appeared — but the switch keeps getting postponed, because the
+better local option appeared, but the switch keeps getting postponed, because the
 migration itself feels more dangerous than the problem it fixes. Nobody wants to be
 the reason checkout broke on a Friday.
 
@@ -19,7 +19,7 @@ not from switching itself.
 ## Why switching normally hurts
 
 When your checkout talks **directly** to one provider's API, that provider is wired
-into your codebase — its SDK, its webhook format, its error codes, its quirks.
+into your codebase: its SDK, its webhook format, its error codes, its quirks.
 Replacing it means:
 
 - **Development work and a redeploy.** A new integration, re-tested end to end,
@@ -40,9 +40,9 @@ married to the *old* one.
 
 Whatever your setup, the safe pattern is the same:
 
-1. **Add the new provider alongside the old one** — never remove the old until the
+1. **Add the new provider alongside the old one:** never remove the old until the
    new is proven.
-2. **Test the full flow in sandbox** — payment, webhook, refund, and (if you use
+2. **Test the full flow in sandbox:** payment, webhook, refund, and (if you use
    them) a renewal.
 3. **Move a slice of traffic first**, watch authorisation and settlement, then widen.
 4. **Keep the old provider live** until in-flight payments and recent tokens have
@@ -54,19 +54,19 @@ is itself a build.
 ## How orchestration removes the risk
 
 With a [payment orchestration platform](/payment-orchestration/) your
-checkout integrates once — with the orchestration layer, not with each provider.
+checkout integrates once, with the orchestration layer, not with each provider.
 Providers sit behind it, so **switching one becomes a configuration change rather
 than a code change.** You can:
 
 - **Add the new provider from a dashboard** and run it alongside the old one with no
   redeploy.
-- **Route by rule** — send a percentage, or one currency/market, to the new provider
+- **Route by rule:** send a percentage, or one currency/market, to the new provider
   and watch it before widening.
 - **Keep webhooks and reconciliation identical**, because your integration didn't
-  change — only which provider handles the payment did.
+  change; only which provider handles the payment did.
 
 One honest caveat: stored card **tokens** are held by each provider, so they don't
-teleport between them — new payments go to the new provider while existing
+teleport between them: new payments go to the new provider while existing
 agreements run out on the old one. Orchestration doesn't change that rule; it just
 means running both in parallel during the transition costs you a toggle, not a
 project.
@@ -76,7 +76,7 @@ project.
 [PaymentHood](/) connects your store to {{ site.provider_floor }} providers through
 one integration, and you add, switch or route between them **from a dashboard
 without touching your checkout code.** Run two providers in parallel, shift traffic
-gradually, and if one has trouble, failover moves payments to another automatically —
+gradually, and if one has trouble, failover moves payments to another automatically,
 so a migration, or an outage, never has to be a big-bang risk. Webhook verification
 and server-side confirmation are handled once, centrally, so they don't need
 rebuilding every time your provider line-up changes.
@@ -84,7 +84,7 @@ rebuilding every time your provider line-up changes.
 ## Where PaymentHood fits
 
 If you've been putting off a provider switch because the migration feels riskier
-than the status quo, that risk is a symptom of a direct integration — not something
+than the status quo, that risk is a symptom of a direct integration, not something
 you have to accept. PaymentHood makes changing providers a dashboard decision, with
 routing, failover, webhook verification and server-side confirmation built in, and
 no per-transaction fee from PaymentHood. Free plugins are available for

@@ -11,8 +11,8 @@ spend, on whose behalf, and who is liable. Those are real questions and they are
 being worked on in public.
 
 This is about something narrower and more immediate. Long before an agent is
-trusted with a budget, it is already making the same HTTP call your checkout makes
-— and it behaves differently from a human in one specific way that payment systems
+trusted with a budget, it is already making the same HTTP call your checkout makes,
+and it behaves differently from a human in one specific way that payment systems
 were not designed for.
 
 **A person who is not sure whether their payment went through stops and checks. An
@@ -30,21 +30,21 @@ This is not rare. It is the normal failure mode of a network, and it happens to
 every payment system at some volume.
 
 With a person at the keyboard, an informal safety net engages. They see a spinner
-that never resolves. They **do not** immediately press pay again — and when they do,
+that never resolves. They **do not** immediately press pay again, and when they do,
 they usually check their bank first, or email support, or wait. If they are charged
 twice they notice and complain, which is unpleasant but is also a repair mechanism.
 Human hesitation has been silently compensating for imperfect payment code for
 decades.
 
 An agent has none of that. It receives a timeout, classifies it as a retryable
-error, and retries — in milliseconds, with an identical request, with no notion
+error, and retries: in milliseconds, with an identical request, with no notion
 that money may already have moved. If your idempotency is weak, the customer is
 charged twice before anyone could have looked.
 
 ## Four ways it goes wrong
 
 **Retry velocity.** A human retries three times over ten minutes. An agent with an
-exponential-backoff policy can produce a dozen attempts in a minute — and a dozen
+exponential-backoff policy can produce a dozen attempts in a minute, and a dozen
 attempts against a card is also, from your provider's point of view, a pattern that
 looks like [card testing](/blog/card-testing-fraud-signup-forms/). You can trip
 your own fraud controls with entirely legitimate traffic.
@@ -52,7 +52,7 @@ your own fraud controls with entirely legitimate traffic.
 **Unknown state treated as failure.** Systems tend to encode "no response" as
 failure because that is the safe assumption for a read. For a write that moves
 money it is the dangerous one. The correct response to a timeout is a *status
-query*, not a retry — go and ask the provider what actually happened. Agents
+query*, not a retry: go and ask the provider what actually happened. Agents
 overwhelmingly do the second.
 
 **No shared memory of the attempt.** Two agent runs, or the same agent after a
@@ -76,7 +76,7 @@ a standard where human hesitation is no longer papering over the gaps:
   remembering anything.
 - **That identity has to live above the providers.** Provider A's idempotency key
   means nothing to provider B, so the moment a retry crosses providers is the moment
-  provider-level protection stops working — the argument in [how payment failover is
+  provider-level protection stops working, the argument in [how payment failover is
   actually built](/payment-infrastructure/failover/).
 - **Unknown has to be a real state.** Not a synonym for failed. Something has to
   resolve it by asking the provider, with a bounded time before a human is involved.
@@ -88,7 +88,7 @@ a standard where human hesitation is no longer papering over the gaps:
 ## Deriving a key that actually protects you
 
 An idempotency key is the whole defence, and it is usually the part implemented
-wrongly — not because the concept is hard, but because the wrong derivation looks
+wrongly, not because the concept is hard, but because the wrong derivation looks
 correct in every test that gets written.
 
 The rule is that the key must identify **the payment attempt**, not the request.
@@ -97,7 +97,7 @@ carries a different key, the provider sees an unrelated payment, and you get two
 charges. This is the single most common implementation error, and it passes every
 happy-path test, because the happy path never retries.
 
-Derive it from something stable that both the caller and the retry already know —
+Derive it from something stable that both the caller and the retry already know:
 the order identifier plus an attempt number is usually enough. If you cannot name
 what makes it stable, it is not stable.
 
@@ -106,7 +106,7 @@ The subtlety that catches people out is **which** retries share a key:
 - A retry after a **timeout** is the *same* attempt. It must reuse the original
   key, so the provider can tell you what happened to the first request instead of
   performing a new charge.
-- A retry after a **definitive decline** is a *new* attempt. It needs a new key —
+- A retry after a **definitive decline** is a *new* attempt. It needs a new key;
   reuse the old one and you will get the cached decline back forever and conclude,
   wrongly, that the card is dead.
 
@@ -124,11 +124,11 @@ charge, generally within a retention window measured in hours or days. That is
 real and valuable. Three things it does not do:
 
 **It does not span providers.** A key is scoped to the provider that received it.
-If a retry is routed elsewhere — which is exactly what failover does — the second
+If a retry is routed elsewhere, which is exactly what failover does, the second
 provider has never seen that key and will happily create a second payment. Retry
 identity has to live above the providers, in your own layer, or failover and
-idempotency actively work against each other. That is the design problem in
-<a href="/payment-infrastructure/failover/">how failover is actually built</a>.
+idempotency actively work against each other. That is the design problem at the
+heart of failover.
 
 **It does not cover your own side.** If your system creates a second payment
 record before the call, or your job runner starts two workers on the same task,
@@ -149,7 +149,7 @@ settle it, and each takes an afternoon:
 - **Send the same charge twice with the same key.** Expect one payment and two
   identical responses.
 - **Kill the connection mid-charge, then retry.** Expect the system to reach a
-  resolved state with exactly one charge — this is the test that finds a key
+  resolved state with exactly one charge; this is the test that finds a key
   generated per request.
 - **Fire two workers at the same payment simultaneously.** Expect one charge, not
   a race that both sides win.
@@ -158,10 +158,9 @@ settle it, and each takes an afternoon:
 
 None of these require a provider sandbox that simulates failure. They require
 breaking the connection at your own boundary, which you control. The broader
-pre-launch list is in
-<a href="/blog/test-your-checkout-before-you-go-live/">test your checkout before
-you go live</a>, and the failure taxonomy that decides what deserves a retry at
-all is in <a href="/blog/why-payments-fail/">why payments fail</a>.
+pre-launch list is a separate exercise, and the failure taxonomy that decides
+what deserves a retry at all is in <a href="/blog/why-payments-fail/">why
+payments fail</a>.
 
 ## What this is not
 
@@ -172,7 +171,7 @@ implement agent-payment protocols such as AP2 or x402. Those are real areas of w
 and other people are doing them; we are not, and a page saying otherwise would be
 marketing rather than engineering.
 
-What we do is the layer underneath all of that — and the argument of this post is
+What we do is the layer underneath all of that, and the argument of this post is
 that the layer underneath is where the failures actually happen. An agent framework
 with excellent spending controls sitting on a payment integration whose idempotency
 key is generated per request will still double-charge customers.
@@ -213,7 +212,7 @@ than in whatever is calling it.
 
 The property that matters here is where the identity of a payment lives. Charge
 creation is idempotent on **your own order reference**, checked before any provider
-is contacted — so a repeated create returns the original payment rather than making
+is contacted, so a repeated create returns the original payment rather than making
 a second one, whichever provider is involved and however fast the caller is. And
 payments left in flight are resolved by querying the provider for what actually
 happened, rather than by inferring an outcome from a dead connection.

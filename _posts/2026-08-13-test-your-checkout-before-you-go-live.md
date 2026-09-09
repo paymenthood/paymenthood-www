@@ -16,7 +16,7 @@ Here is the short version of what to test, in the order worth doing it.
 ## 1. Test a payment that fails
 
 This is the one people skip, and it is the one that matters. Every provider
-publishes test cards that trigger a **decline** as well as ones that succeed —
+publishes test cards that trigger a **decline** as well as ones that succeed;
 find them in your provider's testing documentation and use them.
 
 What you are checking is not that it fails, but what your store does next: the
@@ -27,7 +27,7 @@ that would otherwise have found you on launch day.
 ## 2. Check the order status, not the thank-you page
 
 Place a successful test order, then go and look at the order in your admin. It
-should be marked **paid** — not "pending", not "processing" forever.
+should be marked **paid**, not "pending", not "processing" forever.
 
 These are two different things. The thank-you page only proves the customer's
 browser was redirected. The order status proves your store actually heard back
@@ -46,7 +46,7 @@ so long.
 ## 4. Confirm the emails fire
 
 Order confirmation to the customer, order notification to you. Check the spam
-folder before you decide it works — and check that the total, currency and order
+folder before you decide it works, and check that the total, currency and order
 number in the email match what was actually charged.
 
 ## 5. Then do it once for real
@@ -62,7 +62,7 @@ only test that covers the whole path end to end.
 
 ## The one thing sandbox will never tell you
 
-Test environments are stable. Real providers are not — they have slow days and
+Test environments are stable. Real providers are not. They have slow days and
 occasional outages, and no amount of testing prevents that. What you can decide
 in advance is what your checkout does when it happens: show the customer an
 error, or quietly send that payment to a second provider.
@@ -73,11 +73,11 @@ That is the difference between having one gateway and having a fallback.
 
 If you are setting up a store now, [our free plugins](/integrations/) cover
 WooCommerce, WHMCS, VirtueMart, Phoca Cart and J2Commerce, and give you more than
-one provider behind a single checkout — so the failover in the last section is a
+one provider behind a single checkout, so the failover in the last section is a
 setting rather than a project. And once you are live, [Why Payments Fail](/blog/why-payments-fail/)
 covers what to do about the declines you will start seeing.
 
 If you wrote the integration yourself rather than installing a plugin, there is a
-longer engineering version of this list — idempotency, webhook signatures, unknown
-states — in the [payment integration launch
+longer engineering version of this list (idempotency, webhook signatures, unknown
+states) in the [payment integration launch
 checklist](/payment-infrastructure/checklist/).

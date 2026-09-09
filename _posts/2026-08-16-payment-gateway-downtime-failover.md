@@ -9,7 +9,7 @@ image: /assets/images/og/blog/payment-gateway-downtime-failover.jpg
 
 Here is the version of this that keeps founders up at night: it is a normal
 afternoon, traffic is steady, and your one payment provider has an outage. For as
-long as it lasts, **every checkout fails**. You are not losing a few sales — you are
+long as it lasts, **every checkout fails**. You are not losing a few sales. You are
 losing *all* of them, and you usually find out not from monitoring but from a
 customer asking why their card was declined.
 
@@ -24,7 +24,7 @@ frequent:
 - **Provider outages and maintenance.** Every processor has incident pages for a
   reason. Even the biggest names have partial outages measured in minutes to hours.
 - **Account holds and reviews.** A risk flag, a sudden spike in volume, or a
-  compliance review can freeze your ability to charge — often with little warning.
+  compliance review can freeze your ability to charge, often with little warning.
 - **Regional blocks.** A provider that works everywhere else can be unavailable, or
   quietly decline, in one country your customers are buying from.
 - **Rate limits and timeouts.** Under load, requests start timing out. The gateway
@@ -40,7 +40,7 @@ and a payment that fails through one provider would have succeeded through anoth
 With one provider, you have a single point of failure sitting directly between your
 customers and your revenue. When it has a bad day:
 
-- **Every transaction fails** for the duration — not a degraded experience, a
+- **Every transaction fails** for the duration: not a degraded experience, a
   stopped one.
 - **You find out late.** The first signal is usually support tickets, not an alert.
 - **The damage outlasts the outage.** Customers who hit a declined card at checkout
@@ -55,24 +55,24 @@ Failover is the ability to **retry a failed payment through a different provider
 instead of returning an error to the customer. The important nuance is *which*
 failures are worth retrying:
 
-- A **technical failure** — a timeout, a 500, a gateway outage — is worth retrying
+- A **technical failure** (a timeout, a 500, a gateway outage) is worth retrying
   elsewhere, because the payment itself was fine.
-- A **hard decline** — insufficient funds, a genuinely blocked card — is *not*.
+- A **hard decline** (insufficient funds, a genuinely blocked card) is *not*.
   Retrying it through another provider just annoys the customer's bank and can look
   like card testing.
 
 Good failover tells these apart. It reroutes the recoverable failures and leaves the
 genuine declines alone.
 
-## Why "just add a second provider" isn't enough
+## Why adding a second provider is not enough
 
-Plenty of teams reach the same conclusion — *we need a backup provider* — and then
+Plenty of teams reach the same conclusion (*we need a backup provider*) and then
 discover the hard part isn't having two providers, it's **coordinating** them:
 
 - Something has to detect that provider A failed and decide, per transaction,
   whether to try provider B.
 - Both providers report success differently, sign their webhooks differently, and
-  reconcile differently — so a second integration is a second set of everything to
+  reconcile differently, so a second integration is a second set of everything to
   get right.
 - The routing logic has to live somewhere you can change without a redeploy, or
   you are editing checkout code in the middle of an incident.
@@ -82,12 +82,12 @@ This coordination layer is exactly what a
 integration that sits above your providers and moves each payment to a healthy one.
 If you are designing that layer rather than reacting to an outage, [how payment
 failover is actually built](/payment-infrastructure/failover/) covers the
-architecture — including the duplicate charge a naive retry can create.
+architecture, including the duplicate charge a naive retry can create.
 
 ## How PaymentHood keeps your checkout up
 
 [PaymentHood](/) routes every transaction through the best available provider and,
-when one fails for a technical reason, **automatically retries through another** —
+when one fails for a technical reason, **automatically retries through another**,
 so a provider's outage doesn't become your outage. You connect the providers you
 want (cards, wallets, regional and crypto methods, {{ site.provider_floor }}
 supported), and routing and failover happen without you touching checkout code.
@@ -101,7 +101,7 @@ wrong.
 ## Where PaymentHood fits
 
 If losing your one provider means losing every sale until they recover, that single
-point of failure is worth removing before the next outage — not during it.
+point of failure is worth removing before the next outage, not during it.
 PaymentHood connects your store to {{ site.provider_floor }} providers through one
 free integration, with automatic routing, failover, webhook verification and
 server-side confirmation built in. There's no per-transaction fee from PaymentHood;
