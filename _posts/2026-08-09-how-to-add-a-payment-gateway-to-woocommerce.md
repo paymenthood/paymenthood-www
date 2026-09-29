@@ -42,7 +42,7 @@ That covers one provider. The friction shows up later:
 
 - **Every extra provider is another plugin,** another set of keys, another thing
   to keep updated.
-- **No fallback.** If your provider has an outage, checkout is down until they
+- **No fallback.** If your provider has an [outage](/blog/payment-gateway-downtime-failover/), checkout is down until they
   recover.
 - **Regional gaps.** Some providers your customers ask for have no maintained
   WooCommerce plugin at all.
@@ -71,7 +71,7 @@ route to another automatically, so their outage doesn't become yours.
   provider supports.
 - **"Payment method not available for your currency."** The provider doesn't
   settle in your store currency: change currency, or use a provider (or
-  orchestration layer) that covers it.
+  [orchestration layer](/blog/what-is-payment-orchestration/)) that covers it.
 - **Test payments work, live ones fail.** You're likely still on test/sandbox
   keys, or the provider account isn't fully activated for live payments.
 - **Webhooks not updating order status.** The provider's webhook/callback URL

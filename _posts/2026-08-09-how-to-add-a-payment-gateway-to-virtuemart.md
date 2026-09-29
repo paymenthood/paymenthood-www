@@ -11,7 +11,7 @@ related:
   - /blog/test-your-checkout-before-you-go-live/
 ---
 
-VirtueMart is the e-commerce component for Joomla, and out of the box it handles
+VirtueMart is the e-commerce component for [Joomla](/integrations/joomla/), and out of the box it handles
 carts and orders but not card payments. For that you add a **payment gateway**.
 In VirtueMart a card gateway is set up as a **"payment method"**, so the two
 terms mean the same thing here. This guide covers how VirtueMart payments work
@@ -33,7 +33,7 @@ method is published.
    give it a name, and select the payment plugin you just installed.
 3. **Configure it:** API credentials, currencies, countries, and any
    minimum/maximum order total.
-4. **Publish and test** in sandbox, then switch to live credentials.
+4. **Publish and test** in [sandbox](/blog/test-your-checkout-before-you-go-live/), then switch to live credentials.
 
 The friction on Joomla specifically: there are **fewer maintained VirtueMart
 payment plugins** than on WooCommerce, so the provider you want may not have a

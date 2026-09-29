@@ -22,7 +22,7 @@ look.
 
 Always possible, and consistently underestimated, because the charge call is the
 small part. What follows it is webhook handling with correct signature
-verification, refunds and partial refunds, idempotency so a timeout cannot double
+verification, refunds and partial refunds, [idempotency](/blog/automated-retries-payment-idempotency/) so a timeout cannot double
 charge, server-side confirmation, reconciliation into your accounting, and a
 sandbox-to-live cycle for all of it.
 
@@ -34,7 +34,7 @@ year, not just the first sprint.
 
 Sometimes this is genuinely right, and it is worth pricing honestly rather than
 dismissing. But be clear about what you are optimising for. If you picked your
-provider for settlement currency, local payment methods or approval rates in your
+provider for settlement currency, [local payment methods](/blog/local-payment-methods-why-cards-lose-sales/) or approval rates in your
 market, switching to whichever one happens to have a plugin means choosing your
 payments partner based on plugin availability instead of on your customers.
 

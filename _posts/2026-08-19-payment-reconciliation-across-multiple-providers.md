@@ -44,7 +44,7 @@ nobody is reporting the same thing twice:
 - **Currency conversion and rounding.** An order priced in EUR, settled in GBP,
   converted at the provider's rate on the provider's date, will not equal the number
   your store calculated at checkout.
-- **Missed webhooks.** A status change that never arrived leaves the order in one
+- **Missed [webhooks](/blog/webhook-verification-reconciliation/).** A status change that never arrived leaves the order in one
   state in your store and another at the provider. This one is the most dangerous,
   because it is not a reporting difference; it is a genuinely wrong record.
 
@@ -109,7 +109,7 @@ Free plugins are available for [WooCommerce](/integrations/woocommerce/),
 ## Where PaymentHood fits
 
 If you run more than one payment provider (and most sellers eventually do, whether
-for currency coverage, local methods or failover), reconciliation is the hidden tax
+for currency coverage, local methods or [failover](/payment-infrastructure/failover/)), reconciliation is the hidden tax
 you pay for it. PaymentHood removes that tax by making multiple providers look like
 one system to your books, and there is **no per-transaction fee from PaymentHood**,
 so consolidating your reporting does not cost you a slice of every sale.

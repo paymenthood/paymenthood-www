@@ -51,7 +51,7 @@ is a number you can put on an invoice.
 
 ## What failover actually is
 
-Failover is the ability to **retry a failed payment through a different provider**
+Failover is the ability to **[retry](/blog/automated-retries-payment-idempotency/) a failed payment through a different provider**
 instead of returning an error to the customer. The important nuance is *which*
 failures are worth retrying:
 
@@ -90,7 +90,7 @@ architecture, including the duplicate charge a naive retry can create.
 when one fails for a technical reason, **automatically retries through another**,
 so a provider's outage doesn't become your outage. You connect the providers you
 want (cards, wallets, regional and crypto methods, {{ site.provider_floor }}
-supported), and routing and failover happen without you touching checkout code.
+supported), and [routing and failover](/blog/how-payment-orchestration-works/) happen without you touching checkout code.
 
 Because it is one integration, adding a backup provider is a dashboard change rather
 than a second build, and switching your primary provider mid-incident is a toggle

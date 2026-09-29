@@ -47,7 +47,7 @@ That covers one provider. In WHMCS specifically, the friction is:
 - **Recurring billing.** Hosting renews. For automatic renewals to work, the
   gateway must support tokenised/merchant-initiated payments, and each module
   handles this differently, or not at all.
-- **No failover.** If your provider has an outage on a renewal run, those
+- **No failover.** If your provider has an [outage](/blog/payment-gateway-downtime-failover/) on a renewal run, those
   invoices fail and dunning kicks in.
 - **A module per gateway,** each updated (and broken) on its own schedule.
 
@@ -90,7 +90,7 @@ re-solving the same problems per gateway.
 ## Where PaymentHood fits
 
 [PaymentHood](/) connects WHMCS to {{ site.provider_floor }} payment providers
-through one free, open-source module, with routing, automatic failover,
+through one free, open-source module, with routing, [automatic failover](/payment-infrastructure/failover/),
 subscription/recurring support, webhook verification and server-side
 confirmation handled for you. Orders, renewals, statuses and refunds flow through
 WHMCS as expected, and you switch providers from a dashboard rather than in code.

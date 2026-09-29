@@ -51,7 +51,7 @@ Improving approval rate isn't one trick; it's a handful of disciplines:
 
 1. **Tell soft declines from hard ones.** A timeout or a do-not-honour is worth
    retrying; *insufficient funds* or a *stolen card* is not. Retrying a genuine hard
-   decline just annoys the issuer and can look like card testing. The distinction is
+   decline just annoys the issuer and can look like [card testing](/blog/card-testing-fraud-signup-forms/). The distinction is
    everything.
 2. **Retry recoverable declines through another provider.** A soft decline on
    provider A is often an approval on provider B. This alone recovers a meaningful
@@ -66,7 +66,7 @@ Improving approval rate isn't one trick; it's a handful of disciplines:
 
 Every lever above assumes you can send a payment down more than one path, decide
 which, and retry across them: multiple providers, retry logic that
-classifies declines correctly, and routing rules that live somewhere you can change.
+classifies declines correctly, and [routing rules](/blog/how-payment-orchestration-works/) that live somewhere you can change.
 Build that per-provider and it's a project on its own; it's also exactly what a
 [payment orchestration platform](/payment-orchestration/) does, and the
 same machinery that provides

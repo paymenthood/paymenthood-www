@@ -77,11 +77,11 @@ That is the difference between having one gateway and having a fallback.
 
 If you are setting up a store now, [our free plugins](/integrations/) cover
 WooCommerce, WHMCS, VirtueMart, Phoca Cart and J2Commerce, and give you more than
-one provider behind a single checkout, so the failover in the last section is a
+one provider behind a single checkout, so the [failover](/payment-infrastructure/failover/) in the last section is a
 setting rather than a project. And once you are live, [Why Payments Fail](/blog/why-payments-fail/)
 covers what to do about the declines you will start seeing.
 
 If you wrote the integration yourself rather than installing a plugin, there is a
-longer engineering version of this list (idempotency, webhook signatures, unknown
+longer engineering version of this list ([idempotency](/blog/automated-retries-payment-idempotency/), webhook signatures, unknown
 states) in the [payment integration launch
 checklist](/payment-infrastructure/checklist/).

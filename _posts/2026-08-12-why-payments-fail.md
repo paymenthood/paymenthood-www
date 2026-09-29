@@ -167,7 +167,7 @@ browser reached your success URL, which an attacker controls.
 
 ## Measure the right number
 
-The metric is **authorisation rate**: approved authorisations divided by
+The metric is **[authorisation rate](/blog/how-to-improve-your-payment-approval-rate/)**: approved authorisations divided by
 attempted ones. The aggregate figure is nearly useless on its own. What makes it
 actionable is the segmentation:
 
@@ -207,7 +207,7 @@ rules, idempotency and webhook signature verification across
 {{ site.provider_floor }} providers behind one API. If you are running
 WooCommerce, WHMCS, VirtueMart, Phoca Cart or J2Commerce, the
 [free plugins](/integrations/) mean it is a plugin install rather than a
-development project, and the retry and routing rules live in a dashboard instead
+development project, and the retry and [routing rules](/blog/how-payment-orchestration-works/) live in a dashboard instead
 of in your checkout code.
 
 If the broader idea is new to you, [What Is Payment

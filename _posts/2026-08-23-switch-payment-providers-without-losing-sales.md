@@ -58,7 +58,7 @@ is itself a build.
 ## How orchestration removes the risk
 
 With a [payment orchestration platform](/payment-orchestration/) your
-checkout integrates once, with the orchestration layer, not with each provider.
+checkout integrates once, with the [orchestration layer](/blog/what-is-payment-orchestration/), not with each provider.
 Providers sit behind it, so **switching one becomes a configuration change rather
 than a code change.** You can:
 
@@ -80,7 +80,7 @@ project.
 [PaymentHood](/) connects your store to {{ site.provider_floor }} providers through
 one integration, and you add, switch or route between them **from a dashboard
 without touching your checkout code.** Run two providers in parallel, shift traffic
-gradually, and if one has trouble, failover moves payments to another automatically,
+gradually, and if one has trouble, [failover](/payment-infrastructure/failover/) moves payments to another automatically,
 so a migration, or an outage, never has to be a big-bang risk. Webhook verification
 and server-side confirmation are handled once, centrally, so they don't need
 rebuilding every time your provider line-up changes.

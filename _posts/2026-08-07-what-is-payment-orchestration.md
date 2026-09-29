@@ -61,7 +61,7 @@ two integrations, two webhook formats, two sets of error codes, and a checkout
 that has to know which one to call.
 
 **Wave two: a provider has a bad day.** Every provider does. Without a fallback,
-their outage is your outage. Every transaction fails for as long as it lasts,
+their [outage](/blog/payment-gateway-downtime-failover/) is your outage. Every transaction fails for as long as it lasts,
 and you find out from customers rather than from monitoring.
 
 **Wave three: economics.** Different providers price differently by card type,
@@ -70,7 +70,7 @@ authorisation rate becomes worth real money, but only if the routing decision
 is somewhere you can change it.
 
 Orchestration is the answer to all three: one integration, many providers,
-routing rules that live in configuration rather than in your checkout code.
+[routing rules](/blog/how-payment-orchestration-works/) that live in configuration rather than in your checkout code.
 
 ## What an orchestration layer actually does
 

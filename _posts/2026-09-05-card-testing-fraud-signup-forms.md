@@ -40,7 +40,7 @@ same ones that make signup frictionless for real customers.
 
 The charges themselves are rarely the expensive part. What follows is:
 
-- **Processing fees on every attempt**, including declines. Thousands of attempts
+- **Processing fees on every attempt**, including [declines](/blog/why-payments-fail/). Thousands of attempts
   is a real invoice for revenue that never existed.
 - **Your decline rate**, which your provider watches. Every acquirer has a
   threshold, and crossing it starts a review, and a review of a merchant whose
@@ -49,7 +49,7 @@ The charges themselves are rarely the expensive part. What follows is:
   account review actually does to a business.
 - **Chargebacks later.** The cards that worked get used elsewhere, and some of
   those disputes trace back through your small charge.
-- **Poisoned metrics.** Signups, conversion rate and approval rate all become
+- **Poisoned metrics.** Signups, conversion rate and [approval rate](/blog/how-to-improve-your-payment-approval-rate/) all become
   fiction for as long as it runs.
 - **Infrastructure**, if each signup provisions something before payment clears.
 

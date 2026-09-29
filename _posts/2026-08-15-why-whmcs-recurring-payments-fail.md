@@ -47,7 +47,7 @@ Four causes account for almost all of it:
    `capture` (or don't) in their own way. One gateway auto-charges cleanly; the
    next needs the customer to pay every invoice by hand, and you only discover
    which is which after renewals start failing.
-4. **Card updates and soft declines.** Cards expire and get reissued. Without
+4. **Card updates and [soft declines](/blog/why-payments-fail/).** Cards expire and get reissued. Without
    account-updater support or a retry path, a renewal that *could* succeed on a
    second attempt is written off as a hard failure.
 
@@ -76,7 +76,7 @@ that.
 
 The durable fix is to use a payment path that actually supports merchant-initiated
 renewals, so WHMCS can capture on the due date without the customer present. In
-practice that means a gateway (or an orchestration layer) that:
+practice that means a gateway (or an [orchestration layer](/blog/what-is-payment-orchestration/)) that:
 
 - **Creates a reusable agreement** at the first payment and stores a token WHMCS
   can charge later.

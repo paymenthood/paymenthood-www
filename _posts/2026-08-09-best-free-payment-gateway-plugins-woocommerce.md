@@ -39,7 +39,7 @@ region, the local provider's official plugin is usually the simplest route.
 
 Instead of a plugin per gateway, one free open-source plugin connects WooCommerce
 to {{ site.provider_floor }} providers at once, with routing and automatic
-failover. This is the option to look at when you expect more than one provider, a
+[failover](/payment-infrastructure/failover/). This is the option to look at when you expect more than one provider, a
 fallback, or multiple markets.
 
 ## How to choose
@@ -63,7 +63,7 @@ Two things quietly turn "free" into paid:
 
 [PaymentHood](/) is free and open-source, connects WooCommerce to
 {{ site.provider_floor }} providers through one plugin, and handles routing,
-failover, webhook verification and reconciliation for you, with no
+failover, [webhook verification](/blog/webhook-verification-reconciliation/) and reconciliation for you, with no
 per-transaction fee from us (you pay only your chosen provider's processing
 fees). An optional plan adds white-label checkout branding.
 

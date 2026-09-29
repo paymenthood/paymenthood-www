@@ -74,7 +74,7 @@ trusting a redirect back to your success page.
 
 ## Adding crypto without building a separate silo
 
-Here's the trap. Each crypto provider (Binance Pay, OxaPay, BitPay and others) is
+Here's the trap. Each crypto provider ([Binance Pay](/providers/binance/), OxaPay, [BitPay](/providers/bitpay/) and others) is
 its **own** integration, with its own API, its own callbacks and its own dashboard.
 Add one and you've added another payment system to maintain, separate from the cards
 and local methods you already run. Offer crypto in two stores or on two platforms and

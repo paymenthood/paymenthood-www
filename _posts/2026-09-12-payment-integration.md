@@ -84,7 +84,7 @@ almost always hosted or embedded, and has handled the callback plumbing.
 This is the cheapest route by a wide margin, and the limit is what the plugin
 chooses to expose. The other limit is arithmetic: the usual model is one plugin
 per provider, so the second provider is a second install, a second set of
-credentials and a second reconciliation habit.
+credentials and a second [reconciliation](/blog/payment-reconciliation-across-multiple-providers/) habit.
 [Free plugins for the major carts and billing systems](/integrations/) are worth
 checking before you plan any build at all.
 
@@ -120,7 +120,7 @@ schedule is spent on the paths nobody demos:
 - **Refunds, partial refunds and disputes**, each with their own notification and
   their own effect on your records.
 - **Declines you cannot produce on demand.** Test cards cover a handful; the ones
-  that matter in production are the ones you never saw in sandbox.
+  that matter in production are the ones you never saw in [sandbox](/blog/test-your-checkout-before-you-go-live/).
 
 A concrete list of what to verify before going live, rather than after, is the
 [payment integration launch checklist](/payment-infrastructure/checklist/).

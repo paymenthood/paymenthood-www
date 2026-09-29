@@ -79,7 +79,7 @@ tokens the provider returns, never the card number. Cardholder data never lands 
 your server, your database or your logs, which keeps you on the shortest PCI path
 rather than the SAQ D programme a self-built card form would trigger.
 
-Because it's an orchestration layer, that holds true **across every provider you
+Because it's an [orchestration layer](/blog/what-is-payment-orchestration/), that holds true **across every provider you
 connect**: you don't re-solve PCI scope each time you add a gateway. You connect the
 providers you want ({{ site.provider_floor }} supported) through one integration, and
 the data-handling model stays the same.
@@ -92,7 +92,7 @@ your acquirer confirms which SAQ applies to you.)*
 If PCI compliance feels heavier than it should, it's usually because card data is
 touching a server it never needed to. PaymentHood connects your store to
 {{ site.provider_floor }} providers through one free integration that keeps cardholder
-data off your systems entirely, with webhook verification and server-side
+data off your systems entirely, with [webhook verification](/blog/webhook-verification-reconciliation/) and server-side
 confirmation handled for you, and no per-transaction fee from PaymentHood. Free
 plugins are available for [WooCommerce](/integrations/woocommerce/),
 [WHMCS](/integrations/whmcs/), VirtueMart, Phoca Cart and J2Commerce.

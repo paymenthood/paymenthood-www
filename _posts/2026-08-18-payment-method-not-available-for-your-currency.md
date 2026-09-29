@@ -31,7 +31,7 @@ refuses rather than guesses. The usual triggers:
   Spain) or a local scheme are currency- and country-bound by design: correct for
   their market, unavailable outside it.
 - **Multi-currency pricing without multi-currency acceptance.** Your storefront
-  shows prices in the visitor's currency, but the single gateway behind it can only
+  shows prices in the visitor's currency, but the [single gateway](/blog/single-payment-processor-limitations/) behind it can only
   charge in one, so the display and the charge disagree.
 
 ## How to confirm it's the currency
@@ -84,7 +84,7 @@ each market without maintaining a plugin per gateway.
 If international orders are dying at *"not available for your currency,"* the fix is
 to stop relying on one provider to cover every currency. PaymentHood connects your
 store to {{ site.provider_floor }} providers through one free integration, routing
-by currency with automatic failover, webhook verification and server-side
+by currency with [automatic failover](/payment-infrastructure/failover/), webhook verification and server-side
 confirmation built in, and no per-transaction fee from PaymentHood. Free plugins
 are available for [WooCommerce](/integrations/woocommerce/),
 [WHMCS](/integrations/whmcs/), VirtueMart, Phoca Cart and J2Commerce.

@@ -165,7 +165,7 @@ settle it, and each takes an afternoon:
 - **Retry after a decline with the old key.** Expect a new attempt to be possible;
   if you get the cached decline back, your key is too coarse.
 
-None of these require a provider sandbox that simulates failure. They require
+None of these require a provider [sandbox](/blog/test-your-checkout-before-you-go-live/) that simulates failure. They require
 breaking the connection at your own boundary, which you control. The broader
 pre-launch list is a separate exercise, and the failure taxonomy that decides
 what deserves a retry at all is in <a href="/blog/why-payments-fail/">why
@@ -216,7 +216,7 @@ is proportional to traffic and therefore grows exactly as the business does.
 [PaymentHood](/) is a [payment orchestration
 platform](/payment-orchestration/): one integration between your application and
 [{{ site.provider_floor }} providers](/providers.html), with routing, failover,
-idempotency, webhook verification and reconciliation handled in the layer rather
+idempotency, [webhook verification](/blog/webhook-verification-reconciliation/) and reconciliation handled in the layer rather
 than in whatever is calling it.
 
 The property that matters here is where the identity of a payment lives. Charge

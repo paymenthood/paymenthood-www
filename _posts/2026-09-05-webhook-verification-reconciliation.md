@@ -106,7 +106,7 @@ the event permanently.
 
 **Expect retries to continue.** A provider that cannot reach you will keep trying
 for a long time, which means a handler that has been broken for an hour may get an
-hour of history delivered at once when it recovers. That is the moment idempotency
+hour of history delivered at once when it recovers. That is the moment [idempotency](/blog/automated-retries-payment-idempotency/)
 earns its place.
 
 ## Webhooks are the news, not the record
@@ -129,7 +129,7 @@ job, no alert. The money is at the provider and your database does not know.
 
 ## Reconciliation is the check that webhooks were enough
 
-Reconciliation is the periodic comparison between what you think happened and
+[Reconciliation](/blog/payment-reconciliation-across-multiple-providers/) is the periodic comparison between what you think happened and
 what each provider says happened. It is the only mechanism that catches the
 failure mode above, and it is boring in the way that load-bearing things usually
 are.

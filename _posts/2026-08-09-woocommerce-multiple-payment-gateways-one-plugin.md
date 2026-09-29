@@ -42,12 +42,12 @@ cluttered, which *hurts* conversion instead of helping it.
 ## The one-plugin approach
 
 Instead of a plugin per gateway, connect WooCommerce to many providers through a
-**single plugin** (this is what payment orchestration does). You still offer
+**single plugin** (this is what [payment orchestration](/blog/what-is-payment-orchestration/) does). You still offer
 several methods at checkout, but:
 
 - **One plugin** to install and keep updated, not five.
 - **Add or switch providers from a dashboard:** no new installation.
-- **Automatic routing and failover** across providers.
+- **Automatic [routing and failover](/blog/how-payment-orchestration-works/)** across providers.
 - **One reconciliation view** instead of five settlement reports.
 
 ## Choosing which provider handles a payment
