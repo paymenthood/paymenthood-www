@@ -2,10 +2,12 @@
   Cookie consent banner. Pairs with the Consent Mode v2 / GTM gate in the
   <head> of header.html, which exposes window.phConsent.
 
-  Nothing non-essential loads until accept() is called, so this banner is the
-  only thing standing between a visitor and Google Analytics / Microsoft
-  Clarity session recording. Reject is a real choice, not a dismiss: it is
-  stored, and GTM is never injected.
+  Since the move to Consent Mode advanced (2026-09-29) the GTM container loads
+  for every visitor, so this banner is no longer the thing that keeps Google
+  Analytics and Microsoft Clarity quiet. What keeps them quiet is the denied
+  consent state set before the container arrives, plus per-tag consent checks
+  configured inside the container. Reject is still a real choice, not a
+  dismiss: it is stored, and it sends an explicit denied update.
 
   Rendered hidden and revealed by JS so it never appears for visitors who have
   already chosen, and never blocks first paint.
@@ -14,7 +16,7 @@
   <div class="ph-consent-inner">
     <div class="ph-consent-copy">
       <p id="ph-consent-title" class="ph-consent-title">We use cookies</p>
-      <p id="ph-consent-desc" class="ph-consent-text">Essential cookies keep the site working. We would also like analytics cookies to understand how the site is used, which includes session recording. These load only if you accept. Read our <a href="/privacy.html">Privacy Policy</a>.</p>
+      <p id="ph-consent-desc" class="ph-consent-text">Essential cookies keep the site working. We would also like analytics cookies to understand how the site is used, which includes session recording. These start only if you accept. Read our <a href="/privacy.html">Privacy Policy</a>.</p>
     </div>
     <div class="ph-consent-actions">
       <button type="button" id="ph-consent-reject" class="ph-consent-btn ph-consent-btn--ghost">Reject</button>
