@@ -388,6 +388,36 @@
                 <h2 class="h2 fw-bold txt-blue-600 mb-3">Keep reading</h2>
             </div>
         </div>
+        {%- comment %}
+          Same provider, other platforms. Combo pages were reaching two inbound
+          internal links each (the provider page and the platform page) and no
+          more, which is thin for a family of a hundred pages and shows up in
+          Search Console as "Discovered, currently not indexed". Linking the
+          siblings turns a flat hub-and-spoke into a mesh, and it is genuinely
+          useful: a reader on one cart often runs another.
+
+          Gated stubs are skipped. They carry noindex, so a link into one is a
+          link Google is asked to ignore.
+        {% endcomment -%}
+        {%- assign family = site.pages | where: "provider", include.provider | sort: "platform" -%}
+        {%- assign siblings = '' | split: '' -%}
+        {%- for s in family -%}
+          {%- unless s.platform == include.platform or s.noindex -%}
+            {%- assign siblings = siblings | push: s -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- if siblings.size > 0 %}
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+                <p class="fw-semibold txt-blue-600 mb-3">{{ d.name }} on other platforms</p>
+                <ul class="chip-row">
+                    {%- for s in siblings %}
+                    <li><a class="chip" href="/integrations/{{ s.platform }}/{{ include.provider }}/">{{ d.name }} for {{ site.data.integrations[s.platform].product.platform }}</a></li>
+                    {%- endfor %}
+                </ul>
+            </div>
+        </div>
+        {%- endif %}
         <div class="row gy-4 justify-content-center">
             <div class="col-lg-4 col-md-6">
                 <a href="{{ provider_url }}" class="how-step">
