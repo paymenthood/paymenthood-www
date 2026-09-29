@@ -49,7 +49,7 @@ In every one of those cases the money moved and your store never heard about it.
 ## Then why doesn't the webhook save you?
 
 It usually does, which is why this is intermittent rather than constant. But
-[webhooks](/blog/webhook-verification-reconciliation/) have their own failure modes, and they are quieter than the redirect ones.
+webhooks have their own failure modes, and they are quieter than the redirect ones.
 
 **Delivery is not guaranteed.** Providers retry a handful of times and then give
 up. If your server was down, slow, or mid-deploy during that window, the event is
@@ -59,7 +59,7 @@ never arrived and a notification that never arrived look identical.
 **Timeouts count as failures.** If your webhook handler does real work inline
 (sending the confirmation email, calling an ERP, generating a licence), a slow
 downstream service can push you past the provider's timeout. The provider records
-a failed delivery and retries, and if the handler is not [idempotent](/blog/automated-retries-payment-idempotency/), the retries
+a failed delivery and retries, and if the handler is not idempotent, the retries
 can double-apply what the first one already did.
 
 **Some providers have no useful webhook at all.** PPRO's Global API, which is how

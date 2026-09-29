@@ -51,7 +51,7 @@ is a number you can put on an invoice.
 
 ## What failover actually is
 
-Failover is the ability to **[retry](/blog/automated-retries-payment-idempotency/) a failed payment through a different provider**
+Failover is the ability to **retry a failed payment through a different provider**
 instead of returning an error to the customer. The important nuance is *which*
 failures are worth retrying:
 

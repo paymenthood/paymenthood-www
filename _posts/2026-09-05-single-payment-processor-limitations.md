@@ -85,7 +85,7 @@ is a bad week rather than an extinction event.
 
 This one is invisible, which is why it is last and why it persists longest.
 
-With one provider, your [approval rate](/blog/how-to-improve-your-payment-approval-rate/) is just a number. It might be excellent for
+With one provider, your approval rate is just a number. It might be excellent for
 your mix of countries, methods and customers, or it might be leaving a meaningful
 share of revenue on the table every month. There is no way to tell from the
 inside, because you have no counterfactual. The provider's own reporting will not
@@ -159,7 +159,7 @@ integration **plus** a coordination layer nobody scoped:
 - Somebody has to maintain all of it as both providers change their APIs.
 
 That coordination layer is the actual product being described whenever anyone
-says "[payment orchestration](/blog/what-is-payment-orchestration/)": the reason it exists as a category rather than as
+says "payment orchestration": the reason it exists as a category rather than as
 a weekend of work. [How payment failover is actually
 built](/payment-infrastructure/failover/) walks through the part that most often
 gets underestimated.

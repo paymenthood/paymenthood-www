@@ -47,7 +47,7 @@ Four causes account for almost all of it:
    `capture` (or don't) in their own way. One gateway auto-charges cleanly; the
    next needs the customer to pay every invoice by hand, and you only discover
    which is which after renewals start failing.
-4. **Card updates and [soft declines](/blog/why-payments-fail/).** Cards expire and get reissued. Without
+4. **Card updates and soft declines.** Cards expire and get reissued. Without
    account-updater support or a retry path, a renewal that *could* succeed on a
    second attempt is written off as a hard failure.
 

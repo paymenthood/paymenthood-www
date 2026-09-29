@@ -61,7 +61,7 @@ the layer simply routes that shopper to a provider that can take their money.
 
 Every provider has a bad day. Without a fallback, their downtime is your downtime:
 every payment fails until they recover, and you usually hear it from customers. With
-orchestration, a **technical** failure (a timeout, a 500, a gateway [outage](/blog/payment-gateway-downtime-failover/)) is retried
+orchestration, a **technical** failure (a timeout, a 500, a gateway outage) is retried
 through another healthy provider while the shopper is still on the page.
 
 The discipline is in what *not* to retry:
@@ -99,7 +99,7 @@ Here is exactly how it happens, and how the layer stops it:
 2. Failover (Step 2) retries the "failed" payment through another provider. Now the
    card has been charged **twice**.
 
-An orchestration layer prevents this with an **[idempotency key](/blog/automated-retries-payment-idempotency/)**: a unique token
+An orchestration layer prevents this with an **idempotency key**: a unique token
 attached to the payment *attempt*, not the provider call. A repeated request with the
 same key returns the original result instead of creating a second charge, and failover
 carries that key so the retry can't double-charge. Without one payment identity across

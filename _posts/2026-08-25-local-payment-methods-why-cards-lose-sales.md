@@ -85,14 +85,14 @@ fee from PaymentHood. You pay only your chosen provider's processing fees.
 
 Because it's one integration, adding the local method for a market you're losing
 sales in is a dashboard change rather than a new build, and you're never limited to
-whichever methods a [single provider](/blog/single-payment-processor-limitations/) happens to support.
+whichever methods a single provider happens to support.
 
 ## Where PaymentHood fits
 
 If a new market is underperforming and you can't quite say why, check the payment
 methods your checkout offers there before you blame anything else; the sale is often
 lost to a missing local rail, not to the market. PaymentHood lets you offer the right
-local methods per market through one free integration, with routing, [failover](/payment-infrastructure/failover/),
+local methods per market through one free integration, with routing, failover,
 webhook verification and server-side confirmation built in. Free plugins are
 available for [WooCommerce](/integrations/woocommerce/), [WHMCS](/integrations/whmcs/),
 VirtueMart, Phoca Cart and J2Commerce.
