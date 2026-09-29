@@ -1,7 +1,8 @@
 ---
 title: "How to Accept Crypto Payments on Your Store (Without Holding Crypto)"
-description: "How to accept crypto payments on your store: which providers to use, how settlement to fiat works, chargeback protection, and how to add crypto alongside cards."
+description: "How to accept crypto payments on your store: which providers to use, how settlement to fiat works, and how to add crypto alongside cards."
 date: 2026-08-31
+image: /assets/images/og/blog/how-to-accept-crypto-payments.jpg
 tags: [payments, crypto]
 hero: /assets/images/blog/how-to-accept-crypto-payments.svg
 ---

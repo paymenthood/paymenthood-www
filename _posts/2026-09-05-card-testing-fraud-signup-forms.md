@@ -1,7 +1,9 @@
 ---
 title: "Card Testing on Signup Forms: Spot It and Stop It"
-description: "Card testing turns your signup form into someone else's validation tool. How to recognise the pattern, why CAPTCHA is not the fix, and the rules that actually stop it."
+description: "Card testing turns your signup form into someone else's validation tool. How to spot the pattern, why CAPTCHA is not the fix, and what stops it."
 date: 2026-09-05
+image: /assets/images/og/blog/card-testing-fraud-signup-forms.jpg
+hero: /assets/images/blog/card-testing-fraud-signup-forms.jpg
 tags: [fraud, payments]
 ---
 

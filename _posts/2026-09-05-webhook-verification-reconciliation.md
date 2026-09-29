@@ -1,7 +1,9 @@
 ---
 title: "Webhook Verification and Reconciliation, Explained"
-description: "How webhook verification prevents double-processing, and how reconciliation keeps your transaction records in sync once more than one provider is taking money."
+description: "How webhook verification prevents double-processing, and how reconciliation keeps your records in sync once more than one provider takes money."
 date: 2026-09-05
+image: /assets/images/og/blog/webhook-verification-reconciliation.jpg
+hero: /assets/images/blog/webhook-verification-reconciliation.jpg
 tags: [webhooks, architecture]
 redirect_from: /blog/webhooks-for-payment-events/
 ---

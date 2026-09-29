@@ -1,7 +1,9 @@
 ---
 title: "The Limits of a Single Payment Processor"
-description: "One processor is the right choice for longer than people admit. But four limits are structural rather than fixable, and the expensive one has nothing to do with technology."
+description: "One processor is right for longer than people admit. But four limits are structural, and the expensive one has nothing to do with technology."
 date: 2026-09-05
+image: /assets/images/og/blog/single-payment-processor-limitations.jpg
+hero: /assets/images/blog/single-payment-processor-limitations.jpg
 tags: [payments, orchestration]
 ---
 
