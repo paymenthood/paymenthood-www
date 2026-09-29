@@ -18,7 +18,7 @@ slug: opay
 status: live
 category: regional
 region: Nigeria
-logo: /assets/images/home/providers-icon/opay-light.png
+logo: /assets/images/home/providers-icon/opay-light.webp
 accent: "#00873d"
 accent_rgb: "0,135,61"
 accent_text: "#00843b"   # computed: 4.81 on white, 4.57 on bg-light

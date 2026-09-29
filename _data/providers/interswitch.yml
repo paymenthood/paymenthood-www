@@ -18,7 +18,7 @@ slug: interswitch
 status: live
 category: regional
 region: Nigeria / Africa
-logo: /assets/images/home/providers-icon/interswitch-light.png
+logo: /assets/images/home/providers-icon/interswitch-light.webp
 accent: "#c8102e"
 accent_rgb: "200,16,46"
 accent_text: "#c8102e"   # computed: 5.88 on white, 5.58 on bg-light

@@ -18,7 +18,7 @@ slug: quidax
 status: live
 category: crypto
 region: Africa
-logo: /assets/images/home/providers-icon/quidax-light.png
+logo: /assets/images/home/providers-icon/quidax-light.webp
 accent: "#3d5afe"
 accent_rgb: "61,90,254"
 accent_text: "#3d5afe"   # computed: 5.13 on white, 4.87 on bg-light

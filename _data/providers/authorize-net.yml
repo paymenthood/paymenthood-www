@@ -18,7 +18,7 @@ slug: authorize-net
 status: live
 category: regional
 region: US / Canada
-logo: /assets/images/home/providers-icon/authorize.png
+logo: /assets/images/home/providers-icon/authorize.webp
 accent: "#0072c6"
 accent_rgb: "0,114,198"
 accent_text: "#0072c6"   # computed: 4.97 on white, 4.72 on bg-light

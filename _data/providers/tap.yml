@@ -18,7 +18,7 @@ slug: tap
 status: live
 category: regional
 region: MENA
-logo: /assets/images/home/providers-icon/tap.png
+logo: /assets/images/home/providers-icon/tap.webp
 accent: "#1a56db"
 accent_rgb: "26,86,219"
 accent_text: "#1a56db"   # computed: 6.18 on white, 5.86 on bg-light

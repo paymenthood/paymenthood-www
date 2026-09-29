@@ -18,7 +18,7 @@ slug: sslcommerz
 status: live
 category: regional
 region: Bangladesh
-logo: /assets/images/home/providers-icon/sslcommerz.png
+logo: /assets/images/home/providers-icon/sslcommerz.webp
 accent: "#00539b"
 accent_rgb: "0,83,155"
 accent_text: "#00539b"   # computed: 7.75 on white, 7.35 on bg-light

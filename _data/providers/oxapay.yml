@@ -18,7 +18,7 @@ slug: oxapay
 status: live
 category: crypto
 region: Global
-logo: /assets/images/home/providers-icon/oxapay.png
+logo: /assets/images/home/providers-icon/oxapay.webp
 accent: "#0f9d8f"
 accent_rgb: "15,157,143"
 accent_text: "#068074"   # computed: 4.83 on white, 4.58 on bg-light

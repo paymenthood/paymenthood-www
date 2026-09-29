@@ -18,7 +18,7 @@ slug: paga
 status: live
 category: regional
 region: Nigeria
-logo: /assets/images/home/providers-icon/Paga-light.png
+logo: /assets/images/home/providers-icon/Paga-light.webp
 accent: "#b35900"
 accent_rgb: "179,89,0"
 accent_text: "#b35900"   # computed: 4.83 on white, 4.58 on bg-light

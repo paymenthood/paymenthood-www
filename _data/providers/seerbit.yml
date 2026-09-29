@@ -18,7 +18,7 @@ slug: seerbit
 status: live
 category: regional
 region: Africa
-logo: /assets/images/home/providers-icon/seerbit-light.png
+logo: /assets/images/home/providers-icon/seerbit-light.webp
 accent: "#00629b"
 accent_rgb: "0,98,155"
 accent_text: "#00629b"   # computed: 6.52 on white, 6.19 on bg-light

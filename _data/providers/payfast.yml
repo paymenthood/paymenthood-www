@@ -6,7 +6,7 @@ slug: payfast
 status: live
 category: regional
 region: South Africa
-logo: /assets/images/home/providers-icon/PayFast-light.png
+logo: /assets/images/home/providers-icon/PayFast-light.webp
 accent: "#e63946"
 accent_rgb: "230,57,70"
 accent_text: "#d2313e"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

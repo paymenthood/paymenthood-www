@@ -18,7 +18,7 @@ slug: braintree
 status: live
 category: global
 region: US / Global
-logo: /assets/images/home/providers-icon/braintree.png
+logo: /assets/images/home/providers-icon/braintree.webp
 accent: "#009cde"
 accent_rgb: "0,156,222"
 accent_text: "#0079ad"   # computed: 4.84 on white, 4.59 on bg-light

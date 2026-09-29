@@ -6,7 +6,7 @@ slug: dpo
 status: live
 category: regional
 region: Pan-Africa
-logo: /assets/images/home/providers-icon/dpo-light.png
+logo: /assets/images/home/providers-icon/dpo-light.webp
 accent: "#0b7285"
 accent_rgb: "11,114,133"
 accent_text: "#0b7285"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

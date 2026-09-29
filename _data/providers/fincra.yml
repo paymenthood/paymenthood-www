@@ -18,7 +18,7 @@ slug: fincra
 status: live
 category: regional
 region: Africa / Europe
-logo: /assets/images/home/providers-icon/Fincra-light.png
+logo: /assets/images/home/providers-icon/Fincra-light.webp
 accent: "#2b4eff"
 accent_rgb: "43,78,255"
 accent_text: "#2b4eff"   # computed: 5.77 on white, 5.48 on bg-light

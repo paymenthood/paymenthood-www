@@ -18,7 +18,7 @@ slug: adyen
 status: live
 category: global
 region: Europe / Global
-logo: /assets/images/home/providers-icon/adyen.png
+logo: /assets/images/home/providers-icon/adyen.webp
 accent: "#0abf53"
 accent_rgb: "10,191,83"
 accent_text: "#008433"   # computed: 4.83 on white, 4.58 on bg-light

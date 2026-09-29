@@ -18,7 +18,7 @@ slug: binance
 status: live
 category: crypto
 region: Global
-logo: /assets/images/home/providers-icon/binance.png
+logo: /assets/images/home/providers-icon/binance.webp
 accent: "#f0b90b"
 accent_rgb: "240,185,11"
 accent_text: "#8e6b00"   # computed: 4.94 on white, 4.68 on bg-light

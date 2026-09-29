@@ -18,7 +18,7 @@ slug: tpay
 status: live
 category: regional
 region: MENA / Africa
-logo: /assets/images/home/providers-icon/tpay.png
+logo: /assets/images/home/providers-icon/tpay.webp
 accent: "#5b2d90"
 accent_rgb: "91,45,144"
 accent_text: "#5b2d90"   # computed: 9.45 on white, 8.96 on bg-light

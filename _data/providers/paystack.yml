@@ -20,7 +20,7 @@ slug: paystack
 status: live                 # live | development — only `live` may be published
 category: regional
 region: Nigeria, Ghana, South Africa, Kenya & Côte d'Ivoire
-logo: /assets/images/home/providers-icon/paystack-light.png
+logo: /assets/images/home/providers-icon/paystack-light.webp
 accent: "#00c3f7"
 accent_rgb: "0,195,247"
 accent_text: "#007b9d"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

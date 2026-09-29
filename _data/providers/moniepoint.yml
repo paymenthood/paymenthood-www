@@ -18,7 +18,7 @@ slug: moniepoint
 status: live
 category: regional
 region: Nigeria
-logo: /assets/images/home/providers-icon/Moniepoint-light.png
+logo: /assets/images/home/providers-icon/Moniepoint-light.webp
 accent: "#0357ee"
 accent_rgb: "3,87,238"
 accent_text: "#0357ee"   # computed: 5.83 on white, 5.53 on bg-light

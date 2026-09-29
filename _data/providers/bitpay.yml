@@ -18,7 +18,7 @@ slug: bitpay
 status: live
 category: crypto
 region: Global
-logo: /assets/images/home/providers-icon/bitpay.png
+logo: /assets/images/home/providers-icon/bitpay.webp
 accent: "#113375"
 accent_rgb: "17,51,117"
 accent_text: "#113375"   # computed: 11.97 on white, 11.36 on bg-light

@@ -6,7 +6,7 @@ slug: ozow
 status: live
 category: regional
 region: South Africa
-logo: /assets/images/home/providers-icon/Ozow-light.png
+logo: /assets/images/home/providers-icon/Ozow-light.webp
 accent: "#0aa2c0"
 accent_rgb: "10,162,192"
 accent_text: "#007e94"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

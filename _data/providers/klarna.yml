@@ -18,7 +18,7 @@ slug: klarna
 status: live
 category: global
 region: Europe / US
-logo: /assets/images/home/providers-icon/klarna.png
+logo: /assets/images/home/providers-icon/klarna.webp
 accent: "#ffb3c7"
 accent_rgb: "255,179,199"
 accent_text: "#936372"   # computed: 4.92 on white, 4.67 on bg-light

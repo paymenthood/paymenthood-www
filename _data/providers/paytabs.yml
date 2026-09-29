@@ -18,7 +18,7 @@ slug: paytabs
 status: live
 category: regional
 region: MENA
-logo: /assets/images/home/providers-icon/paytabs.png
+logo: /assets/images/home/providers-icon/paytabs.webp
 accent: "#d81e34"
 accent_rgb: "216,30,52"
 accent_text: "#d81e34"   # computed: 5.05 on white, 4.79 on bg-light

@@ -18,7 +18,7 @@ slug: revolut
 status: live
 category: regional
 region: UK / Europe
-logo: /assets/images/home/providers-icon/revolut.png
+logo: /assets/images/home/providers-icon/revolut.webp
 accent: "#0666eb"
 accent_rgb: "6,102,235"
 accent_text: "#0666eb"   # computed: 5.11 on white, 4.85 on bg-light

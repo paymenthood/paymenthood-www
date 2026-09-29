@@ -6,7 +6,7 @@ slug: pesapal
 status: live
 category: regional
 region: East & Southern Africa
-logo: /assets/images/home/providers-icon/Pesapal-light.png
+logo: /assets/images/home/providers-icon/Pesapal-light.webp
 accent: "#f7941d"
 accent_rgb: "247,148,29"
 accent_text: "#a5600b"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

@@ -18,7 +18,7 @@ slug: square
 status: live
 category: global
 region: US / Global
-logo: /assets/images/home/providers-icon/square.png
+logo: /assets/images/home/providers-icon/square.webp
 accent: "#3e4348"
 accent_rgb: "62,67,72"
 accent_text: "#3e4348"   # computed: 9.99 on white, 9.48 on bg-light

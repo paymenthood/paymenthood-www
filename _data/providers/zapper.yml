@@ -12,7 +12,7 @@ slug: zapper
 status: live
 category: regional
 region: South Africa
-logo: /assets/images/home/providers-icon/Zapper-light.png
+logo: /assets/images/home/providers-icon/Zapper-light.webp
 accent: "#4c6ef5"
 accent_rgb: "76,110,245"
 accent_text: "#4665e6"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

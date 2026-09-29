@@ -18,7 +18,7 @@ slug: stripe
 status: live
 category: global
 region: Global
-logo: /assets/images/home/providers-icon/stripe.png
+logo: /assets/images/home/providers-icon/stripe.webp
 accent: "#635bff"
 accent_rgb: "99,91,255"
 accent_text: "#6159f9"   # computed: 4.88 on white, 4.63 on bg-light

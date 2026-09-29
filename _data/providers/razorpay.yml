@@ -18,7 +18,7 @@ slug: razorpay
 status: live
 category: regional
 region: India
-logo: /assets/images/home/providers-icon/razor.png
+logo: /assets/images/home/providers-icon/razor.webp
 accent: "#3395ff"
 accent_rgb: "51,149,255"
 accent_text: "#2774c7"   # computed: 4.76 on white, 4.52 on bg-light

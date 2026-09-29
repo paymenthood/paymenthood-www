@@ -18,7 +18,7 @@ slug: monnify
 status: live
 category: regional
 region: Nigeria
-logo: /assets/images/home/providers-icon/monnify.png
+logo: /assets/images/home/providers-icon/monnify.webp
 accent: "#0e7c3a"
 accent_rgb: "14,124,58"
 accent_text: "#0e7c3a"   # computed: 5.30 on white, 5.03 on bg-light

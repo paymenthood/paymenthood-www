@@ -18,7 +18,7 @@ slug: amazon-pay
 status: live
 category: global
 region: US / Europe
-logo: /assets/images/home/providers-icon/amazon.png
+logo: /assets/images/home/providers-icon/amazon.webp
 accent: "#ff9900"
 accent_rgb: "255,153,0"
 accent_text: "#a76000"   # computed: 4.87 on white, 4.62 on bg-light

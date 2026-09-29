@@ -22,7 +22,7 @@ region: Belgium
 # kept. Contrast recomputed for the new pair:
 #   #0066b3 — 5.91:1 on #ffffff, 5.61:1 on #f8f9fa  (fills, gradients)
 #   #005498 — 7.72:1 on #ffffff, 7.32:1 on #f8f9fa  (text and small icons)
-logo: /assets/images/home/providers-icon/bancontact-light.png
+logo: /assets/images/home/providers-icon/bancontact-light.webp
 accent: "#0066b3"
 accent_rgb: "0,102,179"
 accent_text: "#005498"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

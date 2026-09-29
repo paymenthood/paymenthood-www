@@ -30,7 +30,7 @@ region: Spain
 #   #007681 — 5.37:1 on #ffffff, 5.10:1 on #f8f9fa  (text and small icons)
 # accent_text is unchanged: it already matches the sampled brand darkened to 62%
 # (#03777b, 5.35:1) to within a rounding step, and it passes on both surfaces.
-logo: /assets/images/home/providers-icon/bizum-light.png
+logo: /assets/images/home/providers-icon/bizum-light.webp
 accent: "#05c0c7"
 accent_rgb: "5,192,199"
 accent_text: "#007681"   # WCAG AA on white and .bg-light; see _sass/components/_provider.scss

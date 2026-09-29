@@ -18,7 +18,7 @@ slug: kuda
 status: live
 category: regional
 region: Nigeria
-logo: /assets/images/home/providers-icon/kuda-light.png
+logo: /assets/images/home/providers-icon/kuda-light.webp
 accent: "#40196d"
 accent_rgb: "64,25,109"
 accent_text: "#40196d"   # computed: 13.31 on white, 12.63 on bg-light

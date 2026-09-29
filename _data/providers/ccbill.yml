@@ -34,7 +34,7 @@ region: Global
 # One difference remains and it is minor: siblings carry a tRNS chunk, this file
 # does not, so its white background is opaque rather than transparent. Invisible
 # on the white card, and at most a faint rectangle on .bg-light (#f8f9fa).
-logo: /assets/images/home/providers-icon/ccbill-light.png
+logo: /assets/images/home/providers-icon/ccbill-light.webp
 
 # RE-SAMPLE THIS. #0073ac was taken from the OLD artwork's blue background block,
 # which no longer exists — the replacement is a blue wordmark on white, and its
