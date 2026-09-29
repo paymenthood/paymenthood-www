@@ -5,6 +5,10 @@ date: 2026-08-27
 tags: [payments]
 hero: /assets/images/blog/how-to-improve-your-payment-approval-rate.svg
 image: /assets/images/og/blog/how-to-improve-your-payment-approval-rate.jpg
+related:
+  - /blog/why-payments-fail/
+  - /blog/automated-retries-payment-idempotency/
+  - /blog/local-payment-methods-why-cards-lose-sales/
 ---
 
 Most stores watch for payments that *fail loudly*: the error message, the stuck

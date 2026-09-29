@@ -5,6 +5,10 @@ date: 2026-08-18
 tags: [payments]
 hero: /assets/images/blog/payment-method-not-available-for-your-currency.svg
 image: /assets/images/og/blog/payment-method-not-available-for-your-currency.jpg
+related:
+  - /blog/local-payment-methods-why-cards-lose-sales/
+  - /blog/payment-provider-not-supported/
+  - /blog/switch-payment-providers-without-losing-sales/
 ---
 
 A customer in another country reaches your checkout, picks a payment method, and

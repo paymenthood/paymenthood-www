@@ -2,6 +2,14 @@
 layout: none
 title: Payment Routing, Failover and Reconciliation
 description: Route each payment to the right provider, retry technical failures through another, and reconcile every provider in one ledger. No checkout code changes.
+# "Read next" (related-posts.html). The first entry also links this page to the
+# post Google ranks for "payment orchestration", so the two reinforce each other.
+related:
+  - /blog/what-is-payment-orchestration/
+  - /blog/how-payment-orchestration-works/
+  - /blog/payment-gateway-downtime-failover/
+  - /blog/single-payment-processor-limitations/
+  - /blog/switch-payment-providers-without-losing-sales/
 ---
 
 {% include header-secondary.html %}
@@ -189,6 +197,16 @@ description: Route each payment to the right provider, retry technical failures 
   </section>
 
   {% include providers-strip.html eyebrow="Route Across" title="One layer, every provider" description="Activate any of them from your dashboard and the routing rules take it from there." %}
+
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          {% include related-posts.html heading="Read next" limit=5 %}
+        </div>
+      </div>
+    </div>
+  </section>
 
   {% include faq.html items=site.data.payment_orchestration.faqs eyebrow="Orchestration FAQ" bg="bg-light" %}
 </main>

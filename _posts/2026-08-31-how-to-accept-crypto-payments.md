@@ -5,6 +5,10 @@ date: 2026-08-31
 image: /assets/images/og/blog/how-to-accept-crypto-payments.jpg
 tags: [payments, crypto]
 hero: /assets/images/blog/how-to-accept-crypto-payments.svg
+related:
+  - /blog/local-payment-methods-why-cards-lose-sales/
+  - /blog/payment-method-not-available-for-your-currency/
+  - /blog/payment-provider-not-supported/
 ---
 
 Accepting crypto payments used to mean picking a coin, holding a volatile balance,

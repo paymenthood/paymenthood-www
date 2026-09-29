@@ -1,0 +1,79 @@
+{%- comment %}
+  Related articles, rendered as the same .blog-card the /blog/ listing uses.
+
+  Params (all optional):
+    heading  — visible <h2>, default "Related articles"
+    limit    — how many cards, default 3
+
+  Which posts, in priority order:
+    1. `related:` in the page's front matter — a list of post URLs, e.g.
+         related: [/blog/why-payments-fail/, /blog/how-payment-orchestration-works/]
+       Hand-picked lists (the marketing team's Links sheet) always win.
+    2. Newest posts sharing a specific tag with this page. "payments" is on
+       nearly every post, so a match on it alone says nothing about relevance
+       and is ignored here.
+    3. Newest posts overall, to fill any remaining slots.
+  The current page is never listed. Seen URLs are tracked as strings because
+  Liquid's `contains` is not reliable on arrays of post objects.
+
+  Card titles are <h3>: the block's own heading is the <h2>, and post bodies
+  start at <h2>, so the outline never skips a level.
+{% endcomment -%}
+{%- assign limit = include.limit | default: 3 -%}
+{%- assign generic_tag = "payments" -%}
+{%- assign picks = '' | split: '' -%}
+{%- assign seen = page.url | split: '|' -%}
+
+{%- for url in page.related -%}
+  {%- if picks.size >= limit -%}{%- break -%}{%- endif -%}
+  {%- assign p = site.posts | where: "url", url | first -%}
+  {%- if p and seen contains p.url -%}{%- continue -%}{%- endif -%}
+  {%- if p -%}
+    {%- assign picks = picks | push: p -%}
+    {%- assign seen = seen | push: p.url -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for post in site.posts -%}
+  {%- if picks.size >= limit -%}{%- break -%}{%- endif -%}
+  {%- if seen contains post.url -%}{%- continue -%}{%- endif -%}
+  {%- assign hit = false -%}
+  {%- for t in post.tags -%}
+    {%- if t != generic_tag and page.tags contains t -%}{%- assign hit = true -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if hit -%}
+    {%- assign picks = picks | push: post -%}
+    {%- assign seen = seen | push: post.url -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for post in site.posts -%}
+  {%- if picks.size >= limit -%}{%- break -%}{%- endif -%}
+  {%- if seen contains post.url -%}{%- continue -%}{%- endif -%}
+  {%- assign picks = picks | push: post -%}
+  {%- assign seen = seen | push: post.url -%}
+{%- endfor -%}
+
+{%- if picks.size > 0 %}
+<aside class="mt-5 pt-4 border-top" aria-labelledby="related-heading">
+  <h2 id="related-heading" class="h4 fw-bold txt-blue-600 mb-0">{{ include.heading | default: "Related articles" }}</h2>
+  <div class="row">
+    {%- for post in picks %}
+    {%- assign tag_label = nil -%}
+    {%- if post.tags.first -%}
+      {%- assign tag_label = site.data.breadcrumb_labels[post.tags.first] -%}
+      {%- unless tag_label -%}{%- assign tag_label = post.tags.first | replace: '-', ' ' | capitalize -%}{%- endunless -%}
+    {%- endif %}
+    <div class="col-12 blog-card">
+      <a href="{{ post.url | relative_url }}" class="blog-card-link">
+        {%- if tag_label %}
+        <span class="badge badge-tag">{{ tag_label }}</span>
+        {%- endif %}
+        <h3 class="blog-card-title">{{ post.title }}</h3>
+        <time datetime="{{ post.date | date_to_xmlschema }}" class="blog-card-date">{{ post.date | date: "%B %-d, %Y" }}</time>
+      </a>
+    </div>
+    {%- endfor %}
+  </div>
+</aside>
+{%- endif %}

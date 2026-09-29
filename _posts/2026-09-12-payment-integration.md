@@ -5,6 +5,10 @@ date: 2026-09-12
 image: /assets/images/og/blog/payment-integration.jpg
 hero: /assets/images/blog/payment-integration.jpg
 tags: [payments, integration]
+related:
+  - /blog/payment-provider-not-supported/
+  - /blog/what-is-payment-orchestration/
+  - /blog/do-you-need-pci-compliance-to-accept-payments/
 ---
 
 > **A payment integration** is the connection between your checkout and a payment

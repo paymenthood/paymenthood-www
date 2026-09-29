@@ -4,7 +4,11 @@ description: "A failed payment is three problems with three fixes. How to tell t
 date: 2026-08-12
 tags: [payments, reliability]
 hero: /assets/images/blog/why-payments-fail.svg
-image: /assets/images/og/blog/why-payments-fail.jpg
+image: /assets/images/og/blog/why-payments-fail.jpg
+related:
+  - /blog/how-to-improve-your-payment-approval-rate/
+  - /blog/payment-gateway-downtime-failover/
+  - /blog/automated-retries-payment-idempotency/
 ---
 
 Most checkouts treat a failed payment as one event: the charge did not go

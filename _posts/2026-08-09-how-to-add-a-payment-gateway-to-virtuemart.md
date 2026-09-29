@@ -5,6 +5,10 @@ date: 2026-08-09
 tags: [virtuemart, joomla, payments]
 hero: /assets/images/blog/how-to-add-a-payment-gateway-to-virtuemart.jpg
 image: /assets/images/og/blog/how-to-add-a-payment-gateway-to-virtuemart.jpg
+related:
+  - /blog/how-to-add-a-payment-gateway-to-woocommerce/
+  - /blog/how-to-add-a-payment-gateway-to-whmcs/
+  - /blog/test-your-checkout-before-you-go-live/
 ---
 
 VirtueMart is the e-commerce component for Joomla, and out of the box it handles

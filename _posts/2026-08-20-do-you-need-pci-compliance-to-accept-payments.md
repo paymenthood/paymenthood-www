@@ -5,6 +5,10 @@ date: 2026-08-20
 tags: [payments, security]
 hero: /assets/images/blog/do-you-need-pci-compliance-to-accept-payments.jpg
 image: /assets/images/og/blog/do-you-need-pci-compliance-to-accept-payments.jpg
+related:
+  - /blog/payment-integration/
+  - /blog/card-testing-fraud-signup-forms/
+  - /blog/test-your-checkout-before-you-go-live/
 ---
 
 At some point after you start taking card payments, a message arrives that makes

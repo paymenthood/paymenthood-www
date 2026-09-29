@@ -5,6 +5,10 @@ date: 2026-09-05
 image: /assets/images/og/blog/card-testing-fraud-signup-forms.jpg
 hero: /assets/images/blog/card-testing-fraud-signup-forms.jpg
 tags: [fraud, payments]
+related:
+  - /blog/how-to-improve-your-payment-approval-rate/
+  - /blog/why-payments-fail/
+  - /blog/do-you-need-pci-compliance-to-accept-payments/
 ---
 
 Somebody has a list of stolen card numbers. Most of them are dead. Before they can

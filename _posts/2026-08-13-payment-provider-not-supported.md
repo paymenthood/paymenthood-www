@@ -5,6 +5,10 @@ date: 2026-08-13
 tags: [payments, integration]
 hero: /assets/images/blog/payment-provider-not-supported.jpg
 image: /assets/images/og/blog/payment-provider-not-supported.jpg
+related:
+  - /blog/switch-payment-providers-without-losing-sales/
+  - /blog/payment-integration/
+  - /blog/payment-method-not-available-for-your-currency/
 ---
 
 You chose a payment provider for good reasons. It settles in your currency, it

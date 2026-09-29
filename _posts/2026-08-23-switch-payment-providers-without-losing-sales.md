@@ -5,6 +5,10 @@ date: 2026-08-23
 tags: [payments]
 hero: /assets/images/blog/switch-payment-providers-without-losing-sales.svg
 image: /assets/images/og/blog/switch-payment-providers-without-losing-sales.jpg
+related:
+  - /blog/payment-provider-not-supported/
+  - /blog/single-payment-processor-limitations/
+  - /blog/payment-gateway-downtime-failover/
 ---
 
 Most merchants know months before they act that they should switch payment

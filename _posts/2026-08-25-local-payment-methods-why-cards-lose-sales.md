@@ -4,7 +4,11 @@ description: "Shoppers leave when their trusted local method is missing: iDEAL, 
 date: 2026-08-25
 tags: [payments]
 hero: /assets/images/blog/local-payment-methods-why-cards-lose-sales.jpg
-image: /assets/images/og/blog/local-payment-methods-why-cards-lose-sales.jpg
+image: /assets/images/og/blog/local-payment-methods-why-cards-lose-sales.jpg
+related:
+  - /blog/payment-method-not-available-for-your-currency/
+  - /blog/how-to-improve-your-payment-approval-rate/
+  - /blog/how-to-accept-crypto-payments/
 ---
 
 You open a new market. Traffic arrives, the product is right, the prices are fair,

@@ -5,6 +5,10 @@ date: 2026-08-09
 tags: [whmcs, payments]
 hero: /assets/images/blog/how-to-add-a-payment-gateway-to-whmcs.svg
 image: /assets/images/og/blog/how-to-add-a-payment-gateway-to-whmcs.jpg
+related:
+  - /blog/why-whmcs-recurring-payments-fail/
+  - /blog/how-to-add-a-payment-gateway-to-virtuemart/
+  - /blog/how-to-add-a-payment-gateway-to-woocommerce/
 ---
 
 WHMCS automates billing and provisioning for hosting and SaaS businesses, but to

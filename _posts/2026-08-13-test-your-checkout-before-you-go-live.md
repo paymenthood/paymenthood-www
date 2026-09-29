@@ -4,7 +4,11 @@ description: "Most stores test one thing: a card that works. The failures that c
 date: 2026-08-13
 tags: [payments, checkout]
 hero: /assets/images/blog/test-your-checkout-before-you-go-live.svg
-image: /assets/images/og/blog/test-your-checkout-before-you-go-live.jpg
+image: /assets/images/og/blog/test-your-checkout-before-you-go-live.jpg
+related:
+  - /blog/payment-successful-order-still-pending/
+  - /blog/webhook-verification-reconciliation/
+  - /blog/do-you-need-pci-compliance-to-accept-payments/
 ---
 
 Almost every store tests its checkout the same way: put a test card in, see the
