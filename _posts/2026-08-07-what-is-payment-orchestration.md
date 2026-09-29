@@ -2,6 +2,7 @@
 title: "What Is Payment Orchestration? A Clear Definition"
 description: "Payment orchestration routes each transaction across your payment providers behind one API. What it actually does, and when you do not need it."
 date: 2026-08-07
+last_modified_at: 2026-09-29
 tags: [orchestration, architecture]
 image: /assets/images/og/blog/what-is-payment-orchestration.jpg
 hero: /assets/images/blog/what-is-payment-orchestration.jpg
@@ -18,7 +19,9 @@ reconciliation view.
 
 The short version: a payment gateway moves one transaction to one processor.
 An orchestration layer decides which processor, handles it failing, and keeps
-the result consistent across all of them.
+the result consistent across all of them. What that looks like as a product
+rather than as a concept is [payment routing, failover and
+reconciliation](/payment-orchestration/).
 
 <figure class="figure d-block w-100 my-4">
   <picture>
@@ -194,8 +197,7 @@ others without changing your checkout code.
 {{ site.provider_floor }} providers, with [routing, failover, idempotency,
 webhook signature verification and server-side
 confirmation](/payment-orchestration/) handled for you. For
-stores on [WooCommerce](/integrations/woocommerce/), [WHMCS](/integrations/whmcs/),
-VirtueMart, Phoca Cart or J2Commerce there are
+stores on WooCommerce, WHMCS, VirtueMart, Phoca Cart or J2Commerce there are
 [free plugins](/integrations/) so the integration is a plugin install rather than
 a development project, and provider changes happen in a dashboard rather than in
 your checkout code.
