@@ -1,6 +1,6 @@
 ---
 title: "Why Payments Fail, and What to Do About Each One"
-description: "A failed payment is three different problems with three different fixes. How to tell them apart, what to retry, when to retry it, and what to tell the customer."
+description: "A failed payment is three problems with three fixes. How to tell them apart, what to retry, when to retry it, and what to tell the customer."
 date: 2026-08-12
 tags: [payments, reliability]
 hero: /assets/images/blog/why-payments-fail.svg

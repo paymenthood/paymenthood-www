@@ -1,6 +1,6 @@
 ---
 title: "Local Payment Methods: Why Cards Alone Cost You Sales Abroad"
-description: "Shoppers abandon checkout when their trusted local method isn't there: iDEAL, Bizum, mobile money. Why cards aren't universal, and how to offer the right method per market."
+description: "Shoppers leave when their trusted local method is missing: iDEAL, Bizum, mobile money. Why cards are not universal, and how to offer the right one."
 date: 2026-08-25
 tags: [payments]
 hero: /assets/images/blog/local-payment-methods-why-cards-lose-sales.jpg
