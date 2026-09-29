@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="A store checkout connects once to the PaymentHood layer, which handles routing, failover, idempotency and verification, and fans out to five payment providers.">
+  <!--
+    Shares the visual language of the other blog SVGs: same 1200x675 canvas,
+    same palette (#1f6feb blue, #16b364 green, #64748b muted, #12183a text).
+    Fonts are a system stack on purpose. An SVG referenced through <img> gets
+    no webfonts, so naming Roboto here would silently fall back anyway.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2fb"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="card" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#1f6feb" flood-opacity="0.14"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11 z" fill="#1f6feb"/>
+    </marker>
+  </defs>
+
+  <style>
+    .t   { font-family: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+    .hd  { font-size: 26px; font-weight: 700; fill: #12183a; }
+    .lb  { font-size: 21px; font-weight: 600; fill: #12183a; }
+    .mu  { font-size: 18px; font-weight: 500; fill: #64748b; }
+    .cap { font-size: 17px; font-weight: 600; fill: #1f6feb; letter-spacing: .06em; }
+  </style>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1090" cy="70" r="200" fill="#1f6feb" opacity="0.06"/>
+  <circle cx="110" cy="620" r="150" fill="#16b364" opacity="0.08"/>
+
+  <!-- your checkout -->
+  <g filter="url(#card)">
+    <rect x="70" y="268" width="250" height="140" rx="16" fill="#ffffff" stroke="#dbe4f6" stroke-width="2"/>
+  </g>
+  <rect x="70" y="268" width="250" height="6" rx="3" fill="#1f6feb"/>
+  <text class="t hd" x="195" y="330" text-anchor="middle">Your checkout</text>
+  <text class="t mu" x="195" y="362" text-anchor="middle">one integration</text>
+
+  <!-- checkout -> layer -->
+  <line x1="322" y1="338" x2="418" y2="338" stroke="#1f6feb" stroke-width="4" marker-end="url(#arrow)"/>
+  <text class="t mu" x="370" y="318" text-anchor="middle">one API</text>
+
+  <!-- the layer -->
+  <g filter="url(#card)">
+    <rect x="430" y="190" width="340" height="296" rx="20" fill="#ffffff" stroke="#1f6feb" stroke-width="2.5"/>
+  </g>
+  <text class="t cap" x="600" y="232" text-anchor="middle">PAYMENT LAYER</text>
+  <text class="t hd" x="600" y="266" text-anchor="middle">PaymentHood</text>
+  <g>
+    <rect x="462" y="292" width="127" height="44" rx="10" fill="#eef4ff"/>
+    <text class="t lb" x="525" y="321" text-anchor="middle">Routing</text>
+    <rect x="611" y="292" width="127" height="44" rx="10" fill="#eef4ff"/>
+    <text class="t lb" x="674" y="321" text-anchor="middle">Failover</text>
+    <rect x="462" y="350" width="127" height="44" rx="10" fill="#eef4ff"/>
+    <text class="t lb" x="525" y="379" text-anchor="middle">Idempotency</text>
+    <rect x="611" y="350" width="127" height="44" rx="10" fill="#eef4ff"/>
+    <text class="t lb" x="674" y="379" text-anchor="middle">Verification</text>
+  </g>
+  <text class="t mu" x="600" y="440" text-anchor="middle">one reconciliation ledger</text>
+
+  <!-- layer -> providers -->
+  <g fill="none" stroke="#1f6feb" stroke-width="3" opacity="0.85">
+    <path d="M772 338 C 830 338 840 167 886 167" marker-end="url(#arrow)"/>
+    <path d="M772 338 C 830 338 840 252 886 252" marker-end="url(#arrow)"/>
+    <path d="M772 338 L 886 338" marker-end="url(#arrow)"/>
+    <path d="M772 338 C 830 338 840 424 886 424" marker-end="url(#arrow)"/>
+    <path d="M772 338 C 830 338 840 509 886 509" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- providers -->
+  <g>
+    <rect x="900" y="136" width="230" height="62" rx="12" fill="#ffffff" stroke="#dbe4f6" stroke-width="2"/>
+    <circle cx="936" cy="167" r="11" fill="#1f6feb" opacity="0.5"/>
+    <text class="t lb" x="962" y="175">Provider</text>
+    <rect x="900" y="221" width="230" height="62" rx="12" fill="#ffffff" stroke="#dbe4f6" stroke-width="2"/>
+    <circle cx="936" cy="252" r="11" fill="#16b364" opacity="0.5"/>
+    <text class="t lb" x="962" y="260">Provider</text>
+    <rect x="900" y="307" width="230" height="62" rx="12" fill="#ffffff" stroke="#dbe4f6" stroke-width="2"/>
+    <circle cx="936" cy="338" r="11" fill="#f0a500" opacity="0.6"/>
+    <text class="t lb" x="962" y="346">Provider</text>
+    <rect x="900" y="393" width="230" height="62" rx="12" fill="#ffffff" stroke="#dbe4f6" stroke-width="2"/>
+    <circle cx="936" cy="424" r="11" fill="#7c3aed" opacity="0.5"/>
+    <text class="t lb" x="962" y="432">Provider</text>
+    <rect x="900" y="478" width="230" height="62" rx="12" fill="#ffffff" stroke="#dbe4f6" stroke-width="2"/>
+    <circle cx="936" cy="509" r="11" fill="#0e9aa7" opacity="0.6"/>
+    <text class="t lb" x="962" y="517">Provider</text>
+  </g>
+  <text class="t mu" x="1015" y="580" text-anchor="middle">add or switch in a dashboard</text>
+</svg>

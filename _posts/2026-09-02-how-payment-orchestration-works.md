@@ -1,7 +1,8 @@
 ---
 title: "How Payment Orchestration Works: Routing, Failover and Retries, Step by Step"
-description: "How payment orchestration works in practice: the routing rules that pick a provider, the failover that retries a failed payment, and the idempotency that stops double charges."
+description: "How payment orchestration works in practice: the rules that pick a provider, the failover that retries, and the idempotency that stops double charges."
 date: 2026-09-02
+image: /assets/images/og/blog/how-payment-orchestration-works.jpg
 tags: [orchestration, architecture]
 hero: /assets/images/blog/how-payment-orchestration-works.jpg
 ---
@@ -49,6 +50,13 @@ the structural fix for the checkout error that quietly kills international sales
 [payment method not available for your currency](/blog/payment-method-not-available-for-your-currency/):
 the layer simply routes that shopper to a provider that can take their money.
 
+<figure class="figure d-block w-100 my-4">
+  <img src="/assets/images/blog/payment-routing-decision.svg" alt="One payment carrying a currency, country and method is matched against routing rules, which send it to the provider that fits and skip the two that do not."
+       width="1200" height="675" class="figure-img img-fluid rounded w-100"
+       loading="lazy" decoding="async">
+  <figcaption class="figure-caption">The rule is evaluated per transaction. Two providers are skipped here not because they failed, but because they were never eligible.</figcaption>
+</figure>
+
 ## Step 2. Failover and retries: an outage is not a lost sale
 
 Every provider has a bad day. Without a fallback, their downtime is your downtime:
@@ -69,6 +77,13 @@ built](/payment-infrastructure/failover/).
 
 Getting that distinction right is also most of what lifts your payment approval
 rate, and it is the same machinery behind surviving a gateway outage.
+
+<figure class="figure d-block w-100 my-4">
+  <img src="/assets/images/blog/payment-failover-retry.svg" alt="A payment times out at the first provider and is retried through a second, which captures it, while a hard decline from the issuer is shown as something no reroute can fix."
+       width="1200" height="675" class="figure-img img-fluid rounded w-100"
+       loading="lazy" decoding="async">
+  <figcaption class="figure-caption">The retry carries the same idempotency key, which is what keeps one intended payment from becoming two charges.</figcaption>
+</figure>
 
 ## Step 3. Idempotency: how the double charge is prevented
 

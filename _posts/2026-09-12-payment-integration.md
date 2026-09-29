@@ -2,6 +2,8 @@
 title: "Payment Integration: The Four Ways to Connect"
 description: "What a payment integration is, the four ways to connect a provider, and how each choice changes your PCI scope, your control and how long the build takes."
 date: 2026-09-12
+image: /assets/images/og/blog/payment-integration.jpg
+hero: /assets/images/blog/payment-integration.jpg
 tags: [payments, integration]
 ---
 
@@ -133,6 +135,13 @@ problem of deciding which provider handles a given payment. That is the point at
 which teams start reading about
 [payment orchestration](/blog/what-is-payment-orchestration/), which exists to
 make the second and third providers cost far less than the first.
+
+<figure class="figure d-block w-100 my-4">
+  <img src="/assets/images/blog/checkout-to-providers.svg" alt="A store checkout connects once to a payment layer, which handles routing, failover, idempotency and verification, and fans out to five payment providers."
+       width="1200" height="675" class="figure-img img-fluid rounded w-100"
+       loading="lazy" decoding="async">
+  <figcaption class="figure-caption">One integration on the left, many providers on the right. What sits between them is the work this article is about.</figcaption>
+</figure>
 
 ## Frequently asked questions
 

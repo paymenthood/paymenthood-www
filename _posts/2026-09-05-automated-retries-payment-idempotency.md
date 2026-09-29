@@ -2,6 +2,8 @@
 title: "Idempotency and Failover When Systems Retry Automatically"
 description: "Scripts, bots and AI agents do not retry a payment the way a person does. Why that matters for idempotency, duplicate charges and unresolved payment state."
 date: 2026-09-05
+image: /assets/images/og/blog/automated-retries-payment-idempotency.jpg
+hero: /assets/images/blog/automated-retries-payment-idempotency.jpg
 tags: [architecture, payments]
 redirect_from: /blog/risks-of-letting-ai-agents-pay/
 ---
@@ -84,6 +86,13 @@ a standard where human hesitation is no longer papering over the gaps:
   final will eventually try.
 - **Rate limits have to exist on your side.** Not because the agent is hostile, but
   because it does not get tired.
+
+<figure class="figure d-block w-100 my-4">
+  <img src="/assets/images/blog/retry-idempotency-timeline.svg" alt="A timeline of one payment: the charge is created, the confirmation times out, the caller retries with the same idempotency key, and the provider returns the original result instead of creating a second charge."
+       width="1200" height="675" class="figure-img img-fluid rounded w-100"
+       loading="lazy" decoding="async">
+  <figcaption class="figure-caption">The money moves once, at step one. Everything after that is the system finding out what already happened.</figcaption>
+</figure>
 
 ## Deriving a key that actually protects you
 
