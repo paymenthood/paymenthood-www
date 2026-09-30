@@ -93,6 +93,13 @@
 
             // Deferral for performance only. It no longer gates anything.
             function schedule() {
+                // Load GTM ONLY on the production site. Local dev (jekyll serve on
+                // localhost:4000), preview builds, etc. must never beacon into the
+                // production GA4 property — that pollution showed up in GA4 as
+                // "localhost:4000 / referral" sessions. Off-production: no listeners,
+                // no timeout, no gtm.js — the container never loads.
+                var host = w.location.hostname;
+                if (host !== 'www.paymenthood.com' && host !== 'paymenthood.com') return;
                 EVENTS.forEach(function (e) { w.addEventListener(e, inject, { passive: true, once: true }); });
                 w.setTimeout(inject, 3000);
             }
