@@ -258,14 +258,16 @@
                         <dt class="fact-label">What moves the rate</dt>
                         <dd class="fact-value">Payment providers price per market and per method rather than as a
                             single global figure.
-                            {%- if d.countries and d.countries.size > 1 %} {{ d.name }} operates across
-                            {{ d.countries.size }} countries, so the country the payment is taken in matters.{%- endif %}
+                            {%- comment %} No counts here: "operates across 4 countries" is a completeness
+                              claim the data cannot support (`countries` may list only the markets
+                              PaymentHood handles), and it rots the day the provider adds a market. {% endcomment -%}
+                            {%- if d.countries and d.countries.size > 1 %} {{ d.name }} works in several
+                            countries, so the country the payment is taken in matters.{%- endif %}
                             {%- if d.currencies and d.currencies.size > 1 %} It settles in
                             {% for c in d.currencies %}{{ c }}{% unless forloop.last %}, {% endunless %}{% endfor %},
                             and cross-currency transactions are not priced the same as domestic ones.{%- endif %}
-                            {%- if d.methods and d.methods.size > 1 %} It also accepts
-                            {{ d.methods.size }} different payment methods, and card, transfer and wallet rails
-                            each carry their own cost.{%- endif %}</dd>
+                            {%- if d.methods and d.methods.size > 1 %} It also accepts several kinds of
+                            payment, and card, transfer and wallet rails each carry their own cost.{%- endif %}</dd>
                     </div>
                     <div class="fact-row">
                         <dt class="fact-label">Where to check the figure</dt>

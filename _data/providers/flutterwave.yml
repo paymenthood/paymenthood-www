@@ -1,0 +1,146 @@
+# Single source of truth for /providers/flutterwave/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# the template links to the provider's own pricing page instead.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/flutterwave/index.html. Until then the page builds but stays
+# out of the index.
+#
+# NOTE (2026-09-30): flutterwave.com and developer.flutterwave.com answer every
+# automated request with a Cloudflare bot challenge (403), so the provider facts
+# below were gathered from search-engine copies of the Flutterwave pages listed
+# under `sources`, not by opening them directly. The reviewer should open each
+# source in a normal browser before signing off. The `integration:` block and the
+# PaymentHood-side currency list come from PaymentHood's own code, not from
+# Flutterwave (payment-service-provider: Providers/Flutterwave; payment-service:
+# PaymentDbContext currency seed).
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Flutterwave
+slug: flutterwave
+status: live                 # live | development — only `live` may be published
+category: regional
+region: Pan-Africa
+logo: /assets/images/home/providers-icon/flutterwave-light.webp
+accent: "#ff9b00"            # the orange of the official butterfly mark
+accent_rgb: "255,155,0"
+accent_text: "#a36300"   # 4.84:1 on white, 4.59:1 on #f8f9fa — WCAG AA; see _sass/components/_provider.scss
+
+# Lead paragraph. Written to be lifted verbatim as a featured snippet or an LLM
+# citation: direct definition first, no marketing wind-up.
+summary: >-
+  Flutterwave is a payment gateway that lets businesses accept card, bank transfer, mobile money
+  and USSD payments across African markets, including Nigeria, Ghana, Kenya and South Africa,
+  through one API. The merchant opens and verifies its own Flutterwave account, and the customer
+  pays on Flutterwave's hosted checkout page rather than entering card details on the merchant's
+  site.
+
+# Markets where Flutterwave says it is supported AND whose local currency
+# PaymentHood's Flutterwave connection handles. Flutterwave also names further
+# markets on its requirements page; they are not listed here because PaymentHood
+# does not charge in their currencies yet.
+countries:
+  - Nigeria
+  - Ghana
+  - Kenya
+  - South Africa
+
+# PaymentHood-side list: the currencies PaymentHood's Flutterwave connection is
+# built for (payment-service currency seed). Each is also a Flutterwave currency.
+currencies: [NGN, GHS, KES, ZAR, USD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, Verve, Discover and American Express, local and international
+  - label: Bank transfer
+    icon: bank
+    detail: The customer transfers to account details generated for the payment
+  - label: Mobile money
+    icon: mobile
+    detail: M-PESA for Kenyan shilling payments, and MTN and Airtel wallets where each operates
+  - label: USSD
+    icon: ussd
+    detail: Bank shortcodes, available in Nigeria only
+  - label: Apple Pay and Google Pay
+    icon: wallet
+    detail: Device wallets, on the checkouts where Flutterwave offers them
+  - label: QR
+    icon: qr
+    detail: Scan-to-pay, listed among Flutterwave's payment channels
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://flutterwave.com/
+  docs: https://developer.flutterwave.com/
+  pricing: https://flutterwave.com/ng/pricing
+  channels: https://flutterwave.com/us/support/payment-methods/payment-channels
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual PaymentHood.Services provider implementation, not to the provider's docs.
+integration:
+  auth: Client ID and client secret exchanged for a short-lived bearer token on Flutterwave's v4 API, held server-side in PaymentHood
+  webhook: Received on a PaymentHood URL that carries a secret key; the payload only identifies the payment and is never trusted for its status
+  verification: Server-side charge lookup by transaction reference against the Flutterwave API before an order is marked paid
+
+faqs:
+  - q: Which countries can use Flutterwave with PaymentHood?
+    a: >-
+      Flutterwave supports merchants in Nigeria, Ghana, Kenya and South Africa, whose local
+      currencies PaymentHood's Flutterwave connection handles, and names further markets on its
+      own requirements page. You open and verify the Flutterwave account yourself, then connect it
+      to PaymentHood. PaymentHood does not resell Flutterwave or sit in the flow of funds.
+  - q: Which currencies can I charge through Flutterwave on PaymentHood?
+    a: >-
+      Nigerian Naira (NGN), Ghanaian Cedi (GHS), Kenyan Shilling (KES), South African Rand (ZAR)
+      and US Dollar (USD). Which of these you can actually charge depends on the country your
+      Flutterwave account is registered in and what Flutterwave has enabled on it.
+  - q: Do card details pass through my store or PaymentHood?
+    a: >-
+      No. PaymentHood sends the customer to Flutterwave's hosted checkout page, and the card is
+      entered there. Neither your store nor PaymentHood receives the card number; PaymentHood only
+      learns the outcome, plus the masked card digits Flutterwave reports back.
+  - q: How does PaymentHood confirm a Flutterwave payment?
+    a: >-
+      It never marks an order paid on the strength of a webhook alone. The webhook arrives on a
+      PaymentHood URL carrying a secret key, and its content is used only to find the payment.
+      PaymentHood then looks the charge up on Flutterwave's API by its transaction reference and
+      releases the order only if Flutterwave reports it succeeded.
+  - q: Can I refund a Flutterwave payment from PaymentHood?
+    a: >-
+      Yes. A refund started in PaymentHood is sent to Flutterwave for the full captured amount of the
+      charge, and PaymentHood tracks it until Flutterwave reports the refund completed.
+  - q: Does PaymentHood charge extra on top of Flutterwave's fees?
+    a: >-
+      No. PaymentHood adds nothing to what Flutterwave charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. Flutterwave bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and <a
+      href="https://flutterwave.com/ng/pricing" target="_blank" rel="noopener">Flutterwave's pricing
+      page<span class="visually-hidden"> (opens in new tab)</span></a>.
+
+verification:
+  # The date the facts above were gathered, shown on the page as "written against
+  # Flutterwave's own documentation on …". It is NOT a sign-off: that is
+  # `verified_by`, left empty for a human (see the header of this file).
+  verified_on: 2026-09-30
+  verified_by:
+  sources:
+    - https://flutterwave.com/ng/support/general/what-are-the-requirements-for-using-flutterwave
+    - https://flutterwave.com/us/support/payment-methods/payment-channels
+    - https://flutterwave.com/us/support/payment-methods/pay-with-card
+    - https://developer.flutterwave.com/docs/ussd
+    - https://developer.flutterwave.com/v3.0/docs/payment-methods
+    - https://flutterwave.com/gb/support/general/what-are-the-currencies-accepted-on-flutterwave
+    - https://flutterwave.com/ng/pricing
+    - https://developer.flutterwave.com/
