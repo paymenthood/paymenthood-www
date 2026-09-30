@@ -3,6 +3,9 @@ layout: none
 title: Contact Us
 description: Any question? Reach out to us and we'll get back to you shortly.
 nav_active: contact
+# Outage switch for the contact form. true = show a "temporarily unavailable" notice with the
+# email addresses and disable every control. Flip it whenever the form provider is down.
+contact_form_down: false
 ---
 
 {% include header-secondary.html %}
@@ -79,17 +82,42 @@ nav_active: contact
       <div class="col-lg-7">
         <div class="bg-blue-30 p-4 p-md-5 rounded animated" data-animate="fadeInRight" data-delay=".2">
           {%- comment -%}
-            Posts to formsubmit.co, which mails the submission to support@paymenthood.com.
-            The address lives in the form action, so it is visible to anything that reads the
-            page source.
+            Posts to Formspree (dashboard form "Contact", account support@paymenthood.com),
+            which mails every submission to support@paymenthood.com. Moved here from
+            formsubmit.co on 2026-09-30, after FormSubmit's endpoint returned 500 for every
+            address and messages were being lost without anyone knowing.
 
-            Two spam defences, both verified by FormSubmit on their side:
-              - `_captcha` is on, so FormSubmit interposes its own captcha page between the
-                POST and the mail, then forwards to `_next` once it is solved. Turning this
-                off is what leaves the endpoint open to unattended bots.
-              - `_honey` below is a honeypot; FormSubmit drops any submission that fills it.
+            assets/js/contact-form.js sends it in the background:
+              - success goes to /thank-you.html. Keep that exact path: the GTM generate_lead
+                conversion fires on a page view of it.
+              - any failure shows #contact-error, with everything the visitor typed still in
+                the form, a pre-filled email link and a copy button.
+            If reCAPTCHA is switched on in the Formspree form settings, Formspree refuses
+            background submissions (403). The script then falls back to a normal post:
+            Formspree's captcha page, then Formspree's own confirmation page. On the free plan
+            that page cannot redirect to /thank-you.html, so the conversion is not counted.
+            If that script fails to load, the form still posts normally and Formspree shows its
+            own confirmation page. (With JavaScript off entirely the theme's .animated wrappers
+            never become visible, so the whole form is hidden; that is site-wide, not this form.)
+
+            Spam defence: the `_gotcha` honeypot below (Formspree silently drops any
+            submission that fills it) plus Formspree's own filtering.
+
+            page.contact_form_down (front matter) is the outage switch: it shows a notice
+            with the email addresses and disables every control, so nobody writes a message
+            into a form that cannot deliver it.
           {%- endcomment -%}
-          <form id="contact-form" action="https://formsubmit.co/support@paymenthood.com" method="POST">
+          {%- if page.contact_form_down %}
+          <div class="warning-box mt-0 mb-4" role="status">
+            <em class="fas fa-exclamation-triangle me-2" aria-hidden="true"></em>
+            <strong>Our contact form is temporarily unavailable.</strong>
+            Please email <a href="mailto:support@paymenthood.com" class="txt-blue-200 fw-semibold">support@paymenthood.com</a>
+            for support or <a href="mailto:sales@paymenthood.com" class="txt-blue-200 fw-semibold">sales@paymenthood.com</a> for sales,
+            and we'll get back to you as usual.
+          </div>
+          {%- endif %}
+          <form id="contact-form" action="https://formspree.io/f/xrpbjjrk" method="POST">
+            <fieldset{% if page.contact_form_down %} disabled{% endif %}>
             <!-- Name Field -->
             <div class="mb-4 animated" data-animate="fadeInUp" data-delay=".3">
               <label for="name" class="form-label txt-blue-600 fw-semibold mb-2">
@@ -135,18 +163,31 @@ nav_active: contact
               ></textarea>
             </div>
 
-            <!-- Honeypot. Hidden from people, filled in by bots; the server drops any submission
-                 that carries a value here. Not type="hidden": bots skip those. -->
-            <div style="position:absolute;left:-9999px" aria-hidden="true">
-              <label for="_honey">Website</label>
-              <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
+            <!-- Honeypot. Hidden from people, filled in by bots; Formspree silently drops any
+                 submission that carries a value here. Not type="hidden": bots skip those. -->
+            <div class="visually-hidden" aria-hidden="true">
+              <label for="_gotcha">Website</label>
+              <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
             </div>
 
-            <!-- FormSubmit config: require its captcha, format the email as a table, and send the
-                 visitor to the thank-you page on success. -->
-            <input type="hidden" name="_captcha" value="true" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://www.paymenthood.com/thank-you.html" />
+            <!-- Subject line of the email Formspree sends to support@. -->
+            <input type="hidden" name="_subject" value="New contact form message – paymenthood.com" />
+
+            <!-- Send failure. Shown by contact-form.js; the fields above keep their text. -->
+            <div id="contact-error" class="warning-box mt-0 mb-4 d-none" role="alert" tabindex="-1">
+              <p class="fw-semibold mb-1">
+                <em class="fas fa-exclamation-triangle me-2" aria-hidden="true"></em>Your message wasn't sent.
+              </p>
+              <p id="contact-error-detail" class="small mb-2"></p>
+              <div class="d-flex flex-wrap gap-3 small">
+                <a id="contact-error-mail" href="mailto:support@paymenthood.com" class="txt-blue-200 fw-semibold">
+                  <em class="fas fa-envelope me-1" aria-hidden="true"></em>Email it to support@paymenthood.com
+                </a>
+                <button type="button" id="contact-copy" class="bg-transparent border-0 p-0 txt-blue-200 fw-semibold">
+                  <em class="fas fa-copy me-1" aria-hidden="true"></em><span>Copy my message</span>
+                </button>
+              </div>
+            </div>
 
             <!-- Submit Button -->
             <div class="text-end animated" data-animate="fadeInUp" data-delay=".7">
@@ -154,6 +195,7 @@ nav_active: contact
                 <em class="fas fa-paper-plane me-2"></em>Send Message
               </button>
             </div>
+            </fieldset>
           </form>
         </div>
       </div>
@@ -162,5 +204,9 @@ nav_active: contact
 </main>
 
 {% include chat-widget.html %}
+
+{%- unless page.contact_form_down %}
+<script defer src="{{ '/assets/js/contact-form.js' | relative_url }}?ver=1"></script>
+{%- endunless %}
 
 {% include footer.html %}

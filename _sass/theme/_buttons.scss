@@ -52,6 +52,15 @@
     right: 0;
     transform: translate(50%, -50%);
   }
+
+  // Without this a disabled .vh-btn looked and hovered exactly like a live one
+  // (first needed by the contact form's "Sending…" and outage states).
+  // Same opacity as Bootstrap's disabled .btn.
+  &:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 // ---- size modifiers ----
