@@ -1,0 +1,23 @@
+---
+layout: none
+platform: virtuemart
+provider: alipay
+nav_active: integrations
+# Review gate (added 2026-10-01). A combo page publishes only when BOTH the
+# provider data file is signed off (_data/providers/alipay.yml ->
+# verification.verified_by) AND a human-written _data/combos/virtuemart-alipay.yml
+# exists; see the header of _includes/integration-provider.html. Until then it
+# renders, is linked from /providers/alipay/, and stays out of the index.
+noindex: true
+sitemap: false
+title: "Alipay Payment Gateway for VirtueMart"
+description: "Accept Alipay on VirtueMart through your Stripe account with the free PaymentHood plugin. No gateway code."
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#1677ff;--pp-accent-text:#146deb;--pp-accent-rgb:22,119,255;--pp-hero-end:#1677ff;--pp-blob-rgb:22,119,255}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

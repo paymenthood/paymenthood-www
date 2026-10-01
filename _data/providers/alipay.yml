@@ -1,0 +1,143 @@
+# Single source of truth for /providers/alipay/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# the template links to the provider's own pricing page instead.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/alipay/index.html. Until then the page builds but stays out
+# of the index.
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# NOTE (2026-10-01): the Alipay facts below come from Stripe's own Alipay page
+# (docs.stripe.com/payments/alipay), opened and read on this date, because in
+# PaymentHood Alipay is offered ONLY through the merchant's Stripe account. This
+# is Alipay, not Alipay+. Never describe it as a direct Alipay connection.
+# The `integration:` block, the currency list and the refund behaviour describe
+# PaymentHood's own implementation (payment-service-provider, Providers/
+# StripeAliPay, commit 480c650), not Stripe's docs. They differ from the task
+# document's first draft in three places, each marked CHANGED below.
+
+name: Alipay
+slug: alipay
+status: live                 # live | development — only `live` may be published
+category: regional
+region: China
+# Alipay runs ONLY on the merchant's own Stripe account, so Stripe is who bills, onboards and
+# settles the merchant. The templates use this instead of "Alipay bills you directly".
+billed_by: Stripe
+logo: /assets/images/home/providers-icon/alipay.webp   # official wordmark; its blue dot measures #0f77ff
+accent: "#1677ff"
+accent_rgb: "22,119,255"
+accent_text: "#146deb"   # 4.75:1 on white, 4.51:1 on #f8f9fa — WCAG AA; see _sass/components/_provider.scss
+
+summary: >-
+  Alipay is a digital wallet from China. In PaymentHood it is offered through Stripe: the
+  payment runs on the merchant's own Stripe account, and the customer approves it with their
+  Alipay app or Alipay login, on the web or on a mobile device.
+
+# No `countries` list: the merchant side is the list of Stripe account countries, the payer
+# side is described in words. `countries` and `coverage` are mutually exclusive.
+coverage: >-
+  Payers are Chinese consumers, overseas Chinese and Chinese travellers. To accept Alipay, the
+  merchant's Stripe account must be registered in one of the countries Stripe lists for Alipay,
+  across Europe, North America and Asia-Pacific.
+coverage_short: "China"
+
+# CHANGED (1 of 3): the draft listed Stripe's twelve Alipay currencies. PaymentHood's connection
+# charges in these nine (payment-service currency seed and the provider's own minimum-amount
+# table). CNY, HKD and JPY are Stripe Alipay currencies too, but PaymentHood does not support
+# them yet, so they are not claimed here.
+currencies: [USD, EUR, GBP, AUD, CAD, CHF, NZD, SGD, MYR]
+
+methods:
+  - label: Alipay wallet
+    icon: wallet
+    detail: The customer approves the payment with their Alipay app or Alipay login
+  - label: Web and mobile
+    icon: mobile
+    detail: Alipay users can pay on the web or on a mobile device
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+# NOTE: confirm with the owner that Alipay works through every plugin above. The backend
+# provider is a hosted redirect and the plugins name no provider, but that is not a test.
+
+links:
+  website: https://global.alipay.com/
+  docs: https://docs.stripe.com/payments/alipay
+  pricing: https://stripe.com/pricing/local-payment-methods
+
+# CHANGED (2 of 3): the draft said the Stripe event signature is verified. The code does the
+# opposite on purpose: no Stripe signing secret is stored, the webhook only identifies the
+# payment, and its body is never trusted for the status.
+integration:
+  auth: The merchant's own Stripe secret key, the same one used for cards, held server-side in PaymentHood and never exposed to the storefront
+  webhook: Received on a PaymentHood URL that carries a secret key; the payload only identifies the payment and is never trusted for its status
+  verification: Server-side status check of the Stripe payment before an order is marked paid
+
+faqs:
+  - q: Do I need a Stripe account to accept Alipay through PaymentHood?
+    a: >-
+      Yes. Alipay in PaymentHood runs through Stripe, not through a direct Alipay account. You add
+      Alipay as a provider in your PaymentHood dashboard using your own Stripe secret key, the same
+      key you use for cards, and Alipay has to be turned on in the payment method settings of your
+      Stripe Dashboard.
+  - q: Who pays with Alipay?
+    a: >-
+      Stripe describes Alipay's customers as Chinese consumers, overseas Chinese and Chinese
+      travellers. Customers see their purchase amount in CNY.
+  - q: Which currencies can I charge in?
+    a: >-
+      US Dollar (USD), Euro (EUR), British Pound (GBP), Australian Dollar (AUD), Canadian Dollar
+      (CAD), Swiss Franc (CHF), New Zealand Dollar (NZD), Singapore Dollar (SGD) and Malaysian
+      Ringgit (MYR). Which of these you can use depends on the country your Stripe account is
+      registered in, and Stripe sets a minimum payment amount for each.
+  - q: Can every business accept Alipay?
+    a: >-
+      No. Your business can't be on Stripe's restricted list or on Alipay's prohibited business
+      list, and your Stripe account has to be registered in a country where Stripe offers Alipay.
+      Your Stripe Dashboard shows whether your account is eligible.
+  - q: Can Alipay payments be disputed?
+    a: >-
+      Stripe states that Alipay has no dispute process that could create chargebacks, because the
+      customer authenticates every payment. If a customer raises a problem with Alipay, Alipay
+      may direct them to you to resolve it.
+  # CHANGED (3 of 3): the draft said "in full or in part". PaymentHood's refund sends the whole
+  # payment (RefundCreateOptions carries no amount); a partial refund is a Stripe Dashboard action.
+  - q: Can I refund an Alipay payment?
+    a: >-
+      Yes. A refund started in PaymentHood returns the full payment. Stripe allows Alipay refunds
+      up to 90 days after the original payment, and they settle asynchronously, so the final
+      status arrives a few minutes later. A partial refund is possible in your Stripe Dashboard,
+      not from PaymentHood.
+  - q: Can I use Alipay for subscriptions or saved payments?
+    a: >-
+      Not today. Stripe lists recurring Alipay payments as a private preview, and PaymentHood
+      takes Alipay as a one-off payment, so plan for paying each invoice as it comes due.
+  - q: Does PaymentHood charge extra on top of Stripe for Alipay?
+    a: >-
+      No. PaymentHood adds nothing to what Stripe charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. Stripe bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and <a
+      href="https://stripe.com/pricing/local-payment-methods" target="_blank" rel="noopener">Stripe's
+      pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
+
+verification:
+  # The date the facts were gathered; shown on the page. NOT a sign-off: that is
+  # `verified_by`, left empty for a human.
+  verified_on: 2026-10-01
+  verified_by:
+  sources:
+    - https://docs.stripe.com/payments/alipay
+    - https://stripe.com/pricing/local-payment-methods
+    - https://stripe.com/legal/alipay
+    - https://stripe.com/restricted-businesses
+    - https://global.alipay.com/

@@ -33,6 +33,8 @@
 {%- capture combo_key %}{{ include.platform }}-{{ include.provider }}{% endcapture -%}
 {%- assign combo = site.data.combos[combo_key] -%}
 {%- assign labels = site.data.breadcrumb_labels -%}
+{%- comment %} See provider-detail.html: `billed_by` names who bills and onboards the merchant when it is not the provider itself. {% endcomment -%}
+{%- assign biller = d.billed_by | default: d.name -%}
 
 {%- comment %} ---- derived tokens, mirroring integration-product.html ---- {% endcomment -%}
 {%- assign noun = p.noun | default: 'plugin' -%}
@@ -86,7 +88,7 @@
                 </div>
                 <h2 class="h1 fw-bold text-white mb-4">Accept <span class="txt-blue-50">{{ d.name }}</span><br>payments on {{ p.platform }}</h2>
                 <p class="lead mb-4 hero-lead">
-                    {%- if combo.intro %}{{ combo.intro }}{% else %}Install the free PaymentHood {{ noun }} for {{ p.platform }}, connect your {{ d.name }} account, and {{ d.name }} appears as a payment option at checkout. No custom gateway code, and no second integration when you add another provider later.{% endif %}
+                    {%- if combo.intro %}{{ combo.intro }}{% else %}Install the free PaymentHood {{ noun }} for {{ p.platform }}, connect your {{ biller }} account, and {{ d.name }} appears as a payment option at checkout. No custom gateway code, and no second integration when you add another provider later.{% endif %}
                 </p>
                 <ul class="chip-row mb-5">
                     {%- for c in d.currencies %}
@@ -198,7 +200,7 @@
                     </div>
                     <div class="fact-row">
                         <dt class="fact-label">Cost</dt>
-                        <dd class="fact-value">The {{ noun }} is free and open source. You pay {{ d.name }}'s own fees, published on
+                        <dd class="fact-value">The {{ noun }} is free and open source. You pay {{ biller }}'s own fees, published on
                             <a href="{{ d.links.pricing }}" target="_blank" rel="noopener">their pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
                             PaymentHood adds nothing on top.</dd>
                     </div>
@@ -226,12 +228,12 @@
                 "documentation" would be a small lie repeated on many pages.
                 {%- endcomment -%}
                 <p class="source-note">
-                    Coverage, currencies and payment methods as published by {{ d.name }}, who set
+                    Coverage, currencies and payment methods as published by {{ biller }}, who set
                     and update them. For the current list see
                     {%- if d.links.docs and d.links.docs != d.links.website %}
-                    <a href="{{ d.links.docs }}" target="_blank" rel="noopener">{{ d.name }}'s own documentation<span class="visually-hidden"> (opens in new tab)</span></a>.
+                    <a href="{{ d.links.docs }}" target="_blank" rel="noopener">{{ biller }}'s own documentation<span class="visually-hidden"> (opens in new tab)</span></a>.
                     {%- else %}
-                    <a href="{{ d.links.website }}" target="_blank" rel="noopener">{{ d.name }}'s own site<span class="visually-hidden"> (opens in new tab)</span></a>.
+                    <a href="{{ d.links.website }}" target="_blank" rel="noopener">{{ biller }}'s own site<span class="visually-hidden"> (opens in new tab)</span></a>.
                     {%- endif %}
                 </p>
             </div>
@@ -303,15 +305,20 @@
             <div class="col-lg-3 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">1</div>
+                    {%- if d.billed_by %}
+                    <h3 class="h5">Use your {{ biller }} account</h3>
+                    <p>{{ d.name }} runs on your own {{ biller }} account. Register with {{ biller }} if you have no account yet, and turn {{ d.name }} on in your {{ biller }} Dashboard. Funds settle from {{ biller }} to your own bank account.</p>
+                    {%- else %}
                     <h3 class="h5">Open a {{ d.name }} account</h3>
                     <p>Register with {{ d.name }} and finish their onboarding. Funds settle from {{ d.name }} to your own bank account.</p>
+                    {%- endif %}
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">2</div>
                     <h3 class="h5">Add it in PaymentHood</h3>
-                    <p>Paste your {{ d.name }} credentials into the PaymentHood dashboard. They stay server-side and never reach your storefront.</p>
+                    <p>Paste your {{ biller }} credentials into the PaymentHood dashboard. They stay server-side and never reach your storefront.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">

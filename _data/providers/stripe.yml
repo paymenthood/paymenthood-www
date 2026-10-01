@@ -89,6 +89,12 @@ faqs:
       The methods available to your Stripe account are offered through the same PaymentHood
       checkout. Which ones you can enable depends on your Stripe account's country and approval
       status, not on PaymentHood.
+  - q: Can I accept Alipay with my Stripe account?
+    a: >-
+      Yes. Alipay is available in PaymentHood as its own provider that runs on your Stripe
+      account, with the same Stripe secret key you use for cards. See
+      <a href="/providers/alipay/">Alipay through Stripe</a> for who can use it, which currencies
+      it takes and how refunds work.
   - q: Does PaymentHood charge extra on top of Stripe?
     a: >-
       No. PaymentHood adds nothing to what Stripe charges: no percentage, no per-transaction

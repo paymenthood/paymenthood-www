@@ -1,0 +1,21 @@
+---
+layout: none
+nav_active: providers
+slug: alipay
+title: "Alipay Payment Gateway Integration"
+description: "Accept Alipay through your own Stripe account with one PaymentHood integration. Free plugins for WHMCS, WooCommerce and more, no PaymentHood transaction fee."
+# Review gate. The page builds and is linked from /providers.html, but stays out
+# of the index until a person has checked every field in
+# _data/providers/alipay.yml against its sources and filled in
+# `verification.verified_by`. Delete these two lines only after that sign-off.
+noindex: true
+sitemap: false
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#1677ff;--pp-accent-text:#146deb;--pp-accent-rgb:22,119,255;--pp-hero-end:#1677ff;--pp-blob-rgb:22,119,255}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

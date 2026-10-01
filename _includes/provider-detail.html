@@ -21,6 +21,13 @@
 {% endcomment %}
 {%- assign d = site.data.providers[include.slug] -%}
 {%- assign labels = site.data.breadcrumb_labels -%}
+{%- comment %}
+  `billed_by` (optional) names the company that bills, onboards and settles the merchant when
+  that is NOT the provider itself. Alipay runs only on the merchant's own Stripe account, so
+  saying "Alipay bills you directly" or "register directly with Alipay" would be false. Unset
+  for every other provider, where it falls back to the provider's own name and nothing changes.
+{% endcomment -%}
+{%- assign biller = d.billed_by | default: d.name -%}
 
 <main id="main-content" class="prose-links">
 <!-- Hero -->
@@ -125,8 +132,13 @@
                             {%- else %}
                             {{ d.coverage }}
                             {%- endif %}
+                            {%- if d.billed_by %}
+                            <p class="mb-0 mt-2 small">Among the countries {{ biller }} supports for {{ d.name }} —
+                                <a href="{{ d.links.docs }}" target="_blank" rel="noopener">{{ biller }}'s own list is authoritative<span class="visually-hidden"> (opens in new tab)</span></a>.</p>
+                            {%- else %}
                             <p class="mb-0 mt-2 small">Among the markets {{ d.name }} serves —
                                 <a href="{{ d.links.website }}" target="_blank" rel="noopener">their own list is authoritative<span class="visually-hidden"> (opens in new tab)</span></a>.</p>
+                            {%- endif %}
                         </dd>
                     </div>
                     <div class="fact-row">
@@ -161,7 +173,7 @@
                           calling that "their pricing page" would be a small lie on every one of
                           those pages. When it is not a distinct URL, name the provider instead.
                         {% endcomment -%}
-                        <dd class="fact-value">Set and billed by {{ d.name }}
+                        <dd class="fact-value">Set and billed by {{ biller }}
                             {%- if d.links.pricing != d.links.website %}, and published on
                             <a href="{{ d.links.pricing }}" target="_blank" rel="noopener">their pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
                             {%- else %}, who publish current rates on
@@ -186,11 +198,11 @@
                     </div>
                 </dl>
                 <p class="source-note">
-                    Written against {{ d.name }}'s own documentation on
+                    Written against {{ biller }}'s own documentation on
                     <time datetime="{{ d.verification.verified_on }}">{{ d.verification.verified_on | date: "%-d %B %Y" }}</time>.
                     This page deliberately states no fees, no counts and no completeness claims, because those
                     change without notice — for anything you are about to build on,
-                    <a href="{{ d.links.docs }}" target="_blank" rel="noopener">{{ d.name }}'s own documentation<span class="visually-hidden"> (opens in new tab)</span></a>
+                    <a href="{{ d.links.docs }}" target="_blank" rel="noopener">{{ biller }}'s own documentation<span class="visually-hidden"> (opens in new tab)</span></a>
                     is the authority.
                 </p>
             </div>
@@ -249,10 +261,10 @@
                             <a href="/pricing.html">Premium plan</a> only adds white-label checkout branding.</dd>
                     </div>
                     <div class="fact-row">
-                        <dt class="fact-label">What {{ d.name }} charges</dt>
-                        <dd class="fact-value">{{ d.name }} sets its own rates and bills you directly. PaymentHood
+                        <dt class="fact-label">What {{ biller }} charges</dt>
+                        <dd class="fact-value">{{ biller }} sets its own rates and bills you directly. PaymentHood
                             never sits between you and that invoice, so switching to or from {{ d.name }} changes
-                            what you pay {{ d.name }} and nothing else.</dd>
+                            what you pay {{ biller }} and nothing else.</dd>
                     </div>
                     <div class="fact-row">
                         <dt class="fact-label">What moves the rate</dt>
@@ -272,9 +284,9 @@
                     <div class="fact-row">
                         <dt class="fact-label">Where to check the figure</dt>
                         <dd class="fact-value">
-                            {%- if d.links.pricing != d.links.website %}{{ d.name }} publishes current rates on
+                            {%- if d.links.pricing != d.links.website %}{{ biller }} publishes current rates on
                             <a href="{{ d.links.pricing }}" target="_blank" rel="noopener">their pricing page<span class="visually-hidden"> (opens in new tab)</span></a>.
-                            {%- else %}{{ d.name }} publishes current rates on
+                            {%- else %}{{ biller }} publishes current rates on
                             <a href="{{ d.links.website }}" target="_blank" rel="noopener">their own site<span class="visually-hidden"> (opens in new tab)</span></a>.
                             {%- endif %}
                             That is the authority, not this page. We deliberately quote no numbers here, because a
@@ -294,7 +306,7 @@
             <div class="col-lg-8 text-center">
                 <div class="section-eyebrow">Integration</div>
                 <h2 class="h2 fw-bold txt-blue-600 mb-3">How PaymentHood works with {{ d.name }}</h2>
-                <p class="lead mw-narrow">A direct {{ d.name }} integration is not just an API call. These are the parts every team ends up rebuilding — and the parts PaymentHood ships already done.</p>
+                <p class="lead mw-narrow">{% if d.billed_by %}Integrating {{ d.name }} through {{ biller }} yourself{% else %}A direct {{ d.name }} integration{% endif %} is not just an API call. These are the parts every team ends up rebuilding — and the parts PaymentHood ships already done.</p>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -366,15 +378,20 @@
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">1</div>
+                    {%- if d.billed_by %}
+                    <h3 class="h5">Use your {{ biller }} account</h3>
+                    <p>{{ d.name }} runs on your own {{ biller }} account. If you do not have one, register with {{ biller }} and complete its onboarding, then turn {{ d.name }} on in your {{ biller }} Dashboard. Funds settle from {{ biller }} into your own bank account — PaymentHood never holds merchant money.</p>
+                    {%- else %}
                     <h3 class="h5">Open your {{ d.name }} account</h3>
                     <p>Register directly with {{ d.name }} and complete their onboarding. Funds settle from {{ d.name }} into your own bank account — PaymentHood never holds merchant money.</p>
+                    {%- endif %}
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="how-step">
                     <div class="how-step-num">2</div>
                     <h3 class="h5">Add the credentials to PaymentHood</h3>
-                    <p>Paste your {{ d.name }} API credentials into the PaymentHood dashboard. They are stored server-side and never exposed to your storefront.</p>
+                    <p>Paste your {{ biller }} API credentials into the PaymentHood dashboard. They are stored server-side and never exposed to your storefront.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
