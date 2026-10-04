@@ -1,0 +1,164 @@
+# Single source of truth for /providers/nexi-xpay/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# and with XPay the price is set by the merchant's own bank, not by Nexi, so
+# there is no single figure to quote even in principle.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/nexi-xpay/index.html and from the five platform stubs. Until
+# then the pages build but stay out of the index.
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# NOTE (2026-10-04): the `integration:` block, the currency list, the refund
+# behaviour and the subscriptions answer describe PaymentHood's own
+# implementation, not Nexi's documentation. They were read from the code, which
+# the task document says wins where the two disagree:
+#   payment-service-provider  Payment.Provider/Providers/NexiXPay/ (Payment.Provider 1.5.0)
+#   payment-service           docs/italian-banks-hosted-page-research.md §7
+# Each place the code contradicted the task draft is marked CHANGED below.
+#
+# LOGO (2026-10-04): the XPay lockup, not the Nexi corporate wordmark. The
+# product is XPay; Nexi is the company behind it, and the official lockup sets
+# them that way round. Cropped from Nexi's own asset,
+# https://www.nexi.it/content/dam/nexinew/schede-prodotto/e-commerce/menu/menu_XPay_nok.webp,
+# at 360x146 so it is 2x the 180x60 the provider template renders. Not redrawn.
+#
+# The accent is the fill declared in Nexi's vector wordmark,
+# https://www.nexi.it/content/dam/nexinew/icone/nexi-logo-dark.svg (fill="#2D32AA"),
+# rather than a pixel sampled out of the lossy webp, which reads #2c31ab.
+
+name: Nexi XPay
+slug: nexi-xpay
+status: live                 # live | development — the review gate below, not this field, is what keeps the page unpublished
+category: regional
+region: Italy
+# XPay reaches the merchant through their bank, which is also who contracts,
+# prices and settles them. The templates use this instead of "Nexi bills you directly".
+billed_by: Nexi, through your bank
+logo: /assets/images/home/providers-icon/nexi-xpay.webp   # official XPay lockup, cropped from Nexi's own asset; see the LOGO note above
+accent: "#2d32aa"
+accent_rgb: "45,50,170"
+accent_text: "#2d32aa"   # 9.78:1 on white, 9.27:1 on #f8f9fa — clears AA unaided, so no darker variant
+# NOTE: accent and accent_text are the same here only because Nexi's blue is already dark
+# enough. Most brand colours are not; see _sass/components/_provider.scss.
+
+summary: >-
+  Nexi XPay is the e-commerce payment gateway of Nexi Payments S.p.A. Merchants reach it through
+  their bank rather than directly, and the customer pays on a payment page hosted by Nexi, so card
+  details never touch the merchant's website or PaymentHood.
+
+# No `countries` list: XPay is an Italian product reached through an Italian banking
+# relationship, so the useful statement is which banks distribute it, in words.
+# `countries` and `coverage` are mutually exclusive.
+coverage: >-
+  Merchants whose bank distributes Nexi XPay. Intesa Sanpaolo (as XPay Web), Banca MPS, BPER,
+  Banca Mediolanum and Mediobanca Premier are among the banks that do. Your own terms come from
+  the bank, not from Nexi.
+coverage_short: "Italy"
+
+# CHANGED (1 of 3): the task draft left the reason implicit. Only EUR is seeded for this
+# provider in payment-service, and the research note records that which currencies a given
+# merchant contract allows is NOT verified. So EUR is stated as what PaymentHood charges in,
+# with no claim about what Nexi could support.
+currencies: [EUR]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa, Mastercard, American Express and Diners, as enabled on your Nexi contract
+  - label: Wallets and local methods
+    icon: wallet
+    detail: Nexi lists Apple Pay, Google Pay, PayPal, Bancomat Pay and MyBank among its circuits; what appears on the page depends on your contract
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+# NOTE: open question 3 for the owner. The backend provider is a hosted redirect and the
+# plugins name no provider, but that is reasoning, not a test. Confirm before publishing.
+
+links:
+  website: https://developer.nexi.it/en/
+  # NOTE: this is Nexi's developer portal, not a marketing page for XPay. No merchant-facing
+  # XPay page was opened that is not a bank's. Replace if the owner has a better URL.
+  docs: https://developer.nexi.it/en/api/introduzione
+  # `pricing` is omitted on purpose: XPay is priced by the merchant's bank, so there is no
+  # Nexi page to link. The bank's "foglio informativo esercenti" carries the figures.
+
+# CHANGED (2 of 3): the draft described only the API key. The merchant also sets an optional
+# hosted-page language (ISO 639-2, Nexi's default is Italian), which is visible to their buyers.
+integration:
+  auth: The merchant's XPay API key from their Nexi back office, held server-side in PaymentHood and sent only from PaymentHood's servers to Nexi. The hosted page language is a per-merchant setting and defaults to Italian
+  webhook: Received on a PaymentHood URL that carries a per-profile secret key. Nexi does not sign its notification, so it is only read for which payment it concerns and is never trusted for the status
+  verification: Server-side read-back of the order from Nexi before an order is marked paid, so the payment's real state always comes from Nexi rather than from the notification
+
+faqs:
+  - q: Do I need a Nexi XPay contract?
+    a: >-
+      Yes, and it normally comes from your bank rather than from Nexi directly. PaymentHood needs
+      the XPay API key from your Nexi back office; it does not open Nexi accounts and is not party
+      to your contract.
+  - q: Which banks sell XPay?
+    a: >-
+      Intesa Sanpaolo (as XPay Web), Banca MPS, BPER, Banca Mediolanum and Mediobanca Premier are
+      among the banks that distribute it. If you are not sure what sits behind your bank's
+      e-commerce product, the acquirer is named in the merchant information sheet your bank gives
+      you, the <em>foglio informativo esercenti</em>.
+  - q: Which currencies can I charge in?
+    a: >-
+      Euro (EUR). Other currencies depend on your own Nexi contract and PaymentHood does not offer
+      them for XPay yet.
+  - q: Where do customers enter their card details?
+    a: >-
+      On a payment page hosted by Nexi. The buyer leaves your checkout, pays on Nexi's page and
+      returns, which keeps card data off your server and off PaymentHood's. The page is shown in
+      Italian unless you set another language.
+  - q: Can I refund an XPay payment?
+    a: >-
+      Yes. A refund started in PaymentHood returns what is still refundable on the capture, and it
+      settles asynchronously, so the final status arrives a little later. A partial refund is made
+      in your Nexi back office rather than from PaymentHood, and it leaves the payment captured.
+  - q: Can I use XPay for subscriptions or saved cards?
+    a: >-
+      Not today. PaymentHood takes XPay as a one-off payment, so plan for paying each invoice as it
+      comes due.
+  - q: Can I test before going live?
+    a: >-
+      Yes. Nexi provides a test environment with test cards after you create a free developer
+      account, and PaymentHood has a sandbox mode for XPay alongside it.
+  - q: Does PaymentHood charge extra on top of Nexi for XPay?
+    a: >-
+      No. PaymentHood adds nothing to what your bank and Nexi charge: no percentage, no
+      per-transaction cut, and no volume threshold where that changes. Your bank bills you directly
+      and you keep that relationship. PaymentHood's only paid plan is Premium at $29 a month, which
+      adds white-label checkout branding and nothing to your transaction cost. See <a
+      href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a>.
+
+# CHANGED (3 of 3): the draft proposed a disputes/chargebacks FAQ slot. Nothing opened supports a
+# statement about XPay disputes, so there is none, per the task's own instruction.
+
+verification:
+  # The date the facts were gathered; shown on the page. NOT a sign-off: that is
+  # `verified_by`, left empty for a human.
+  verified_on: 2026-10-04
+  verified_by:
+  sources:
+    - https://developer.nexi.it/en/api/introduzione
+    - https://developer.nexi.it/en/api/post-orders-hpp
+    - https://developer.nexi.it/it/api/notifica
+    - https://developer.nexi.it/it/area-test/introduzione
+    - https://www.intesasanpaolo.com/it/business/prodotti/soluzioni-pos-nexi-gestione-pagamenti/pos-virtuale-gateway-pagamento-nexi-xpay-web.html
+    - https://www.mps.it/imprese/incassi-e-pagamenti/vendite-e-commerce.html
+    - https://www.bper.it/imprese-professionisti/incassi-pagamenti/incassi-commerciali/pos/online
+    - https://www.bancamediolanum.it/static-assets/documenti/file/it/2024/02/27//Foglio_informativo_esercenti_febbraio_2024.pdf
+    # NOTE (2026-10-04): the task document also cited a Mediobanca Premier PDF
+    # (wcm/connect/public/d22bc39f-.../FoglioInfoEsercentiNexi.pdf). It returns 404,
+    # caught by check-provider-data.mjs, so it is not listed as a source. Mediobanca
+    # Premier is still named in `coverage` on the strength of the research note in
+    # payment-service/docs/italian-banks-hosted-page-research.md §4, which records it
+    # as reselling Nexi. Replace this comment with a live URL when one is found, or
+    # drop the bank from `coverage` if none can be.

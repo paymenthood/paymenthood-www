@@ -26,6 +26,7 @@ authorize-net: Authorize.net
 binance: Binance Pay
 bitpay: BitPay
 ccbill: CCBill
+nexi-xpay: Nexi XPay
 dpo: DPO Pay
 opay: OPay
 oxapay: OxaPay

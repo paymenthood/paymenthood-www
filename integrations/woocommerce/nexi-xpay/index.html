@@ -1,0 +1,23 @@
+---
+layout: none
+platform: woocommerce
+provider: nexi-xpay
+nav_active: integrations
+# Review gate. A combo page publishes only when BOTH the provider data file is
+# signed off (_data/providers/nexi-xpay.yml -> verification.verified_by) AND a
+# human-written _data/combos/woocommerce-nexi-xpay.yml exists; see the header of
+# _includes/integration-provider.html. Until then it renders, is linked from
+# /providers/nexi-xpay/, and stays out of the index.
+noindex: true
+sitemap: false
+title: "Nexi XPay Payment Gateway for WooCommerce"
+description: "Accept Nexi XPay on WooCommerce through your bank's contract with the free PaymentHood plugin. No gateway code."
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#2d32aa;--pp-accent-text:#2d32aa;--pp-accent-rgb:45,50,170;--pp-hero-end:#2d32aa;--pp-blob-rgb:45,50,170}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}

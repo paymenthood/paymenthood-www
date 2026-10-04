@@ -1,0 +1,22 @@
+---
+layout: none
+nav_active: providers
+slug: nexi-xpay
+title: "Nexi XPay Payment Gateway Integration"
+description: "Accept Nexi XPay through your own bank's contract with one PaymentHood integration. Free plugins for WooCommerce, WHMCS and more, no PaymentHood transaction fee."
+# Review gate. The page builds and is linked from /providers.html, but stays out
+# of the index until a person has checked every field in
+# _data/providers/nexi-xpay.yml against its sources and filled in
+# `verification.verified_by`. Delete these two lines only after that sign-off,
+# and only once the owner confirms the Nexi sandbox test passed.
+noindex: true
+sitemap: false
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#2d32aa;--pp-accent-text:#2d32aa;--pp-accent-rgb:45,50,170;--pp-hero-end:#2d32aa;--pp-blob-rgb:45,50,170}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}
