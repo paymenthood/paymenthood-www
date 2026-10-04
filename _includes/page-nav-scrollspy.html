@@ -47,28 +47,84 @@
 
       var visible = new Set();
 
+      // Everything sticky above the content: the site header plus this nav.
+      // Measured rather than hardcoded, because both change with the breakpoint.
+      function stackHeight() {
+        var headerH = parseInt(getComputedStyle(document.documentElement)
+          .getPropertyValue('--ph-header-h'), 10) || 89;
+        return headerH + Math.round(nav.getBoundingClientRect().height);
+      }
+
       function paint() {
-        // The topmost section still on screen wins, so scrolling past a short
-        // section does not leave two links lit or none.
-        var best = null, bestTop = Infinity;
-        visible.forEach(function (el) {
+        // The section you are reading is the LAST one that has started above the
+        // sticky stack, not the one with the smallest top. Smallest-top wins was
+        // the old rule and it picked whichever section you had scrolled furthest
+        // past: as long as its tail still intersected the observer band, its top
+        // was the most negative number on screen. That is why every tab lit the
+        // link before the one you clicked.
+        // The line is each section's own scroll-margin-top, not the measured
+        // stack. Those differ: .anchor-offset adds breathing room above the
+        // heading, so a section jumped to lands a little BELOW the sticky bar.
+        // Comparing against the stack alone put it just past the line and
+        // handed the highlight back to the previous section. Reading the same
+        // number the CSS uses to land the jump keeps the two in step for good,
+        // including if that offset is ever retuned.
+        var best = null, bestTop = -Infinity;
+        targets.forEach(function (el) {
           var top = el.getBoundingClientRect().top;
-          if (top < bestTop) { bestTop = top; best = el; }
+          var line = parseInt(getComputedStyle(el).scrollMarginTop, 10);
+          if (isNaN(line)) line = stackHeight();
+          if (top <= line + 2 && top > bestTop) { bestTop = top; best = el; }
         });
+        // Above the first heading, nothing has started yet; light the first tab
+        // rather than none, which is what a reader at the top of the page expects.
+        if (!best && targets.length) best = targets[0];
         Object.keys(links).forEach(function (id) {
           links[id].classList.toggle('active', !!best && best.id === id);
         });
       }
 
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) visible.add(entry.target);
-          else visible.delete(entry.target);
-        });
-        paint();
-      }, { rootMargin: '-72px 0px -55% 0px', threshold: 0 });
+      // The top inset has to be the real height of everything sticky above the
+      // content: the site header plus this nav. It used to be a hardcoded 72px,
+      // which is shorter than the actual stack (117 + 57 on a desktop width), so
+      // the tail of the previous section stayed "visible" while sitting behind
+      // the bar. Having the smallest top, it won paint() and lit the wrong link:
+      // clicking FAQ highlighted Setup, every tab one behind, on all 42 provider
+      // pages. Measured rather than guessed, and rebuilt on resize because both
+      // heights change with the breakpoint.
+      var observer = null;
 
-      targets.forEach(function (el) { observer.observe(el); });
+      function observe() {
+        if (observer) observer.disconnect();
+        visible.clear();
+        var stack = stackHeight();
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) visible.add(entry.target);
+            else visible.delete(entry.target);
+          });
+          paint();
+        }, { rootMargin: '-' + stack + 'px 0px -55% 0px', threshold: 0 });
+        targets.forEach(function (el) { observer.observe(el); });
+      }
+
+      observe();
+      window.addEventListener('resize', observe);
+
+      // The observer alone is not enough to leave the nav in the right state.
+      // It fires on intersection changes, and during a smooth scroll the last
+      // of those happens before the page stops moving, so the highlight froze
+      // mid-journey: every tab lit the link before the one that was clicked.
+      // Repainting on scroll settles it. paint() is seven getBoundingClientRect
+      // calls behind a rAF, which is cheap enough to run on every frame of a
+      // scroll without the layout thrash a naive handler would cause.
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () { ticking = false; paint(); });
+      }, { passive: true });
+      paint();
     });
   })();
 </script>
