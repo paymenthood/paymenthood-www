@@ -70,6 +70,7 @@ redirect_from: /features.html
             <div id="homeBannerMask" class="nk-ovm mask-d mask-contain-bottom shape-x"></div>
         </div>
 
+
         <!-- Provider Icons slider -->
         <section class="section section-m over-lg-up pdb-0">
             <div class="container">
@@ -92,6 +93,79 @@ redirect_from: /features.html
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        {%- comment %}
+          Trust bar. Sits directly after the provider logos: the banner makes a
+          claim, the logos show who is behind it, and this answers the question
+          that follows both, which is why any of it should be believed. Eight
+          scrolls down in the Trust Center is too late for that.
+
+          It cannot go between the banner and the logos, which was the first
+          attempt. That slider carries .over-lg-up, a -80px margin that lifts it
+          onto the curve at the foot of the banner, so anything placed above it
+          gets 80px of slider dropped on top. The badge landed on the logos.
+
+          Only the first column is a certification. PaymentHood holds one, and a
+          three-across grid of a single card reads as "is that all?", so the two
+          beside it are other things that are true and independently checkable
+          rather than padding dressed up as credentials. If a second real
+          certification ever lands, it replaces one of them.
+
+          No data-animate here. The bar has to be in the first frame: anything
+          that waits for a scroll trigger is missed by the visitor who scrolls
+          straight past, which is exactly the visitor this is for. The logo is
+          eager for the same reason.
+
+          Bootstrap utilities and theme classes only; the home page does not
+          load components.css, so the Trust Center's .tc-cert markup cannot be
+          reused here.
+        {% endcomment -%}
+        {%- comment %}
+          mt-6 (3rem) sits the band in the middle of the gap rather than up
+          against the slider. Measured: 39px of air above it and 105px below,
+          which read as stuck to the logos; the extra 48 evens that out. The
+          105 below belongs to the next section padding and is left alone.
+        {% endcomment -%}
+        <section class="bg-blue-30 py-4 mt-6 border-bottom">
+            <div class="container">
+                <ul class="row g-4 align-items-center list-unstyled mb-0">
+                    <li class="col-lg-4 col-md-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <picture>
+                                <source srcset="{{ '/assets/images/logos/csa-star-level1.webp' | relative_url }}" type="image/webp">
+                                <img src="{{ '/assets/images/logos/csa-star-level1.png' | relative_url }}" width="52" height="52" decoding="async" alt="" class="flex-shrink-0">
+                            </picture>
+                            <div>
+                                <p class="mb-0 fw-semibold txt-blue-600">CSA STAR Level 1</p>
+                                <a href="https://cloudsecurityalliance.org/star/registry/omegahood-llc/services/paymenthood" class="small txt-blue-100 text-decoration-none" target="_blank" rel="noopener">Verify on the public registry<span class="visually-hidden"> (opens in new tab)</span></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-lg-4 col-md-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="rounded-circle bg-blue-100 bg-opacity-10 d-flex align-items-center justify-content-center flex-shrink-0 txt-blue-100" style="width: 52px; height: 52px;">
+                                <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            </span>
+                            <div>
+                                <p class="mb-0 fw-semibold txt-blue-600">Card data never reaches your server</p>
+                                <a href="{{ '/blog/do-you-need-pci-compliance-to-accept-payments/' | relative_url }}" class="small txt-blue-100 text-decoration-none">What that means for your PCI scope</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-lg-4 col-md-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="rounded-circle bg-blue-100 bg-opacity-10 d-flex align-items-center justify-content-center flex-shrink-0 txt-blue-100" style="width: 52px; height: 52px;">
+                                <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            </span>
+                            <div>
+                                <p class="mb-0 fw-semibold txt-blue-600">Responsible disclosure programme</p>
+                                <a href="{{ '/disclosure/' | relative_url }}" class="small txt-blue-100 text-decoration-none">How we handle reported issues</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -242,26 +316,14 @@ redirect_from: /features.html
 
                 <div class="d-flex bg-blue-100 bg-opacity-25 rounded-5 py-4 px-6" style="--bs-bg-opacity: .15;">
                     <div class="row justify-content-around m-xl-4">
-                        <div class="col-lg-5 animated" data-animate="fadeInLeft" data-delay=".2">
-                            <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="col-lg-8 text-center animated" data-animate="fadeInUp" data-delay=".2">
+                            <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
                                 <div class="rounded-circle bg-blue-100 bg-opacity-10 d-flex align-items-center justify-content-center flex-shrink-0 txt-blue-100" style="width: 61px; height: 61px;">
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512"><path fill="currentColor" d="M264.4 95.01c-35.6-.06-80.2 11.19-124.2 34.09C96.27 152 61.45 182 41.01 211.3c-20.45 29.2-25.98 56.4-15.92 75.8c10.07 19.3 35.53 30.4 71.22 30.4c35.69.1 80.29-11.2 124.19-34c44-22.9 78.8-53 99.2-82.2c20.5-29.2 25.9-56.4 15.9-75.8c-10.1-19.3-35.5-30.49-71.2-30.49m91.9 70.29c-3.5 15.3-11.1 31-21.8 46.3c-22.6 32.3-59.5 63.8-105.7 87.8c-46.2 24.1-93.1 36.2-132.5 36.2c-18.6 0-35.84-2.8-50.37-8.7l10.59 20.4c10.08 19.4 35.47 30.5 71.18 30.5c35.7 0 80.3-11.2 124.2-34.1c44-22.8 78.8-52.9 99.2-82.2c20.4-29.2 26-56.4 15.9-75.7zm28.8 16.8c11.2 26.7 2.2 59.2-19.2 89.7c-18.9 27.1-47.8 53.4-83.6 75.4c11.1 1.2 22.7 1.8 34.5 1.8c49.5 0 94.3-10.6 125.9-27.1c31.7-16.5 49.1-38.1 49.1-59.9s-17.4-43.4-49.1-59.9c-16.1-8.4-35.7-15.3-57.6-20m106.7 124.8c-10.2 11.9-24.2 22.4-40.7 31c-35 18.2-82.2 29.1-134.3 29.1c-21.2 0-41.6-1.8-60.7-5.2c-23.2 11.7-46.5 20.4-68.9 26.1c1.2.7 2.4 1.3 3.7 2c31.6 16.5 76.4 27.1 125.9 27.1s94.3-10.6 125.9-27.1c31.7-16.5 49.1-38.1 49.1-59.9z"/></svg>
                                 </div>
                                 <h3 class="h4">Micro-deposits</h3>
                             </div>
                             <p class="txt-blue-50">Verify payment with small test deposits. Credit cards are verified instantly, while ACH/bank accounts take 2-3 days for confirmation.</p>
-                        </div>
-                        <div class="col-lg-2 animated" data-animate="fadeInUp" data-delay=".2">
-                            <div id="verificationDivider" class="bg-blue-100 mx-lg-auto my-lg-0 my-4"></div>
-                        </div>
-                        <div class="col-lg-5 animated" data-animate="fadeInRight" data-delay=".2">
-                            <div class="d-flex align-items-center gap-3 mb-4">
-                                <div class="rounded-circle bg-blue-100 bg-opacity-10 d-flex align-items-center justify-content-center flex-shrink-0 txt-blue-100" style="width: 61px; height: 61px;">
-                                    <img src="assets/images/home/plaid-icon.png" width="38" height="38" loading="lazy" decoding="async" alt="">
-                                </div>
-                                <h3 class="h4">PLAID</h3>
-                            </div>
-                            <p class="txt-blue-50">Fast, seamless account verification through Plaid's secure connection to banks and financial institutions.</p>
                         </div>
                     </div>
                 </div>
