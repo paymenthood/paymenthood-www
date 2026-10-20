@@ -1,0 +1,437 @@
+// Home hero slider (index.html #heroSlider).
+//
+// Slide 1 is the original hero, left exactly where it was in the document flow:
+// it is the page's LCP element and its preloads and inline critical CSS in
+// header.html depend on that markup, so nothing about it moves. It only gets a
+// wrapper that can fade. Slide 2 (security) is laid over it with
+// position:absolute, so the hero's height is still decided by slide 1 and
+// switching slides can never shift the page.
+//
+// No class here may contain "bg-": base.scss gives every [class*='bg-'] element
+// position:relative and a background-size, which would break the overlay.
+//
+// Everything is progressive: without JavaScript slide 1 is shown (it carries
+// .is-active in the markup) and the controls stay [hidden].
+
+// Horizontal swipes belong to the slider. Without this a sideways swipe over the
+// hero can trigger the browser's own history-back gesture instead.
+#heroSlider {
+  touch-action: pan-y pinch-zoom;
+}
+
+// ---- slides ----------------------------------------------------------------
+
+.hero-slide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .6s ease, visibility 0s linear .6s;
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .6s ease;
+  }
+}
+
+// Not rendered at all until the script mounts it once the page is idle (or the
+// visitor asks for it). That keeps its badge image and its layout work out of the
+// first seconds, which belong to the LCP image. Without JavaScript it simply
+// never appears.
+.hero-slide-security {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  &.is-mounted,
+  &.is-active {
+    display: block;
+  }
+
+  // Same box as slide 1's banner, so both slides centre their content in the
+  // same area at every breakpoint (the theme's min-heights use !important).
+  .banner {
+    height: 100%;
+    min-height: 0 !important;
+  }
+}
+
+// ---- security slide backdrop ----------------------------------------------
+// Same overlay stack as #homeBannerMask (curve at the foot, diagonal shapes),
+// but a deep blue gradient with a soft glow behind the certificate card in
+// place of the photograph.
+
+.hero-security-mask {
+  background:
+    radial-gradient(58% 72% at 76% 46%, rgba(var(--blue-100-rgb), .34), rgba(var(--blue-100-rgb), 0) 70%),
+    linear-gradient(135deg, rgb(var(--blue-200-rgb)) 0%, #132a78 55%, rgb(var(--blue-600-rgb)) 135%);
+
+  &:before {
+    background-image: url('../images/home/banner-mask-small.svg');
+    background-position: 101% 101%;
+    right: -1px !important;
+    left: -1px !important;
+  }
+}
+
+// ---- security slide content ------------------------------------------------
+
+.hero-slide-security {
+  .cpn-head {
+    margin-top: .5rem;
+  }
+
+  // Avoids a one-word last line ("us.") where the browser supports it.
+  .lead {
+    text-wrap: pretty;
+  }
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0 0 1rem;
+  padding: .35rem .9rem;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+}
+
+.hero-cert-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  margin: 0 0 .75rem;
+  padding: .3rem 1rem .3rem .3rem;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: left;
+}
+
+// Below 992px the large certificate card is gone, so the badge is kept small, on the white
+// chip it needs (the ring is blue and vanishes on blue). It stands in for the "Security" label.
+.hero-cert-mini-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fff;
+
+  img {
+    display: block;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+.hero-cert-card {
+  position: relative;
+  z-index: 2;
+  max-width: 26rem;
+  margin-left: auto;
+  padding: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 0 24px 60px rgba(var(--blue-600-rgb), .35);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.hero-cert-head {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 1.4rem;
+}
+
+// The badge is drawn for light backgrounds (a blue ring) and disappears on blue,
+// so it always sits on a white chip. Same reason as .footer-cert-chip.
+.hero-cert-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: .8rem;
+  border-radius: 1.4rem;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(var(--blue-600-rgb), .3);
+
+  img {
+    display: block;
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+}
+
+.hero-cert-name {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.hero-cert-level {
+  margin: .25rem 0 0;
+  color: rgba(255, 255, 255, .82);
+  font-size: .95rem;
+}
+
+.hero-cert-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: .7rem;
+    align-items: flex-start;
+    margin: 0 0 .8rem;
+    color: rgba(255, 255, 255, .92);
+    font-size: .95rem;
+    line-height: 1.45;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex-shrink: 0;
+    margin-top: .05rem;
+    color: #5be3b5;
+  }
+}
+
+// A large, faint shield behind the card. Decorative only.
+.hero-shield {
+  position: absolute;
+  top: 50%;
+  right: -4rem;
+  width: 34rem;
+  height: 34rem;
+  transform: translateY(-50%);
+  color: #fff;
+  opacity: .07;
+  pointer-events: none;
+}
+
+// ---- controls ----------------------------------------------------------------
+// A slim dark pill of dots and a pause button. On tablets and desktops there is ONE set, placed
+// beside slide 1's "View All" button and kept in that exact spot while the slides change.
+// On phones the buttons run down to the curve and there is no room beside them, so one pill
+// hangs under the hero's bottom edge instead.
+// The pill behind the dots keeps them legible over the photo and the plain blue alike.
+
+.hero-attach {
+  position: relative;
+}
+
+.hero-ctrl {
+  display: none;
+}
+
+.hero-rail {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-pill {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: rgba(var(--blue-600-rgb), .74);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  // One set for both slides, a child of #heroSlider (outside the slides, so it never fades or
+  // goes inert). hero-slider.js sets left/top from slide 1's "View All" button.
+  .hero-ctrl {
+    display: block;
+    position: absolute;
+    z-index: 6;
+  }
+
+  .hero-rail {
+    display: none;
+  }
+}
+
+// 24px touch targets (WCAG 2.2 target size), with a much smaller mark inside.
+.hero-dot,
+.hero-pause {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 1px;
+    box-shadow: 0 0 0 4px rgba(var(--blue-100-rgb), .9);
+  }
+}
+
+.hero-dot {
+  &:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .5);
+    transition: width .25s ease, background-color .25s ease;
+  }
+
+  &[aria-current="true"]:before {
+    width: 18px;
+    background: #fff;
+  }
+}
+
+.hero-pause {
+  margin-left: 4px;
+  padding-left: 4px;
+  width: 28px;
+  border-radius: 0 12px 12px 0;
+  border-left: 1px solid rgba(255, 255, 255, .24);
+
+  svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  // Shows the glyph for the action the button will take.
+  .icon-play {
+    display: none;
+  }
+
+  &[aria-pressed="true"] {
+    .icon-pause {
+      display: none;
+    }
+
+    .icon-play {
+      display: block;
+    }
+  }
+}
+
+// Between 992px and 1259px the card column is narrow: a slimmer card keeps its text
+// from wrapping badly.
+@media (min-width: 992px) and (max-width: 1259px) {
+  .hero-cert-card {
+    max-width: 21rem;
+    padding: 1.4rem;
+  }
+
+  .hero-cert-chip img {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+// Very narrow phones (320px): hang a little lower, clear of the last button.
+@media (max-width: 359px) {
+  .hero-rail {
+    bottom: -30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-eyebrow {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  // Slide 1: on phones the hero's content is centred in a fixed-height box and, at several
+  // widths (about 330 to 430px), its first line "All-in-One" rode up under the header bar.
+  // A little padding on top keeps it clear.
+  #heroSlide1 .banner {
+    padding-top: 1.75rem;
+  }
+
+  // The fixed 599px box has no slack at these widths, so give the hero 41px more. Both slides use
+  // it (slide 2 fills the same box). Beats the theme's `.banner { min-height: 599px !important }`.
+  .header-banner .banner {
+    min-height: 640px !important;
+  }
+
+  // The badge chip makes this slide a little taller than before; tighten its spacing so the
+  // chip clears the header on a 390px phone.
+  .hero-slide-security {
+    .banner {
+      padding-top: 1.75rem;
+    }
+
+    .cpn-head {
+      margin-top: 0;
+    }
+
+    .cpn-text {
+      margin-top: .25rem;
+      margin-bottom: .5rem;
+    }
+  }
+
+  .hero-slide-security .lead {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+// Reduced motion: the slides still rotate, but swap instantly instead of cross-fading.
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-slide.is-active {
+    transition: none;
+  }
+
+  .hero-dot:before {
+    transition: none;
+  }
+}

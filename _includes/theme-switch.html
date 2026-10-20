@@ -1,0 +1,47 @@
+{%- comment -%}
+  Colour theme selector: Light, Dark, or System (follow the device setting).
+  Included once, in the menu button row of header.html.
+
+  Desktop: an icon button that opens a small panel. Mobile: the button is hidden and
+  the same three options sit inline in the slide-in menu. The options are native
+  radio buttons, so arrow keys, focus and screen-reader announcements come from the
+  browser; assets/js/theme-switch.js only stores the choice and flips the
+  data-theme attribute on <html>. Without JavaScript the control is display:none (no
+  dead button). With JavaScript its space is reserved from the first paint (the inline
+  script in header.html sets data-theme-pref on <html>) and it is only made visible once
+  the script is ready, so revealing it never moves the menu.
+
+  Class names avoid the substring "bg-" on purpose (base.scss gives every
+  [class*='bg-'] element position:relative and a background-size).
+{%- endcomment -%}
+<div class="theme-switch" data-theme-switch>
+    <button type="button" class="theme-switch-btn" aria-haspopup="true" aria-expanded="false" aria-controls="themeSwitchPanel" aria-label="Colour theme">
+        <svg class="ts-icon ts-icon-light" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="ts-icon ts-icon-dark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ts-icon ts-icon-system" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </button>
+    <fieldset class="theme-switch-panel" id="themeSwitchPanel">
+        <legend class="visually-hidden">Colour theme</legend>
+        <label class="ts-option">
+            <input type="radio" name="ph-theme" value="light" class="ts-input">
+            <span class="ts-face">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                <span>Light</span>
+            </span>
+        </label>
+        <label class="ts-option">
+            <input type="radio" name="ph-theme" value="dark" class="ts-input">
+            <span class="ts-face">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                <span>Dark</span>
+            </span>
+        </label>
+        <label class="ts-option">
+            <input type="radio" name="ph-theme" value="system" class="ts-input">
+            <span class="ts-face">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                <span>System</span>
+            </span>
+        </label>
+    </fieldset>
+</div>

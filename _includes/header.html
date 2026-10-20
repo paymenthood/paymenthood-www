@@ -22,6 +22,25 @@
     {%- endcomment -%}
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
+    {%- comment -%}
+      Colour theme, resolved BEFORE the first paint so a visitor who chose dark (or whose
+      system is dark) never sees a white flash. The choice lives in localStorage under
+      ph_theme as light, dark or system (the default). The stylesheet only ever looks at
+      html[data-theme="dark"]: "system" is resolved to light or dark here and again in
+      assets/js/theme-switch.js when the system setting changes. If storage is blocked the
+      page simply follows the system. Keep this tiny and inline; it is render-critical.
+    {%- endcomment -%}
+    <script>
+        (function () {
+            var pref = 'system';
+            try { var saved = localStorage.getItem('ph_theme'); if (saved === 'light' || saved === 'dark') pref = saved; } catch (e) {}
+            var dark = pref === 'dark' || (pref === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            var root = document.documentElement;
+            root.setAttribute('data-theme-pref', pref);
+            root.setAttribute('data-theme', dark ? 'dark' : 'light');
+        })();
+    </script>
+
     <!-- Consent Mode v2 defaults + consent-gated Google Tag Manager -->
     {%- comment -%}
       Consent Mode v2 in ADVANCED mode (changed 2026-09-29; it was "basic"
@@ -397,6 +416,9 @@
                                     <li class="menu-item"><a class="menu-link nav-link{% if page.nav_active == 'contact' %} active{% endif %}"{% if page.nav_active == 'contact' %} aria-current="page"{% endif %} href="/contact-us.html">Contact Us</a></li>
                                 </ul>
                                 <ul class="menu-btns">
+                                    <li class="menu-theme">
+                                        {%- include theme-switch.html %}
+                                    </li>
                                     <li><a href="{{ site.signup_url }}" class="vh-btn btn-md btn-auto btn-green-300 vh-btn-outline no-change"><span>Start Free</span></a></li>
                                 </ul>
                             </nav>

@@ -1,0 +1,223 @@
+// Colour theme selector (_includes/theme-switch.html).
+//
+// Desktop: a round icon button in the header that opens a small panel of three
+// radio options (Light, Dark, System). Mobile: the button is hidden and the same
+// three options sit in a row inside the slide-in menu. The dark-theme look of the
+// panel lives in _dark.scss with the rest of the dark rules.
+//
+// No class here contains "bg-": base.scss gives every [class*='bg-'] element
+// position:relative and a background-size.
+
+.theme-switch {
+  position: relative;
+  display: none;
+  vertical-align: middle;
+}
+
+// JavaScript is running (header.html sets data-theme-pref before first paint): keep the
+// control's space but stay invisible until theme-switch.js adds .is-ready. Revealing it
+// later therefore cannot shift the menu (it did, by 0.0013 CLS, when it was [hidden]).
+html[data-theme-pref] .theme-switch {
+  display: inline-flex;
+  visibility: hidden;
+}
+
+html[data-theme-pref] .theme-switch.is-ready {
+  visibility: visible;
+}
+
+.theme-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(var(--blue-400-rgb), .4);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--blue-400);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+
+  &:hover {
+    border-color: var(--blue-100);
+    background: rgba(var(--blue-100-rgb), .12);
+    color: var(--blue-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--blue-100);
+    outline-offset: 2px;
+  }
+}
+
+// Over the hero the header is a navy bar with white text.
+.is-transparent:not(.has-fixed) .theme-switch-btn {
+  border-color: rgba(255, 255, 255, .45);
+  color: #fff;
+
+  &:hover {
+    background: rgba(255, 255, 255, .16);
+    border-color: #fff;
+    color: #fff;
+  }
+}
+
+// One icon at a time: the one for the CHOICE (System shows the monitor).
+.ts-icon {
+  display: none;
+  width: 20px;
+  height: 20px;
+}
+
+html:not([data-theme-pref]) .ts-icon-system,
+html[data-theme-pref="system"] .ts-icon-system,
+html[data-theme-pref="light"] .ts-icon-light,
+html[data-theme-pref="dark"] .ts-icon-dark {
+  display: block;
+}
+
+// ---- the panel ---------------------------------------------------------------
+
+.theme-switch-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 60;
+  min-width: 10.5rem;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid #dbe4f7;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(var(--blue-600-rgb), .18);
+}
+
+.theme-switch.is-open .theme-switch-panel {
+  display: block;
+}
+
+.ts-option {
+  position: relative;
+  display: block;
+  margin: 0;
+  cursor: pointer;
+}
+
+// Native radio, kept focusable but not visible: the face beside it is the control.
+.ts-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  opacity: 0;
+}
+
+.ts-face {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: var(--blue-400);
+  font-size: 15px;
+  line-height: 1.2;
+  transition: background-color .15s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+}
+
+.ts-option:hover .ts-face {
+  background: var(--blue-30);
+}
+
+.ts-input:checked + .ts-face {
+  background: rgba(var(--blue-100-rgb), .14);
+  color: #0a5fa3;
+  font-weight: 500;
+
+  &:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: currentColor;
+  }
+}
+
+.ts-input:focus-visible + .ts-face {
+  outline: 2px solid var(--blue-100);
+  outline-offset: -2px;
+}
+
+// The row of buttons the header menu keeps on one line.
+.menu-theme {
+  display: flex;
+  align-items: center;
+}
+
+// ---- inside the slide-in menu (below 992px) ------------------------------------
+
+@media (max-width: 991px) {
+  .menu-btns > .menu-theme {
+    flex: 0 0 100%;
+  }
+
+  html[data-theme-pref] .theme-switch {
+    display: flex;
+    width: 100%;
+  }
+
+  .theme-switch-btn {
+    display: none;
+  }
+
+  .theme-switch-panel {
+    display: flex;
+    position: static;
+    gap: 4px;
+    width: 100%;
+    min-width: 0;
+    padding: 4px;
+    border-color: #dbe4f7;
+    border-radius: 12px;
+    background: rgba(var(--blue-100-rgb), .08);
+    box-shadow: none;
+  }
+
+  .ts-option {
+    flex: 1 1 0;
+  }
+
+  .ts-face {
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 4px;
+    font-size: 14px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .ts-input:checked + .ts-face:after {
+    display: none;
+  }
+
+  .ts-input:checked + .ts-face {
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(var(--blue-600-rgb), .16);
+  }
+}

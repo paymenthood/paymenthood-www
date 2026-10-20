@@ -36,3 +36,15 @@
 
   strong { color: var(--blue-600); }
 }
+
+// ── Dark theme ──────────────────────────────────────────────────────────────────────────────
+// html[data-theme="dark"]. See _sass/theme/_dark.scss for how it works: the palette vars are
+// re-pointed there, so only hard-coded colours need a rule, mirrored behind :where() so each
+// one ties with the rule it overrides and wins by coming last.
+@media screen {
+  :where(html[data-theme="dark"]) {
+    .about-supplier {
+      background: var(--gray-100);
+    }
+  }
+}

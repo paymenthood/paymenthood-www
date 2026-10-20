@@ -1,0 +1,115 @@
+// Dark theme: shared components (components.css). Applies when <html data-theme="dark">.
+// Read the header of _sass/theme/_dark.scss first: it explains the token re-pointing
+// that does most of the work, and why every rule here mirrors its original selector
+// behind :where(html[data-theme="dark"]) instead of using a plain html[...] prefix.
+//
+// This file is loaded after the rules it overrides (it is the last partial of
+// components.scss), which is what lets zero-specificity overrides win.
+
+@media screen {
+  :where(html[data-theme="dark"]) {
+
+    // ---- cards and panels: white becomes the card surface -----------------------------------
+    .fact-table,
+    .stats-bar,
+    .feat-card,
+    .ptype-card,
+    .why-card,
+    .faq-question,
+    .faq-answer,
+    .install-hero,
+    .method-card,
+    .combo-tile,
+    a.how-step,
+    .chip {
+      background: var(--gray-100);
+    }
+
+    // ---- sticky in-page nav (provider and combo pages) ---------------------------------------------
+    .page-nav {
+      background: rgba(var(--bs-light-rgb), .92);
+    }
+
+    // ---- per-page accent colour used as TEXT --------------------------------------------------------
+    // Each product, provider and combo stub sets --pp-accent-text: its brand colour darkened
+    // until it reads on WHITE (4.5:1). On a dark page that same value is too dark, so the text
+    // uses it lightened toward white. color-mix keeps the hue, and a browser without it keeps
+    // the original value (these declarations are simply ignored).
+    .section-eyebrow,
+    .stat-number,
+    .page-nav a:hover,
+    .page-nav a:focus-visible,
+    .page-nav a.active,
+    .chip--code,
+    .method-icon,
+    .source-note a {
+      color: color-mix(in srgb, var(--pp-accent-text, var(--pp-accent, var(--blue-200))) 52%, #fff);
+    }
+
+    // ---- tinted chips: pale blue paper becomes translucent blue ----------------------------
+    .check-list li:before,
+    .step-num {
+      background: rgba(var(--blue-100-rgb), .16);
+    }
+
+    // ---- hard-coded text ----------------------------------------------------------------------
+    .install-hero h2,
+    .install-hero p,
+    .install-hero .lead {
+      color: var(--blue-600);
+    }
+
+    .feat-card-icon.indigo {
+      color: #a3a8ff;
+    }
+
+    .feat-card-icon.green {
+      color: #4fe0a8;
+    }
+
+    // ---- platform badges: pastel paper becomes translucent colour ------------------------------
+    .badge.badge-wordpress {
+      background: rgba(33, 117, 155, .22);
+      color: #7cc4e8;
+    }
+
+    .badge.badge-billing {
+      background: rgba(46, 125, 50, .24);
+      color: #8fe296;
+    }
+
+    .badge.badge-joomla {
+      background: rgba(57, 73, 171, .26);
+      color: #aab4ff;
+    }
+
+    // ---- "pending review" banner on unsigned provider pages ---------------------------------------
+    .review-banner {
+      background: rgba(217, 158, 11, .14);
+      color: #f2d98d;
+
+      code {
+        background: rgba(217, 158, 11, .2);
+        color: #f2d98d;
+      }
+    }
+  }
+
+  // ---- legacy inline <style> blocks ------------------------------------------------------------
+  // integrations/whmcs/index.html carries its own .compare-table rules in a <style> in the page,
+  // which comes after this stylesheet, so a plain tie would lose to it. These use the real
+  // html[data-theme] prefix for the extra specificity.
+  html[data-theme="dark"] {
+    .compare-table thead th {
+      background: rgb(var(--blue-200-rgb));
+    }
+
+    .compare-table tbody tr:nth-child(odd) {
+      background: var(--gray-100);
+    }
+
+    .check-no {
+      color: #ff8a8a;
+    }
+  }
+}

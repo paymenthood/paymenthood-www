@@ -1,0 +1,142 @@
+// Home page banner under "Supported Payment Providers" that points vibe coders at
+// /integrations/ai-builders/ (index.html #aiBuildersBanner). It lives in the theme because the
+// home page does not load components.css.
+//
+// Navy in both themes, with literal colours on purpose: the dark theme re-points the palette
+// vars (--blue-600 becomes near white), which would turn this panel light. No @media: the two
+// columns reflow with auto-fit.
+
+.home-ai-banner {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  align-items: center;
+  gap: 2.5rem;
+  padding: clamp(1.75rem, 4vw, 3.5rem);
+  border-radius: 28px;
+  background: linear-gradient(135deg, #0e1431 0%, #1940b0 100%);
+  box-shadow: 0 28px 70px rgba(25, 64, 176, .22);
+  color: #fff;
+
+  // Soft glow behind the prompt card.
+  &:before {
+    content: "";
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    right: -140px;
+    top: -200px;
+    border-radius: 50%;
+    background: rgba(22, 163, 254, .22);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+  }
+
+  h3 {
+    margin: 0 0 1rem;
+    color: #fff;
+  }
+
+  p {
+    margin: 0 0 1.5rem;
+    color: rgba(255, 255, 255, .82);
+  }
+}
+
+.home-ai-eyebrow {
+  display: inline-block;
+  margin-bottom: .9rem;
+  padding: .3rem .85rem;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.home-ai-fine {
+  margin: 1.25rem 0 0;
+  font-size: .78rem;
+  color: rgba(255, 255, 255, .62);
+}
+
+// The prompt, as a small editor window.
+.home-ai-prompt {
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 18px;
+  background: #0b1028;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, .35);
+  overflow: hidden;
+}
+
+.home-ai-prompt-bar {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .7rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .04);
+  font-size: .78rem;
+  color: rgba(255, 255, 255, .65);
+
+  i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .24);
+  }
+
+  span {
+    margin-left: auto;
+  }
+}
+
+.home-ai-prompt-body {
+  margin: 0;
+  padding: 1.15rem 1.25rem 1.3rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: .86rem;
+  line-height: 1.75;
+  color: #dbe5fb;
+  white-space: pre-wrap;
+
+  b {
+    color: #2fd9ad;
+    font-weight: 600;
+  }
+}
+
+.home-ai-logos {
+  display: flex;
+  gap: .6rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    place-items: center;
+    // Shrinks on narrow phones so all six marks stay on one row.
+    flex: 0 1 48px;
+    min-width: 0;
+    aspect-ratio: 1;
+    padding: 9px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}

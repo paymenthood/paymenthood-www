@@ -22,3 +22,7 @@
 @use "theme/overrides";        // site-specific overrides (page header, home banner…)
 @use "theme/extras";           // late-cascade page extras (transaction cards, slider)
 @use "theme/integrations-menu"; // integrations mega-menu in the navbar
+@use "theme/hero-slider";     // home hero slider: slides, security slide, control rail
+@use "theme/ai-banner";      // home banner that points vibe coders at /integrations/ai-builders/
+@use "theme/theme-switch";   // colour theme selector: header button, panel, mobile row
+@use "theme/dark";           // dark theme (html[data-theme=dark]); must stay LAST

@@ -12,3 +12,4 @@
 @use "components/install";
 @use "components/provider";
 @use "components/blog-card";
+@use "components/dark";        // dark theme overrides; must stay LAST

@@ -13,8 +13,17 @@ redirect_from: /features.html
 
     <main id="main-content" class="overflow-hidden">
 
+        {%- comment %}
+          Hero slider. Slide 1 is the original hero and stays in the document flow
+          untouched: it is the LCP element (see the preloads and critical CSS in
+          header.html). Slide 2 is laid over it, so the hero's height never changes.
+          Logic: assets/js/hero-slider.js. Styles: _sass/theme/_hero-slider.scss.
+          The controls are [hidden] until the script has run, so without JavaScript
+          the page is exactly the original hero.
+        {% endcomment -%}
         <!-- Banner -->
-        <div class="header-banner bg-blue-200">
+        <div class="header-banner bg-blue-200" id="heroSlider" role="region" aria-roledescription="carousel" aria-label="PaymentHood highlights">
+        <div class="hero-slide is-active" id="heroSlide1" role="group" aria-roledescription="slide" aria-label="1 of 2: Payment integration">
             <div class="banner">
                 <div class="banner-wrap">
                     <div class="container">
@@ -54,7 +63,7 @@ redirect_from: /features.html
                                             <em class="ti ti-arrow-right ps-2"></em>
                                         </a>
                                     </div>
-                                    <div class="cpn-btns d-none d-sm-block animated" data-animate="fadeInUp" data-delay="0.5">
+                                    <div class="cpn-btns hero-attach d-none d-sm-block animated" data-animate="fadeInUp" data-delay="0.5">
                                         <a href="/integrations/" class="vh-btn btn-md btn-brand-equal btn-blue-100 no-change" aria-label="View All integrations">
                                             <em class="ti ti-layout-grid2"></em>
                                             <span class="ms-1">View All</span>
@@ -68,6 +77,100 @@ redirect_from: /features.html
                 </div>
             </div>
             <div id="homeBannerMask" class="nk-ovm mask-d mask-contain-bottom shape-x"></div>
+        </div>
+
+        <!-- Slide 2: security. CSA STAR Level 1 is a published SELF-assessment, not a
+             certification or an audit (see _data/ssrm.yml "limits"). The wording below must
+             never say certified, audited or attested. -->
+        <div class="hero-slide hero-slide-security" id="heroSlide2" role="group" aria-roledescription="slide" aria-label="2 of 2: Security">
+            <div class="banner">
+                <div class="banner-wrap">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center justify-content-lg-between">
+                            <div class="col-xl-6 col-lg-7 col-sm-10 col-mb-10 text-center text-lg-start">
+                                <div class="banner-caption cpn tc-light">
+                                    <p class="hero-cert-mini d-lg-none">
+                                        <span class="hero-cert-mini-chip">
+                                            <picture>
+                                                <source srcset="{{ '/assets/images/logos/csa-star-level1.webp' | relative_url }}" type="image/webp">
+                                                <img src="{{ '/assets/images/logos/csa-star-level1.png' | relative_url }}" width="160" height="160" loading="lazy" decoding="async" fetchpriority="low" alt="">
+                                            </picture>
+                                        </span>
+                                        <span>CSA STAR Level 1<br>Self-Assessment</span>
+                                    </p>
+                                    <p class="hero-eyebrow">
+                                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                                        Security
+                                    </p>
+                                    <div class="cpn-head">
+                                        <h2 class="title title-lg">Security You <br class="d-none d-md-block">Can Verify</h2>
+                                    </div>
+                                    <div class="cpn-text cpn-text-s3 mb-0">
+                                        <p class="lead lead-s3">PaymentHood is listed on the Cloud Security Alliance STAR Registry with a published Level 1 Self-Assessment of our cloud security controls. It is public, so you can read it before you talk to us.</p>
+                                    </div>
+                                    <div class="cpn-action d-flex flex-wrap gap-3 align-items-center justify-content-center justify-content-lg-start">
+                                        <div class="cpn-btns">
+                                            <a href="https://cloudsecurityalliance.org/star/registry/omegahood-llc/services/paymenthood" class="vh-btn btn-md btn-blue-100 no-change" target="_blank" rel="noopener">
+                                                <span>View the registry listing</span><span class="visually-hidden"> (opens in new tab)</span>
+                                                <em class="ti ti-arrow-top-right ps-2" aria-hidden="true"></em>
+                                            </a>
+                                        </div>
+                                        <div class="cpn-btns">
+                                            <a href="/trust-center/" class="vh-btn btn-md btn-blue-100 no-change">
+                                                <span>Read the Trust Center</span>
+                                                <em class="ti ti-arrow-right ps-2" aria-hidden="true"></em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block position-relative">
+                                <svg class="hero-shield" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                                <div class="hero-cert-card">
+                                    <div class="hero-cert-head">
+                                        <span class="hero-cert-chip">
+                                            <picture>
+                                                <source srcset="{{ '/assets/images/logos/csa-star-level1.webp' | relative_url }}" type="image/webp">
+                                                <img src="{{ '/assets/images/logos/csa-star-level1.png' | relative_url }}" width="160" height="160" loading="lazy" decoding="async" fetchpriority="low" alt="">
+                                            </picture>
+                                        </span>
+                                        <div>
+                                            <p class="hero-cert-name">CSA STAR Registry</p>
+                                            <p class="hero-cert-level">Level 1 &middot; Self-Assessment</p>
+                                        </div>
+                                    </div>
+                                    <ul class="hero-cert-list">
+                                        <li>
+                                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 3 3 5-6"/></svg>
+                                            <span>A public listing, open without an account</span>
+                                        </li>
+                                        <li>
+                                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 3 3 5-6"/></svg>
+                                            <span>Controls documented against the Cloud Controls Matrix</span>
+                                        </li>
+                                        <li>
+                                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 3 3 5-6"/></svg>
+                                            <span>Our own assessment, published for you to read</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-ovm mask-d mask-contain-bottom shape-x hero-security-mask"></div>
+        </div>
+
+        <!-- One set of controls for BOTH slides, outside them so it never fades or goes inert with a
+             slide. hero-slider.js places it beside slide 1's "View All" button and it stays there. -->
+        <div class="hero-ctrl" data-hero-controls hidden>
+            {% include hero-controls.html %}
+        </div>
+
+        <div class="hero-rail" data-hero-controls hidden>
+            {% include hero-controls.html %}
+        </div>
         </div>
 
 
@@ -176,7 +279,7 @@ redirect_from: /features.html
         {% include video-embed.html
              id="zav1wqwmjtA"
              title="Add Any Payment Provider Without Touching Your Code"
-             poster="/assets/images/home/video-poster.webp"
+             poster="/assets/images/home/video-poster-providers.webp"
              description="How PaymentHood removes the code changes, rebuilds and redeploys that normally come with adding, swapping or losing a payment provider."
              duration="PT1M27S"
              upload_date="2026-08-04T13:00:05-07:00"
@@ -299,6 +402,41 @@ redirect_from: /features.html
                             </ul>
                         </div>
                     </div>
+                </div>
+
+                <!-- Vibe coding: points AI-builder users at the prompt page, which is otherwise
+                     only reachable from the Integrations menu. The logo list comes from the same
+                     data file as that page, so a new builder shows up here too. -->
+                {%- assign aib = site.data.ai_builder_prompts.builders %}
+                <div class="container mt-6">
+                    <aside id="aiBuildersBanner" class="home-ai-banner animated" data-animate="fadeInUp" data-delay=".2" aria-labelledby="aiBuildersTitle">
+                        <div>
+                            <span class="home-ai-eyebrow">Vibe coding</span>
+                            <h3 id="aiBuildersTitle" class="h2">Building with AI? Add payments with one prompt.</h3>
+                            <p>Using Lovable, Bolt.new, v0, Replit, Base44 or a coding agent? Copy one of our ready-made prompts into your project and it writes the PaymentHood checkout and webhook for you, with the payment rules generated code usually gets wrong already spelled out.</p>
+                            <a href="/integrations/ai-builders/" class="vh-btn btn-green-300 no-change">
+                                <span>Get the ready-made prompts</span>
+                                <em class="ti ti-arrow-right ps-2" aria-hidden="true"></em>
+                            </a>
+                            <p class="home-ai-fine">PaymentHood is not affiliated with these tools. Names and logos are used only to show which tool a prompt is written for.</p>
+                        </div>
+                        <div aria-hidden="true">
+                            <div class="home-ai-prompt">
+                                <div class="home-ai-prompt-bar"><i></i><i></i><i></i><span>Prompt &middot; paste into your builder</span></div>
+                                <pre class="home-ai-prompt-body">Add payments to this app with <b>PaymentHood</b>.
+
+<b>1.</b> Create the payment on the server
+<b>2.</b> Keep every API key out of the browser
+<b>3.</b> Verify the webhook signature
+<b>4.</b> Mark the order paid only when Captured</pre>
+                            </div>
+                            <ul class="home-ai-logos">
+                                {%- for b in aib %}
+                                <li><img src="{{ '/assets/images/ai-builders/' | append: b.logos.first | relative_url }}" alt="" width="30" height="30" loading="lazy" decoding="async"></li>
+                                {%- endfor %}
+                            </ul>
+                        </div>
+                    </aside>
                 </div>
             </div>
 
@@ -778,5 +916,7 @@ redirect_from: /features.html
 
     <!-- Chat email gate -->
     {% include chat-widget.html %}
+
+    <script defer src="{{ '/assets/js/hero-slider.js' | relative_url }}?ver=5"></script>
 
     {% include footer.html %}

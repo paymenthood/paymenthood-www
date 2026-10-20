@@ -229,3 +229,32 @@
 @media (max-width: 767px) {
   .ssrm-limits { grid-template-columns: 1fr; }
 }
+
+// ── Dark theme ──────────────────────────────────────────────────────────────────────────────
+// html[data-theme="dark"]. See _sass/theme/_dark.scss for how it works: the palette vars are
+// re-pointed there, so only hard-coded colours need a rule, mirrored behind :where() so each
+// one ties with the rule it overrides and wins by coming last.
+@media screen {
+  :where(html[data-theme="dark"]) {
+    .ssrm-party,
+    .ssrm-key,
+    .ssrm-domains,
+    .ssrm-duty {
+      background: var(--gray-100);
+    }
+
+    .ssrm-domain--azure .ssrm-domain-owner {
+      background: rgba(31, 68, 145, .3);
+      color: #a9c1ff;
+    }
+
+    .ssrm-domain--paymenthood .ssrm-domain-owner {
+      background: rgba(20, 102, 63, .3);
+      color: #8fe3b4;
+    }
+
+    .ssrm-domain--shared .ssrm-domain-owner {
+      background: rgba(174, 187, 221, .16);
+    }
+  }
+}

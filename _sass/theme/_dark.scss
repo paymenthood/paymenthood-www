@@ -1,0 +1,297 @@
+// Dark theme: shared theme layer (style.css). Applies when <html data-theme="dark">.
+// That attribute is set before first paint by the inline script in header.html and
+// kept in step by assets/js/theme-switch.js ("system" is resolved to light or dark
+// there), so this file never needs a prefers-color-scheme query.
+//
+// HOW IT WORKS (read before adding a rule)
+//   1. The site's colours are palette custom properties. Almost all text uses
+//      var(--blue-200|400|600) and almost every light surface uses --blue-30,
+//      --gray-100/200 or Bootstrap's --bs-light-rgb. Re-pointing those at dark
+//      values below recolours everything that uses them, in this file and in every
+//      stylesheet loaded after it, with no per-component rule.
+//   2. The -rgb twins (--blue-200-rgb ...) are left alone: backgrounds are built from
+//      those, so brand-blue heroes, the footer and the buttons keep their colour.
+//   3. Two kinds of element still need a rule:
+//        a. a FILL that uses a re-pointed hex var (brand-blue panels that use
+//           var(--blue-200) as a background): the var is put back for that element;
+//        b. a hard-coded colour (#fff cards, #415076 text): overridden by mirroring
+//           the original selector, prefixed with :where(html[data-theme="dark"]).
+//   4. :where() has zero specificity, so each override ties with the rule it mirrors
+//      and wins only by coming later, exactly like the cascade it replaces. A plain
+//      html[data-theme="dark"] .x would out-rank `.tc-light .lead` and turn the
+//      hero's white text grey; do not "simplify" the prefix.
+//   5. Components that stay light on purpose (logo tiles, badges drawn for white) are
+//      left unstyled; anything inside them that reads a re-pointed var has it put back.
+//
+// Rules for classes in components.css and the page stylesheets live at the end of
+// those files: they load after this one, so only a later rule can override theirs.
+// Everything is inside @media screen so print stays light.
+
+@media screen {
+
+  // ---- 1. tokens ------------------------------------------------------------------
+  html[data-theme="dark"] {
+    color-scheme: dark;
+
+    // Bootstrap: page, alternate sections (.bg-light), borders.
+    --bs-body-bg: #0b1129;
+    --bs-body-color: #aebbdd;
+    --bs-light-rgb: 15, 22, 54;
+    --bs-border-color: #222c63;
+    --bs-border-color-translucent: rgba(255, 255, 255, .12);
+
+    // Text tokens, re-pointed. The -rgb twins stay as they are (see 2 above).
+    --blue-200: #8fb0ff;   // accent text, links, headings
+    --blue-400: #aebbdd;   // body and muted text
+    --blue-600: #eef2ff;   // strong headings
+
+    // Light surfaces become dark ones: --gray-100 is the card surface, --blue-30 a
+    // tint that sits on it (hover, icon chips), --gray-200 borders and the stuck header.
+    --bs-code-color: #ff9ccb;
+
+    --blue-30: #1b2658;
+    --blue-30-rgb: 27, 38, 88;
+    --gray-100: #141d47;
+    --gray-100-rgb: 20, 29, 71;
+    --gray-200: #222c63;
+    --gray-200-rgb: 34, 44, 99;
+
+    color: var(--bs-body-color);
+  }
+
+  :where(html[data-theme="dark"]) {
+
+    body {
+      color: var(--bs-body-color);
+    }
+
+    // ---- 3a. fills that must stay brand blue / navy ---------------------------------
+    // Put the two hex vars back for these elements (from their unchanged -rgb twins).
+    // A plain selector list, NOT :is(...): PurgeCSS drops a whole :is() rule as soon as one
+    // argument is unused on the site, which silently removed this block from the deployed CSS.
+    // As a list each selector is kept or pruned on its own.
+    .btn-blue-300, .bg-theme-alt, #pageHeader, .skip-link:focus, .skip-link:focus-visible,
+    .video-facade, .video-facade-icon, .ph-consent-inner, #ph-chat-launcher,
+    .footer-social-link:hover, .footer-social-link:focus-visible,
+    .product-hero, .how-step-num, .providers-strip,
+    .faq-item.open .faq-arrow, .cta-banner, .about-feature-icon, .plan-card--premium,
+    .filter-btn:hover, .filter-btn.active, .ssrm-party--merchant .ssrm-party-icon,
+    .ssrm-duty-icon, .tc-callout, .tc-step-num, .tc-disclosure-icon {
+      --blue-200: rgb(var(--blue-200-rgb));
+      --blue-400: rgb(var(--blue-400-rgb));
+      --blue-600: rgb(var(--blue-600-rgb));
+    }
+
+    // ---- 3a'. components that stay LIGHT on purpose -----------------------------------
+    // The chat widget keeps its white card; its text reads the re-pointed vars.
+    #ph-email-gate {
+      --blue-200: rgb(var(--blue-200-rgb));
+      --blue-400: rgb(var(--blue-400-rgb));
+      --blue-600: rgb(var(--blue-600-rgb));
+    }
+
+    // ---- 3b. hard-coded text colours ----------------------------------------------------
+    .lead,
+    .list li,
+    .cpn-text,
+    .section-head p,
+    .accordion-title.collapsed,
+    .input-line,
+    .menu-item a,
+    .toggle-line,
+    .toggle-line:hover,
+    .text-muted {
+      color: var(--blue-400);
+    }
+
+    .text-muted {
+      color: var(--blue-400) !important;
+    }
+
+    .text-primary {
+      color: var(--blue-200) !important;
+    }
+
+    .wgs-links li a {
+      color: var(--blue-600);
+    }
+
+    .customer-text-logo {
+      color: var(--blue-400);
+
+      .clt-bit {
+        color: #6ea0ff;
+      }
+    }
+
+    // Outline buttons are drawn as a coloured ring around a white pill (the pill is :before).
+    // On dark pages the pill takes the card colour and the label turns light. The header's
+    // own rules for these buttons are more specific and are left as they are.
+    .vh-btn-outline:before {
+      background-color: var(--gray-100);
+    }
+
+    .vh-btn-outline:not(:hover),
+    .vh-btn-outline:not(:focus) {
+      color: var(--blue-400);
+    }
+
+    // The header sets the label of its outline button itself (more specific than the rule
+    // above), so mirror those: dark navy labels become light.
+    .header-menu .vh-btn-outline:not(:hover) {
+      color: var(--blue-600);
+    }
+
+    .btn-outline-primary {
+      --bs-btn-color: #8bb5ff;
+      --bs-btn-border-color: #8bb5ff;
+      --bs-btn-hover-bg: #8bb5ff;
+      --bs-btn-hover-border-color: #8bb5ff;
+      --bs-btn-hover-color: #0b1129;
+      --bs-btn-active-bg: #8bb5ff;
+      --bs-btn-active-border-color: #8bb5ff;
+      --bs-btn-active-color: #0b1129;
+    }
+
+    // ---- 3b. hard-coded light surfaces ----------------------------------------------------
+    .card,
+    .step-card,
+    .transaction-card,
+    .customer-card,
+    .about-feature-item:hover {
+      background: var(--gray-100);
+    }
+
+    // The home logo strip is dark logos on the white page, with no plate of its own.
+    // Logos stay on white in dark mode, like every other logo tile.
+    .partner-box {
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .preloader:before,
+    .preloader:after {
+      background: var(--bs-body-bg);
+    }
+
+    // Section background utility some pages carry: follow the page.
+    .section.bg-white {
+      background-color: var(--bs-body-bg) !important;
+    }
+
+    // Callout boxes: tinted glass instead of pastel paper.
+    .info-box {
+      background: rgba(33, 150, 243, .14);
+    }
+
+    .warning-box {
+      background: rgba(255, 152, 0, .14);
+    }
+
+    .success-box {
+      background: rgba(76, 175, 80, .14);
+    }
+
+    // ---- header -----------------------------------------------------------------------------
+    // The stuck header uses --gray-200 (now dark navy), so it needs the white logo.
+    .logo-dark {
+      display: none;
+    }
+
+    .logo-light {
+      display: block;
+    }
+
+    // Desktop dropdowns (the integrations mega menu keeps white tiles for its logos).
+    .menu-sub,
+    .menu-mega {
+      background: var(--gray-100);
+    }
+
+    // Slide-in menu (below 992px): Bootstrap hard-codes the panel white.
+    .offcanvas,
+    .offcanvas-lg {
+      --bs-offcanvas-bg: var(--gray-100);
+    }
+
+    .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+    }
+
+    .menu-item {
+      border-bottom-color: var(--bs-border-color);
+    }
+
+    // ---- forms --------------------------------------------------------------------------------
+    .form-control,
+    .form-select,
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
+    textarea,
+    select {
+      background-color: var(--gray-100);
+      border-color: var(--bs-border-color);
+      color: var(--bs-body-color);
+    }
+
+    // The chat widget keeps its white card, so its field keeps white too.
+    #ph-email-gate input {
+      background-color: #fff;
+      color: #111;
+    }
+
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+      color: rgba(174, 187, 221, .6);
+    }
+
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+      color: rgba(174, 187, 221, .6);
+    }
+
+    // ---- the colour selector -----------------------------------------------------------------
+    .theme-switch-btn {
+      border-color: rgba(var(--blue-400-rgb), .55);
+      color: var(--blue-400);
+    }
+
+    .theme-switch-panel {
+      border-color: var(--bs-border-color);
+      background: var(--gray-100);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .5);
+    }
+
+    .ts-input:checked + .ts-face {
+      background: rgba(var(--blue-100-rgb), .2);
+      color: #7cc7ff;
+    }
+  }
+
+  @media (min-width: 992px) {
+    :where(html[data-theme="dark"]) .has-fixed:not(.is-dark) .header-menu .vh-btn-outline:not(:hover) {
+      color: var(--blue-600);
+    }
+  }
+
+  // Header over the hero keeps its white control; the stuck header follows the theme.
+  html[data-theme="dark"] .is-transparent:not(.has-fixed) .theme-switch-btn {
+    border-color: rgba(255, 255, 255, .45);
+    color: #fff;
+  }
+
+  @media (max-width: 991px) {
+    :where(html[data-theme="dark"]) {
+
+      .theme-switch-panel {
+        background: rgba(var(--blue-100-rgb), .1);
+        border-color: var(--bs-border-color);
+      }
+
+      .ts-input:checked + .ts-face {
+        background: var(--blue-30);
+        box-shadow: none;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -41,6 +41,8 @@ function walk(dir, exts, out = []) {
 const htmlFiles = walk(SITE, ['.html']);
 const jsFiles = [
   path.join(ROOT, 'assets/js/scripts.js'),
+  path.join(ROOT, 'assets/js/hero-slider.js'),
+  path.join(ROOT, 'assets/js/theme-switch.js'),
   path.join(ROOT, 'assets/js/bootstrap.bundle.min.js'),
 ];
 

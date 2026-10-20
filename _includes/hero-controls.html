@@ -1,0 +1,14 @@
+{%- comment -%}
+  The hero slider's dots and pause button (assets/js/hero-slider.js). Included three times in
+  index.html: beside the last button of each slide on tablets and desktops, and once more as a
+  pill hanging under the hero on phones. Only one set is ever displayed; the script keeps them all
+  in step. No class contains "bg-" (base.scss gives every [class*='bg-'] element position:relative).
+{%- endcomment -%}
+<div class="hero-pill">
+    <button type="button" class="hero-dot" data-slide="0" aria-label="Show slide 1: Payment integration" aria-current="true"></button>
+    <button type="button" class="hero-dot" data-slide="1" aria-label="Show slide 2: Security" aria-current="false"></button>
+    <button type="button" class="hero-pause" aria-pressed="false" aria-label="Pause slideshow">
+        <svg class="icon-pause" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4.5" height="16" rx="1"/><rect x="13.5" y="4" width="4.5" height="16" rx="1"/></svg>
+        <svg class="icon-play" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+    </button>
+</div>
