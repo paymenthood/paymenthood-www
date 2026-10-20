@@ -1,0 +1,311 @@
+---
+layout: none
+nav_active: integrations
+title: "Add Payments to an AI-Built App"
+description: "Paste a ready-made prompt into Lovable, Bolt, v0, Replit, Base44 or your coding agent, and your app takes payments through PaymentHood."
+---
+{% comment %}
+  Segment page for people building with AI site and app builders.
+
+  NOT a product stub. /integrations/<slug>/ is normally rendered from the shared
+  _includes/integration-product.html template driven by _data/integrations/<slug>.yml,
+  but "AI builders" is a category of tool, not a platform with a plugin, so there is
+  no ai-builders.yml under _data/integrations/ and there should not be. Like
+  /integrations/hosting/ and /integrations/joomla/ it is hand-written.
+
+  OWNERSHIP (see .docs/seo-page-ownership.md). This page owns the SEGMENT: "add
+  payments to an AI-built app", "payment gateway for lovable / bolt / v0 apps". It
+  must NOT own "payment integration" (that is /blog/payment-integration/) and it must
+  not explain a platform's own checkout settings; every WooCommerce or WHMCS
+  mention is one sentence plus a link.
+
+  DATA. Everything that changes lives in _data/ai_builder_prompts.yml: the shared
+  contract, a short adapter per tool, the per-tool notes, the docs links and the
+  FAQ. This page joins the contract and the adapter into the prompt a visitor
+  copies, so a correction to how PaymentHood works is made once, in `contract`, and
+  every prompt gets it. Nothing is generated outside the repository. The one
+  exception is a builder with its own `prompt:` (the owner's Lovable prompt), which
+  is used exactly as written and skips the assembly.
+
+  INDEXABLE ON PURPOSE, UNTESTED IN THE TOOLS. The owner chose on 2026-10-20 to publish
+  this without the review gate that provider pages use. What that leaves open, so nobody
+  has to rediscover it: no prompt has been run end to end inside the tool it is written
+  for, and the Bolt notes rest on third-party guides (see `unverified` in the data file).
+  The Lovable prompt is written like the others (the owner's own earlier one could not be
+  found, and on 2026-10-20 they asked for a new one). The contract part of every prompt
+  was checked against the live OpenAPI. If a visitor reports that a prompt
+  produced broken code, fix the adapter in the data file first.
+
+  TRADEMARKS. Names and logos are used only to say which tool a prompt is written
+  for, and the page says plainly that PaymentHood is not affiliated with any of
+  them. Do not reword the copy to imply a partnership, an integration agreement or
+  an endorsement.
+{% endcomment %}
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/ai-builders.css' | relative_url }}">
+{%- assign ai = site.data.ai_builder_prompts %}
+{%- assign c = ai.contract %}
+
+<main id="main-content" class="overflow-hidden">
+
+  <!-- How it works -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <div class="section-eyebrow animated" data-animate="fadeInUp" data-delay=".1">How it works</div>
+          <h2 class="txt-blue-600 mb-4 animated" data-animate="fadeInUp" data-delay=".2">The builder writes the app. The prompt writes the checkout.</h2>
+          <p class="lead animated" data-animate="fadeInUp" data-delay=".3">AI builders are quick at screens and easy to get wrong at the part where money moves, because payment code has rules that look optional until they cost you. Each prompt below carries those rules, written for the tool you use, so what it generates starts from the right place.</p>
+          <p class="animated" data-animate="fadeInUp" data-delay=".35">Every prompt talks to the same PaymentHood API, so it works with whichever payment provider you have set up in the Console. Want the detail first? The full reference is at <a href="https://docs.paymenthood.com/" target="_blank" rel="noopener">docs.paymenthood.com<span class="visually-hidden"> (opens in new tab)</span></a>.</p>
+          <div class="d-flex flex-wrap gap-3 mt-4 animated" data-animate="fadeInUp" data-delay=".4">
+            <a href="#prompts" class="btn btn-green-300 btn-lg px-4 rounded-pill">Choose your tool</a>
+            <a href="https://docs.paymenthood.com/" class="btn btn-outline-primary btn-lg px-4 rounded-pill fw-semibold" target="_blank" rel="noopener">Read the documentation<span class="visually-hidden"> (opens in new tab)</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="ai-steps-card animated" data-animate="fadeInUp" data-delay=".3">
+            <h3 class="h5 txt-blue-600 mb-4">Your path from idea to first payment</h3>
+            <ol class="ai-steps">
+              {%- for step in ai.steps %}
+              <li>{{ step }}</li>
+              {%- endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Picker and prompts -->
+  <section class="section bg-blue-30" id="prompts">
+    <div class="container">
+      <div class="section-head wide-sm text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Prompts</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Pick the tool you build with</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Each prompt is complete on its own. Copy it, paste it into your project, and add the secrets when the tool asks for them.</p>
+      </div>
+
+      <ul class="ai-picker" role="tablist" aria-label="AI builders">
+        {%- for b in ai.builders %}
+        <li role="presentation">
+          <button type="button" class="ai-tile{% if forloop.first %} active{% endif %}" id="tab-{{ b.slug }}" role="tab" data-bs-toggle="tab" data-bs-target="#pane-{{ b.slug }}" data-tab-hash="{{ b.slug }}" aria-controls="pane-{{ b.slug }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+            <span class="ai-tile-logo{% if b.logos.size > 1 %} ai-tile-logo--multi{% endif %}">
+              {%- for logo in b.logos %}
+              <img src="{{ '/assets/images/ai-builders/' | append: logo | relative_url }}" alt="" width="64" height="64" decoding="async">
+              {%- endfor %}
+            </span>
+            <span class="ai-tile-name">{{ b.name }}</span>
+            <span class="ai-tile-kind">{{ b.kind }}</span>
+          </button>
+        </li>
+        {%- endfor %}
+      </ul>
+
+      <div class="tab-content">
+        {%- for b in ai.builders %}
+        {%- comment %}
+          The prompt a visitor copies. A builder with its own `prompt:` uses that exactly as
+          written (the owner's Lovable prompt goes in this way). Every other builder gets the
+          shared contract with that tool's adapter slotted in after the BUILD block. Blank lines
+          between the blocks are literal newlines inside this capture; strip on each part keeps
+          the data file's block-scalar indentation and trailing newlines out of the output.
+        {% endcomment %}
+        {%- capture assembled %}
+{%- if b.agent %}{{ c.opening_agent | strip }}{% else %}{{ c.opening_app | strip }}{% endif %}
+
+{{ c.build | strip }}
+
+{{ b.adapter | strip }}
+
+{% if b.agent %}{{ c.secrets_agent | strip }}{% else %}{{ c.secrets_app | strip }}{% endif %}
+
+{{ c.create | strip }}
+
+{{ c.webhook | strip }}
+
+{{ c.states | strip }}
+
+{{ c.self_check | strip }}
+
+{% if b.agent %}{{ c.finish_agent | strip }}{% else %}{{ c.finish_app | strip }}{% endif %}
+        {%- endcapture %}
+        {%- if b.prompt %}{% assign prompt_text = b.prompt | strip %}{% elsif b.adapter %}{% assign prompt_text = assembled | strip %}{% else %}{% assign prompt_text = '' %}{% endif %}
+        <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="pane-{{ b.slug }}" role="tabpanel" aria-labelledby="tab-{{ b.slug }}" tabindex="0">
+          <div class="ai-panel" data-copy-scope>
+            <div class="row g-5">
+              <div class="col-lg-5">
+                <div class="ai-panel-head">
+                  <span class="ai-panel-logo{% if b.logos.size > 1 %} ai-panel-logo--multi{% endif %}">
+                    {%- for logo in b.logos %}
+                    <img src="{{ '/assets/images/ai-builders/' | append: logo | relative_url }}" alt="" width="34" height="34" loading="lazy" decoding="async">
+                    {%- endfor %}
+                  </span>
+                  <h3>{{ b.name }}</h3>
+                </div>
+
+                <dl class="ai-meta">
+                  <div>
+                    <dt>Best for</dt>
+                    <dd class="mb-0">{{ b.fits }}</dd>
+                  </div>
+                  <div>
+                    <dt>Server code runs in</dt>
+                    <dd class="mb-0">{{ b.backend }}</dd>
+                  </div>
+                  {%- if b.also %}
+                  <div>
+                    <dt>Written for</dt>
+                    <dd class="mb-0">{{ b.also }}</dd>
+                  </div>
+                  {%- endif %}
+                </dl>
+
+                <h4 class="h6 txt-blue-600 mb-3">Watch for</h4>
+                <ul class="ai-watch">
+                  {%- for g in b.gotchas %}
+                  <li>{{ g }}</li>
+                  {%- endfor %}
+                </ul>
+
+                <p class="ai-basis">
+                  {{ b.basis }}
+                  {%- if b.sources.size > 0 %} Read more:
+                  {%- for s in b.sources %}
+                  <a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.label }}<span class="visually-hidden"> (opens in new tab)</span></a>{% unless forloop.last %},{% endunless %}
+                  {%- endfor %}.
+                  {%- endif %}
+                </p>
+              </div>
+
+              <div class="col-lg-7">
+                {%- if prompt_text != '' %}
+                <div class="ai-prompt-bar">
+                  <span><strong>Prompt for {{ b.name }}</strong> &middot; {{ prompt_text | number_of_words }} words</span>
+                  <button type="button" class="btn btn-green-300 rounded-pill px-4 ai-copy" data-copy-target="prompt-{{ b.slug }}" data-copy-name="{{ b.slug }}">
+                    <span data-copy-label>Copy prompt</span>
+                  </button>
+                </div>
+                <pre class="code-block ai-prompt" id="prompt-{{ b.slug }}" tabindex="0" aria-label="Prompt for {{ b.name }}">{{ prompt_text | escape }}</pre>
+                <span class="visually-hidden" role="status" aria-live="polite" data-copy-status></span>
+                {%- else %}
+                <div class="ai-waiting">
+                  <strong>The {{ b.name }} prompt is on its way</strong>
+                  <span>Until it lands, the <a href="https://docs.paymenthood.com/quickstart/" target="_blank" rel="noopener">Quick Start<span class="visually-hidden"> (opens in new tab)</span></a> walks through the same flow by hand.</span>
+                </div>
+                {%- endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+
+      <p class="ai-fineprint">PaymentHood is not affiliated with, endorsed by or sponsored by any of these products. Their names and logos belong to their owners and appear here only to show which tool a prompt is written for.</p>
+    </div>
+  </section>
+
+  <!-- The rules -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head wide-sm text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Why a prompt</span>
+        <h2 class="txt-blue-600 animated" data-animate="fadeInUp" data-delay=".2">Six rules generated payment code usually breaks</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">A tool that is only asked to add payments will tend to guess. Each prompt states these outright instead.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift ai-rule animated" data-animate="fadeInUp" data-delay=".2">
+            <span class="ai-rule-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></span>
+            <h3>Amounts in major units</h3>
+            <p>20.00 means twenty dollars. Tools used to Stripe send cents, and a checkout that multiplies by 100 charges a hundred times too much.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift ai-rule animated" data-animate="fadeInUp" data-delay=".3">
+            <span class="ai-rule-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M16 6l3 3M14 8l2 2"/></svg></span>
+            <h3>Keys stay on the server</h3>
+            <p>The App ID, API key and webhook secret live in the platform's secret store, never in frontend code, a public variable, or the chat.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift ai-rule animated" data-animate="fadeInUp" data-delay=".4">
+            <span class="ai-rule-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3>The signature is checked on the raw body</h3>
+            <p>A webhook is trusted only after its HMAC verifies against the exact bytes received, inside a five minute window. A re-encoded body never matches.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift ai-rule animated" data-animate="fadeInUp" data-delay=".2">
+            <span class="ai-rule-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg></span>
+            <h3>The API has the last word</h3>
+            <p>The webhook only says which payment changed. The order is updated from reading the payment back, never from the webhook body.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift ai-rule animated" data-animate="fadeInUp" data-delay=".3">
+            <span class="ai-rule-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></span>
+            <h3>Safe to run twice</h3>
+            <p>Retries and out-of-order delivery are normal. An order never moves backwards, and a repeated create cannot produce a second payment.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift ai-rule animated" data-animate="fadeInUp" data-delay=".4">
+            <span class="ai-rule-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg></span>
+            <h3>Paid means Captured</h3>
+            <p>The return URL proves nothing. Fulfilment waits for the Captured state, and a declined card is read from the state, not from the HTTP status.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documentation -->
+  <section class="section ai-docs" id="docs">
+    <div class="container">
+      <div class="section-head wide-sm text-center">
+        <span class="animated" data-animate="fadeInUp" data-delay=".1">Documentation</span>
+        <h2 class="animated" data-animate="fadeInUp" data-delay=".2">Everything the prompts rely on is in the docs</h2>
+        <p class="animated" data-animate="fadeInUp" data-delay=".3">Each prompt is built from these pages. If a tool asks you a question the prompt does not answer, the answer is here, and the OpenAPI reference wins if anything ever disagrees.</p>
+        <a href="https://docs.paymenthood.com/" class="ai-docs-url animated" data-animate="fadeInUp" data-delay=".4" target="_blank" rel="noopener">docs.paymenthood.com<em class="ti ti-arrow-top-right" aria-hidden="true"></em><span class="visually-hidden"> (opens in new tab)</span></a>
+      </div>
+
+      <div class="row g-4 mt-4">
+        {%- for d in ai.docs %}
+        <div class="col-md-6 col-lg-4">
+          <a href="{{ d.url }}" class="ai-doc-link animated" data-animate="fadeInUp" data-delay=".2" target="_blank" rel="noopener">
+            <strong>{{ d.title }}</strong>
+            <span class="ai-doc-note">{{ d.note }}</span>
+            <code>{{ d.url | remove: 'https://' }}</code>
+            <span class="visually-hidden"> (opens in new tab)</span>
+          </a>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% include faq.html items=ai.faqs eyebrow="Questions" bg="bg-light" first_open=true %}
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner text-center">
+        <h2 class="h2 fw-bold mb-3">Start in the sandbox</h2>
+        <p class="lead mb-4 mw-narrow">Create a free account, add a provider, and paste your first prompt. No PaymentHood transaction fee, and no live money moves until you switch to your live app.</p>
+        <div class="cta-buttons d-flex flex-wrap gap-3 justify-content-center">
+          <a href="{{ site.signup_url }}" class="btn btn-green-300 btn-lg px-4 rounded-pill">Create Free Account</a>
+          <a href="https://docs.paymenthood.com/quickstart/" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold border-2" target="_blank" rel="noopener">Read the Quick Start<span class="visually-hidden"> (opens in new tab)</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{% include copy-prompt.html %}
+{% include chat-widget.html %}
+
+{% include footer.html %}

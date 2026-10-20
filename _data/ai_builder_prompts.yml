@@ -1,0 +1,284 @@
+# Prompts for AI site and app builders: paste one in and the project connects to PaymentHood.
+# Rendered by integrations/ai-builders/index.html.
+#
+# HOW A PROMPT IS BUILT
+# Each prompt is the shared `contract` below with the tool's own `adapter` slotted in after
+# the BUILD block. The contract is how PaymentHood works and is the same for every tool, so a
+# correction to it is made once, here, and every prompt gets it. The adapter is only where
+# that tool puts server code, secrets and a public webhook URL. `agent: true` swaps in the
+# opening, secrets and closing blocks written for a coding agent working in a repository.
+#
+# A builder that has a `prompt:` of its own uses that as written and skips the assembly. That
+# is how a hand-written prompt goes in: pasted unchanged, not assembled.
+#
+# EVERY CONTRACT DETAIL traces to https://docs.paymenthood.com and was checked against the
+# live OpenAPI (https://api.paymenthood.com/swagger/v1/swagger.json) on 2026-10-20. Where they
+# disagreed the prompts are written to be correct under both: registerAutoPayment is optional
+# in the docs and required in the spec, and returnUrl and showPayRecurringInCheckout are
+# required in the docs and not marked so in the spec, so the prompts always send all three.
+# Re-check against the spec whenever the contract text changes.
+#
+# The self-check hex is HMAC-SHA256 of the documented worked example, computed independently
+# in Python and in Node and found to agree. If the example in the docs changes, recompute it.
+#
+# NOTE: the per-tool adapters come from each vendor's own docs where they could be read and
+# from third-party guides where they could not (see `basis`). None of these prompts has been
+# run end to end inside the tool it is written for. Do that once per tool, in sandbox, before
+# the page leaves its review gate. `unverified` records what each tool's notes rest on and is
+# not shown on the page.
+
+docs:
+  - title: "Documentation home"
+    url: https://docs.paymenthood.com/
+    note: "Everything below, in one place."
+  - title: "Quick Start"
+    url: https://docs.paymenthood.com/quickstart/
+    note: "A sandbox payment end to end."
+  - title: "Payments API"
+    url: https://docs.paymenthood.com/payments/
+    note: "Create, capture, read back."
+  - title: "Webhook signing"
+    url: https://docs.paymenthood.com/webhooks/signing/
+    note: "The exact algorithm and a test vector."
+  - title: "Verification samples"
+    url: https://docs.paymenthood.com/webhooks/verification-samples/
+    note: "Receivers in Node, PHP, Python and C#."
+  - title: "OpenAPI reference"
+    url: https://api.paymenthood.com/swagger/index.html
+    note: "The authoritative contract."
+
+faqs:
+  - q: "Does this work with any AI builder?"
+    a: "The prompts are written for the tools on this page. Any tool that can run server-side code and keep a secret can follow the same contract: create a payment, send the customer to the checkout, verify the webhook, then read the payment back. Only the part about where the server code and secrets live changes from tool to tool."
+  - q: "Do I need to write code?"
+    a: "Not for the builders listed here: you paste a prompt and add three secrets. You do still need to run a test payment in sandbox yourself. Generated payment code should never go live untested."
+  - q: "Is it safe to put my API key in the prompt?"
+    a: "The prompt never contains a key, and you should never paste one into a chat. It tells the tool to keep three values in its server-side secret store and to ask you to add them through its secure form."
+  - q: "Why does the prompt insist on checking the signature and reading the payment back?"
+    a: "A webhook is an unauthenticated request from the internet until its signature is verified, and its body only says which payment changed. The state you act on has to come from reading the payment back from the API. The <a href=\"https://docs.paymenthood.com/webhooks/signing/\" target=\"_blank\" rel=\"noopener\">webhook signing guide<span class=\"visually-hidden\"> (opens in new tab)</span></a> has the algorithm and a test vector."
+  - q: "Should I start in sandbox or live?"
+    a: "Sandbox. It is a separate app with its own App ID, API key and provider setup, and no live money moves. Undelivered sandbox webhooks stop retrying after an hour, while live ones keep retrying. Repeat the steps with your live app's credentials once the test passes."
+  - q: "Can I use this on Wix, Framer, Webflow or Squarespace?"
+    a: "Not with a prompt. Those products host the site and give you little or no place to run your own server code, which this integration needs. If your store runs on WooCommerce, WHMCS, VirtueMart, Phoca Cart or J2Commerce, the <a href=\"/integrations/\">free plugins</a> do the same job without any code."
+  - q: "Does PaymentHood charge extra for this?"
+    a: "No. PaymentHood adds nothing to what your payment provider charges: no percentage and no per-transaction cut. Your provider bills you directly. See <a href=\"/pricing.html\">PaymentHood pricing</a>."
+
+steps:
+  - "Create a sandbox app in the PaymentHood Console and add a payment provider profile. Copy its App ID and API key."
+  - "In the Console open Settings, then Webhook, and turn on webhook signing. Copy the whsec_ secret: it is shown once."
+  - "Pick your tool below, copy its prompt and paste it into the project that sells something."
+  - "When it asks, add the three secrets through its secure form. Never paste them into the chat."
+  - "Pay with your provider's test card on the deployed site, and watch the order go from pending to paid."
+  - "When that works, repeat with your live app's credentials."
+
+contract:
+  opening_app: |
+    Add PaymentHood checkout to this app. PaymentHood is a hosted checkout: I create a payment on the server, send the customer to a PaymentHood page where they pay, and PaymentHood reports the result to my server by webhook. Card details never touch my app. Reference: https://docs.paymenthood.com/quickstart/
+  opening_agent: |
+    Add PaymentHood checkout to this repository, using its existing stack and conventions. PaymentHood is a hosted checkout: the server creates a payment, the customer pays on a PaymentHood page, and PaymentHood reports the result to the server by webhook. Card details never touch this code.
+
+    Read these first: https://docs.paymenthood.com/quickstart/, https://docs.paymenthood.com/payments/ and https://docs.paymenthood.com/webhooks/signing/. The OpenAPI spec at https://api.paymenthood.com/swagger/v1/swagger.json is the contract if anything disagrees.
+  build: |
+    BUILD
+    1. create-checkout (server): for the signed-in user's order, read the price from my database (never from the browser), create the payment, and return the redirectUrl. The browser then redirects to it.
+    2. paymenthood-webhook (server, public): receives PaymentHood's notifications and updates the order.
+    3. A return page at /checkout/return. It shows "Confirming your payment" and re-reads the order from my own database until it is paid, failed, or about a minute has passed. It never marks anything paid itself.
+    4. An orders table: id (uuid), user id, amount, currency, status (pending, paid, failed, refunded), paymenthood_payment_id, updated_at.
+  secrets_app: |
+    SECRETS
+    - Three server-only secrets: PAYMENTHOOD_APP_ID, PAYMENTHOOD_API_KEY, PAYMENTHOOD_WEBHOOK_SECRET. Never put them in frontend code, in a VITE_ or NEXT_PUBLIC_ variable, in the repository, or in a log line. Do not ask me to paste them into this chat: tell me which are missing and let me add them through the platform's secure secrets form.
+    - Where I get them: the App ID and API key are in the PaymentHood Console (https://console.paymenthood.com) for my app. The webhook secret comes from Settings, Webhook, Enable webhook signing. It starts with whsec_ and is shown only once.
+    - Sandbox and live are separate PaymentHood apps with separate credentials. Start with sandbox.
+  secrets_agent: |
+    SECRETS
+    - Three server-only secrets: PAYMENTHOOD_APP_ID, PAYMENTHOOD_API_KEY, PAYMENTHOOD_WEBHOOK_SECRET. Read them from environment variables. Add them to .env.example with empty values, make sure .env is git-ignored, and never print them or put them in client code.
+    - Where I get them: the App ID and API key are in the PaymentHood Console (https://console.paymenthood.com) for my app. The webhook secret comes from Settings, Webhook, Enable webhook signing. It starts with whsec_ and is shown only once.
+    - Sandbox and live are separate PaymentHood apps with separate credentials. Start with sandbox.
+  create: |
+    CREATE THE PAYMENT
+    POST https://api.paymenthood.com/api/apps/{APP_ID}/payments/hosted-page
+    Headers: Authorization: Bearer {API_KEY} and Content-Type: application/json
+    Send all of these every time, including the ones that look optional:
+    {
+      "referenceId": "<my order uuid, saved on the order before this call>",
+      "amount": 20.00,
+      "currency": "USD",
+      "returnUrl": "https://<my deployed domain>/checkout/return?order=<order id>",
+      "autoCapture": true,
+      "showPayRecurringInCheckout": false,
+      "registerAutoPayment": false,
+      "webhookUrl": "<my deployed paymenthood-webhook URL>",
+      "customerOrder": { "customer": { "customerId": "<my user id>" } }
+    }
+    - amount is a decimal in MAJOR units: 20.00 means twenty dollars. Do not convert to cents or multiply by 100, which is the Stripe habit and would charge 100 times too much.
+    - Success is 201 Created. Redirect the browser to the redirectUrl in the response.
+    - referenceId is the idempotency key and is unique per app. If the call answers 409, read the payment back (see the webhook steps) instead of creating a second one. If its paymentState is still Created and it has a redirectUrl, send the customer there.
+  webhook: |
+    WEBHOOK (do these steps in this order)
+    PaymentHood POSTs {"payment":{"paymentId":90210,"paymentState":"Captured","paymentStateId":7,"referenceId":"..."}} and nothing else, so the body is only a hint that something changed.
+    1. Read the raw body as text before any JSON parsing. A re-serialised body never verifies.
+    2. The header X-PaymentHood-Signature looks like t=1785000000,v1=<64 lowercase hex characters>. Parse it by key, not by position.
+    3. Reject if t is more than 300 seconds from the current Unix time.
+    4. expected = lowercase hex of HMAC-SHA256 with the key PAYMENTHOOD_WEBHOOK_SECRET over the string t + "." + rawBody.
+    5. Compare expected with v1 in constant time. Treat malformed hex as a failed check, never as an exception. On failure answer 400 and stop.
+    6. Only now parse the JSON.
+    7. GET https://api.paymenthood.com/api/apps/{APP_ID}/payments/referenceId:{referenceId} with the same bearer header, and set the order from paymentState in that response, never from the webhook body.
+    8. Answer 200 once the order is updated. Keep all of this to a few seconds, because serverless functions can be stopped the moment the response is sent. If the read-back or the update fails, answer 500 so PaymentHood retries.
+    The endpoint must not require a login, session or token from the caller. PaymentHood has none; the signature is the authentication.
+  states: |
+    ORDER STATES
+    - Mark an order paid only when the read-back paymentState is Captured. Failed means the order failed, and the reason is in lastError. Mark refunded only on Refunded.
+    - Webhooks are retried and can arrive out of order. The handler must be safe to run twice and must never move an order backwards, for example from paid to pending.
+    - A declined card is not an HTTP error: the API answers 200 with paymentState Failed. Branch on paymentState, not on the status code.
+    - The return URL is not proof of payment. The customer can close the tab, refresh it, or replay it.
+    - Refunds, only if I ask later: POST https://api.paymenthood.com/api/apps/{APP_ID}/payments/{paymentId}/refund with the numeric paymentId, not the referenceId, and wait for Refunded.
+  self_check: |
+    SELF-CHECK
+    With secret whsec_test_secret, t 1720000000 and body {"payment":{"paymentId":42,"paymentState":"Captured"}}, the correct v1 is e49595faf1e42b54d3634f76233d28a893e71dc8f1cfdf8c052a42004f0123fb. Use this as a test.
+  finish_app: |
+    WHEN YOU ARE DONE
+    List the secrets I still need to add, and give me the one URL PaymentHood will call, so I can test on the deployed app.
+  finish_agent: |
+    WHEN YOU ARE DONE
+    Summarise what you changed, which secrets I still need to set, and the one URL PaymentHood will call.
+
+builders:
+  - slug: lovable
+    name: "Lovable"
+    kind: "AI app builder"
+    fits: "A full app with a backend, built from chat."
+    backend: "Supabase Edge Functions"
+    logos:
+      - lovable.svg
+    basis: "Platform notes follow Lovable's own documentation and Supabase's Edge Function guide."
+    gotchas:
+      - "Supabase blocks calls without a login by default, so the webhook function needs JWT verification turned off. The prompt asks for this. Without it every webhook is a 401 and is retried."
+      - "Test on the deployed app, not in the editor preview."
+      - "Check that row level security is on for the orders table before real customers use it."
+    sources:
+      - label: "Lovable: payments"
+        url: https://docs.lovable.dev/integrations/stripe
+      - label: "Supabase: Edge Function auth"
+        url: https://supabase.com/docs/guides/functions/auth
+    unverified: "Read from Lovable's Stripe page and Supabase's Edge Function docs. The exact JWT setting Lovable generates was not tested."
+    adapter: |
+      PLATFORM NOTES (Lovable)
+      - Put both server functions in Supabase Edge Functions (supabase/functions/), written for Deno. Nothing that calls PaymentHood may run in the browser, and no secret may sit in a VITE_ variable or in any client file.
+      - Store the three secrets as Supabase Edge Function secrets, and read them with Deno.env.get. When you need a secret from me, ask for it through Lovable's secure secret form. I will not paste it into this chat.
+      - Supabase rejects any call without a valid JWT by default, and PaymentHood's webhook has none. Turn JWT verification off for the webhook function only, with verify_jwt = false for that function in supabase/config.toml, and rely on the signature check. Keep verification on for the function that creates the payment, and require the signed-in user there.
+      - In the webhook function read the raw body with await req.text() before anything else, verify the signature on that string, and only then call JSON.parse.
+      - Create an orders table with row level security on. A signed-in user can read only their own rows and can never write the status. Only the webhook function, using the service role key, changes the status.
+      - The webhook URL is the deployed function URL, https://<project-ref>.supabase.co/functions/v1/<webhook-function-name>. The editor preview is not reachable by PaymentHood, so test on the published app.
+  - slug: bolt
+    name: "Bolt.new"
+    kind: "AI app builder"
+    fits: "Fast browser-based builds with no setup."
+    backend: "Supabase Edge Functions or Netlify Functions"
+    logos:
+      - bolt.svg
+    basis: "Platform notes come from third-party guides and from how Supabase and Netlify work. Run the flow in sandbox before you go live."
+    gotchas:
+      - "Server code has to live in a Supabase or Netlify function. Anything in the browser is readable."
+      - "Add the secrets to the deployed environment as well as the preview."
+      - "Test on the deployed site: a preview URL cannot receive webhooks."
+    sources: []
+    unverified: "No official Bolt page was read. These notes rest on third-party guides and on how Supabase and Netlify work. Treat as unverified until run in Bolt."
+    adapter: |
+      PLATFORM NOTES (Bolt)
+      - Bolt previews run in the browser, so anything in client code can be read by anyone. Put both server functions in Supabase Edge Functions or Netlify Functions, whichever this project deploys to, and keep the three secrets in that service's server-side secrets or environment settings. Not in client code and not in a file the browser can read.
+      - The deployed site needs its own copy of every secret. A variable that works in the preview but is missing on the deployed site is the usual reason server routes fail after deploying.
+      - If you use Supabase: it rejects calls without a valid JWT by default, so turn JWT verification off for the webhook function only and rely on the signature check. Also turn row level security on for the orders table, with users able to read only their own rows and never write status.
+      - The webhook URL must be the deployed function URL. A preview URL inside the editor is not reachable by PaymentHood.
+  - slug: v0
+    name: "v0"
+    kind: "AI app builder"
+    fits: "Polished React and Next.js apps, especially on Vercel."
+    backend: "Next.js Route Handlers"
+    logos:
+      - v0.svg
+    basis: "Platform notes follow the documentation of v0 and Vercel."
+    gotchas:
+      - "Variables without NEXT_PUBLIC_ stay on the server. Redeploy after you change them."
+      - "Use the production URL for webhooks. A protected preview deployment rejects them."
+      - "Read the webhook body with request.text(), not request.json()."
+    sources:
+      - label: "v0: security"
+        url: https://v0.app/docs/security
+      - label: "Vercel: environment variables"
+        url: https://vercel.com/docs/environment-variables/managing-environment-variables
+    unverified: "Environment-variable behaviour is from v0 and Vercel docs. The deployment-protection point was not tested against a live preview."
+    adapter: |
+      PLATFORM NOTES (v0)
+      - Use Next.js App Router Route Handlers: app/api/checkout/route.ts and app/api/paymenthood/webhook/route.ts, with export const runtime = "nodejs".
+      - In the webhook handler read the body with await request.text(). Never call request.json() first.
+      - Keep the three secrets in the project's environment variables without a NEXT_PUBLIC_ prefix, set for Production and Preview. Changes only apply to new deployments, so redeploy after adding them. Keep the PaymentHood calls out of client components. If you use a server action, put "use server" at the top of the file.
+      - PaymentHood must reach the webhook on the production URL. A preview deployment can sit behind deployment protection, which would turn every webhook into a 401.
+      - Store orders in the database this project already uses.
+  - slug: replit
+    name: "Replit Agent"
+    kind: "AI app builder with hosting"
+    fits: "Apps you can read and change, built and hosted in one place."
+    backend: "Express, Flask or FastAPI"
+    logos:
+      - replit.svg
+    basis: "Platform notes follow Replit's own documentation."
+    gotchas:
+      - "Secrets added while developing do not carry over to the published app. Add them again in the publishing settings."
+      - "Use the published URL for webhooks, not the development URL."
+    sources:
+      - label: "Replit: Secrets"
+        url: https://docs.replit.com/core-concepts/project-editor/app-setup/secrets
+      - label: "Replit: publishing"
+        url: https://docs.replit.com/cloud-services/deployments/troubleshooting
+    unverified: "The secrets and publishing behaviour is from Replit's docs. The Express raw-body route is from PaymentHood's own verification samples."
+    adapter: |
+      PLATFORM NOTES (Replit)
+      - This is a real server (Express, or Flask or FastAPI). Put the three secrets in Replit Secrets and read them from environment variables. Secrets added while developing do not carry over to the published app, so add all three again in the publishing settings.
+      - For the webhook route with Express, use express.raw({ type: "application/json" }) on that route only, so the body stays as bytes. With Flask use request.get_data(). Do not put express.json() in front of it.
+      - Use the published URL (replit.app or my custom domain) for webhookUrl and returnUrl. The development URL changes and is not stable enough for webhooks.
+      - Store orders in the project's database.
+  - slug: base44
+    name: "Base44"
+    kind: "AI app builder with a built-in backend"
+    fits: "Beginners who want the backend handled for them."
+    backend: "Base44 backend functions (Deno)"
+    logos:
+      - base44.webp
+    basis: "Platform notes follow Base44's own documentation."
+    gotchas:
+      - "The webhook runs without a signed-in user, so the signature check is the only caller check. Do not remove it."
+      - "Read secrets inside the handler, not when the module loads."
+    sources:
+      - label: "Base44: backend functions"
+        url: https://docs.base44.com/developers/backend/resources/backend-functions/overview
+    unverified: "Taken from Base44's backend function docs. Two doc pages show different ways to read a secret, so test that it is defined."
+    adapter: |
+      PLATFORM NOTES (Base44)
+      - Use backend functions (Deno) for both server pieces. Each deployed function has its own HTTP endpoint, and that endpoint is the webhook URL.
+      - Store the three values as app secrets and read them inside the handler.
+      - A webhook call has no signed-in Base44 user, so inside paymenthood-webhook use the service role to update the order. The signature check is then the only check on who is calling, so it must not be skipped. create-checkout runs as the signed-in user.
+  - slug: coding-agents
+    name: "Coding agents"
+    kind: "AI coding agents"
+    fits: "Developers who want it written into their own repository."
+    also: "Cursor, Windsurf, Claude Code and GitHub Copilot"
+    backend: "Whatever your repository already uses"
+    agent: true
+    logos:
+      - cursor.svg
+      - windsurf.svg
+      - claude.svg
+      - githubcopilot.svg
+    basis: "These agents can read documentation directly, so the prompt sends them to it and asks for tests."
+    gotchas:
+      - "Run the tests the prompt asks for before the first real payment."
+      - "If the docs and the OpenAPI spec disagree, the spec wins."
+    sources:
+      - label: "PaymentHood: verification samples"
+        url: https://docs.paymenthood.com/webhooks/verification-samples/
+    unverified: ""
+    adapter: |
+      PLATFORM NOTES
+      - Follow the stack, folder layout and error-handling style already in this repository.
+      - Write tests for: (1) the known-answer signature below, (2) a stale timestamp is rejected, (3) a tampered body is rejected, (4) a Failed event arriving after Captured does not move the order back, (5) an amount of 20.00 reaches the API as 20.00 and not 2000.
+      - Check your verification code against PaymentHood's own receivers (Node, PHP, Python and C#) at https://docs.paymenthood.com/webhooks/verification-samples/ rather than inventing a scheme.

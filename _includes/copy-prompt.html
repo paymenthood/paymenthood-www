@@ -1,0 +1,139 @@
+{%- comment -%}
+  Copy-to-clipboard buttons, and deep links into Bootstrap tabs.
+
+  Behaviour ships with the markup, the same pattern as faq.html and
+  page-nav-scrollspy.html, and is guarded by a window flag so a page that includes
+  it twice binds once.
+
+  COPY
+    <button data-copy-target="some-id" data-copy-name="lovable">
+      <span data-copy-label>Copy prompt</span>
+    </button>
+  copies the textContent of #some-id. textContent rather than innerText so the
+  copied text is the markup's text exactly, with no rendering-dependent line
+  collapsing.
+
+  navigator.clipboard needs a secure context. The fallback (a temporary readonly
+  textarea and execCommand) covers the rest, and when both fail the text is
+  selected so the visitor can press Ctrl+C: a copy button that fails silently is
+  worse than none.
+
+  The button announces the result through [data-copy-status], a polite live
+  region, because swapping the label alone is invisible to a screen reader.
+
+  MEASUREMENT
+  Each successful copy pushes { event: 'ai_prompt_copied', ai_tool: <name> } to
+  dataLayer. dataLayer is created up front in header.html, so the push queues even
+  before the container loads, and nothing personal is in it. Nothing consumes the
+  event until a GTM trigger is created for it.
+
+  DEEP LINKS
+  Tabs are Bootstrap's own (data-bs-toggle="tab"). Bootstrap does not read the URL,
+  so /page/#replit would open the first tab. Any trigger carrying data-tab-hash
+  becomes addressable by that value, and the hash follows the active tab so the
+  address bar is shareable.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (window.phCopyPromptBound) return;
+    window.phCopyPromptBound = true;
+
+    var RESET_MS = 2400;
+
+    function fallbackCopy(text) {
+      var area = document.createElement('textarea');
+      area.className = 'ai-copy-buffer';
+      area.value = text;
+      area.setAttribute('readonly', '');
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(area);
+      return ok;
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text).then(
+          function () { return true; },
+          function () { return fallbackCopy(text); }
+        );
+      }
+      return Promise.resolve(fallbackCopy(text));
+    }
+
+    function selectAll(node) {
+      var range = document.createRange();
+      range.selectNodeContents(node);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    function announce(button, message) {
+      var scope = button.closest('[data-copy-scope]') || document;
+      var live = scope.querySelector('[data-copy-status]');
+      if (live) live.textContent = message;
+    }
+
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-copy-target]');
+      if (!button) return;
+      var source = document.getElementById(button.getAttribute('data-copy-target'));
+      if (!source) return;
+
+      var label = button.querySelector('[data-copy-label]');
+      var original = button.getAttribute('data-copy-original') || (label ? label.textContent : '');
+      button.setAttribute('data-copy-original', original);
+
+      copyText(source.textContent).then(function (ok) {
+        if (ok) {
+          button.classList.add('is-copied');
+          if (label) label.textContent = 'Copied';
+          announce(button, 'Prompt copied to the clipboard.');
+          (window.dataLayer = window.dataLayer || []).push({
+            event: 'ai_prompt_copied',
+            ai_tool: button.getAttribute('data-copy-name') || ''
+          });
+        } else {
+          selectAll(source);
+          if (label) label.textContent = 'Press Ctrl+C';
+          announce(button, 'Copying was blocked. The prompt is selected: press Ctrl+C to copy it.');
+        }
+        window.setTimeout(function () {
+          button.classList.remove('is-copied');
+          if (label) label.textContent = original;
+        }, RESET_MS);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var triggers = document.querySelectorAll('[data-tab-hash]');
+      if (!triggers.length) return;
+
+      function show(hash) {
+        var name = String(hash || '').replace(/^#/, '');
+        if (!name) return;
+        for (var i = 0; i < triggers.length; i++) {
+          if (triggers[i].getAttribute('data-tab-hash') === name) {
+            if (window.bootstrap && window.bootstrap.Tab) {
+              window.bootstrap.Tab.getOrCreateInstance(triggers[i]).show();
+            }
+            return;
+          }
+        }
+      }
+
+      show(window.location.hash);
+      window.addEventListener('hashchange', function () { show(window.location.hash); });
+
+      document.addEventListener('shown.bs.tab', function (event) {
+        var name = event.target.getAttribute('data-tab-hash');
+        if (name && window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', '#' + name);
+        }
+      });
+    });
+  })();
+</script>

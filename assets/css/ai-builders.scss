@@ -1,0 +1,499 @@
+---
+# Page stylesheet for /integrations/ai-builders/ only.
+# Compiled by Jekyll to /assets/css/ai-builders.css.
+---
+
+// Everything here is specific to the prompt picker, the prompt viewer and the docs
+// band. Anything a second page would share belongs in _sass/components/ instead.
+// No @media: the tile grid uses auto-fit, so it reflows without breakpoints.
+
+// ── Steps card ───────────────────────────────────────────────────── //
+.ai-steps-card {
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 24px 60px rgba(25, 64, 176, .09);
+}
+
+.ai-steps {
+    counter-reset: ai-step;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+
+    li {
+        counter-increment: ai-step;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        color: var(--blue-600);
+        line-height: 1.55;
+    }
+
+    li::before {
+        content: counter(ai-step);
+        flex: 0 0 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        // The -rgb twin, not the hex var: the dark theme re-points --blue-200 to a light
+        // blue for text, which would put white digits on a pale disc.
+        background: rgb(var(--blue-200-rgb));
+        color: #fff;
+        font-weight: 700;
+        font-size: .92rem;
+        margin-top: -3px;
+    }
+}
+
+// ── Tool picker ──────────────────────────────────────────────────── //
+.ai-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ai-tile {
+    appearance: none;
+    font: inherit;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 26px 16px 20px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 22px;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: var(--blue-50);
+        box-shadow: 0 18px 40px rgba(25, 64, 176, .11);
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--blue-100);
+        outline-offset: 3px;
+    }
+
+    // The selected tool: a ring rather than a fill, so the logo stays on white
+    // and its own colours are never fought by a coloured background.
+    &.active {
+        border-color: var(--blue-200);
+        box-shadow: 0 0 0 4px rgba(25, 64, 176, .14), 0 22px 48px rgba(25, 64, 176, .16);
+        transform: translateY(-5px);
+    }
+
+    &.active::after {
+        content: "";
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgb(var(--blue-200-rgb)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat;
+    }
+}
+
+// A white chip behind every mark, in both themes. Several of these logos are drawn
+// in black (v0, Cursor, Copilot) and would vanish on a dark surface; the Trust
+// Center's certification logos solve the same problem the same way.
+.ai-tile-logo {
+    height: 76px;
+    width: 76px;
+    padding: 12px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(18, 24, 58, .05), 0 8px 20px rgba(18, 24, 58, .1);
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+}
+
+// Four marks in one tile (coding agents): a 2x2 so none of them is dominant.
+.ai-tile-logo--multi {
+    grid-template-columns: repeat(2, 24px);
+    gap: 6px;
+    padding: 10px;
+    align-content: center;
+    justify-content: center;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.ai-tile-name {
+    font-weight: 700;
+    color: var(--blue-600);
+    line-height: 1.25;
+}
+
+.ai-tile-kind {
+    font-size: .8rem;
+    color: var(--blue-400);
+    line-height: 1.35;
+}
+
+.ai-fineprint {
+    font-size: .82rem;
+    color: var(--blue-400);
+    max-width: 760px;
+    margin: 26px auto 0;
+    text-align: center;
+}
+
+// ── Prompt viewer ────────────────────────────────────────────────── //
+.ai-panel {
+    margin-top: 34px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 28px;
+    padding: 34px;
+    box-shadow: 0 28px 70px rgba(25, 64, 176, .1);
+}
+
+.ai-panel-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+
+    h3 {
+        margin: 0;
+        font-size: 1.45rem;
+        color: var(--blue-600);
+    }
+}
+
+.ai-panel-logo {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    display: grid;
+    place-items: center;
+
+    img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+}
+
+.ai-panel-logo--multi {
+    grid-template-columns: repeat(2, 22px);
+    gap: 4px;
+    align-content: center;
+    justify-content: center;
+
+    img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+.ai-meta {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+
+    dt {
+        font-size: .74rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--blue-400);
+        margin-bottom: 4px;
+    }
+}
+
+.ai-watch {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+
+    li {
+        position: relative;
+        padding-left: 28px;
+        color: var(--blue-600);
+        line-height: 1.5;
+        font-size: .94rem;
+    }
+
+    li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff3e0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d97706' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 7v6M12 17h.01'/%3E%3C/svg%3E") center / 11px no-repeat;
+    }
+}
+
+.ai-basis {
+    margin: 22px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--gray-200);
+    font-size: .84rem;
+    color: var(--blue-400);
+    line-height: 1.55;
+
+    a {
+        color: var(--blue-200);
+    }
+}
+
+.ai-prompt-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 14px 12px 22px;
+    // Literal navy, not var(--blue-600): that token is the strong-heading colour and
+    // the dark theme turns it near white, which would flip this bar light.
+    background: #12183a;
+    color: var(--blue-50);
+    border-radius: 16px 16px 0 0;
+    font-size: .9rem;
+
+    strong {
+        color: #fff;
+    }
+}
+
+// Scoped under .ai-panel to beat the theme's .code-block rather than reaching for
+// !important. The theme gives it a Courier face and #1e1e1e; this one is a
+// system monospace stack on the same navy as the bar above it, so the two read
+// as one object.
+.ai-panel .ai-prompt.code-block {
+    margin: 0;
+    padding: 22px 24px;
+    max-height: 540px;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    background: #0e1431;
+    color: #dbe5fb;
+    border-radius: 0 0 16px 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    line-height: 1.7;
+
+    &:focus-visible {
+        outline: 3px solid var(--blue-100);
+        outline-offset: -3px;
+    }
+}
+
+.ai-copy {
+    transition: background-color .2s ease, transform .2s ease;
+
+    &.is-copied {
+        background: rgb(var(--blue-200-rgb));
+        border-color: rgb(var(--blue-200-rgb));
+        transform: scale(1.03);
+    }
+}
+
+// Off-screen but selectable, for the clipboard fallback. Not display:none, which
+// would stop it being selectable at all.
+.ai-copy-buffer {
+    position: fixed;
+    top: -1000px;
+    left: -1000px;
+    opacity: 0;
+}
+
+.ai-waiting {
+    min-height: 260px;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    gap: 8px;
+    padding: 32px;
+    border: 2px dashed var(--blue-50);
+    border-radius: 18px;
+    background: var(--blue-30);
+    color: var(--blue-400);
+
+    strong {
+        color: var(--blue-600);
+        font-size: 1.1rem;
+    }
+}
+
+// ── Rules grid ───────────────────────────────────────────────────── //
+.ai-rule {
+    height: 100%;
+    padding: 28px;
+    border-radius: 22px;
+    background: #fff;
+
+    h3 {
+        font-size: 1.12rem;
+        color: var(--blue-600);
+        margin: 18px 0 8px;
+    }
+
+    p {
+        margin: 0;
+        color: var(--blue-400);
+        line-height: 1.6;
+        font-size: .95rem;
+    }
+}
+
+.ai-rule-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: rgba(25, 64, 176, .08);
+    color: var(--blue-200);
+}
+
+// ── Docs band ────────────────────────────────────────────────────── //
+.ai-docs {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #12183a 0%, #1940b0 100%);
+    color: #fff;
+
+    h2 {
+        color: #fff;
+    }
+
+    .section-head > span {
+        color: var(--blue-100);
+    }
+
+    // Scoped under .ai-docs: the theme sets .section-head p to a muted body colour, and a
+    // bare class would lose to it on specificity and leave this lead nearly invisible on
+    // the navy band.
+    .section-head p {
+        color: var(--blue-50);
+    }
+}
+
+// The address itself, set large: the thing the section exists to hand over.
+.ai-docs-url {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .28);
+    color: #fff;
+    text-decoration: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: background-color .2s ease, transform .2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, .18);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #fff;
+        outline-offset: 4px;
+    }
+}
+
+.ai-doc-link {
+    display: block;
+    height: 100%;
+    padding: 24px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .16);
+    color: #fff;
+    text-decoration: none;
+    transition: transform .25s ease, background-color .25s ease, border-color .25s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, .13);
+        border-color: rgba(255, 255, 255, .4);
+        color: #fff;
+    }
+
+    &:focus-visible {
+        outline: 3px solid #fff;
+        outline-offset: 3px;
+    }
+
+    strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 6px;
+    }
+
+    .ai-doc-note {
+        display: block;
+        color: var(--blue-50);
+        font-size: .92rem;
+        line-height: 1.5;
+    }
+
+    code {
+        display: block;
+        margin-top: 14px;
+        padding: 0;
+        background: none;
+        color: var(--blue-100);
+        font-size: .8rem;
+        overflow-wrap: anywhere;
+    }
+}
+
+
+// ── Dark theme ───────────────────────────────────────────────────────────────────────────────
+// html[data-theme="dark"]. See _sass/theme/_dark.scss for how it works: the palette vars are
+// re-pointed there, so text and borders that read them already follow. Only the hard-coded
+// white surfaces need a rule, mirrored behind :where() so each ties with the rule it
+// overrides and wins by coming last. The logo chips and the prompt viewer stay as they are
+// on purpose: white behind the marks, navy behind the code, in both themes.
+@media screen {
+  :where(html[data-theme="dark"]) {
+    .ai-steps-card,
+    .ai-tile,
+    .ai-panel,
+    .ai-rule {
+      background: var(--gray-100);
+    }
+  }
+}
