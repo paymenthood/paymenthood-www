@@ -3,6 +3,9 @@ title: "Subscription Dunning: Recovering Failed Renewal Payments"
 description: "A renewal payment silently fails and the customer doesn't notice until service stops. Why dunning fails, and how to recover more of those renewals."
 date: 2026-10-20
 tags: [payments, orchestration]
+hero: /assets/images/blog/subscription-dunning-recovering-failed-renewals.jpg
+image: /assets/images/og/blog/subscription-dunning-recovering-failed-renewals.jpg
+image_alt: "A failed renewal is retried and followed by a reminder email until the payment is recovered"
 ---
 
 A subscriber has been paying without incident for eight months. The card on file

@@ -3,6 +3,9 @@ title: "Why Customers Abandon Checkout at the Redirect"
 description: "Customers click Pay, land on an unfamiliar provider page, and leave without entering a card. Why redirect checkouts lose sales, and how to reduce it."
 date: 2026-10-19
 tags: [payments, orchestration]
+hero: /assets/images/blog/why-customers-abandon-checkout-at-the-redirect.jpg
+image: /assets/images/og/blog/why-customers-abandon-checkout-at-the-redirect.jpg
+image_alt: "A checkout page sends the customer to an unfamiliar payment page, marked with a question mark, and the customer walks away"
 ---
 
 A customer has done all the hard work. They found the product, chose a size, typed
