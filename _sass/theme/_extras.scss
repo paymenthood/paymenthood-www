@@ -105,22 +105,28 @@
   }
 }
 
+// The YouTube play button, so a visitor recognises what the click will load.
+// The red is YouTube's own, hard-coded on purpose (it must not follow the
+// theme or the dark palette); the triangle is white inside the SVG.
 .video-facade-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 84px;
-  height: 84px;
-  padding-left: 5px;
-  border-radius: 50%;
-  background: var(--blue-200);
-  color: #fff;
-  box-shadow: 0 10px 34px rgba(18, 24, 58, .45);
-  transition: transform .25s, background-color .25s;
+  width: 68px;
+  height: 48px;
+  color: #f00;
+  filter: drop-shadow(0 6px 16px rgba(18, 24, 58, .45));
+  transition: transform .25s, color .25s;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 
   .video-facade-play:hover & {
     transform: scale(1.08);
-    background: var(--blue-100);
+    color: #cc0000;
   }
 }
 
