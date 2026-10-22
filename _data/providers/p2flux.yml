@@ -1,0 +1,150 @@
+# Single source of truth for /providers/p2flux/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# the template links to the provider's own fees page instead.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/p2flux/index.html and the five integrations/*/p2flux/ stubs.
+# Until then the pages build but stay out of the index.
+#
+# NOTE (2026-10-21): the provider facts below were read from P2Flux's own site and
+# docs (the sources listed). The `integration:` block, the USD-only currency and the
+# statements about what PaymentHood's P2Flux connection does and does not do come from
+# PaymentHood's code (payment-service-provider: Providers/P2Flux), not from P2Flux.
+# Two of those are perishable and must be revisited when the backend changes:
+#   - "refunds started from PaymentHood are not available yet" (the console step that
+#     records the merchant's refund transaction is not built), and
+#   - "one-time payments only" (P2Flux also offers recurring payments; PaymentHood's
+#     connection does not use them).
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: P2Flux
+slug: p2flux
+status: live                 # live | development — only `live` may be published
+category: crypto
+region: USDC on Base
+logo: /assets/images/home/providers-icon/p2flux.webp
+accent: "#4636e3"            # the indigo dot of the official mark
+accent_rgb: "70,54,227"
+accent_text: "#4636e3"   # computed: 7.0 on white, 6.7 on #f8f9fa — WCAG AA; see _sass/components/_provider.scss
+
+# Lead paragraph. Written to be lifted verbatim as a featured snippet or an LLM
+# citation: direct definition first, no marketing wind-up.
+summary: >-
+  P2Flux is a non-custodial payment service for direct USDC payments on the Base network. The
+  buyer pays from their own wallet and the money goes straight to the merchant's wallet in one
+  transaction, so there is no P2Flux account to open and no P2Flux balance holding funds. Through
+  PaymentHood the merchant's whole setup is the wallet address that receives the money, and the
+  customer pays on P2Flux's hosted checkout page.
+
+# No `countries` list: P2Flux has no merchant accounts or approval process, so there is
+# no market list to state. The two fields are exclusive.
+coverage: >-
+  P2Flux does not run merchant accounts, applications or an approval queue, so there is no
+  country list to qualify for. Payer and merchant wallets are screened against the U.S. OFAC
+  sanctions list.
+coverage_short: "USDC on Base"
+
+# PaymentHood-side list: payments are created in US dollars and paid in USDC one to one
+# (payment-service-provider: Providers/P2Flux refuses any other currency).
+currencies: [USD]
+
+methods:
+  - label: USDC on Base
+    icon: link
+    detail: Circle's USDC, sent from the buyer's own wallet straight to the merchant's wallet in one transaction
+  - label: No ETH needed
+    icon: wallet
+    detail: For one-time payments the buyer can pay the network fee in USDC instead of holding ETH
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://p2flux.com/
+  docs: https://p2flux.com/docs/
+  pricing: https://p2flux.com/docs/fees.html
+  security: https://p2flux.com/security
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual PaymentHood.Services provider implementation, not to the provider's docs.
+integration:
+  auth: No account or API key. The merchant's receiving wallet address is the whole setup, saved in PaymentHood and checked when it is saved
+  webhook: Received on a PaymentHood URL that names the order. P2Flux does not sign its webhooks, so the notification is only a prompt to check the payment
+  verification: Server-side check against P2Flux's verify endpoint, and the payment must match the one PaymentHood created, before an order is marked paid
+
+faqs:
+  - q: What makes P2Flux different from a normal payment gateway?
+    a: >-
+      It never holds the money. The buyer's wallet pays the merchant's wallet in a single
+      transaction on Base, so there is no P2Flux balance, no payout to wait for, and no P2Flux
+      merchant account or approval process. The trade-off is that the buyer must pay in USDC from
+      a crypto wallet, which suits some audiences far better than others.
+  - q: Which currency do I charge in?
+    a: >-
+      US dollars. PaymentHood creates the payment in USD and the buyer pays the same amount in
+      USDC, which P2Flux settles on Base. A PaymentHood sandbox app uses P2Flux's test network
+      (Base Sepolia) with faucet USDC, so you can try the whole flow without real money.
+  - q: Do I need a P2Flux account or an API key?
+    a: >-
+      No. P2Flux has no merchant accounts and no API keys. You give PaymentHood the wallet address
+      that should receive the money, and PaymentHood refuses an address that is not valid when you
+      save it. Use a wallet you control, because that is where every payment lands.
+  - q: Does my customer need ETH to pay?
+    a: >-
+      Not for a one-time payment. P2Flux lets the buyer pay the network fee in USDC, so a buyer
+      holding only USDC can complete the payment.
+  - q: How does PaymentHood confirm a P2Flux payment?
+    a: >-
+      P2Flux does not sign its webhooks, so PaymentHood treats a notification only as a prompt.
+      It checks the payment with P2Flux's verify endpoint and confirms it is the payment it
+      created before releasing the order. If the wallet that paid is flagged by P2Flux's
+      sanctions screening, the payment is held for review instead of being captured.
+  - q: Can I refund a P2Flux payment?
+    a: >-
+      On P2Flux a refund is a USDC transfer that you send from your own wallet back to the payer,
+      so you pay the network fee, and partial refunds up to the original amount are allowed.
+      Refunds started from inside PaymentHood are not available for P2Flux yet; until they are,
+      refund from P2Flux directly.
+  - q: Does PaymentHood support P2Flux subscriptions?
+    a: >-
+      Not at the moment. P2Flux offers recurring payments of its own, but PaymentHood's P2Flux
+      connection handles one-time payments.
+  - q: Has P2Flux been audited?
+    a: >-
+      P2Flux states on its security page that its contracts have not yet had a paid third-party
+      audit. It says the contracts' source is published and verified, that they hold no balance
+      between transactions, and that there is no admin who can move merchant funds. These are
+      P2Flux's own statements, so read its <a href="https://p2flux.com/security" target="_blank"
+      rel="noopener">security page<span class="visually-hidden"> (opens in new tab)</span></a>
+      before you decide.
+  - q: Does PaymentHood charge extra on top of P2Flux's fees?
+    a: >-
+      No. PaymentHood adds nothing to what P2Flux charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. P2Flux bills its own fees through the
+      payment itself, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and <a
+      href="https://p2flux.com/docs/fees.html" target="_blank" rel="noopener">P2Flux's fees
+      page<span class="visually-hidden"> (opens in new tab)</span></a>.
+
+verification:
+  # The date the facts above were gathered, shown on the page as "written against
+  # P2Flux's own documentation on …". It is NOT a sign-off: that is `verified_by`,
+  # left empty for a human (see the header of this file).
+  verified_on: 2026-10-21
+  verified_by:
+  sources:
+    - https://p2flux.com/
+    - https://p2flux.com/security
+    - https://p2flux.com/docs/
+    - https://p2flux.com/docs/networks.html
+    - https://p2flux.com/docs/webhooks.html
+    - https://p2flux.com/docs/refunds.html
+    - https://p2flux.com/docs/fees.html

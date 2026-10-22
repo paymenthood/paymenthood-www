@@ -1,0 +1,21 @@
+---
+layout: none
+nav_active: providers
+slug: p2flux
+title: "P2Flux USDC Payment Gateway Integration"
+description: "Accept USDC payments on Base through one PaymentHood integration. No P2Flux account or API key, funds go straight to your wallet. Free plugins, no extra fee."
+# Review gate. The page builds and is linked from /providers.html, but stays out
+# of the index until a person has checked every field in
+# _data/providers/p2flux.yml against its sources and filled in
+# `verification.verified_by`. Delete these two lines only after that sign-off.
+noindex: true
+sitemap: false
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#4636e3;--pp-accent-text:#4636e3;--pp-accent-rgb:70,54,227;--pp-hero-end:#4636e3;--pp-blob-rgb:70,54,227}
+</style>
+{% include provider-detail.html slug=page.slug %}
+{% include footer.html %}

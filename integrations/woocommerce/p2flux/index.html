@@ -1,0 +1,23 @@
+---
+layout: none
+platform: woocommerce
+provider: p2flux
+nav_active: integrations
+# Review gate (added 2026-10-21). A combo page publishes only when BOTH the
+# provider data file is signed off (_data/providers/p2flux.yml ->
+# verification.verified_by) AND a human-written _data/combos/woocommerce-p2flux.yml
+# exists; see the header of _includes/integration-provider.html. Until then it
+# renders, is linked from /providers/p2flux/, and stays out of the index.
+noindex: true
+sitemap: false
+title: "P2Flux USDC Payment Gateway for WooCommerce"
+description: "Accept USDC payments through P2Flux on WooCommerce with the free PaymentHood plugin. No gateway code, no P2Flux account or API key."
+---
+{% include header-secondary.html %}
+{% include breadcrumb.html %}
+<link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+<style>
+#main-content{--pp-accent:#4636e3;--pp-accent-text:#4636e3;--pp-accent-rgb:70,54,227;--pp-hero-end:#4636e3;--pp-blob-rgb:70,54,227}
+</style>
+{% include integration-provider.html platform=page.platform provider=page.provider %}
+{% include footer.html %}
