@@ -1,0 +1,174 @@
+# Single source of truth for /providers/klasha/.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# RULE: every factual claim rendered on the provider page comes from this file.
+# Nothing is written from memory, and no number appears here without a URL in
+# `verification.sources` that a human has actually opened.
+#
+# `fees` is deliberately absent from this schema. Provider pricing changes
+# without notice and a wrong fee is the fastest way to lose merchant trust —
+# the template links to the provider's own pricing page instead.
+#
+# Set `verification.verified_by` to a real name once every field below has been
+# checked against the linked sources, then delete `noindex`/`sitemap: false`
+# from providers/klasha/index.html and the five integrations/*/klasha/ stubs.
+# Until then the pages build but stay out of the index.
+#
+# NOTE (2026-11-04): the provider facts below were read from Klasha's own site and
+# developer docs (the sources listed; the docs were read from developers.klasha.com's
+# llms-full.txt copy). The `integration:` block, the currency list and the statements
+# about what PaymentHood's Klasha connection does and does not do come from PaymentHood's
+# code (payment-service-provider: Providers/Klasha; payment-service: PaymentDbContext
+# currency seed), not from Klasha.
+#
+# Things a reviewer should look at before signing off:
+#   - GHS. The currency list is PaymentHood's (NGN, GHS, KES, ZAR, USD). Klasha's docs
+#     list the currencies it accepts as NGN, UGX, KES, ZAR and USD ("updated regularly")
+#     and name GHS only in its wallet table; Ghana appears on its country-coverage page
+#     with mobile money and bank transfer. Confirm with Klasha that a GHS payment link works.
+#   - Methods per country come from the country-coverage page and the docs table. Whether
+#     every one of them appears on a payment-link page (which is what PaymentHood uses) is
+#     not stated by Klasha; the page words it as "listed by Klasha" for that reason.
+#   - Two statements are perishable and describe PaymentHood, not Klasha: "refunds are made
+#     on the Klasha dashboard" (Klasha documents no refund API) and "the customer is not
+#     sent back to the store" (a Klasha payment link has no return address). Revisit both
+#     when either changes. Klasha also offers recurrent payment links; PaymentHood's
+#     connection is one-time payments only.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Klasha
+slug: klasha
+status: live                 # live | development — only `live` may be published
+category: regional
+region: Pan-Africa
+logo: /assets/images/home/providers-icon/klasha-light.webp
+accent: "#ff4a01"            # the orange of Klasha's own app icon and site theme colour
+accent_rgb: "255,74,1"
+accent_text: "#cc3a00"   # 5.03:1 on white, 4.77:1 on #f8f9fa — WCAG AA; see _sass/components/_provider.scss
+
+# Lead paragraph. Written to be lifted verbatim as a featured snippet or an LLM
+# citation: direct definition first, no marketing wind-up.
+summary: >-
+  Klasha is a cross-border payments company for emerging markets whose payment gateway lets
+  international businesses accept local payments in African currencies, including cards, bank
+  transfer, USSD and M-Pesa, in markets such as Nigeria, Ghana, Kenya and South Africa. The
+  merchant opens its own Klasha account, and through PaymentHood the customer pays on a Klasha
+  payment-link page rather than entering card details on the merchant's site.
+
+# Markets Klasha lists on its country-coverage page AND whose local currency
+# PaymentHood's Klasha connection handles. Klasha lists further markets (for example Uganda,
+# Zambia and Tanzania); they are not named here because PaymentHood does not charge in
+# their currencies yet.
+countries:
+  - Nigeria
+  - Ghana
+  - Kenya
+  - South Africa
+
+# PaymentHood-side list: the currencies PaymentHood's Klasha connection is built for
+# (payment-service currency seed). See the GHS note in the header of this file.
+currencies: [NGN, GHS, KES, ZAR, USD]
+
+methods:
+  - label: Cards
+    icon: card
+    detail: Visa and Mastercard, plus Verve in Nigeria, as listed by Klasha for its card markets
+  - label: Bank transfer
+    icon: bank
+    detail: Listed by Klasha for Nigeria, Ghana, Kenya and South Africa
+  - label: Mobile money
+    icon: mobile
+    detail: M-Pesa for Kenyan shilling payments, and mobile money in Ghana
+  - label: USSD
+    icon: ussd
+    detail: Bank shortcodes, listed by Klasha for Nigeria
+  - label: Klasha wallet
+    icon: wallet
+    detail: Customers with a Klasha account can pay from their Klasha wallet, listed for Nigeria
+
+platforms: [woocommerce, whmcs, virtuemart, phoca-cart, j2commerce]
+
+links:
+  website: https://www.klasha.com/
+  docs: https://developers.klasha.com/
+  pricing: https://www.klasha.com/pricing
+  coverage: https://www.klasha.com/country-coverage
+
+# What PaymentHood handles on the merchant's behalf. Keep these accurate to the
+# actual PaymentHood.Services provider implementation, not to the provider's docs.
+integration:
+  auth: The merchant public key from the Klasha dashboard and the Klasha account's login, exchanged for a bearer token, plus the sub-merchant the payment links are created for; all held server-side in PaymentHood
+  webhook: Set once on the Klasha dashboard and received by PaymentHood. Klasha documents no signature, so a notification only prompts PaymentHood to look at the payment and is never trusted for its status
+  verification: Server-side lookup of the payment link's transactions on Klasha's API; an order is released only when Klasha lists a successful transaction for that link, and PaymentHood also polls so a missed webhook does not lose the payment
+
+faqs:
+  - q: Which countries can use Klasha with PaymentHood?
+    a: >-
+      Klasha lists Nigeria, Ghana, Kenya and South Africa among its markets, and PaymentHood's Klasha
+      connection handles their local currencies. Klasha names further markets on its own
+      <a href="https://www.klasha.com/country-coverage" target="_blank" rel="noopener">country-coverage
+      page<span class="visually-hidden"> (opens in new tab)</span></a>. You open and verify the Klasha
+      account yourself, then connect it to PaymentHood. PaymentHood does not resell Klasha or sit in
+      the flow of funds.
+  - q: Which currencies can I charge through Klasha on PaymentHood?
+    a: >-
+      Nigerian Naira (NGN), Ghanaian Cedi (GHS), Kenyan Shilling (KES), South African Rand (ZAR)
+      and US Dollar (USD). Which of these you can actually charge depends on what Klasha has
+      enabled on your account.
+  - q: What do I need from Klasha to connect it?
+    a: >-
+      A Klasha account, the merchant public key from your Klasha dashboard (Settings, then Generate
+      API Keys), the e-mail and password of that Klasha account, and the sub-merchant ID and name
+      that the payment links are created for. You enter them in PaymentHood, which keeps them on the
+      server and never shows them in full again.
+  - q: Do card details pass through my store or PaymentHood?
+    a: >-
+      No. PaymentHood sends the customer to a Klasha payment-link page, and the payment details are
+      entered there. Neither your store nor PaymentHood receives the card number; PaymentHood only
+      learns the outcome.
+  - q: Will the customer return to my store after paying?
+    a: >-
+      Not automatically. A Klasha payment link has no return address, so the customer stays on
+      Klasha's page after paying. PaymentHood confirms the payment with Klasha and updates your
+      order, so the order is correct even though the customer is not sent back.
+  - q: How does PaymentHood confirm a Klasha payment?
+    a: >-
+      It never marks an order paid on the strength of a notification alone. Klasha documents no
+      signature on its webhook, so the webhook is used only to find the payment. PaymentHood then
+      looks up the payment link's transactions on Klasha's API and releases the order only if Klasha
+      lists a successful one. It also checks on its own, so a payment is found even if the webhook
+      never arrives.
+  - q: Can I refund a Klasha payment from PaymentHood?
+    a: >-
+      Klasha documents no refund API, so a refund is made from your Klasha dashboard and then recorded
+      in PaymentHood as a manual refund.
+  - q: Does PaymentHood support Klasha recurring payments?
+    a: >-
+      Not at the moment. Klasha offers recurrent payment links on its dashboard, but PaymentHood's
+      Klasha connection handles one-time payments.
+  - q: Does PaymentHood charge extra on top of Klasha's fees?
+    a: >-
+      No. PaymentHood adds nothing to what Klasha charges: no percentage, no per-transaction
+      cut, and no volume threshold where that changes. Klasha bills you directly for its own
+      processing fees, and you keep that relationship. PaymentHood's only paid plan is Premium
+      at $29 a month, which adds white-label checkout branding and nothing to your transaction
+      cost. See <a href="/pricing.html" class="txt-blue-100">PaymentHood pricing</a> and <a
+      href="https://www.klasha.com/pricing" target="_blank" rel="noopener">Klasha's pricing
+      page<span class="visually-hidden"> (opens in new tab)</span></a>.
+
+verification:
+  # The date the facts above were gathered, shown on the page as "written against
+  # Klasha's own documentation on …". It is NOT a sign-off: that is `verified_by`,
+  # left empty for a human (see the header of this file).
+  verified_on: 2026-11-04
+  verified_by:
+  sources:
+    - https://www.klasha.com/
+    - https://www.klasha.com/pricing
+    - https://www.klasha.com/country-coverage
+    - https://developers.klasha.com/
+    - https://developers.klasha.com/integrating-klasha/prerequisites
+    - https://developers.klasha.com/overview/introduction
+    - https://developers.klasha.com/overview/authentication
+    - https://developers.klasha.com/accepting-payments/payment-link/payment-link-api
+    - https://developers.klasha.com/misc/webhook
