@@ -12,7 +12,7 @@
 # is how a hand-written prompt goes in: pasted unchanged, not assembled.
 #
 # EVERY CONTRACT DETAIL traces to https://docs.paymenthood.com and was checked against the
-# live OpenAPI (https://api.paymenthood.com/swagger/v1/swagger.json) on 2026-10-20. Where they
+# live OpenAPI (now https://api.paymenthood.com/openapi/v1.json) on 2026-10-20. Where they
 # disagreed the prompts are written to be correct under both: registerAutoPayment is optional
 # in the docs and required in the spec, and returnUrl and showPayRecurringInCheckout are
 # required in the docs and not marked so in the spec, so the prompts always send all three.
@@ -44,7 +44,7 @@ docs:
     url: https://docs.paymenthood.com/webhooks/verification-samples/
     note: "Receivers in Node, PHP, Python and C#."
   - title: "OpenAPI reference"
-    url: https://api.paymenthood.com/swagger/index.html
+    url: https://api.paymenthood.com/
     note: "The authoritative contract."
 
 faqs:
@@ -77,7 +77,7 @@ contract:
   opening_agent: |
     Add PaymentHood checkout to this repository, using its existing stack and conventions. PaymentHood is a hosted checkout: the server creates a payment, the customer pays on a PaymentHood page, and PaymentHood reports the result to the server by webhook. Card details never touch this code.
 
-    Read these first: https://docs.paymenthood.com/quickstart/, https://docs.paymenthood.com/payments/ and https://docs.paymenthood.com/webhooks/signing/. The OpenAPI spec at https://api.paymenthood.com/swagger/v1/swagger.json is the contract if anything disagrees.
+    Read these first: https://docs.paymenthood.com/quickstart/, https://docs.paymenthood.com/payments/ and https://docs.paymenthood.com/webhooks/signing/. The OpenAPI spec at https://api.paymenthood.com/openapi/v1.json is the contract if anything disagrees.
   build: |
     BUILD
     1. create-checkout (server): for the signed-in user's order, read the price from my database (never from the browser), create the payment, and return the redirectUrl. The browser then redirects to it.
